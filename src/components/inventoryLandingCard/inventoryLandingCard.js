@@ -6,10 +6,10 @@ function inventoryLandingCard(props){
         <div className="inventoryLandingCard">
             <div>
                 <div className="detailTopic">
-                    <h1>{props.topic}</h1>
+                    <h2>{props.topic}</h2>
                 </div>
                 <div className="values">
-                    <h1 style={{ color: props.textColor }}>{props.inventoryValues}</h1>
+                    <h2 style={{ color: props.textColor }}>{props.inventoryValues}</h2>
                 </div>
             </div>
         </div>

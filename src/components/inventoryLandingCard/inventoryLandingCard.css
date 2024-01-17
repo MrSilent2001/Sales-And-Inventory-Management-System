@@ -1,9 +1,9 @@
 .inventoryLandingCard{
-    width: 34.563rem;
-    height: 14.5rem;
+    width: 24.563em;
+    height: 10.5em;
     background-color: #FFFFFF;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 1.313rem;
+    border-radius: 1.313em;
     display: flex;
     align-items: center;
     justify-content: center;

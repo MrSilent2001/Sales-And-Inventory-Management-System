@@ -8,7 +8,7 @@ function InventoryLanding(){
 
     return(
         <div className="inventoryLandingOuter">
-            <div className="InventoryLandingInner">
+            <div className="inventoryLandingInner">
                 <div className="cardRow">
                     <div className="landingCard">
                         <InventoryLandingCard
@@ -22,12 +22,12 @@ function InventoryLanding(){
                     </div>
                 </div>
                 <div className="cardRow">
-                    <div className="landingCard">
+                    <div className="landingCard secondCardRow">
                         <InventoryLandingCard
                             topic="Low Stock Item" inventoryValues="2" textColor="#3F72AF">
                         </InventoryLandingCard>
                     </div>
-                    <div className="landingCard">
+                    <div className="landingCard secondCardRow">
                         <InventoryLandingCard
                             topic="Overall Stock Status" inventoryValues="Healthy" textColor="#1FAB89">
                         </InventoryLandingCard>
