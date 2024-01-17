@@ -1,0 +1,14 @@
+.inventoryLandingCard{
+    width: 34.563rem;
+    height: 14.5rem;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 1.313rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detailTopic h2{
+    font-family: Inter;
+}
