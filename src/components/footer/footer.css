@@ -1,0 +1,31 @@
+.footer{
+    width: 100%;
+    height: 154px;
+    background-color: #242F9B;
+}
+
+.logoName{
+    margin: 0;
+    padding: 0;
+}
+
+.logoName h4{
+    color: white;
+    font-family: Inter;
+    margin: 0;
+    padding: 32px 0 24px 0;
+}
+
+.footerLinks a{
+    color: white;
+    font-family: Inter;
+    font-size: 11px;
+    padding: 30px 15px;
+}
+
+.copyright p{
+    color: white;
+    font-family: Inter;
+    font-size: 9px;
+    padding: 10px 0 0 0;
+}
