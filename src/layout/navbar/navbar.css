@@ -24,9 +24,10 @@
 }
 
 a:hover{
+    color: #858bcb;
     font-weight: bold;
-    font-size: 13px;
-    transition-duration: 0.20s;
+    font-size: 12.5px;
+    transition-duration: 0.3s;
 }
 
 .lastNavLink{

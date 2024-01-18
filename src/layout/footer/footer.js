@@ -4,7 +4,7 @@ function footer(){
     return(
         <div className="footer">
             <div className="logoName">
-              <h4>Tradeasy</h4>
+              <h5>Tradeasy</h5>
             </div>
             <div className="footerLinks">
                 <a href="#">About Us</a>

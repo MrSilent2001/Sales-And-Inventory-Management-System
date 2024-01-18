@@ -5,7 +5,7 @@ function navbar(){
     return(
         <div className="navbar">
             <div className="logo">
-                <img src="./logo.png" alt="Logo" />
+                <img src="" alt="Logo" />
             </div>
             <div className="navigation">
                 <a href="#">Inventory</a>
