@@ -1,12 +1,12 @@
 import './App.css';
-import InventoryLanding from "./pages/inventory landing page/inventoryLanding";
 import Navbar from "./layout/navbar/navbar";
+import PaymentDashboard from "./pages/payment Dashboard/paymentDashboard";
 
 function App() {
   return (
     <div className="App">
         <Navbar></Navbar>
-      <InventoryLanding></InventoryLanding>
+        <PaymentDashboard/>
     </div>
   );
 }
