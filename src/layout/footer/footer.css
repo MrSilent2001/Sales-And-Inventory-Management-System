@@ -13,23 +13,23 @@
     color: white;
     font-family: Inter;
     margin: 0;
-    padding: 22px 0 10px 0;
+    padding: 1.375em 0 0.625em 0;
 }
 
 .footerLinks{
-    padding-bottom: -20px;
+    padding-bottom: -1.25em;
 }
 
 .footerLinks a{
     color: white;
     font-family: Inter;
-    font-size: 10px;
-    padding: 25px 15px 0px 15px;
+    font-size: 0.625em;
+    padding: 1.563em 0.938em 0px 0.938em;
 }
 
 .copyright p{
     color: white;
     font-family: Inter;
-    font-size: 8px;
-    padding: 5px 0 0 0;
+    font-size: 0.5em;
+    padding: 0.313em 0 0 0;
 }
