@@ -31,27 +31,27 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
 }));
 
 const columns = [
-    {id: 'id', label: 'Id', minWidth: 170},
-    {id: 'name', label: 'Name', minWidth: 100},
+    {id: 'id', label: 'Id', minWidth: 170, align: 'center'},
+    {id: 'name', label: 'Name', minWidth: 100, align: 'center'},
     {
         id: 'address',
         label: 'Address',
         minWidth: 170,
-        align: 'right',
+        align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
         id: 'items',
         label: 'Purchased Items',
         minWidth: 170,
-        align: 'right',
+        align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
         id: 'amount',
         label: 'Total Amount (\u20A8.)',
         minWidth: 170,
-        align: 'right',
+        align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     }
 ];
@@ -95,7 +95,7 @@ function PaymentDashboard() {
     return (
         <div className="paymentDashboardOuter">
             <div className="paymentDashboardInner">
-                <h2 className="title">Payments</h2>
+                <h2 className="paymentTitle">Payments</h2>
                 <Paper sx={{width: '90%', overflow: 'hidden'}}>
                     <TableContainer sx={{maxHeight: 440}}>
                         <Table stickyHeader aria-label="sticky table">
