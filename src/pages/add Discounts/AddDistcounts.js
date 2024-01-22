@@ -24,14 +24,14 @@ function AddDiscount(){
 
                         <div className="row">
                             <label>Selling Price: </label>
-                            <TextField className="input" size="small" id="outlined-required" label="Selling Price"  required/>
+                            <TextField className="input" size="small" type="number" id="outlined-required" label="Selling Price"  required/>
                         </div>
 
                         <br/><br/>
 
                         <div className="row">
                             <label>Discount Percentage:  </label>
-                            <TextField className="input" size="small" id="outlined-required" label="Discount Percentage" required/>
+                            <TextField className="input" size="small" type="number" id="outlined-required" label="Discount Percentage" required/>
                         </div>
 
                         <br/><br/>
