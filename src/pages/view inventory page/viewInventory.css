@@ -1,18 +1,36 @@
-.searchAndButtons{
-    border: 1px solid red;
+.viewInventoryOuter{
     display: flex;
-    width: 1200px;
+}
+
+.viewInventoryFilter{
+    width: 14.375em;
+    height: 36.03em;
+    background-color: #646FD4;
+}
+
+.viewInventoryInner{
+    width: 81.25em;
+    height: 36.03em;
+    background-color: #DBDFFD;
+}
+
+.searchAndButtons{
+    display: flex;
+    width: 81.25em;
+    padding: 0.5em 0 0 0;
     justify-content: space-between;
 }
 
 .viewInventorySearch{
     display: flex;
     align-items: center;
-    border: 1px solid black;
+    padding: 0 0 0 2em;
 }
 
 .viewInventoryButtons{
     display: flex;
     align-items: center;
-    border: 1px solid black;
+    width: 15.625em;
+    justify-content: space-between;
+    padding: 0 1.95em 0 0;
 }

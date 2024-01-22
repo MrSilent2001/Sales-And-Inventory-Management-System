@@ -33,14 +33,19 @@ function SearchBar(){
 
 function ViewInventory(){
     return(
-        <div className="viewInventory">
-            <div className="searchAndButtons">
-                <div className="viewInventorySearch">
-                    <SearchBar></SearchBar>
-                </div>
-                <div className="viewInventoryButtons">
-                    <AddItemButton>Add Item</AddItemButton>
-                    <DeleteItemButton>Delete Item</DeleteItemButton>
+        <div className="viewInventoryOuter">
+            <div className="viewInventoryFilter">
+
+            </div>
+            <div className="viewInventoryInner">
+                <div className="searchAndButtons">
+                    <div className="viewInventorySearch">
+                        <SearchBar></SearchBar>
+                    </div>
+                    <div className="viewInventoryButtons">
+                        <AddItemButton>Add Item</AddItemButton>
+                        <DeleteItemButton>Delete Item</DeleteItemButton>
+                    </div>
                 </div>
             </div>
         </div>
