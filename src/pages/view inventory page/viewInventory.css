@@ -28,22 +28,22 @@
 }
 
 .filterHeader h2{
-    color: white;
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: underline;
 }
 
 .itemCategoryTopic h5{
-    color: white;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .itemAbailabilityTopic h5{
-    color: white;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .viewInventoryInner{
     width: 81.25em;
     height: 36.03em;
-    background-color: #DBDFFD;
+    background-color: rgba(219, 223, 253, 0.8);
 }
 
 .searchAndButtons{
