@@ -7,6 +7,10 @@ const DeleteItemButton = styled(Button)(({ theme }) => ({
     '&:hover': {
         backgroundColor: '#D41400' // You can adjust the darken value as needed
     },
+    '&.MuiButton-root': {
+        width: '10.625em',
+        height: '2.75em'
+    },
 }));
 
 export default DeleteItemButton;
