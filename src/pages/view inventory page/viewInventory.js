@@ -2,6 +2,8 @@ import React from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import "./viewInventory.css";
+import AddItemButton from "../../layout/buttons/addItemButton/AddItemButton";
+import DeleteItemButton from "../../layout/buttons/deleteItemButton/DeleteItemButton";
 
 function SearchBar(){
     return(
@@ -10,20 +12,21 @@ function SearchBar(){
             sx={{
                 '& > :not(style)': {
                     m: 1,
-                    width: '55ch',
+                    width: '17.5em',
                     "& .MuiInputBase-root":{
-                        height: 30,
-                        borderRadius: 10,
+                        height: '1.95em',
+                        borderRadius: '1.5em',
                     },
                     "& .MuiInputLabel-root": {
-                        fontSize: 10
+                        fontSize: '0.6em',
+                        textAlign: 'center',
                     },
                 },
             }}
             noValidate
             autoComplete="off"
         >
-            <TextField id="standard-basic" label="Standard" variant="outlined" size="small"/>
+            <TextField id="standard-basic" label="Search Here" variant="outlined" size="small"/>
         </Box>
     )
 }
@@ -31,7 +34,15 @@ function SearchBar(){
 function ViewInventory(){
     return(
         <div className="viewInventory">
-            <SearchBar></SearchBar>
+            <div className="searchAndButtons">
+                <div className="viewInventorySearch">
+                    <SearchBar></SearchBar>
+                </div>
+                <div className="viewInventoryButtons">
+                    <AddItemButton>Add Item</AddItemButton>
+                    <DeleteItemButton>Delete Item</DeleteItemButton>
+                </div>
+            </div>
         </div>
     )
 }
