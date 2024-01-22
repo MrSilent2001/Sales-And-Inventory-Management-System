@@ -3,9 +3,41 @@
 }
 
 .viewInventoryFilter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 14.375em;
     height: 36.03em;
     background-color: #646FD4;
+}
+
+.itemCategoryFilter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.itemAvailabilityFilter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.applyButton{
+    margin: 3em 0 0 0;
+}
+
+.filterHeader h2{
+    color: white;
+    text-decoration: underline;
+}
+
+.itemCategoryTopic h5{
+    color: white;
+}
+
+.itemAbailabilityTopic h5{
+    color: white;
 }
 
 .viewInventoryInner{
