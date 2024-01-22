@@ -1,7 +1,18 @@
 .searchAndButtons{
+    border: 1px solid red;
     display: flex;
+    width: 1200px;
+    justify-content: space-between;
+}
+
+.viewInventorySearch{
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
 }
 
 .viewInventoryButtons{
     display: flex;
+    align-items: center;
+    border: 1px solid black;
 }

@@ -35,7 +35,9 @@ function ViewInventory(){
     return(
         <div className="viewInventory">
             <div className="searchAndButtons">
-                <SearchBar></SearchBar>
+                <div className="viewInventorySearch">
+                    <SearchBar></SearchBar>
+                </div>
                 <div className="viewInventoryButtons">
                     <AddItemButton>Add Item</AddItemButton>
                     <DeleteItemButton>Delete Item</DeleteItemButton>

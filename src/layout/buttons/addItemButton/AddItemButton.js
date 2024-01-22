@@ -5,12 +5,15 @@ const AddItemButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#242F9B'),
     backgroundColor: '#242F9B',
     '&:hover': {
-        backgroundColor: '#242F9B' // You can adjust the darken value as needed
+        backgroundColor: '#2d3ed2' // You can adjust the darken value as needed
     },
     '&.MuiButton-root': {
-        width: '10.625em',
+        width: '11.625em',
         height: '2.75em'
     },
+    fontSize: '0.625em',
+    fontFamily: 'inter',
+    padding: '1.75em 0.625em'
 }));
 
 
