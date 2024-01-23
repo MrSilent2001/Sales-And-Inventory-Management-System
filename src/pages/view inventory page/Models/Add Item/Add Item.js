@@ -60,86 +60,95 @@ const SaveItemButton = styled(Button)(({ theme }) => ({
     fontFamily: 'inter',
     padding: '1.75em 0.625em'
 }));
+
+const CenteredModal = styled('div')({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh', // Make the container take the full height of the viewport
+});
 function AddItem(props){
     return(
-        <div className="addItemOuter">
-            <div className="addItemModel">
-                <h2>Add Item</h2>
-                <div className="addItemForm">
-                    <div className="formField">
-                        <div className="idField">
-                            <h5>Inventory Id</h5>
+        <CenteredModal>
+            <div className="addItemOuter">
+                <div className="addItemModel">
+                    <h2>Add Item</h2>
+                    <div className="addItemForm">
+                        <div className="formField">
+                            <div className="idField">
+                                <h5>Inventory Id</h5>
+                            </div>
+                            <div className="idInput">
+                                <BasicTextFields></BasicTextFields>
+                            </div>
                         </div>
-                        <div className="idInput">
-                            <BasicTextFields></BasicTextFields>
-                        </div>
-                    </div>
 
-                    <div className="formField">
-                        <div className="idField">
-                            <h5>Item Description</h5>
+                        <div className="formField">
+                            <div className="idField">
+                                <h5>Item Description</h5>
+                            </div>
+                            <div className="idInput">
+                                <BasicTextFields></BasicTextFields>
+                            </div>
                         </div>
-                        <div className="idInput">
-                            <BasicTextFields></BasicTextFields>
-                        </div>
-                    </div>
 
-                    <div className="formField">
-                        <div className="idField">
-                            <h5>Item Category</h5>
+                        <div className="formField">
+                            <div className="idField">
+                                <h5>Item Category</h5>
+                            </div>
+                            <div className="idInput">
+                                <BasicTextFields></BasicTextFields>
+                            </div>
                         </div>
-                        <div className="idInput">
-                            <BasicTextFields></BasicTextFields>
-                        </div>
-                    </div>
 
-                    <div className="formField">
-                        <div className="idField">
-                            <h5>Quantity</h5>
+                        <div className="formField">
+                            <div className="idField">
+                                <h5>Quantity</h5>
+                            </div>
+                            <div className="idInput">
+                                <BasicTextFields></BasicTextFields>
+                            </div>
                         </div>
-                        <div className="idInput">
-                            <BasicTextFields></BasicTextFields>
-                        </div>
-                    </div>
 
-                    <div className="formField">
-                        <div className="idField">
-                            <h5>Unit Price</h5>
+                        <div className="formField">
+                            <div className="idField">
+                                <h5>Unit Price</h5>
+                            </div>
+                            <div className="idInput">
+                                <BasicTextFields></BasicTextFields>
+                            </div>
                         </div>
-                        <div className="idInput">
-                            <BasicTextFields></BasicTextFields>
-                        </div>
-                    </div>
 
-                    <div className="formField">
-                        <div className="idField">
-                            <h5>Manufacture Dated</h5>
+                        <div className="formField">
+                            <div className="idField">
+                                <h5>Manufacture Dated</h5>
+                            </div>
+                            <div className="idInput">
+                                <BasicTextFields></BasicTextFields>
+                            </div>
                         </div>
-                        <div className="idInput">
-                            <BasicTextFields></BasicTextFields>
-                        </div>
-                    </div>
 
-                    <div className="formField">
-                        <div className="idField">
-                            <h5>Expire Date</h5>
+                        <div className="formField">
+                            <div className="idField">
+                                <h5>Expire Date</h5>
+                            </div>
+                            <div className="idInput">
+                                <BasicTextFields></BasicTextFields>
+                            </div>
                         </div>
-                        <div className="idInput">
-                            <BasicTextFields></BasicTextFields>
-                        </div>
-                    </div>
 
-                    <div className="formFieldButtons">
-                        <div className="cancelButton">
-                            <CancelButton onClick={() => props.onClose(false)}>Cancel</CancelButton>
-                        </div>
-                        <div className="saveButton">
-                            <SaveItemButton>Add Item</SaveItemButton>
+                        <div className="formFieldButtons">
+                            <div className="cancelButton">
+                                <CancelButton onClick={() => props.onClose(false)}>Cancel</CancelButton>
+                            </div>
+                            <div className="saveButton">
+                                <SaveItemButton>Add Item</SaveItemButton>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </CenteredModal>
     )
 }
 
