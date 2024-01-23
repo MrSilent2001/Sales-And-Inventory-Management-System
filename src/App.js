@@ -1,13 +1,13 @@
 import './App.css';
 import Navbar from "./layout/navbar/navbar";
-import SalesLanding from "./pages/inventory landing page/inventoryLanding";
+import PendingOrders from "./pages/Pending Orders/pendingOrders" ;
 import Footer from './layout/footer/footer';
 
 function App() {
   return (
     <div className="App">
         <Navbar/>
-        <SalesLanding/>
+        <PendingOrders />
         <Footer/>
     </div>
   );
