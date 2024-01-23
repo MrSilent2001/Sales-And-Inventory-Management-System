@@ -33,3 +33,9 @@ a:hover{
 .lastNavLink{
     padding-right: 20px;
 }
+
+.logo h5{
+    color: white;
+    font-family: inter;
+    padding: 0 0 0 1.25em;
+}

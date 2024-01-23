@@ -191,9 +191,6 @@ const rows = [
     createData('I0001', 'Tokyo Super Cement', 'Cement', 67, 'In Stock'),
     createData('I0001', 'Tokyo Super Cement', 'Cement', 49, 'In Stock'),
     createData('I0001', 'Tokyo Super Cement', 'Cement', 49, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 49, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 49, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 49, 'In Stock'),
 ];
 
 const ViewItemButton = styled(Button)(({ theme }) => ({
