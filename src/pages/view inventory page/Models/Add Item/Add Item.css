@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 600px;
-    height: 570px;
+    width: 37.5em;
+    height: 38.75em;
     padding: 0.25em 0 0 0;
     background-color: #DBDFFD;
     border-radius: 0.5em;
@@ -11,7 +11,7 @@
 
 .addItemModel h2{
     font-family: Inter;
-    padding: 0.5em 0 0 0;
+    padding: 1.25em 0 0 0;
 }
 
 .addItemForm{
@@ -46,4 +46,5 @@
     width: 16.25em;
     justify-content: space-between;
     margin: 1.4em 0 0 0;
+    padding-bottom: 3em;
 }
