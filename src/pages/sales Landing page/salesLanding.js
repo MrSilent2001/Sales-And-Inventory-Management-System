@@ -1,37 +1,41 @@
 import React from "react";
-import "./inventoryLanding.css"
+import "./salesLanding.css"
 import InventoryLandingCard from "../../components/inventoryLandingCard/inventoryLandingCard";
 
-function InventoryLanding(){
+function SalesLanding(){
 
     //There should be a useEffect hook for display the inventory values in the component
 
     return(
-        <div className="inventoryLandingOuter">
-            <div className="inventoryLandingInner">
-
+        <div className="salesLandingOuter">
+            <div className="salesLandingInner">
                 <div className="cardRow">
-                    <div className="landingCard">
+                    <div className="salesLandingCard">
+                        <h5 className = "timeline">November</h5>
                         <InventoryLandingCard
-                            topic="All Item Categories" inventoryValues="25" textColor="#3F72AF">
+                            topic="Total Sales" inventoryValues="Rs.6,512,890.12" textColor="#FF0000">
+
                         </InventoryLandingCard>
                     </div>
                     <div className="landingCard">
+                        <h5 className = "timeline">Today</h5>
                         <InventoryLandingCard
-                            topic="All Items" inventoryValues="125" textColor="#E74646">
+                            topic="Pending Orders" inventoryValues="11" textColor="#FF0000">
                         </InventoryLandingCard>
                     </div>
                 </div>
-
                 <div className="cardRow">
+                
                     <div className="landingCard secondCardRow">
+                        <h5 className = "timeline">November</h5>
                         <InventoryLandingCard
-                            topic="Low Stock Item" inventoryValues="2" textColor="#3F72AF">
+                            topic="Total Earnings" inventoryValues="Rs.4,105,918.80" textColor="#FF0000">
                         </InventoryLandingCard>
                     </div>
                     <div className="landingCard secondCardRow">
+                    <h5 className = "timeline">November</h5>
                         <InventoryLandingCard
-                            topic="Overall Stock Status" inventoryValues="Healthy" textColor="#1FAB89">
+                            topic="Total Orders" inventoryValues="112" textColor="#FF00000">
                         </InventoryLandingCard>
                     </div>
                 </div>
@@ -40,4 +44,4 @@ function InventoryLanding(){
     )
 }
 
-export default InventoryLanding;
+export default SalesLanding;
