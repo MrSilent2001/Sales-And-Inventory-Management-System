@@ -19,6 +19,7 @@ import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import {Modal} from "@mui/material";
 import AddItem from "./Models/Add Item/Add Item";
+import UpdateItem from "./Models/Update Item/Update Item";
 
 
 function SearchBar(){
@@ -211,6 +212,8 @@ const ViewItemButton = styled(Button)(({ theme }) => ({
 }));
 
 function CustomizedTables() {
+    const [visible,setVisible] = useState(false)
+
     return (
         <TableContainer component={Paper} sx={{ width: '76.875em', maxHeight: '25em', overflowY: 'auto', position: 'relative'}}>
             <Table sx={{ minWidth: '25em'}} aria-label="customized table">
@@ -234,11 +237,14 @@ function CustomizedTables() {
                             <StyledTableCell align="right">{row.itemCategory}</StyledTableCell>
                             <StyledTableCell align="right">{row.Quantity}</StyledTableCell>
                             <StyledTableCell align="right">{row.inventoryStatus}</StyledTableCell>
-                            <StyledTableCell><ViewItemButton>View</ViewItemButton></StyledTableCell>
+                            <StyledTableCell><ViewItemButton onClick={()=>setVisible(true)}>View</ViewItemButton></StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>
             </Table>
+            <Modal open={visible}>
+                <UpdateItem onClose={(value) => { setVisible(false)}}></UpdateItem>
+            </Modal>
         </TableContainer>
     );
 }
