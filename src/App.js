@@ -1,5 +1,5 @@
 import './App.css';
-import InventoryLanding from "./pages/inventory landing page/inventoryLanding";
+import RefundRequest from "./pages/refundRequest/refundRequest";
 import Navbar from "./layout/navbar/navbar";
 import Footer from "./layout/footer/footer";
 
@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
         <Navbar></Navbar>
-        <InventoryLanding></InventoryLanding>
+        <RefundRequest/>
         <Footer></Footer>
     </div>
   );
