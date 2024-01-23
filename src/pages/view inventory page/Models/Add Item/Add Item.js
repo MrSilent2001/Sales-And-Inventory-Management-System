@@ -60,7 +60,7 @@ const SaveItemButton = styled(Button)(({ theme }) => ({
     fontFamily: 'inter',
     padding: '1.75em 0.625em'
 }));
-function AddItem(){
+function AddItem(props){
     return(
         <div className="addItemOuter">
             <div className="addItemModel">
@@ -131,7 +131,7 @@ function AddItem(){
 
                     <div className="formFieldButtons">
                         <div className="cancelButton">
-                            <CancelButton>Cancel</CancelButton>
+                            <CancelButton onClick={() => props.onClose(false)}>Cancel</CancelButton>
                         </div>
                         <div className="saveButton">
                             <SaveItemButton>Add Item</SaveItemButton>

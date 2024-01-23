@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
@@ -17,6 +17,8 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
+import {Modal} from "@mui/material";
+import AddItem from "./Models/Add Item/Add Item";
 
 
 function SearchBar(){
@@ -242,6 +244,9 @@ function CustomizedTables() {
 }
 
 function ViewInventory(){
+
+    const [visible,setVisible] = useState(false)
+
     return(
         <div className="viewInventoryOuter">
             <div className="viewInventoryFilter">
@@ -271,7 +276,7 @@ function ViewInventory(){
                         <SearchBar></SearchBar>
                     </div>
                     <div className="viewInventoryButtons">
-                        <AddItemButton>Add Item</AddItemButton>
+                        <AddItemButton onClick={()=>setVisible(true)}>Add Item</AddItemButton>
                         <DeleteItemButton>Delete Item</DeleteItemButton>
                     </div>
                 </div>
@@ -280,6 +285,10 @@ function ViewInventory(){
                     <CustomizedTables></CustomizedTables>
                 </div>
             </div>
+
+            <Modal open={visible}>
+                <AddItem onClose={(value) => { setVisible(false)}} ></AddItem>
+            </Modal>
         </div>
     )
 }
