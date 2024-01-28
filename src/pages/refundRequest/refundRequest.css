@@ -10,6 +10,7 @@
 
 .refund-request-form{
     width: 85em;
+    height:20%;
     background-color:#DBDFFD;
     border-radius: 2%;
     padding: 20px;
@@ -27,7 +28,7 @@
 
   .refund-request-form h2 {
     text-align: center;
-    color: #333; /* Adjust the color to match your screenshot */
+    color: #333; 
   }
   
   .refund-request-form form {
@@ -43,7 +44,7 @@
   .refund-request-form input[type="number"] {
     padding: 8px;
     margin-top: 4px;
-    border: 1px solid #ccc; /* Adjust the color to match your screenshot */
+    border: 1px solid #ccc; 
     border-radius: 4px;
   }
   
@@ -60,19 +61,19 @@
     cursor: pointer;
   }
   
-  /* Style for the cancel button */
+  
   .refund-request-form button[type="button"] {
-    background-color: #ccc; /* Adjust the color to match your screenshot */
+    background-color: #ccc;
     color: white;
   }
   
-  /* Style for the submit button */
+
   .refund-request-form button[type="submit"] {
-    background-color: #4CAF50; /* Adjust the color to match your screenshot */
+    background-color: #4CAF50; 
     color: white;
   }
   
-  /* Hover effects for buttons */
+
   .refund-request-form button:hover {
     opacity: 0.9;
   }

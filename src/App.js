@@ -1,5 +1,6 @@
 import './App.css';
-import RefundRequest from "./pages/refundRequest/refundRequest";
+
+import GeneratedRequest from "./pages/generatedRequest/generatedRequest";
 import Navbar from "./layout/navbar/navbar";
 import Footer from "./layout/footer/footer";
 
@@ -7,7 +8,7 @@ function App() {
   return (
     <div className="App">
         <Navbar></Navbar>
-        <RefundRequest/>
+        <GeneratedRequest></GeneratedRequest>
         <Footer></Footer>
     </div>
   );
