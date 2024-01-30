@@ -86,7 +86,23 @@ function OrderDetails() {
 
                             <div className="textSection">
                                 
-                                <label className='label'>Receiver Id</label> 
+                                <label className='label'>Receiver</label> 
+
+                                <BasicTextFields></BasicTextFields>
+
+                            </div>
+
+                            <div className="textSection">
+                                
+                                <label className='label'>Address</label> 
+
+                                <BasicTextFields></BasicTextFields>
+
+                            </div>
+
+                            <div className="textSection">
+                                
+                                <label className='label'>Contact</label> 
 
                                 <BasicTextFields></BasicTextFields>
 
@@ -108,13 +124,7 @@ function OrderDetails() {
 
                             </div>
 
-                            <div className="textSection">
-                                
-                                <label className='label'>Reason</label> 
-
-                                <BasicTextFields></BasicTextFields>
-
-                            </div>
+                            
                             
                         </form>
                           

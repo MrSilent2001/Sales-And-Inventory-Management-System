@@ -67,7 +67,7 @@
 
 .label{
     font-weight: Bold;
-    font-size: large;
+    font-size:medium;
     width:6em;
     text-align: left;
     
@@ -81,7 +81,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding-top: 1.5em;
+    padding-top: 0.8em;
     
     
     
