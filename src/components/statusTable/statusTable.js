@@ -51,14 +51,14 @@ const columns = [
 
 
 
-function createData(id, name, amount, accept, reject) {
+function createData(id, name, amount, accept) {
 
     return {
         id,
         name,
         amount,
         accept,
-        reject
+        
 
 
     };
