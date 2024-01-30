@@ -7,16 +7,26 @@ export default function BasicTextFields() {
     <Box
       component="form"
       sx={{
-        '& > :not(style)': { m: 1, width: '25ch' },
-        
+        '& > :not(style)': { m: 1, width: '30em' },
+        marginLeft:'2em',
+       
         
       }}
+
+      
       noValidate
       autoComplete="off"
-    > 
-     
+    >
       
-      <TextField id="filled-basic" label="Filled" variant="filled" />
+      <TextField id="filled-basic" size = "small" variant="outlined"
+      
+      sx={{
+        backgroundColor : '#CCCCFF',
+        borderRadius:'0.2em',  
+      }}>
+
+
+      </TextField>
       
     </Box>
   );

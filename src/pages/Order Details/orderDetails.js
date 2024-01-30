@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./orderDetails.css";
 import { Button } from '@mui/material';
-
+import BasicTextFields from '../../components/forms/TextField';
 
 const CustomButton = ({ buttonText, isActive, handleClick }) =>{
 
@@ -73,12 +73,54 @@ function OrderDetails() {
                     </div>
                 </div>
                 <div className="orderDetailsInner">
-                    <div className="table1">
+                    
                         <div className="formbox">
+                        <form>
+                            <div className="textSection">
+                                
+                                <label className='label'>Order Id</label> 
+
+                                <BasicTextFields></BasicTextFields>
+
+                            </div>
+
+                            <div className="textSection">
+                                
+                                <label className='label'>Receiver Id</label> 
+
+                                <BasicTextFields></BasicTextFields>
+
+                            </div>
+
+                            <div className="textSection">
+                                
+                                <label className='label'>Items</label> 
+
+                                <BasicTextFields></BasicTextFields>
+
+                            </div>
+
+                            <div className="textSection">
+                                
+                                <label className='label'>Amount</label> 
+
+                                <BasicTextFields></BasicTextFields>
+
+                            </div>
+
+                            <div className="textSection">
+                                
+                                <label className='label'>Reason</label> 
+
+                                <BasicTextFields></BasicTextFields>
+
+                            </div>
+                            
+                        </form>
                           
 
                         </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
