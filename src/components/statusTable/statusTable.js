@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import {styled} from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
@@ -9,7 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import Button from '@mui/material/Button';
+import StatusDropdown from '../statusDropdown/statusDropdown';
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -37,7 +36,7 @@ const columns = [
     {
         id: 'amount',
         label: 'Amount(\u20A8.)',
-        minWidth: 170,
+        minWidth: 100,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
@@ -46,24 +45,11 @@ const columns = [
         label: '',
         minWidth: 100,
         align: 'center',
-        format: () => (
-          <Button/>
-        ),
-    },
-    {
-        id: 'reject',
-        label: '',
-        minWidth: 100,
-        align: 'center',
-        format: () => (
-            <Button/>
-        ),
+        
     }
 ];
 
-const handleButtonClick = () => {
-    console.log('Button clicked for row:');
-};
+
 
 function createData(id, name, amount, accept, reject) {
 
@@ -79,18 +65,18 @@ function createData(id, name, amount, accept, reject) {
 }
 
 const rows = [
-    createData('OID001', 'WAP Saman Perera', 100000, <Button variant="contained" onClick={() => handleButtonClick()}>Accept</Button> , <Button variant="contained" color = "error" onClick={() => handleButtonClick()}>Reject</Button>),
-    createData('OID002', 'WAP Saman Perera', 100000, <Button variant="contained" onClick={() => handleButtonClick()}>Accept</Button> , <Button variant="contained"  color = "error" onClick={() => handleButtonClick()}>Reject</Button>),
-    createData('OID004', 'WAP Saman Perera', 100000, <Button variant="contained" onClick={() => handleButtonClick()}>Accept</Button> , <Button variant="contained"  color = "error" onClick={() => handleButtonClick()}>Reject</Button>),
-    createData('OID005', 'WAP Saman Perera', 100000, <Button variant="contained" onClick={() => handleButtonClick()}>Accept</Button> , <Button variant="contained"  color = "error" onClick={() => handleButtonClick()}>Reject</Button>),
-    createData('OID006', 'WAP Saman Perera', 100000, <Button variant="contained" onClick={() => handleButtonClick()}>Accept</Button> , <Button variant="contained"  color = "error" onClick={() => handleButtonClick()}>Reject</Button>),
-    createData('OID007', 'WAP Saman Perera', 100000, <Button variant="contained" onClick={() => handleButtonClick()}>Accept</Button> , <Button variant="contained"  color = "error" onClick={() => handleButtonClick()}>Reject</Button>),
-    createData('OID008', 'WAP Saman Perera', 100000, <Button variant="contained" onClick={() => handleButtonClick()}>Accept</Button> , <Button variant="contained"  color = "error" onClick={() => handleButtonClick()}>Reject</Button>),
-    createData('OID009', 'WAP Saman Perera', 100000, <Button variant="contained" onClick={() => handleButtonClick()}>Accept</Button> , <Button variant="contained"  color = "error" onClick={() => handleButtonClick()}>Reject</Button>),
-    createData('OID010', 'WAP Saman Perera', 100000, <Button variant="contained" onClick={() => handleButtonClick()}>Accept</Button> , <Button variant="contained"  color = "error" onClick={() => handleButtonClick()}>Reject</Button>),
+    createData('OID001', 'WAP Saman Perera', 100000,<StatusDropdown />),
+    createData('OID002', 'WAP Saman Perera', 100000,<StatusDropdown />),
+    createData('OID004', 'WAP Saman Perera', 100000,<StatusDropdown />),
+    createData('OID005', 'WAP Saman Perera', 100000,<StatusDropdown />),
+    createData('OID006', 'WAP Saman Perera', 100000,<StatusDropdown />),
+    createData('OID007', 'WAP Saman Perera', 100000,<StatusDropdown />),
+    createData('OID008', 'WAP Saman Perera', 100000,<StatusDropdown />),
+    createData('OID009', 'WAP Saman Perera', 100000,<StatusDropdown />),
+    createData('OID010', 'WAP Saman Perera', 100000,<StatusDropdown />),
    ];
 
-function OrderTable() {
+function StatusTable() {
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -161,4 +147,4 @@ function OrderTable() {
     );
 }
 
-export default OrderTable;
+export default StatusTable;

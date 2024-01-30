@@ -1,0 +1,56 @@
+.orderStatusOuter{
+    display: flex;
+}
+
+.body{
+    display: flex;
+    flex-direction: row;
+}
+
+.orderStatusFilter{
+    width: 14.375em;
+    height: 36.03em;
+    background-color: #646FD4;
+
+}
+
+.orderStatusInner{
+    width : 78.5em;
+    height: 33em;
+    margin: 1.5em 0 0 1em;
+    background-color: #DBDFFD;
+}
+
+.searchAndButtons{
+    display: flex;
+    width: 81.25em;
+    padding: 0.5em 0 0 0;
+    justify-content: space-between;
+}
+
+.PendingOrdersSearch{
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 2em;
+}
+
+.PendingOrdersButtons{
+    display: flex;
+    align-items: center;
+    width: 15.625em;
+    justify-content: space-between;
+    padding: 0 1.95em 0 0;
+}
+.Button1{
+    margin-top: 2em;
+    margin-bottom: 2em;
+   
+
+}
+
+.table1{
+    margin-top: 1em;
+    margin-left: 9em;
+    margin-right: 2em;
+    
+}
