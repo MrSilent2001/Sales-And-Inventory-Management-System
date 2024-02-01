@@ -1,3 +1,6 @@
+body{
+  font-family: Inter;
+}
 .outer{
   display: flex;
   justify-content: center;
@@ -19,7 +22,7 @@
   .request-container {
     background-color:#FFFFFF;
     padding:2% 5% 4% 1%;
-    width: 70%;
+    width: 80%;
     height: 30%;
     
   }
@@ -27,9 +30,14 @@
   h2 {
    margin-top: 3%; 
   }
-  span{
+  h4{
     text-align: left;
+    margin-left: 40%;
     
+  }
+  .value{
+    text-align: left;
+    margin-left: 15%;
   }
   
   .go-back-button {
