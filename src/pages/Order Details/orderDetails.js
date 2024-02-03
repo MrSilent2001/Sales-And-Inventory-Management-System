@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./orderDetails.css";
 import { Button } from '@mui/material';
 import BasicTextFields from '../../components/forms/TextField';
+import BasicButtons from '../../components/Buttons/orderDetailsButtons';
 
 const CustomButton = ({ buttonText, isActive, handleClick }) =>{
 
@@ -124,7 +125,9 @@ function OrderDetails() {
 
                             </div>
 
-                            
+                            <div className="formButtons">
+                            <BasicButtons></BasicButtons>
+                            </div>
                             
                         </form>
                           
