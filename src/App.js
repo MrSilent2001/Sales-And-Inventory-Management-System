@@ -1,5 +1,5 @@
 import './App.css';
-import Navbar from "./layout/navbar/navbar";
+import Navbar from "./layout/navbar/Inventory navbar/navbar";
 import Footer from "./layout/footer/footer";
 import ViewInventory from "./pages/Inventory/View Inventory Page/viewInventory";
 
