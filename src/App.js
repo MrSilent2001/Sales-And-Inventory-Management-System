@@ -1,12 +1,12 @@
 import './App.css';
 import Footer from "./layout/footer/footer";
-import ViewInventory from "./pages/Inventory/View Inventory Page/viewInventory";
-import InventoryNavbar from "./layout/navbar/Inventory navbar/Inventory navbar";
+import ViewInventory from "./pages/Inventory/View Inventory Page/viewInventory";;
+import CustomerNavbar from "./layout/navbar/Customer navbar/Customer navbar";
 
 function App() {
   return (
     <div className="App">
-        <InventoryNavbar></InventoryNavbar>
+        <CustomerNavbar></CustomerNavbar>
         <ViewInventory></ViewInventory>
         <Footer></Footer>
     </div>
