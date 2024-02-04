@@ -54,7 +54,7 @@ function AddSupplier(){
 
                         <div className="row">
                             <label>Email:  </label>
-                            <TextField className="input" type="email" size="small" id="outlined-required" label="Email" required/>
+                            <TextField  className="supplierInput" type="email" size="small" id="outlined-required" label="Email" required/>
                         </div>
 
                         <br/><br/>
@@ -88,7 +88,7 @@ function AddSupplier(){
 
                         <div className="row">
                             <label>Photo: </label>
-                            <Button component="label" variant="contained" startIcon={<CloudUploadIcon />} className="supplierInput">
+                            <Button component="label" variant="contained" startIcon={<CloudUploadIcon />} style={{width:"22.75em"}}>
                                 Upload Image
                                 <VisuallyHiddenInput type="file" />
                             </Button>

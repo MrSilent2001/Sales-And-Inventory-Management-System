@@ -1,16 +1,18 @@
 import './App.css';
 import Navbar from "./layout/navbar/navbar";
-import AddDistcounts from "./pages/add Discounts/AddDistcounts";
-import AddSupplier from "./pages/add Supplier/addSupplier";
-import InventoryLanding from "./pages/inventory landing page/inventoryLanding";
 import UpdateSupplier from "./pages/update Supplier/updateSupplier";
+import Footer from "./layout/footer/footer";
+import PaymentDashboard from "./pages/payment Dashboard/paymentDashboard";
+import InventoryLanding from "./pages/inventory landing page/inventoryLanding";
 import DiscountDashboard from "./pages/discount Dashboard/discountDashboard";
+import AddSupplier from "./pages/add Supplier/addSupplier";
 
 function App() {
   return (
     <div className="App">
         <Navbar/>
-        <UpdateSupplier/>
+        <AddSupplier/>
+        <Footer/>
     </div>
   );
 }

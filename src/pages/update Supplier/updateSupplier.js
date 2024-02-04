@@ -83,7 +83,7 @@ function UpdateSupplier(){
                         <div className="row">
                             <label>Email:  </label>
                             <TextField
-                                className="input"
+                                className="supplierInput"
                                 type="email"
                                 size="small"
                                 id="outlined-required"
@@ -132,7 +132,7 @@ function UpdateSupplier(){
 
                         <div className="row">
                             <label>Photo: </label>
-                            <Button component="label" variant="contained" startIcon={<CloudUploadIcon />} className="supplierInput">
+                            <Button component="label" variant="contained" startIcon={<CloudUploadIcon />} style={{width:"22.75em"}}  >
                                 Upload Image
                                 <VisuallyHiddenInput type="file" />
                             </Button>
