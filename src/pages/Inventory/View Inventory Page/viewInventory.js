@@ -6,8 +6,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import "./viewInventory.css";
-import AddItemButton from "../../layout/buttons/addItemButton/AddItemButton";
-import DeleteItemButton from "../../layout/buttons/deleteItemButton/DeleteItemButton";
+import AddItemButton from "../../../layout/buttons/addItemButton/AddItemButton";
+import DeleteItemButton from "../../../layout/buttons/deleteItemButton/DeleteItemButton";
 import {styled} from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import TableCell, {tableCellClasses} from "@mui/material/TableCell";
@@ -84,7 +84,7 @@ function FilterItems(){
                         fontSize: 10,
                         border: '1px solid white',
                         '& .MuiInputLabel-root': {
-                            fontSize: 4, // Set the desired font size for the placeholder
+                            fontSize: 4,
                         },
                     }}
                 >
@@ -132,7 +132,7 @@ function FilterAvailability(){
                         fontSize: 10,
                         border: '1px solid white',
                         '& .MuiInputLabel-root': {
-                            fontSize: 4, // Set the desired font size for the placeholder
+                            fontSize: 4,
                         },
                     }}
                 >
@@ -148,7 +148,7 @@ const ApplyButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#D41400'),
     backgroundColor: '#D41400',
     '&:hover': {
-        backgroundColor: '#e03a26' // You can adjust the darken value as needed
+        backgroundColor: '#e03a26'
     },
     '&.MuiButton-root': {
         width: '11.625em',
@@ -200,7 +200,7 @@ const ViewItemButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#242F9B'),
     backgroundColor: '#242F9B',
     '&:hover': {
-        backgroundColor: '#2d3ed2' // You can adjust the darken value as needed
+        backgroundColor: '#2d3ed2'
     },
     '&.MuiButton-root': {
         width: '11.625em',
