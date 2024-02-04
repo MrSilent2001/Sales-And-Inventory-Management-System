@@ -1,7 +1,7 @@
 import './App.css';
 import Navbar from "./layout/navbar/navbar";
 import Footer from "./layout/footer/footer";
-import ViewInventory from "./pages/Inventory/view inventory page/viewInventory";
+import ViewInventory from "./pages/Inventory/View Inventory Page/viewInventory";
 
 function App() {
   return (
