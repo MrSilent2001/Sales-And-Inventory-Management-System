@@ -1,0 +1,18 @@
+.generated-request {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 35.75rem;
+    background-color: #DBDFFD;
+    width:85rem;
+    text-align: center;
+
+  }
+  .outer{
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+    margin-bottom: 3%;
+  }
+  
