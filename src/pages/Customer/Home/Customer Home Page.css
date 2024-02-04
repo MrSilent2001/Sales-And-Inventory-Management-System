@@ -1,6 +1,10 @@
 .carouselOuter{
     width: 100%;
     height: 600px;
+    background-image: url('./HomeCarousel.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .carouselOuter img {

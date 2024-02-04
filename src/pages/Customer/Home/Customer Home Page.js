@@ -5,7 +5,7 @@ function CustomerHome(){
         <div className="custoemrHome">
 
             <div className="carouselOuter">
-                <img src={require('./HomeCarousel.jpg')} alt=""/>
+                {/*<img src={require('./HomeCarousel.jpg')} alt=""/>*/}
             </div>
         </div>
     )
