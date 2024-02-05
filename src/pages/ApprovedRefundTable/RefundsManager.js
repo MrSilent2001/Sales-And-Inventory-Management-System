@@ -11,7 +11,7 @@ const RefundsManager = () => {
 
   return (
     <div>
-      {view === 'requests' && <RefundRequestsTable onApprove={showApproved} />}
+      {view === 'requests' && <RefundRequestsTable onViewApproved={showApproved} />}
       {view === 'approved' && <ApprovedRefundsTable onBack={showRequests} />}
     </div>
   );

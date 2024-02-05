@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Container, Typography, Box, Button } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility'; // This is the icon for viewing individual refund requests
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 const fetchRequests = () => {
   // Simulating fetching data from a database
@@ -21,19 +22,32 @@ const RefundRequestsTable = ({ onViewApproved }) => {
   }, []);
 
   return (
-    <Container className='inner_container' maxWidth="90%">
+    <Container className='inner_container' maxWidth="90%"a>
       <Box sx={{ my: 4 }}>
-        <Typography variant="h4" gutterBottom component="div">
-          Refund Requests
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: 2,
+          backgroundColor: '#DBDFFD', 
+          marginBottom: 2
+        }}
+      >
+        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+          Refund Request
         </Typography>
         <Button
           variant="contained"
-          startIcon={<VisibilityIcon />}
           onClick={onViewApproved}
-          sx={{ marginBottom: 2 }}
+          sx={{ borderRadius: 1,
+             backgroundColor:"#242F9B",
+             textTransform:"none"
+            }} 
         >
-          View Approved Refunds
+          Approved Refunds
         </Button>
+      </Box>
         <TableContainer component={Paper}>
           <Table aria-label="refund requests table">
             <TableHead>
