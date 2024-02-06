@@ -3,15 +3,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 500px;
-    height: auto;
+    width: 250px;
+    height: 200px;
     background: rgb(179, 179, 232);
     color: azure;
     font-size: 24px;
     text-align: center;  
     margin-top: 100px;
     margin-bottom: 100px;
-    margin-left: 500px;
+    margin-left: 400px;
     
 }
 
@@ -81,16 +81,18 @@
     border-width: 2px;
     border-radius: 4px;
     padding: 20px 45px 20px 20px;
-    margin-top: 5px;
-    margin-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom:0px;
   }
   .register-link{
     color:black;
     font-size: medium;
     font-weight: 700;
     text-align: left;
-    margin-bottom: 10px;
+    margin-bottom: 17px;
     margin-top: 0px;
+
+  
   }
 
   .remember-forgot{
@@ -106,45 +108,3 @@
 
 
 
-/*
-.wrapper1 h1{
-    font-size: 36px;
-    text-align: center;
-}
-.wrapper1 .input-box{
-    position: relative;
-    width:100%;
-    height: 50px;
-    margin: 30px 0;
-}
-.input-box input{
-    width: 100%;
-    height: 100%;
-    background: whitesmoke;
-    border: none;
-    outline: none;
-    border: 2px solid white;
-    font-size: 16px;
-    color: black;
-    padding: 20px 45px 20px 20px;
-
-}
-.input-box input ::placeholder{
-    color: aqua;
-
-
- .button {
-    width: 100%;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0069d9;
-  }
-} */

@@ -5,7 +5,7 @@ import './signup.css'
   return (
     <div className='container'>
           <div className='wrapper1'>
-                <form action="" method="post">
+                <form action="" >
                     <h1>Sign UP</h1>
                     <div className="input-box">
                         <input type="text" placeholder='Username' required />
