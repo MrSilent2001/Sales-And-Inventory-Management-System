@@ -5,7 +5,7 @@ const LoginForm = () => {
     return (
         <div className='container'>
             <div className='wrapper1'>
-                <form action="">
+                <form action="" method="post">
                     <h1>Login</h1>
                     <div className="input-box">
                         <input type="text" placeholder='Username' required />
@@ -21,7 +21,6 @@ const LoginForm = () => {
                     </div>
 
                     <div className="remember-forgot">
-
                         <a href="#"> Forgot Password</a>
                     </div>
                 </form>
