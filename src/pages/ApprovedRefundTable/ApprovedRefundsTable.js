@@ -15,19 +15,17 @@ const ApprovedRefundsTable = ({ onBack }) => {
 
   return (
     <Container className='inner_container' maxWidth="90%">
-      <Box sx={{ my: 4 }}>
+      <Box sx={{ my: 4, display:'flex',flexDirection:'column'}}>
         <Button 
           startIcon={<ArrowBackIosIcon/>} 
-          variant='contained' 
           size="large" 
-          style={{color:"black"}}
-          onClick={onBack}  // Use the onBack prop here
+          style={{color: "black", fontWeight: 'bold',textTransform:"none"}} 
+          onClick={onBack}  // onBack prop
+          sx={{width:'20%',p:'0px',pr:'7%',mt:'2%',mb:'2%'}}
         >
           Refund Request
         </Button>
-        <Typography variant="h4" gutterBottom component="div">
-          Approved Refunds
-        </Typography>
+       
         <TableContainer component={Paper}>
           <Table aria-label="approved refunds table">
             <TableHead>

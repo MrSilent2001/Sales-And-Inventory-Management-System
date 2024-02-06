@@ -23,31 +23,51 @@ const RefundRequestsTable = ({ onViewApproved }) => {
 
   return (
     <Container className='inner_container' maxWidth="90%"a>
-      <Box sx={{ my: 4 }}>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: 2,
-          backgroundColor: '#DBDFFD', 
-          marginBottom: 2
-        }}
-      >
-        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-          Refund Request
-        </Typography>
-        <Button
-          variant="contained"
-          onClick={onViewApproved}
-          sx={{ borderRadius: 1,
-             backgroundColor:"#242F9B",
-             textTransform:"none"
-            }} 
+          <Box sx={{ my: 4 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: 2,
+            backgroundColor: '##D41400', 
+            marginBottom: 2
+          }}
         >
-          Approved Refunds
-        </Button>
-      </Box>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+            Refund Request
+          </Typography>
+          <Box>
+            {/* Existing Approved Refunds Button */}
+            
+            {/* New Red-colored Refund Request Button */}
+            <Button
+              variant="contained"
+              onClick={() => {/* handler function here */}}
+              sx={{ 
+                borderRadius: 1,
+                backgroundColor:"#FF0000", // Red color for the button
+                textTransform:"none",
+                color: 'white', // Ensuring the text is white for better readability
+                marginRight: 1,
+              }} 
+            >
+              Refunds Request
+            </Button>
+            <Button
+              variant="contained"
+              onClick={onViewApproved}
+              sx={{ 
+                borderRadius: 1,
+                backgroundColor:"#242F9B",
+                textTransform:"none",
+                 // Added margin to separate buttons
+              }} 
+            >
+              Approved Refunds
+            </Button>
+          </Box>
+        </Box>
         <TableContainer component={Paper}>
           <Table aria-label="refund requests table">
             <TableHead>
