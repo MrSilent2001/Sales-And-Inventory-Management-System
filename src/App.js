@@ -9,11 +9,9 @@ function App() {
   return (
     <div className="App">
         <Navbar></Navbar>
-        <RefundsManager/>
         <GeneratedRequest/>
-        <RefundRequestForm/>
         <Footer></Footer>
-        <CustomerRefundRequest/>
+
     </div>
   );
 }

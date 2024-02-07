@@ -5,10 +5,10 @@ import VisibilityIcon from '@mui/icons-material/Visibility'; // This is the icon
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 const fetchRequests = () => {
-  // Simulating fetching data from a database
+
   return Promise.resolve([
     { id: 1, name: 'John Doe', requestId: '0771112224', orderId: 'J0002', amount: 'Rs.50,000.00', status: 'Pending' },
-    // Add more dummy data as needed
+    
   ]);
 };
 
@@ -38,17 +38,17 @@ const RefundRequestsTable = ({ onViewApproved }) => {
             Refund Request
           </Typography>
           <Box>
-            {/* Existing Approved Refunds Button */}
+            {}
             
-            {/* New Red-colored Refund Request Button */}
+            {}
             <Button
               variant="contained"
-              onClick={() => {/* handler function here */}}
+              onClick={() => {}}
               sx={{ 
                 borderRadius: 1,
-                backgroundColor:"#FF0000", // Red color for the button
+                backgroundColor:"#FF0000", 
                 textTransform:"none",
-                color: 'white', // Ensuring the text is white for better readability
+                color: 'white', 
                 marginRight: 1,
               }} 
             >
@@ -61,7 +61,7 @@ const RefundRequestsTable = ({ onViewApproved }) => {
                 borderRadius: 1,
                 backgroundColor:"#242F9B",
                 textTransform:"none",
-                 // Added margin to separate buttons
+                
               }} 
             >
               Approved Refunds
