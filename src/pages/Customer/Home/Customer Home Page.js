@@ -34,6 +34,18 @@ function CustomerHome(){
                     </div>
                 </div>
             </div>
+
+            <div className="aboutUs">
+                <h2 className="aboutUsTopic">
+                    About Us
+                </h2>
+                <p className="aboutUsParagraph">
+                    Welcome to Tradeasy – your one-stop solution for top-quality construction substances! At Tradeasy, we cater to all your building needs with a diverse range of reliable and durable materials. Our expert team is here to guide you, ensuring you find the right substances for any project, big or small. Trust Tradeasy for excellence in construction – where quality meets convenience!
+                </p>
+                <p className="aboutUsParagraph aboutUsParagraphLast">
+                    What sets Tradeasy apart is our unwavering commitment to excellence in construction. We understand the importance of using high-quality materials for durability and longevity. Every product in our inventory undergoes rigorous quality checks to meet and exceed industry standards, providing you with confidence and peace of mind in your construction endeavors. Trust Tradeasy for an unparalleled blend of quality and convenience. Explore our extensive selection, and let us be your trusted companion in the journey towards construction excellence. Welcome to Tradeasy – where craftsmanship meets choice!
+                </p>
+            </div>
         </div>
     )
 }
