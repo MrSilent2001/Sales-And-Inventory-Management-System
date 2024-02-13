@@ -1,11 +1,11 @@
 import React from "react";
 import "./Customer navbar.css";
-
+import logo from "../logo.png";
 function CustomerNavbar(){
     return(
         <div className="navbar">
             <div className="logo">
-                <h5>Tradeasy</h5>
+                <img src={logo} alt="Logo" style={{width:"30px", margin:"10px"}} />
             </div>
             <div className="navigation">
                 <a href="#">Home</a>
