@@ -2,6 +2,7 @@ import React from "react";
 import "./Inventory navbar.css";
 import logo from "../../../assets/images/logo.png";
 
+
 function InventoryNavbar(){
     return(
         <div className="navbar">

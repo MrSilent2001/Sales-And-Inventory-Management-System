@@ -2,6 +2,7 @@ import React from "react";
 import "./Customer navbar.css";
 import logo from "../../../assets/images/logo.png";
 
+
 function CustomerNavbar(){
     return(
         <div className="navbar">
