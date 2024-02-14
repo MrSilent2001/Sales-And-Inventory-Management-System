@@ -23,6 +23,14 @@
     margin: auto 14px auto 14px;
 }
 
+.logo{
+    margin: 0.2em 0 0 0.9em;
+}
+
+.logo img{
+    border-radius: 10%;
+}
+
 a:hover{
     color: #858bcb;
     font-weight: bold;
