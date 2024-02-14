@@ -1,8 +1,8 @@
 import React from "react";
-import "./navbar.css";
-import logo from "../../assets/images/logo.png";
+import "./Inventory navbar.css";
+import logo from "../../../assets/images/logo.png";
 
-function navbar(){
+function InventoryNavbar(){
     return(
         <div className="navbar">
             <div className="logo">
@@ -20,4 +20,4 @@ function navbar(){
     )
 }
 
-export default navbar;
+export default InventoryNavbar;
