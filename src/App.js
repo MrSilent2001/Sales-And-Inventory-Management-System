@@ -1,12 +1,14 @@
 import './App.css';
 import CustomerNavbar from "./layout/navbar/Customer navbar/Customer navbar";
-import CustomerHome from "./pages/Customer/Home/Customer Home Page";
+import CustomerRefunds from "./pages/Customer/Refund/Customer Refunds";
+import Footer from "./layout/footer/footer";
 
 function App() {
   return (
     <div className="App">
         <CustomerNavbar></CustomerNavbar>
-        <CustomerHome></CustomerHome>
+        <CustomerRefunds></CustomerRefunds>
+        <Footer></Footer>
     </div>
   );
 }
