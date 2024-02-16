@@ -1,5 +1,7 @@
 import React from 'react'
 import './signup.css'
+import { TextField } from '@mui/material'
+
 
  const Signup = () => {
   return (
@@ -8,10 +10,10 @@ import './signup.css'
                 <form action="" >
                     <h1>Sign UP</h1>
                     <div className="input-box">
-                        <input type="text" placeholder='Username' required />
+                    <TextField id="filled-basic" label = 'Username' variant="filled" />
                     </div>
                     <div className="input-box">
-                        <input type="email" placeholder='Email' required />
+                    <TextField id="filled-basic" label = 'email' variant="filled" />
                     </div>
                     <div className="input-box">
                         <input type="tel" placeholder='Contact Number' required />
@@ -23,7 +25,7 @@ import './signup.css'
                         <input type="password" placeholder='Confirm Password' required />
                     </div>
 
-                    <div className='login'><button type="submit">Log In</button></div>
+                    <div className='login'><button type="submit">Sign up</button></div>
 
                     <div className="register-link">
                         <p>Already Registered- <a href="#"> Log in</a></p>

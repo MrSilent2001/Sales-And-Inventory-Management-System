@@ -1,0 +1,22 @@
+.CustomerManagementOuter{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.CustomerManagementInner{
+    width: 95%;
+    height: 40.625em;
+    background-color: #DBDFFD;
+    border-radius: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.customerTitle{
+    text-align: left;
+}
