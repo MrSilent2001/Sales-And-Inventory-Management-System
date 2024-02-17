@@ -11,7 +11,7 @@ import TableBody from "@mui/material/TableBody";
 import {Modal} from "@mui/material";
 import UpdateItem from "../../Inventory/View Inventory Page/Models/Update Item/Update Item";
 
-const CustomerRefundequestButton = styled(Button)(({ theme }) => ({
+const CustomerRefundRequestButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#242F9B'),
     backgroundColor: '#242F9B',
     '&:hover': {
@@ -93,7 +93,7 @@ function CustomerRefunds(){
                     </div>
 
                     <div className="customerRefundRequestButton">
-                        <CustomerRefundequestButton>Request Refund</CustomerRefundequestButton>
+                        <CustomerRefundRequestButton>Request Refund</CustomerRefundRequestButton>
                     </div>
                 </div>
 
