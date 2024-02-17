@@ -1,5 +1,4 @@
-
-import './customer management-01.css'
+import './customer management-02.css';
 import {styled} from '@mui/material/styles';
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -11,14 +10,13 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 
-const CustomerManagementButton = styled(Button)(({ theme }) => ({
+
+const CustomerOrdersButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#242F9B'),
-    backgroundColor: 'red',
+    backgroundColor: '#242F9B',
     '&:hover': {
         backgroundColor: '#2d3ed2'
-
     },
     '&.MuiButton-root': {
         width: '13.625em',
@@ -97,7 +95,7 @@ const rows = [
     createData('00014', 'Catherine Brunt', 'No.3, Sussex, England', '0740007896','CatherineBrunt@gmail.com'),
     createData('00015', 'Sarah Taylor', 'No.33, London, England', '0719596961', 'SarahTaylor@gmail.com'),
 ];
-function CustomerManagement() {
+function CustomerOrders() {
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -112,23 +110,23 @@ function CustomerManagement() {
     };
 
     return (
-        <div className="CustomerManagementOuter">
-            <div className="CustomerManagementInner">
-            <div className="customerManagementTopicWithButton">
-                    <div className="customerManagementTopic">
-                        <h2>Customers</h2>
+
+
+        <div className="CustomerOrdersOuter">
+            <div className="CustomerOrdersInner">
+            <div className="customerOrdersTopicWithButton">
+                    <div className="customerOrdersTopic">
+                        <h2>Orders</h2>
                     </div>
 
-                    <div className="customerManagementButton">
-                        <CustomerManagementButton>Inactive Customers</CustomerManagementButton>
+                    <div className="customerOrdersButton">
+                        <CustomerOrdersButton>Inactive Customers</CustomerOrdersButton>
                     </div>
-
-                   <div className="customerManagementTextfield">
-                   <TextField id="outlined-search" label="Search" type="search" />
-                   </div>
-
                 </div>
 
+
+            
+       
                 <Paper sx={{width: '90%', overflow: 'hidden'}}>
                     <TableContainer sx={{maxHeight: 440}}>
                         <Table stickyHeader aria-label="sticky table">
@@ -182,4 +180,4 @@ function CustomerManagement() {
     );
 }
 
-export default CustomerManagement;
+export default CustomerOrders;

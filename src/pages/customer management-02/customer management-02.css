@@ -1,4 +1,4 @@
-.CustomerManagementOuter{
+.CustomerOrdersOuter{
     width: 100%;
     height: 100%;
     display: flex;
@@ -6,7 +6,7 @@
     padding: 40px 0;
 }
 
-.CustomerManagementInner{
+.CustomerOrdersInner{
     width: 95%;
     height: 40.625em;
     background-color: #DBDFFD;
@@ -20,17 +20,15 @@
 /*.customerTitle{
     text-align: left;
 }*/
-
-.customerManagementTopicWithButton{
+.customerOrdersTopicWithButton{
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 87em;
     margin: 2em 0 2em 0;
-
 }
 
-.customerManagementTopic h2{
+.customerOrdersTopic h2{
     margin: 0;
     font-family: Inter;
     font-size: 1.3em;
