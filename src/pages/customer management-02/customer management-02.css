@@ -20,7 +20,7 @@
 /*.customerTitle{
     text-align: left;
 }*/
-.customerOrdersTopicWithButton{
+.customerOrdersTopicWithTextfield{
     display: flex;
     justify-content: space-between;
     align-items: center;

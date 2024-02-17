@@ -10,9 +10,10 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 
-const CustomerOrdersButton = styled(Button)(({ theme }) => ({
+/*const CustomerOrdersButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#242F9B'),
     backgroundColor: '#242F9B',
     '&:hover': {
@@ -25,7 +26,7 @@ const CustomerOrdersButton = styled(Button)(({ theme }) => ({
     fontSize: '0.625em',
     fontFamily: 'inter',
     padding: '1.75em 0.625em'
-}));
+}));*/
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -48,7 +49,7 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
 }));
 
 const columns = [
-    {id: 'id', label: 'Id', minWidth: 170, align: 'center'},
+    {id: 'id', label: 'ID', minWidth: 170, align: 'center'},
     {id: 'name', label: 'Name', minWidth: 100, align: 'center'},
     {
         id: 'address',
@@ -58,42 +59,42 @@ const columns = [
         format: (value) => value.toLocaleString('en-US'),
     },
     {
-        id: 'contact',
-        label: 'Contact',
+        id: 'items',
+        label: 'Items',
         minWidth: 170,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
-        id: 'email',
-        label: 'Email',
+        id: 'totalAmount',
+        label: 'Total Amount',
         minWidth: 170,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     }
 ];
 
-function createData(id, name, address, contact, email) {
-    return {id, name, address, contact, email};
+function createData(id, name, address,items,totalAmount) {
+    return {id, name, address,items,totalAmount};
 }
 
 const rows = [
-    createData('000000', 'Chris Gayle', 'No.132, Kingston, Jamaica', '0771112323', 'chrisgayle@gmail.com'),
-    createData('000001', 'Stuart Broad', 'No.62, Worwickshire, England', '0719596961', 'stuartbroad@gmail.com'),
-    createData('000002', 'Regina Percil', 'No.13,Ludwigsburg , Germany','0719446987' ,'reginapercil@gmail.com'),
-    createData('000003', 'James Anderson', 'No.65, Yorkshire, England','0771112323', 'Jamesanderson@gmail.com'),
-    createData('000004', 'Finn Allen', 'No.22, Auckland, New Zealand', '0740007896', 'Finnallen@gmail.com'),
-    createData('000005', 'Jason Holder', 'No.325, Basseterri, Barbados', '0771112323', 'JasonHolder@gmail.com'),
-    createData('000006', 'Shaun Marsh', 'No.132, Kingston, Jamaica','0771112323' ,'ShaunMarsh@gmail.com'),
-    createData('000007', 'Mitchell Starc', 'No.72, Sydney, Australia','0771112323' , 'MitchellStarc@gmail.com'),
-    createData('000008', 'Josh Hazelwood', 'No.92, Melbourne, Australia', '0740007896','JoshHazelwood@gmail.com'),
-    createData('000009', 'Joe Root', 'No.52, Lankanshire, England','0771112323' , 'JoeRoot@gmail.com'),
-    createData('000010', 'Harry Brook', 'No.26, Derbyshire, England', '0740007896', 'HarryBrook@gmail.com'),
-    createData('000011', 'Fabian Allen', 'No.12, St.Georges Park, Guyana','0771112323' , 'FabianAllen@gmail.com'),
-    createData('00012', 'Ross Taylor', 'No.252, Wellington, New Zealand', '0719596961', 'RossTaylor@gmail.com'),
-    createData('00013', 'Nat Sciver', 'No.23, Essex, England', '0719596961', 'NatSciver@gmail.com'),
-    createData('00014', 'Catherine Brunt', 'No.3, Sussex, England', '0740007896','CatherineBrunt@gmail.com'),
-    createData('00015', 'Sarah Taylor', 'No.33, London, England', '0719596961', 'SarahTaylor@gmail.com'),
+    createData('000000', 'Chris Gayle', 'No.132, Kingston, Jamaica', ['7111,2323'], 'Rs.311,000'),
+    createData('000001', 'Stuart Broad', 'No.62, Worwickshire, England', ['1959,6961'], 'Rs.311,000'),
+    createData('000002', 'Regina Percil', 'No.13,Ludwigsburg , Germany',['1944,6987'] ,'Rs.311,000'),
+    createData('000003', 'James Anderson', 'No.65, Yorkshire, England',['7111,2323'], 'Rs.311,000'),
+    createData('000004', 'Finn Allen', 'No.22, Auckland, New Zealand', ['4000,7896'], 'Rs.311,000'),
+    createData('000005', 'Jason Holder', 'No.325, Basseterri, Barbados', ['7111,2323'], 'Rs.311,000'),
+    createData('000006', 'Shaun Marsh', 'No.132, Kingston, Jamaica',['7111,2323'] ,'Rs.311,000'),
+    createData('000007', 'Mitchell Starc', 'No.72, Sydney, Australia',['7111,2323'] , 'Rs.311,000'),
+    createData('000008', 'Josh Hazelwood', 'No.92, Melbourne, Australia', ['4000,7896'],'Rs.311,000'),
+    createData('000009', 'Joe Root', 'No.52, Lankanshire, England',['7111,2323'] , 'Rs.311,000'),
+    createData('000010', 'Harry Brook', 'No.26, Derbyshire, England', ['4040,7896'], 'Rs.311,000'),
+    createData('000011', 'Fabian Allen', 'No.12, St.Georges Park, Guyana',['7111,2323'] , 'Rs.311,000'),
+    createData('00012', 'Ross Taylor', 'No.252, Wellington, New Zealand', ['7195,9661'], 'Rs.311,000'),
+    createData('00013', 'Nat Sciver', 'No.23, Essex, England', '1959,6961', 'Rs.311,000'),
+    createData('00014', 'Catherine Brunt', 'No.3, Sussex, England', ['0740,0078'],'Rs.311,000'),
+    createData('00015', 'Sarah Taylor', 'No.33, London, England', ['1959,6501'], 'Rs.311,000'),
 ];
 function CustomerOrders() {
 
@@ -114,13 +115,13 @@ function CustomerOrders() {
 
         <div className="CustomerOrdersOuter">
             <div className="CustomerOrdersInner">
-            <div className="customerOrdersTopicWithButton">
+            <div className="customerOrdersTopicWithTextfield">
                     <div className="customerOrdersTopic">
                         <h2>Orders</h2>
                     </div>
 
-                    <div className="customerOrdersButton">
-                        <CustomerOrdersButton>Inactive Customers</CustomerOrdersButton>
+                    <div className="customerOrdersTextField">
+                   <TextField id="outlined-search" label="Search" type="search" />
                     </div>
                 </div>
 
