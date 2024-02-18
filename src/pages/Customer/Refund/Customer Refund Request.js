@@ -158,7 +158,7 @@ function CustomerRefundRequest(){
 
                     <div className="formField">
                         <div className="textField">
-                            <h5>Inventory Id</h5>
+                            <h5>Contact</h5>
                         </div>
                         <div className="textInput">
                             <BasicTextFields></BasicTextFields>
