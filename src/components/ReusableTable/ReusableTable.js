@@ -9,7 +9,7 @@ function ReusableTable({ data }) {
         {data.map((row, rowIndex) => (
           <TableRow key={rowIndex}>
             {Object.values(row).map((value, columnIndex) => (
-              <TableCell key={columnIndex}>{value}</TableCell>
+              <TableCell key={columnIndex} className={`column-${columnIndex}`}>{value}</TableCell>
             ))}
           </TableRow>
         ))}

@@ -3,10 +3,14 @@ import { Container, Box, Button, Typography, Paper } from '@mui/material';
 import ReusableTable from '../../../components/ReusableTable/ReusableTable';
 
 const fetchRequests = () => {
-  // ... same as before
+  return Promise.resolve([
+    { name: 'John Doe', requestId: '0771112224', orderId: 'J0002'},
+    { name: 'John Doe', requestId: '0771112224', orderId: 'I0002'},
+    { name: 'Jane Smith', requestId: '0771112225', orderId: 'I0003'},
+  ]);
 };
 
-const RefundRequestsTable = ({ onViewApproved }) => {
+const SalesRefundRequestsTable = ({ onViewApproved }) => {
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
@@ -16,30 +20,26 @@ const RefundRequestsTable = ({ onViewApproved }) => {
   }, []);
 
   const handleStatusButtonClick = requestId => {
-    // Logic to handle the button click event
     console.log('Button for request ID', requestId, 'was clicked');
-    // Here you would typically handle the transition to the request handling flow,
-    // such as opening a modal, navigating to a details page, etc.
   };
 
+  // Transform data to match the ReusableTable format
   const transformedData = requests.map(request => ({
     Name: request.name,
     "Request ID": request.requestId,
     "Order ID": request.orderId,
-    Amount: request.amount,
-    Status: request.status === 'Pending' ? (
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => handleStatusButtonClick(request.requestId)}
-      >
-        View
-      </Button>
-    ) : (
-      <Typography variant="body2" style={{ color: 'gray' }}>
-        {request.status}
-      </Typography>
-    ),
+    Status: (
+      <Box display="flex" justifyContent="flex-end"> 
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => handleStatusButtonClick(request.requestId)}
+          sx={{backgroundColor:"#242F9B",width:'30%'}}
+        >
+          View
+        </Button>
+      </Box>
+    )
   }));
 
   return (
@@ -51,7 +51,6 @@ const RefundRequestsTable = ({ onViewApproved }) => {
             justifyContent: 'space-between',
             alignItems: 'center',
             padding: 2,
-            backgroundColor: '#D41400', // Corrected the typo here
             marginBottom: 2
           }}
         >
@@ -61,24 +60,11 @@ const RefundRequestsTable = ({ onViewApproved }) => {
           <Box>
             <Button
               variant="contained"
-              onClick={() => {}} // Implement the logic for this button
-              sx={{ 
-                borderRadius: 1,
-                backgroundColor: "#FF0000", 
-                textTransform: "none",
-                color: 'white', 
-                marginRight: 1,
-              }} 
-            >
-              Refunds Request
-            </Button>
-            <Button
-              variant="contained"
               onClick={onViewApproved}
               sx={{ 
                 borderRadius: 1,
-                backgroundColor: "#242F9B",
-                textTransform: "none",
+                backgroundColor:"#242F9B",
+                textTransform:"none",
               }} 
             >
               Approved Refunds
@@ -93,4 +79,4 @@ const RefundRequestsTable = ({ onViewApproved }) => {
   );
 };
 
-export default RefundRequestsTable;
+export default SalesRefundRequestsTable;
