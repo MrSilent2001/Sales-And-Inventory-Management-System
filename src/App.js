@@ -5,12 +5,13 @@ import Footer from "./layout/footer/footer";
 import RefundsManager from './pages/Admin_Inventory/RefundRequestsTable/RefundsManager';
 import CustomerRefundRequest from './pages/Admin_Inventory/InventoryRefundRequest/InventoryRefundRequest';
 import SalesRefundsManager from './pages/Admin_Sales/Sales_RefundRequestTable/SalesRefundsManager';
-import SalesViewRequest from './pages/Admin_Sales/Sales_generatedRequest/SalesViewRequest';
+import SalesViewRequest from './pages/Admin_Sales/Sales_ViewRequest/SalesViewRequest';
+import RefundDenialForm from './pages/Admin_Sales/Sales_RefundDenialForm/RefundDenialForm';
 function App() {
   return (
     <div className="App">
         <Navbar></Navbar>
-        <SalesViewRequest/>
+        <RefundDenialForm/>
         <Footer></Footer>
 
     </div>
