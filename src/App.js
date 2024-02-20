@@ -7,6 +7,7 @@ import CustomerManagement from './pages/customer management-01/customer manageme
 import CustomerOrders from './pages/customer management-02/customer management-02';
 import RemoveCustomers from './pages/remove customers/remove customers';
 import CustomerProfile from './pages/customer profile/customer profile';
+import CustomerProfileManagement from './pages/customerProfile management/customerProfile management';
 
 
 function App() {
@@ -16,8 +17,9 @@ function App() {
       
         {/*<CustomerManagement/>*/}
         {/*<CustomerOrders/>*/}
-        <CustomerProfile/>
-        {/*<RemoveCustomers/>*/}
+        <RemoveCustomers/>
+        {/*<CustomerProfile/>*/}
+        {/*CustomerProfileManagement*/}
          {/*<Signup/>*/}
         {/* <LoginForm/> / */}
       <Footer/>
