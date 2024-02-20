@@ -1,9 +1,9 @@
 import './App.css';
-import GeneratedRequest from './pages/admin/Sales/generatedRequest/generatedRequest';
+import GeneratedRequest from './pages/Admin_Inventory/generatedRequest/generatedRequest';
 import Navbar from "./layout/navbar/navbar";
 import Footer from "./layout/footer/footer";
-import RefundsManager from './pages/admin/Sales/RefundsManager';
-import CustomerRefundRequest from './pages/admin/Sales/InventoryRefundRequest/InventoryRefundRequest';
+import RefundsManager from './pages/Admin_Inventory/RefundRequestsTable/RefundsManager';
+import CustomerRefundRequest from './pages/Admin_Inventory/InventoryRefundRequest/InventoryRefundRequest';
 function App() {
   return (
     <div className="App">
