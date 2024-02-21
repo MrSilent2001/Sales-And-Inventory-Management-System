@@ -1,17 +1,17 @@
 import './App.css';
-import GeneratedRequest from './pages/Admin_Inventory/generatedRequest/generatedRequest';
+import GeneratedRequest from './pages/Admin_Inventory/Refund/generatedRequest/generatedRequest';
 import Navbar from "./layout/navbar/navbar";
 import Footer from "./layout/footer/footer";
-import RefundsManager from './pages/Admin_Inventory/RefundRequestsTable/RefundsManager';
-import CustomerRefundRequest from './pages/Admin_Inventory/InventoryRefundRequest/InventoryRefundRequest';
+import RefundsManager from './pages/Admin_Inventory/Refund/RefundRequestsTable/RefundsManager';
 import SalesRefundsManager from './pages/Admin_Sales/Sales_RefundRequestTable/SalesRefundsManager';
 import SalesViewRequest from './pages/Admin_Sales/Sales_ViewRequest/SalesViewRequest';
-import RefundDenialForm from './pages/Admin_Sales/Sales_RefundDenialForm/RefundDenialForm';
+import PurchaseOrderDashboard from './pages/Admin_Inventory/purchaseorders/PurchaseOrderDashboard';
+
 function App() {
   return (
     <div className="App">
         <Navbar></Navbar>
-        <RefundDenialForm/>
+        <PurchaseOrderDashboard/>
         <Footer></Footer>
 
     </div>
