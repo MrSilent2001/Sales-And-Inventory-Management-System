@@ -10,7 +10,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {Link} from "react-router-dom";
-import Login from "../login/login";
+
 // import {useLocation, useNavigate} from "react-router-dom";
 // import {useAuth} from "../../services/auth";
 
@@ -147,7 +147,7 @@ const SignUp = () => {
 
                             <div>
                                 <p>Already have an Account?
-                                    <Link to={<Login/>}>Login</Link>
+                                    <Link to="/login">Login</Link>
                                 </p>
                             </div>
                         </div>
