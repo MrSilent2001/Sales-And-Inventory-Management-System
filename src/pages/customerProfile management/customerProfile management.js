@@ -2,6 +2,7 @@ import './customerProfile management.css'
 import * as React from "react";
 import {styled} from "@mui/material/styles";
 import Button from "@mui/material/Button";
+import Avatar from '@mui/material/Avatar';
 
 const customerProfileManagementButtons = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#242F9B'),
@@ -22,65 +23,59 @@ function CustomerProfileManagement(){
         <div className="customerProfileManagementOuter">
             <div className="customerProfileManagementInner">
 
-                <div className="customerProfileManagementTopic">
-                    <h2>Generated Request</h2>
-                </div>
-
+                
+            <div className="avatar">
+            <Avatar src="/broken-image.jpg"  sx={{ width: 286, height: 286,border:2 ,borderRadius:3}} />
+            <h2>Saman Perera</h2>
+            </div>
                 <div className="customerProfileManagementDetails">
 
                     <div className="formField">
                         <div className="textField">
-                            <h5>Customer</h5>
+                            <h4>Customer ID</h4>
                         </div>
                         <div className="inputData">
-                            <h6>WAP Saman Perera</h6>
+                            <h5>CU0004</h5>
                         </div>
                     </div>
 
                     <div className="formField">
                         <div className="textField">
-                            <h5>Contact</h5>
+                            <h4>Address</h4>
                         </div>
                         <div className="inputData">
-                            <h6>0771112234</h6>
+                            <h5>151/A, Colombo, SriLanka.</h5>
                         </div>
                     </div>
 
                     <div className="formField">
                         <div className="textField">
-                            <h5>Item</h5>
+                            <h4>E-mail</h4>
                         </div>
                         <div className="inputData">
-                            <h6>I0001</h6>
+                            <h5>samanperera@gmail.com</h5>
                         </div>
                     </div>
 
                     <div className="formField">
                         <div className="textField">
-                            <h5>Quantity</h5>
+                            <h4>Contact</h4>
                         </div>
                         <div className="inputData">
-                            <h6>35</h6>
+                            <h5>0771147935</h5>
                         </div>
                     </div>
 
                     <div className="formField">
                         <div className="textField">
-                            <h5>Reason</h5>
+                            <h4>Previous Orders</h4>
                         </div>
                         <div className="inputData">
-                            <h6>Defected Items</h6>
+                        <Button variant="contained"  >View Orders</Button>
                         </div>
                     </div>
 
-                    <div className="formField">
-                        <div className="textField">
-                            <h5>Total Price</h5>
-                        </div>
-                        <div className="inputData">
-                            <h6>Rs.120,000</h6>
-                        </div>
-                    </div>
+                    
 
                 </div>
 
@@ -89,9 +84,10 @@ function CustomerProfileManagement(){
                         <customerProfileManagementButtons>Go Back</customerProfileManagementButtons>
                     </div>
                 </div>
+                </div>
 
             </div>
-        </div>
+       
     )
 }
 

@@ -17,9 +17,9 @@ function App() {
       
         {/*<CustomerManagement/>*/}
         {/*<CustomerOrders/>*/}
-        <RemoveCustomers/>
+        <CustomerProfileManagement/>
         {/*<CustomerProfile/>*/}
-        {/*CustomerProfileManagement*/}
+        {/*removeCustomers*/}
          {/*<Signup/>*/}
         {/* <LoginForm/> / */}
       <Footer/>
