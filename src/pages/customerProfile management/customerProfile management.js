@@ -25,7 +25,7 @@ function CustomerProfileManagement(){
 
                 
             <div className="avatar">
-            <Avatar src="/broken-image.jpg"  sx={{ width: 286, height: 286,border:2 ,borderRadius:3}} />
+            <Avatar src="/broken-image.jpg"  sx={{ width: 230, height: 230,border:2 ,borderRadius:3}} />
             <h2>Saman Perera</h2>
             </div>
                 <div className="customerProfileManagementDetails">
@@ -71,7 +71,7 @@ function CustomerProfileManagement(){
                             <h4>Previous Orders</h4>
                         </div>
                         <div className="inputData">
-                        <Button variant="contained"  >View Orders</Button>
+                        <Button variant="contained" size="small" >View Orders</Button>
                         </div>
                     </div>
 
@@ -79,11 +79,7 @@ function CustomerProfileManagement(){
 
                 </div>
 
-                <div className="refundButtonField">
-                    <div className="customerProfileManagementButtons">
-                        <customerProfileManagementButtons>Go Back</customerProfileManagementButtons>
-                    </div>
-                </div>
+                
                 </div>
 
             </div>
