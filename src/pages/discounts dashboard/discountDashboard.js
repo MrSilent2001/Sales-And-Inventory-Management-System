@@ -10,6 +10,8 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
+import SalesNavbar from "../../layout/navbar/Sales navbar/sales navbar";
+import Footer from "../../layout/footer/footer";
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -106,6 +108,8 @@ function DiscountDashboard() {
     };
 
     return(
+        <>
+            <SalesNavbar/>
         <div className="discountDashboardOuter">
             <div className="discountDashboardInner">
                 <h2 className="title">Discounted Items</h2>
@@ -159,6 +163,8 @@ function DiscountDashboard() {
                 </Paper>
             </div>
         </div>
+            <Footer/>
+        </>
     );
 }
 
