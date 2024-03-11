@@ -1,13 +1,13 @@
 import './App.css';
 import Navbar from "./layout/navbar/navbar";
 import Footer from './layout/footer/footer';
-import CancelOrder from './pages/cancel Order/cancelOrder';
+import Cart from './pages/Cart/Cart';
 
 function App() {
   return (
     <div className="App">
         <Navbar/>
-        <CancelOrder/>
+        <Cart/>
         <Footer/>
     </div>
   );
