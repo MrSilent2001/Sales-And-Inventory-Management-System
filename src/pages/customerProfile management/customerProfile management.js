@@ -33,7 +33,7 @@ const CustomerProfileManagementButtons = styled(Button)(({ theme }) => ({
     fontSize: '0.75em',
     fontFamily: 'inter',
     padding: '1.75em 0.625em',
-    marginRight:'5em'
+    marginRight:'6em'
 }));
 
 function CustomerProfileManagement() {

@@ -12,7 +12,10 @@
     width: 92.875em;
     height: 32em;
     background-color: #DBDFFD;
-    margin: 1.5em;
+    margin-top: 3em;
+    margin-bottom: 3em;
+    margin-left: 3em;
+    margin-right: 3em;
     border-radius: 0.5em;
     justify-content: space-between;
 }
@@ -97,12 +100,9 @@
     bottom: 0;
     right: 0;
     display: flex;
-    margin: 1em;
+    margin-top: 1em;
+    margin-bottom: 5em;
    
 }
 
 
-.DeleteButtons {
-    margin: 0% 2% 0% 0%;
-    
-}
