@@ -16,7 +16,10 @@
     width: 92.875em;
     height: 32em;
     background-color:rgb(240, 240, 245);
-    margin: 1.5em 0 0 0;
+    margin-top: 5em;
+    margin-bottom: 5em;
+    margin-left: 3em;
+    margin-right: 3em;
     border-radius: 0.5em;
     
 }
@@ -40,6 +43,8 @@
 }
 
 
+
+
 .ViewOrdersInnerForm{
     display: flex;
     flex-direction: column;
@@ -47,7 +52,7 @@
     height: 300px;
   width: 50%;
     padding: 2em;
-    margin-left: 10em;
+    margin-right:10em;
     border-radius: 0.5em;
    flex: 2;
    justify-content: center;

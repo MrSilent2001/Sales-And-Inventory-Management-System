@@ -19,7 +19,9 @@ const ViewOrdersButtons = styled(Button)(({ theme }) => ({
     },
     fontSize: '0.75em',
     fontFamily: 'inter',
-    padding: '1.75em 0.625em'
+    padding: '1.75em 0.625em',
+    marginRight:'5em'
+
 }));
 
 function BasicTextFields() {
@@ -62,7 +64,9 @@ function ViewOrders() {
 
             <div className="ViewOrdersInner">
                 <div className="customerProfile">
+                    
                     <h3>W A P Saman Perera</h3>
+                    
                     <div className="avatar">
                         <Avatar src="/broken-image.jpg" sx={{ width: 230, height: 230, border: 2, borderRadius: 3 }} />
                     </div>
@@ -120,7 +124,7 @@ function ViewOrders() {
 
                     <div className="ViewOrdersButtonField">
                         <div className="ViewOrdersButtons">
-                            <ViewOrdersButtons>Update</ViewOrdersButtons>
+                            <ViewOrdersButtons>View Orders</ViewOrdersButtons>
                         </div>
                     </div>
 

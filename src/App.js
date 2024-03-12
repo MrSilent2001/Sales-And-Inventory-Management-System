@@ -21,9 +21,9 @@ function App() {
         {/*<CustomerManagement/>*/}
         {/*<CustomerOrders/>*/}
        {/* <UpdateCustomers/>  */} 
-       {/* <ViewOrders/>  */} 
+       {/* <CustomerProfileManagement/>  */} 
        {/* <UpdateSupplier/>  */} 
-       <CustomerProfileManagement/>
+       <ViewOrders/>
        {/*<RemoveCustomers/>*/}
         {/*<CustomerProfile/>*/}
         {/*SupplierProfile*/}
