@@ -4,6 +4,37 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Avatar from '@mui/material/Avatar';
 
+const DeleteButtons = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText('#FF0800'),
+    backgroundColor: '#FF0800',
+    '&:hover': {
+        backgroundColor: '#CA3433'
+    },
+    '&.MuiButton-root': {
+        width: '13.625em',
+        height: '3.5em'
+    },
+    fontSize: '0.75em',
+    fontFamily: 'inter',
+    padding: '1.75em 0.625em',
+    marginRight: '2em'
+}));
+
+const CustomerProfileManagementButtons = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText('#242F9B'),
+    backgroundColor: '#242F9B',
+    '&:hover': {
+        backgroundColor: '#2d3ed2'
+    },
+    '&.MuiButton-root': {
+        width: '13.625em',
+        height: '3.5em'
+    },
+    fontSize: '0.75em',
+    fontFamily: 'inter',
+    padding: '1.75em 0.625em',
+    marginRight:'5em'
+}));
 
 function CustomerProfileManagement() {
     return (
@@ -58,11 +89,15 @@ function CustomerProfileManagement() {
                             <h4>Previous Orders</h4>
                         </div>
                         <div className="inputData">
-                            <Button variant="contained" size="small" >View Orders</Button>
+                        <CustomerProfileManagementButtons>Update</CustomerProfileManagementButtons>
                         </div>
                     </div>
                 </div>
-                   
+                <div className='buttonStack'>
+                <DeleteButtons>Delete Profile</DeleteButtons>
+                <CustomerProfileManagementButtons>Update Profile</CustomerProfileManagementButtons>
+                </div>
+
             </div>
                    
         </div>

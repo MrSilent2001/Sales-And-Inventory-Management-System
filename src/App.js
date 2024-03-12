@@ -23,8 +23,8 @@ function App() {
        {/* <UpdateCustomers/>  */} 
        {/* <ViewOrders/>  */} 
        {/* <UpdateSupplier/>  */} 
-        <RemoveCustomers/>
-       {/*<CustomerProfileManagement/>*/}
+       <CustomerProfileManagement/>
+       {/*<RemoveCustomers/>*/}
         {/*<CustomerProfile/>*/}
         {/*SupplierProfile*/}
          {/*<Signup/>*/}

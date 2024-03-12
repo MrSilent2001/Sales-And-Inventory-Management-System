@@ -131,12 +131,6 @@ function UpdateCustomers() {
 
 
 
-
-
-
-
-
-
                 </div>
 
             </div>
