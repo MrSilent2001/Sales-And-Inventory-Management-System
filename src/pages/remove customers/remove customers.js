@@ -12,6 +12,35 @@ import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
+const SendWarningButtons = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText('#242F9B'),
+    backgroundColor: '#242F9B',
+    '&:hover': {
+        backgroundColor: '#2d3ed2'
+    },
+    '&.MuiButton-root': {
+        width: '13.625em',
+        height: '3.5em'
+    },
+    fontSize: '0.75em',
+    fontFamily: 'inter',
+    padding: '1.75em 0.625em'
+}));
+
+const RemoveButtons = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText('#ff0000'),
+    backgroundColor: '#ff0000',
+    '&:hover': {
+        backgroundColor: '#2d3ed2'
+    },
+    '&.MuiButton-root': {
+        width: '13.625em',
+        height: '3.5em'
+    },
+    fontSize: '0.75em',
+    fontFamily: 'inter',
+    padding: '1.75em 0.625em'
+}));
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -79,21 +108,21 @@ function createData(id,name,address,actions1, actions2) {
 }
 
 const rows = [
-    createData('0001', 'Finn Allen', 'No.65, Yorkshire, England', <Button variant="contained"  onClick={() => handleButtonClick()}>Send Warning</Button>, <Button variant="contained" color="error" onClick={() => handleButtonClick()}>Remove</Button>),
-    createData('0002', 'Finn Allen', 'No.65, Yorkshire, England', <Button variant="contained"  onClick={() => handleButtonClick()}>Send Warning</Button>, <Button variant="contained" color="error" onClick={() => handleButtonClick()}>Remove</Button>),
-    createData('0003', 'Finn Allen', 'No.65, Yorkshire, England', <Button variant="contained"  onClick={() => handleButtonClick()}>Send Warning</Button>, <Button variant="contained" color="error" onClick={() => handleButtonClick()}>Remove</Button>),
-    createData('0004', 'Finn Allen', 'No.65, Yorkshire, England', <Button variant="contained"  onClick={() => handleButtonClick()}>Send Warning</Button>, <Button variant="contained" color="error" onClick={() => handleButtonClick()}>Remove</Button>),
-    createData('0005', 'Finn Allen', 'No.65, Yorkshire, England', <Button variant="contained"  onClick={() => handleButtonClick()}>Send Warning</Button>, <Button variant="contained" color="error" onClick={() => handleButtonClick()}>Remove</Button>),
-    createData('0006', 'Finn Allen', 'No.65, Yorkshire, England', <Button variant="contained"  onClick={() => handleButtonClick()}>Send Warning</Button>, <Button variant="contained" color="error" onClick={() => handleButtonClick()}>Remove</Button>),
-    createData('0007', 'Finn Allen', 'No.65, Yorkshire, England', <Button variant="contained"  onClick={() => handleButtonClick()}>Send Warning</Button>, <Button variant="contained" color="error" onClick={() => handleButtonClick()}>Remove</Button>),
-    createData('0008', 'Finn Allen', 'No.65, Yorkshire, England', <Button variant="contained"  onClick={() => handleButtonClick()}>Send Warning</Button>, <Button variant="contained" color="error" onClick={() => handleButtonClick()}>Remove</Button>),
-    createData('0009', 'Finn Allen', 'No.65, Yorkshire, England', <Button variant="contained"  onClick={() => handleButtonClick()}>Send Warning</Button>, <Button variant="contained" color="error" onClick={() => handleButtonClick()}>Remove</Button>),
-    createData('0010', 'Finn Allen', 'No.65, Yorkshire, England', <Button variant="contained"  onClick={() => handleButtonClick()}>Send Warning</Button>, <Button variant="contained" color="error" onClick={() => handleButtonClick()}>Remove</Button>),
-    createData('0011', 'Finn Allen', 'No.65, Yorkshire, England', <Button variant="contained"  onClick={() => handleButtonClick()}>Send Warning</Button>, <Button variant="contained" color="error" onClick={() => handleButtonClick()}>Remove</Button>),
-    createData('0012', 'Finn Allen', 'No.65, Yorkshire, England', <Button variant="contained"  onClick={() => handleButtonClick()}>Send Warning</Button>, <Button variant="contained" color="error" onClick={() => handleButtonClick()}>Remove</Button>),
-    createData('0013', 'Finn Allen', 'No.65, Yorkshire, England', <Button variant="contained"  onClick={() => handleButtonClick()}>Send Warning</Button>, <Button variant="contained" color="error" onClick={() => handleButtonClick()}>Remove</Button>),
-    createData('0014', 'Finn Allen', 'No.65, Yorkshire, England', <Button variant="contained"  onClick={() => handleButtonClick()}>Send Warning</Button>, <Button variant="contained" color="error" onClick={() => handleButtonClick()}>Remove</Button>),
-    createData('0015', 'Finn Allen', 'No.65, Yorkshire, England', <Button variant="contained"  onClick={() => handleButtonClick()}>Send Warning</Button>, <Button variant="contained" color="error" onClick={() => handleButtonClick()}>Remove</Button>)
+    createData('0001', 'Finn Allen', 'No.65, Yorkshire, England', <SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
+    createData('0002', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
+    createData('0003', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
+    createData('0004', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
+    createData('0005', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
+    createData('0006', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
+    createData('0007', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
+    createData('0008', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
+    createData('0009', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
+    createData('0010', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
+    createData('0011', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
+    createData('0012', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
+    createData('0013', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
+    createData('0014', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
+    createData('0015', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>)
 ];
 
 function RemoveCustomers() {
