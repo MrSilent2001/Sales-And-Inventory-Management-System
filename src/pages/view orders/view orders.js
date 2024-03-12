@@ -73,6 +73,15 @@ function ViewOrders() {
 
                 <div className="ViewOrdersForm">
 
+                <div className="formField">
+                        <div className="textField">
+                            <h5>Customer ID</h5>
+                        </div>
+                        <div className="textInput">
+                            <BasicTextFields></BasicTextFields>
+                        </div>
+                    </div>
+
                     <div className="formField">
                         <div className="textField">
                             <h5>Name</h5>
