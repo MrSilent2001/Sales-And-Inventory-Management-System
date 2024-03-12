@@ -9,15 +9,17 @@ import RemoveCustomers from './pages/remove customers/remove customers';
 import CustomerProfile from './pages/customer profile/customer profile';
 import CustomerProfileManagement from './pages/customerProfile management/customerProfile management';
 import UpdateCustomers from './pages/update customers/update customers';
+import ViewOrders from './pages/view orders/view orders';
 
 function App() {
   return (
     <div className="App">
         <Navbar/>
       
-        {/*<CustomerManagement/>*/}
+        {/*<ViewOrders/>*/}
         {/*<CustomerOrders/>*/}
-        <UpdateCustomers/>
+       {/* <UpdateCustomers/>  */} 
+        <CustomerManagement/>
        {/*<CustomerProfileManagement/>*/}
         {/*<CustomerProfile/>*/}
         {/*removeCustomers*/}
