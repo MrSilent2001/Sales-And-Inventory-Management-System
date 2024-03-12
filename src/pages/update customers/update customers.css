@@ -1,11 +1,11 @@
-.customerProfileManagementOuter{
+.UpdateCustomersOuter{
     display: flex;
     justify-content: center;
     width: 100%;
     height: 90%;
 }
 
-.customerProfileManagementInner{
+.UpdateCustomersInner{
     display: flex;
    
     align-items: center;
@@ -17,12 +17,8 @@
     
 }
 
-.customerProfileManagementTopic h2{
-    font-family: Inter;
-    margin: 1.45em 0 0 0;
-}
 
-.customerProfileManagementDetails{
+.UpdateCustomersForm{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -56,19 +52,9 @@
     font-size: 0.8em;
 }
 
-.inputData{
-    width: 8em;
-    text-align: left;
-}
 
-.inputData h5{
-    font-family: Inter;
-    font-weight: 500;
-    font-size: 0.65em;
-}
 
-.refundButtonField{
-    width: 38em;
+.UpdateCustomerButtonField{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -87,14 +73,3 @@
     justify-content: center;
     padding: 1em; 
 }
-/*
-.buttonStack{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2em;
-}
-.button.stack > * {
-    margin-bottom: 1em; /* Adjust vertical spacing between buttons 
-}*/
