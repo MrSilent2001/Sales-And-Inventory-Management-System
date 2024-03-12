@@ -16,10 +16,11 @@ function App() {
     <div className="App">
         <Navbar/>
       
-        {/*<ViewOrders/>*/}
+        {/*<CustomerManagement/>*/}
         {/*<CustomerOrders/>*/}
        {/* <UpdateCustomers/>  */} 
-        <CustomerManagement/>
+    
+        <ViewOrders/>
        {/*<CustomerProfileManagement/>*/}
         {/*<CustomerProfile/>*/}
         {/*removeCustomers*/}
