@@ -10,6 +10,8 @@ import CustomerProfile from './pages/customer profile/customer profile';
 import CustomerProfileManagement from './pages/customerProfile management/customerProfile management';
 import UpdateCustomers from './pages/update customers/update customers';
 import ViewOrders from './pages/view orders/view orders';
+import SupplierProfile from './pages/supplier profile/supplier profile';
+import UpdateSupplier from './pages/update Supplier/updateSupplier';
 
 function App() {
   return (
@@ -19,8 +21,9 @@ function App() {
         {/*<CustomerManagement/>*/}
         {/*<CustomerOrders/>*/}
        {/* <UpdateCustomers/>  */} 
-    
-        <ViewOrders/>
+       {/* <ViewOrders/>  */} 
+       {/* <UpdateSupplier/>  */} 
+        <SupplierProfile/>
        {/*<CustomerProfileManagement/>*/}
         {/*<CustomerProfile/>*/}
         {/*removeCustomers*/}
