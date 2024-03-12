@@ -31,7 +31,7 @@ const RemoveButtons = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#ff0000'),
     backgroundColor: '#ff0000',
     '&:hover': {
-        backgroundColor: '#2d3ed2'
+        backgroundColor: '#CA3433'
     },
     '&.MuiButton-root': {
         width: '13.625em',
