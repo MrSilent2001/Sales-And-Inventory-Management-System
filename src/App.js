@@ -9,6 +9,13 @@ import PaymentDashboard from "./pages/payment dashboard/paymentDashboard";
 import CustomerRefundRequest from "./pages/Customer/Refund/Customer Refund Request ";
 import CustomerRefunds from "./pages/Customer/Refund/Customer Refunds";
 import GeneratedCustomerRefundRequest from "./pages/Customer/Refund/Generated Customer Refund Request";
+import CustomerDashboard from "./pages/Customer/Dashboard/customerDashboard";
+import CustomerProfile from "./pages/Customer/Profile/customerProfile";
+import CustomerOrderHistory from "./pages/Customer/Order History/customerOrderHistory";
+import CustomersProfileDetails from "./pages/Customer/Profile/cutomersProfileDetails";
+import RemoveCustomers from "./pages/Customer/Remove Customers/removeCustomers";
+import UpdateCustomers from "./pages/Customer/Update Customers/updateCustomers.js";
+import View from "./pages/Customer/View/view";
 
 function App() {
   return (
@@ -24,10 +31,20 @@ function App() {
             /*sales navbar routes*/
             <Route path="/salesdashboard" element={<SalesLanding/>}/>
             <Route path="/paymentdashboard" element={<PaymentDashboard/>}/>
-            <Route path="/customerdashboard" element={<CustomerHome/>}/>
+            <Route path="/customerHome" element={<CustomerHome/>}/>
             <Route path="/refunddashboard" element={<CustomerRefunds/>}/>
             <Route path="/discountdashboard" element={<DiscountDashboard/>}/>
             <Route path="/logout" element={<GeneratedCustomerRefundRequest/>}/>
+
+
+            /*Customer navbar routes*/
+            <Route path="/customerdashboard" element={<CustomerDashboard/>}/>
+            <Route path="/customerorderhistory" element={<CustomerOrderHistory/>}/>
+            <Route path="/customerprofiledetails" element={<CustomersProfileDetails/>}/>
+            <Route path="/customerprofile" element={<CustomerProfile/>}/>
+            <Route path="/removeCustomers" element={<RemoveCustomers/>}/>
+            <Route path="/updateCustomers" element={<UpdateCustomers/>}/>
+            <Route path="/view" element={<View/>}/>
 
         </Routes>
     </div>
