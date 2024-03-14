@@ -4,6 +4,7 @@ import {styled} from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../layout/footer/footer";
+import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
 
 const ShopNowButton = styled(Button)(({theme}) => ({
     color: 'black',
@@ -23,7 +24,7 @@ const ShopNowButton = styled(Button)(({theme}) => ({
 function CustomerHome() {
     return (
         <>
-            <SalesNavbar/>
+            <CustomerNavbar/>
             <div className="customerHome">
 
                 <div className="carouselOuter">

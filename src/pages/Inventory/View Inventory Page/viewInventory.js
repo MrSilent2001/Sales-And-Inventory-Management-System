@@ -20,6 +20,8 @@ import TableBody from "@mui/material/TableBody";
 import {Modal} from "@mui/material";
 import AddItem from "./Models/Add Item/Add Item";
 import UpdateItem from "./Models/Update Item/Update Item";
+import InventoryNavbar from "../../../layout/navbar/Inventory navbar/Inventory navbar";
+import Footer from "../../../layout/footer/footer";
 
 
 function SearchBar(){
@@ -254,48 +256,54 @@ function ViewInventory(){
     const [visible,setVisible] = useState(false)
 
     return(
-        <div className="viewInventoryOuter">
-            <div className="viewInventoryFilter">
-                <div className="filterHeader">
-                    <h2>Filter Items</h2>
-                    <div className="itemCategoryFilter">
-                        <div className="itemCategoryTopic">
-                            <h5>Category</h5>
+        <>
+            <InventoryNavbar/>
+
+            <div className="viewInventoryOuter">
+                <div className="viewInventoryFilter">
+                    <div className="filterHeader">
+                        <h2>Filter Items</h2>
+                        <div className="itemCategoryFilter">
+                            <div className="itemCategoryTopic">
+                                <h5>Category</h5>
+                            </div>
+                            <FilterItems></FilterItems>
                         </div>
-                        <FilterItems></FilterItems>
-                    </div>
-                    <div className="itemAvailabilityFilter">
-                        <div className="itemAbailabilityTopic">
-                            <h5>Availability</h5>
+                        <div className="itemAvailabilityFilter">
+                            <div className="itemAbailabilityTopic">
+                                <h5>Availability</h5>
+                            </div>
+                            <FilterAvailability></FilterAvailability>
                         </div>
-                        <FilterAvailability></FilterAvailability>
-                    </div>
-                    <div className="applyButton">
-                        <ApplyButton>Apply</ApplyButton>
+                        <div className="applyButton">
+                            <ApplyButton>Apply</ApplyButton>
+                        </div>
                     </div>
                 </div>
+                <div className="viewInventoryInner">
+
+                    <div className="searchAndButtons">
+                        <div className="viewInventorySearch">
+                            <SearchBar></SearchBar>
+                        </div>
+                        <div className="viewInventoryButtons">
+                            <AddItemButton onClick={()=>setVisible(true)}>Add Item</AddItemButton>
+                            <DeleteItemButton>Delete Item</DeleteItemButton>
+                        </div>
+                    </div>
+
+                    <div className="itemTable">
+                        <CustomizedTables></CustomizedTables>
+                    </div>
+                </div>
+
+                <Modal open={visible}>
+                    <AddItem onClose={(value) => { setVisible(false)}} ></AddItem>
+                </Modal>
             </div>
-            <div className="viewInventoryInner">
 
-                <div className="searchAndButtons">
-                    <div className="viewInventorySearch">
-                        <SearchBar></SearchBar>
-                    </div>
-                    <div className="viewInventoryButtons">
-                        <AddItemButton onClick={()=>setVisible(true)}>Add Item</AddItemButton>
-                        <DeleteItemButton>Delete Item</DeleteItemButton>
-                    </div>
-                </div>
-
-                <div className="itemTable">
-                    <CustomizedTables></CustomizedTables>
-                </div>
-            </div>
-
-            <Modal open={visible}>
-                <AddItem onClose={(value) => { setVisible(false)}} ></AddItem>
-            </Modal>
-        </div>
+            <Footer/>
+        </>
     )
 }
 
