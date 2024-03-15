@@ -10,9 +10,9 @@ import CustomerRefundRequest from "./pages/Customer/Refund/Customer Refund Reque
 import CustomerRefunds from "./pages/Customer/Refund/Customer Refunds";
 import GeneratedCustomerRefundRequest from "./pages/Customer/Refund/Generated Customer Refund Request";
 import CustomerDashboard from "./pages/Customer/Dashboard/customerDashboard";
-import CustomerProfile from "./pages/Customer/Profile/customerProfile";
+import CustomerProfile from "./pages/Customer/Customer Profile/Profile/customerProfile";
 import CustomerOrderHistory from "./pages/Customer/Order History/customerOrderHistory";
-import CustomersProfileDetails from "./pages/Customer/Profile/cutomersProfileDetails";
+import CustomersProfileDetails from "./pages/Customer/Customer Profile/Profile Details/cutomersProfileDetails";
 import RemoveCustomers from "./pages/Customer/Remove Customers/removeCustomers";
 import UpdateCustomers from "./pages/Customer/Update Customers/updateCustomers.js";
 import View from "./pages/Customer/View/view";

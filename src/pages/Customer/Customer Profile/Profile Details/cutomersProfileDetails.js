@@ -10,8 +10,8 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
-import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
-import Footer from "../../../layout/footer/footer";
+import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";
+import Footer from "../../../../layout/footer/footer";
 
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
