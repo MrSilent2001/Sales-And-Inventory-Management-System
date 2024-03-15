@@ -33,7 +33,7 @@ function BasicTextFields() {
             sx={{
                 '& > :not(style)': {
                     m: 1,
-                    width: '25.5em',
+                    width: '35.5em',
                     "& .MuiInputBase-root": {
                         height: '2.5em',
                         backgroundColor: '#DBDFFD'
