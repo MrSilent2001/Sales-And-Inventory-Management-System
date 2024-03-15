@@ -1,0 +1,58 @@
+/* ViewOrder.css */
+.viewOrder-container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding-top: 50px;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .sidebar {
+    margin-right: 2rem;
+  }
+  
+  .sidebar-button {
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  .order-details {
+    width: 600px;
+    padding: 2rem;
+    background-color:#DBDFFD;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+   
+  .order_data{
+    background-color: white;
+    text-align: left;
+  }
+  .order-details h2 {
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0;
+    
+  }
+  
+  .detail span {
+    font-size: 1rem;
+  }
+  
+  .actions {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .actions Button {
+    margin-left: 0.5rem;
+  }
+  
