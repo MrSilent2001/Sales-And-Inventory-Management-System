@@ -19,6 +19,7 @@ import View from "./pages/Customer/View/view";
 import InventoryLanding from "./pages/Inventory/Inventory Landing Page/inventoryLanding";
 import ViewInventory from "./pages/Inventory/View Inventory Page/viewInventory";
 import ViewSupplier from "./pages/view supplier page/viewSupplier";
+import Cart from "./pages/Inventory/Cart/shoppingCart";
 
 function App() {
   return (
@@ -53,8 +54,8 @@ function App() {
 
             /*Customer navbar routes*/
             <Route path="/customerHome" element={<CustomerHome/>}/>
-            <Route path="/products" element={<InventoryLanding/>}/>
-            <Route path="/cart" element={<CustomerHome/>}/>
+            <Route path="/products" element={<CustomerHome/>}/>
+            <Route path="/cart" element={<Cart/>}/>
             <Route path="/customerProfile" element={<CustomerProfile/>}/>
             <Route path="/refundRequests" element={<CustomerRefunds/>}/>
             <Route path="/logout" element={<Login/>}/>
