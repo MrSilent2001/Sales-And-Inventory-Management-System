@@ -9,11 +9,12 @@ import PurchaseOrderDashboard from './pages/Admin_Inventory/purchaseorders/Purch
 import PlaceOrder from './pages/Admin_Inventory/purchaseorders/PlaceOrder/PlaceOrder';
 import RefundDenialForm from './pages/Admin_Sales/Sales_RefundDenialForm/RefundDenialForm';
 import InventoryRefundRequest from './pages/Admin_Inventory/Refund/InventoryRefundRequest/InventoryRefundRequest';
+import ViewOrder from './pages/Admin_Inventory/purchaseorders/ViewOrder/ViewOrder';
 function App() {
   return (
     <div className="App">
         <Navbar></Navbar>
-        <PlaceOrder/>
+        <ViewOrder/>
         <Footer></Footer>
 
     </div>
