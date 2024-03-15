@@ -12,7 +12,7 @@ import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import Searchbar from "../../../layout/search bar/search bar";
 import Footer from "../../../layout/footer/footer";
-import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
+import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
 
 const CustomerManagementButton = styled(Button)(({theme}) => ({
     color: theme.palette.getContrastText('#242F9B'),
@@ -115,7 +115,7 @@ function CustomerDashboard() {
 
     return (
         <>
-            <CustomerNavbar/>
+            <SalesNavbar/>
             <div className="CustomerManagementOuter">
                 <div className="CustomerManagementInner">
 
