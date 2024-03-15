@@ -7,7 +7,7 @@ import SalesLanding from "./pages/Customer/Sales Landing/salesLanding";
 import DiscountDashboard from "./pages/discounts dashboard/discountDashboard";
 import PaymentDashboard from "./pages/payment dashboard/paymentDashboard";
 import CustomerRefundRequest from "./pages/Customer/Refund/Customer Refund Request ";
-import CustomerRefunds from "./pages/Customer/Refund/Customer Refunds";
+import CustomerRefunds from "./pages/Customer/Refund/Request Refund/Customer Refunds";
 import GeneratedCustomerRefundRequest from "./pages/Customer/Refund/Generated Customer Refund Request";
 import CustomerDashboard from "./pages/Customer/Dashboard/customerDashboard";
 import CustomerProfile from "./pages/Customer/Customer Profile/Profile/customerProfile";
