@@ -5,16 +5,19 @@
 .paymentDashboardOuter{
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 40px 0;
 }
 
 .paymentDashboardInner{
-    width: 95%;
+    width: 100%;
     height: 40.625em;
     background-color: #DBDFFD;
-    border-radius: 2%;
+}
+
+.payment-title{
+    margin: 0;
+}
+
+.paymentDashboard{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,6 +25,8 @@
 }
 
 .paymentTitle{
-    text-align: center;
+    text-align: left;
+    margin: 0;
+    padding: 1.25em 7.75em;
 
 }
