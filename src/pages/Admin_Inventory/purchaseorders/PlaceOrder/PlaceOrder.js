@@ -102,7 +102,7 @@ function PlaceOrder() {
             <div className="customerRefundRequestInner">
 
                 <div className="customerRefundRequestTopic">
-                    <h2>Refund Request</h2>
+                    <h2>Inventory Order</h2>
                 </div>
 
                 <div className="refundRequestForm">

@@ -173,8 +173,8 @@ function InventoryRefundRequest() {
 
                     <div className="refundButtonField">
                         <div className="refundRequestButtons">
-                            <RefundRequestButtons>Cancel Request</RefundRequestButtons>
-                            <RefundRequestButtons>Create Request</RefundRequestButtons>
+                            <RefundRequestButtons>Cancel </RefundRequestButtons>
+                            <RefundRequestButtons>Place order</RefundRequestButtons>
                         </div>
                     </div>
 
