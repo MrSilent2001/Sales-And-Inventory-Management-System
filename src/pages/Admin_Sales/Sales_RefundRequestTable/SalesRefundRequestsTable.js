@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Box, Button, Typography, Paper } from '@mui/material';
-import ReusableTable from '../../../components/ReusableTable/ReusableTable';
+import ReusableTable from '../../../components/Reusable Table/Reusable Table';
+import InventoryNavbar from "../../../layout/navbar/Inventory navbar/Inventory navbar";
+import Footer from "../../../layout/footer/footer";
 
 const fetchRequests = () => {
   return Promise.resolve([
+    { name: 'John Doe', requestId: '0771112224', orderId: 'J0002'},
+    { name: 'John Doe', requestId: '0771112224', orderId: 'I0002'},
+    { name: 'Jane Smith', requestId: '0771112225', orderId: 'I0003'},
+    { name: 'John Doe', requestId: '0771112224', orderId: 'J0002'},
+    { name: 'John Doe', requestId: '0771112224', orderId: 'I0002'},
+    { name: 'Jane Smith', requestId: '0771112225', orderId: 'I0003'},
     { name: 'John Doe', requestId: '0771112224', orderId: 'J0002'},
     { name: 'John Doe', requestId: '0771112224', orderId: 'I0002'},
     { name: 'Jane Smith', requestId: '0771112225', orderId: 'I0003'},
@@ -43,39 +51,43 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
   }));
 
   return (
-    <Container className='inner_container' maxWidth="90%">
-      <Box sx={{ my: 4 }}>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            padding: 2,
-            marginBottom: 2
-          }}
-        >
-          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-            Refund Request
-          </Typography>
-          <Box>
-            <Button
-              variant="contained"
-              onClick={onViewApproved}
-              sx={{ 
-                borderRadius: 1,
-                backgroundColor:"#242F9B",
-                textTransform:"none",
-              }} 
-            >
-              Approved Refunds
-            </Button>
-          </Box>
-        </Box>
-        <Paper>
-          <ReusableTable data={transformedData} />
-        </Paper>
-      </Box>
-    </Container>
+      <>
+          <InventoryNavbar/>
+          <Container className='inner_container' maxWidth="90%">
+              <Box sx={{ my: 4 }}>
+                  <Box
+                      sx={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          padding: 2,
+                          marginBottom: 2
+                      }}
+                  >
+                      <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                          Refund Request
+                      </Typography>
+                      <Box>
+                          <Button
+                              variant="contained"
+                              onClick={onViewApproved}
+                              sx={{
+                                  borderRadius: 1,
+                                  backgroundColor:"#242F9B",
+                                  textTransform:"none",
+                              }}
+                          >
+                              Approved Refunds
+                          </Button>
+                      </Box>
+                  </Box>
+                  <Paper>
+                      <ReusableTable data={transformedData} />
+                  </Paper>
+              </Box>
+          </Container>
+          <Footer/>
+      </>
   );
 };
 
