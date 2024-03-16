@@ -13,8 +13,8 @@ const DeleteButtons = styled(Button)(({theme}) => ({
         backgroundColor: '#CA3433'
     },
     '&.MuiButton-root': {
-        width: '13.625em',
-        height: '3.5em'
+        width: '10em',
+        height: '1.5em'
     },
     fontSize: '0.75em',
     fontFamily: 'inter',
@@ -29,13 +29,13 @@ const CustomerProfileManagementButtons = styled(Button)(({theme}) => ({
         backgroundColor: '#2d3ed2'
     },
     '&.MuiButton-root': {
-        width: '13.625em',
-        height: '3.5em'
+        width: '10em',
+        height: '1.5em'
     },
     fontSize: '0.75em',
     fontFamily: 'inter',
     padding: '1.75em 0.625em',
-    marginRight: '6em'
+    marginRight: '-2em'
 }));
 
 function CustomerProfile() {
