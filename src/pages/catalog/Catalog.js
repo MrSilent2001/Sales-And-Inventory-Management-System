@@ -11,27 +11,36 @@ function Catalog() {
     
     return (
         
-        <div class = "Catalogouter">
+        <div className = "Catalogouter">
             <div className="sidebar">
                 gg
             </div>
-            <div class = "grid">
-            <div class = "card" >
+            <div className = "grid">
+            <div className = "card" >
                 <MultiActionAreaCard/>
             </div>
-            <div class = "card">
+            <div className = "card">
                 <MultiActionAreaCard/>
             </div>
-            <div class = "card">
+            <div className = "card">
                 <MultiActionAreaCard/>
             </div>
-            <div class = "card">
+            <div className = "card">
                 <MultiActionAreaCard/>
             </div>
-            <div class = "card">
+            <div className = "card">
                 <MultiActionAreaCard/>
             </div>
-            <div class = "card">
+            <div className = "card">
+                <MultiActionAreaCard/>
+            </div>
+            <div className = "card">
+                <MultiActionAreaCard/>
+            </div>
+            <div className = "card">
+                <MultiActionAreaCard/>
+            </div>
+            <div className = "card">
                 <MultiActionAreaCard/>
             </div>
         </div>

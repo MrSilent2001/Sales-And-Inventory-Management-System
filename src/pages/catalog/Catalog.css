@@ -1,24 +1,30 @@
 .Catalogouter{
     display: grid;
     grid-template-columns: 10em 1fr;
+    height : 80%;
 }
 
 .grid{
+    margin-top: 5em;
+    margin-left: 10em;
+    margin-bottom: 5em;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 16px;
-    row-gap: 16px;
+    column-gap: -5em;
+    row-gap: 3em;
 }
 
 .card{
     display: flex;
     align-items: center;
-    justify-content: center;
+    
+    
+    
 }
 
 .sidebar{
     
-    background-color: blue;
-    width: 5em;
+    background-color:#DBDFFD;
+    width: 15em;
     float: left;
 }
