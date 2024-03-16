@@ -9,9 +9,9 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import {Modal} from "@mui/material";
-import UpdateItem from "../../Inventory/View Inventory Page/Models/Update Item/Update Item";
-import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
-import Footer from "../../../layout/footer/footer";
+import UpdateItem from "../../../Inventory/View Inventory Page/Models/Update Item/Update Item";
+import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";
+import Footer from "../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
 
 const CustomerRefundRequestButton = styled(Button)(({theme}) => ({
@@ -65,7 +65,7 @@ function CustomerRefundRequestTables() {
 
     return (
         <TableContainer component={Paper}
-                        sx={{width: '87em', maxHeight: '25em', overflowY: 'auto', position: 'relative'}}>
+                        sx={{width: '70em', maxHeight: '25em', overflowY: 'auto', position: 'relative'}}>
             <Table sx={{minWidth: '30em'}} aria-label="customized table">
                 <TableBody>
                     {rows.map((row) => (
@@ -91,7 +91,7 @@ function CustomerRefundRequestTables() {
 function CustomerRefunds() {
     return (
         <>
-            <SalesNavbar/>
+            <CustomerNavbar/>
             <div className="customerRefundsOuter">
                 <div className="customerRefundsInner">
 

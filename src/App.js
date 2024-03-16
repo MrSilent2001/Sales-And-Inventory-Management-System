@@ -7,12 +7,12 @@ import SalesLanding from "./pages/Customer/Sales Landing/salesLanding";
 import DiscountDashboard from "./pages/discounts dashboard/discountDashboard";
 import PaymentDashboard from "./pages/payment dashboard/paymentDashboard";
 import CustomerRefundRequest from "./pages/Customer/Refund/Customer Refund Request ";
-import CustomerRefunds from "./pages/Customer/Refund/Customer Refunds";
+import CustomerRefunds from "./pages/Customer/Refund/Request Refund/Customer Refunds";
 import GeneratedCustomerRefundRequest from "./pages/Customer/Refund/Generated Customer Refund Request";
 import CustomerDashboard from "./pages/Customer/Dashboard/customerDashboard";
-import CustomerProfile from "./pages/Customer/Profile/customerProfile";
+import CustomerProfile from "./pages/Customer/Customer Profile/Profile/customerProfile";
 import CustomerOrderHistory from "./pages/Customer/Order History/customerOrderHistory";
-import CustomersProfileDetails from "./pages/Customer/Profile/cutomersProfileDetails";
+import CustomersProfileDetails from "./pages/Customer/Customer Profile/Profile Details/cutomersProfileDetails";
 import RemoveCustomers from "./pages/Customer/Remove Customers/removeCustomers";
 import UpdateCustomers from "./pages/Customer/Update Customers/updateCustomers.js";
 import View from "./pages/Customer/View/view";
@@ -24,7 +24,7 @@ import ViewOrder from "./pages/Admin_Inventory/purchaseorders/ViewOrder/ViewOrde
 import PlaceOrder from "./pages/Admin_Inventory/purchaseorders/PlaceOrder/PlaceOrder";
 import PurchaseOrderDashboard from "./pages/Admin_Inventory/purchaseorders/PurchaseOrderDashboard";
 import SalesRefundRequestsTable from "./pages/Admin_Sales/Sales_RefundRequestTable/SalesRefundRequestsTable";
-
+import Cart from "./pages/Inventory/Cart/shoppingCart";
 
 function App() {
   return (
@@ -65,8 +65,8 @@ function App() {
 
             /*Customer navbar routes*/
             <Route path="/customerHome" element={<CustomerHome/>}/>
-            <Route path="/products" element={<InventoryLanding/>}/>
-            <Route path="/cart" element={<CustomerHome/>}/>
+            <Route path="/products" element={<CustomerHome/>}/>
+            <Route path="/cart" element={<Cart/>}/>
             <Route path="/customerProfile" element={<CustomerProfile/>}/>
             <Route path="/refundRequests" element={<CustomerRefunds/>}/>
             <Route path="/logout" element={<Login/>}/>
