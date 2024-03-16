@@ -19,6 +19,11 @@ import View from "./pages/Customer/View/view";
 import InventoryLanding from "./pages/Inventory/Inventory Landing Page/inventoryLanding";
 import ViewInventory from "./pages/Inventory/View Inventory Page/viewInventory";
 import ViewSupplier from "./pages/view supplier page/viewSupplier";
+import InventoryOrder from "./pages/Admin_Inventory/purchaseorders/InventoryOrder";
+import ViewOrder from "./pages/Admin_Inventory/purchaseorders/ViewOrder/ViewOrder";
+import PlaceOrder from "./pages/Admin_Inventory/purchaseorders/PlaceOrder/PlaceOrder";
+import PurchaseOrderDashboard from "./pages/Admin_Inventory/purchaseorders/PurchaseOrderDashboard";
+import SalesRefundRequestsTable from "./pages/Admin_Sales/Sales_RefundRequestTable/SalesRefundRequestsTable";
 import Cart from "./pages/Inventory/Cart/shoppingCart";
 
 function App() {
@@ -41,6 +46,12 @@ function App() {
             <Route path="/removeCustomers" element={<RemoveCustomers/>}/>
             <Route path="/updateCustomers" element={<UpdateCustomers/>}/>
             <Route path="/view" element={<View/>}/>
+
+            <Route path="/inventoryOrder" element={<InventoryOrder/>}/>
+            <Route path="/placeOrder" element={<PlaceOrder/>}/>
+            <Route path="/viewOrder" element={<ViewOrder/>}/>
+            <Route path="/purchasedOrder" element={<PurchaseOrderDashboard/>}/>
+            <Route path="/viewRefundRequests" element={<SalesRefundRequestsTable/>}/>
 
 
             /*sales navbar routes*/
