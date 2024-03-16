@@ -80,7 +80,7 @@ function App() {
             /*Inventory navbar routes*/
             <Route path="/viewInventory" element={<ViewInventory/>}/>
             <Route path="/viewSupplier" element={<ViewSupplier/>}/>
-            <Route path="/viewOrders" element={<ViewSupplier/>}/>
+            <Route path="/purchasedOrder" element={<ViewOrder/>}/>
             <Route path="/refundRequests" element={<ViewSupplier/>}/>
             <Route path="/paymentsDashboard" element={<PaymentDashboard/>}/>
             <Route path="/logout" element={<Login/>}/>
