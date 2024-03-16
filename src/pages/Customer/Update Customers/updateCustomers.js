@@ -16,12 +16,13 @@ const UploadButtons = styled(Button)(({ theme }) => ({
         backgroundColor: '#2d3ed2'
     },
     '&.MuiButton-root': {
-        width: '17.225em',
-        height: '3.5em'
+        width: '15em',
+        height: '2.5em'
     },
     fontSize: '0.95em',
     fontFamily: 'inter',
-    padding: '1.75em 0.625em'
+    padding: '1.75em 0.625em',
+    marginTop:"0.5em",
 }));
 
 
@@ -34,12 +35,17 @@ const UpdateCustomerButtons = styled(Button)(({ theme }) => ({
         backgroundColor: '#2d3ed2'
     },
     '&.MuiButton-root': {
-        width: '13.625em',
-        height: '3.5em'
+        width: '10em',
+        height: '1.5em',
+        margin:"0.5em",
+       
     },
     fontSize: '0.75em',
     fontFamily: 'inter',
-    padding: '1.75em 0.625em'
+    padding: '1.75em 0.625em',
+    
+   
+
 }));
 
 function BasicTextFields() {
@@ -49,21 +55,25 @@ function BasicTextFields() {
             sx={{
                 '& > :not(style)': {
                     m: 1,
-                    width: '25.5em',
-                    "& .MuiInputBase-root":{
+                    width: '25em',
+                    "& .MuiInputBase-root": {
                         height: '2.5em',
-                        backgroundColor: '#e9eeff'
+                        backgroundColor: '#e9eeff',
+                        
                     },
                     "& .MuiInputLabel-root": {
                         fontSize: '0.5em',
-                        textAlign: 'center',
+                        textAlign: 'left',
+                        
+                        
+                        
                     },
                 },
             }}
             noValidate
             autoComplete="off"
         >
-            <TextField id="outlined-basic" variant="outlined" margin='normal'/>
+            <TextField id="outlined-basic" variant="outlined" margin='normal' />
         </Box>
     );
 }
@@ -72,68 +82,65 @@ function BasicTextFields() {
 function UpdateCustomers() {
     return (
         <>
-            <CustomerNavbar/>
+            <CustomerNavbar />
             <div className="UpdateCustomersOuter">
                 <div className="UpdateCustomersInner">
 
-                    <div className="customerProfile">
-                        <h3>W A P Saman Perera</h3>
-                        <div className="avatar">
-                            <Avatar src="/broken-image.jpg" sx={{ width: 230, height: 230, border: 2, borderRadius: 3 }} />
-                            <div className='uploadButton'>
-                                <UploadButtons>...Upload...</UploadButtons>
+                    <div className='customerContainer'>
+
+                        <div className="customerProfile">
+                            <h2 className='topic'>W A Saman Perera</h2>
+                            <div className="avatar">
+                                <Avatar src="/broken-image.jpg" sx={{ width: 230, height: 230, border: 2, borderRadius: 3, marginBottom:2,marginRight:0 }} />
+                                <div className='uploadButton'>
+                                    <UploadButtons>Upload</UploadButtons>
+                                </div>
                             </div>
                         </div>
 
-
-
-                    </div>
-
-                    <div className="UpdateCustomerForm">
-
-                        <div className="formField">
-                            <div className="textField">
-                                <h5>Name</h5>
+                        <div className="UpdateCustomerForm">
+                            <div className="formField">
+                                <div className="textField">
+                                    <h4>Name.....</h4>
+                                </div>
+                                <div className="textInput">
+                                    <BasicTextFields></BasicTextFields>
+                                </div>
                             </div>
-                            <div className="textInput">
-                                <BasicTextFields></BasicTextFields>
-                            </div>
-                        </div>
 
-                        <div className="formField">
-                            <div className="textField">
-                                <h5>Address</h5>
+                            <div className="formField">
+                                <div className="textField">
+                                    <h4>Address</h4>
+                                </div>
+                                <div className="textInput">
+                                    <BasicTextFields></BasicTextFields>
+                                </div>
                             </div>
-                            <div className="textInput">
-                                <BasicTextFields></BasicTextFields>
-                            </div>
-                        </div>
 
-                        <div className="formField">
-                            <div className="textField">
-                                <h5>Contact</h5>
+                            <div className="formField">
+                                <div className="textField">
+                                    <h4>Contact</h4>
+                                </div>
+                                <div className="textInput">
+                                    <BasicTextFields></BasicTextFields>
+                                </div>
                             </div>
-                            <div className="textInput">
-                                <BasicTextFields></BasicTextFields>
-                            </div>
-                        </div>
 
-                        <div className="formField">
-                            <div className="textField">
-                                <h5>Email</h5>
+                            <div className="formField">
+                                <div className="textField">
+                                    <h4>Email....</h4>
+                                </div>
+                                <div className="textInput">
+                                    <BasicTextFields></BasicTextFields>
+                                </div>
                             </div>
-                            <div className="textInput">
-                                <BasicTextFields></BasicTextFields>
-                            </div>
-                        </div>
 
-                        <div className="UpdateCustomerButtonField">
-                            <div className="UpdateCustomerButtons">
-                                <UpdateCustomerButtons>Update</UpdateCustomerButtons>
+                            <div className="UpdateCustomerButtonField">
+                                <div className="UpdateCustomerButtons">
+                                    <UpdateCustomerButtons>Update</UpdateCustomerButtons>
+                                </div>
                             </div>
                         </div>
-
-
 
                     </div>
 
@@ -141,7 +148,7 @@ function UpdateCustomers() {
 
             </div>
 
-            <Footer/>
+            <Footer />
         </>
     )
 }
