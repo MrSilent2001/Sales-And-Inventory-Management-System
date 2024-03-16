@@ -2,7 +2,7 @@ import './App.css';
 import Navbar from "./layout/navbar/navbar";
 import Footer from './layout/footer/footer';
 import Cart from './pages/Cart/Cart';
-import Catalog from './pages/catalog/Catalog';
+import Catalog from './pages/Catalog/Catalog';
 
 function App() {
   return (

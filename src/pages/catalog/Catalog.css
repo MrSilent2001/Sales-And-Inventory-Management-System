@@ -16,6 +16,7 @@
 
 .card{
     display: flex;
+    
     align-items: center;
     
     
@@ -27,4 +28,20 @@
     background-color:#DBDFFD;
     width: 15em;
     float: left;
+    padding-top: 3em;
+    line-height: 3em;
+}
+
+.content{
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 80%;
+    
+
+}
+
+.label{
+    margin-left: -3em;
 }

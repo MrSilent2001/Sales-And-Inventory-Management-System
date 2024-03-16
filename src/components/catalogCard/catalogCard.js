@@ -11,24 +11,28 @@ export default function MultiActionAreaCard() {
       <CardActionArea>
         <CardMedia
           component="img"
-          height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
-          alt="green iguana"
+          height="250"
+          image="https://www.freepik.com/free-photo/view-steel-hammer-construction-work-with-nails_49590265.htm#fromView=search&page=1&position=1&uuid=81ef6240-3a70-4a0a-b8b5-ccc299956ee7"
+          alt="Hammer"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
+          
+          <Typography variant="body2" color="text.primary">
+            Lightweight Steel Hammer With Rubber Grip
+            
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+          <Typography variant="body2" color="text.primary"
+           sx={{ fontWeight: 'bold' }}>
+           
+            Rs 2800/=
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
+      <Button variant="contained" disableElevation
+      sx={{margin: 'auto', display: 'block'}}>
+          Add to Cart
+      </Button>
       </CardActions>
     </Card>
   );
