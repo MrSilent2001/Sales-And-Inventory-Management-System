@@ -11,10 +11,10 @@ function SalesNavbar(){
                 <img src={logo} alt="Logo" style={{width:"30px", margin:"10px"}} />
             </div>
             <div className="navigation">
-                <NavLink to="/salesdashboard">Sales</NavLink>
+                <NavLink to="/pendingOrders">Sales</NavLink>
                 <NavLink to="/paymentdashboard">Payments</NavLink>
                 <NavLink to="/customerdashboard">Customers</NavLink>
-                <NavLink to="/refunddashboard">Refunds</NavLink>
+                <NavLink to="/viewRefundRequests">Refunds</NavLink>
                 <NavLink to="/discountdashboard">Discounts</NavLink>
                 <NavLink to="/logout" className="lastNavLink">Logout</NavLink>
             </div>

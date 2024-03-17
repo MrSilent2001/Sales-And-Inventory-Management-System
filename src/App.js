@@ -1,6 +1,6 @@
 import './App.css';
 import CustomerHome from "./pages/Customer/Home/Customer Home Page";
-import Login from "./pages/login/login";
+import Login from "../src/pages/login/login";
 import {Route, Routes} from "react-router-dom";
 import Signup from "./pages/SignUp/signup";
 import SalesLanding from "./pages/Customer/Sales Landing/salesLanding";
@@ -25,6 +25,20 @@ import PlaceOrder from "./pages/Admin_Inventory/purchaseorders/PlaceOrder/PlaceO
 import PurchaseOrderDashboard from "./pages/Admin_Inventory/purchaseorders/PurchaseOrderDashboard";
 import SalesRefundRequestsTable from "./pages/Admin_Sales/Sales_RefundRequestTable/SalesRefundRequestsTable";
 import Cart from "./pages/Inventory/Cart/shoppingCart";
+import ApprovedRefundsTable from "./pages/Admin_Inventory/Refund/ApproveRefundsTable/ApprovedRefundsTable";
+import GeneratedRequest from "./pages/Admin_Inventory/Refund/generatedRequest/generatedRequest";
+import InventoryRefundRequest from "./pages/Admin_Inventory/Refund/InventoryRefundRequest/InventoryRefundRequest";
+import RefundRequestsTable from "./pages/Admin_Inventory/Refund/RefundRequestsTable/RefundRequestsTable";
+import RefundsManager from "./pages/Admin_Inventory/Refund/RefundRequestsTable/RefundsManager";
+import SalesApprovedRefundsTable from "./pages/Admin_Sales/Sales_ApprovedRefundsTable/SalesApprovedRefundsTable";
+import RefundDenialForm from "./pages/Admin_Sales/Sales_RefundDenialForm/RefundDenialForm";
+import SalesRefundsManager from "./pages/Admin_Sales/Sales_RefundRequestTable/SalesRefundsManager";
+import SalesViewRequest from "./pages/Admin_Sales/Sales_ViewRequest/SalesViewRequest";
+import Catalog from "./pages/Catalog/catalog";
+import OrderDetails from "./pages/Order Details/orderDetails";
+import PendingOrders from "./pages/Pending Orders/pendingOrders";
+import OrderStatus from "./pages/Order Status/orderStatus";
+import CancelOrder from "./pages/Cancel Orders/cancelOrders";
 
 function App() {
   return (
@@ -33,7 +47,8 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<Signup/>}/>
 
-            <Route path="/" element={<SalesLanding/>}/>
+            <Route path="/" element={<Login/>}/>
+            <Route path="/salesLanding" element={<SalesLanding/>}/>
             <Route path="/inventoryLanding" element={<InventoryLanding/>}/>
 
             <Route path="/generatedrefund" element={<GeneratedCustomerRefundRequest/>}/>
@@ -51,21 +66,42 @@ function App() {
             <Route path="/placeOrder" element={<PlaceOrder/>}/>
             <Route path="/viewOrder" element={<ViewOrder/>}/>
             <Route path="/purchasedOrder" element={<PurchaseOrderDashboard/>}/>
+
+            <Route path="/ApprovedRefundsTable" element={<ApprovedRefundsTable/>}/>
             <Route path="/viewRefundRequests" element={<SalesRefundRequestsTable/>}/>
+
+            <Route path="/GeneratedRequest" element={<GeneratedRequest/>}/>
+            <Route path="/InventoryRefundRequest" element={<InventoryRefundRequest/>}/>
+
+            <Route path="/RefundRequestsTable" element={<RefundRequestsTable/>}/>
+            <Route path="/RefundsManager" element={<RefundsManager/>}/>
+
+
+            <Route path="/SalesApprovedRefundsTable" element={<SalesApprovedRefundsTable/>}/>
+            <Route path="/RefundDenialForm" element={<RefundDenialForm/>}/>
+            <Route path="/SalesRefundsManager" element={<SalesRefundsManager/>}/>
+            <Route path="/SalesViewRequest" element={<SalesViewRequest/>}/>
+
+            <Route path="/orderDetails" element={<OrderDetails/>}/>
+            <Route path="/pendingOrders" element={<PendingOrders/>}/>
+            <Route path="/orderStatus" element={<OrderStatus/>}/>
+            <Route path="/cancelOrders" element={<CancelOrder/>}/>
+
+
 
 
             /*sales navbar routes*/
-            <Route path="/salesdashboard" element={<SalesLanding/>}/>
+            <Route path="/pendingOrders" element={<PendingOrders/>}/>
             <Route path="/paymentdashboard" element={<PaymentDashboard/>}/>
             <Route path="/customerHome" element={<CustomerHome/>}/>
-            <Route path="/refunddashboard" element={<CustomerRefunds/>}/>
+            <Route path="/viewRefundRequests" element={<SalesRefundRequestsTable/>}/>
             <Route path="/discountdashboard" element={<DiscountDashboard/>}/>
             <Route path="/logout" element={<Login/>}/>
 
 
             /*Customer navbar routes*/
             <Route path="/customerHome" element={<CustomerHome/>}/>
-            <Route path="/products" element={<CustomerHome/>}/>
+            <Route path="/products" element={<Catalog/>}/>
             <Route path="/cart" element={<Cart/>}/>
             <Route path="/customerProfile" element={<CustomerProfile/>}/>
             <Route path="/refundRequests" element={<CustomerRefunds/>}/>
@@ -84,9 +120,6 @@ function App() {
             <Route path="/refundRequests" element={<ViewSupplier/>}/>
             <Route path="/paymentsDashboard" element={<PaymentDashboard/>}/>
             <Route path="/logout" element={<Login/>}/>
-
-
-
 
         </Routes>
     </div>

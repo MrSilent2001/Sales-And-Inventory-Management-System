@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Box, Button, Typography, Paper } from '@mui/material';
-import ReusableTable from '../../../../components/ReusableTable/ReusableTable';
+import ReusableTable from '../../../../components/Reusable Table/Reusable Table';
 
 const fetchRequests = () => {
   // ... same as before
