@@ -14,6 +14,22 @@ import SalesNavbar from "../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../layout/footer/footer";
 import Searchbar from "../../layout/search bar/search bar";
 
+const CancelButtons = styled(Button)(({theme}) => ({
+    color: theme.palette.getContrastText('#242F9B'),
+    backgroundColor: '#242F9B',
+    '&:hover': {
+        backgroundColor: '#2d3ed2'
+    },
+    '&.MuiButton-root': {
+        width: '11em',
+        height: '2.5em'
+    },
+    fontSize: '0.75em',
+    fontFamily: 'inter',
+    padding: '1.75em 0.625em',
+    marginRight: '6em'
+}));
+
 const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: "#273031",
@@ -78,20 +94,20 @@ function createData(id, product, discount, price, actions) {
 }
 
 const rows = [
-    createData('I001', 'Holcim-Cement Bag 50kg', '10%', 2750.00, <Button variant="contained" onClick={() => handleButtonClick()}>Cancel</Button>),
-    createData('I002', 'Holcim-Cement Bag 50kg', '10%', 1250.00, <Button variant="contained" onClick={() => handleButtonClick()}>Cancel</Button>),
-    createData('I004', 'Holcim-Cement Bag 50kg', '10%', 3000.00, <Button variant="contained" onClick={() => handleButtonClick()}>Cancel</Button>),
-    createData('I005', 'Holcim-Cement Bag 50kg', '10%', 1200.00, <Button variant="contained" onClick={() => handleButtonClick()}>Cancel</Button>),
-    createData('I006', 'Holcim-Cement Bag 50kg', '10%', 1560.00, <Button variant="contained" onClick={() => handleButtonClick()}>Cancel</Button>),
-    createData('I007', 'Holcim-Cement Bag 50kg', '5%', 1225.50, <Button variant="contained" onClick={() => handleButtonClick()}>Cancel</Button>),
-    createData('I008', 'Holcim-Cement Bag 50kg', '5%', 1550.50, <Button variant="contained" onClick={() => handleButtonClick()}>Cancel</Button>),
-    createData('I009', 'Holcim-Cement Bag 50kg', '12%', 750.50, <Button variant="contained" onClick={() => handleButtonClick()}>Cancel</Button>),
-    createData('I010', 'Holcim-Cement Bag 50kg', '10%', 7542.00, <Button variant="contained" onClick={() => handleButtonClick()}>Cancel</Button>),
-    createData('I011', 'Holcim-Cement Bag 50kg', '12%', 8510.00, <Button variant="contained" onClick={() => handleButtonClick()}>Cancel</Button>),
-    createData('I012', 'Holcim-Cement Bag 50kg', '5%', 3800.00, <Button variant="contained" onClick={() => handleButtonClick()}>Cancel</Button>),
-    createData('I013', 'Holcim-Cement Bag 50kg', '12%', 1250.00, <Button variant="contained" onClick={() => handleButtonClick()}>Cancel</Button>),
-    createData('I014', 'Holcim-Cement Bag 50kg', '10%', 375.25, <Button variant="contained" onClick={() => handleButtonClick()}>Cancel</Button>),
-    createData('I015', 'Holcim-Cement Bag 50kg', '5%', 999.99, <Button variant="contained" onClick={() => handleButtonClick()}>Cancel</Button>)
+    createData('I001', 'Holcim-Cement Bag 50kg', '10%', 2750.00, <CancelButtons>Cancel</CancelButtons>),
+    createData('I002', 'Holcim-Cement Bag 50kg', '10%', 1250.00, <CancelButtons>Cancel</CancelButtons>),
+    createData('I004', 'Holcim-Cement Bag 50kg', '10%', 3000.00, <CancelButtons>Cancel</CancelButtons>),
+    createData('I005', 'Holcim-Cement Bag 50kg', '10%', 1200.00, <CancelButtons>Cancel</CancelButtons>),
+    createData('I006', 'Holcim-Cement Bag 50kg', '10%', 1560.00, <CancelButtons>Cancel</CancelButtons>),
+    createData('I007', 'Holcim-Cement Bag 50kg', '5%', 1225.50, <CancelButtons>Cancel</CancelButtons>),
+    createData('I008', 'Holcim-Cement Bag 50kg', '5%', 1550.50, <CancelButtons>Cancel</CancelButtons>),
+    createData('I009', 'Holcim-Cement Bag 50kg', '12%', 750.50, <CancelButtons>Cancel</CancelButtons>),
+    createData('I010', 'Holcim-Cement Bag 50kg', '10%', 7542.00, <CancelButtons>Cancel</CancelButtons>),
+    createData('I011', 'Holcim-Cement Bag 50kg', '12%', 8510.00, <CancelButtons>Cancel</CancelButtons>),
+    createData('I012', 'Holcim-Cement Bag 50kg', '5%', 3800.00, <CancelButtons>Cancel</CancelButtons>),
+    createData('I013', 'Holcim-Cement Bag 50kg', '12%', 1250.00, <CancelButtons>Cancel</CancelButtons>),
+    createData('I014', 'Holcim-Cement Bag 50kg', '10%', 375.25, <CancelButtons>Cancel</CancelButtons>),
+    createData('I015', 'Holcim-Cement Bag 50kg', '5%', 999.99, <CancelButtons>Cancel</CancelButtons>)
 ];
 
 function DiscountDashboard() {
