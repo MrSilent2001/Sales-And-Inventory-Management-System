@@ -1,6 +1,7 @@
 import React from "react";
 import "./Inventory navbar.css";
 import logo from "../../../assets/images/logo.png";
+import {NavLink} from "react-router-dom";
 
 
 function InventoryNavbar(){
@@ -10,12 +11,12 @@ function InventoryNavbar(){
                 <img src={logo} alt="Logo" style={{width:"30px", margin:"10px"}} />
             </div>
             <div className="navigation">
-                <a href="#">Inventory</a>
-                <a href="#">Supplier</a>
-                <a href="#">Orders</a>
-                <a href="#">Refunds</a>
-                <a href="#">Payment</a>
-                <a href="#" className="lastNavLink">Logout</a>
+                <NavLink to="/viewInventory">Inventory</NavLink>
+                <NavLink to="/inventoryLanding">Supplier</NavLink>
+                <NavLink to="/cart">Orders</NavLink>
+                <NavLink to="/customerProfile">Refunds</NavLink>
+                <NavLink to="/paymentdashboard">Payment</NavLink>
+                <NavLink to="/logout" className="lastNavLink">Logout</NavLink>
             </div>
         </div>
     )
