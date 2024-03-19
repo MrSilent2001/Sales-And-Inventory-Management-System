@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Box, Button, Paper } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ReusableTable from '../../../../components/ReusableTable/ReusableTable';
-import './ApprovedRefundsTable.css';  // Make sure you define your styles in this CSS file
+import './ApprovedRefundsTable.css';
 
 const ApprovedRefundsTable = ({ onBack }) => {
   const [refundRequests, setRefundRequests] = useState([]);

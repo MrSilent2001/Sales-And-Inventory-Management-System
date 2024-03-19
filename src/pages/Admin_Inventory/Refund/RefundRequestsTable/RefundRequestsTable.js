@@ -1,9 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Box, Button, Typography, Paper } from '@mui/material';
 import ReusableTable from '../../../../components/ReusableTable/ReusableTable';
+import { styled } from '@mui/system';
 
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  '& .MuiTableCell-root': {
+    textAlign: 'center',
+    paddingleft: '19rem',
+
+    
+  },
+}));
 const fetchRequests = () => {
-  // ... same as before
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve([
+        // Mock data, adjust as per your requirement
+        { name: 'John Doe', requestId: '1', orderId: 'A1', amount: '100.00', status: 'Pending' },
+        { name: 'Jane Doe', requestId: '2', orderId: 'A2', amount: '200.00', status: 'Approved' },
+        // Add more mocked data as needed
+      ]);
+    }, 1000); // Simulate a delay to mimic network request
+  });
 };
 
 const RefundRequestsTable = ({ onViewApproved }) => {
@@ -51,7 +69,6 @@ const RefundRequestsTable = ({ onViewApproved }) => {
             justifyContent: 'space-between',
             alignItems: 'center',
             padding: 2,
-            backgroundColor: '#D41400', // Corrected the typo here
             marginBottom: 2
           }}
         >
@@ -85,9 +102,9 @@ const RefundRequestsTable = ({ onViewApproved }) => {
             </Button>
           </Box>
         </Box>
-        <Paper>
+        <StyledPaper>
           <ReusableTable data={transformedData} />
-        </Paper>
+        </StyledPaper>
       </Box>
     </Container>
   );
