@@ -7,7 +7,7 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   '& .MuiTableCell-root': {
     textAlign: 'center',
     paddingleft: '19rem',
-
+  
     
   },
 }));
@@ -61,7 +61,7 @@ const RefundRequestsTable = ({ onViewApproved }) => {
   }));
 
   return (
-    <Container className='inner_container' maxWidth="90%">
+    <Container className='inner_container' maxWidth="90%" sx={{backgroundColor: '#DBDFFD'}}>
       <Box sx={{ my: 4 }}>
         <Box
           sx={{
@@ -103,8 +103,10 @@ const RefundRequestsTable = ({ onViewApproved }) => {
           </Box>
         </Box>
         <StyledPaper>
-          <ReusableTable data={transformedData} />
+          <ReusableTable data={transformedData}  /> 
+          
         </StyledPaper>
+        <br/><br/>
       </Box>
     </Container>
   );
