@@ -12,7 +12,7 @@ function CustomerNavbar(){
             </div>
             <div className="navigation">
                 <NavLink to="/customerHome">Home</NavLink>
-                <NavLink to="/inventoryLanding">Products</NavLink>
+                <NavLink to="/CustomerHome">Products</NavLink>
                 <NavLink to="/cart">Cart</NavLink>
                 <NavLink to="/customerProfile">Profile</NavLink>
                 <NavLink to="/refundRequests">Refunds</NavLink>

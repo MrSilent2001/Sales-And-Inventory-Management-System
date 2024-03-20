@@ -12,6 +12,7 @@ import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import SalesNavbar from "../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../layout/footer/footer";
+import Searchbar from "../../layout/search bar/search bar";
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -112,55 +113,63 @@ function DiscountDashboard() {
             <SalesNavbar/>
         <div className="discountDashboardOuter">
             <div className="discountDashboardInner">
-                <h2 className="title">Discounted Items</h2>
-                <Paper sx={{width: '90%', overflow: 'hidden'}}>
-                    <TableContainer sx={{maxHeight: 440}}>
-                        <Table stickyHeader aria-label="sticky table">
-                            <TableHead>
-                                <TableRow>
-                                    {columns.map((column) => (
-                                        <StyledTableCell
-                                            key={column.id}
-                                            align={column.align}
-                                            style={{minWidth: column.minWidth}}
-                                        >
-                                            {column.label}
-                                        </StyledTableCell>
-                                    ))}
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {rows
-                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                    .map((row) => {
-                                        return (
-                                            <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                                                {columns.map((column) => {
-                                                    const value = row[column.id];
-                                                    return (
-                                                        <StyledTableCell key={column.id} align={column.align}>
-                                                            {column.format && typeof value === 'number'
-                                                                ? column.format(value)
-                                                                : value}
-                                                        </StyledTableCell>
-                                                    );
-                                                })}
-                                            </StyledTableRow>
-                                        );
-                                    })}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                    <TablePagination
-                        rowsPerPageOptions={[10, 25, 100]}
-                        component="div"
-                        count={rows.length}
-                        rowsPerPage={rowsPerPage}
-                        page={page}
-                        onPageChange={handleChangePage}
-                        onRowsPerPageChange={handleChangeRowsPerPage}
-                    />
-                </Paper>
+
+                <div className="discountTitleWithSearchbar">
+
+                    <h2 className="discountTitle">Discounted Items</h2>
+                        <Searchbar/>
+                </div>
+
+                <div className="discount-dashboard">
+                    <Paper sx={{width: '75%', overflow: 'hidden'}}>
+                        <TableContainer sx={{maxHeight: 440}}>
+                            <Table stickyHeader aria-label="sticky table">
+                                <TableHead>
+                                    <TableRow>
+                                        {columns.map((column) => (
+                                            <StyledTableCell
+                                                key={column.id}
+                                                align={column.align}
+                                                style={{minWidth: column.minWidth}}
+                                            >
+                                                {column.label}
+                                            </StyledTableCell>
+                                        ))}
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {rows
+                                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                        .map((row) => {
+                                            return (
+                                                <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                                                    {columns.map((column) => {
+                                                        const value = row[column.id];
+                                                        return (
+                                                            <StyledTableCell key={column.id} align={column.align}>
+                                                                {column.format && typeof value === 'number'
+                                                                    ? column.format(value)
+                                                                    : value}
+                                                            </StyledTableCell>
+                                                        );
+                                                    })}
+                                                </StyledTableRow>
+                                            );
+                                        })}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        <TablePagination
+                            rowsPerPageOptions={[10, 25, 100]}
+                            component="div"
+                            count={rows.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            onPageChange={handleChangePage}
+                            onRowsPerPageChange={handleChangeRowsPerPage}
+                        />
+                    </Paper>
+                </div>
             </div>
         </div>
             <Footer/>

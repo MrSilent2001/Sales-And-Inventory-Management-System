@@ -13,8 +13,8 @@ function InventoryNavbar(){
             <div className="navigation">
                 <NavLink to="/viewInventory">Inventory</NavLink>
                 <NavLink to="/inventoryLanding">Supplier</NavLink>
-                <NavLink to="/cart">Orders</NavLink>
-                <NavLink to="/customerProfile">Refunds</NavLink>
+                <NavLink to="/purchasedOrder">Orders</NavLink>
+                <NavLink to="/viewRefundRequests">Refunds</NavLink>
                 <NavLink to="/paymentdashboard">Payment</NavLink>
                 <NavLink to="/logout" className="lastNavLink">Logout</NavLink>
             </div>
