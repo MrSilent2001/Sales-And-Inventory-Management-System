@@ -14,21 +14,6 @@ import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navb
 import Footer from "../../../layout/footer/footer";
 
 
-/*const CustomerOrdersButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText('#242F9B'),
-    backgroundColor: '#242F9B',
-    '&:hover': {
-        backgroundColor: '#2d3ed2'
-    },
-    '&.MuiButton-root': {
-        width: '13.625em',
-        height: '2.75em'
-    },
-    fontSize: '0.625em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em'
-}));*/
-
 const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: "#273031",
