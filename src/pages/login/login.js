@@ -43,7 +43,7 @@ const Login = () => {
         } else if (username === "customer" && password === "12345" && role === "customer") {
             console.log(username+" "+ password+" "+role);
             // Redirect to customer dashboard
-            navigate("/customerDashboard", { replace: true });
+            navigate("/customerHome", { replace: true });
         } else if (username === "supplier" && password === "12345" && role === "supplier") {
             console.log(username+" "+ password+" "+role);
             // Redirect to supplier dashboard

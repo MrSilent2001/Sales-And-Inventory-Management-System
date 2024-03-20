@@ -39,6 +39,8 @@ import OrderDetails from "./pages/Order Details/orderDetails";
 import PendingOrders from "./pages/Pending Orders/pendingOrders";
 import OrderStatus from "./pages/Order Status/orderStatus";
 import CancelOrder from "./pages/Cancel Orders/cancelOrders";
+import InventoryDashboard from "./pages/Supplier/Inventory Dashboard/inventoryDashboard";
+import SupplierProfile from "./pages/Supplier/Supplier Profile/SupplierProfile";
 
 function App() {
   return (
@@ -47,9 +49,13 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<Signup/>}/>
 
+
             <Route path="/" element={<Login/>}/>
+
+            /*Landing Pages*/
             <Route path="/salesLanding" element={<SalesLanding/>}/>
             <Route path="/inventoryLanding" element={<InventoryLanding/>}/>
+            <Route path="/customerHome" element={<CustomerHome/>}/>
 
             <Route path="/generatedrefund" element={<GeneratedCustomerRefundRequest/>}/>
             <Route path="/createrefund" element={<CustomerRefundRequest/>}/>
@@ -61,6 +67,7 @@ function App() {
             <Route path="/removeCustomers" element={<RemoveCustomers/>}/>
             <Route path="/updateCustomers" element={<UpdateCustomers/>}/>
             <Route path="/view" element={<View/>}/>
+
 
             <Route path="/inventoryOrder" element={<InventoryOrder/>}/>
             <Route path="/placeOrder" element={<PlaceOrder/>}/>
@@ -109,8 +116,8 @@ function App() {
 
 
             /*Supplier navbar routes*/
-            <Route path="/inventoryDashbaord" element={<Login/>}/>
-            <Route path="/updateprofile" element={<CustomerProfile/>}/>
+            <Route path="/inventoryDashboard" element={<InventoryDashboard/>}/>
+            <Route path="/supplierProfile" element={<SupplierProfile/>}/>
             <Route path="/logout" element={<Login/>}/>
 
             /*Inventory navbar routes*/
