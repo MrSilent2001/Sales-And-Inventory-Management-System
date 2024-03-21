@@ -1,4 +1,3 @@
-// ReusableTable.js
 import React from 'react';
 import { Table, TableBody, TableRow, TableCell } from '@mui/material';
 

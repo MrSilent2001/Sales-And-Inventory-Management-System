@@ -32,7 +32,6 @@ import RefundRequestsTable from "./pages/Admin_Inventory/Refund/RefundRequestsTa
 import RefundsManager from "./pages/Admin_Inventory/Refund/RefundRequestsTable/RefundsManager";
 import SalesApprovedRefundsTable from "./pages/Admin_Sales/Sales_ApprovedRefundsTable/SalesApprovedRefundsTable";
 import RefundDenialForm from "./pages/Admin_Sales/Sales_RefundDenialForm/RefundDenialForm";
-import SalesRefundsManager from "./pages/Admin_Sales/Sales_RefundRequestTable/SalesRefundsManager";
 import SalesViewRequest from "./pages/Admin_Sales/Sales_ViewRequest/SalesViewRequest";
 import Catalog from "./pages/Catalog/catalog";
 import OrderDetails from "./pages/Order Details/orderDetails";
@@ -41,6 +40,8 @@ import OrderStatus from "./pages/Order Status/orderStatus";
 import CancelOrder from "./pages/Cancel Orders/cancelOrders";
 import InventoryDashboard from "./pages/Supplier/Inventory Dashboard/inventoryDashboard";
 import SupplierProfile from "./pages/Supplier/Supplier Profile/SupplierProfile";
+import Success from "./pages/Inventory/Cart/success";
+import Cancel from "./pages/Inventory/Cart/cancel";
 
 function App() {
   return (
@@ -49,6 +50,9 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<Signup/>}/>
 
+            /*Payment Gateway*/
+            <Route path="/success" element={<Success/>}/>
+            <Route path="/cancel" element={<Cancel/>}/>
 
             <Route path="/" element={<Login/>}/>
 
@@ -86,7 +90,6 @@ function App() {
 
             <Route path="/SalesApprovedRefundsTable" element={<SalesApprovedRefundsTable/>}/>
             <Route path="/RefundDenialForm" element={<RefundDenialForm/>}/>
-            <Route path="/SalesRefundsManager" element={<SalesRefundsManager/>}/>
             <Route path="/SalesViewRequest" element={<SalesViewRequest/>}/>
 
             <Route path="/orderDetails" element={<OrderDetails/>}/>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Box, Button, Typography, Paper } from '@mui/material';
 import ReusableTable from '../../../components/Reusable Table/Reusable Table';
-import InventoryNavbar from "../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../layout/footer/footer";
 import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
 import {Link} from "react-router-dom";
