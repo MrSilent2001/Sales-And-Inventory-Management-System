@@ -68,32 +68,12 @@ function Catalog() {
                 </div>
                 <div className = "grid">
                     <div className = "card" >
-                        <MultiActionAreaCard/>
+                        {prductsArray.map((product,index) => (
+                            <MultiActionAreaCard/>
+                        ))}
+
                     </div>
-                    <div className = "card">
-                        <MultiActionAreaCard/>
-                    </div>
-                    <div className = "card">
-                        <MultiActionAreaCard/>
-                    </div>
-                    <div className = "card">
-                        <MultiActionAreaCard/>
-                    </div>
-                    <div className = "card">
-                        <MultiActionAreaCard/>
-                    </div>
-                    <div className = "card">
-                        <MultiActionAreaCard/>
-                    </div>
-                    <div className = "card">
-                        <MultiActionAreaCard/>
-                    </div>
-                    <div className = "card">
-                        <MultiActionAreaCard/>
-                    </div>
-                    <div className = "card">
-                        <MultiActionAreaCard/>
-                    </div>
+
                 </div>
 
             </div>
