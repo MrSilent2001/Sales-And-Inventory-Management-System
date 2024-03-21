@@ -1,0 +1,117 @@
+.carouselOuter{
+    width: 100%;
+    height: 600px;
+    background-image: url('./HomeCarousel.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.carouselOuter img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carouselOuter::before {
+    content: "";
+    position: absolute;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    height: 600px;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.carouselHeader{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    top: 10.5em;
+    z-index: 2;
+    padding: 0 0 0 6em;
+}
+
+.carouselHeader h1{
+    font-size: 4.15em;
+    font-family: Inter;
+    letter-spacing: 0.075em;
+    color: white;
+    margin: 0 0 0.1em 0;
+}
+
+.carouselHeader p{
+    font-size: 1em;
+    font-family: Inter;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+}
+
+.carouselButton{
+    margin: 2.5em 0 0 0;
+}
+
+.aboutUs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2em 0 0 0;
+    font-family: Inter;
+}
+
+.aboutUsTopic{
+    font-family: Inter;
+    margin-top: 2em;
+}
+
+.aboutUsParagraph{
+    width: 98.938em;
+    font-size: 0.8em;
+    line-height: 1.9;
+}
+
+.aboutUsParagraphLast{
+    margin: 0.75em 0 3em 0;
+}
+
+.productsTopic{
+    font-family: Inter;
+    margin: 1em 0 2em 0;
+}
+
+.productCategoryTypes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    margin: 0 0 5em 0;
+}
+
+.productCategoryTypesRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    padding: 1.5em 0 1.5em 0;
+}
+
+.productCategoryCard{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 19em;
+    height: 8em;
+    background-color: #DBDFFD;
+    border-radius: 12px;
+}
+
+.productCategoryCardName{
+    font-family: Inter;
+    font-size: 0.844em;
+    font-weight: 500;
+}

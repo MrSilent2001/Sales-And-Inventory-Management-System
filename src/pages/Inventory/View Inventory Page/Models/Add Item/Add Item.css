@@ -1,0 +1,50 @@
+.addItemModel{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 37.5em;
+    height: 38.75em;
+    padding: 0.25em 0 0 0;
+    background-color: #DBDFFD;
+    border-radius: 0.5em;
+}
+
+.addItemModel h2{
+    font-family: Inter;
+    padding: 1.25em 0 0 0;
+}
+
+.addItemForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formField{
+    width: 27.5em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.1em 0 0 0;
+}
+
+.formField h5{
+    font-family: Inter;
+    font-weight: 600;
+    font-size: 0.75em;
+}
+
+.addItemForm{
+    margin-top: 0.3em;
+}
+
+.formFieldButtons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 16.25em;
+    justify-content: space-between;
+    margin: 1.4em 0 0 0;
+    padding-bottom: 3em;
+}

@@ -1,0 +1,33 @@
+.inventoryLandingOuter{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 4.375em 0;
+    margin: -2.5em 0 -2.5em 0;
+}
+
+.inventoryLandingInner{
+    width: 65%;
+    height: 32.2em;
+    background-color: #DBDFFD;
+    border-radius: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cardRow{
+    display: flex;
+    flex-direction: row;
+}
+
+.landingCard{
+    padding: 0 1.875em;
+    margin: 0 0 3.125em 0;
+}
+
+.secondCardRow{
+    margin: 0;
+}

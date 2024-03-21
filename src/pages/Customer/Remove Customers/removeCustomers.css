@@ -1,0 +1,33 @@
+.removeCustomersOuter{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.removeCustomersInner{
+    width: 95%;
+    height: 40.625em;
+    background-color: #DBDFFD;
+    border-radius: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.removeCustomersTopicWithButton{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 87em;
+    margin: 2em 0 2em 0;
+
+}
+
+.removeCustomersTopic h2{
+    margin: 0;
+    font-family: Inter;
+    font-size: 1.3em;
+}
