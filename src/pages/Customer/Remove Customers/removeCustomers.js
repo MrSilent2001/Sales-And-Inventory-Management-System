@@ -110,21 +110,18 @@ function createData(id,name,address,actions1, actions2) {
 }
 
 const rows = [
-    createData('0001', 'Finn Allen', 'No.65, Yorkshire, England', <SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
-    createData('0002', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
-    createData('0003', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
-    createData('0004', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
-    createData('0005', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
-    createData('0006', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
-    createData('0007', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
-    createData('0008', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
-    createData('0009', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
-    createData('0010', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
-    createData('0011', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
-    createData('0012', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
-    createData('0013', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
-    createData('0014', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>),
-    createData('0015', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons>Remove</RemoveButtons>)
+    createData('0001', 'Finn Allen', 'No.65, Yorkshire, England', <SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons onClick={()=>{alert("Customer Has been Removed")}}>Remove</RemoveButtons>),
+    createData('0002', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons onClick={()=>{alert("Customer Has been Removed")}}>Remove</RemoveButtons>),
+    createData('0003', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons onClick={()=>{alert("Customer Has been Removed")}}>Remove</RemoveButtons>),
+    createData('0004', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons onClick={()=>{alert("Customer Has been Removed")}}>Remove</RemoveButtons>),
+    createData('0005', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons onClick={()=>{alert("Customer Has been Removed")}}>Remove</RemoveButtons>),
+    createData('0006', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons onClick={()=>{alert("Customer Has been Removed")}}>Remove</RemoveButtons>),
+    createData('0007', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons onClick={()=>{alert("Customer Has been Removed")}}>Remove</RemoveButtons>),
+    createData('0008', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons onClick={()=>{alert("Customer Has been Removed")}}>Remove</RemoveButtons>),
+    createData('0009', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons onClick={()=>{alert("Customer Has been Removed")}}>Remove</RemoveButtons>),
+    createData('0010', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons onClick={()=>{alert("Customer Has been Removed")}}>Remove</RemoveButtons>),
+    createData('0011', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons onClick={()=>{alert("Customer Has been Removed")}}>Remove</RemoveButtons>),
+
 ];
 
 function RemoveCustomers() {

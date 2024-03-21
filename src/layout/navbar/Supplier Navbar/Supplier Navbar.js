@@ -1,5 +1,5 @@
 import React from "react";
-import "./sales navbar.css";
+import "./Supplier Navbar.css";
 import logo from "../../../assets/images/logo.png";
 import {NavLink} from "react-router-dom";
 
@@ -11,8 +11,8 @@ function SalesNavbar(){
                 <img src={logo} alt="Logo" style={{width:"30px", margin:"10px"}} />
             </div>
             <div className="navigation">
-                <NavLink to="/refunddashboard">Inventory</NavLink>
-                <NavLink to="/discountdashboard">Profile</NavLink>
+                <NavLink to="/inventoryDashboard">Inventory</NavLink>
+                <NavLink to="/supplierProfile">Profile</NavLink>
                 <NavLink to="/logout" className="lastNavLink">Logout</NavLink>
             </div>
         </div>
