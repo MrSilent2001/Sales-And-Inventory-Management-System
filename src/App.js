@@ -41,6 +41,8 @@ import OrderStatus from "./pages/Order Status/orderStatus";
 import CancelOrder from "./pages/Cancel Orders/cancelOrders";
 import InventoryDashboard from "./pages/Supplier/Inventory Dashboard/inventoryDashboard";
 import SupplierProfile from "./pages/Supplier/Supplier Profile/SupplierProfile";
+import Cancel from "./pages/Inventory/Cart/cancel";
+import Success from "./pages/Inventory/Cart/success";
 
 function App() {
   return (
@@ -94,7 +96,9 @@ function App() {
             <Route path="/orderStatus" element={<OrderStatus/>}/>
             <Route path="/cancelOrders" element={<CancelOrder/>}/>
 
-
+            /*Payments*/
+            <Route path="/cancel" element={<Cancel/>}/>
+            <Route path="/success" element={<Success/>}/>
 
 
             /*sales navbar routes*/
