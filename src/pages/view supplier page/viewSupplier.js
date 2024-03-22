@@ -259,34 +259,29 @@ function ViewSupplier(){
         <>
             <InventoryNavbar/>
 
-            <div className="viewInventoryOuter">
-                <div className="viewInventoryFilter">
+            <div className="viewSupplierOuter">
+                <div className="viewSupplierFilter">
                     <div className="filterHeader">
                         <h2>Filter Items</h2>
-                        <div className="itemCategoryFilter">
+                        <div className="supplierCategoryFilter">
                             <div className="itemCategoryTopic">
                                 <h5>Category</h5>
                             </div>
                             <FilterItems></FilterItems>
                         </div>
-                        <div className="itemAvailabilityFilter">
-                            <div className="itemAbailabilityTopic">
-                                <h5>Availability</h5>
-                            </div>
-                            <FilterAvailability></FilterAvailability>
-                        </div>
+
                         <div className="applyButton">
                             <ApplyButton>Apply</ApplyButton>
                         </div>
                     </div>
                 </div>
-                <div className="viewInventoryInner">
+                <div className="viewSupplierInner">
 
                     <div className="searchAndButtons">
-                        <div className="viewInventorySearch">
+                        <div className="viewSupplierSearch">
                             <SearchBar></SearchBar>
                         </div>
-                        <div className="viewInventoryButtons">
+                        <div className="viewSupplierButtons">
                             <AddItemButton onClick={()=>setVisible(true)}>Add Supplier</AddItemButton>
                             <DeleteItemButton>Delete Supplier</DeleteItemButton>
                         </div>

@@ -42,6 +42,8 @@ import InventoryDashboard from "./pages/Supplier/Inventory Dashboard/inventoryDa
 import SupplierProfile from "./pages/Supplier/Supplier Profile/SupplierProfile";
 import Success from "./pages/Inventory/Cart/success";
 import Cancel from "./pages/Inventory/Cart/cancel";
+import AddDiscounts from "./pages/discounts dashboard/Models/Add Discounts/addDiscounts";
+import AddDiscount from "./pages/discounts dashboard/Models/Add Discounts/addDiscounts";
 
 function App() {
   return (
@@ -98,6 +100,7 @@ function App() {
             <Route path="/cancelOrders" element={<CancelOrder/>}/>
 
 
+            <Route path="/AddDiscount" element={<AddDiscounts/>}/>
 
 
             /*sales navbar routes*/

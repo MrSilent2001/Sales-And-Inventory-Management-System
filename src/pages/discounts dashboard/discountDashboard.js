@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import SalesNavbar from "../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../layout/footer/footer";
 import Searchbar from "../../layout/search bar/search bar";
+import {Link} from "react-router-dom";
 
 const CancelButtons = styled(Button)(({theme}) => ({
     color: theme.palette.getContrastText('#242F9B'),
@@ -94,7 +95,7 @@ function createData(id, product, discount, price, actions) {
 }
 
 const rows = [
-    createData('I001', 'Holcim-Cement Bag 50kg', '10%', 2750.00, <CancelButtons>Cancel</CancelButtons>),
+    createData('I001', 'Holcim-Cement Bag 50kg', '10%', 2750.00, <CancelButtons onClick={()=>{alert("Discount Has been Closed")}}>View</CancelButtons>),
     createData('I002', 'Holcim-Cement Bag 50kg', '10%', 1250.00, <CancelButtons>Cancel</CancelButtons>),
     createData('I004', 'Holcim-Cement Bag 50kg', '10%', 3000.00, <CancelButtons>Cancel</CancelButtons>),
     createData('I005', 'Holcim-Cement Bag 50kg', '10%', 1200.00, <CancelButtons>Cancel</CancelButtons>),
@@ -133,7 +134,9 @@ function DiscountDashboard() {
                 <div className="discountTitleWithSearchbar">
 
                     <h2 className="discountTitle">Discounted Items</h2>
+                    <Link to="/AddDiscount">
                         <Searchbar/>
+                    </Link>
                 </div>
 
                 <div className="discount-dashboard">

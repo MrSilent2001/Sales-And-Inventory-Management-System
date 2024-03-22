@@ -10,9 +10,10 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
 import Footer from "../../../layout/footer/footer";
+import SearchBar from "../../../layout/search bar/search bar";
+import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
 
 const SendWarningButtons = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#242F9B'),
@@ -110,7 +111,7 @@ function createData(id,name,address,actions1, actions2) {
 }
 
 const rows = [
-    createData('0001', 'Finn Allen', 'No.65, Yorkshire, England', <SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons onClick={()=>{alert("Customer Has been Removed")}}>Remove</RemoveButtons>),
+    createData('0001', 'Finn Allen', 'No.65, Yorkshire, England', <SendWarningButtons onClick={() =>{alert("Please Login to the Account")}}>Send Warning</SendWarningButtons>, <RemoveButtons onClick={()=>{alert("Customer Has been Removed")}}>Remove</RemoveButtons>),
     createData('0002', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons onClick={()=>{alert("Customer Has been Removed")}}>Remove</RemoveButtons>),
     createData('0003', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons onClick={()=>{alert("Customer Has been Removed")}}>Remove</RemoveButtons>),
     createData('0004', 'Finn Allen', 'No.65, Yorkshire, England',<SendWarningButtons>Send Warning</SendWarningButtons>, <RemoveButtons onClick={()=>{alert("Customer Has been Removed")}}>Remove</RemoveButtons>),
@@ -140,7 +141,7 @@ function RemoveCustomers() {
 
     return(
         <>
-            <CustomerNavbar/>
+            <SalesNavbar/>
             <div className="removeCustomersOuter">
                 <div className="removeCustomersInner">
                     <div className="removeCustomersTopicWithButton">
@@ -149,7 +150,7 @@ function RemoveCustomers() {
                         </div>
 
                         <div className="removeCustomersTextfield">
-                            <TextField id="outlined-search" label="Search" type="search" />
+                            <SearchBar/>
                         </div>
 
                     </div>

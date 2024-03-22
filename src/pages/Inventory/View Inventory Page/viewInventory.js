@@ -22,6 +22,7 @@ import AddItem from "./Models/Add Item/Add Item";
 import UpdateItem from "./Models/Update Item/Update Item";
 import InventoryNavbar from "../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../layout/footer/footer";
+import DeleteItem from "./Models/Delete Item/Delete Item";
 
 
 function SearchBar(){
@@ -270,7 +271,7 @@ function ViewInventory(){
                             <FilterItems></FilterItems>
                         </div>
                         <div className="itemAvailabilityFilter">
-                            <div className="itemAbailabilityTopic">
+                            <div className="itemAvailabilityTopic">
                                 <h5>Availability</h5>
                             </div>
                             <FilterAvailability></FilterAvailability>
@@ -280,15 +281,14 @@ function ViewInventory(){
                         </div>
                     </div>
                 </div>
-                <div className="viewInventoryInner">
-
+                <div className="viewInventoryItemInner">
                     <div className="searchAndButtons">
                         <div className="viewInventorySearch">
                             <SearchBar></SearchBar>
                         </div>
                         <div className="viewInventoryButtons">
                             <AddItemButton onClick={()=>setVisible(true)}>Add Item</AddItemButton>
-                            <DeleteItemButton>Delete Item</DeleteItemButton>
+                            <DeleteItemButton onClick={()=>setVisible(true)}>Delete Item</DeleteItemButton>
                         </div>
                     </div>
 
@@ -298,7 +298,8 @@ function ViewInventory(){
                 </div>
 
                 <Modal open={visible}>
-                    <AddItem onClose={(value) => { setVisible(false)}} ></AddItem>
+                    <AddItem onClose={(value) => { setVisible(false)}} />
+                    <DeleteItem onClose={(value) => { setVisible(false)}}/>
                 </Modal>
             </div>
 

@@ -35,7 +35,7 @@ const SalesApprovedRefundsTable = ({ onBack }) => {
           onClick={onBack} // onBack prop
           sx={{ width: '20%', p: '0px', pr: '7%', mt: '2%', mb: '2%' }}
         >
-          Refund Request
+          Approved Refunds
         </Button>
         <Paper elevation={4}>
           <ReusableTable data={transformData(refundRequests)} />
