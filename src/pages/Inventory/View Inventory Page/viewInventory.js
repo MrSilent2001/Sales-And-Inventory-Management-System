@@ -215,7 +215,7 @@ const ViewItemButton = styled(Button)(({ theme }) => ({
 }));
 
 function CustomizedTables() {
-    const [visible,setVisible] = useState(false)
+    const [visible,setVisible] = useState(false);
 
     return (
         <TableContainer component={Paper} sx={{ width: '76.875em', maxHeight: '25em', overflowY: 'auto', position: 'relative'}}>
@@ -299,7 +299,10 @@ function ViewInventory(){
 
                 <Modal open={visible}>
                     <AddItem onClose={(value) => { setVisible(false)}} />
-                    <DeleteItem onClose={(value) => { setVisible(false)}}/>
+                </Modal>
+
+                <Modal open={visible}>
+                    <DeleteItem onClose={(value) => { setVisible(false)}} />
                 </Modal>
             </div>
 

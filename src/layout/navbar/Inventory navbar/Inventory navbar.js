@@ -12,8 +12,8 @@ function InventoryNavbar(){
             </div>
             <div className="navigation">
                 <NavLink to="/viewInventory">Inventory</NavLink>
-                <NavLink to="/inventoryLanding">Supplier</NavLink>
-                <NavLink to="/cart">Orders</NavLink>
+                <NavLink to="/viewSupplier">Supplier</NavLink>
+                <NavLink to="/purchasedOrder">Orders</NavLink>
                 <NavLink to="/customerProfile">Refunds</NavLink>
                 <NavLink to="/paymentdashboard">Payment</NavLink>
                 <NavLink to="/salesLanding">Sales</NavLink>

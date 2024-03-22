@@ -3,9 +3,8 @@ import Button from "@mui/material/Button";
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import React from "react";
-import "./addSupplier.css";
+import "./placeOrder.css";
 import {styled} from "@mui/material/styles";
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Box from '@mui/material/Box';
 
 function BasicTextFields({id, variant, size, type}) {
@@ -49,9 +48,9 @@ const CancelButton = styled(Button)(({ theme }) => ({
     padding: '1.75em 0.625em'
 }));
 
-const SaveSupplierButton = styled(Button)(({ theme }) => ({
+const PlaceOrderButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#242F9B'),
-    backgroundColor: '#242F9B',
+    backgroundColor: '#249b54',
     '&:hover': {
         backgroundColor: '#2d3ed2' // You can adjust the darken value as needed
     },
@@ -70,39 +69,42 @@ const CenteredModal = styled('div')({
     alignItems: 'center',
     height: '100vh', // Make the container take the full height of the viewport
 });
-function AddSupplier(props){
+
+const AddItemsButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText('#242F9B'),
+    backgroundColor: '#242F9B',
+    '&:hover': {
+        backgroundColor: '#2d3ed2' // You can adjust the darken value as needed
+    },
+    '&.MuiButton-root': {
+        width: '7.625em',
+        height: '3.75em'
+    },
+    fontSize: '0.5em',
+    fontFamily: 'inter',
+    padding: '1.75em 0.625em'
+}));
+function PlaceOrder(props){
     const [category, setCategory] = React.useState('');
 
     const handleChange = (event) => {
         setCategory(event.target.value);
     };
 
-    const VisuallyHiddenInput = styled('input')({
-        clip: 'rect(0 0 0 0)',
-        clipPath: 'inset(50%)',
-        height: 1,
-        overflow: 'hidden',
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        whiteSpace: 'nowrap',
-        width: 1,
-    });
-
-    const addSupplier = () =>{
-        console.log("Supplier Added Successfully");
-        alert("Supplier Added Successfully");
+    const placeOrder = () =>{
+        console.log("Order Placed Successfully");
+        alert("Order Placed Successfully");
     }
 
     return(
         <CenteredModal>
-            <div className="addSupplierOuter">
-                <div className="addSupplierModel">
-                    <h2>Add Supplier</h2>
-                    <div className="addSupplierForm">
+            <div className="placeOrderOuter">
+                <div className="placeOrderModel">
+                    <h2>Inventory Order</h2>
+                    <div className="placeOrderForm">
                         <div className="formField">
                             <div className="idField">
-                                <h5>Supplier Id:</h5>
+                                <h5>Order Id:</h5>
                             </div>
                             <div className="idInput">
                                 <BasicTextFields id="outlined-required" size="small"/>
@@ -111,10 +113,32 @@ function AddSupplier(props){
 
                         <div className="formField">
                             <div className="idField">
-                                <h5>Address:</h5>
+                                <h5>Supplier:</h5>
                             </div>
                             <div className="idInput">
-                                <BasicTextFields id="outlined-textarea" size="small"/>
+                                <Select
+                                    className="supplierInput"
+                                    id="demo-select-small"
+                                    value={category}
+                                    onChange={handleChange}
+                                    size="small"
+                                    style={{width:"17.5em",left:"-.5em"}}
+                                >
+                                    <MenuItem value="None">
+                                        <em>None</em>
+                                    </MenuItem>
+                                    <MenuItem value="Category01">Primary</MenuItem>
+                                    <MenuItem value="Category02">Secondary</MenuItem>
+                                </Select>
+                            </div>
+                        </div>
+
+                        <div className="formField">
+                            <div className="idField">
+                                <h5>Delivery Address:</h5>
+                            </div>
+                            <div className="idInput">
+                                <BasicTextFields id="outlined-required" size="small" type="email"/>
                             </div>
                         </div>
 
@@ -138,43 +162,45 @@ function AddSupplier(props){
 
                         <div className="formField">
                             <div className="idField">
-                                <h5>Category:</h5>
+                                <h5>Items:</h5>
                             </div>
-                            <div className="idInput">
-                                <Select
-                                    className="supplierInput"
-                                    id="demo-select-small"
-                                    value={category}
-                                    onChange={handleChange}
-                                    size="small"
-                                    style={{width:"17.5em",left:"-.5em"}}
-                                >
-                                    <MenuItem value="None">
-                                        <em>None</em>
-                                    </MenuItem>
-                                    <MenuItem value="Category01">Category 01</MenuItem>
-                                    <MenuItem value="Category02">Category 02</MenuItem>
-                                    <MenuItem value="Category03">Category 03</MenuItem>
-                                </Select>
+                            <div className="idInput" id="items">
+                                <div>
+                                    <Select
+                                        className="supplierInput"
+                                        id="demo-select-small"
+                                        value={category}
+                                        onChange={handleChange}
+                                        size="small"
+                                        style={{width:"10.5em",left:"-.5em"}}
+                                    >
+                                        <MenuItem value="None">
+                                            <em>None</em>
+                                        </MenuItem>
+                                        <MenuItem value="Item01">Item01</MenuItem>
+                                        <MenuItem value="Item02">Item02</MenuItem>
+                                        <MenuItem value="Item03">Item03</MenuItem>
+                                        <MenuItem value="Item04">Item04</MenuItem>
+                                    </Select>
+                                </div>
+                                <div>
+                                   <AddItemsButton>Add Items</AddItemsButton>
+                                </div>
                             </div>
                         </div>
-
                         <div className="formField">
                             <div className="idField">
-                                <h5>Photo:</h5>
+
                             </div>
                             <div className="idInput">
-                                <Button component="label" variant="contained" startIcon={<CloudUploadIcon />} style={{width:"20em",left:"-.5em"}}>
-                                    Upload Image
-                                    <VisuallyHiddenInput type="file" />
-                                </Button>
+                                <BasicTextFields id="outlined-required" size="small"/>
                             </div>
                         </div>
 
 
                         <div className="formFieldButtons">
                             <div className="saveButton">
-                                <SaveSupplierButton onClick={addSupplier}>Add Supplier</SaveSupplierButton>
+                                <PlaceOrderButton onClick={placeOrder}>Place Order</PlaceOrderButton>
                             </div>
 
                             <div className="cancelButton">
@@ -188,4 +214,4 @@ function AddSupplier(props){
     )
 }
 
-export default AddSupplier;
+export default PlaceOrder;

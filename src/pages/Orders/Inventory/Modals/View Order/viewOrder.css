@@ -1,4 +1,4 @@
-.updateSupplierModel{
+.viewOrderModel{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,12 +9,12 @@
     border-radius: 0.5em;
 }
 
-.updateSupplierModel h2{
+.viewOrderModel h2{
     font-family: Inter;
     padding: 1.25em 0 0 0;
 }
 
-.updateSupplierForm{
+.viewOrderForm{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,7 +35,7 @@
     font-size: 0.75em;
 }
 
-.updateSupplierForm{
+.viewOrderForm{
     margin-top: 0.3em;
 }
 
