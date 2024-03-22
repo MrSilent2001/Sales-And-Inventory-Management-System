@@ -14,7 +14,7 @@ const DeleteButtons = styled(Button)(({theme}) => ({
     },
     '&.MuiButton-root': {
         width: '10em',
-        height: '2.5em'
+        height: '1.5em'
     },
     fontSize: '0.75em',
     fontFamily: 'inter',
@@ -30,7 +30,7 @@ const CustomerProfileManagementButtons = styled(Button)(({theme}) => ({
     },
     '&.MuiButton-root': {
         width: '10em',
-        height: '2.5em'
+        height: '1.5em'
     },
     fontSize: '0.75em',
     fontFamily: 'inter',
