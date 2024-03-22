@@ -18,7 +18,7 @@ const getStripe = () =>{
 
 }
 
-function Cart() {
+function Cart({handleClick}) {
 
     const [stripeError, setStripeError] = useState(null);
     const [isLoading, setLoading] = useState(false);
