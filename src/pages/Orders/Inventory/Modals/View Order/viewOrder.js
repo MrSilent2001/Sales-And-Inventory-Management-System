@@ -11,7 +11,7 @@ const GoBackButton = styled(Button)(({ theme }) => ({
         backgroundColor: '#2d3ed2' // You can adjust the darken value as needed
     },
     '&.MuiButton-root': {
-        width: '11.625em',
+        width: '15.625em',
         height: '2.75em'
     },
     fontSize: '0.625em',

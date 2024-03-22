@@ -20,7 +20,7 @@
     align-items: center;
 }
 
-.formField{
+.updateSupplierformField{
     width: 27.5em;
     display: flex;
     flex-direction: row;
@@ -29,7 +29,7 @@
     margin: 0.1em 0 0 0;
 }
 
-.formField h5{
+.updateSupplierformField h5{
     font-family: Inter;
     font-weight: 600;
     font-size: 0.75em;
@@ -39,7 +39,7 @@
     margin-top: 0.3em;
 }
 
-.formFieldButtons{
+.updateSupplierformFieldButtons{
     display: flex;
     flex-direction: row;
     align-items: center;

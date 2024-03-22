@@ -6,26 +6,29 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { styled } from "@mui/material/styles";
+import {styled} from "@mui/material/styles";
 import Button from "@mui/material/Button";
+import InventoryNavbar from "../../../../layout/navbar/Inventory navbar/Inventory navbar";
+import Footer from "../../../../layout/footer/footer";
+import {Link} from "react-router-dom";
 
 // Mock data for suppliers and items, replace with your actual data
 const suppliers = [
-    { code: 'S0001', name: 'Supplier 1' },
-    { code: 'S0002', name: 'Supplier 2' },
+    {code: 'S0001', name: 'Supplier 1'},
+    {code: 'S0002', name: 'Supplier 2'},
     // ... more suppliers
 ];
 
 const items = [
-    { code: 'I0001', name: 'Item 1' },
-    { code: 'I0002', name: 'Item 2' },
-    { code: 'I0003', name: 'Item 3' },
+    {code: 'I0001', name: 'Item 1'},
+    {code: 'I0002', name: 'Item 2'},
+    {code: 'I0003', name: 'Item 3'},
     // ... more items
 ];
 
-function Dropdown({ label, value, onChange, options }) {
+function Dropdown({label, value, onChange, options}) {
     return (
-        <Box sx={{ minWidth: 120 }}>
+        <Box sx={{minWidth: 120}}>
             <FormControl fullWidth>
                 <InputLabel id={`select-${label}-label`}>{label}</InputLabel>
                 <Select
@@ -51,7 +54,7 @@ function Dropdown({ label, value, onChange, options }) {
     );
 }
 
-function InputField({ label }) {
+function InputField({label}) {
     return (
         <Box
             component="form"
@@ -72,12 +75,12 @@ function InputField({ label }) {
             noValidate
             autoComplete="off"
         >
-            <TextField id={`outlined-${label}`} label={label} variant="outlined" margin='normal' />
+            <TextField id={`outlined-${label}`} label={label} variant="outlined" margin='normal'/>
         </Box>
     );
 }
 
-const RefundRequestButtons = styled(Button)(({ theme }) => ({
+const RefundRequestButtons = styled(Button)(({theme}) => ({
     color: theme.palette.getContrastText('#242F9B'),
     backgroundColor: '#242F9B',
     '&:hover': {
@@ -98,89 +101,97 @@ function InventoryRefundRequest() {
     const [reason, setReason] = React.useState('');
 
     return (
-        <div className="customerRefundRequestOuter">
-            <div className="customerRefundRequestInner">
+        <>
+            <InventoryNavbar/>
+            <div className="customerRefundRequestOuter">
+                <div className="customerRefundRequestInner">
 
-                <div className="customerRefundRequestTopic">
-                    <h2>Refund Request</h2>
-                </div>
-
-                <div className="refundRequestForm">
-
-                    <div className="formField">
-                        <div className="textField">
-                            <h5>Supplier</h5>
-                        </div>
-                        <div className="textInput">
-                            <Dropdown 
-                                label="Supplier" 
-                                value={supplierCode} 
-                                onChange={(e) => setSupplierCode(e.target.value)} 
-                                options={suppliers} 
-                            />
-                        </div>
+                    <div className="customerRefundRequestTopic">
+                        <h2>Refund Request</h2>
                     </div>
 
-                    <div className="formField">
-                        <div className="textField">
-                            <h5>Item</h5>
-                        </div>
-                        <div className="textInput">
-                            <Dropdown 
-                                label="Item" 
-                                value={itemCode}
-                                onChange={(e) => setItemCode(e.target.value)} 
-                                options={items} 
-                            />
-                        </div>
-                    </div>
+                    <div className="refundRequestForm">
 
-                    <div className="formField">
-                        <div className="textField">
-                            <h5>Quantity</h5>
+                        <div className="formField">
+                            <div className="textField">
+                                <h5>Supplier</h5>
+                            </div>
+                            <div className="textInput">
+                                <Dropdown
+                                    label="Supplier"
+                                    value={supplierCode}
+                                    onChange={(e) => setSupplierCode(e.target.value)}
+                                    options={suppliers}
+                                />
+                            </div>
                         </div>
-                        <div className="textInput">
-                            <InputField label="Quantity" />
-                        </div>
-                    </div>
 
-                    <div className="formField">
-                        <div className="textField">
-                            <h5>Reason</h5>
+                        <div className="formField">
+                            <div className="textField">
+                                <h5>Item</h5>
+                            </div>
+                            <div className="textInput">
+                                <Dropdown
+                                    label="Item"
+                                    value={itemCode}
+                                    onChange={(e) => setItemCode(e.target.value)}
+                                    options={items}
+                                />
+                            </div>
                         </div>
-                        <div className="textInput">
-                            <Dropdown 
-                                label="Reason" 
-                                value={reason} 
-                                onChange={(e) => setReason(e.target.value)} 
-                                options={[
-                                    { code: 'defected', name: 'Defected Item' },
-                                    { code: 'not-as-described', name: 'Not as Described' },
-                                    { code: 'expired', name: 'Expired' }
-                                ]} 
-                            />
-                        </div>
-                    </div>
 
-                    <div className="formField">
-                        <div className="textField">
-                            <h5>Total Price</h5>
+                        <div className="formField">
+                            <div className="textField">
+                                <h5>Quantity</h5>
+                            </div>
+                            <div className="textInput">
+                                <InputField label="Quantity"/>
+                            </div>
                         </div>
-                        <div className="textInput">
-                            <InputField label="Total Price" />
-                        </div>
-                    </div>
 
-                    <div className="refundButtonField">
-                        <div className="refundRequestButtons">
-                            <RefundRequestButtons>Cancel </RefundRequestButtons>
-                            <RefundRequestButtons>Place order</RefundRequestButtons>
+                        <div className="formField">
+                            <div className="textField">
+                                <h5>Reason</h5>
+                            </div>
+                            <div className="textInput">
+                                <Dropdown
+                                    label="Reason"
+                                    value={reason}
+                                    onChange={(e) => setReason(e.target.value)}
+                                    options={[
+                                        {code: 'defected', name: 'Defected Item'},
+                                        {code: 'not-as-described', name: 'Not as Described'},
+                                        {code: 'expired', name: 'Expired'}
+                                    ]}
+                                />
+                            </div>
                         </div>
-                    </div>
 
+                        <div className="formField">
+                            <div className="textField">
+                                <h5>Total Price</h5>
+                            </div>
+                            <div className="textInput">
+                                <InputField label="Total Price"/>
+                            </div>
+                        </div>
+
+                        <div className="refundButtonField">
+                            <div className="refundRequestButtons">
+                                <RefundRequestButtons>Cancel </RefundRequestButtons>
+
+                                <Link to="/GeneratedRequest">
+                                    <RefundRequestButtons>Create Request</RefundRequestButtons>
+                                </Link>
+
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-        </div>
+            <Footer/>
+        </>
     );
 }
 

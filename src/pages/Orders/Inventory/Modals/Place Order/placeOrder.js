@@ -77,12 +77,12 @@ const AddItemsButton = styled(Button)(({ theme }) => ({
         backgroundColor: '#2d3ed2' // You can adjust the darken value as needed
     },
     '&.MuiButton-root': {
-        width: '7.625em',
+        width: '6.25em',
         height: '3.75em'
     },
     fontSize: '0.5em',
     fontFamily: 'inter',
-    padding: '1.75em 0.625em'
+    padding: '1.75em 0'
 }));
 function PlaceOrder(props){
     const [category, setCategory] = React.useState('');
@@ -102,20 +102,20 @@ function PlaceOrder(props){
                 <div className="placeOrderModel">
                     <h2>Inventory Order</h2>
                     <div className="placeOrderForm">
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="placeOrderformField">
+                            <div className="placeOrderidField">
                                 <h5>Order Id:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="placeOrderidInput">
                                 <BasicTextFields id="outlined-required" size="small"/>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="placeOrderformField">
+                            <div className="placeOrderidField">
                                 <h5>Supplier:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="placeOrderidInput">
                                 <Select
                                     className="supplierInput"
                                     id="demo-select-small"
@@ -133,8 +133,8 @@ function PlaceOrder(props){
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="placeOrderformField">
+                            <div className="placeOrderidField">
                                 <h5>Delivery Address:</h5>
                             </div>
                             <div className="idInput">
@@ -142,29 +142,29 @@ function PlaceOrder(props){
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="placeOrderformField">
+                            <div className="placeOrderidField">
                                 <h5>Email:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="placeOrderidInput">
                                 <BasicTextFields id="outlined-required" size="small" type="email"/>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="placeOrderformField">
+                            <div className="placeOrderidField">
                                 <h5>Contact Number:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="placeOrderidInput">
                                 <BasicTextFields id="outlined-required" size="small"/>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="placeOrderformField">
+                            <div className="placeOrderidField">
                                 <h5>Items:</h5>
                             </div>
-                            <div className="idInput" id="items">
+                            <div className="placeOrderidInput" id="items">
                                 <div>
                                     <Select
                                         className="supplierInput"
@@ -172,7 +172,7 @@ function PlaceOrder(props){
                                         value={category}
                                         onChange={handleChange}
                                         size="small"
-                                        style={{width:"10.5em",left:"-.5em"}}
+                                        style={{width:"13.5em",left:"-.5em"}}
                                     >
                                         <MenuItem value="None">
                                             <em>None</em>
@@ -188,22 +188,22 @@ function PlaceOrder(props){
                                 </div>
                             </div>
                         </div>
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="placeOrderformField">
+                            <div className="placeOrderidField">
 
                             </div>
-                            <div className="idInput">
+                            <div className="placeOrderidInput">
                                 <BasicTextFields id="outlined-required" size="small"/>
                             </div>
                         </div>
 
 
-                        <div className="formFieldButtons">
-                            <div className="saveButton">
+                        <div className="placeOrderformFieldButtons">
+                            <div className="placeOrderBtn">
                                 <PlaceOrderButton onClick={placeOrder}>Place Order</PlaceOrderButton>
                             </div>
 
-                            <div className="cancelButton">
+                            <div className="placeOrdercancelButton">
                                 <CancelButton onClick={() => props.onClose(false)}>Cancel</CancelButton>
                             </div>
                         </div>

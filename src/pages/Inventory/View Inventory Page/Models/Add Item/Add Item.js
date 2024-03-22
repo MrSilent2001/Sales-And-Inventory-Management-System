@@ -74,74 +74,74 @@ function AddItem(props){
                 <div className="addItemModel">
                     <h2>Add Item</h2>
                     <div className="addItemForm">
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="addItemformField">
+                            <div className="addItemidField">
                                 <h5>Inventory Id</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="addItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="addItemformField">
+                            <div className="addItemidField">
                                 <h5>Item Description</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="addItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="addItemformField">
+                            <div className="addItemidField">
                                 <h5>Item Category</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="addItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="addItemformField">
+                            <div className="addItemidField">
                                 <h5>Quantity</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="addItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="addItemformField">
+                            <div className="addItemidField">
                                 <h5>Unit Price</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="addItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="addItemformField">
+                            <div className="addItemidField">
                                 <h5>Manufacture Dated</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="addItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="addItemformField">
+                            <div className="addItemidField">
                                 <h5>Expire Date</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="addItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formFieldButtons">
-                            <div className="cancelButton">
+                        <div className="addItemformFieldButtons">
+                            <div className="addItemcancelButton">
                                 <CancelButton onClick={() => props.onClose(false)}>Cancel</CancelButton>
                             </div>
-                            <div className="saveButton">
+                            <div className="addItemButton">
                                 <SaveItemButton>Add Item</SaveItemButton>
                             </div>
                         </div>

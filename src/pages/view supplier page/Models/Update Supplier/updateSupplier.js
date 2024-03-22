@@ -112,11 +112,11 @@ function UpdateSupplier(props) {
                 <div className="updateSupplierModel">
                     <h2>Update Supplier</h2>
                     <div className="updateSupplierForm">
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="updateSupplierformField">
+                            <div className="updateSupplieridField">
                                 <h5>Supplier Id:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="updateSupplieridInput">
                                 <BasicTextFields
                                     id="outlined-required"
                                     size="small"
@@ -126,11 +126,11 @@ function UpdateSupplier(props) {
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="updateSupplierformField">
+                            <div className="updateSupplieridField">
                                 <h5>Address:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="updateSupplieridInput">
                                 <BasicTextFields
                                     id="outlined-textarea"
                                     size="small"
@@ -142,11 +142,11 @@ function UpdateSupplier(props) {
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="updateSupplierformField">
+                            <div className="updateSupplieridField">
                                 <h5>Email:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="updateSupplieridInput">
                                 <BasicTextFields
                                     id="outlined-required"
                                     size="small"
@@ -157,11 +157,11 @@ function UpdateSupplier(props) {
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="updateSupplierformField">
+                            <div className="updateSupplieridField">
                                 <h5>Contact Number:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="updateSupplieridInput">
                                 <BasicTextFields
                                     id="outlined-required"
                                     size="small"
@@ -171,11 +171,11 @@ function UpdateSupplier(props) {
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="updateSupplierformField">
+                            <div className="updateSupplieridField">
                                 <h5>Category:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="updateSupplieridInput">
                                 <Select
                                     className="supplierInput"
                                     id="demo-select-small"
@@ -194,11 +194,11 @@ function UpdateSupplier(props) {
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="updateSupplierformField">
+                            <div className="updateSupplieridField">
                                 <h5>Photo:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="updateSupplieridInput">
                                 <Button component="label" variant="contained" startIcon={<CloudUploadIcon/>} style={{width: "20em",left:"-.5em"}}>
                                     Upload Image
                                     <VisuallyHiddenInput type="file"/>
@@ -207,12 +207,12 @@ function UpdateSupplier(props) {
                         </div>
 
 
-                        <div className="formFieldButtons">
-                            <div className="saveButton">
+                        <div className="updateSupplierformFieldButtons">
+                            <div className="updateSuppliersButton">
                                 <UpdateSupplierButton onClick={updateSupplier}>Update Supplier</UpdateSupplierButton>
                             </div>
 
-                            <div className="cancelButton">
+                            <div className="updateSuppliercancelButton">
                                 <CancelButton onClick={() => props.onClose(false)}>Cancel</CancelButton>
                             </div>
                         </div>

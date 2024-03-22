@@ -74,74 +74,74 @@ function AddItem(props){
                 <div className="deleteItemModel">
                     <h2>Delete Item</h2>
                     <div className="deleteItemForm">
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="deleteItemformField">
+                            <div className="deleteItemidField">
                                 <h5>Inventory Id</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="deleteItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="deleteItemformField">
+                            <div className="deleteItemidField">
                                 <h5>Item Description</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="deleteItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="deleteItemformField">
+                            <div className="deleteItemidField">
                                 <h5>Item Category</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="deleteItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="deleteItemformField">
+                            <div className="deleteItemidField">
                                 <h5>Quantity</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="deleteItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="deleteItemformField">
+                            <div className="deleteItemidField">
                                 <h5>Unit Price</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="deleteItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="deleteItemformField">
+                            <div className="deleteItemidField">
                                 <h5>Manufacture Dated</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="deleteItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="deleteItemformField">
+                            <div className="deleteItemidField">
                                 <h5>Expire Date</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="deleteItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formFieldButtons">
-                            <div className="cancelButton">
+                        <div className="deleteItemformFieldButtons">
+                            <div className="deleteItemcancelButton">
                                 <CancelButton onClick={() => props.onClose(false)}>Cancel</CancelButton>
                             </div>
-                            <div className="saveButton">
+                            <div className="deleteItemsaveButton">
                                 <SaveItemButton>Delete Item</SaveItemButton>
                             </div>
                         </div>

@@ -100,47 +100,47 @@ function AddSupplier(props){
                 <div className="addSupplierModel">
                     <h2>Add Supplier</h2>
                     <div className="addSupplierForm">
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="addSupplierformField">
+                            <div className="addSupplieridField">
                                 <h5>Supplier Id:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="addSupplieridInput">
                                 <BasicTextFields id="outlined-required" size="small"/>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="addSupplierformField">
+                            <div className="addSupplieridField">
                                 <h5>Address:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="addSupplieridInput">
                                 <BasicTextFields id="outlined-textarea" size="small"/>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="addSupplierformField">
+                            <div className="addSupplieridField">
                                 <h5>Email:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="addSupplieridInput">
                                 <BasicTextFields id="outlined-required" size="small" type="email"/>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="addSupplierformField">
+                            <div className="addSupplieridField">
                                 <h5>Contact Number:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="addSupplieridInput">
                                 <BasicTextFields id="outlined-required" size="small"/>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="addSupplierformField">
+                            <div className="addSupplieridField">
                                 <h5>Category:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="addSupplieridInput">
                                 <Select
                                     className="supplierInput"
                                     id="demo-select-small"
@@ -159,11 +159,11 @@ function AddSupplier(props){
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="addSupplierformField">
+                            <div className="addSupplieridField">
                                 <h5>Photo:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="addSupplieridInput">
                                 <Button component="label" variant="contained" startIcon={<CloudUploadIcon />} style={{width:"20em",left:"-.5em"}}>
                                     Upload Image
                                     <VisuallyHiddenInput type="file" />
@@ -172,12 +172,12 @@ function AddSupplier(props){
                         </div>
 
 
-                        <div className="formFieldButtons">
-                            <div className="saveButton">
+                        <div className="addSupplierformFieldButtons">
+                            <div className="addSupplierButton">
                                 <SaveSupplierButton onClick={addSupplier}>Add Supplier</SaveSupplierButton>
                             </div>
 
-                            <div className="cancelButton">
+                            <div className="addSuppliercancelButton">
                                 <CancelButton onClick={() => props.onClose(false)}>Cancel</CancelButton>
                             </div>
                         </div>
