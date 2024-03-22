@@ -1,36 +1,40 @@
-import React from 'react';
+import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
-export default function MultiActionAreaCard({ item, onAddToCart }) {
-    const addToCart = () => {
-        onAddToCart(item); // Call the callback function with the item
-    };
-
+export default function MultiActionAreaCard() {
     return (
         <Card sx={{ maxWidth: 300 }}>
             <CardActionArea>
                 <CardMedia
                     component="img"
                     height="250"
-                    image={item.image}
-                    alt={item.name}
+                    image="https://www.freepik.com/free-photo/view-steel-hammer-construction-work-with-nails_49590265.htm#fromView=search&page=1&position=1&uuid=81ef6240-3a70-4a0a-b8b5-ccc299956ee7"
+                    alt="Hammer"
                 />
                 <CardContent>
+
                     <Typography variant="body2" color="text.primary">
-                        {item.name}
+                        Lightweight Steel Hammer With Rubber Grip
+
                     </Typography>
-                    <Typography variant="body2" color="text.primary" sx={{ fontWeight: 'bold' }}>
-                        {item.price ? `Rs ${item.price.toFixed(2)}` : 'Price not available'}
+                    <Typography variant="body2" color="text.primary"
+                                sx={{ fontWeight: 'bold' }}>
+
+                        Rs 2800/=
                     </Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button variant="contained" disableElevation sx={{ margin: 'auto', display: 'block' }}
-                        onClick={addToCart}>
+                <Button variant="contained" disableElevation
+                        sx={{margin: 'auto', display: 'block'}}
+                        onClick={()=>{
+                            alert("Item has been added to the Cart");
+                        }}
+                >
                     Add to Cart
                 </Button>
             </CardActions>
