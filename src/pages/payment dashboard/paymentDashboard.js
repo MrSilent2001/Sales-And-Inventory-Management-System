@@ -11,6 +11,10 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import SalesNavbar from "../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../layout/footer/footer";
+import AddItemButton from "../../layout/buttons/addItemButton/AddItemButton";
+import {useState} from "react";
+import {Modal} from "@mui/material";
+import AddPayment from "./Modal/AddPayment/addPayment";
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -84,6 +88,7 @@ function PaymentDashboard() {
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [visible,setVisible] = useState(false);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -102,6 +107,9 @@ function PaymentDashboard() {
 
                 <div className="payment-title">
                     <h2 className="paymentTitle">Payments</h2>
+                    <div className="addButton">
+                        <AddItemButton onClick={()=>setVisible(true)}>Add Payment</AddItemButton>
+                    </div>
                 </div>
 
                 <div className="paymentDashboard">
@@ -153,6 +161,10 @@ function PaymentDashboard() {
                             onRowsPerPageChange={handleChangeRowsPerPage}
                         />
                     </Paper>
+
+                    <Modal open={visible}>
+                        <AddPayment onClose={(value) => { setVisible(false)}}></AddPayment>
+                    </Modal>
                 </div>
             </div>
         </div>
