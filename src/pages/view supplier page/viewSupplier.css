@@ -7,8 +7,8 @@
     flex-direction: column;
     justify-content: center;
     width: 14.375em;
-    height: 37.75em;
-    background-color: #646FD4
+    height: 36.03em;
+    background-color: #646FD4;
 }
 
 .itemCategoryFilter{
@@ -45,7 +45,7 @@
 
 .viewInventoryInner{
     width: 81.25em;
-    height: 36.25em;
+    height: 36.03em;
     background-color: rgba(219, 223, 253, 0.8);
     padding: 1.5em 0 0 0;
 }

@@ -3,6 +3,8 @@ import { Container, Box, Button, Typography, Paper } from '@mui/material';
 import ReusableTable from '../../../components/Reusable Table/Reusable Table';
 import InventoryNavbar from "../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../layout/footer/footer";
+import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
+import {Link} from "react-router-dom";
 
 const fetchRequests = () => {
   return Promise.resolve([
@@ -52,7 +54,7 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
 
   return (
       <>
-          <InventoryNavbar/>
+          <SalesNavbar/>
           <Container className='inner_container' maxWidth="90%">
               <Box sx={{ my: 4 }}>
                   <Box
@@ -68,17 +70,20 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
                           Refund Request
                       </Typography>
                       <Box>
-                          <Button
-                              variant="contained"
-                              onClick={onViewApproved}
-                              sx={{
-                                  borderRadius: 1,
-                                  backgroundColor:"#242F9B",
-                                  textTransform:"none",
-                              }}
-                          >
-                              Approved Refunds
-                          </Button>
+                          <Link to="/ApprovedRefundsTable">
+                              <Button
+                                  variant="contained"
+                                  onClick={onViewApproved}
+                                  sx={{
+                                      borderRadius: 1,
+                                      backgroundColor:"#242F9B",
+                                      textTransform:"none",
+                                  }}
+                              >
+                                  Approved Refunds
+                              </Button>
+                          </Link>
+
                       </Box>
                   </Box>
                   <Paper>

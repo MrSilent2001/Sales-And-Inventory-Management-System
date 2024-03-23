@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import Searchbar from "../../../layout/search bar/search bar";
 import Footer from "../../../layout/footer/footer";
 import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
+import {Link} from "react-router-dom";
 
 const CustomerManagementButton = styled(Button)(({theme}) => ({
     color: theme.palette.getContrastText('#242F9B'),
@@ -124,7 +125,10 @@ function CustomerDashboard() {
                         <h2 className="customerManagement-title">Customers</h2>
 
                         <div className="CustomerManagementBtnWithSearchbar">
-                            <CustomerManagementButton>Inactive Customers</CustomerManagementButton>
+                            <Link to="/removeCustomers">
+                                <CustomerManagementButton>Inactive Customers</CustomerManagementButton>
+                            </Link>
+
                             <Searchbar/>
                         </div>
 

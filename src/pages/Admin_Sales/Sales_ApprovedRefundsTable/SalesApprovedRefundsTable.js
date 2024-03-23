@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Box, Button, Paper } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ReusableTable from '../../../components/ReusableTable/ReusableTable';
+import ReusableTable from '../../../components/Reusable Table/Reusable Table';
 import './SalesApprovedRefundsTable.css'
 
 const SalesApprovedRefundsTable = ({ onBack }) => {

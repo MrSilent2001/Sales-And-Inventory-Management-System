@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import {Link} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 // import {useLocation, useNavigate} from "react-router-dom";
 // import {useAuth} from "../../services/auth";
 
@@ -23,18 +23,36 @@ const Login = () => {
         event.preventDefault();
     };
 
-    // const navigate = useNavigate();
-    //
-    // const [username, setUsername] = useState("");
-    // const [password, setPassword] = useState("");
-    // //const auth = useAuth();
-    // const location = useLocation();
-    // const redirectPath = location.state?.path || "/inventoryLanding";
-    //
-    // const handleLogin = () => {
-    //     //auth.login(username);
-    //     navigate(redirectPath, {replace:true});
-    // }
+    const navigate = useNavigate();
+
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [role, setRole] = useState("");
+    //const auth = useAuth();
+    const location = useLocation();
+    const redirectPath = location.state?.path || "/login";
+
+    const handleLogin = () => {
+        //auth.login(username);
+        navigate(redirectPath, {replace:true});
+
+        if (username === "admin" && password === "12345" && role === "admin") {
+            console.log(username+" "+ password+" "+role);
+            // Redirect to admin dashboard
+            navigate("/salesdashboard", { replace: true });
+        } else if (username === "customer" && password === "12345" && role === "customer") {
+            console.log(username+" "+ password+" "+role);
+            // Redirect to customer dashboard
+            navigate("/customerHome", { replace: true });
+        } else if (username === "supplier" && password === "12345" && role === "supplier") {
+            console.log(username+" "+ password+" "+role);
+            // Redirect to supplier dashboard
+            navigate("/supplierDashboard", { replace: true });
+        } else {
+            console.log(username+" "+ password+" "+role);
+            console.log("Invalid username, password, or role");
+    }
+}
 
     return (
         <div className='loginOuter'>
@@ -50,7 +68,7 @@ const Login = () => {
                                     size="small"
                                     id="outlined-required"
                                     label="Username"
-                                    //onChange={(e) => setUsername(e.target.value)}
+                                    onChange={(e) => setUsername(e.target.value)}
                                     required
                                 />
                             </div>
@@ -63,6 +81,7 @@ const Login = () => {
                                     type={showPassword ? 'text' : 'password'}
                                     label="Password"
                                     className="loginInput"
+                                    onChange={(e) => setPassword(e.target.value)}
                                     endAdornment={
                                         <InputAdornment position="end">
                                             <IconButton
@@ -70,7 +89,6 @@ const Login = () => {
                                                 onClick={handleClickShowPassword}
                                                 onMouseDown={handleMouseDownPassword}
                                                 edge="end"
-                                                //onChange={(e) => setPassword(e.target.value)}
                                             >
                                                 {showPassword ? <VisibilityOff /> : <Visibility />}
                                             </IconButton>
@@ -87,13 +105,14 @@ const Login = () => {
                                     className="loginInput"
                                     id="demo-select-small"
                                     size="small"
+                                    onChange={(e) => setRole(e.target.value)}
                                 >
-                                    <MenuItem value="None">
+                                    <MenuItem value="none">
                                         <em>None</em>
                                     </MenuItem>
-                                    <MenuItem value="Category01">Admin</MenuItem>
-                                    <MenuItem value="Category02">Customer</MenuItem>
-                                    <MenuItem value="Category03">Supplier</MenuItem>
+                                    <MenuItem value="admin">Admin</MenuItem>
+                                    <MenuItem value="customer">Customer</MenuItem>
+                                    <MenuItem value="supplier">Supplier</MenuItem>
                                 </Select>
                             </div>
 
@@ -102,7 +121,7 @@ const Login = () => {
                                 <Button
                                     className="btn"
                                     variant="contained"
-                                    //onClick={handleLogin}
+                                    onClick={handleLogin}
                                 >
                                     Login
                                 </Button>
@@ -119,7 +138,7 @@ const Login = () => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default Login;

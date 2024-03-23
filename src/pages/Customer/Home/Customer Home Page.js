@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../layout/footer/footer";
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
+import {Link} from "react-router-dom";
 
 const ShopNowButton = styled(Button)(({theme}) => ({
     color: 'black',
@@ -35,7 +36,9 @@ function CustomerHome() {
                             <h1>TRADEASY</h1>
                             <p>Best Place for the Construction Substances</p>
                             <div className="carouselButton">
-                                <ShopNowButton>Shop Now</ShopNowButton>
+                                <Link to="/products">
+                                    <ShopNowButton>Shop Now</ShopNowButton>
+                                </Link>
                             </div>
                         </div>
                     </div>
