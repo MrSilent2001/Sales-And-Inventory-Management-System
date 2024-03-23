@@ -177,8 +177,8 @@ function PlaceOrder() {
 
                     <div className="refundButtonField">
                         <div className="refundRequestButtons">
-                            <RefundRequestButtons>Cancel Request</RefundRequestButtons>
-                            <RefundRequestButtons>Create Request</RefundRequestButtons>
+                            <RefundRequestButtons>Cancel </RefundRequestButtons>
+                            <RefundRequestButtons>Place Order</RefundRequestButtons>
                         </div>
                     </div>
 

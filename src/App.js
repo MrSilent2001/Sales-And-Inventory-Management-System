@@ -22,13 +22,14 @@ import ViewSupplier from "./pages/view supplier page/viewSupplier";
 import InventoryOrder from "./pages/Admin_Inventory/purchaseorders/InventoryOrder";
 import ViewOrder from "./pages/Admin_Inventory/purchaseorders/ViewOrder/ViewOrder";
 import PlaceOrder from "./pages/Admin_Inventory/purchaseorders/PlaceOrder/PlaceOrder";
-import PurchaseOrderDashboard from "./pages/Admin_Inventory/purchaseorders/PurchaseOrderDashboard";
+import PurchaseOrderDashboard from "./pages/Admin_Inventory/purchaseorders/PurchaseOrderDashboard.js";
 import SalesRefundRequestsTable from "./pages/Admin_Sales/Sales_RefundRequestTable/SalesRefundRequestsTable";
 import Cart from "./pages/Inventory/Cart/shoppingCart";
 
 function App() {
   return (
     <div className="App">
+       <PlaceOrder/>
         <Routes>
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<Signup/>}/>
