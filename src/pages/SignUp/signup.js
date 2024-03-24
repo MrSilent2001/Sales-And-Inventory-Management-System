@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import "./signup.css";
+import {styled} from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import MenuItem from '@mui/material/MenuItem';
@@ -10,6 +11,24 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {Link} from "react-router-dom";
+
+
+const SignUpButtons = styled(Button)(({theme}) => ({
+    color: theme.palette.getContrastText('#242F9B'),
+    backgroundColor: '#242F9B',
+    '&:hover': {
+        backgroundColor: '#2d3ed2'
+    },
+    '&.MuiButton-root': {
+        width: '11em',
+        height: '2em'
+    },
+    fontSize: '0.95em',
+    fontFamily: 'inter',
+    padding: '1.75em 0.625em',
+   
+}));
+
 
 // import {useLocation, useNavigate} from "react-router-dom";
 // import {useAuth} from "../../services/auth";
@@ -136,13 +155,9 @@ const SignUp = () => {
 
 
                             <div className="btn-row">
-                                <Button
-                                    className="btn"
-                                    variant="contained"
-                                    //onClick={handleLogin}
-                                >
+                                <SignUpButtons>
                                     SignUp
-                                </Button>
+                                </SignUpButtons>
                             </div>
 
                             <div>
