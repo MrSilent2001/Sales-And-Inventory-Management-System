@@ -74,74 +74,74 @@ function UpdateItem(props){
                 <div className="updateItemModel">
                     <h2>Update Item</h2>
                     <div className="updateItemForm">
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="updateItemformField">
+                            <div className="updateItemidField">
                                 <h5>Inventory Id</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="updateItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="updateItemformField">
+                            <div className="updateItemidField">
                                 <h5>Item Description</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="updateItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="updateItemformField">
+                            <div className="updateItemidField">
                                 <h5>Item Category</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="updateItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="updateItemformField">
+                            <div className="updateItemidField">
                                 <h5>Quantity</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="updateItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="updateItemformField">
+                            <div className="updateItemidField">
                                 <h5>Unit Price</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="updateItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="updateItemformField">
+                            <div className="updateItemidField">
                                 <h5>Manufacture Dated</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="updateItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="updateItemformField">
+                            <div className="updateItemidField">
                                 <h5>Expire Date</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="updateItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formFieldButtons">
-                            <div className="cancelButton">
+                        <div className="updateItemformFieldButtons">
+                            <div className="updateItemcancelButton">
                                 <CancelButton onClick={() => props.onClose(false)}>Cancel</CancelButton>
                             </div>
-                            <div className="updateButton">
+                            <div className="updateItemupdateButton">
                                 <UpdateItemButton>Update Item</UpdateItemButton>
                             </div>
                         </div>

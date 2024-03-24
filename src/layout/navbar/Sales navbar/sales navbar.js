@@ -16,6 +16,7 @@ function SalesNavbar(){
                 <NavLink to="/customerdashboard">Customers</NavLink>
                 <NavLink to="/viewRefundRequests">Refunds</NavLink>
                 <NavLink to="/discountdashboard">Discounts</NavLink>
+                <NavLink to="/inventoryLanding">Inventory</NavLink>
                 <NavLink to="/logout" className="lastNavLink">Logout</NavLink>
             </div>
         </div>

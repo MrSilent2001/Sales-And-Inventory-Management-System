@@ -1,4 +1,4 @@
-.updateSupplierModel{
+.placeOrderModel{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,18 +9,19 @@
     border-radius: 0.5em;
 }
 
-.updateSupplierModel h2{
+.placeOrderModel h2{
     font-family: Inter;
     padding: 1.25em 0 0 0;
 }
 
-.updateSupplierForm{
+.placeOrderForm{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 0.3em;
 }
 
-.updateSupplierformField{
+.placeOrderformField{
     width: 27.5em;
     display: flex;
     flex-direction: row;
@@ -29,17 +30,13 @@
     margin: 0.1em 0 0 0;
 }
 
-.updateSupplierformField h5{
+.placeOrderformField h5{
     font-family: Inter;
     font-weight: 600;
     font-size: 0.75em;
 }
 
-.updateSupplierForm{
-    margin-top: 0.3em;
-}
-
-.updateSupplierformFieldButtons{
+.placeOrderformFieldButtons{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -47,4 +44,10 @@
     justify-content: space-between;
     margin: 1.4em 0 0 0;
     padding-bottom: 3em;
+}
+
+#items{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

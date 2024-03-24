@@ -1,16 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./catalog.css";
 import MultiActionAreaCard from '../../../src/components/Catalog Card/catalogCard';
 import Checkboxes from '../../components/checkbox/checkbox';
 import Footer from "../../layout/footer/footer";
 import CustomerNavbar from "../../layout/navbar/Customer navbar/Customer navbar";
-
-
+import products from "../productStore";
+import Button from "@mui/material/Button";
+import {Link} from "react-router-dom";
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 function Catalog() {
 
+    const [show, setShow] = useState(true);
+    const [cart , setCart] = useState([]);
+    const [warning, setWarning] = useState(false);
+
+    const handleClick = (item) => {
+        console.log(item);
+        setCart([...cart, item]);
+    }
     return (
         <>
             <CustomerNavbar/>
@@ -60,40 +69,21 @@ function Catalog() {
                     </div>
 
                     <div className="content">
-                        <Checkboxes/>
-                        <label>Building Matrial</label>
-
+                        <Button
+                            color="success"
+                            variant="contained"
+                        >
+                            Goto Cart
+                        </Button>
                     </div>
 
                 </div>
                 <div className = "grid">
-                    <div className = "card" >
-                        <MultiActionAreaCard/>
+                    {products.map((item)=>(
+                    <div className = "card" key={item.id} >
+                        <MultiActionAreaCard item={item}  handleClick={handleClick}/>
                     </div>
-                    <div className = "card">
-                        <MultiActionAreaCard/>
-                    </div>
-                    <div className = "card">
-                        <MultiActionAreaCard/>
-                    </div>
-                    <div className = "card">
-                        <MultiActionAreaCard/>
-                    </div>
-                    <div className = "card">
-                        <MultiActionAreaCard/>
-                    </div>
-                    <div className = "card">
-                        <MultiActionAreaCard/>
-                    </div>
-                    <div className = "card">
-                        <MultiActionAreaCard/>
-                    </div>
-                    <div className = "card">
-                        <MultiActionAreaCard/>
-                    </div>
-                    <div className = "card">
-                        <MultiActionAreaCard/>
-                    </div>
+                    ))};
                 </div>
 
             </div>

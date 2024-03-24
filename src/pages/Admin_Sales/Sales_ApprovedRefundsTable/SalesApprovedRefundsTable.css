@@ -1,15 +1,12 @@
-.inner_container {
+.inv_inner_container {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 60%;
+    height: 40em;
     background-color: #DBDFFD;
-    max-width:95%;
-    text-align: center;
-    padding-bottom:3%;
-    margin-top: 2%;
-    margin-bottom:2%;
+    max-width:100%;
+    margin-top: -2em;
+    padding-bottom: 20em;
 }
   
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import './Add Item.css'
+import './Delete Item.css'
 import {styled} from "@mui/material/styles";
 import Button from "@mui/material/Button";
 
@@ -70,79 +70,79 @@ const CenteredModal = styled('div')({
 function AddItem(props){
     return(
         <CenteredModal>
-            <div className="addItemOuter">
-                <div className="addItemModel">
-                    <h2>Add Item</h2>
-                    <div className="addItemForm">
-                        <div className="addItemformField">
-                            <div className="addItemidField">
+            <div className="deleteItemOuter">
+                <div className="deleteItemModel">
+                    <h2>Delete Item</h2>
+                    <div className="deleteItemForm">
+                        <div className="deleteItemformField">
+                            <div className="deleteItemidField">
                                 <h5>Inventory Id</h5>
                             </div>
-                            <div className="addItemidInput">
+                            <div className="deleteItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="addItemformField">
-                            <div className="addItemidField">
+                        <div className="deleteItemformField">
+                            <div className="deleteItemidField">
                                 <h5>Item Description</h5>
                             </div>
-                            <div className="addItemidInput">
+                            <div className="deleteItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="addItemformField">
-                            <div className="addItemidField">
+                        <div className="deleteItemformField">
+                            <div className="deleteItemidField">
                                 <h5>Item Category</h5>
                             </div>
-                            <div className="addItemidInput">
+                            <div className="deleteItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="addItemformField">
-                            <div className="addItemidField">
+                        <div className="deleteItemformField">
+                            <div className="deleteItemidField">
                                 <h5>Quantity</h5>
                             </div>
-                            <div className="addItemidInput">
+                            <div className="deleteItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="addItemformField">
-                            <div className="addItemidField">
+                        <div className="deleteItemformField">
+                            <div className="deleteItemidField">
                                 <h5>Unit Price</h5>
                             </div>
-                            <div className="addItemidInput">
+                            <div className="deleteItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="addItemformField">
-                            <div className="addItemidField">
+                        <div className="deleteItemformField">
+                            <div className="deleteItemidField">
                                 <h5>Manufacture Dated</h5>
                             </div>
-                            <div className="addItemidInput">
+                            <div className="deleteItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="addItemformField">
-                            <div className="addItemidField">
+                        <div className="deleteItemformField">
+                            <div className="deleteItemidField">
                                 <h5>Expire Date</h5>
                             </div>
-                            <div className="addItemidInput">
+                            <div className="deleteItemidInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="addItemformFieldButtons">
-                            <div className="addItemcancelButton">
+                        <div className="deleteItemformFieldButtons">
+                            <div className="deleteItemcancelButton">
                                 <CancelButton onClick={() => props.onClose(false)}>Cancel</CancelButton>
                             </div>
-                            <div className="addItemButton">
-                                <SaveItemButton>Add Item</SaveItemButton>
+                            <div className="deleteItemsaveButton">
+                                <SaveItemButton>Delete Item</SaveItemButton>
                             </div>
                         </div>
                     </div>

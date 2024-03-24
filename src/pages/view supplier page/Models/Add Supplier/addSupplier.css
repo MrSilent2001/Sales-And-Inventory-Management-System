@@ -1,62 +1,50 @@
-*{
-    font-family: Inter, serif;
-}
-
-.addSupplierOuter{
-    width: 100%;
-    height: 100%;
+.addSupplierModel{
     display: flex;
-    justify-content: center;
-    padding: 30px 0;
-}
-
-.addSupplierInner{
-    min-width: 97.5%;
-    height: 50em;
+    flex-direction: column;
+    align-items: center;
+    width: 37.5em;
+    height: 38.75em;
+    padding: 0.25em 0 0 0;
     background-color: #DBDFFD;
-    border-radius: 2%;
+    border-radius: 0.5em;
+}
+
+.addSupplierModel h2{
+    font-family: Inter;
+    padding: 1.25em 0 0 0;
+}
+
+.addSupplierForm{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
 }
 
-.supplierForm{
-    margin: 5em 0;
-    width: 40em;
-    height: 40.625em;
-    background-color: #FFFFFF;
-    border-radius: 1em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.supplierInput{
-    width: 20em;
-}
-
-
-label{
-    padding-right: 50px;
-}
-
-.row{
+.addSupplierformField{
+    width: 27.5em;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    margin: 0.1em 0 0 0;
 }
 
-.btn-row{
+.addSupplierformField h5{
+    font-family: Inter;
+    font-weight: 600;
+    font-size: 0.75em;
+}
+
+.addSupplierForm{
+    margin-top: 0.3em;
+}
+
+.addSupplierformFieldButtons{
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
-}
-
-.btn{
-    width: 7.5em;
-    margin: 0 20em;
+    width: 16.25em;
+    justify-content: space-between;
+    margin: 1.4em 0 0 0;
+    padding-bottom: 3em;
 }
