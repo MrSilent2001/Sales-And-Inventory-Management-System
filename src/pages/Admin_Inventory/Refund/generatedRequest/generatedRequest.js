@@ -8,8 +8,8 @@ function GeneratedRequest() {
     return (
         <>
             <InventoryNavbar/>
-            <div className='outer'>
-                <div className="generated-request">
+            <div className='generateRequestsOuter'>
+                <div className="generated-request-inner">
                     <h2>Generated Request</h2>
                     <div className='request-container' style={{display: "flex", width: "50%", height: "40vh"}}>
                         <div className='="inner1' style={{
@@ -45,7 +45,7 @@ function GeneratedRequest() {
                         <button
                             type="button"
                             className="go-back-button"
-                            style={{backgroundColor: "#242F9B", width: "20%", marginLeft: "47%", marginBottom: "3%"}}>
+                            style={{backgroundColor: "#242F9B", width: "10em", marginLeft: "47%", marginBottom: "3%"}}>
                             Go Back
                         </button>
                     </Link>

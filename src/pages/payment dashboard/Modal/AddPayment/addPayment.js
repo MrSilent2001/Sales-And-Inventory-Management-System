@@ -47,7 +47,7 @@ const CancelButton = styled(Button)(({ theme }) => ({
     padding: '1.75em 0.625em'
 }));
 
-const SaveItemButton = styled(Button)(({ theme }) => ({
+const AddPaymentButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#242F9B'),
     backgroundColor: '#242F9B',
     '&:hover': {
@@ -75,6 +75,10 @@ function AddPayment(props){
     const handleChange = (event) => {
         setCategory(event.target.value);
     };
+
+    const addPayment = () =>{
+        alert("Payment Completed Successfully.");
+    }
     return(
         <CenteredModal>
             <div className="addPaymentOuter">
@@ -97,9 +101,9 @@ function AddPayment(props){
                                     <MenuItem value="None">
                                         <em>None</em>
                                     </MenuItem>
-                                    <MenuItem value="Category01">Category 01</MenuItem>
-                                    <MenuItem value="Category02">Category 02</MenuItem>
-                                    <MenuItem value="Category03">Category 03</MenuItem>
+                                    <MenuItem value="Category01">Supplier 01</MenuItem>
+                                    <MenuItem value="Category02">Supplier 02</MenuItem>
+                                    <MenuItem value="Category03">Supplier 03</MenuItem>
                                 </Select>
                             </div>
                         </div>
@@ -143,7 +147,7 @@ function AddPayment(props){
 
                         <div className="addPaymentformFieldButtons">
                             <div className="addPaymentButton">
-                                <SaveItemButton>Add Payment</SaveItemButton>
+                                <AddPaymentButton onClick={addPayment}>Add Payment</AddPaymentButton>
                             </div>
                             <div className="addPaymentcancelButton">
                                 <CancelButton onClick={() => props.onClose(false)}>Cancel</CancelButton>

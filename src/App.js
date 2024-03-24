@@ -27,7 +27,7 @@ import SalesRefundRequestsTable from "./pages/Admin_Sales/Sales_RefundRequestTab
 import Cart from "./pages/Inventory/Cart/shoppingCart";
 import ApprovedRefundsTable from "./pages/Admin_Inventory/Refund/ApproveRefundsTable/ApprovedRefundsTable";
 import GeneratedRequest from "./pages/Admin_Inventory/Refund/generatedRequest/generatedRequest";
-import InventoryRefundRequest from "./pages/Admin_Inventory/Refund/InventoryRefundRequest/InventoryRefundRequest";
+import InventoryRefundRequest from "./pages/Admin_Inventory/Refund/Modal/InventoryRefundRequest/InventoryRefundRequest";
 import RefundRequestsTable from "./pages/Admin_Inventory/Refund/RefundRequestsTable/RefundRequestsTable";
 import RefundsManager from "./pages/Admin_Inventory/Refund/RefundRequestsTable/RefundsManager";
 import SalesApprovedRefundsTable from "./pages/Admin_Sales/Sales_ApprovedRefundsTable/SalesApprovedRefundsTable";
@@ -43,7 +43,6 @@ import SupplierProfile from "./pages/Supplier/Supplier Profile/SupplierProfile";
 import Success from "./pages/Inventory/Cart/success";
 import Cancel from "./pages/Inventory/Cart/cancel";
 import AddDiscounts from "./pages/discounts dashboard/Models/Add Discounts/addDiscounts";
-import AddDiscount from "./pages/discounts dashboard/Models/Add Discounts/addDiscounts";
 
 function App() {
   return (
@@ -130,7 +129,7 @@ function App() {
             <Route path="/viewInventory" element={<ViewInventory/>}/>
             <Route path="/viewSupplier" element={<ViewSupplier/>}/>
             <Route path="/purchasedOrder" element={<ViewOrder/>}/>
-            <Route path="/refundRequests" element={<ViewSupplier/>}/>
+            <Route path="/RefundRequestsTable" element={<RefundRequestsTable/>}/>
             <Route path="/paymentsDashboard" element={<PaymentDashboard/>}/>
             <Route path="/logout" element={<Login/>}/>
 

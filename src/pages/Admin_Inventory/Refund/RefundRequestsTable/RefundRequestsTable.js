@@ -1,19 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {Box, Button, Container, Paper, Typography} from '@mui/material';
-
+import {Box, Button, Container, Modal, Paper, Typography} from '@mui/material';
 import ReusableTable from '../../../../components/Reusable Table/Reusable Table';
 import {styled} from '@mui/system';
 import InventoryNavbar from "../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
+import InventoryRefundRequest from "../Modal/InventoryRefundRequest/InventoryRefundRequest";
 
 
 const StyledPaper = styled(Paper)(({theme}) => ({
     '& .MuiTableCell-root': {
         textAlign: 'center',
         paddingleft: '19rem',
-
-
     },
 }));
 const fetchRequests = () => {
@@ -36,6 +34,7 @@ const fetchRequests = () => {
 
 const RefundRequestsTable = ({onViewApproved}) => {
     const [requests, setRequests] = useState([]);
+    const [visible,setVisible] = useState(false)
 
     useEffect(() => {
         fetchRequests().then(data => {
@@ -70,7 +69,16 @@ const RefundRequestsTable = ({onViewApproved}) => {
     return (
         <>
             <InventoryNavbar/>
-            <Container className='inner_container' maxWidth="90%" sx={{backgroundColor: '#DBDFFD'}}>
+            <Container
+                className='inner_container'
+                maxWidth="100%"
+                sx={
+                    {
+                        backgroundColor: '#DBDFFD',
+                        width: '100%',
+                    }
+                }
+            >
                 <Box sx={{my: 4}}>
                     <Box
                         sx={{
@@ -85,11 +93,9 @@ const RefundRequestsTable = ({onViewApproved}) => {
                             Refund Request
                         </Typography>
                         <Box>
-                            <Link to="/InventoryRefundRequest">
                                 <Button
                                     variant="contained"
-                                    onClick={() => {
-                                    }} // Implement the logic for this button
+                                    onClick={()=>setVisible(true)}
                                     sx={{
                                         borderRadius: 1,
                                         backgroundColor: "#FF0000",
@@ -100,9 +106,8 @@ const RefundRequestsTable = ({onViewApproved}) => {
                                 >
                                     Refunds Request
                                 </Button>
-                            </Link>
 
-                            <Link to="/ApprovedRefundsTable">
+                            <Link to="/SalesApprovedRefundsTable">
                                 <Button
                                     variant="contained"
                                     onClick={onViewApproved}
@@ -125,6 +130,9 @@ const RefundRequestsTable = ({onViewApproved}) => {
                     <br/><br/>
                 </Box>
             </Container>
+            <Modal open={visible}>
+                <InventoryRefundRequest onClose={(value) => { setVisible(false)}}></InventoryRefundRequest>
+            </Modal>
             <Footer/>
         </>
     );

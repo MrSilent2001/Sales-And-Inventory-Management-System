@@ -15,6 +15,7 @@ import AddItemButton from "../../layout/buttons/addItemButton/AddItemButton";
 import {useState} from "react";
 import {Modal} from "@mui/material";
 import AddPayment from "./Modal/AddPayment/addPayment";
+import InventoryNavbar from "../../layout/navbar/Inventory navbar/Inventory navbar";
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -101,7 +102,7 @@ function PaymentDashboard() {
 
     return (
         <>
-            <SalesNavbar/>
+            <InventoryNavbar/>
         <div className="paymentDashboardOuter">
             <div className="paymentDashboardInner">
 
