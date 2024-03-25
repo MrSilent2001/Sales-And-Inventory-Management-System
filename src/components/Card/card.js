@@ -7,11 +7,12 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
 
-
-
-export default function MediaControlCard({item}) {
+export default function MediaControlCard({ item, removeFromCart }) {
     const theme = useTheme();
 
+    const handleRemoveClick = () => {
+        removeFromCart(item.id);
+    }
 
     return (
         <Card sx={{ display: 'flex', flexDirection: 'column', height: 230, width: 1000, marginTop: 4, marginLeft: 10, backgroundColor: 'whitesmoke' }}>
@@ -20,7 +21,6 @@ export default function MediaControlCard({item}) {
                     component="img"
                     sx={{ width: 160, height: 160, marginLeft: 10, marginTop: 2 }}
                     image={item.img}
-
                 />
                 <CardContent sx={{ flex: '1 0 auto', marginLeft: 10 }}>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
@@ -34,17 +34,14 @@ export default function MediaControlCard({item}) {
                     </Typography>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
                         Price : {item.price}
-                    </Typography>
+                    </Typography>   
                 </CardContent>
             </Box>
-            <Box sx={{ alignSelf: 'right', marginLeft: 100}}>
-                <Button variant="contained" color="error">
+            <Box sx={{ alignSelf: 'right', marginLeft: 100 }}>
+                <Button variant="contained" color="error" onClick={handleRemoveClick}>
                     Remove
                 </Button>
             </Box>
         </Card>
     );
-
-
 }
-

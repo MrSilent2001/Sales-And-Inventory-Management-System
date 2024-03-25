@@ -19,7 +19,7 @@ const getStripe = () => {
 }
 
 
-function Cart({ handleClick }) {
+function Cart() {
 
     const [cart, setCart] = useState([]);
     const [stripeError, setStripeError] = useState(null);
@@ -32,6 +32,23 @@ function Cart({ handleClick }) {
             setCart(storedCart);
         }
     }, []);
+
+    const removeFromCart = (itemId) => {
+        const updatedCart = cart.map(item => {
+            if (item.id === itemId) {
+                if (item.amount === 1) {
+                    // If amount is 1, remove the item
+                    return null;
+                } else {
+                    // Otherwise, decrement the amount
+                    return { ...item, amount: item.amount - 1 };
+                }
+            }
+            return item;
+        }).filter(Boolean); // Filter out null values (removed items)
+        setCart(updatedCart);
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+    }
 
     const checkoutOptions = {
         lineItems: cart.map(item => ({ price: item.id, quantity: item.amount })), // Adjust this according to your data structure
@@ -61,7 +78,7 @@ function Cart({ handleClick }) {
 
                 <div className="cardspace">
                     {cart.map(item => (
-                        <MediaControlCard key={item.id} item={item} />
+                        <MediaControlCard key={item.id} item={item} removeFromCart={removeFromCart} />
                     ))}
                 </div>
 
