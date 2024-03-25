@@ -9,7 +9,8 @@ import { Button } from '@mui/material';
 
 
 
-export default function MediaControlCard() {
+export default function MediaControlCard({item}) {
+    // const {title, price, img} = item;
     const theme = useTheme();
 
 
@@ -19,7 +20,7 @@ export default function MediaControlCard() {
                 <CardMedia
                     component="img"
                     sx={{ width: 160, height: 160, marginLeft: 10, marginTop: 2 }}
-                    image="/static/images/cards/live-from-space.jpg"
+                    image={item.img}
 
                 />
                 <CardContent sx={{ flex: '1 0 auto', marginLeft: 10 }}>
@@ -27,13 +28,13 @@ export default function MediaControlCard() {
                         Item Id :
                     </Typography>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
-                        Item Name :
+                        Item Name : {item.title}
                     </Typography>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
                         Quantity:
                     </Typography>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
-                        Price :
+                        Price : {item.price}
                     </Typography>
                 </CardContent>
             </Box>

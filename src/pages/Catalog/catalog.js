@@ -19,6 +19,9 @@ function Catalog() {
     const handleClick = (item) => {
         console.log(item);
         setCart([...cart, item]);
+        localStorage.setItem("cart", JSON.stringify([...cart, item]));
+        // console.log(cart);
+        console.log(JSON.stringify(cart, null, 2));
     }
     return (
         <>
