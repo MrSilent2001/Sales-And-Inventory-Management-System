@@ -15,13 +15,13 @@ const getStripe = () => {
         stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
     }
     return stripePromise;
-
 }
 
 
 function Cart() {
 
     const [cart, setCart] = useState([]);
+    const [totalAmount, setTotalAmount] = useState(0);
     const [stripeError, setStripeError] = useState(null);
     const [isLoading, setLoading] = useState(false);
 
@@ -32,6 +32,15 @@ function Cart() {
             setCart(storedCart);
         }
     }, []);
+
+    useEffect(() => {
+        // Calculate total amount whenever cart changes
+        let total = 0;
+        cart.forEach(item => {
+            total += item.price * item.amount;
+        });
+        setTotalAmount(total);
+    }, [cart]);
 
     const removeFromCart = (itemId) => {
         const updatedCart = cart.map(item => {
@@ -90,7 +99,7 @@ function Cart() {
 
                     <div className="totalText">
                         <p>Total Amount</p>
-                        <p className="amount ">Rs 12,000.00</p>
+                        <p className="amount ">Rs {totalAmount.toFixed(2)}</p>
                         <Button variant="contained" color="success" onClick={redirectToCheckout} disabled={isLoading}>
                             <div className="text-container">
                                 <p className="text" style={{ color: isLoading ? 'white' : 'inherit' }}>
