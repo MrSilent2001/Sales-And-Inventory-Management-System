@@ -16,13 +16,31 @@ function Catalog() {
     const [cart , setCart] = useState([]);
     const [warning, setWarning] = useState(false);
 
+    // const handleClick = (item) => {
+    //     console.log(item);
+    //     setCart([...cart, item]);
+    //     localStorage.setItem("cart", JSON.stringify([...cart, item]));
+    //     // console.log(cart);
+    //     console.log(JSON.stringify(cart, null, 2));
+    // }
+
     const handleClick = (item) => {
-        console.log(item);
-        setCart([...cart, item]);
-        localStorage.setItem("cart", JSON.stringify([...cart, item]));
-        // console.log(cart);
-        console.log(JSON.stringify(cart, null, 2));
+        // Check if the item already exists in the cart
+        const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
+    
+        if (existingItemIndex !== -1) {
+            // If the item exists, update its amount
+            const updatedCart = [...cart];
+            updatedCart[existingItemIndex].amount += 1;
+            setCart(updatedCart);
+            localStorage.setItem("cart", JSON.stringify(updatedCart));
+        } else {
+            // If the item does not exist, add it to the cart
+            setCart([...cart, { ...item, amount: 1 }]);
+            localStorage.setItem("cart", JSON.stringify([...cart, { ...item, amount: 1 }]));
+        }
     }
+    
     return (
         <>
             <CustomerNavbar/>

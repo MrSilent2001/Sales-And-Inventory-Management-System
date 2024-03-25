@@ -10,7 +10,6 @@ import { Button } from '@mui/material';
 
 
 export default function MediaControlCard({item}) {
-    // const {title, price, img} = item;
     const theme = useTheme();
 
 
@@ -25,13 +24,13 @@ export default function MediaControlCard({item}) {
                 />
                 <CardContent sx={{ flex: '1 0 auto', marginLeft: 10 }}>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
-                        Item Id :
+                        Item Id : {item.id}
                     </Typography>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
                         Item Name : {item.title}
                     </Typography>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
-                        Quantity:
+                        Quantity: {item.amount}
                     </Typography>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
                         Price : {item.price}
