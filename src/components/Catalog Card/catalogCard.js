@@ -8,7 +8,7 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 export default function MultiActionAreaCard({item,handleClick}) {
     const {title, price, img} = item;
     return (
-        <Card sx={{ maxWidth: 300 }}>
+        <Card sx={{ maxWidth: 300, width: 300 }}>
             <CardActionArea>
 
                 <CardMedia

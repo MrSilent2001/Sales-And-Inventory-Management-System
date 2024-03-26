@@ -1,7 +1,8 @@
 
 .cartOuter {
     width: 100%;
-    height: 50em;
+    /* height: 50em; */
+    overflow-y: scroll; 
 }
 
 .cartInner {
@@ -9,15 +10,17 @@
     height:50em;
     float: left;
     background-color: whitesmoke;
+    
 
 }
 
 .cardspace {
     width: 80%;
-    height:50em;
+    /* height:50em; */
     float: left;
     display: flex;
     flex-direction: column;
+    /* overflow-y: auto; */
 
 }
 
