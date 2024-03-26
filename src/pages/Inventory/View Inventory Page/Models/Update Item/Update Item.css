@@ -20,7 +20,7 @@
     align-items: center;
 }
 
-.formField{
+.updateItemformField{
     width: 27.5em;
     display: flex;
     flex-direction: row;
@@ -29,17 +29,17 @@
     margin: 0.1em 0 0 0;
 }
 
-.formField h5{
+.updateItemformField h5{
     font-family: Inter;
     font-weight: 600;
     font-size: 0.75em;
 }
 
-.updateItemForm{
+.updateItemupdateItemForm{
     margin-top: 0.3em;
 }
 
-.formFieldButtons{
+.updateItemformFieldButtons{
     display: flex;
     flex-direction: row;
     align-items: center;

@@ -39,7 +39,7 @@ const Login = () => {
         if (username === "admin" && password === "12345" && role === "admin") {
             console.log(username+" "+ password+" "+role);
             // Redirect to admin dashboard
-            navigate("/salesdashboard", { replace: true });
+            navigate("/salesLanding", { replace: true });
         } else if (username === "customer" && password === "12345" && role === "customer") {
             console.log(username+" "+ password+" "+role);
             // Redirect to customer dashboard

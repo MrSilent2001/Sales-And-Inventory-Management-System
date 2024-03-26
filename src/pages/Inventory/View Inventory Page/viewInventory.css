@@ -7,7 +7,7 @@
     flex-direction: column;
     justify-content: center;
     width: 14.375em;
-    height: 39.5em;
+    height: 40em;
     background-color: #646FD4
 }
 
@@ -38,14 +38,14 @@
     font-family: inter;
 }
 
-.itemAbailabilityTopic h5{
+.itemAvailabilityTopic h5{
     color: rgba(255, 255, 255, 0.8);
     font-family: inter;
 }
 
-.viewInventoryInner{
+.viewInventoryItemInner{
     width: 81.25em;
-    height: 36.03em;
+    height: 38.5em ;
     background-color: rgba(219, 223, 253, 0.8);
     padding: 1.5em 0 0 0;
 }

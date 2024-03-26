@@ -5,7 +5,8 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ReusableTable from '../../../../components/Reusable Table/Reusable Table';
 import './ApprovedRefundsTable.css';
 import SalesNavbar from "../../../../layout/navbar/Sales navbar/sales navbar";
-import Footer from "../../../../layout/footer/footer";  // Make sure you define your styles in this CSS file
+import Footer from "../../../../layout/footer/footer";
+import {Link} from "react-router-dom";  // Make sure you define your styles in this CSS file
 
 const ApprovedRefundsTable = ({ onBack }) => {
   const [refundRequests, setRefundRequests] = useState([]);
@@ -32,15 +33,19 @@ const ApprovedRefundsTable = ({ onBack }) => {
       <SalesNavbar/>
       <Container className='inner_container' maxWidth="90%">
         <Box sx={{ my: 4, display: 'flex', flexDirection: 'column' }}>
-          <Button
-              startIcon={<ArrowBackIosIcon />}
-              size="large"
-              style={{ color: "black", fontWeight: 'bold', textTransform: "none" }}
-              onClick={onBack} // onBack prop
-              sx={{ width: '20%', p: '0px', pr: '7%', mt: '2%', mb: '2%' }}
-          >
-            Refund Request
-          </Button>
+
+          <Link to="/RefundRequestsTable">
+            <Button
+                startIcon={<ArrowBackIosIcon />}
+                size="large"
+                style={{ color: "black", fontWeight: 'bold', textTransform: "none" }}
+                onClick={onBack} // onBack prop
+                sx={{ width: '20%', p: '0px', pr: '7%', mt: '2%', mb: '2%' }}
+            >
+              Refund Request
+            </Button>
+          </Link>
+
           <Paper elevation={4}>
             <ReusableTable data={transformData(refundRequests)} />
           </Paper>

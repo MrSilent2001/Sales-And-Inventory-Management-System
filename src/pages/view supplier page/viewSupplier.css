@@ -1,23 +1,17 @@
-.viewInventoryOuter{
+.viewSupplierOuter{
     display: flex;
 }
 
-.viewInventoryFilter{
+.viewSupplierFilter{
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 14.375em;
-    height: 36.03em;
+    height: 40em;
     background-color: #646FD4;
 }
 
-.itemCategoryFilter{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.itemAvailabilityFilter{
+.supplierCategoryFilter{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,19 +27,14 @@
     font-family: inter;
 }
 
-.itemCategoryTopic h5{
+.supplierCategoryTopic h5{
     color: rgba(255, 255, 255, 0.8);
     font-family: inter;
 }
 
-.itemAbailabilityTopic h5{
-    color: rgba(255, 255, 255, 0.8);
-    font-family: inter;
-}
-
-.viewInventoryInner{
+.viewSupplierInner{
     width: 81.25em;
-    height: 36.03em;
+    height: 38.5em;
     background-color: rgba(219, 223, 253, 0.8);
     padding: 1.5em 0 0 0;
 }
@@ -57,13 +46,13 @@
     justify-content: space-between;
 }
 
-.viewInventorySearch{
+.viewSupplierSearch{
     display: flex;
     align-items: center;
     padding: 0 0 0 2em;
 }
 
-.viewInventoryButtons{
+.viewSupplierButtons{
     display: flex;
     align-items: center;
     width: 15.625em;
