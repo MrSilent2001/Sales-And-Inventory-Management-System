@@ -9,13 +9,14 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import SalesNavbar from "../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../layout/footer/footer";
 import AddItemButton from "../../layout/buttons/addItemButton/AddItemButton";
 import {useState} from "react";
 import {Modal} from "@mui/material";
 import AddPayment from "./Modal/AddPayment/addPayment";
 import InventoryNavbar from "../../layout/navbar/Inventory navbar/Inventory navbar";
+import rows from "../../data/data.json";
+
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -63,27 +64,7 @@ const columns = [
     }
 ];
 
-function createData(id, name, address, items, amount) {
-    return {id, name, address, items, amount};
-}
 
-const rows = [
-    createData('000001', 'Chris Gayle', 'No.132, Kingston, Jamaica', ['I004', 'I002'], 3287263),
-    createData('000002', 'Stuart Broad', 'No.62, Worwickshire, England', ['I001', 'I002'], 9596961),
-    createData('000003', 'James Anderson', 'No.62, Yorkshire, England', ['I001', 'I002'], 301340),
-    createData('000004', 'Finn Allen', 'No.22, Auckland, New Zealand', ['I001', 'I008'], 9833520),
-    createData('000005', 'Jason Holder', 'No.325, Basseterri, Barbados', ['I001', 'I002'], 9984670),
-    createData('000006', 'Shaun Marsh', 'No.132, Kingston, Jamaica', ['I001', 'I002'], 7692024),
-    createData('000007', 'Mitchell Starc', 'No.72, Sydney, Australia', ['I001', 'I002'], 357578),
-    createData('000008', 'Josh Hazelwood', 'No.92, Melbourne, Australia', ['I005', 'I002'], 70273),
-    createData('000009', 'Joe Root', 'No.52, Lankanshire, England', ['I001', 'I002'], 1972550),
-    createData('000010', 'Harry Brook', 'No.26, Derbyshire, England', ['I001', 'I006'], 377973),
-    createData('000011', 'Fabian Allen', 'No.12, St.Georges Park, Guyana', ['I001', 'I002'], 640679),
-    createData('00012', 'Ross Taylor', 'No.252, Wellington, New Zealand', ['I001', 'I002'], 242495),
-    createData('00013', 'Nat Sciver', 'No.23, Essex, England', ['I001', 'I002'], 17098246),
-    createData('00014', 'Catherine Brunt', 'No.3, Sussex, England', ['I001', 'I003'], 923768),
-    createData('00015', 'Sarah Taylor', 'No.33, London, England', ['I001', 'I002'], 8515767),
-];
 
 function PaymentDashboard() {
 
@@ -131,7 +112,7 @@ function PaymentDashboard() {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {rows
+                                    {rows.paymentData
                                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                         .map((row) => {
                                             return (
