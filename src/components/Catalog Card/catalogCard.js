@@ -5,34 +5,41 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
-export default function MultiActionAreaCard({item,handleClick}) {
-    const {title, price, img} = item;
+// Functional component representing a card with action area
+export default function MultiActionAreaCard({ item, handleClick }) {
+    // Destructuring item to extract title, price, and img
+    const { title, price, img } = item;
+
     return (
         <Card sx={{ maxWidth: 300, width: 300 }}>
+            {/* Action area for the card */}
             <CardActionArea>
-
+                {/* Media area to display image */}
                 <CardMedia
                     component="img"
                     height="250"
                     image={img}
-                    alt="Hammer"
+                    alt="Product Image"
                 />
+                {/* Content area for the card */}
                 <CardContent>
+                    {/* Title of the product */}
                     <Typography variant="body2" color="text.primary">
                         {title}
                     </Typography>
+                    {/* Price of the product */}
                     <Typography variant="body2" color="text.primary" sx={{ fontWeight: 'bold' }}>
                         Rs.{price}
                     </Typography>
                 </CardContent>
-
             </CardActionArea>
-
+            {/* Actions section for the card */}
             <CardActions>
+                {/* Button to add the product to cart */}
                 <Button
                     variant="contained" disableElevation
-                    sx={{margin: 'auto', display: 'block'}}
-                    onClick={()=>handleClick(item)}
+                    sx={{ margin: 'auto', display: 'block' }}
+                    onClick={() => handleClick(item)}
                 >
                     Add to Cart
                 </Button>
@@ -40,5 +47,3 @@ export default function MultiActionAreaCard({item,handleClick}) {
         </Card>
     );
 }
-
-
