@@ -40,3 +40,5 @@ export default function MultiActionAreaCard({item,handleClick}) {
         </Card>
     );
 }
+
+
