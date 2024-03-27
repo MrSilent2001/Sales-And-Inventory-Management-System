@@ -31,6 +31,7 @@ export default function MediaControlCard({ item, removeFromCart }) {
                     </Typography>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
                         Quantity: {item.amount}
+                        
                     </Typography>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
                         Price : {item.price}

@@ -45,16 +45,23 @@
 }
 
 .formField{
-    width: 20em;
+    width: 30em;
     height: 3.25em;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+   
 }
 
 .textField{
-    padding: 0 0 0 1em;
+   margin-left: 2em;
+    margin-right: 1em;
+    width: 7em;
+    height: 3.25;
+    align-items: self-start;
+    
+
 }
 
 .textField h4{
@@ -64,8 +71,11 @@
 }
 
 .inputData{
-    width: 8em;
+    width: 10em;
+    height: 3.25em;
     text-align: left;
+    margin-left: 1em;
+   
 }
 
 .inputData h5{
@@ -100,5 +110,6 @@
     align-items: center;
     justify-content: right;
     margin-top: 1.5em;
+    margin-right: -6em;
 
 }
