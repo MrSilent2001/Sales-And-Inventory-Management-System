@@ -3,38 +3,39 @@ import CustomerHome from "./pages/Customer/Home/Customer Home Page";
 import Login from "./pages/login & SignUp/login/login";
 import {Route, Routes} from "react-router-dom";
 import Signup from "./pages/login & SignUp/SignUp/signup";
-import SalesLanding from "./pages/admin/Sales Landing/salesLanding";
-import DiscountDashboard from "./pages/discounts/DiscountDashboard/discountDashboard";
-import PaymentDashboard from "./pages/payments/paymentDashboard";
-import CustomerRefundRequest from "./pages/Customer/Refund/Request Refund/Customer Refund Request ";
+import SalesLanding from "./pages/admin/Landing Pages/Sales Landing/salesLanding";
+import DiscountDashboard from "./pages/admin/Discounts/discountDashboard";
+import PaymentDashboard from "./pages/admin/Payment Dashboard/paymentDashboard";
 import CustomerRefunds from "./pages/Customer/Refund/Refund Dashboard/Customer Refunds";
-import GeneratedCustomerRefundRequest from "./pages/Customer/Refund/Generated Request/Generated Customer Refund Request";
 import CustomerDashboard from "./pages/admin/Customer Dashboard/customerDashboard";
 import CustomerProfile from "./pages/Customer/Customer Profile/Profile/customerProfile";
 import CustomerOrderHistory from "./pages/Customer/Order History/customerOrderHistory";
 import RemoveCustomers from "./pages/admin/Remove Customers/removeCustomers";
 import UpdateCustomers from "./pages/admin/Update Customers/updateCustomers.js";
 import View from "./pages/Customer/View/view";
-import InventoryLanding from "./pages/admin/Inventory Landing/inventoryLanding";
+import InventoryLanding from "./pages/admin/Landing Pages/Inventory Landing/inventoryLanding";
 import ViewInventory from "./pages/admin/View Inventory/viewInventory";
-import ViewSupplier from "./pages/Supplier/view supplier/viewSupplier";
-import PurchaseOrderDashboard from "./pages/Orders/Inventory/Order Dashboard/PurchaseOrderDashboard";
-import SalesRefundRequestsTable from "./pages/Admin_Sales/Sales_RefundRequestTable/SalesRefundRequestsTable";
+import ViewSupplier from "./pages/admin/Supplier Dashboard/viewSupplier";
+import PurchaseOrderDashboard from "./pages/admin/Orders/Inventory/Order Dashboard/PurchaseOrderDashboard";
+import SalesRefundRequestsTable from "./pages/admin/Refunds/Customer/View Sales Refund Requests/SalesRefundRequestsTable";
 import Cart from "./pages/Customer/Cart/shoppingCart";
-import ApprovedRefundsTable from "./pages/refunds/ApproveRefundsTable/ApprovedRefundsTable";
-import GeneratedRequest from "./pages/refunds//generatedRequests/generatedRequest";
-import InventoryRefundRequest from "./pages/refunds/Modal/InventoryRefundRequest/InventoryRefundRequest";
-import RefundRequestsTable from "./pages/refunds/RefundRequestsTable/RefundRequestsTable";
-import RefundsManager from "./pages/refunds/RefundRequestsTable/RefundsManager";
-import SalesApprovedRefundsTable from "./pages/Admin_Sales/Sales_ApprovedRefundsTable/SalesApprovedRefundsTable";
-import RefundDenialForm from "./pages/Admin_Sales/Sales_RefundDenialForm/RefundDenialForm";
-import SalesViewRequest from "./pages/Admin_Sales/Sales_ViewRequest/SalesViewRequest";
+import ApprovedRefundsTable from "./pages/admin/Refunds/Customer/Approved Refunds/ApprovedRefundsTable";
+import InventoryGeneratedRequest from "./pages/admin/Refunds/Customer/Generated Refund Request/SalesViewRequest";
+import InventoryRefundRequest from "./pages/admin/Refunds/Inventory/InventoryRefundRequest/InventoryRefundRequest";
+import InventoryRefundRequestsTable from "./pages/admin/Refunds/Inventory/InventoryRefundRequest/InventoryRefundRequest";
+import RefundsManager from "./pages/admin/Refunds/Inventory/RefundRequestsTable/RefundsManager";
+import SalesApprovedRefundsTable from "./pages/admin/Refunds/Customer/Sales_Approved Refunds/SalesApprovedRefundsTable";
+import SalesRefundDenialForm from "./pages/admin/Refunds/Customer/Refund Denial Form/SalesRefundDenialForm";
+import SalesViewRequest from "./pages/admin/Refunds/Customer/Generated Refund Request/SalesViewRequest";
 import Catalog from "./pages/Customer/Product Catelog/catalog";
-import PendingOrders from "./pages/Orders/Sales/Pending Orders/pendingOrders";
+import PendingOrders from "./pages/admin/Orders/Sales/Pending Orders/pendingOrders";
 import InventoryDashboard from "./pages/Supplier/Inventory Dashboard/inventoryDashboard";
 import SupplierProfile from "./pages/Supplier/Supplier Profile/SupplierProfile";
 import Success from "./pages/Customer/Cart/success";
 import Cancel from "./pages/Customer/Cart/cancel";
+import CustomerRefundRequest from "./pages/Customer/Refund/Request Refund/Customer Refund Request ";
+import GeneratedCustomerRefundRequest from "./pages/Customer/Refund/Generated Request/Generated Customer Refund Request";
+import AddDiscounts from "./pages/admin/Discounts/Modal/Add Discount/addDiscounts";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
             <Route path="/generatedrefund" element={<GeneratedCustomerRefundRequest/>}/>
             <Route path="/createrefund" element={<CustomerRefundRequest/>}/>
 
+
             <Route path="/customerdashboard" element={<CustomerDashboard/>}/>
             <Route path="/customerorderhistory" element={<CustomerOrderHistory/>}/>
             <Route path="/customerprofile" element={<CustomerProfile/>}/>
@@ -66,19 +68,19 @@ function App() {
 
 
             <Route path="/purchasedOrder" element={<PurchaseOrderDashboard/>}/>
+            <Route path="/AddDiscount" element={<AddDiscounts/>}/>
 
             <Route path="/ApprovedRefundsTable" element={<ApprovedRefundsTable/>}/>
-            <Route path="/viewRefundRequests" element={<SalesRefundRequestsTable/>}/>
 
-            <Route path="/GeneratedRequest" element={<GeneratedRequest/>}/>
+            <Route path="/InventoryGeneratedRequest" element={<InventoryGeneratedRequest/>}/>
             <Route path="/InventoryRefundRequest" element={<InventoryRefundRequest/>}/>
 
-            <Route path="/RefundRequestsTable" element={<RefundRequestsTable/>}/>
+            <Route path="/InventoryRefundRequestsTable" element={<InventoryRefundRequestsTable/>}/>
             <Route path="/RefundsManager" element={<RefundsManager/>}/>
 
 
             <Route path="/SalesApprovedRefundsTable" element={<SalesApprovedRefundsTable/>}/>
-            <Route path="/RefundDenialForm" element={<RefundDenialForm/>}/>
+            <Route path="/SalesRefundDenialForm" element={<SalesRefundDenialForm/>}/>
             <Route path="/SalesViewRequest" element={<SalesViewRequest/>}/>
 
 
@@ -102,7 +104,7 @@ function App() {
 
 
             {/*Supplier navbar routes*/}
-            <Route path="/inventoryDashboard" element={<InventoryDashboard/>}/>
+            <Route path="/supplierDashboard" element={<InventoryDashboard/>}/>
             <Route path="/supplierProfile" element={<SupplierProfile/>}/>
             <Route path="/logout" element={<Login/>}/>
 
@@ -110,7 +112,7 @@ function App() {
             <Route path="/viewInventory" element={<ViewInventory/>}/>
             <Route path="/viewSupplier" element={<ViewSupplier/>}/>
             <Route path="/purchasedOrder" element={<PurchaseOrderDashboard/>}/>
-            <Route path="/RefundRequestsTable" element={<RefundRequestsTable/>}/>
+            <Route path="/InventoryRefundRequestsTable" element={<InventoryRefundRequestsTable/>}/>
             <Route path="/paymentsDashboard" element={<PaymentDashboard/>}/>
             <Route path="/logout" element={<Login/>}/>
 

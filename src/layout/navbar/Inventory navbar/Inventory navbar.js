@@ -14,7 +14,7 @@ function InventoryNavbar(){
                 <NavLink to="/viewInventory">Inventory</NavLink>
                 <NavLink to="/viewSupplier">Supplier</NavLink>
                 <NavLink to="/purchasedOrder">Orders</NavLink>
-                <NavLink to="/RefundRequestsTable">Refunds</NavLink>
+                <NavLink to="/InventoryRefundRequestsTable">Refunds</NavLink>
                 <NavLink to="/paymentdashboard">Payment</NavLink>
                 <NavLink to="/salesLanding">Sales</NavLink>
                 <NavLink to="/logout" className="lastNavLink">Logout</NavLink>

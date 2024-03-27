@@ -12,7 +12,8 @@ let stripePromise = "";
 
 const getStripe = () => {
     if (!stripePromise) {
-        stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
+        //stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
+        stripePromise = loadStripe('pk_test_51OaaAGG6hT4n4c8nfxnNFoOroCTuVGkZJeOB63fTdNGluws7CDw36bOR8HDlMAXwybMqfvDK9KSubfJljBvVvmV300D1erYeiI');
     }
     return stripePromise;
 }
@@ -59,12 +60,21 @@ function Cart() {
         localStorage.setItem("cart", JSON.stringify(updatedCart));
     }
 
+    const lineItems = cart.map(item => ({
+            price: item.price.toString(),
+            quantity: item.amount
+        })
+    );
+
+
     const checkoutOptions = {
-        lineItems: cart.map(item => ({ price: item.id, quantity: item.amount })), // Adjust this according to your data structure
+        lineItems: lineItems, // Adjust this according to your data structure
         mode: "payment",
         successUrl: `${window.location.origin}/success`,
         cancelUrl: `${window.location.origin}/cancel`
     };
+
+    console.log(checkoutOptions.lineItems);
 
     const redirectToCheckout = async () => {
         setLoading(true);

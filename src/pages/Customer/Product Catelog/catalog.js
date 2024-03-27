@@ -4,9 +4,8 @@ import MultiActionAreaCard from '../../../../src/components/Catalog Card/catalog
 import Checkboxes from '../../../components/checkbox/checkbox';
 import Footer from "../../../layout/footer/footer";
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
-import products from "../../productStore";
+import products from "../../Customer/Cart/productStore";
 import Button from "@mui/material/Button";
-import {Link} from "react-router-dom";
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
