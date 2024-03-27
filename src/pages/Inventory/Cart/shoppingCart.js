@@ -7,34 +7,36 @@ import Footer from "../../../layout/footer/footer";
 import { loadStripe } from "@stripe/stripe-js";
 import React, { useEffect, useState } from 'react';
 
-
+// Initialize Stripe promise
 let stripePromise = "";
 
+// Function to get the Stripe instance
 const getStripe = () => {
+    // If Stripe instance is not already created, initialize it
     if (!stripePromise) {
-        stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
+        stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY); // Load Stripe with the publishable key
     }
     return stripePromise;
 }
 
-
+// Cart Component
 function Cart() {
+    // State variables
+    const [cart, setCart] = useState([]); // Cart items
+    const [totalAmount, setTotalAmount] = useState(0); // Total amount of the cart
+    const [stripeError, setStripeError] = useState(null); // Stripe error message
+    const [isLoading, setLoading] = useState(false); // Loading state for Stripe checkout
 
-    const [cart, setCart] = useState([]);
-    const [totalAmount, setTotalAmount] = useState(0);
-    const [stripeError, setStripeError] = useState(null);
-    const [isLoading, setLoading] = useState(false);
-
+    // Effect to retrieve cart data from local storage on component mount
     useEffect(() => {
-        // Retrieve cart data from local storage
         const storedCart = JSON.parse(localStorage.getItem("cart"));
         if (storedCart) {
             setCart(storedCart);
         }
     }, []);
 
+    // Effect to calculate total amount whenever cart changes
     useEffect(() => {
-        // Calculate total amount whenever cart changes
         let total = 0;
         cart.forEach(item => {
             total += item.price * item.amount;
@@ -42,61 +44,56 @@ function Cart() {
         setTotalAmount(total);
     }, [cart]);
 
+    // Function to remove item from cart
     const removeFromCart = (itemId) => {
         const updatedCart = cart.map(item => {
             if (item.id === itemId) {
                 if (item.amount === 1) {
-                    // If amount is 1, remove the item
-                    return null;
+                    return null; // If amount is 1, remove the item
                 } else {
-                    // Otherwise, decrement the amount
-                    return { ...item, amount: item.amount - 1 };
+                    return { ...item, amount: item.amount - 1 }; // Otherwise, decrement the amount
                 }
             }
             return item;
         }).filter(Boolean); // Filter out null values (removed items)
         setCart(updatedCart);
-        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        localStorage.setItem("cart", JSON.stringify(updatedCart)); // Update cart in local storage
     }
 
+    // Configuration options for Stripe checkout
     const checkoutOptions = {
-        lineItems: cart.map(item => ({ price: item.id, quantity: item.amount })), // Adjust this according to your data structure
+        lineItems: cart.map(item => ({ price: item.id, quantity: item.amount })),
         mode: "payment",
         successUrl: `${window.location.origin}/success`,
         cancelUrl: `${window.location.origin}/cancel`
     };
 
+    // Function to redirect to Stripe checkout
     const redirectToCheckout = async () => {
         setLoading(true);
-        console.log("RedirectToCheckout");
-
         const stripe = await getStripe();
         const { error } = await stripe.redirectToCheckout(checkoutOptions);
-        console.log("stripe checkout error:", error);
-
         if (error) setStripeError(error.message);
         setLoading(false);
     }
 
+    // If there is a Stripe error, display an alert
     if (stripeError) alert(setStripeError);
 
+    // Render component
     return (
         <>
             <CustomerNavbar />
             <div className="cartOuter">
-
                 <div className="cardspace">
                     {cart.map(item => (
                         <MediaControlCard key={item.id} item={item} removeFromCart={removeFromCart} />
                     ))}
                 </div>
-
                 <div className="cartInner">
-
                     <div className="arrow">
                         <ArrowBackIosIcon />
                     </div>
-
                     <div className="totalText">
                         <p>Total Amount</p>
                         <p className="amount ">Rs {totalAmount.toFixed(2)}</p>
@@ -106,14 +103,13 @@ function Cart() {
                                     {isLoading ? "Loading..." : "Buy Now"}
                                 </p>
                             </div>
-
                         </Button>
                     </div>
                 </div>
             </div>
-
             <Footer />
         </>
     );
 }
+
 export default Cart;
