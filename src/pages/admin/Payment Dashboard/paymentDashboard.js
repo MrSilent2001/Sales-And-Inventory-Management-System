@@ -10,12 +10,12 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Footer from "../../../layout/footer/footer";
-import AddItemButton from "../../../layout/buttons/addItemButton/AddItemButton";
 import {useState} from "react";
 import {Modal} from "@mui/material";
 import AddPayment from "../../admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment";
 import InventoryNavbar from "../../../layout/navbar/Inventory navbar/Inventory navbar";
 import rows from "../../../data/data.json";
+import CustomizedButton from "../../../components/Button/button";
 
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
@@ -90,7 +90,26 @@ function PaymentDashboard() {
                 <div className="payment-title">
                     <h2 className="paymentTitle">Payments</h2>
                     <div className="addButton">
-                        <AddItemButton onClick={()=>setVisible(true)}>Add Payment</AddItemButton>
+                        <CustomizedButton
+                            onClick={()=>setVisible(true)}
+                            hoverBackgroundColor="#2d3ed2"
+                            style={{
+                                color: '#ffffff',
+                                backgroundColor: '#242F9B',
+                                border: '1px solid #242F9B',
+                                width: '11em',
+                                height: '2.5em',
+                                fontSize: '0.95em',
+                                fontFamily: 'inter',
+                                padding: '0.5em 0.625em',
+                                borderRadius: '0.35em',
+                                fontWeight: '550',
+                                marginTop: '0.625em',
+                                textTransform: 'none',
+                                textAlign: 'center',
+                            }}>
+                            Add Payment
+                        </CustomizedButton>
                     </div>
                 </div>
 

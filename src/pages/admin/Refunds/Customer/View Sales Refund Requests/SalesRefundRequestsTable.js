@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Box, Button, Container, Paper, Typography} from '@mui/material';
+import {Box, Container, Paper, Typography} from '@mui/material';
 import ReusableTable from '../../../../../components/Reusable Table/Reusable Table';
 import Footer from "../../../../../layout/footer/footer";
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import {Link} from "react-router-dom";
+import CustomizedButton from "../../../../../components/Button/button";
 
 const fetchRequests = () => {
     return Promise.resolve([
@@ -40,14 +41,26 @@ const SalesRefundRequestsTable = ({onViewApproved}) => {
         Status: (
             <Box display="flex" justifyContent="flex-end">
                 <Link to="/SalesViewRequest">
-                    <Button
-                        variant="contained"
-                        color="primary"
+                    <CustomizedButton
                         onClick={() => handleStatusButtonClick(request.requestId)}
-                        sx={{backgroundColor: "#242F9B", width: '30%'}}
-                    >
+                        hoverBackgroundColor="#2d3ed2"
+                        style={{
+                            color: '#ffffff',
+                            backgroundColor: '#242F9B',
+                            border: '1px solid #242F9B',
+                            width: '6em',
+                            height: '2.5em',
+                            fontSize: '0.95em',
+                            fontFamily: 'inter',
+                            padding: '0.5em 0.625em',
+                            borderRadius: '0.35em',
+                            fontWeight: '550',
+                            marginTop: '0.625em',
+                            textTransform: 'none',
+                            textAlign: 'center',
+                        }}>
                         View
-                    </Button>
+                    </CustomizedButton>
                 </Link>
             </Box>
         )
@@ -72,17 +85,26 @@ const SalesRefundRequestsTable = ({onViewApproved}) => {
                         </Typography>
                         <Box>
                             <Link to="/ApprovedRefundsTable">
-                                <Button
-                                    variant="contained"
+                                <CustomizedButton
                                     onClick={onViewApproved}
-                                    sx={{
-                                        borderRadius: 1,
-                                        backgroundColor: "#242F9B",
-                                        textTransform: "none",
-                                    }}
-                                >
+                                    hoverBackgroundColor="#2d3ed2"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#242F9B',
+                                        border: '1px solid #242F9B',
+                                        width: '11em',
+                                        height: '2.5em',
+                                        fontSize: '0.95em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        fontWeight: '550',
+                                        marginTop: '0.625em',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                    }}>
                                     Approved Refunds
-                                </Button>
+                                </CustomizedButton>
                             </Link>
 
                         </Box>

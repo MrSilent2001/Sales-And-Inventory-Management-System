@@ -15,6 +15,7 @@ import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inven
 import Footer from "../../../../../layout/footer/footer";
 import PlaceOrder from "../../../Orders/Inventory/Modals/Place Order/placeOrder";
 import ViewOrder from "../../../Orders/Inventory/Modals/View Order/viewOrder";
+import CustomizedButton from "../../../../../components/Button/button";
 
 const PurchaseOrderDashboard = () => {
 
@@ -44,14 +45,51 @@ const PurchaseOrderDashboard = () => {
     contact: item.contact,
     category: item.category,
     actions: (
-      <>
-        <Button variant="outlined" color="primary"  onClick={() => setViewOrderVisible(true)}  sx={{ mr: 1 }}>
+      <div style={{display:'flex'}}>
+        <CustomizedButton
+            onClick={() => setPlaceOrderVisible(true)}
+            hoverBackgroundColor="#transparent"
+            style={{
+              color: '#242F9B',
+              backgroundColor: 'transparent',
+              border: '1px solid #242F9B',
+              width: '7.5em',
+              height: '2.75em',
+              fontSize: '0.95em',
+              fontFamily: 'inter',
+              padding: '0.5em 0.625em',
+              borderRadius: '0.35em',
+              fontWeight: '550',
+              marginTop: '0.625em',
+              marginRight: '1.5em',
+              textTransform: 'none',
+              textAlign: 'center',
+            }}>
           View
-        </Button>
-        <Button variant="outlined" color="secondary" onClick={()=>{alert("Order Cancelled")}}>
+        </CustomizedButton>
+
+        <CustomizedButton
+            onClick={() => setPlaceOrderVisible(true)}
+            hoverBackgroundColor="transparent"
+            style={{
+              color: '#960505',
+              backgroundColor: 'transparent',
+              border: '1px solid #960505',
+              width: '7.5em',
+              height: '2.75em',
+              fontSize: '0.95em',
+              fontFamily: 'inter',
+              padding: '0.5em 0.625em',
+              borderRadius: '0.35em',
+              fontWeight: '550',
+              marginTop: '0.625em',
+              marginRight: '1.5em',
+              textTransform: 'none',
+              textAlign: 'center',
+            }}>
           Cancel
-        </Button>
-      </>
+        </CustomizedButton>
+      </div>
     )
   }));
 
@@ -62,9 +100,28 @@ const PurchaseOrderDashboard = () => {
         <Box sx={{ display: 'flex', height: '100vh' }}>
           {/* Sidebar */}
           <Box sx={{ width: '15%',height:'auto', bgcolor: '#646FD4', color: 'white', p: 2 }}>
-            <Button variant="contained" onClick={() => setPlaceOrderVisible(true)} sx={{ width: '100%', mt:12,mb: 2, bgcolor: 'green', '&:hover': { bgcolor: 'green.700' } }}>
+            <CustomizedButton
+                onClick={() => setPlaceOrderVisible(true)}
+                hoverBackgroundColor="#0aaf0b"
+                style={{
+                  color: '#ffffff',
+                  backgroundColor: '#057007',
+                  width: '11.5em',
+                  height: '2.75em',
+                  fontSize: '0.95em',
+                  fontFamily: 'inter',
+                  padding: '0.5em 0.625em',
+                  borderRadius: '0.625em',
+                  fontWeight: '550',
+                  border: 'none',
+                  marginTop: '5em',
+                  marginBottom:'2em',
+                  textTransform: 'none',
+                  textAlign: 'center',
+                }}>
               Place Order
-            </Button>
+            </CustomizedButton>
+
             <Card sx={{ mb: 2, bgcolor: '#B4D4FF', color: 'black', p:1}}>
               <CardContent>
                 <Typography variant="subtitle1" sx={{color:'#E74646',fontWeight:'bold',mr:6}}>December</Typography>

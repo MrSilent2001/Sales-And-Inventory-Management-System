@@ -88,6 +88,7 @@
 }
 
 .formButtons{
+    display: flex;
     margin-top: 1.2em;
     margin-left: 34.5em;
 }

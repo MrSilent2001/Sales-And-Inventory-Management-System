@@ -6,10 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import "./viewSupplier.css";
-import AddItemButton from "../../../layout/buttons/addItemButton/AddItemButton";
-import DeleteItemButton from "../../../layout/buttons/deleteItemButton/DeleteItemButton";
 import {styled} from "@mui/material/styles";
-import Button from "@mui/material/Button";
 import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
@@ -22,6 +19,7 @@ import AddSupplier from "../Supplier Dashboard/Modals/AddSupplier/addSupplier";
 import UpdateSupplier from "../Supplier Dashboard/Modals/UpdateSupplier/updateSupplier";
 import InventoryNavbar from "../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../layout/footer/footer";
+import CustomizedButton from "../../../components/Button/button";
 
 
 function SearchBar(){
@@ -146,21 +144,6 @@ function FilterAvailability(){
     )
 }
 
-const ApplyButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText('#D41400'),
-    backgroundColor: '#D41400',
-    '&:hover': {
-        backgroundColor: '#e03a26'
-    },
-    '&.MuiButton-root': {
-        width: '11.625em',
-        height: '2.75em'
-    },
-    fontSize: '0.625em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em'
-}));
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor:'#646FD4',
@@ -198,21 +181,6 @@ const rows = [
     createData('I0001', 'Tokyo Super Cement', 'Cement', 49, 'In Stock'),
 ];
 
-const ViewItemButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText('#242F9B'),
-    backgroundColor: '#242F9B',
-    '&:hover': {
-        backgroundColor: '#2d3ed2'
-    },
-    '&.MuiButton-root': {
-        width: '11.625em',
-        height: '2.75em'
-    },
-    fontSize: '0.7em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em'
-}));
-
 function CustomizedTables() {
     const [visible,setVisible] = useState(false);
 
@@ -239,7 +207,29 @@ function CustomizedTables() {
                             <StyledTableCell align="right">{row.email}</StyledTableCell>
                             <StyledTableCell align="right">{row.contact}</StyledTableCell>
                             <StyledTableCell align="right">{row.category}</StyledTableCell>
-                            <StyledTableCell><ViewItemButton onClick={()=>setVisible(true)}>View</ViewItemButton></StyledTableCell>
+                            <StyledTableCell>
+                                <CustomizedButton
+                                    onClick={()=>setVisible(true)}
+                                    hoverBackgroundColor="#2d3ed2"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#242F9B',
+                                        border: '1px solid #242F9B',
+                                        width: '6em',
+                                        height: '2.5em',
+                                        fontSize: '0.95em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        fontWeight: '550',
+                                        marginTop: '0.625em',
+                                        marginRight: '1.5em',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                    }}>
+                                    View
+                                </CustomizedButton>
+                            </StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>
@@ -271,7 +261,27 @@ function ViewSupplier(){
                         </div>
 
                         <div className="applyButton">
-                            <ApplyButton>Apply</ApplyButton>
+                            <CustomizedButton
+                                onClick={() =>{alert("Order has been Cancelled")}}
+                                hoverBackgroundColor="#f11717"
+                                style={{
+                                    color: '#ffffff',
+                                    backgroundColor: '#960505',
+                                    width: '11em',
+                                    height: '2.5em',
+                                    fontSize: '0.95em',
+                                    fontFamily: 'inter',
+                                    padding: '0.5em 0.625em',
+                                    borderRadius: '0.35em',
+                                    fontWeight: '550',
+                                    marginTop: '0.625em',
+                                    marginRight:'1.5em',
+                                    marginLeft: '1.5em',
+                                    textTransform: 'none',
+                                    textAlign: 'center',
+                                }}>
+                                Apply
+                            </CustomizedButton>
                         </div>
                     </div>
                 </div>
@@ -282,8 +292,48 @@ function ViewSupplier(){
                             <SearchBar></SearchBar>
                         </div>
                         <div className="viewSupplierButtons">
-                            <AddItemButton onClick={()=>setVisible(true)}>Add Supplier</AddItemButton>
-                            <DeleteItemButton>Delete Supplier</DeleteItemButton>
+                            <CustomizedButton
+                                onClick={()=>setVisible(true)}
+                                hoverBackgroundColor="#2d3ed2"
+                                style={{
+                                    color: '#ffffff',
+                                    backgroundColor: '#242F9B',
+                                    border: '1px solid #242F9B',
+                                    width: '11em',
+                                    height: '2.5em',
+                                    fontSize: '0.95em',
+                                    fontFamily: 'inter',
+                                    padding: '0.5em 0.625em',
+                                    borderRadius: '0.35em',
+                                    fontWeight: '550',
+                                    marginTop: '0.625em',
+                                    marginRight: '1.5em',
+                                    textTransform: 'none',
+                                    textAlign: 'center',
+                                }}>
+                                Add Supplier
+                            </CustomizedButton>
+
+                            <CustomizedButton
+                                onClick={() =>{alert("Order has been Cancelled")}}
+                                hoverBackgroundColor="#f11717"
+                                style={{
+                                    color: '#ffffff',
+                                    backgroundColor: '#960505',
+                                    width: '11em',
+                                    height: '2.5em',
+                                    fontSize: '0.95em',
+                                    fontFamily: 'inter',
+                                    padding: '0.5em 0.625em',
+                                    borderRadius: '0.35em',
+                                    fontWeight: '550',
+                                    marginTop: '0.625em',
+                                    marginRight: '1.5em',
+                                    textTransform: 'none',
+                                    textAlign: 'center',
+                                }}>
+                                Delete Supplier
+                            </CustomizedButton>
                         </div>
                     </div>
 

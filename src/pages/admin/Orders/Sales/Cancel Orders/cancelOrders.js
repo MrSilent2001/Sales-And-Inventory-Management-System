@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import "./cancelOrders.css";
 import { Button } from '@mui/material';
 import BasicTextFields from '../../../../../components/forms/textfield';
-import BasicButtons1 from '../../../../../components/Buttons/cancelOrderButtons';
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
+import CustomizedButton from "../../../../../components/Button/button";
 
 const CustomButton = ({ buttonText, isActive, handleClick }) =>{
 
@@ -133,7 +133,48 @@ function CancelOrder() {
 
 
                                 <div className="formButtons">
-                                    <BasicButtons1></BasicButtons1>
+                                    <CustomizedButton
+                                        hoverBackgroundColor="#2d3ed2"
+                                        style={{
+                                            color: '#ffffff',
+                                            backgroundColor: '#242F9B',
+                                            border: '1px solid #242F9B',
+                                            width: '6em',
+                                            height: '2.5em',
+                                            fontSize: '0.95em',
+                                            fontFamily: 'inter',
+                                            padding: '0.5em 0.625em',
+                                            borderRadius: '0.35em',
+                                            fontWeight: '550',
+                                            marginTop: '0.625em',
+                                            marginRight: '1.5em',
+                                            textTransform: 'none',
+                                            textAlign: 'center',
+                                        }}>
+                                        Go Back
+                                    </CustomizedButton>
+
+                                    <CustomizedButton
+                                        onClick={() =>{alert("Order has been Cancelled")}}
+                                        hoverBackgroundColor="#f11717"
+                                        style={{
+                                            color: '#ffffff',
+                                            backgroundColor: '#960505',
+                                            width: '6em',
+                                            height: '2.5em',
+                                            fontSize: '0.95em',
+                                            fontFamily: 'inter',
+                                            padding: '0.5em 0.625em',
+                                            borderRadius: '0.35em',
+                                            fontWeight: '550',
+                                            marginTop: '0.625em',
+                                            marginRight: '1.5em',
+                                            textTransform: 'none',
+                                            textAlign: 'center',
+                                        }}>
+                                        Cancel
+                                    </CustomizedButton>
+
                                 </div>
 
                             </form>

@@ -7,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
 import Footer from "../../../layout/footer/footer";
+import CustomizedButton from "../../../components/Button/button";
 
 
 const UploadButtons = styled(Button)(({ theme }) => ({
@@ -24,23 +25,6 @@ const UploadButtons = styled(Button)(({ theme }) => ({
     padding: '1.75em 0.625em'
 }));
 
-
-
-
-const UpdateCustomerButtons = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText('#242F9B'),
-    backgroundColor: '#242F9B',
-    '&:hover': {
-        backgroundColor: '#2d3ed2'
-    },
-    '&.MuiButton-root': {
-        width: '13.625em',
-        height: '3.5em'
-    },
-    fontSize: '0.75em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em'
-}));
 
 function BasicTextFields() {
     return (
@@ -129,7 +113,25 @@ function UpdateCustomers() {
 
                         <div className="UpdateCustomerButtonField">
                             <div className="UpdateCustomerButtons">
-                                <UpdateCustomerButtons>Update</UpdateCustomerButtons>
+                                <CustomizedButton
+                                    hoverBackgroundColor="#2d3ed2"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#242F9B',
+                                        border: '1px solid #242F9B',
+                                        width: '8em',
+                                        height: '2.5em',
+                                        fontSize: '0.95em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        fontWeight: '550',
+                                        marginTop: '0.625em',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                    }}>
+                                    Update
+                                </CustomizedButton>
                             </div>
                         </div>
 

@@ -10,7 +10,7 @@ import ViewSupplier from "../pages/admin/Supplier Dashboard/viewSupplier";
 import PurchaseOrderDashboard from "../pages/admin/Orders/Inventory/Order Dashboard/PurchaseOrderDashboard";
 import SalesRefundRequestsTable from "../pages/admin/Refunds/Customer/View Sales Refund Requests/SalesRefundRequestsTable";
 import Cart from "../pages/Customer/Cart/shoppingCart";
-import InventoryRefundRequestsTable from "../pages/admin/Refunds/Inventory/InventoryRefundRequest/InventoryRefundRequest";
+import InventoryRefundRequestsTable from "../pages/admin/Refunds/Inventory/RefundRequestsTable/InventoryRefundRequestsTable";
 import Catalog from "../pages/Customer/Product Catelog/catalog";
 import PendingOrders from "../pages/admin/Orders/Sales/Pending Orders/pendingOrders";
 import InventoryDashboard from "../pages/Supplier/Inventory Dashboard/inventoryDashboard";
