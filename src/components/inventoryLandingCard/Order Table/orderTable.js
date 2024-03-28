@@ -1,40 +1,35 @@
-
-
 import * as React from 'react';
-import {styled} from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell, {tableCellClasses} from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import Button from '@mui/material/Button';
+import CustomizedButton from "../../Button/button";
 
-const StyledTableCell = styled(TableCell)(({theme}) => ({
-    [`&.${tableCellClasses.head}`]: {
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    root: {
         backgroundColor: "#273031",
         color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
     },
 }));
 
-const StyledTableRow = styled(TableRow)(({theme}) => ({
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
         backgroundColor: theme.palette.action.hover,
     },
-    // hide last border
     '&:last-child td, &:last-child th': {
         border: 0,
     },
 }));
 
 const columns = [
-    {id: 'id', label: 'Id', minWidth: 170, align: 'center'},
-    {id: 'name', label: 'Customer Name', minWidth: 170, align: 'center'},
+    { id: 'id', label: 'Id', minWidth: 170, align: 'center' },
+    { id: 'name', label: 'Customer Name', minWidth: 170, align: 'center' },
     {
         id: 'amount',
         label: 'Amount(\u20A8.)',
@@ -43,62 +38,74 @@ const columns = [
         format: (value) => value.toLocaleString('en-US'),
     },
     {
-        id: 'accept',
+        id: 'actions',
         label: '',
-        minWidth: 100,
+        minWidth: 200,
         align: 'center',
-        format: () => (
-            <Button/>
-        ),
-    },
-    {
-        id: 'reject',
-        label: '',
-        minWidth: 100,
-        align: 'center',
-        format: () => (
-            <Button/>
+        format: (accept, reject) => (
+            <div style={{ display: 'flex' }}>
+                <CustomizedButton
+                    onClick={() => { alert("Order has been Accepted") }}
+                    hoverBackgroundColor="#2d3ed2"
+                    style={{
+                        color: '#ffffff',
+                        backgroundColor: '#242F9B',
+                        border: '1px solid #242F9B',
+                        width: '6em',
+                        height: '2.5em',
+                        fontSize: '0.95em',
+                        fontFamily: 'inter',
+                        padding: '0.5em 0.625em',
+                        borderRadius: '0.35em',
+                        fontWeight: '550',
+                        marginTop: '0.625em',
+                        marginRight: '1.5em',
+                        textTransform: 'none',
+                        textAlign: 'center',
+                    }}>
+                    Accept
+                </CustomizedButton>
+
+                <CustomizedButton
+                    hoverBackgroundColor="#f11717"
+                    style={{
+                        color: '#ffffff',
+                        backgroundColor: '#960505',
+                        width: '6em',
+                        height: '2.5em',
+                        fontSize: '0.95em',
+                        fontFamily: 'inter',
+                        padding: '0.5em 0.625em',
+                        borderRadius: '0.35em',
+                        fontWeight: '550',
+                        marginTop: '0.625em',
+                        textTransform: 'none',
+                        textAlign: 'center',
+                    }}>
+                    Reject
+                </CustomizedButton>
+            </div>
         ),
     }
 ];
 
-const handleButtonClick1 = () => {
-    console.log('Button clicked for row:');
-    alert("Order has been Accepted");
-};
-
-const handleButtonClick2 = () => {
-    console.log('Button clicked for row:');
-    alert("Order has been Rejected");
-};
-
-function createData(id, name, amount, accept, reject) {
-
-    return {
-        id,
-        name,
-        amount,
-        accept,
-        reject
-
-
-    };
+function createData(id, name, amount) {
+    return { id, name, amount };
 }
 
 const rows = [
-    createData('OID001', 'WAP Saman Perera', 100000, <Button variant="contained" onClick={() => handleButtonClick1()}>Accept</Button> , <Button variant="contained" color = "error" onClick={() => handleButtonClick2()}>Reject</Button>),
-    createData('OID002', 'WAP Saman Perera', 100000, <Button variant="contained" onClick={() => handleButtonClick1()}>Accept</Button> , <Button variant="contained"  color = "error" onClick={() => handleButtonClick2()}>Reject</Button>),
-    createData('OID004', 'WAP Saman Perera', 100000, <Button variant="contained" onClick={() => handleButtonClick1()}>Accept</Button> , <Button variant="contained"  color = "error" onClick={() => handleButtonClick2()}>Reject</Button>),
-    createData('OID005', 'WAP Saman Perera', 100000, <Button variant="contained" onClick={() => handleButtonClick1()}>Accept</Button> , <Button variant="contained"  color = "error" onClick={() => handleButtonClick2()}>Reject</Button>),
-    createData('OID006', 'WAP Saman Perera', 100000, <Button variant="contained" onClick={() => handleButtonClick1()}>Accept</Button> , <Button variant="contained"  color = "error" onClick={() => handleButtonClick2()}>Reject</Button>),
-    createData('OID007', 'WAP Saman Perera', 100000, <Button variant="contained" onClick={() => handleButtonClick1()}>Accept</Button> , <Button variant="contained"  color = "error" onClick={() => handleButtonClick2()}>Reject</Button>),
-    createData('OID008', 'WAP Saman Perera', 100000, <Button variant="contained" onClick={() => handleButtonClick1()}>Accept</Button> , <Button variant="contained"  color = "error" onClick={() => handleButtonClick2()}>Reject</Button>),
-    createData('OID009', 'WAP Saman Perera', 100000, <Button variant="contained" onClick={() => handleButtonClick1()}>Accept</Button> , <Button variant="contained"  color = "error" onClick={() => handleButtonClick2()}>Reject</Button>),
-    createData('OID010', 'WAP Saman Perera', 100000, <Button variant="contained" onClick={() => handleButtonClick1()}>Accept</Button> , <Button variant="contained"  color = "error" onClick={() => handleButtonClick2()}>Reject</Button>),
+    createData('OID001', 'WAP Saman Perera', 100000),
+    createData('OID002', 'WAP Saman Perera', 100000),
+    createData('OID004', 'WAP Saman Perera', 100000),
+    createData('OID005', 'WAP Saman Perera', 100000),
+    createData('OID006', 'WAP Saman Perera', 100000),
+    createData('OID007', 'WAP Saman Perera', 100000),
+    createData('OID008', 'WAP Saman Perera', 100000),
+    createData('OID009', 'WAP Saman Perera', 100000),
+    createData('OID010', 'WAP Saman Perera', 100000),
 ];
 
 function OrderTable() {
-
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -111,10 +118,9 @@ function OrderTable() {
         setPage(0);
     };
 
-    return(
-
-        <Paper sx={{width: '90%', overflow: 'hidden'}}>
-            <TableContainer sx={{maxHeight: 440}}>
+    return (
+        <Paper sx={{ width: '90%', overflow: 'hidden' }}>
+            <TableContainer sx={{ maxHeight: 440 }}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
@@ -122,7 +128,7 @@ function OrderTable() {
                                 <StyledTableCell
                                     key={column.id}
                                     align={column.align}
-                                    style={{minWidth: column.minWidth}}
+                                    style={{ minWidth: column.minWidth }}
                                 >
                                     {column.label}
                                 </StyledTableCell>
@@ -132,14 +138,14 @@ function OrderTable() {
                     <TableBody>
                         {rows
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map((row) => {
+                            .map((row, index) => {
                                 return (
                                     <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                                         {columns.map((column) => {
                                             const value = row[column.id];
                                             return (
                                                 <StyledTableCell key={column.id} align={column.align}>
-                                                    {column.format && typeof value === 'number'
+                                                    {column.id === 'actions' ? column.format() : column.format && typeof value === 'number'
                                                         ? column.format(value)
                                                         : value}
                                                 </StyledTableCell>
@@ -150,7 +156,6 @@ function OrderTable() {
                             })}
                     </TableBody>
                 </Table>
-
             </TableContainer>
             <TablePagination
                 rowsPerPageOptions={[10, 25, 100]}
@@ -162,9 +167,6 @@ function OrderTable() {
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
         </Paper>
-
-
-
     );
 }
 

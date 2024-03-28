@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Box, Button, Container, Modal, Paper, Typography} from '@mui/material';
+import {Box, Container, Modal, Paper, Typography} from '@mui/material';
 import ReusableTable from '../../../../../components/Reusable Table/Reusable Table';
 import {styled} from '@mui/system';
 import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
-import InventoryRefundRequest from "../../../../../pages/admin/Refunds/Inventory/InventoryRefundRequest/InventoryRefundRequest";
+import InventoryRefundRequest from "../../../../../pages/admin/Refunds/Inventory/Modal/InventoryRefundRequest";
+import CustomizedButton from "../../../../../components/Button/button";
 
 
 const StyledPaper = styled(Paper)(({theme}) => ({
@@ -52,13 +53,27 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
         "Order ID": request.orderId,
         Amount: request.amount,
         Status: request.status === 'Pending' ? (
-            <Button
-                variant="contained"
-                color="primary"
+            <CustomizedButton
                 onClick={() => handleStatusButtonClick(request.requestId)}
-            >
+                hoverBackgroundColor="#2d3ed2"
+                style={{
+                    color: '#ffffff',
+                    backgroundColor: '#242F9B',
+                    border: '1px solid #242F9B',
+                    width: '6em',
+                    height: '2.5em',
+                    fontSize: '0.95em',
+                    fontFamily: 'inter',
+                    padding: '0.5em 0.625em',
+                    borderRadius: '0.35em',
+                    fontWeight: '550',
+                    marginTop: '0.625em',
+                    marginRight: '1.5em',
+                    textTransform: 'none',
+                    textAlign: 'center',
+                }}>
                 View
-            </Button>
+            </CustomizedButton>
         ) : (
             <Typography variant="body2" style={{color: 'gray'}}>
                 {request.status}
@@ -92,36 +107,51 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
                         <Typography variant="h6" sx={{fontWeight: 'bold'}}>
                             Refund Request
                         </Typography>
-                        <Box>
-                                <Button
-                                    variant="contained"
-                                    onClick={()=>setVisible(true)}
-                                    sx={{
-                                        borderRadius: 1,
-                                        backgroundColor: "#FF0000",
-                                        textTransform: "none",
-                                        color: 'white',
-                                        marginRight: 1,
-                                    }}
-                                >
-                                    Refunds Request
-                                </Button>
+                        <div style={{display:'flex'}}>
+                            <CustomizedButton
+                                onClick={()=>setVisible(true)}
+                                hoverBackgroundColor="#2d3ed2"
+                                style={{
+                                    color: '#ffffff',
+                                    backgroundColor: '#242F9B',
+                                    border: '1px solid #242F9B',
+                                    width: '11em',
+                                    height: '2.5em',
+                                    fontSize: '0.95em',
+                                    fontFamily: 'inter',
+                                    padding: '0.5em 0.625em',
+                                    borderRadius: '0.35em',
+                                    fontWeight: '550',
+                                    marginTop: '0.625em',
+                                    marginRight: '1.5em',
+                                    textTransform: 'none',
+                                    textAlign: 'center',
+                                }}>
+                                Refund Requests
+                            </CustomizedButton>
 
                             <Link to="/SalesApprovedRefundsTable">
-                                <Button
-                                    variant="contained"
-                                    onClick={onViewApproved}
-                                    sx={{
-                                        borderRadius: 1,
-                                        backgroundColor: "#242F9B",
-                                        textTransform: "none",
-                                    }}
-                                >
-                                    Approved Refunds
-                                </Button>
+                            <CustomizedButton
+                                onClick={onViewApproved}
+                                hoverBackgroundColor="#f11717"
+                                style={{
+                                    color: '#ffffff',
+                                    backgroundColor: '#960505',
+                                    width: '11em',
+                                    height: '2.5em',
+                                    fontSize: '0.95em',
+                                    fontFamily: 'inter',
+                                    padding: '0.5em 0.625em',
+                                    borderRadius: '0.35em',
+                                    fontWeight: '550',
+                                    marginTop: '0.625em',
+                                    textTransform: 'none',
+                                    textAlign: 'center',
+                                }}>
+                                Approved Refunds
+                            </CustomizedButton>
                             </Link>
-
-                        </Box>
+                        </div>
                     </Box>
                     <StyledPaper>
                         <ReusableTable data={transformedData}/>

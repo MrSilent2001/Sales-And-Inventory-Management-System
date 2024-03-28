@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import "./orderDetails.css";
 import { Button } from '@mui/material';
 import BasicTextFields from '../../../../../components/forms/textfield';
-import BasicButtons from '../../../../../components/Buttons/orderDetailsButtons';
 import Footer from "../../../../../layout/footer/footer";
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import {Link} from "react-router-dom";
+import CustomizedButton from "../../../../../components/Button/button";
 
 const CustomButton = ({ buttonText, isActive, handleClick }) =>{
 
@@ -139,7 +139,47 @@ function OrderDetails() {
                                 </div>
 
                                 <div className="formButtons">
-                                    <BasicButtons></BasicButtons>
+                                    <CustomizedButton
+                                        onClick={() =>{alert("Order Details Successfully Updated")}}
+                                        hoverBackgroundColor="#2d3ed2"
+                                        style={{
+                                            color: '#ffffff',
+                                            backgroundColor: '#242F9B',
+                                            border: '1px solid #242F9B',
+                                            width: '6em',
+                                            height: '2.5em',
+                                            fontSize: '0.95em',
+                                            fontFamily: 'inter',
+                                            padding: '0.5em 0.625em',
+                                            borderRadius: '0.35em',
+                                            fontWeight: '550',
+                                            marginTop: '0.625em',
+                                            marginRight: '1.5em',
+                                            textTransform: 'none',
+                                            textAlign: 'center',
+                                        }}>
+                                        Update
+                                    </CustomizedButton>
+
+                                    <CustomizedButton
+                                        hoverBackgroundColor="#f11717"
+                                        style={{
+                                            color: '#ffffff',
+                                            backgroundColor: '#960505',
+                                            width: '6em',
+                                            height: '2.5em',
+                                            fontSize: '0.95em',
+                                            fontFamily: 'inter',
+                                            padding: '0.5em 0.625em',
+                                            borderRadius: '0.35em',
+                                            fontWeight: '550',
+                                            marginTop: '0.625em',
+                                            marginRight: '1.5em',
+                                            textTransform: 'none',
+                                            textAlign: 'center',
+                                        }}>
+                                        Cancel
+                                    </CustomizedButton>
                                 </div>
 
                             </form>

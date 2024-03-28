@@ -9,27 +9,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import Button from '@mui/material/Button';
 import Searchbar from "../../../layout/search bar/search bar";
 import Footer from "../../../layout/footer/footer";
 import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
 import {Link} from "react-router-dom";
-
-const CustomerManagementButton = styled(Button)(({theme}) => ({
-    color: theme.palette.getContrastText('#242F9B'),
-    backgroundColor: 'red',
-    '&:hover': {
-        backgroundColor: '#2d3ed2'
-
-    },
-    '&.MuiButton-root': {
-        width: '13.625em',
-        height: '2.75em'
-    },
-    fontSize: '0.625em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em'
-}));
+import CustomizedButton from "../../../components/Button/button";
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -126,7 +110,25 @@ function CustomerDashboard() {
 
                         <div className="CustomerManagementBtnWithSearchbar">
                             <Link to="/removeCustomers">
-                                <CustomerManagementButton>Inactive Customers</CustomerManagementButton>
+                                <CustomizedButton
+                                    hoverBackgroundColor="#f11717"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#960505',
+                                        width: '12.25em',
+                                        height: '2.25em',
+                                        fontSize: '0.9em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.625em',
+                                        fontWeight: '550',
+                                        border: 'none',
+                                        marginTop: '0.625em',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                    }}>
+                                    Inactive Customers
+                                </CustomizedButton>
                             </Link>
 
                             <Searchbar/>
