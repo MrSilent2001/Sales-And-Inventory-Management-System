@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./button.css";
 
-function CustomizedButton({ type, id, style, onClick, children, hoverBackgroundColor }) {
+function CustomizedButton({ type, id, style, onClick, children, hoverBackgroundColor, disabled }) {
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
@@ -26,6 +26,7 @@ function CustomizedButton({ type, id, style, onClick, children, hoverBackgroundC
                 onClick={onClick}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
+                disabled={disabled}
             >
                 {children}
             </button>

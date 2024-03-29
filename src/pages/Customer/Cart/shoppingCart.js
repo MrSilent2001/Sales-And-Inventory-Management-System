@@ -1,12 +1,11 @@
 import "./shoppingCart.css";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import MediaControlCard from '../../../components/Card/card';
-import { Button } from '@mui/material';
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
 import Footer from "../../../layout/footer/footer";
 import { loadStripe } from "@stripe/stripe-js";
 import React, { useEffect, useState } from 'react';
-
+import CustomizedButton from "../../../components/Button/button";
 
 let stripePromise = "";
 
@@ -110,14 +109,28 @@ function Cart() {
                     <div className="totalText">
                         <p>Total Amount</p>
                         <p className="amount ">Rs {totalAmount.toFixed(2)}</p>
-                        <Button variant="contained" color="success" onClick={redirectToCheckout} disabled={isLoading}>
-                            <div className="text-container">
-                                <p className="text" style={{ color: isLoading ? 'white' : 'inherit' }}>
-                                    {isLoading ? "Loading..." : "Buy Now"}
-                                </p>
-                            </div>
-
-                        </Button>
+                        <CustomizedButton
+                            onClick={redirectToCheckout}
+                            disabled={isLoading}
+                            hoverBackgroundColor="#0aaf0b"
+                            style={{
+                                color: '#ffffff',
+                                backgroundColor: '#057007',
+                                width: '7.5em',
+                                height: '2.25em',
+                                fontSize: '0.85em',
+                                fontFamily: 'inter',
+                                padding: '0.5em 0.625em',
+                                borderRadius: '0.625em',
+                                fontWeight: '550',
+                                border: 'none',
+                                marginTop: '0.25em',
+                                marginBottom:'2em',
+                                textTransform: 'none',
+                                textAlign: 'center',
+                            }}>
+                            {isLoading ? "Loading..." : "Buy Now"}
+                        </CustomizedButton>
                     </div>
                 </div>
             </div>

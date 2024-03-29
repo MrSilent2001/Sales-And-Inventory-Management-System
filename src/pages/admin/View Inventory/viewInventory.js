@@ -6,10 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import "./viewInventory.css";
-import AddItemButton from "../../../layout/buttons/addItemButton/AddItemButton";
-import DeleteItemButton from "../../../layout/buttons/deleteItemButton/DeleteItemButton";
 import {styled} from "@mui/material/styles";
-import Button from "@mui/material/Button";
 import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
@@ -148,21 +145,6 @@ function FilterAvailability(){
     )
 }
 
-const ApplyButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText('#D41400'),
-    backgroundColor: '#D41400',
-    '&:hover': {
-        backgroundColor: '#e03a26'
-    },
-    '&.MuiButton-root': {
-        width: '11.625em',
-        height: '2.75em'
-    },
-    fontSize: '0.625em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em'
-}));
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor:'#646FD4',
@@ -286,7 +268,6 @@ function ViewInventory(){
                         </div>
                         <div className="applyButton">
                             <CustomizedButton
-                                onClick={() =>{alert("Order has been Cancelled")}}
                                 hoverBackgroundColor="#f11717"
                                 style={{
                                     color: '#ffffff',

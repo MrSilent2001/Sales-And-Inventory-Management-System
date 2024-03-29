@@ -1,4 +1,3 @@
-import CustomerHome from "../pages/Customer/Home/Customer Home Page";
 import Login from "../pages/login & SignUp/login/login";
 import {Route, Routes} from "react-router-dom";
 import Signup from "../pages/login & SignUp/SignUp/signup";
@@ -13,7 +12,6 @@ import InventoryLanding from "../pages/admin/Landing Pages/Inventory Landing/inv
 import ApprovedRefundsTable from "../pages/admin/Refunds/Customer/Approved Refunds/ApprovedRefundsTable";
 import InventoryGeneratedRequest from "../pages/admin/Refunds/Inventory/generatedRequests/InventoryGeneratedRequest";
 import InventoryRefundRequest from "../pages/admin/Refunds/Inventory/Modal/InventoryRefundRequest";
-import InventoryRefundRequestsTable from "../pages/admin/Refunds/Inventory/RefundRequestsTable/InventoryRefundRequestsTable";
 import RefundsManager from "../pages/admin/Refunds/Inventory/RefundRequestsTable/RefundsManager";
 import SalesApprovedRefundsTable from "../pages/admin/Refunds/Customer/Sales_Approved Refunds/SalesApprovedRefundsTable";
 import SalesRefundDenialForm from "../pages/admin/Refunds/Customer/Refund Denial Form/SalesRefundDenialForm";
@@ -26,8 +24,10 @@ import AddDiscounts from "../pages/admin/Discounts/Modal/Add Discount/addDiscoun
 import OrderDetails from "../pages/admin/Orders/Sales/Order Details/orderDetails";
 import CancelOrder from "../pages/admin/Orders/Sales/Cancel Orders/cancelOrders";
 import OrderStatus from "../pages/admin/Orders/Sales/Order Status/orderStatus";
-import SalesRefundRequestsTable
-    from "../pages/admin/Refunds/Customer/View Sales Refund Requests/SalesRefundRequestsTable";
+import SalesRefundRequestsTable from "../pages/admin/Refunds/Customer/View Sales Refund Requests/SalesRefundRequestsTable";
+import PlaceOrder from "../pages/admin/Orders/Inventory/Modals/Place Order/placeOrder";
+import ViewOrder from "../pages/admin/Orders/Inventory/Modals/View Order/viewOrder";
+import PurchaseOrderDashboard from "../pages/admin/Orders/Inventory/Order Dashboard/PurchaseOrderDashboard";
 
 export function PageRouting() {
     return (
@@ -45,7 +45,6 @@ export function PageRouting() {
                 {/*Landing Pages*/}
                 <Route path="/salesLanding" element={<SalesLanding/>}/>
                 <Route path="/inventoryLanding" element={<InventoryLanding/>}/>
-                <Route path="/customerHome" element={<CustomerHome/>}/>
 
                 <Route path="/generatedrefund" element={<GeneratedCustomerRefundRequest/>}/>
                 <Route path="/createrefund" element={<CustomerRefundRequest/>}/>
@@ -77,6 +76,10 @@ export function PageRouting() {
                 <Route path="/SalesRefundDenialForm" element={<SalesRefundDenialForm/>}/>
                 <Route path="/SalesViewRequest" element={<SalesViewRequest/>}/>
                 <Route path="/SalesRefundRequestTable" element={<SalesRefundRequestsTable/>}/>
+
+                <Route path="/placeOrder" element={<PlaceOrder/>}/>
+                <Route path="/viewOrder" element={<ViewOrder/>}/>
+                <Route path="/purchasedOrder" element={<PurchaseOrderDashboard/>}/>
 
             </Routes>
         </div>
