@@ -43,19 +43,13 @@ function InventoryGeneratedRequest() {
                     </div>
 
                     <Link to="/InventoryRefundRequestsTable">
-                        {/*<button*/}
-                        {/*    type="button"*/}
-                        {/*    className="go-back-button"*/}
-                        {/*    style={{backgroundColor: "#242F9B", width: "10em", marginLeft: "47%", marginBottom: "3%"}}>*/}
-                        {/*    Go Back*/}
-                        {/*</button>*/}
                         <CustomizedButton
                             hoverBackgroundColor="#2d3ed2"
                             style={{
                                 color: '#ffffff',
                                 backgroundColor: '#242F9B',
                                 border: '1px solid #242F9B',
-                                width: '11em',
+                                width: '8em',
                                 height: '2.5em',
                                 fontSize: '0.95em',
                                 fontFamily: 'inter',

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./catalog.css";
-import MultiActionAreaCard from '../../../../src/components/Catalog Card/catalogCard';
-import Checkboxes from '../../../components/checkbox/checkbox';
+import MultiActionAreaCard from '../../../../src/components/Cards/catalogCard';
+import Checkboxes from '../../../components/Form Inputs/checkbox';
 import Footer from "../../../layout/footer/footer";
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
 import {Link} from "react-router-dom";
@@ -107,7 +107,7 @@ const products = [
     }
 ];
 
-function Catalog() {
+function ProductCatalog() {
     // State variables
     //const [show, setShow] = useState(true);
     const [cart, setCart] = useState([]);
@@ -226,5 +226,5 @@ function Catalog() {
     );
 }
 
-export default Catalog;
+export default ProductCatalog;
 

@@ -2,11 +2,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 40em;
+    height: 45.5em;
     background-color: #DBDFFD;
     max-width:100%;
-    margin-top: -2em;
-    padding-bottom: 20em;
+    margin: -2em;
 }
   
 

@@ -1,6 +1,6 @@
 import "./shoppingCart.css";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import MediaControlCard from '../../../components/Card/card';
+import MediaControlCard from '../../../components/Cards/shoppingCartCard';
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
 import Footer from "../../../layout/footer/footer";
 import { loadStripe } from "@stripe/stripe-js";

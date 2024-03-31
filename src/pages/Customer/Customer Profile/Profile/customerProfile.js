@@ -98,7 +98,7 @@ function CustomerProfile() {
                                             color: '#ffffff',
                                             backgroundColor: '#242F9B',
                                             border: '1px solid #242F9B',
-                                            width: '8.5em',
+                                            width: '9.5em',
                                             height: '2.5em',
                                             fontSize: '0.85em',
                                             fontFamily: 'inter',
@@ -119,7 +119,7 @@ function CustomerProfile() {
                                     style={{
                                         color: '#ffffff',
                                         backgroundColor: '#960505',
-                                        width: '8.5em',
+                                        width: '9.5em',
                                         height: '2.5em',
                                         fontSize: '0.85em',
                                         fontFamily: 'inter',

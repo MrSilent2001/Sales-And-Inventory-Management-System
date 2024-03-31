@@ -3,7 +3,7 @@ import * as React from "react";
 import Avatar from '@mui/material/Avatar';
 import Footer from "../../../layout/footer/footer";
 import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navbar";
-import SearchBar from "../../../layout/search bar/search bar";
+import SearchBar from "../../../components/search bar/search bar";
 import CustomizedButton from "../../../components/Button/button";
 
 

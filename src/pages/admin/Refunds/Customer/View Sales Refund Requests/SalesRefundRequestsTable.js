@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {Box, Container, Paper, Typography} from '@mui/material';
-import ReusableTable from '../../../../../components/Reusable Table/Reusable Table';
 import Footer from "../../../../../layout/footer/footer";
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../../../components/Button/button";
+import DefaultTable from "../../../../../components/Table/Default Table/defaultTable";
 
 const fetchRequests = () => {
     return Promise.resolve([
@@ -13,10 +13,7 @@ const fetchRequests = () => {
         {name: 'Jane Smith', requestId: '0771112225', orderId: 'I0003'},
         {name: 'John Doe', requestId: '0771112224', orderId: 'J0002'},
         {name: 'John Doe', requestId: '0771112224', orderId: 'I0002'},
-        {name: 'Jane Smith', requestId: '0771112225', orderId: 'I0003'},
-        {name: 'John Doe', requestId: '0771112224', orderId: 'J0002'},
-        {name: 'John Doe', requestId: '0771112224', orderId: 'I0002'},
-        {name: 'Jane Smith', requestId: '0771112225', orderId: 'I0003'},
+        {name: 'Jane Smith', requestId: '0771112225', orderId: 'I0003'}
     ]);
 };
 
@@ -69,8 +66,8 @@ const SalesRefundRequestsTable = ({onViewApproved}) => {
     return (
         <>
             <SalesNavbar/>
-            <Container className='inner_container' maxWidth="90%">
-                <Box sx={{my: 4}}>
+            <Container maxWidth="90%" style={{backgroundColor: '#DBDFFD', height: '37.5em'}}>
+                <Box>
                     <Box
                         sx={{
                             display: 'flex',
@@ -110,7 +107,7 @@ const SalesRefundRequestsTable = ({onViewApproved}) => {
                         </Box>
                     </Box>
                     <Paper>
-                        <ReusableTable data={transformedData}/>
+                        <DefaultTable data={transformedData}/>
                     </Paper>
                 </Box>
             </Container>

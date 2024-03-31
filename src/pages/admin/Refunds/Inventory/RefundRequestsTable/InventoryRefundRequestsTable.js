@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {Box, Container, Modal, Paper, Typography} from '@mui/material';
-import ReusableTable from '../../../../../components/Reusable Table/Reusable Table';
 import {styled} from '@mui/system';
 import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
 import InventoryRefundRequest from "../../../../../pages/admin/Refunds/Inventory/Modal/InventoryRefundRequest";
 import CustomizedButton from "../../../../../components/Button/button";
+import DefaultTable from "../../../../../components/Table/Default Table/defaultTable";
 
 
 const StyledPaper = styled(Paper)(({theme}) => ({
@@ -26,8 +26,7 @@ const fetchRequests = () => {
                 {name: 'Jane Doe', requestId: '2', orderId: 'A2', amount: '200.00', status: 'Pending'},
                 {name: 'John Doe', requestId: '1', orderId: 'A1', amount: '100.00', status: 'Pending'},
                 {name: 'Jane Doe', requestId: '2', orderId: 'A2', amount: '200.00', status: 'Pending'},
-                {name: 'John Doe', requestId: '1', orderId: 'A1', amount: '100.00', status: 'Pending'},
-                {name: 'Jane Doe', requestId: '2', orderId: 'A2', amount: '200.00', status: 'Pending'}
+                {name: 'John Doe', requestId: '1', orderId: 'A1', amount: '100.00', status: 'Pending'}
             ]);
         }, 1000);
     });
@@ -91,10 +90,11 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
                     {
                         backgroundColor: '#DBDFFD',
                         width: '100%',
+                        height: '40em'
                     }
                 }
             >
-                <Box sx={{my: 4}}>
+                <Box sx={{}}>
                     <Box
                         sx={{
                             display: 'flex',
@@ -154,7 +154,7 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
                         </div>
                     </Box>
                     <StyledPaper>
-                        <ReusableTable data={transformedData}/>
+                        <DefaultTable data={transformedData}/>
 
                     </StyledPaper>
                     <br/><br/>

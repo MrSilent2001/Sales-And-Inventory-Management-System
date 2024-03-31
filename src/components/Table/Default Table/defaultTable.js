@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, TableBody, TableRow, TableCell } from '@mui/material';
 
-function ReusableTable({ data }) {
+function DefaultTable({ data }) {
     return (
         <Table>
             <TableBody>
@@ -17,4 +17,4 @@ function ReusableTable({ data }) {
     );
 }
 
-export default ReusableTable;
+export default DefaultTable;

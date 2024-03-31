@@ -13,6 +13,7 @@ import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer n
 import Footer from "../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
+import customerRefunds from "../../../../data/data.json";
 
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
@@ -32,19 +33,7 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
     },
 }));
 
-function createData(customerName, mobileNumber, itemId, payment, refundStatus) {
-    return {customerName, mobileNumber, itemId, payment, refundStatus};
-}
-
-const rows = [
-    createData('WAP Saman Perera', '0771112234', 'I0001', 100000, 'Refunded'),
-    createData('WAP Saman Perera', '0771112234', 'I0001', 100000, 'Refunded'),
-    createData('WAP Saman Perera', '0771112234', 'I0001', 100000, 'Refunded'),
-    createData('WAP Saman Perera', '0771112234', 'I0001', 100000, 'Refunded'),
-    createData('WAP Saman Perera', '0771112234', 'I0001', 100000, 'Refunded'),
-    createData('WAP Saman Perera', '0771112234', 'I0001', 100000, 'Refunded'),
-    createData('WAP Saman Perera', '0771112234', 'I0001', 100000, 'Refunded'),
-];
+const rows = customerRefunds.customerRefunds || [];
 
 function CustomerRefundRequestTables() {
     const [visible, setVisible] = useState(false)

@@ -1,32 +1,10 @@
 import React, { useState } from 'react';
 import "./pendingOrders.css";
-import Button from '@mui/material/Button';
 import OrderTable from "../../../../../components/inventoryLandingCard/Order Table/orderTable";
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
-
-const CustomButton = ({ buttonText, isActive, handleClick }) =>{
-
-    return (
-        <Button
-            variant="contained"
-            size="large"
-            style={{
-                padding: '2.2em 2.2em',
-                width : '11.8em',
-                height : '3em',
-                backgroundColor: isActive ? 'lightblue' : 'white',
-                color: '#646FD4',
-                textTransform: 'none',
-                lineHeight: '1.4em',
-            }}
-            onClick={handleClick}
-        >
-            {buttonText}
-        </Button>
-    );
-};
+import CustomizedButton from "../../../../../components/Button/button";
 
 function PendingOrders() {
     const [activeButton, setActiveButton] = useState(null);
@@ -43,44 +21,112 @@ function PendingOrders() {
                    <div className="PendingOrdersFilter">
                        <div className="Button1">
                            <Link to="/pendingOrders">
-                               <CustomButton
-                                   buttonText="Pending Orders"
-                                   isActive={activeButton === "Button 1"}
-                                   handleClick={() => handleButtonClick("Button 1")}
-                               />
+                               <CustomizedButton
+                                   children="Pending Orders"
+                                   onClick={() => handleButtonClick("Button 1")}
+                                   variant="contained"
+                                   size="large"
+                                   style={{
+                                       color: '#646FD4',
+                                       backgroundColor: activeButton === "Button 1" ? 'lightblue' : 'white',
+                                       width: '11.8em',
+                                       height: '3em',
+                                       fontSize: '0.95em',
+                                       fontFamily: 'inter',
+                                       borderRadius: '0.625em',
+                                       fontWeight: '550',
+                                       border: 'none',
+                                       marginTop: '1.5em',
+                                       marginBottom: '2em',
+                                       textTransform: 'none',
+                                       textAlign: 'center',
+                                       padding: '2.2em 2.2em',
+                                       lineHeight: '1.4em',
+                                   }}/>
                            </Link>
 
                        </div>
 
                        <div className="Button1">
                            <Link to="/orderStatus">
-                               <CustomButton
-                                   buttonText="Update Order Status"
-                                   isActive={activeButton === "Button 2"}
-                                   handleClick={() => handleButtonClick("Button 2")}
-                               />
+                               <CustomizedButton
+                                   children="Update Order Status"
+                                   onClick={() => handleButtonClick("Button 1")}
+                                   variant="contained"
+                                   size="large"
+                                   style={{
+                                       color: '#646FD4',
+                                       backgroundColor: activeButton === "Button 1" ? 'lightblue' : 'white',
+                                       width: '11.8em',
+                                       height: '3em',
+                                       fontSize: '0.95em',
+                                       fontFamily: 'inter',
+                                       borderRadius: '0.625em',
+                                       fontWeight: '550',
+                                       border: 'none',
+                                       marginTop: '0.005em',
+                                       marginBottom: '2em',
+                                       textTransform: 'none',
+                                       textAlign: 'center',
+                                       padding: '2.2em 2.2em',
+                                       lineHeight: '1.4em',
+                                   }}/>
                            </Link>
 
                        </div>
 
                        <div className="Button1">
                            <Link to="/orderDetails">
-                               <CustomButton
-                                   buttonText="Update Order Details"
-                                   isActive={activeButton === "Button 3"}
-                                   handleClick={() => handleButtonClick("Button 3")}
-                               />
+                               <CustomizedButton
+                                   children="Update Order Details"
+                                   onClick={() => handleButtonClick("Button 1")}
+                                   variant="contained"
+                                   size="large"
+                                   style={{
+                                       color: '#646FD4',
+                                       backgroundColor: activeButton === "Button 1" ? 'lightblue' : 'white',
+                                       width: '11.8em',
+                                       height: '3em',
+                                       fontSize: '0.95em',
+                                       fontFamily: 'inter',
+                                       borderRadius: '0.625em',
+                                       fontWeight: '550',
+                                       border: 'none',
+                                       marginTop: '0.005em',
+                                       marginBottom: '2em',
+                                       textTransform: 'none',
+                                       textAlign: 'center',
+                                       padding: '2.2em 2.2em',
+                                       lineHeight: '1.4em',
+                                   }}/>
                            </Link>
 
                        </div>
 
                        <div className="Button1">
                            <Link to="/cancelOrders">
-                               <CustomButton
-                                   buttonText="Cancel Order"
-                                   isActive={activeButton === "Button 4"}
-                                   handleClick={() => handleButtonClick("Button 4")}
-                               />
+                               <CustomizedButton
+                                   children="Cancel Order"
+                                   onClick={() => handleButtonClick("Button 1")}
+                                   variant="contained"
+                                   size="large"
+                                   style={{
+                                       color: '#646FD4',
+                                       backgroundColor: activeButton === "Button 1" ? 'lightblue' : 'white',
+                                       width: '11.8em',
+                                       height: '3em',
+                                       fontSize: '0.95em',
+                                       fontFamily: 'inter',
+                                       borderRadius: '0.625em',
+                                       fontWeight: '550',
+                                       border: 'none',
+                                       marginTop: '0.005em',
+                                       marginBottom: '2em',
+                                       textTransform: 'none',
+                                       textAlign: 'center',
+                                       padding: '2.2em 2.2em',
+                                       lineHeight: '1.4em',
+                                   }}/>
                            </Link>
 
                        </div>

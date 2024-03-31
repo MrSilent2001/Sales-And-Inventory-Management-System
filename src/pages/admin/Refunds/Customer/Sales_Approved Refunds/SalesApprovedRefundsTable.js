@@ -1,12 +1,11 @@
-// ApprovedRefundsTable.js
 import React, { useState, useEffect } from 'react';
 import { Container, Box, Button, Paper } from '@mui/material';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ReusableTable from '../../../../../components/Reusable Table/Reusable Table';
 import './SalesApprovedRefundsTable.css'
 import {Link} from "react-router-dom";
 import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../../layout/footer/footer";
+import DefaultTable from "../../../../../components/Table/Default Table/defaultTable";
+import BackArrow from "../../../../../components/Icons/backArrow";
 
 const SalesApprovedRefundsTable = ({ onBack }) => {
   const [refundRequests, setRefundRequests] = useState([]);
@@ -35,7 +34,7 @@ const SalesApprovedRefundsTable = ({ onBack }) => {
         <Box sx={{ my: 4, display: 'flex', flexDirection: 'column' }}>
           <Link to="/InventoryRefundRequestsTable">
             <Button
-                startIcon={<ArrowBackIosIcon />}
+                startIcon={<BackArrow />}
                 size="large"
                 style={{ color: "black", fontWeight: 'bold', textTransform: "none" }}
                 onClick={onBack} // onBack prop
@@ -44,8 +43,8 @@ const SalesApprovedRefundsTable = ({ onBack }) => {
               Approved Refunds
             </Button>
           </Link>
-          <Paper elevation={4}>
-            <ReusableTable data={transformData(refundRequests)}/>
+          <Paper elevation={4} >
+            <DefaultTable data={transformData(refundRequests)}/>
           </Paper>
         </Box>
       </Container>
@@ -55,6 +54,7 @@ const SalesApprovedRefundsTable = ({ onBack }) => {
 };
 
 const approvedRefundsData = () => {
+  // eslint-disable-next-line no-sparse-arrays
   return Promise.resolve([
     { name: 'WAP Samane Perea', requestId: '0771112223', orderId: 'I0001', amount: 'Rs.19,500.00', status: '2024/01/15' },
     { name: 'John Doe', requestId: '0771112224', orderId: 'I0002', amount: 'Rs.150,000.00', status: '2024/01/16' },

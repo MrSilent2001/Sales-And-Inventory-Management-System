@@ -13,8 +13,10 @@ import AddItem from "../../admin/View Inventory/Modals/Add Item/Add Item";
 import UpdateItem from "../../admin/View Inventory/Modals/Update Item/Update Item";
 import Footer from "../../../layout/footer/footer";
 import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navbar";
-import SearchBar from "../../../layout/search bar/search bar";
+import SearchBar from "../../../components/search bar/search bar";
 import CustomizedButton from "../../../components/Button/button";
+import inventory from "../../../data/data.json";
+import CustomizedAlert from "../../../components/Alert/alert";
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -41,25 +43,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-function createData(inventoryId, itemDescription, itemCategory, Quantity, inventoryStatus) {
-    return { inventoryId, itemDescription, itemCategory, Quantity, inventoryStatus };
-}
-
-const rows = [
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 24, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 37, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 24, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 67, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 49, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 49, 'In Stock'),
-];
+const rows = inventory.inventory || [];
 
 function CustomizedTables() {
     const [visible,setVisible] = useState(false)
 
     return (
         <TableContainer component={Paper} sx={{ width: '100%', maxHeight: '25em', overflowY: 'auto', position: 'relative'}}>
-            <Table sx={{ minWidth: '25em'}} aria-label="customized table">
+            <Table aria-label="customized table">
                 <TableHead>
                     <TableRow>
                         <StyledTableCell>Inventory ID</StyledTableCell>
@@ -116,7 +107,12 @@ function CustomizedTables() {
 
 function InventoryDashboard(){
 
-    const [visible,setVisible] = useState(false)
+    const [visible,setVisible] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
+
+    const handleDelete = () => {
+        setShowAlert(true);
+    };
 
     return(
         <>
@@ -152,7 +148,7 @@ function InventoryDashboard(){
                             </CustomizedButton>
 
                             <CustomizedButton
-                                onClick={() =>{alert("Order has been Cancelled")}}
+                                onClick={handleDelete}
                                 hoverBackgroundColor="#f11717"
                                 style={{
                                     color: '#ffffff',
@@ -178,6 +174,17 @@ function InventoryDashboard(){
                         <CustomizedTables></CustomizedTables>
                     </div>
                 </div>
+
+                {showAlert && (
+                    <CustomizedAlert
+                        variant="contained"
+                        severity="error"
+                        onClose={() => setShowAlert(false)}
+
+                    >
+                        Alert Message
+                    </CustomizedAlert>
+                )}
 
                 <Modal open={visible}>
                     <AddItem onClose={(value) => { setVisible(false)}} ></AddItem>

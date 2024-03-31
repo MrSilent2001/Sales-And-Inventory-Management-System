@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import "./button.css";
+import Button from "@mui/material/Button";
 
-function CustomizedButton({ type, id, style, onClick, children, hoverBackgroundColor, disabled }) {
+function CustomizedButton({ variant, size, type, id, style, onClick, children, hoverBackgroundColor, disabled, isActive}) {
     const [isHovered, setIsHovered] = useState(false);
+
+
 
     const handleMouseEnter = () => {
         setIsHovered(true);
@@ -14,13 +17,16 @@ function CustomizedButton({ type, id, style, onClick, children, hoverBackgroundC
 
     return (
         <div>
-            <button
+            <Button
                 className="button"
+                variant={variant}
+                size={size}
                 type={type}
                 id={id}
+                isActive={isActive}
                 style={{
                     ...style,
-                    backgroundColor: isHovered ? hoverBackgroundColor : style.backgroundColor,
+                    backgroundColor: isActive ? 'lightblue' : (isHovered ? hoverBackgroundColor : style.backgroundColor),
                     cursor: isHovered ? 'pointer' : 'default'
                 }}
                 onClick={onClick}
@@ -29,7 +35,7 @@ function CustomizedButton({ type, id, style, onClick, children, hoverBackgroundC
                 disabled={disabled}
             >
                 {children}
-            </button>
+            </Button>
         </div>
     );
 }

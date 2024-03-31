@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -21,34 +20,8 @@ import InventoryNavbar from "../../../layout/navbar/Inventory navbar/Inventory n
 import Footer from "../../../layout/footer/footer";
 import DeleteItem from "./Modals/Delete Item/Delete Item";
 import CustomizedButton from "../../../components/Button/button";
-
-
-function SearchBar(){
-    return(
-        <Box
-            component="form"
-            sx={{
-                '& > :not(style)': {
-                    m: 1,
-                    width: '17.5em',
-                    "& .MuiInputBase-root":{
-                        height: '1.95em',
-                        borderRadius: '1.5em',
-                        /*backgroundColor: 'white'*/
-                    },
-                    "& .MuiInputLabel-root": {
-                        fontSize: '0.6em',
-                        textAlign: 'center',
-                    },
-                },
-            }}
-            noValidate
-            autoComplete="off"
-        >
-            <TextField id="standard-basic" label="Search Here" variant="outlined" size="small"/>
-        </Box>
-    )
-}
+import items from "../../../data/data.json";
+import SearchBar from "../../../components/search bar/search bar";
 
 function FilterItems(){
 
@@ -169,19 +142,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-function createData(inventoryId, itemDescription, itemCategory, Quantity, inventoryStatus) {
-    return { inventoryId, itemDescription, itemCategory, Quantity, inventoryStatus };
-}
-
-const rows = [
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 24, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 37, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 24, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 67, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 49, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 49, 'In Stock'),
-];
-
+const rows = items.items || [];
 function CustomizedTables() {
     const [visible,setVisible] = useState(false);
 
@@ -293,7 +254,7 @@ function ViewInventory(){
                 <div className="viewInventoryItemInner">
                     <div className="searchAndButtons">
                         <div className="viewInventorySearch">
-                            <SearchBar></SearchBar>
+                            <SearchBar/>
                         </div>
                         <div className="viewInventoryButtons">
                             <CustomizedButton

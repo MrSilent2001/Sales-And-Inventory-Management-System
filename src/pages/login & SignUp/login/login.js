@@ -1,17 +1,10 @@
 import React, {useState} from 'react';
 import "./login.css";
-import {styled} from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
+import PasswordField from "../../../components/Form Inputs/passwordField";
+import ComboBox from "../../../components/Form Inputs/comboBox";
 // import {useLocation, useNavigate} from "react-router-dom";
 // import {useAuth} from "../../services/auth";
 
@@ -19,8 +12,21 @@ import CustomizedButton from "../../../components/Button/button";
 const Login = () => {
 
     const [showPassword, setShowPassword] = React.useState(false);
+    const [category, setCategory] = useState('None');
 
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleChange = (event) => {
+        setCategory(event.target.value);
+    };
+
+    const options = [
+        { value: 'Admin', label: 'Admin' },
+        { value: 'Customer', label: 'Customer' },
+        { value: 'Supplier', label: 'Supplier' },
+    ];
+
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
@@ -30,7 +36,7 @@ const Login = () => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [role, setRole] = useState("");
+
     //const auth = useAuth();
     const location = useLocation();
     const redirectPath = location.state?.path || "/login";
@@ -78,45 +84,27 @@ const Login = () => {
 
                             <div className="row">
                                 <label>Password: </label>
-                                <OutlinedInput
-                                    id="outlined-adornment-password"
-                                    size="small"
-                                    type={showPassword ? 'text' : 'password'}
-                                    label="Password"
-                                    className="loginInput"
+                                <PasswordField
+                                    placeholder="Password"
+                                    style={{width:'14em', marginLeft: '1.85em'}}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                            >
-                                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
-
+                                    showPassword={showPassword}
+                                    handleClickShowPassword={handleClickShowPassword}
+                                    handleMouseDownPassword={handleMouseDownPassword}
                                 />
                             </div>
 
 
                             <div className="row">
                                 <label style={{paddingRight: "50px"}}>Role: </label>
-                                <Select
-                                    className="loginInput"
-                                    id="demo-select-small"
+                                <ComboBox
+                                    value={category}
+                                    onChange={handleChange}
+                                    style={{width: '14em'}}
+                                    options={options}
+                                    label="Category"
                                     size="small"
-                                    onChange={(e) => setRole(e.target.value)}
-                                >
-                                    <MenuItem value="none">
-                                        <em>None</em>
-                                    </MenuItem>
-                                    <MenuItem value="admin">Admin</MenuItem>
-                                    <MenuItem value="customer">Customer</MenuItem>
-                                    <MenuItem value="supplier">Supplier</MenuItem>
-                                </Select>
+                                />
                             </div>
 
                             <div className="btn-row">
@@ -146,7 +134,7 @@ const Login = () => {
                                 <p>Don't you have an Account?
                                     <Link to="/signup">Sign Up</Link>
                                 </p>
-                                <a href="#">Forgot Password?</a>
+                                <a href="/">Forgot Password?</a>
                             </div>
                         </div>
                     </form>

@@ -3,7 +3,6 @@ import {Route, Routes} from "react-router-dom";
 import Signup from "../pages/login & SignUp/SignUp/signup";
 import SalesLanding from "../pages/admin/Landing Pages/Sales Landing/salesLanding";
 import CustomerDashboard from "../pages/admin/Customer Dashboard/customerDashboard";
-import CustomerProfile from "../pages/Customer/Customer Profile/Profile/customerProfile";
 import CustomerOrderHistory from "../pages/Customer/Order History/customerOrderHistory";
 import RemoveCustomers from "../pages/admin/Remove Customers/removeCustomers";
 import UpdateCustomers from "../pages/admin/Update Customers/updateCustomers.js";
@@ -27,7 +26,9 @@ import OrderStatus from "../pages/admin/Orders/Sales/Order Status/orderStatus";
 import SalesRefundRequestsTable from "../pages/admin/Refunds/Customer/View Sales Refund Requests/SalesRefundRequestsTable";
 import PlaceOrder from "../pages/admin/Orders/Inventory/Modals/Place Order/placeOrder";
 import ViewOrder from "../pages/admin/Orders/Inventory/Modals/View Order/viewOrder";
-import PurchaseOrderDashboard from "../pages/admin/Orders/Inventory/Order Dashboard/PurchaseOrderDashboard";
+import InventoryDashboard from "../pages/Supplier/Inventory Dashboard/inventoryDashboard";
+import InventoryRefundRequestsTable
+    from "../pages/admin/Refunds/Inventory/RefundRequestsTable/InventoryRefundRequestsTable";
 
 export function PageRouting() {
     return (
@@ -52,7 +53,6 @@ export function PageRouting() {
 
                 <Route path="/customerdashboard" element={<CustomerDashboard/>}/>
                 <Route path="/customerorderhistory" element={<CustomerOrderHistory/>}/>
-                <Route path="/customerprofile" element={<CustomerProfile/>}/>
                 <Route path="/removeCustomers" element={<RemoveCustomers/>}/>
                 <Route path="/updateCustomers" element={<UpdateCustomers/>}/>
                 <Route path="/view" element={<View/>}/>
@@ -64,6 +64,8 @@ export function PageRouting() {
 
                 <Route path="/InventoryGeneratedRequest" element={<InventoryGeneratedRequest/>}/>
                 <Route path="/InventoryRefundRequest" element={<InventoryRefundRequest/>}/>
+                <Route path="/InventoryRefundRequestTable" element={<InventoryRefundRequestsTable/>}/>
+                <Route path="/inventoryDashbaord" element={<InventoryDashboard/>}/>
 
                 <Route path="/RefundsManager" element={<RefundsManager/>}/>
 
@@ -79,7 +81,6 @@ export function PageRouting() {
 
                 <Route path="/placeOrder" element={<PlaceOrder/>}/>
                 <Route path="/viewOrder" element={<ViewOrder/>}/>
-                <Route path="/purchasedOrder" element={<PurchaseOrderDashboard/>}/>
 
             </Routes>
         </div>
