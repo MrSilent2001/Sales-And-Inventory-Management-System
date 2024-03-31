@@ -768,172 +768,56 @@
       "id": "OID001",
       "name": "WAP Saman Perera",
       "amount": 100000,
-      "status": [
-        {
-          "value": "Accepted",
-          "label": "Accepted"
-        },
-        {
-          "value": "In-Processing",
-          "label": "In-Processing"
-        },
-        {
-          "value": "Departed",
-          "label": "Departed"
-        }
-      ]
+      "status": "Accepted"
     },
     {
       "id": "OID002",
       "name": "WAP Saman Perera",
       "amount": 100000,
-      "status": [
-        {
-          "value": "Accepted",
-          "label": "Accepted"
-        },
-        {
-          "value": "In-Processing",
-          "label": "In-Processing"
-        },
-        {
-          "value": "Departed",
-          "label": "Departed"
-        }
-      ]
+      "status": "Accepted"
     },
     {
       "id": "OID004",
       "name": "WAP Saman Perera",
       "amount": 100000,
-      "status": [
-        {
-          "value": "Accepted",
-          "label": "Accepted"
-        },
-        {
-          "value": "In-Processing",
-          "label": "In-Processing"
-        },
-        {
-          "value": "Departed",
-          "label": "Departed"
-        }
-      ]
+      "status": "Accepted"
     },
     {
       "id": "OID005",
       "name": "WAP Saman Perera",
       "amount": 100000,
-      "status": [
-        {
-          "value": "Accepted",
-          "label": "Accepted"
-        },
-        {
-          "value": "In-Processing",
-          "label": "In-Processing"
-        },
-        {
-          "value": "Departed",
-          "label": "Departed"
-        }
-      ]
+      "status": "Accepted"
     },
     {
       "id": "OID006",
       "name": "WAP Saman Perera",
       "amount": 100000,
-      "status": [
-        {
-          "value": "Accepted",
-          "label": "Accepted"
-        },
-        {
-          "value": "In-Processing",
-          "label": "In-Processing"
-        },
-        {
-          "value": "Departed",
-          "label": "Departed"
-        }
-      ]
+      "status": "Accepted"
     },
     {
       "id": "OID007",
       "name": "WAP Saman Perera",
       "amount": 100000,
-      "status": [
-        {
-          "value": "Accepted",
-          "label": "Accepted"
-        },
-        {
-          "value": "In-Processing",
-          "label": "In-Processing"
-        },
-        {
-          "value": "Departed",
-          "label": "Departed"
-        }
-      ]
+      "status": "Accepted"
+      
     },
     {
       "id": "OID008",
       "name": "WAP Saman Perera",
       "amount": 100000,
-      "status": [
-        {
-          "value": "Accepted",
-          "label": "Accepted"
-        },
-        {
-          "value": "In-Processing",
-          "label": "In-Processing"
-        },
-        {
-          "value": "Departed",
-          "label": "Departed"
-        }
-      ]
+      "status": "Accepted"
     },
     {
       "id": "OID009",
       "name": "WAP Saman Perera",
       "amount": 100000,
-      "status": [
-        {
-          "value": "Accepted",
-          "label": "Accepted"
-        },
-        {
-          "value": "In-Processing",
-          "label": "In-Processing"
-        },
-        {
-          "value": "Departed",
-          "label": "Departed"
-        }
-      ]
+      "status": "Accepted"
     },
     {
       "id": "OID010",
       "name": "WAP Saman Perera",
       "amount": 100000,
-      "status": [
-        {
-          "value": "Accepted",
-          "label": "Accepted"
-        },
-        {
-          "value": "In-Processing",
-          "label": "In-Processing"
-        },
-        {
-          "value": "Departed",
-          "label": "Departed"
-        }
-      ]
+      "status": "Accepted"
     }
   ],
   "pendingOrders": [
