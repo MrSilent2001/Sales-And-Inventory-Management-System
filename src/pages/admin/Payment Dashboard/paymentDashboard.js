@@ -59,10 +59,11 @@ function PaymentDashboard() {
                         </div>
                     </div>
                     <div className="paymentDashboard">
-                        <TableContainer component={Paper} style={{ maxHeight: 500, width: '100%'}}>
+                        <TableContainer component={Paper} >
                             <CustomizedTable
+                                style={{ maxHeight: 500, width: '95%', paddingBottom: '2em'}}
                                 columns={columns}
-                                data={mappedData}
+                                rows={mappedData}
                             />
                         </TableContainer>
                         <Modal open={visible}>

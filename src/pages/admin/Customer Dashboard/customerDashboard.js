@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
 import customerData from "../../../data/data.json";
 import {Paper, TableContainer} from "@mui/material";
-import DefaultTable from "../../../components/Table/Default Table/defaultTable";
+import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 
 const columns = [
     {id: 'id', label: 'Id', minWidth: 170, align: 'center'},
@@ -88,7 +88,7 @@ function CustomerDashboard() {
 
                     <div className="CustomerManagement">
                         <TableContainer component={Paper} style={{ maxHeight: 500, width: '75%'}}>
-                            <DefaultTable
+                            <CustomizedTable
                                 columns={columns}
                                 data={mappedData}
                             />

@@ -12,16 +12,18 @@ import ComboBox from "../../../components/Form Inputs/comboBox";
 const Login = () => {
 
     const [showPassword, setShowPassword] = React.useState(false);
-    const [category, setCategory] = useState('None');
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [role, setRole] = useState("");
 
     const handleChange = (event) => {
-        setCategory(event.target.value);
+        setRole(event.target.value);
     };
 
     const options = [
-        { value: 'Admin', label: 'Admin' },
-        { value: 'Customer', label: 'Customer' },
-        { value: 'Supplier', label: 'Supplier' },
+        { value: 'admin', label: 'Admin' },
+        { value: 'customer', label: 'Customer' },
+        { value: 'supplier', label: 'Supplier' },
     ];
 
     const handleClickShowPassword = () => {
@@ -33,10 +35,6 @@ const Login = () => {
     };
 
     const navigate = useNavigate();
-
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [role, setRole] = useState("");
 
     //const auth = useAuth();
     const location = useLocation();
@@ -87,7 +85,7 @@ const Login = () => {
                                 <label>Password: </label>
                                 <PasswordField
                                     placeholder="Password"
-                                    style={{width:'14em', marginLeft: '1.85em'}}
+                                    style={{width: '14.25em', marginLeft: '2em'}}
                                     onChange={(e) => setPassword(e.target.value)}
                                     showPassword={showPassword}
                                     handleClickShowPassword={handleClickShowPassword}
@@ -99,7 +97,8 @@ const Login = () => {
                             <div className="row">
                                 <label style={{paddingRight: "50px"}}>Role: </label>
                                 <ComboBox
-                                    value={category}
+                                    className="loginInput"
+                                    value={role}
                                     onChange={handleChange}
                                     style={{width: '14em'}}
                                     options={options}

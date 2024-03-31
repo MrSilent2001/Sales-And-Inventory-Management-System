@@ -719,7 +719,6 @@
       "address": "No.65, Yorkshire, England"
     }
   ],
-
   "inventory": [
     {
       "inventoryId": "I0001",
@@ -763,6 +762,433 @@
       "Quantity": 49,
       "inventoryStatus": "In Stock"
     }
-  ]
+  ],
+  "orderStatus": [
+    {
+      "id": "OID001",
+      "name": "WAP Saman Perera",
+      "amount": 100000,
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
+    },
+    {
+      "id": "OID002",
+      "name": "WAP Saman Perera",
+      "amount": 100000,
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
+    },
+    {
+      "id": "OID004",
+      "name": "WAP Saman Perera",
+      "amount": 100000,
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
+    },
+    {
+      "id": "OID005",
+      "name": "WAP Saman Perera",
+      "amount": 100000,
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
+    },
+    {
+      "id": "OID006",
+      "name": "WAP Saman Perera",
+      "amount": 100000,
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
+    },
+    {
+      "id": "OID007",
+      "name": "WAP Saman Perera",
+      "amount": 100000,
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
+    },
+    {
+      "id": "OID008",
+      "name": "WAP Saman Perera",
+      "amount": 100000,
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
+    },
+    {
+      "id": "OID009",
+      "name": "WAP Saman Perera",
+      "amount": 100000,
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
+    },
+    {
+      "id": "OID010",
+      "name": "WAP Saman Perera",
+      "amount": 100000,
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
+    }
+  ],
+  "pendingOrders": [
+    {
+      "order_id": "OID001",
+      "customer_name": "WAP Saman Perera",
+      "amount": 100000
+    },
+    {
+      "order_id": "OID002",
+      "customer_name": "WAP Saman Perera",
+      "amount": 100000
+    },
+    {
+      "order_id": "OID004",
+      "customer_name": "WAP Saman Perera",
+      "amount": 100000
+    },
+    {
+      "order_id": "OID005",
+      "customer_name": "WAP Saman Perera",
+      "amount": 100000
+    },
+    {
+      "order_id": "OID006",
+      "customer_name": "WAP Saman Perera",
+      "amount": 100000
+    },
+    {
+      "order_id": "OID007",
+      "customer_name": "WAP Saman Perera",
+      "amount": 100000
+    },
+    {
+      "order_id": "OID008",
+      "customer_name": "WAP Saman Perera",
+      "amount": 100000
+    },
+    {
+      "order_id": "OID009",
+      "customer_name": "WAP Saman Perera",
+      "amount": 100000
+    },
+    {
+      "order_id": "OID010",
+      "customer_name": "WAP Saman Perera",
+      "amount": 100000
+    }
+  ],
+  "approvedRefunds": [
+    {
+      "name": "WAP Samane Perea",
+      "requestId": "0771112223",
+      "orderId": "I0001",
+      "amount": "Rs.19,500.00",
+      "date": "2024/01/15"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "0771112224",
+      "orderId": "I0002",
+      "amount": "Rs.150,000.00",
+      "date": "2024/01/16"
+    },
+    {
+      "name": "Jane Smith",
+      "requestId": "0771112225",
+      "orderId": "I0003",
+      "amount": "Rs.200,000.00",
+      "date": "2024/01/17"
+    },
+    {
+      "name": "WAP Samane Perea",
+      "requestId": "0771112223",
+      "orderId": "I0001",
+      "amount": "Rs.19,500.00",
+      "date": "2024/01/15"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "0771112224",
+      "orderId": "I0002",
+      "amount": "Rs.150,000.00",
+      "date": "2024/01/16"
+    },
+    {
+      "name": "Jane Smith",
+      "requestId": "0771112225",
+      "orderId": "I0003",
+      "amount": "Rs.200,000.00",
+      "date": "2024/01/17"
+    },
+    {
+      "name": "WAP Samane Perea",
+      "requestId": "0771112223",
+      "orderId": "I0001",
+      "amount": "Rs.19,500.00",
+      "date": "2024/01/15"
+    }
+  ],
+  "salesApprovedRefunds": [
+    {
+      "name": "WAP Samane Perea",
+      "requestId": "0771112223",
+      "orderId": "I0001",
+      "amount": "Rs.19,500.00",
+      "status": "refunded"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "0771112224",
+      "orderId": "I0002",
+      "amount": "Rs.150,000.00",
+      "status": "refunded"
+    },
+    {
+      "name": "Jane Smith",
+      "requestId": "0771112225",
+      "orderId": "I0003",
+      "amount": "Rs.200,000.00",
+      "status": "refunded"
+    },
+    {
+      "name": "WAP Samane Perea",
+      "requestId": "0771112223",
+      "orderId": "I0001",
+      "amount": "Rs.19,500.00",
+      "status": "refunded"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "0771112224",
+      "orderId": "I0002",
+      "amount": "Rs.150,000.00",
+      "status": "refunded"
+    },
+    {
+      "name": "Jane Smith",
+      "requestId": "0771112225",
+      "orderId": "I0003",
+      "amount": "Rs.200,000.00",
+      "status": "refunded"
+    },
+    {
+      "name": "WAP Samane Perea",
+      "requestId": "0771112223",
+      "orderId": "I0001",
+      "amount": "Rs.19,500.00",
+      "status": "refunded"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "0771112224",
+      "orderId": "I0002",
+      "amount": "Rs.150,000.00",
+      "status": "refunded"
+    },
+    {
+      "name": "Jane Smith",
+      "requestId": "0771112225",
+      "orderId": "I0003",
+      "amount": "Rs.200,000.00",
+      "status": "refunded"
+    },
+    {
+      "name": "Jane Smith",
+      "requestId": "0771112225",
+      "orderId": "I0003",
+      "amount": "Rs.200,000.00",
+      "status": "refunded"
+    }
+  ],
+  "viewRefunds": [
+    {
+      "name": "John Doe",
+      "requestId": "0771112224",
+      "orderId": "J0002"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "0771112224",
+      "orderId": "I0002"
+    },
+    {
+      "name": "Jane Smith",
+      "requestId": "0771112225",
+      "orderId": "I0003"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "0771112224",
+      "orderId": "J0002"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "0771112224",
+      "orderId": "I0002"
+    },
+    {
+      "name": "Jane Smith",
+      "requestId": "0771112225",
+      "orderId": "I0003"
+    }
+  ],
 
+
+  "inventoryRefunds": [
+    {
+      "name": "John Doe",
+      "requestId": "1",
+      "orderId": "A1",
+      "amount": "100.00",
+      "status": "Pending"
+    },
+    {
+      "name": "Jane Doe",
+      "requestId": "2",
+      "orderId": "A2",
+      "amount": "200.00",
+      "status": "Pending"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "1",
+      "orderId": "A1",
+      "amount": "100.00",
+      "status": "Pending"
+    },
+    {
+      "name": "Jane Doe",
+      "requestId": "2",
+      "orderId": "A2",
+      "amount": "200.00",
+      "status": "Pending"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "1",
+      "orderId": "A1",
+      "amount": "100.00",
+      "status": "Pending"
+    },
+    {
+      "name": "Jane Doe",
+      "requestId": "2",
+      "orderId": "A2",
+      "amount": "200.00",
+      "status": "Pending"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "1",
+      "orderId": "A1",
+      "amount": "100.00",
+      "status": "Pending"
+    }
+  ]
 }

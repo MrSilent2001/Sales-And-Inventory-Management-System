@@ -1,32 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Container, Box, Paper } from '@mui/material';
 import './ApprovedRefundsTable.css';
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
-import DefaultTable from "../../../../../components/Table/Default Table/defaultTable";
 import BackArrow from "../../../../../components/Icons/backArrow";
+import approvedRefunds from "../../../../../data/data.json";
+import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 
 const ApprovedRefundsTable = ({ onBack }) => {
-  const [refundRequests, setRefundRequests] = useState([]);
 
-  useEffect(() => {
-    approvedRefundsData().then(data => {
-      setRefundRequests(data);
-    });
-  }, []);
+  const columns=[
+    { id: 'name', label: 'Name', minWidth: 70,align: 'center'  },
+    { id: 'requestId', label: 'Request Id', minWidth: 150,align: 'center'  },
+    { id: 'orderId', label: 'order Id', minWidth: 120,align: 'center'  },
+    { id: 'amount', label: 'Amount', minWidth: 100,align: 'center'  },
+    { id: 'date', label: 'Date', minWidth: 100,align: 'center'  }
+  ];
 
-  // This function will transform the data to match the expected structure for the ReusableTable
-  const transformData = (data) => {
-    if (!data) return [];
-    return data.map(({ name, requestId, orderId, amount, status }) => [
-      name,
-      requestId,
-      orderId,
-      amount,
-      status
-    ]);
-  };
+  const  rows = approvedRefunds.approvedRefunds || [];
+
+  const mappedData = rows.map(row => ({
+    name: row.name,
+    requestId: row.requestId,
+    orderId: row.orderId,
+    amount: row.amount,
+    date: row.date
+  }));
 
   return (
       <>
@@ -45,7 +45,10 @@ const ApprovedRefundsTable = ({ onBack }) => {
             </div>
 
             <Paper elevation={4}>
-              <DefaultTable data={transformData(refundRequests)} />
+              <CustomizedTable
+                  columns={columns}
+                  rows={mappedData}
+              />
             </Paper>
           </Box>
         </Container>
@@ -53,18 +56,5 @@ const ApprovedRefundsTable = ({ onBack }) => {
       </>
   );
 };
-
-const approvedRefundsData = () => {
-  return Promise.resolve([
-    { name: 'WAP Samane Perea', requestId: '0771112223', orderId: 'I0001', amount: 'Rs.19,500.00', status: '2024/01/15' },
-    { name: 'John Doe', requestId: '0771112224', orderId: 'I0002', amount: 'Rs.150,000.00', status: '2024/01/16' },
-    { name: 'Jane Smith', requestId: '0771112225', orderId: 'I0003', amount: 'Rs.200,000.00', status: '2024/01/17' },
-    { name: 'WAP Samane Perea', requestId: '0771112223', orderId: 'I0001', amount: 'Rs.19,500.00', status: '2024/01/15' },
-    { name: 'John Doe', requestId: '0771112224', orderId: 'I0002', amount: 'Rs.150,000.00', status: '2024/01/16' },
-    { name: 'Jane Smith', requestId: '0771112225', orderId: 'I0003', amount: 'Rs.200,000.00', status: '2024/01/17' },
-    { name: 'WAP Samane Perea', requestId: '0771112223', orderId: 'I0001', amount: 'Rs.19,500.00', status: '2024/01/15' }
-
-  ]);
-}
 
 export default ApprovedRefundsTable;

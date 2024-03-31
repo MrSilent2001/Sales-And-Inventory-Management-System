@@ -21,11 +21,20 @@ const PurchaseOrderDashboard = () => {
     const [placeOrderVisible, setPlaceOrderVisible] = useState(false);
     const [viewOrderVisible, setViewOrderVisible] = useState(false);
 
-    const rows = purchasedOrders.purchasedOrders || [];
+   const columns=[
+    { id: 'supplierId', label: 'Supplier ID', minWidth: 70,align: 'center'  },
+    { id: 'address', label: 'Address', minWidth: 150,align: 'center'  },
+    { id: 'email', label: 'Email', minWidth: 120,align: 'center'  },
+    { id: 'contact', label: 'Contact', minWidth: 100,align: 'center'  },
+    { id: 'category', label: 'Category', minWidth: 100,align: 'center'  },
+    { id: 'actions', label:'', minWidth: 200,align: 'center'  }
+];
+
+    let rows = purchasedOrders.purchasedOrders || [];
 
     // Map your data to the format ReusableTable expects
     const mappedData = rows.map(row => ({
-        id: row.supplierId,
+        supplierId: row.supplierId,
         address: row.address,
         email: row.email,
         contact: row.contact,
@@ -33,7 +42,7 @@ const PurchaseOrderDashboard = () => {
         actions: (
             <div style={{ display: 'flex' }}>
                 <CustomizedButton
-                    onClick={() => setPlaceOrderVisible(true)}
+                    onClick={() => setViewOrderVisible(true)}
                     hoverBackgroundColor="#transparent"
                     style={{
                         color: '#242F9B',
@@ -142,15 +151,9 @@ const PurchaseOrderDashboard = () => {
                     <SearchBar />
                     <div style={{ overflow: 'auto', maxHeight: 'calc(100vh - 64px - 4em)' }}>
                         <CustomizedTable
-                            columns={[
-                                { id: 'id', label: 'Supplier ID', minWidth: 100 },
-                                { id: 'address', label: 'Address', minWidth: 200 },
-                                { id: 'email', label: 'Email', minWidth: 200 },
-                                { id: 'contact', label: 'Contact', minWidth: 150 },
-                                { id: 'category', label: 'Category', minWidth: 150 },
-                                { id: 'actions', label: 'Actions', minWidth: 200 }
-                            ]}
-                            data={mappedData}
+                            style={{width: '100%', maxHeight:500,marginLeft: '2.5em'}}
+                            columns={columns}
+                            rows={mappedData}
                         />
                     </div>
 

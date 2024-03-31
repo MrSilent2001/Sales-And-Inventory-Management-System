@@ -1,10 +1,10 @@
 import React from 'react';
-import { Paper, TableContainer, Table, TableHead, TableBody, TableCell, TableRow, TablePagination } from '@mui/material';
+import { Paper, TableContainer, Table, TableHead, TableBody, TableCell, TableRow} from '@mui/material';
 
-function CustomizedTable({ columns, rows, page, rowsPerPage, handleChangePage, handleChangeRowsPerPage }) {
+function CustomizedTable({ columns, rows, style }) {
     return (
-        <Paper sx={{ width: '75%', overflow: 'hidden' }}>
-            <TableContainer sx={{ maxHeight: 440 }}>
+        <Paper sx={{ width: '95%', overflow: 'hidden' }}>
+            <TableContainer sx={{ maxHeight: 440 }} style={style}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
@@ -22,7 +22,6 @@ function CustomizedTable({ columns, rows, page, rowsPerPage, handleChangePage, h
                     </TableHead>
                     <TableBody>
                         {rows
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((row) => {
                                 return (
                                     <TableRow className="table-row" hover role="checkbox" tabIndex={-1} key={row.code}>
@@ -42,15 +41,7 @@ function CustomizedTable({ columns, rows, page, rowsPerPage, handleChangePage, h
                     </TableBody>
                 </Table>
             </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-            />
+
         </Paper>
     );
 }
