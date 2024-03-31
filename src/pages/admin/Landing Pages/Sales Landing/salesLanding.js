@@ -1,6 +1,6 @@
 import React from "react";
 import "../Sales Landing/salesLanding.css";
-import InventoryLandingCard from "../../../../components/inventoryLandingCard/inventoryLandingCard";
+import InventoryLandingCard from "../../../../components/Cards/LandingPageCard";
 import Footer from "../../../../layout/footer/footer";
 import SalesNavbar from "../../../../layout/navbar/Sales navbar/sales navbar";
 

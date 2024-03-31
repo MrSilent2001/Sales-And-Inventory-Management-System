@@ -1,42 +1,34 @@
 import React, {useState} from 'react';
 import "./login.css";
-import {styled} from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {Link, useLocation, useNavigate} from "react-router-dom";
+import CustomizedButton from "../../../components/Button/button";
+import PasswordField from "../../../components/Form Inputs/passwordField";
+import ComboBox from "../../../components/Form Inputs/comboBox";
 // import {useLocation, useNavigate} from "react-router-dom";
 // import {useAuth} from "../../services/auth";
-
-
-const LoginButtons = styled(Button)(({theme}) => ({
-    color: theme.palette.getContrastText('#242F9B'),
-    backgroundColor: '#242F9B',
-    '&:hover': {
-        backgroundColor: '#2d3ed2'
-    },
-    '&.MuiButton-root': {
-        width: '11.5em',
-        height: '2em'
-    },
-    fontSize: '0.95em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em',
-   
-}));
 
 
 const Login = () => {
 
     const [showPassword, setShowPassword] = React.useState(false);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [role, setRole] = useState("");
 
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleChange = (event) => {
+        setRole(event.target.value);
+    };
+
+    const options = [
+        { value: 'admin', label: 'Admin' },
+        { value: 'customer', label: 'Customer' },
+        { value: 'supplier', label: 'Supplier' },
+    ];
+
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
@@ -44,9 +36,6 @@ const Login = () => {
 
     const navigate = useNavigate();
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [role, setRole] = useState("");
     //const auth = useAuth();
     const location = useLocation();
     const redirectPath = location.state?.path || "/login";
@@ -94,59 +83,58 @@ const Login = () => {
 
                             <div className="row">
                                 <label>Password: </label>
-                                <OutlinedInput
-                                    id="outlined-adornment-password"
-                                    size="small"
-                                    type={showPassword ? 'text' : 'password'}
-                                    label="Password"
-                                    className="loginInput"
+                                <PasswordField
+                                    placeholder="Password"
+                                    style={{width: '14.25em', marginLeft: '2em'}}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                            >
-                                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
-
+                                    showPassword={showPassword}
+                                    handleClickShowPassword={handleClickShowPassword}
+                                    handleMouseDownPassword={handleMouseDownPassword}
                                 />
                             </div>
 
 
                             <div className="row">
                                 <label style={{paddingRight: "50px"}}>Role: </label>
-                                <Select
+                                <ComboBox
                                     className="loginInput"
-                                    id="demo-select-small"
+                                    value={role}
+                                    onChange={handleChange}
+                                    style={{width: '14em'}}
+                                    options={options}
+                                    label="Category"
                                     size="small"
-                                    onChange={(e) => setRole(e.target.value)}
-                                >
-                                    <MenuItem value="none">
-                                        <em>None</em>
-                                    </MenuItem>
-                                    <MenuItem value="admin">Admin</MenuItem>
-                                    <MenuItem value="customer">Customer</MenuItem>
-                                    <MenuItem value="supplier">Supplier</MenuItem>
-                                </Select>
+                                />
                             </div>
 
-
                             <div className="btn-row">
-                                <LoginButtons>
+                                <CustomizedButton
+                                    onClick={handleLogin}
+                                    hoverBackgroundColor="#2d3ed2"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#242F9B',
+                                        width: '11.5em',
+                                        height: '2.75em',
+                                        fontSize: '0.95em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.625em',
+                                        fontWeight: '550',
+                                        border: 'none',
+                                        marginTop: '0.625em',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                    }}>
                                     Login
-                                </LoginButtons>
+                                </CustomizedButton>
                             </div>
 
                             <div>
                                 <p>Don't you have an Account?
                                     <Link to="/signup">Sign Up</Link>
                                 </p>
-                                <a href="#">Forgot Password?</a>
+                                <a href="/">Forgot Password?</a>
                             </div>
                         </div>
                     </form>

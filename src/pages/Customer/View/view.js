@@ -1,30 +1,11 @@
 import './view.css';
 import * as React from "react";
-import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
 import Avatar from '@mui/material/Avatar';
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
 import Footer from "../../../layout/footer/footer";
-
-
-const ViewOrdersButtons = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText('#242F9B'),
-    backgroundColor: '#242F9B',
-    '&:hover': {
-        backgroundColor: '#2d3ed2'
-    },
-    '&.MuiButton-root': {
-        width: '13.625em',
-        height: '3.5em'
-    },
-    fontSize: '0.75em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em',
-    marginRight:'5em'
-
-}));
+import CustomizedButton from "../../../components/Button/button";
 
 function BasicTextFields() {
     return (
@@ -123,7 +104,26 @@ function View() {
 
                         <div className="ViewOrdersButtonField">
                             <div className="ViewOrdersButtons">
-                                <ViewOrdersButtons>View Orders</ViewOrdersButtons>
+                                <CustomizedButton
+                                    hoverBackgroundColor="#2d3ed2"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#242F9B',
+                                        border: '1px solid #242F9B',
+                                        width: '11em',
+                                        height: '2.5em',
+                                        fontSize: '0.85em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        fontWeight: '550',
+                                        marginTop: '0.625em',
+                                        marginRight: '1.5em',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                    }}>
+                                    View Orders
+                                </CustomizedButton>
                             </div>
                         </div>
 

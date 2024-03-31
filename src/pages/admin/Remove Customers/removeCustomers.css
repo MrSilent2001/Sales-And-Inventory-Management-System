@@ -3,14 +3,12 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    padding: 40px 0;
 }
 
 .removeCustomersInner{
-    width: 95%;
+    width: 100%;
     height: 40.625em;
     background-color: #DBDFFD;
-    border-radius: 2%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,8 +19,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 87em;
-    margin: 2em 0 2em 0;
+    width: 75em;
+    margin: 0.25em 0 1em 0;
 
 }
 

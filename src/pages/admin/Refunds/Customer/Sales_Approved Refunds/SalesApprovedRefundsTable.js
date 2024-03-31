@@ -1,32 +1,32 @@
-// ApprovedRefundsTable.js
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Container, Box, Button, Paper } from '@mui/material';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ReusableTable from '../../../../../components/Reusable Table/Reusable Table';
 import './SalesApprovedRefundsTable.css'
 import {Link} from "react-router-dom";
 import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../../layout/footer/footer";
+import BackArrow from "../../../../../components/Icons/backArrow";
+import salesApprovedRefunds from "../../../../../data/data.json";
+import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 
 const SalesApprovedRefundsTable = ({ onBack }) => {
-  const [refundRequests, setRefundRequests] = useState([]);
 
-  useEffect(() => {
-    approvedRefundsData().then(data => {
-      setRefundRequests(data);
-    });
-  }, []);
+  const columns=[
+    { id: 'name', label: 'Name', minWidth: 70,align: 'center'  },
+    { id: 'requestId', label: 'Request Id', minWidth: 150,align: 'center'  },
+    { id: 'orderId', label: 'Order Id', minWidth: 120,align: 'center'  },
+    { id: 'amount', label: 'Amount', minWidth: 100,align: 'center'  },
+    { id: 'status', label: 'Status', minWidth: 100,align: 'center'  }
+  ];
 
-  // This function will transform the data to match the expected structure for the ReusableTable
-  const transformData = (data) => {
-    return data.map(({ name, requestId, orderId, amount, status }) => [
-      name,
-      requestId,
-      orderId,
-      amount,
-      "refunded"
-    ]);
-  };
+  const rows = salesApprovedRefunds.salesApprovedRefunds || [];
+
+  const mappedData = rows.map(row => ({
+    name: row.name,
+    requestId: row.requestId,
+    orderId: row.orderId,
+    amount: row.amount,
+    status: row.status
+  }));
 
   return (
     <>
@@ -35,7 +35,7 @@ const SalesApprovedRefundsTable = ({ onBack }) => {
         <Box sx={{ my: 4, display: 'flex', flexDirection: 'column' }}>
           <Link to="/InventoryRefundRequestsTable">
             <Button
-                startIcon={<ArrowBackIosIcon />}
+                startIcon={<BackArrow />}
                 size="large"
                 style={{ color: "black", fontWeight: 'bold', textTransform: "none" }}
                 onClick={onBack} // onBack prop
@@ -44,8 +44,11 @@ const SalesApprovedRefundsTable = ({ onBack }) => {
               Approved Refunds
             </Button>
           </Link>
-          <Paper elevation={4}>
-            <ReusableTable data={transformData(refundRequests)}/>
+          <Paper elevation={4} >
+            <CustomizedTable
+                columns={columns}
+                rows={mappedData}
+            />
           </Paper>
         </Box>
       </Container>
@@ -53,20 +56,5 @@ const SalesApprovedRefundsTable = ({ onBack }) => {
     </>
   );
 };
-
-const approvedRefundsData = () => {
-  return Promise.resolve([
-    { name: 'WAP Samane Perea', requestId: '0771112223', orderId: 'I0001', amount: 'Rs.19,500.00', status: '2024/01/15' },
-    { name: 'John Doe', requestId: '0771112224', orderId: 'I0002', amount: 'Rs.150,000.00', status: '2024/01/16' },
-    { name: 'Jane Smith', requestId: '0771112225', orderId: 'I0003', amount: 'Rs.200,000.00', status: '2024/01/17' },
-    { name: 'WAP Samane Perea', requestId: '0771112223', orderId: 'I0001', amount: 'Rs.19,500.00', status: '2024/01/15' },
-    { name: 'John Doe', requestId: '0771112224', orderId: 'I0002', amount: 'Rs.150,000.00', status: '2024/01/16' },
-    { name: 'Jane Smith', requestId: '0771112225', orderId: 'I0003', amount: 'Rs.200,000.00', status: '2024/01/17' },,
-    { name: 'WAP Samane Perea', requestId: '0771112223', orderId: 'I0001', amount: 'Rs.19,500.00', status: '2024/01/15' },
-    { name: 'John Doe', requestId: '0771112224', orderId: 'I0002', amount: 'Rs.150,000.00', status: '2024/01/16' },
-    { name: 'Jane Smith', requestId: '0771112225', orderId: 'I0003', amount: 'Rs.200,000.00', status: '2024/01/17' },
-    { name: 'Jane Smith', requestId: '0771112225', orderId: 'I0003', amount: 'Rs.200,000.00', status: '2024/01/17' }
-  ]);
-}
 
 export default SalesApprovedRefundsTable;

@@ -1,34 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import "./signup.css";
-import {styled} from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {Link} from "react-router-dom";
-
-
-const SignUpButtons = styled(Button)(({theme}) => ({
-    color: theme.palette.getContrastText('#242F9B'),
-    backgroundColor: '#242F9B',
-    '&:hover': {
-        backgroundColor: '#2d3ed2'
-    },
-    '&.MuiButton-root': {
-        width: '11em',
-        height: '2em'
-    },
-    fontSize: '0.95em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em',
-   
-}));
-
+import CustomizedButton from "../../../components/Button/button";
+import PasswordField from "../../../components/Form Inputs/passwordField";
 
 // import {useLocation, useNavigate} from "react-router-dom";
 // import {useAuth} from "../../services/auth";
@@ -105,59 +80,49 @@ const SignUp = () => {
                             </div>
 
                             <div className="row">
-                                <label style={{paddingRight: "65px"}}>Password: </label>
-                                <OutlinedInput
-                                    id="outlined-adornment-password"
-                                    size="small"
-                                    type={showPassword ? 'text' : 'password'}
-                                    label="Password"
-                                    className="signupInput"
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                                //onChange={(e) => setPassword(e.target.value)}
-                                            >
-                                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
+                                <label>Password: </label>
+                                <PasswordField
+                                    placeholder="Password"
+                                    style={{width:'16.85em', marginLeft: '-0.95em'}}
+                                    showPassword={showPassword}
+                                    handleClickShowPassword={handleClickShowPassword}
+                                    handleMouseDownPassword={handleMouseDownPassword}
                                 />
                             </div>
 
 
                             <div className="row">
                                 <label style={{paddingRight: "5px"}}>Confirm Password: </label>
-                                <OutlinedInput
-                                    id="outlined-adornment-password"
-                                    size="small"
-                                    type={showPassword ? 'text' : 'password'}
-                                    label="confirmPassword"
-                                    className="signupInput"
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                                //onChange={(e) => setPassword(e.target.value)}
-                                            >
-                                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
+                                <PasswordField
+                                    placeholder="Password"
+                                    style={{width:'16.85em', marginLeft: '-0.95em'}}
+                                    showPassword={showPassword}
+                                    handleClickShowPassword={handleClickShowPassword}
+                                    handleMouseDownPassword={handleMouseDownPassword}
                                 />
                             </div>
 
 
                             <div className="btn-row">
-                                <SignUpButtons>
-                                    SignUp
-                                </SignUpButtons>
+                                <CustomizedButton
+                                    hoverBackgroundColor="#2d3ed2"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#242F9B',
+                                        width: '11.5em',
+                                        height: '2.75em',
+                                        fontSize: '0.95em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.625em',
+                                        fontWeight: '550',
+                                        border: 'none',
+                                        marginTop: '0.625em',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                    }}>
+                                    Sign Up
+                                </CustomizedButton>
                             </div>
 
                             <div>

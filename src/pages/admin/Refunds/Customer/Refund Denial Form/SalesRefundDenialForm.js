@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Box, Button, Typography, Paper } from '@mui/material';
+import CustomizedButton from "../../../../../components/Button/button";
 
 const SalesRefundDenialForm = () => {
   const [reason, setReason] = useState('');
@@ -20,20 +20,28 @@ const SalesRefundDenialForm = () => {
           placeholder="Provide the reasons of the denial of refund request"
           style={{ width: '100%', height: '150px', padding: '10px', fontSize: '16px', borderRadius: '4px', border: '1px solid #ccc' }}
         />
-        <Box>
-            <Button
-              variant="contained"
-              sx={{ 
-                borderRadius: 1,
-                backgroundColor:"#242F9B",
-                textTransform:"none",
-                ml:77,
-                mt:1
-              }} 
-            >
+
+          <CustomizedButton
+              hoverBackgroundColor="#2d3ed2"
+              style={{
+                  color: '#ffffff',
+                  backgroundColor: '#242F9B',
+                  border: '1px solid #242F9B',
+                  width: '6em',
+                  height: '2.5em',
+                  fontSize: '0.95em',
+                  fontFamily: 'inter',
+                  padding: '0.5em 0.625em',
+                  borderRadius: '0.35em',
+                  fontWeight: '550',
+                  marginTop: '0.625em',
+                  marginRight: '1.5em',
+                  textTransform: 'none',
+                  textAlign: 'center',
+              }}>
               Submit
-            </Button>
-        </Box>    
+          </CustomizedButton>
+
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import "./inventoryLanding.css"
-import InventoryLandingCard from "../../../../components/inventoryLandingCard/inventoryLandingCard";
+import InventoryLandingCard from "../../../../components/Cards/LandingPageCard";
 import InventoryNavbar from "../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../layout/footer/footer";
 

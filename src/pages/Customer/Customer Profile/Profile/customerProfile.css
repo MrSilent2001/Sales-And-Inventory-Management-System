@@ -108,8 +108,7 @@
 .buttonStack {
     display: flex;
     align-items: center;
-    justify-content: right;
+    justify-content: center;
     margin-top: 1.5em;
-    margin-right: -6em;
-
+    margin-right: 3.5em;
 }

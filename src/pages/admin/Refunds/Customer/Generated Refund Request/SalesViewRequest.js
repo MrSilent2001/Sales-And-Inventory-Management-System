@@ -1,8 +1,8 @@
 import React from 'react';
 import './SalesViewRequest.css';
-import {Box, Button} from '@mui/material';
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../../../layout/footer/footer";
+import CustomizedButton from "../../../../../components/Button/button";
 
 function SalesViewRequest() {
     return (
@@ -69,33 +69,49 @@ function SalesViewRequest() {
 
                     </div>
 
-                    <Box sx={{ml: 50, mt: 2}}>
-                        <Button
-                            variant="contained"
-                            onClick={() => {
-                            }} // Implement the logic for this button
-                            sx={{
-                                borderRadius: 1,
-                                backgroundColor: "#FF0000",
-                                textTransform: "none",
-                                color: 'white',
-                                marginRight: 1,
-
-                            }}
-                        >
+                    <div style={{display:'flex'}}>
+                        <CustomizedButton
+                            hoverBackgroundColor="#2d3ed2"
+                            style={{
+                                color: '#ffffff',
+                                backgroundColor: '#242F9B',
+                                border: '1px solid #242F9B',
+                                width: '6em',
+                                height: '2.5em',
+                                fontSize: '0.95em',
+                                fontFamily: 'inter',
+                                padding: '0.5em 0.625em',
+                                borderRadius: '0.35em',
+                                fontWeight: '550',
+                                marginTop: '1.5em',
+                                marginRight: '1.5em',
+                                textTransform: 'none',
+                                textAlign: 'center',
+                            }}>
                             Accept
-                        </Button>
-                        <Button
-                            variant="contained"
-                            sx={{
-                                borderRadius: 1,
-                                backgroundColor: "#242F9B",
-                                textTransform: "none",
-                            }}
-                        >
+                        </CustomizedButton>
+
+                        <CustomizedButton
+                            onClick={() =>{alert("Order has been Cancelled")}}
+                            hoverBackgroundColor="#f11717"
+                            style={{
+                                color: '#ffffff',
+                                backgroundColor: '#960505',
+                                width: '6em',
+                                height: '2.5em',
+                                fontSize: '0.95em',
+                                fontFamily: 'inter',
+                                padding: '0.5em 0.625em',
+                                borderRadius: '0.35em',
+                                fontWeight: '550',
+                                marginTop: '1.5em',
+                                marginRight: '1.5em',
+                                textTransform: 'none',
+                                textAlign: 'center',
+                            }}>
                             Reject
-                        </Button>
-                    </Box>
+                        </CustomizedButton>
+                    </div>
                 </div>
 
             </div>

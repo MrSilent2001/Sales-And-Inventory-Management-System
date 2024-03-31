@@ -1,0 +1,22 @@
+/* tableStyles.css */
+
+/* StyledTableCell */
+.table-head {
+    background-color: #273031;
+    color: white;
+}
+
+.table-body {
+    font-size: 14px;
+}
+
+/* StyledTableRow */
+.table-row:nth-of-type(odd) {
+    background-color: #f5f5f5; /* Use theme.palette.action.hover equivalent */
+}
+
+/* hide last border */
+.table-row:last-child td,
+.table-row:last-child th {
+    border: none;
+}

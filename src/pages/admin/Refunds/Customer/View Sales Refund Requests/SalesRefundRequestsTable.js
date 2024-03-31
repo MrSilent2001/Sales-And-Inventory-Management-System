@@ -1,63 +1,63 @@
-import React, {useEffect, useState} from 'react';
-import {Box, Button, Container, Paper, Typography} from '@mui/material';
-import ReusableTable from '../../../../../components/Reusable Table/Reusable Table';
+import React from 'react';
+import {Box, Container, Paper, Typography} from '@mui/material';
 import Footer from "../../../../../layout/footer/footer";
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import {Link} from "react-router-dom";
+import CustomizedButton from "../../../../../components/Button/button";
+import viewRefunds from "../../../../../data/data.json";
+import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 
-const fetchRequests = () => {
-    return Promise.resolve([
-        {name: 'John Doe', requestId: '0771112224', orderId: 'J0002'},
-        {name: 'John Doe', requestId: '0771112224', orderId: 'I0002'},
-        {name: 'Jane Smith', requestId: '0771112225', orderId: 'I0003'},
-        {name: 'John Doe', requestId: '0771112224', orderId: 'J0002'},
-        {name: 'John Doe', requestId: '0771112224', orderId: 'I0002'},
-        {name: 'Jane Smith', requestId: '0771112225', orderId: 'I0003'},
-        {name: 'John Doe', requestId: '0771112224', orderId: 'J0002'},
-        {name: 'John Doe', requestId: '0771112224', orderId: 'I0002'},
-        {name: 'Jane Smith', requestId: '0771112225', orderId: 'I0003'},
-    ]);
-};
 
 const SalesRefundRequestsTable = ({onViewApproved}) => {
-    const [requests, setRequests] = useState([]);
-
-    useEffect(() => {
-        fetchRequests().then(data => {
-            setRequests(data);
-        });
-    }, []);
-
     const handleStatusButtonClick = requestId => {
         console.log('Button for request ID', requestId, 'was clicked');
     };
 
-    // Transform data to match the ReusableTable format
-    const transformedData = requests.map(request => ({
-        Name: request.name,
-        "Request ID": request.requestId,
-        "Order ID": request.orderId,
-        Status: (
-            <Box display="flex" justifyContent="flex-end">
-                <Link to="/SalesViewRequest">
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => handleStatusButtonClick(request.requestId)}
-                        sx={{backgroundColor: "#242F9B", width: '30%'}}
-                    >
-                        View
-                    </Button>
-                </Link>
-            </Box>
+    const columns=[
+        { id: 'name', label: 'Name', minWidth: 70,align: 'center'  },
+        { id: 'requestId', label: 'Request Id', minWidth: 150,align: 'center'  },
+        { id: 'orderId', label: 'Order Id', minWidth: 120,align: 'center'  },
+        { id: 'actions', label:'', minWidth: 200,align: 'center'  }
+    ];
+
+    const rows = viewRefunds.viewRefunds || [];
+
+    const mappedData = rows.map(row => ({
+        name: row.name,
+        requestId: row.requestId,
+        orderId: row.orderId,
+        actions: (
+            <Link to="/SalesViewRequest">
+                <CustomizedButton
+                    onClick={() => handleStatusButtonClick}
+                    hoverBackgroundColor="#2d3ed2"
+                    style={{
+                        color: '#ffffff',
+                        backgroundColor: '#242F9B',
+                        border: '1px solid #242F9B',
+                        width: '6em',
+                        height: '2.5em',
+                        fontSize: '0.95em',
+                        fontFamily: 'inter',
+                        padding: '0.5em 0.625em',
+                        borderRadius: '0.35em',
+                        fontWeight: '550',
+                        marginTop: '0.625em',
+                        textTransform: 'none',
+                        textAlign: 'center',
+                    }}>
+                    View
+                </CustomizedButton>
+            </Link>
         )
     }));
+
 
     return (
         <>
             <SalesNavbar/>
-            <Container className='inner_container' maxWidth="90%">
-                <Box sx={{my: 4}}>
+            <Container maxWidth="90%" style={{backgroundColor: '#DBDFFD', height: '37.5em'}}>
+                <Box>
                     <Box
                         sx={{
                             display: 'flex',
@@ -72,23 +72,35 @@ const SalesRefundRequestsTable = ({onViewApproved}) => {
                         </Typography>
                         <Box>
                             <Link to="/ApprovedRefundsTable">
-                                <Button
-                                    variant="contained"
+                                <CustomizedButton
                                     onClick={onViewApproved}
-                                    sx={{
-                                        borderRadius: 1,
-                                        backgroundColor: "#242F9B",
-                                        textTransform: "none",
-                                    }}
-                                >
+                                    hoverBackgroundColor="#2d3ed2"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#242F9B',
+                                        border: '1px solid #242F9B',
+                                        width: '11em',
+                                        height: '2.5em',
+                                        fontSize: '0.95em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        fontWeight: '550',
+                                        marginTop: '0.625em',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                    }}>
                                     Approved Refunds
-                                </Button>
+                                </CustomizedButton>
                             </Link>
 
                         </Box>
                     </Box>
                     <Paper>
-                        <ReusableTable data={transformedData}/>
+                        <CustomizedTable
+                            columns={columns}
+                            rows={mappedData}
+                        />
                     </Paper>
                 </Box>
             </Container>

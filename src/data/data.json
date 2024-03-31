@@ -4,106 +4,1191 @@
       "id": "000001",
       "name": "Chris Gayle",
       "address": "No.132, Kingston, Jamaica",
-      "items": ["I004", "I002"],
+      "items": [
+        "I004",
+        "I002"
+      ],
       "amount": 3287263
     },
     {
       "id": "000002",
       "name": "Stuart Broad",
       "address": "No.62, Worwickshire, England",
-      "items": ["I001", "I002"],
+      "items": [
+        "I001",
+        "I002"
+      ],
       "amount": 9596961
     },
     {
       "id": "000003",
       "name": "James Anderson",
       "address": "No.62, Yorkshire, England",
-      "items": ["I001", "I002"],
+      "items": [
+        "I001",
+        "I002"
+      ],
       "amount": 301340
     },
     {
       "id": "000004",
       "name": "Finn Allen",
       "address": "No.22, Auckland, New Zealand",
-      "items": ["I001", "I008"],
+      "items": [
+        "I001",
+        "I008"
+      ],
       "amount": 9833520
     },
     {
       "id": "000005",
       "name": "Jason Holder",
       "address": "No.325, Basseterri, Barbados",
-      "items": ["I001", "I002"],
+      "items": [
+        "I001",
+        "I002"
+      ],
       "amount": 9984670
     },
     {
       "id": "000006",
       "name": "Shaun Marsh",
       "address": "No.132, Kingston, Jamaica",
-      "items": ["I001", "I002"],
+      "items": [
+        "I001",
+        "I002"
+      ],
       "amount": 7692024
     },
     {
       "id": "000007",
       "name": "Mitchell Starc",
       "address": "No.72, Sydney, Australia",
-      "items": ["I001", "I002"],
+      "items": [
+        "I001",
+        "I002"
+      ],
       "amount": 357578
     },
     {
       "id": "000008",
       "name": "Josh Hazelwood",
       "address": "No.92, Melbourne, Australia",
-      "items": ["I005", "I002"],
+      "items": [
+        "I005",
+        "I002"
+      ],
       "amount": 70273
     },
     {
       "id": "000009",
       "name": "Joe Root",
       "address": "No.52, Lankanshire, England",
-      "items": ["I001", "I002"],
+      "items": [
+        "I001",
+        "I002"
+      ],
       "amount": 1972550
     },
     {
       "id": "000010",
       "name": "Harry Brook",
       "address": "No.26, Derbyshire, England",
-      "items": ["I001", "I006"],
+      "items": [
+        "I001",
+        "I006"
+      ],
       "amount": 377973
     },
     {
       "id": "000011",
       "name": "Fabian Allen",
       "address": "No.12, St.Georges Park, Guyana",
-      "items": ["I001", "I002"],
+      "items": [
+        "I001",
+        "I002"
+      ],
       "amount": 640679
     },
     {
       "id": "000012",
       "name": "Ross Taylor",
       "address": "No.252, Wellington, New Zealand",
-      "items": ["I001", "I002"],
+      "items": [
+        "I001",
+        "I002"
+      ],
       "amount": 242495
     },
     {
       "id": "000013",
       "name": "Nat Sciver",
       "address": "No.23, Essex, England",
-      "items": ["I001", "I002"],
+      "items": [
+        "I001",
+        "I002"
+      ],
       "amount": 17098246
     },
     {
       "id": "000014",
       "name": "Catherine Brunt",
       "address": "No.3, Sussex, England",
-      "items": ["I001", "I003"],
+      "items": [
+        "I001",
+        "I003"
+      ],
       "amount": 923768
     },
     {
       "id": "000015",
       "name": "Sarah Taylor",
       "address": "No.33, London, England",
-      "items": ["I001", "I002"],
+      "items": [
+        "I001",
+        "I002"
+      ],
       "amount": 8515767
+    }
+  ],
+  "customerDetails": [
+    {
+      "id": "000000",
+      "name": "Chris Gayle",
+      "address": "No.132, Kingston, Jamaica",
+      "phone": "0771112323",
+      "email": "chrisgayle@gmail.com"
+    },
+    {
+      "id": "000001",
+      "name": "Stuart Broad",
+      "address": "No.62, Worwickshire, England",
+      "phone": "0719596961",
+      "email": "stuartbroad@gmail.com"
+    },
+    {
+      "id": "000002",
+      "name": "Regina Percil",
+      "address": "No.13,Ludwigsburg , Germany",
+      "phone": "0719446987",
+      "email": "reginapercil@gmail.com"
+    },
+    {
+      "id": "000003",
+      "name": "James Anderson",
+      "address": "No.65, Yorkshire, England",
+      "phone": "0771112323",
+      "email": "Jamesanderson@gmail.com"
+    },
+    {
+      "id": "000004",
+      "name": "Finn Allen",
+      "address": "No.22, Auckland, New Zealand",
+      "phone": "0740007896",
+      "email": "Finnallen@gmail.com"
+    },
+    {
+      "id": "000005",
+      "name": "Jason Holder",
+      "address": "No.325, Basseterri, Barbados",
+      "phone": "0771112323",
+      "email": "JasonHolder@gmail.com"
+    },
+    {
+      "id": "000006",
+      "name": "Shaun Marsh",
+      "address": "No.132, Kingston, Jamaica",
+      "phone": "0771112323",
+      "email": "ShaunMarsh@gmail.com"
+    },
+    {
+      "id": "000007",
+      "name": "Mitchell Starc",
+      "address": "No.72, Sydney, Australia",
+      "phone": "0771112323",
+      "email": "MitchellStarc@gmail.com"
+    },
+    {
+      "id": "000008",
+      "name": "Josh Hazelwood",
+      "address": "No.92, Melbourne, Australia",
+      "phone": "0740007896",
+      "email": "JoshHazelwood@gmail.com"
+    },
+    {
+      "id": "000009",
+      "name": "Joe Root",
+      "address": "No.52, Lankanshire, England",
+      "phone": "0771112323",
+      "email": "JoeRoot@gmail.com"
+    },
+    {
+      "id": "000010",
+      "name": "Harry Brook",
+      "address": "No.26, Derbyshire, England",
+      "phone": "0740007896",
+      "email": "HarryBrook@gmail.com"
+    },
+    {
+      "id": "000011",
+      "name": "Fabian Allen",
+      "address": "No.12, St.Georges Park, Guyana",
+      "phone": "0771112323",
+      "email": "FabianAllen@gmail.com"
+    },
+    {
+      "id": "00012",
+      "name": "Ross Taylor",
+      "address": "No.252, Wellington, New Zealand",
+      "phone": "0719596961",
+      "email": "RossTaylor@gmail.com"
+    },
+    {
+      "id": "00013",
+      "name": "Nat Sciver",
+      "address": "No.23, Essex, England",
+      "phone": "0719596961",
+      "email": "NatSciver@gmail.com"
+    },
+    {
+      "id": "00014",
+      "name": "Catherine Brunt",
+      "address": "No.3, Sussex, England",
+      "phone": "0740007896",
+      "email": "CatherineBrunt@gmail.com"
+    },
+    {
+      "id": "00015",
+      "product": "Sarah Taylor",
+      "address": "No.33, London, England",
+      "phone": "0719596961",
+      "email": "SarahTaylor@gmail.com"
+    }
+  ],
+  "discountDetails": [
+    {
+      "id": "I001",
+      "product": "Holcim-Cement Bag 50kg",
+      "discount": "10%",
+      "price": 2750.00
+    },
+    {
+      "id": "I002",
+      "product": "Holcim-Cement Bag 50kg",
+      "discount": "10%",
+      "price": 1250.00
+    },
+    {
+      "id": "I004",
+      "product": "Holcim-Cement Bag 50kg",
+      "discount": "10%",
+      "price": 3000.00
+    },
+    {
+      "id": "I001",
+      "product": "Holcim-Cement Bag 50kg",
+      "discount": "10%",
+      "price": 2750.00
+    },
+    {
+      "id": "I002",
+      "product": "Holcim-Cement Bag 50kg",
+      "discount": "10%",
+      "price": 1250.00
+    },
+    {
+      "id": "I004",
+      "product": "Holcim-Cement Bag 50kg",
+      "discount": "10%",
+      "price": 3000.00
+    }
+  ],
+  "purchasedOrders": [
+    {
+      "supplierId": "S0001",
+      "address": "xxxxxxxxxxxxxx",
+      "email": "xxxx@gmail.com",
+      "contact": "0771112223",
+      "category": "Primary",
+      "actions": "View/Cancel"
+    },
+    {
+      "supplierId": "S0001",
+      "address": "xxxxxxxxxxxxxx",
+      "email": "xxxx@gmail.com",
+      "contact": "0771112223",
+      "category": "Primary",
+      "actions": "View/Cancel"
+    },
+    {
+      "supplierId": "S0001",
+      "address": "xxxxxxxxxxxxxx",
+      "email": "xxxx@gmail.com",
+      "contact": "0771112223",
+      "category": "Primary",
+      "actions": "View/Cancel"
+    },
+    {
+      "supplierId": "S0001",
+      "address": "xxxxxxxxxxxxxx",
+      "email": "xxxx@gmail.com",
+      "contact": "0771112223",
+      "category": "Primary",
+      "actions": "View/Cancel"
+    },
+    {
+      "supplierId": "S0001",
+      "address": "xxxxxxxxxxxxxx",
+      "email": "xxxx@gmail.com",
+      "contact": "0771112223",
+      "category": "Primary",
+      "actions": "View/Cancel"
+    },
+    {
+      "supplierId": "S0001",
+      "address": "xxxxxxxxxxxxxx",
+      "email": "xxxx@gmail.com",
+      "contact": "0771112223",
+      "category": "Primary",
+      "actions": "View/Cancel"
+    },
+    {
+      "supplierId": "S0001",
+      "address": "xxxxxxxxxxxxxx",
+      "email": "xxxx@gmail.com",
+      "contact": "0771112223",
+      "category": "Primary",
+      "actions": "View/Cancel"
+    },
+    {
+      "supplierId": "S0001",
+      "address": "xxxxxxxxxxxxxx",
+      "email": "xxxx@gmail.com",
+      "contact": "0771112223",
+      "category": "Primary",
+      "actions": "View/Cancel"
+    },
+    {
+      "supplierId": "S0001",
+      "address": "xxxxxxxxxxxxxx",
+      "email": "xxxx@gmail.com",
+      "contact": "0771112223",
+      "category": "Primary",
+      "actions": "View/Cancel"
+    }
+  ],
+  "orderHistory": [
+    {
+      "id": "000000",
+      "name": "Chris Gayle",
+      "address": "No.132, Kingston, Jamaica",
+      "items": [
+        "7111,2323"
+      ],
+      "totalAmount": "Rs.311,000"
+    },
+    {
+      "id": "000001",
+      "name": "Stuart Broad",
+      "address": "No.62, Worwickshire, England",
+      "items": [
+        "1959,6961"
+      ],
+      "totalAmount": "Rs.311,000"
+    },
+    {
+      "id": "000002",
+      "name": "Regina Percil",
+      "address": "No.13,Ludwigsburg , Germany",
+      "items": [
+        "1944,6987"
+      ],
+      "totalAmount": "Rs.311,000"
+    },
+    {
+      "id": "000003",
+      "name": "James Anderson",
+      "address": "No.65, Yorkshire, England",
+      "items": [
+        "7111,2323"
+      ],
+      "totalAmount": "Rs.311,000"
+    },
+    {
+      "id": "000004",
+      "name": "Finn Allen",
+      "address": "No.22, Auckland, New Zealand",
+      "items": [
+        "4000,7896"
+      ],
+      "totalAmount": "Rs.311,000"
+    },
+    {
+      "id": "000005",
+      "name": "Jason Holder",
+      "address": "No.325, Basseterri, Barbados",
+      "items": [
+        "7111,2323"
+      ],
+      "totalAmount": "Rs.311,000"
+    },
+    {
+      "id": "000006",
+      "name": "Shaun Marsh",
+      "address": "No.132, Kingston, Jamaica",
+      "items": [
+        "7111,2323"
+      ],
+      "totalAmount": "Rs.311,000"
+    },
+    {
+      "id": "000007",
+      "name": "Mitchell Starc",
+      "address": "No.72, Sydney, Australia",
+      "items": [
+        "7111,2323"
+      ],
+      "totalAmount": "Rs.311,000"
+    },
+    {
+      "id": "000008",
+      "name": "Josh Hazelwood",
+      "address": "No.92, Melbourne, Australia",
+      "items": [
+        "4000,7896"
+      ],
+      "totalAmount": "Rs.311,000"
+    },
+    {
+      "id": "000009",
+      "name": "Joe Root",
+      "address": "No.52, Lankanshire, England",
+      "items": [
+        "7111,2323"
+      ],
+      "totalAmount": "Rs.311,000"
+    },
+    {
+      "id": "000010",
+      "name": "Harry Brook",
+      "address": "No.26, Derbyshire, England",
+      "items": [
+        "4040,7896"
+      ],
+      "totalAmount": "Rs.311,000"
+    },
+    {
+      "id": "000011",
+      "name": "Fabian Allen",
+      "address": "No.12, St.Georges Park, Guyana",
+      "items": [
+        "7111,2323"
+      ],
+      "totalAmount": "Rs.311,000"
+    },
+    {
+      "id": "000012",
+      "name": "Ross Taylor",
+      "address": "No.252, Wellington, New Zealand",
+      "items": [
+        "7195,9661"
+      ],
+      "totalAmount": "Rs.311,000"
+    },
+    {
+      "id": "000013",
+      "name": "Nat Sciver",
+      "address": "No.23, Essex, England",
+      "items": [
+        "1959,6961"
+      ],
+      "totalAmount": "Rs.311,000"
+    },
+    {
+      "id": "000014",
+      "name": "Catherine Brunt",
+      "address": "No.3, Sussex, England",
+      "items": [
+        "0740,0078"
+      ],
+      "totalAmount": "Rs.311,000"
+    },
+    {
+      "id": "000015",
+      "name": "Sarah Taylor",
+      "address": "No.33, London, England",
+      "items": [
+        "1959,6501"
+      ],
+      "totalAmount": "Rs.311,000"
+    }
+  ],
+  "customerRefunds": [
+    {
+      "customerName": "WAP Saman Perera",
+      "mobileNumber": "0771112234",
+      "itemId": "I0001",
+      "payment": 100000,
+      "refundStatus": "Refunded"
+    },
+    {
+      "customerName": "WAP Saman Perera",
+      "mobileNumber": "0771112234",
+      "itemId": "I0001",
+      "payment": 100000,
+      "refundStatus": "Refunded"
+    },
+    {
+      "customerName": "WAP Saman Perera",
+      "mobileNumber": "0771112234",
+      "itemId": "I0001",
+      "payment": 100000,
+      "refundStatus": "Refunded"
+    },
+    {
+      "customerName": "WAP Saman Perera",
+      "mobileNumber": "0771112234",
+      "itemId": "I0001",
+      "payment": 100000,
+      "refundStatus": "Refunded"
+    },
+    {
+      "customerName": "WAP Saman Perera",
+      "mobileNumber": "0771112234",
+      "itemId": "I0001",
+      "payment": 100000,
+      "refundStatus": "Refunded"
+    },
+    {
+      "customerName": "WAP Saman Perera",
+      "mobileNumber": "0771112234",
+      "itemId": "I0001",
+      "payment": 100000,
+      "refundStatus": "Refunded"
+    },
+    {
+      "customerName": "WAP Saman Perera",
+      "mobileNumber": "0771112234",
+      "itemId": "I0001",
+      "payment": 100000,
+      "refundStatus": "Refunded"
+    }
+  ],
+  "suppliers": [
+    {
+      "supplierId": "I0001",
+      "address": "Tokyo Super Cement",
+      "email": "Cement",
+      "contact": 24,
+      "category": "In Stock"
+    },
+    {
+      "supplierId": "I0001",
+      "address": "Tokyo Super Cement",
+      "email": "Cement",
+      "contact": 37,
+      "category": "In Stock"
+    },
+    {
+      "supplierId": "I0001",
+      "address": "Tokyo Super Cement",
+      "email": "Cement",
+      "contact": 24,
+      "category": "In Stock"
+    },
+    {
+      "supplierId": "I0001",
+      "address": "Tokyo Super Cement",
+      "email": "Cement",
+      "contact": 67,
+      "category": "In Stock"
+    },
+    {
+      "supplierId": "I0001",
+      "address": "Tokyo Super Cement",
+      "email": "Cement",
+      "contact": 49,
+      "category": "In Stock"
+    },
+    {
+      "supplierId": "I0001",
+      "address": "Tokyo Super Cement",
+      "email": "Cement",
+      "contact": 49,
+      "category": "In Stock"
+    }
+  ],
+  "items": [
+    {
+      "inventoryId": "I0001",
+      "itemDescription": "Tokyo Super Cement",
+      "itemCategory": "Cement",
+      "Quantity": 24,
+      "inventoryStatus": "In Stock"
+    },
+    {
+      "inventoryId": "I0001",
+      "itemDescription": "Tokyo Super Cement",
+      "itemCategory": "Cement",
+      "Quantity": 37,
+      "inventoryStatus": "In Stock"
+    },
+    {
+      "inventoryId": "I0001",
+      "itemDescription": "Tokyo Super Cement",
+      "itemCategory": "Cement",
+      "Quantity": 24,
+      "inventoryStatus": "In Stock"
+    },
+    {
+      "inventoryId": "I0001",
+      "itemDescription": "Tokyo Super Cement",
+      "itemCategory": "Cement",
+      "Quantity": 67,
+      "inventoryStatus": "In Stock"
+    },
+    {
+      "inventoryId": "I0001",
+      "itemDescription": "Tokyo Super Cement",
+      "itemCategory": "Cement",
+      "Quantity": 49,
+      "inventoryStatus": "In Stock"
+    },
+    {
+      "inventoryId": "I0001",
+      "itemDescription": "Tokyo Super Cement",
+      "itemCategory": "Cement",
+      "Quantity": 49,
+      "inventoryStatus": "In Stock"
+    }
+  ],
+  "customerData": [
+    {
+      "id": "0001",
+      "name": "Finn Allen",
+      "address": "No.65, Yorkshire, England"
+    },
+    {
+      "id": "0002",
+      "name": "Finn Allen",
+      "address": "No.65, Yorkshire, England"
+    },
+    {
+      "id": "0003",
+      "name": "Finn Allen",
+      "address": "No.65, Yorkshire, England"
+    },
+    {
+      "id": "0004",
+      "name": "Finn Allen",
+      "address": "No.65, Yorkshire, England"
+    },
+    {
+      "id": "0005",
+      "name": "Finn Allen",
+      "address": "No.65, Yorkshire, England"
+    },
+    {
+      "id": "0006",
+      "name": "Finn Allen",
+      "address": "No.65, Yorkshire, England"
+    },
+    {
+      "id": "0007",
+      "name": "Finn Allen",
+      "address": "No.65, Yorkshire, England"
+    },
+    {
+      "id": "0008",
+      "name": "Finn Allen",
+      "address": "No.65, Yorkshire, England"
+    },
+    {
+      "id": "0009",
+      "name": "Finn Allen",
+      "address": "No.65, Yorkshire, England"
+    },
+    {
+      "id": "0010",
+      "name": "Finn Allen",
+      "address": "No.65, Yorkshire, England"
+    },
+    {
+      "id": "0011",
+      "name": "Finn Allen",
+      "address": "No.65, Yorkshire, England"
+    }
+  ],
+  "inventory": [
+    {
+      "inventoryId": "I0001",
+      "itemDescription": "Tokyo Super Cement",
+      "itemCategory": "Cement",
+      "Quantity": 24,
+      "inventoryStatus": "In Stock"
+    },
+    {
+      "inventoryId": "I0001",
+      "itemDescription": "Tokyo Super Cement",
+      "itemCategory": "Cement",
+      "Quantity": 37,
+      "inventoryStatus": "In Stock"
+    },
+    {
+      "inventoryId": "I0001",
+      "itemDescription": "Tokyo Super Cement",
+      "itemCategory": "Cement",
+      "Quantity": 24,
+      "inventoryStatus": "In Stock"
+    },
+    {
+      "inventoryId": "I0001",
+      "itemDescription": "Tokyo Super Cement",
+      "itemCategory": "Cement",
+      "Quantity": 67,
+      "inventoryStatus": "In Stock"
+    },
+    {
+      "inventoryId": "I0001",
+      "itemDescription": "Tokyo Super Cement",
+      "itemCategory": "Cement",
+      "Quantity": 49,
+      "inventoryStatus": "In Stock"
+    },
+    {
+      "inventoryId": "I0001",
+      "itemDescription": "Tokyo Super Cement",
+      "itemCategory": "Cement",
+      "Quantity": 49,
+      "inventoryStatus": "In Stock"
+    }
+  ],
+  "orderStatus": [
+    {
+      "id": "OID001",
+      "name": "WAP Saman Perera",
+      "amount": 100000,
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
+    },
+    {
+      "id": "OID002",
+      "name": "WAP Saman Perera",
+      "amount": 100000,
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
+    },
+    {
+      "id": "OID004",
+      "name": "WAP Saman Perera",
+      "amount": 100000,
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
+    },
+    {
+      "id": "OID005",
+      "name": "WAP Saman Perera",
+      "amount": 100000,
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
+    },
+    {
+      "id": "OID006",
+      "name": "WAP Saman Perera",
+      "amount": 100000,
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
+    },
+    {
+      "id": "OID007",
+      "name": "WAP Saman Perera",
+      "amount": 100000,
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
+    },
+    {
+      "id": "OID008",
+      "name": "WAP Saman Perera",
+      "amount": 100000,
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
+    },
+    {
+      "id": "OID009",
+      "name": "WAP Saman Perera",
+      "amount": 100000,
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
+    },
+    {
+      "id": "OID010",
+      "name": "WAP Saman Perera",
+      "amount": 100000,
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
+    }
+  ],
+  "pendingOrders": [
+    {
+      "order_id": "OID001",
+      "customer_name": "WAP Saman Perera",
+      "amount": 100000
+    },
+    {
+      "order_id": "OID002",
+      "customer_name": "WAP Saman Perera",
+      "amount": 100000
+    },
+    {
+      "order_id": "OID004",
+      "customer_name": "WAP Saman Perera",
+      "amount": 100000
+    },
+    {
+      "order_id": "OID005",
+      "customer_name": "WAP Saman Perera",
+      "amount": 100000
+    },
+    {
+      "order_id": "OID006",
+      "customer_name": "WAP Saman Perera",
+      "amount": 100000
+    },
+    {
+      "order_id": "OID007",
+      "customer_name": "WAP Saman Perera",
+      "amount": 100000
+    },
+    {
+      "order_id": "OID008",
+      "customer_name": "WAP Saman Perera",
+      "amount": 100000
+    },
+    {
+      "order_id": "OID009",
+      "customer_name": "WAP Saman Perera",
+      "amount": 100000
+    },
+    {
+      "order_id": "OID010",
+      "customer_name": "WAP Saman Perera",
+      "amount": 100000
+    }
+  ],
+  "approvedRefunds": [
+    {
+      "name": "WAP Samane Perea",
+      "requestId": "0771112223",
+      "orderId": "I0001",
+      "amount": "Rs.19,500.00",
+      "date": "2024/01/15"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "0771112224",
+      "orderId": "I0002",
+      "amount": "Rs.150,000.00",
+      "date": "2024/01/16"
+    },
+    {
+      "name": "Jane Smith",
+      "requestId": "0771112225",
+      "orderId": "I0003",
+      "amount": "Rs.200,000.00",
+      "date": "2024/01/17"
+    },
+    {
+      "name": "WAP Samane Perea",
+      "requestId": "0771112223",
+      "orderId": "I0001",
+      "amount": "Rs.19,500.00",
+      "date": "2024/01/15"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "0771112224",
+      "orderId": "I0002",
+      "amount": "Rs.150,000.00",
+      "date": "2024/01/16"
+    },
+    {
+      "name": "Jane Smith",
+      "requestId": "0771112225",
+      "orderId": "I0003",
+      "amount": "Rs.200,000.00",
+      "date": "2024/01/17"
+    },
+    {
+      "name": "WAP Samane Perea",
+      "requestId": "0771112223",
+      "orderId": "I0001",
+      "amount": "Rs.19,500.00",
+      "date": "2024/01/15"
+    }
+  ],
+  "salesApprovedRefunds": [
+    {
+      "name": "WAP Samane Perea",
+      "requestId": "0771112223",
+      "orderId": "I0001",
+      "amount": "Rs.19,500.00",
+      "status": "refunded"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "0771112224",
+      "orderId": "I0002",
+      "amount": "Rs.150,000.00",
+      "status": "refunded"
+    },
+    {
+      "name": "Jane Smith",
+      "requestId": "0771112225",
+      "orderId": "I0003",
+      "amount": "Rs.200,000.00",
+      "status": "refunded"
+    },
+    {
+      "name": "WAP Samane Perea",
+      "requestId": "0771112223",
+      "orderId": "I0001",
+      "amount": "Rs.19,500.00",
+      "status": "refunded"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "0771112224",
+      "orderId": "I0002",
+      "amount": "Rs.150,000.00",
+      "status": "refunded"
+    },
+    {
+      "name": "Jane Smith",
+      "requestId": "0771112225",
+      "orderId": "I0003",
+      "amount": "Rs.200,000.00",
+      "status": "refunded"
+    },
+    {
+      "name": "WAP Samane Perea",
+      "requestId": "0771112223",
+      "orderId": "I0001",
+      "amount": "Rs.19,500.00",
+      "status": "refunded"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "0771112224",
+      "orderId": "I0002",
+      "amount": "Rs.150,000.00",
+      "status": "refunded"
+    },
+    {
+      "name": "Jane Smith",
+      "requestId": "0771112225",
+      "orderId": "I0003",
+      "amount": "Rs.200,000.00",
+      "status": "refunded"
+    },
+    {
+      "name": "Jane Smith",
+      "requestId": "0771112225",
+      "orderId": "I0003",
+      "amount": "Rs.200,000.00",
+      "status": "refunded"
+    }
+  ],
+  "viewRefunds": [
+    {
+      "name": "John Doe",
+      "requestId": "0771112224",
+      "orderId": "J0002"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "0771112224",
+      "orderId": "I0002"
+    },
+    {
+      "name": "Jane Smith",
+      "requestId": "0771112225",
+      "orderId": "I0003"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "0771112224",
+      "orderId": "J0002"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "0771112224",
+      "orderId": "I0002"
+    },
+    {
+      "name": "Jane Smith",
+      "requestId": "0771112225",
+      "orderId": "I0003"
+    }
+  ],
+
+
+  "inventoryRefunds": [
+    {
+      "name": "John Doe",
+      "requestId": "1",
+      "orderId": "A1",
+      "amount": "100.00",
+      "status": "Pending"
+    },
+    {
+      "name": "Jane Doe",
+      "requestId": "2",
+      "orderId": "A2",
+      "amount": "200.00",
+      "status": "Pending"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "1",
+      "orderId": "A1",
+      "amount": "100.00",
+      "status": "Pending"
+    },
+    {
+      "name": "Jane Doe",
+      "requestId": "2",
+      "orderId": "A2",
+      "amount": "200.00",
+      "status": "Pending"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "1",
+      "orderId": "A1",
+      "amount": "100.00",
+      "status": "Pending"
+    },
+    {
+      "name": "Jane Doe",
+      "requestId": "2",
+      "orderId": "A2",
+      "amount": "200.00",
+      "status": "Pending"
+    },
+    {
+      "name": "John Doe",
+      "requestId": "1",
+      "orderId": "A1",
+      "amount": "100.00",
+      "status": "Pending"
     }
   ]
 }

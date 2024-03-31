@@ -1,71 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Box, Button, Paper } from '@mui/material';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ReusableTable from '../../../../../components/Reusable Table/Reusable Table';
+import React from 'react';
+import { Container, Box, Paper } from '@mui/material';
 import './ApprovedRefundsTable.css';
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../../../layout/footer/footer";
-import {Link} from "react-router-dom";  // Make sure you define your styles in this CSS file
+import {Link} from "react-router-dom";
+import BackArrow from "../../../../../components/Icons/backArrow";
+import approvedRefunds from "../../../../../data/data.json";
+import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 
 const ApprovedRefundsTable = ({ onBack }) => {
-  const [refundRequests, setRefundRequests] = useState([]);
 
-  useEffect(() => {
-    approvedRefundsData().then(data => {
-      setRefundRequests(data);
-    });
-  }, []);
+  const columns=[
+    { id: 'name', label: 'Name', minWidth: 70,align: 'center'  },
+    { id: 'requestId', label: 'Request Id', minWidth: 150,align: 'center'  },
+    { id: 'orderId', label: 'order Id', minWidth: 120,align: 'center'  },
+    { id: 'amount', label: 'Amount', minWidth: 100,align: 'center'  },
+    { id: 'date', label: 'Date', minWidth: 100,align: 'center'  }
+  ];
 
-  // This function will transform the data to match the expected structure for the ReusableTable
-  const transformData = (data) => {
-    return data.map(({ name, requestId, orderId, amount, status }) => [
-      name,
-      requestId,
-      orderId,
-      amount,
-      status  // This should be an actual date if you have it
-    ]);
-  };
+  const  rows = approvedRefunds.approvedRefunds || [];
+
+  const mappedData = rows.map(row => ({
+    name: row.name,
+    requestId: row.requestId,
+    orderId: row.orderId,
+    amount: row.amount,
+    date: row.date
+  }));
 
   return (
-    <>
-      <SalesNavbar/>
-      <Container className='inner_container' maxWidth="90%">
-        <Box sx={{ my: 4, display: 'flex', flexDirection: 'column' }}>
+      <>
+        <SalesNavbar/>
+        <Container className='inner_container' maxWidth="90%">
+          <Box sx={{pt: 4, display: 'flex', flexDirection: 'column' }}>
+            <div style={{display: 'flex',alignItems: 'flex-start', padding: '0.65em 0 0.65em 0', marginTop: '2em 0'}}>
 
-          <Link to="/InventoryRefundRequestsTable">
-            <Button
-                startIcon={<ArrowBackIosIcon />}
-                size="large"
-                style={{ color: "black", fontWeight: 'bold', textTransform: "none" }}
-                onClick={onBack} // onBack prop
-                sx={{ width: '20%', p: '0px', pr: '7%', mt: '2%', mb: '2%' }}
-            >
-              Refund Request
-            </Button>
-          </Link>
+              <Link to="/InventoryRefundRequestsTable">
+                <BackArrow
+                    onClick={onBack}
+                    style={{marginTop: '-0.1em'}}
+                />
+              </Link>
+              <span style={{fontWeight: "bold", }}>Refund Request</span>
+            </div>
 
-          <Paper elevation={4}>
-            <ReusableTable data={transformData(refundRequests)} />
-          </Paper>
-        </Box>
-      </Container>
-      <Footer/>
-    </>
+            <Paper elevation={4}>
+              <CustomizedTable
+                  columns={columns}
+                  rows={mappedData}
+              />
+            </Paper>
+          </Box>
+        </Container>
+        <Footer/>
+      </>
   );
 };
-
-const approvedRefundsData = () => {
-  return Promise.resolve([
-    { name: 'WAP Samane Perea', requestId: '0771112223', orderId: 'I0001', amount: 'Rs.19,500.00', status: '2024/01/15' },
-    { name: 'John Doe', requestId: '0771112224', orderId: 'I0002', amount: 'Rs.150,000.00', status: '2024/01/16' },
-    { name: 'Jane Smith', requestId: '0771112225', orderId: 'I0003', amount: 'Rs.200,000.00', status: '2024/01/17' },
-    { name: 'WAP Samane Perea', requestId: '0771112223', orderId: 'I0001', amount: 'Rs.19,500.00', status: '2024/01/15' },
-    { name: 'John Doe', requestId: '0771112224', orderId: 'I0002', amount: 'Rs.150,000.00', status: '2024/01/16' },
-    { name: 'Jane Smith', requestId: '0771112225', orderId: 'I0003', amount: 'Rs.200,000.00', status: '2024/01/17' },
-    { name: 'WAP Samane Perea', requestId: '0771112223', orderId: 'I0001', amount: 'Rs.19,500.00', status: '2024/01/15' }
-    
-  ]);
-}
 
 export default ApprovedRefundsTable;

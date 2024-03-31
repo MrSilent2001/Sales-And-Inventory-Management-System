@@ -1,5 +1,7 @@
 .viewSupplierOuter{
     display: flex;
+    background-color: rgba(219, 223, 253, 0.8);
+
 }
 
 .viewSupplierFilter{
@@ -33,17 +35,19 @@
 }
 
 .viewSupplierInner{
-    width: 81.25em;
+    width: 100%;
     height: 38.5em;
-    background-color: rgba(219, 223, 253, 0.8);
+    /*background-color: rgba(219, 223, 253, 0.8);*/
     padding: 1.5em 0 0 0;
 }
 
 .searchAndButtons{
     display: flex;
-    width: 81.25em;
-    padding: 0.5em 0 0 0;
-    justify-content: space-between;
+    padding:0;
+    margin: 0 !important;
+    align-items: center;
+    justify-content: center;
+    width: 97.5% !important;
 }
 
 .viewSupplierSearch{
@@ -57,7 +61,7 @@
     align-items: center;
     width: 15.625em;
     justify-content: space-between;
-    padding: 0 1.95em 0 0;
+    margin-right: 8em;
 }
 
 .itemTable{

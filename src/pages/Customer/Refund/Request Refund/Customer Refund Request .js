@@ -6,11 +6,10 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import {styled} from "@mui/material/styles";
-import Button from "@mui/material/Button";
 import Footer from "../../../../layout/footer/footer";
 import SalesNavbar from "../../../../layout/navbar/Sales navbar/sales navbar";
 import {Link} from "react-router-dom";
+import CustomizedButton from "../../../../components/Button/button";
 
 function SelectItem() {
 
@@ -134,21 +133,6 @@ function BasicTextFields() {
     );
 }
 
-const RefundRequestButtons = styled(Button)(({theme}) => ({
-    color: theme.palette.getContrastText('#242F9B'),
-    backgroundColor: '#242F9B',
-    '&:hover': {
-        backgroundColor: '#2d3ed2'
-    },
-    '&.MuiButton-root': {
-        width: '12.625em',
-        height: '3.5em'
-    },
-    fontSize: '0.65em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em'
-}));
-
 function CustomerRefundRequest() {
     return (
         <>
@@ -209,12 +193,47 @@ function CustomerRefundRequest() {
 
                         <div className="refundButtonField">
                             <div className="refundRequestButtons">
-                                <RefundRequestButtons>Cancel Request</RefundRequestButtons>
-
                                 <Link to="/generatedrefund">
-                                <RefundRequestButtons>Create Request</RefundRequestButtons>
+                                    <CustomizedButton
+                                        hoverBackgroundColor="#2d3ed2"
+                                        style={{
+                                            color: '#ffffff',
+                                            backgroundColor: '#242F9B',
+                                            border: '1px solid #242F9B',
+                                            width: '9.5em',
+                                            height: '2.5em',
+                                            fontSize: '0.85em',
+                                            fontFamily: 'inter',
+                                            padding: '0.5em 0.625em',
+                                            borderRadius: '0.35em',
+                                            fontWeight: '550',
+                                            marginTop: '0.625em',
+                                            marginRight: '1.5em',
+                                            textTransform: 'none',
+                                            textAlign: 'center',
+                                        }}>
+                                        Create Request
+                                    </CustomizedButton>
                                 </Link>
 
+                                <CustomizedButton
+                                    hoverBackgroundColor="#f11717"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#960505',
+                                        width: '9.5em',
+                                        height: '2.5em',
+                                        fontSize: '0.85em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        fontWeight: '550',
+                                        marginTop: '0.625em',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                    }}>
+                                    Cancel Request
+                                </CustomizedButton>
                             </div>
                         </div>
 

@@ -1,14 +1,12 @@
 import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button } from '@mui/material';
+import CustomizedButton from "../Button/button";
 
 export default function MediaControlCard({ item, removeFromCart }) {
-    const theme = useTheme();
 
     const handleRemoveClick = () => {
         removeFromCart(item.id);
@@ -39,9 +37,25 @@ export default function MediaControlCard({ item, removeFromCart }) {
                 </CardContent>
             </Box>
             <Box sx={{ alignSelf: 'right', marginLeft: 100 }}>
-                <Button variant="contained" color="error" onClick={handleRemoveClick}>
+                <CustomizedButton
+                    onClick={handleRemoveClick}
+                    hoverBackgroundColor="#f11717"
+                    style={{
+                        color: '#ffffff',
+                        backgroundColor: '#960505',
+                        width: '6em',
+                        height: '2.5em',
+                        fontSize: '0.95em',
+                        fontFamily: 'inter',
+                        padding: '0.5em 0.625em',
+                        borderRadius: '0.35em',
+                        fontWeight: '550',
+                        marginTop: '0.625em',
+                        textTransform: 'none',
+                        textAlign: 'center',
+                    }}>
                     Remove
-                </Button>
+                </CustomizedButton>
             </Box>
         </Card>
     );

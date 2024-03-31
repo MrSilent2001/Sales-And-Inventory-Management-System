@@ -1,9 +1,6 @@
 import React, {useState} from "react";
 import "./inventoryDashboard.css";
-import AddItemButton from "../../../layout/buttons/addItemButton/AddItemButton";
-import DeleteItemButton from "../../../layout/buttons/deleteItemButton/DeleteItemButton";
 import {styled} from "@mui/material/styles";
-import Button from "@mui/material/Button";
 import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
@@ -16,24 +13,11 @@ import AddItem from "../../admin/View Inventory/Modals/Add Item/Add Item";
 import UpdateItem from "../../admin/View Inventory/Modals/Update Item/Update Item";
 import Footer from "../../../layout/footer/footer";
 import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navbar";
-import SearchBar from "../../../layout/search bar/search bar";
+import SearchBar from "../../../components/search bar/search bar";
+import CustomizedButton from "../../../components/Button/button";
+import inventory from "../../../data/data.json";
+import CustomizedAlert from "../../../components/Alert/alert";
 
-
-
-const ApplyButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText('#D41400'),
-    backgroundColor: '#D41400',
-    '&:hover': {
-        backgroundColor: '#e03a26'
-    },
-    '&.MuiButton-root': {
-        width: '11.625em',
-        height: '2.75em'
-    },
-    fontSize: '0.625em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em'
-}));
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -59,40 +43,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-function createData(inventoryId, itemDescription, itemCategory, Quantity, inventoryStatus) {
-    return { inventoryId, itemDescription, itemCategory, Quantity, inventoryStatus };
-}
-
-const rows = [
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 24, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 37, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 24, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 67, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 49, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 49, 'In Stock'),
-];
-
-const ViewItemButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText('#242F9B'),
-    backgroundColor: '#242F9B',
-    '&:hover': {
-        backgroundColor: '#2d3ed2'
-    },
-    '&.MuiButton-root': {
-        width: '11.625em',
-        height: '2.75em'
-    },
-    fontSize: '0.7em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em'
-}));
+const rows = inventory.inventory || [];
 
 function CustomizedTables() {
     const [visible,setVisible] = useState(false)
 
     return (
         <TableContainer component={Paper} sx={{ width: '100%', maxHeight: '25em', overflowY: 'auto', position: 'relative'}}>
-            <Table sx={{ minWidth: '25em'}} aria-label="customized table">
+            <Table aria-label="customized table">
                 <TableHead>
                     <TableRow>
                         <StyledTableCell>Inventory ID</StyledTableCell>
@@ -113,7 +71,29 @@ function CustomizedTables() {
                             <StyledTableCell align="right">{row.itemCategory}</StyledTableCell>
                             <StyledTableCell align="right">{row.Quantity}</StyledTableCell>
                             <StyledTableCell align="right">{row.inventoryStatus}</StyledTableCell>
-                            <StyledTableCell><ViewItemButton onClick={()=>setVisible(true)}>View</ViewItemButton></StyledTableCell>
+                            <StyledTableCell>
+                                <CustomizedButton
+                                    onClick={()=>setVisible(true)}
+                                    hoverBackgroundColor="#2d3ed2"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#242F9B',
+                                        border: '1px solid #242F9B',
+                                        width: '6em',
+                                        height: '2.5em',
+                                        fontSize: '0.95em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        fontWeight: '550',
+                                        marginTop: '0.625em',
+                                        marginRight: '1.5em',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                    }}>
+                                    View
+                                </CustomizedButton>
+                            </StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>
@@ -127,7 +107,12 @@ function CustomizedTables() {
 
 function InventoryDashboard(){
 
-    const [visible,setVisible] = useState(false)
+    const [visible,setVisible] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
+
+    const handleDelete = () => {
+        setShowAlert(true);
+    };
 
     return(
         <>
@@ -140,8 +125,48 @@ function InventoryDashboard(){
                             <SearchBar></SearchBar>
                         </div>
                         <div className="viewInventoryButtons">
-                            <AddItemButton onClick={()=>setVisible(true)}>Add Item</AddItemButton>
-                            <DeleteItemButton>Delete Item</DeleteItemButton>
+                            <CustomizedButton
+                                onClick={()=>setVisible(true)}
+                                hoverBackgroundColor="#2d3ed2"
+                                style={{
+                                    color: '#ffffff',
+                                    backgroundColor: '#242F9B',
+                                    border: '1px solid #242F9B',
+                                    width: '11em',
+                                    height: '2.5em',
+                                    fontSize: '0.95em',
+                                    fontFamily: 'inter',
+                                    padding: '0.5em 0.625em',
+                                    borderRadius: '0.35em',
+                                    fontWeight: '550',
+                                    marginTop: '0.625em',
+                                    marginRight: '1.5em',
+                                    textTransform: 'none',
+                                    textAlign: 'center',
+                                }}>
+                                Add Item
+                            </CustomizedButton>
+
+                            <CustomizedButton
+                                onClick={handleDelete}
+                                hoverBackgroundColor="#f11717"
+                                style={{
+                                    color: '#ffffff',
+                                    backgroundColor: '#960505',
+                                    width: '11em',
+                                    height: '2.5em',
+                                    fontSize: '0.95em',
+                                    fontFamily: 'inter',
+                                    padding: '0.5em 0.625em',
+                                    borderRadius: '0.35em',
+                                    fontWeight: '550',
+                                    marginTop: '0.625em',
+                                    marginRight: '1.5em',
+                                    textTransform: 'none',
+                                    textAlign: 'center',
+                                }}>
+                                Delete Item
+                            </CustomizedButton>
                         </div>
                     </div>
 
@@ -149,6 +174,17 @@ function InventoryDashboard(){
                         <CustomizedTables></CustomizedTables>
                     </div>
                 </div>
+
+                {showAlert && (
+                    <CustomizedAlert
+                        variant="contained"
+                        severity="error"
+                        onClose={() => setShowAlert(false)}
+
+                    >
+                        Alert Message
+                    </CustomizedAlert>
+                )}
 
                 <Modal open={visible}>
                     <AddItem onClose={(value) => { setVisible(false)}} ></AddItem>
