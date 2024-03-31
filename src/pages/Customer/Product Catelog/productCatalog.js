@@ -14,7 +14,7 @@ const products = [
         "id": 1,
         "title": "Item 1",
         "price": 10,
-        "img": "https://m.media-amazon.com/images/I/71rmxx8P2qL._AC_UY327_FMwebp_QL65_.jpg",
+        "img": "https://www.jtc.lk/wp-content/uploads/2021/10/Clow-Hammer-F-H-0.25kg-American-Type.png",
         "amount": 1
     },
     {
@@ -116,6 +116,7 @@ function ProductCatalog() {
     // Load cart from local storage on component mount
     useEffect(() => {
         const storedCart = JSON.parse(localStorage.getItem("cart"));
+        //check if cart is not empty
         if (storedCart) {
             setCart(storedCart);
         }
@@ -123,8 +124,18 @@ function ProductCatalog() {
 
     // Function to handle click event on item
     const handleClick = (item) => {
-        const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
-
+        // const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
+        const findItemIndex = (cart, targetItemId) => {
+            for (let i = 0; i < cart.length; i++) {
+                if (cart[i].id === targetItemId) {
+                    return i; 
+                }
+            }
+            return -1;
+        };
+        
+        const existingItemIndex = findItemIndex(cart, item.id);
+        
         // If item already exists in cart, increase its quantity
         if (existingItemIndex !== -1) {
             const updatedCart = [...cart];
@@ -137,11 +148,9 @@ function ProductCatalog() {
             setCart([...cart, { ...item, amount: 1 }]);
             localStorage.setItem("cart", JSON.stringify([...cart, { ...item, amount: 1 }]));
         }
+        
+    }
 
-
-     }
-
-     
     // Render component
     return (
         <>

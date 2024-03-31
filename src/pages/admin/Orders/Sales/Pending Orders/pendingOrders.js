@@ -5,7 +5,7 @@ import Footer from "../../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../../../components/Button/button";
 import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
-import pendingOrders from "../../../../../data/data.json";
+import Orders from "../../../../../data/data.json";
 
 
 const columns = [
@@ -70,7 +70,7 @@ const columns = [
     }
 ];
 
-const rows = pendingOrders.pendingOrders || [];
+const rows = Orders.Orders || [];
 
 const mappedData = rows.map(row => ({
     order_id: row.order_id,
@@ -265,3 +265,4 @@ function PendingOrders() {
 }
 
 export default PendingOrders;
+
