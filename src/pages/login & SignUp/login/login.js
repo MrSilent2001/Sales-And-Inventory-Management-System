@@ -36,6 +36,7 @@ const Login = () => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [role, setRole] = useState("");
 
     //const auth = useAuth();
     const location = useLocation();
