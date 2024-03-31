@@ -137,8 +137,11 @@ function ProductCatalog() {
             setCart([...cart, { ...item, amount: 1 }]);
             localStorage.setItem("cart", JSON.stringify([...cart, { ...item, amount: 1 }]));
         }
-    }
 
+
+     }
+
+     
     // Render component
     return (
         <>
