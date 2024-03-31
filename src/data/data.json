@@ -768,56 +768,172 @@
       "id": "OID001",
       "name": "WAP Saman Perera",
       "amount": 100000,
-      "status": "Accepted"
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
     },
     {
       "id": "OID002",
       "name": "WAP Saman Perera",
       "amount": 100000,
-      "status": "Accepted"
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
     },
     {
       "id": "OID004",
       "name": "WAP Saman Perera",
       "amount": 100000,
-      "status": "Accepted"
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
     },
     {
       "id": "OID005",
       "name": "WAP Saman Perera",
       "amount": 100000,
-      "status": "Accepted"
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
     },
     {
       "id": "OID006",
       "name": "WAP Saman Perera",
       "amount": 100000,
-      "status": "Accepted"
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
     },
     {
       "id": "OID007",
       "name": "WAP Saman Perera",
       "amount": 100000,
-      "status": "Accepted"
-      
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
     },
     {
       "id": "OID008",
       "name": "WAP Saman Perera",
       "amount": 100000,
-      "status": "Accepted"
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
     },
     {
       "id": "OID009",
       "name": "WAP Saman Perera",
       "amount": 100000,
-      "status": "Accepted"
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
     },
     {
       "id": "OID010",
       "name": "WAP Saman Perera",
       "amount": 100000,
-      "status": "Accepted"
+      "status": [
+        {
+          "value": "Accepted",
+          "label": "Accepted"
+        },
+        {
+          "value": "In-Processing",
+          "label": "In-Processing"
+        },
+        {
+          "value": "Departed",
+          "label": "Departed"
+        }
+      ]
     }
   ],
   "pendingOrders": [
@@ -867,6 +983,91 @@
       "amount": 100000
     }
   ],
+
+  "Orders": [
+    {
+      "order_id": "OID001",
+      "Status": "Pending",
+      "customer_name": "John Doe",
+      "Address": "123 Main Street",
+      "Contact": "555-1234",
+      "Items": [{"ItemID": "I002", "Quantity": 3}, {"ItemID": "I004", "Quantity": 2}],
+      "amount": 95000
+    },
+    {
+      "order_id": "OID002",
+      "Status": "Pending",
+      "customer_name": "Alice Smith",
+      "Address": "456 Elm Street",
+      "Contact": "555-5678",
+      "Items": [{"ItemID": "I005", "Quantity": 1}, {"ItemID": "I007", "Quantity": 4}],
+      "amount": 105000
+    },
+    {
+      "order_id": "OID004",
+      "Status": "Pending",
+      "customer_name": "Bob Johnson",
+      "Address": "789 Oak Street",
+      "Contact": "555-9012",
+      "Items": [{"ItemID": "I008", "Quantity": 2}, {"ItemID": "I010", "Quantity": 3}],
+      "amount": 98000
+    },
+    {
+      "order_id": "OID005",
+      "Status": "Pending",
+      "customer_name": "Emily Brown",
+      "Address": "321 Maple Street",
+      "Contact": "555-3456",
+      "Items": [{"ItemID": "I010", "Quantity": 4}, {"ItemID": "I012", "Quantity": 2}],
+      "amount": 102000
+    },
+    {
+      "order_id": "OID006",
+      "Status": "Pending",
+      "customer_name": "Michael Wilson",
+      "Address": "654 Pine Street",
+      "Contact": "555-7890",
+      "Items": [{"ItemID": "I013", "Quantity": 3}, {"ItemID": "I015", "Quantity": 1}],
+      "amount": 97000
+    },
+    {
+      "order_id": "OID007",
+      "Status": "Pending",
+      "customer_name": "Emma Garcia",
+      "Address": "987 Cedar Street",
+      "Contact": "555-1234",
+      "Items": [{"ItemID": "I017", "Quantity": 2}, {"ItemID": "I019", "Quantity": 3}],
+      "amount": 99000
+    },
+    {
+      "order_id": "OID008",
+      "Status": "Pending",
+      "customer_name": "James Martinez",
+      "Address": "246 Birch Street",
+      "Contact": "555-5678",
+      "Items": [{"ItemID": "I020", "Quantity": 1}, {"ItemID": "I022", "Quantity": 4}],
+      "amount": 103000
+    },
+    {
+      "order_id": "OID009",
+      "Status": "Pending",
+      "customer_name": "Olivia Rodriguez",
+      "Address": "135 Walnut Street",
+      "Contact": "555-9012",
+      "Items": [{"ItemID": "I023", "Quantity": 5}, {"ItemID": "I025", "Quantity": 2}],
+      "amount": 96000
+    },
+    {
+      "order_id": "OID010",
+      "Status": "Pending",
+      "customer_name": "William Lopez",
+      "Address": "864 Sycamore Street",
+      "Contact": "555-3456",
+      "Items": [{"ItemID": "I025", "Quantity": 2}, {"ItemID": "I027", "Quantity": 3}],
+      "amount": 104000
+    }
+  ],
+
   "approvedRefunds": [
     {
       "name": "WAP Samane Perea",
