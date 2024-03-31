@@ -1,142 +1,142 @@
-// import "./shoppingCart.css";
-// import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-// import MediaControlCard from '../../../components/Cards/shoppingCartCard';
-// import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
-// import Footer from "../../../layout/footer/footer";
-// import { loadStripe } from "@stripe/stripe-js";
-// import React, { useEffect, useState } from 'react';
-// import CustomizedButton from "../../../components/Button/button";
+import "./shoppingCart.css";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import MediaControlCard from '../../../components/Cards/shoppingCartCard';
+import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
+import Footer from "../../../layout/footer/footer";
+import { loadStripe } from "@stripe/stripe-js";
+import React, { useEffect, useState } from 'react';
+import CustomizedButton from "../../../components/Button/button";
 
-// let stripePromise = "";
+let stripePromise = "";
 
-// const getStripe = () => {
-//     if (!stripePromise) {
-//         //stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
-//         stripePromise = loadStripe('pk_test_51OaaAGG6hT4n4c8nfxnNFoOroCTuVGkZJeOB63fTdNGluws7CDw36bOR8HDlMAXwybMqfvDK9KSubfJljBvVvmV300D1erYeiI');
-//     }
-//     return stripePromise;
-// }
-
-
-// function Cart() {
-
-//     const [cart, setCart] = useState([]);
-//     const [totalAmount, setTotalAmount] = useState(0);
-//     const [stripeError, setStripeError] = useState(null);
-//     const [isLoading, setLoading] = useState(false);
-
-//     useEffect(() => {
-//         // Retrieve cart data from local storage
-//         const storedCart = JSON.parse(localStorage.getItem("cart"));
-//         if (storedCart) {
-//             setCart(storedCart);
-//         }
-//     }, []);
-
-//     useEffect(() => {
-//         // Calculate total amount whenever cart changes
-//         let total = 0;
-//         cart.forEach(item => {
-//             total += item.price * item.amount;
-//         });
-//         setTotalAmount(total);
-//     }, [cart]);
-
-//     const removeFromCart = (itemId) => {
-//         const updatedCart = cart.map(item => {
-//             if (item.id === itemId) {
-//                 if (item.amount === 1) {
-//                     // If amount is 1, remove the item
-//                     return null;
-//                 } else {
-//                     // Otherwise, decrement the amount
-//                     return { ...item, amount: item.amount - 1 };
-//                 }
-//             }
-//             return item;
-//         }).filter(Boolean); // Filter out null values (removed items)
-//         setCart(updatedCart);
-//         localStorage.setItem("cart", JSON.stringify(updatedCart));
-//     }
-
-//     const lineItems = cart.map(item => ({
-//             price: item.price.toString(),
-//             quantity: item.amount
-//         })
-//     );
+const getStripe = () => {
+    if (!stripePromise) {
+        //stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
+        stripePromise = loadStripe('pk_test_51OaaAGG6hT4n4c8nfxnNFoOroCTuVGkZJeOB63fTdNGluws7CDw36bOR8HDlMAXwybMqfvDK9KSubfJljBvVvmV300D1erYeiI');
+    }
+    return stripePromise;
+}
 
 
-//     const checkoutOptions = {
-//         lineItems: lineItems, // Adjust this according to your data structure
-//         mode: "payment",
-//         successUrl: `${window.location.origin}/success`,
-//         cancelUrl: `${window.location.origin}/cancel`
-//     };
+function Cart() {
 
-//     console.log(checkoutOptions.lineItems);
+    const [cart, setCart] = useState([]);
+    const [totalAmount, setTotalAmount] = useState(0);
+    const [stripeError, setStripeError] = useState(null);
+    const [isLoading, setLoading] = useState(false);
 
-//     const redirectToCheckout = async () => {
-//         setLoading(true);
-//         console.log("RedirectToCheckout");
+    useEffect(() => {
+        // Retrieve cart data from local storage
+        const storedCart = JSON.parse(localStorage.getItem("cart"));
+        if (storedCart) {
+            setCart(storedCart);
+        }
+    }, []);
 
-//         const stripe = await getStripe();
-//         const { error } = await stripe.redirectToCheckout(checkoutOptions);
-//         console.log("stripe checkout error:", error);
+    useEffect(() => {
+        // Calculate total amount whenever cart changes
+        let total = 0;
+        cart.forEach(item => {
+            total += item.price * item.amount;
+        });
+        setTotalAmount(total);
+    }, [cart]);
 
-//         if (error) setStripeError(error.message);
-//         setLoading(false);
-//     }
+    const removeFromCart = (itemId) => {
+        const updatedCart = cart.map(item => {
+            if (item.id === itemId) {
+                if (item.amount === 1) {
+                    // If amount is 1, remove the item
+                    return null;
+                } else {
+                    // Otherwise, decrement the amount
+                    return { ...item, amount: item.amount - 1 };
+                }
+            }
+            return item;
+        }).filter(Boolean); // Filter out null values (removed items)
+        setCart(updatedCart);
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+    }
 
-//     if (stripeError) alert(setStripeError);
+    const lineItems = cart.map(item => ({
+            price: item.price.toString(),
+            quantity: item.amount
+        })
+    );
 
-//     return (
-//         <>
-//             <CustomerNavbar />
-//             <div className="cartOuter">
 
-//                 <div className="cardspace">
-//                     {cart.map(item => (
-//                         <MediaControlCard key={item.id} item={item} removeFromCart={removeFromCart} />
-//                     ))}
-//                 </div>
+    const checkoutOptions = {
+        lineItems: lineItems, // Adjust this according to your data structure
+        mode: "payment",
+        successUrl: `${window.location.origin}/success`,
+        cancelUrl: `${window.location.origin}/cancel`
+    };
 
-//                 <div className="cartInner">
+    console.log(checkoutOptions.lineItems);
 
-//                     <div className="arrow">
-//                         <ArrowBackIosIcon />
-//                     </div>
+    const redirectToCheckout = async () => {
+        setLoading(true);
+        console.log("RedirectToCheckout");
 
-//                     <div className="totalText">
-//                         <p>Total Amount</p>
-//                         <p className="amount ">Rs {totalAmount.toFixed(2)}</p>
-//                         <CustomizedButton
-//                             onClick={redirectToCheckout}
-//                             disabled={isLoading}
-//                             hoverBackgroundColor="#0aaf0b"
-//                             style={{
-//                                 color: '#ffffff',
-//                                 backgroundColor: '#057007',
-//                                 width: '7.5em',
-//                                 height: '2.25em',
-//                                 fontSize: '0.85em',
-//                                 fontFamily: 'inter',
-//                                 padding: '0.5em 0.625em',
-//                                 borderRadius: '0.625em',
-//                                 fontWeight: '550',
-//                                 border: 'none',
-//                                 marginTop: '0.25em',
-//                                 marginBottom:'2em',
-//                                 textTransform: 'none',
-//                                 textAlign: 'center',
-//                             }}>
-//                             {isLoading ? "Loading..." : "Buy Now"}
-//                         </CustomizedButton>
-//                     </div>
-//                 </div>
-//             </div>
+        const stripe = await getStripe();
+        const { error } = await stripe.redirectToCheckout(checkoutOptions);
+        console.log("stripe checkout error:", error);
 
-//             <Footer />
-//         </>
-//     );
-// }
-// export default Cart;
+        if (error) setStripeError(error.message);
+        setLoading(false);
+    }
+
+    if (stripeError) alert(setStripeError);
+
+    return (
+        <>
+            <CustomerNavbar />
+            <div className="cartOuter">
+
+                <div className="cardspace">
+                    {cart.map(item => (
+                        <MediaControlCard key={item.id} item={item} removeFromCart={removeFromCart} />
+                    ))}
+                </div>
+
+                <div className="cartInner">
+
+                    <div className="arrow">
+                        <ArrowBackIosIcon />
+                    </div>
+
+                    <div className="totalText">
+                        <p>Total Amount</p>
+                        <p className="amount ">Rs {totalAmount.toFixed(2)}</p>
+                        <CustomizedButton
+                            onClick={redirectToCheckout}
+                            disabled={isLoading}
+                            hoverBackgroundColor="#0aaf0b"
+                            style={{
+                                color: '#ffffff',
+                                backgroundColor: '#057007',
+                                width: '7.5em',
+                                height: '2.25em',
+                                fontSize: '0.85em',
+                                fontFamily: 'inter',
+                                padding: '0.5em 0.625em',
+                                borderRadius: '0.625em',
+                                fontWeight: '550',
+                                border: 'none',
+                                marginTop: '0.25em',
+                                marginBottom:'2em',
+                                textTransform: 'none',
+                                textAlign: 'center',
+                            }}>
+                            {isLoading ? "Loading..." : "Buy Now"}
+                        </CustomizedButton>
+                    </div>
+                </div>
+            </div>
+
+            <Footer />
+        </>
+    );
+}
+export default Cart;
