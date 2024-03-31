@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import "./catalog.css";
-import MultiActionAreaCard from '../../../../src/components/Catalog Card/catalogCard';
-import Checkboxes from '../../../components/checkbox/checkbox';
+import MultiActionAreaCard from '../../../../src/components/Cards/catalogCard';
+import Checkboxes from '../../../components/Form Inputs/checkbox';
 import Footer from "../../../layout/footer/footer";
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
-import Button from "@mui/material/Button";
+import {Link} from "react-router-dom";
+import CustomizedButton from "../../../components/Button/button";
 
 // Array of products
 const products = [
@@ -106,11 +107,11 @@ const products = [
     }
 ];
 
-function Catalog() {
+function ProductCatalog() {
     // State variables
-    const [show, setShow] = useState(true);
+    //const [show, setShow] = useState(true);
     const [cart, setCart] = useState([]);
-    const [warning, setWarning] = useState(false);
+    //const [warning, setWarning] = useState(false);
 
     // Load cart from local storage on component mount
     useEffect(() => {
@@ -188,12 +189,26 @@ function Catalog() {
                     </div>
 
                     <div className="content">
-                        <Button
-                            color="success"
-                            variant="contained"
-                        >
-                            Goto Cart
-                        </Button>
+                        <Link to="/cart">
+                            <CustomizedButton
+                                hoverBackgroundColor="#2ec931"
+                                style={{
+                                    color: '#ffffff',
+                                    backgroundColor: '#1d8a1f',
+                                    width: '7.5em',
+                                    height: '2.5em',
+                                    fontSize: '0.95em',
+                                    fontFamily: 'inter',
+                                    padding: '0.5em 0.625em',
+                                    borderRadius: '0.35em',
+                                    fontWeight: '550',
+                                    margin: 'auto',
+                                    textTransform: 'none',
+                                    textAlign: 'center',
+                                }}>
+                                Go to Cart
+                            </CustomizedButton>
+                        </Link>
                     </div>
 
 
@@ -211,5 +226,5 @@ function Catalog() {
     );
 }
 
-export default Catalog;
+export default ProductCatalog;
 

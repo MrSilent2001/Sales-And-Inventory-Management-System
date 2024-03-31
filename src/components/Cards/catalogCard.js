@@ -3,7 +3,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { CardActionArea, CardActions } from '@mui/material';
+import CustomizedButton from "../Button/button";
 
 export default function MultiActionAreaCard({item,handleClick}) {
     const {title, price, img} = item;
@@ -28,14 +29,29 @@ export default function MultiActionAreaCard({item,handleClick}) {
 
             </CardActionArea>
 
-            <CardActions>
-                <Button
-                    variant="contained" disableElevation
-                    sx={{margin: 'auto', display: 'block'}}
+            <CardActions sx={{justifyContent: 'center'}}>
+
+                <CustomizedButton
                     onClick={()=>handleClick(item)}
-                >
+                    hoverBackgroundColor="#2d3ed2"
+                    disableElevation
+                    style={{
+                        color: '#ffffff',
+                        backgroundColor: '#242F9B',
+                        border: '1px solid #242F9B',
+                        width: '11em',
+                        height: '2.5em',
+                        fontSize: '0.95em',
+                        fontFamily: 'inter',
+                        padding: '0.5em 0.625em',
+                        borderRadius: '0.35em',
+                        fontWeight: '550',
+                        margin: 'auto',
+                        textTransform: 'none',
+                        textAlign: 'center',
+                    }}>
                     Add to Cart
-                </Button>
+                </CustomizedButton>
             </CardActions>
         </Card>
     );

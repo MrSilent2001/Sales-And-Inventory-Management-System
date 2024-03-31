@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -20,34 +19,9 @@ import UpdateSupplier from "../Supplier Dashboard/Modals/UpdateSupplier/updateSu
 import InventoryNavbar from "../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../layout/footer/footer";
 import CustomizedButton from "../../../components/Button/button";
+import suppliers from "../../../data/data.json";
+import SearchBar from "../../../components/search bar/search bar";
 
-
-function SearchBar(){
-    return(
-        <Box
-            component="form"
-            sx={{
-                '& > :not(style)': {
-                    m: 1,
-                    width: '17.5em',
-                    "& .MuiInputBase-root":{
-                        height: '1.95em',
-                        borderRadius: '1.5em',
-                        /*backgroundColor: 'white'*/
-                    },
-                    "& .MuiInputLabel-root": {
-                        fontSize: '0.6em',
-                        textAlign: 'center',
-                    },
-                },
-            }}
-            noValidate
-            autoComplete="off"
-        >
-            <TextField id="standard-basic" label="Search Here" variant="outlined" size="small"/>
-        </Box>
-    )
-}
 
 function FilterItems(){
 
@@ -97,52 +71,6 @@ function FilterItems(){
     )
 }
 
-function FilterAvailability(){
-
-    const [age, setAge] = React.useState('');
-
-    const handleChange = (event) => {
-        setAge(event.target.value);
-    };
-
-    return(
-        <Box sx={{ minWidth: 80 }}>
-            <FormControl fullWidth>
-                <InputLabel
-                    id="demo-simple-select-label"
-                    sx={{
-                        fontSize: '10px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'rgba(255,255,255,0.7)'
-                    }}
-                >
-                    Select
-                </InputLabel>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={age}
-                    label="Age"
-                    onChange={handleChange}
-                    sx={{
-                        height: 40,
-                        width: 160,
-                        fontSize: 10,
-                        border: '1px solid white',
-                        '& .MuiInputLabel-root': {
-                            fontSize: 4,
-                        },
-                    }}
-                >
-                    <MenuItem value={10} >All</MenuItem>
-                    <MenuItem value={20}>In Stock</MenuItem>
-                </Select>
-            </FormControl>
-        </Box>
-    )
-}
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -168,24 +96,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-function createData(supplierId, address, email, contact, category) {
-    return { supplierId, address, email, contact, category };
-}
-
-const rows = [
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 24, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 37, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 24, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 67, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 49, 'In Stock'),
-    createData('I0001', 'Tokyo Super Cement', 'Cement', 49, 'In Stock'),
-];
+const rows = suppliers.suppliers || [];
 
 function CustomizedTables() {
     const [visible,setVisible] = useState(false);
 
     return (
-        <TableContainer component={Paper} sx={{ width: '76.875em', maxHeight: '25em', overflowY: 'auto', position: 'relative'}}>
+        <TableContainer component={Paper} sx={{ width: '100%', maxHeight: '25em', overflowY: 'auto', position: 'relative', marginRight:'2em'}}>
             <Table sx={{ minWidth: '25em'}} aria-label="customized table">
                 <TableHead>
                     <TableRow>
@@ -289,7 +206,7 @@ function ViewSupplier(){
 
                     <div className="searchAndButtons">
                         <div className="viewSupplierSearch">
-                            <SearchBar></SearchBar>
+                            <SearchBar/>
                         </div>
                         <div className="viewSupplierButtons">
                             <CustomizedButton
@@ -299,14 +216,13 @@ function ViewSupplier(){
                                     color: '#ffffff',
                                     backgroundColor: '#242F9B',
                                     border: '1px solid #242F9B',
-                                    width: '11em',
+                                    width: '9.5em',
                                     height: '2.5em',
                                     fontSize: '0.95em',
                                     fontFamily: 'inter',
                                     padding: '0.5em 0.625em',
                                     borderRadius: '0.35em',
                                     fontWeight: '550',
-                                    marginTop: '0.625em',
                                     marginRight: '1.5em',
                                     textTransform: 'none',
                                     textAlign: 'center',
@@ -320,15 +236,13 @@ function ViewSupplier(){
                                 style={{
                                     color: '#ffffff',
                                     backgroundColor: '#960505',
-                                    width: '11em',
+                                    width: '9.5em',
                                     height: '2.5em',
                                     fontSize: '0.95em',
                                     fontFamily: 'inter',
                                     padding: '0.5em 0.625em',
                                     borderRadius: '0.35em',
                                     fontWeight: '550',
-                                    marginTop: '0.625em',
-                                    marginRight: '1.5em',
                                     textTransform: 'none',
                                     textAlign: 'center',
                                 }}>
@@ -337,7 +251,7 @@ function ViewSupplier(){
                         </div>
                     </div>
 
-                    <div className="itemTable">
+                    <div className="itemTable" style={{width: '90%'}}>
                         <CustomizedTables></CustomizedTables>
                     </div>
                 </div>

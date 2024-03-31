@@ -1,13 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import "./signup.css";
 import TextField from "@mui/material/TextField";
-import OutlinedInput from '@mui/material/OutlinedInput';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
+import PasswordField from "../../../components/Form Inputs/passwordField";
 
 // import {useLocation, useNavigate} from "react-router-dom";
 // import {useAuth} from "../../services/auth";
@@ -84,51 +80,25 @@ const SignUp = () => {
                             </div>
 
                             <div className="row">
-                                <label style={{paddingRight: "65px"}}>Password: </label>
-                                <OutlinedInput
-                                    id="outlined-adornment-password"
-                                    size="small"
-                                    type={showPassword ? 'text' : 'password'}
-                                    label="Password"
-                                    className="signupInput"
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                                //onChange={(e) => setPassword(e.target.value)}
-                                            >
-                                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
+                                <label>Password: </label>
+                                <PasswordField
+                                    placeholder="Password"
+                                    style={{width:'16.85em', marginLeft: '-0.95em'}}
+                                    showPassword={showPassword}
+                                    handleClickShowPassword={handleClickShowPassword}
+                                    handleMouseDownPassword={handleMouseDownPassword}
                                 />
                             </div>
 
 
                             <div className="row">
                                 <label style={{paddingRight: "5px"}}>Confirm Password: </label>
-                                <OutlinedInput
-                                    id="outlined-adornment-password"
-                                    size="small"
-                                    type={showPassword ? 'text' : 'password'}
-                                    label="confirmPassword"
-                                    className="signupInput"
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                                //onChange={(e) => setPassword(e.target.value)}
-                                            >
-                                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
+                                <PasswordField
+                                    placeholder="Password"
+                                    style={{width:'16.85em', marginLeft: '-0.95em'}}
+                                    showPassword={showPassword}
+                                    handleClickShowPassword={handleClickShowPassword}
+                                    handleMouseDownPassword={handleMouseDownPassword}
                                 />
                             </div>
 

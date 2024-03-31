@@ -11,7 +11,7 @@ import PurchaseOrderDashboard from "../pages/admin/Orders/Inventory/Order Dashbo
 import SalesRefundRequestsTable from "../pages/admin/Refunds/Customer/View Sales Refund Requests/SalesRefundRequestsTable";
 import Cart from "../pages/Customer/Cart/shoppingCart";
 import InventoryRefundRequestsTable from "../pages/admin/Refunds/Inventory/RefundRequestsTable/InventoryRefundRequestsTable";
-import Catalog from "../pages/Customer/Product Catelog/catalog";
+import ProductCatalog from "../pages/Customer/Product Catelog/productCatalog";
 import PendingOrders from "../pages/admin/Orders/Sales/Pending Orders/pendingOrders";
 import InventoryDashboard from "../pages/Supplier/Inventory Dashboard/inventoryDashboard";
 import SupplierProfile from "../pages/Supplier/Supplier Profile/SupplierProfile";
@@ -31,7 +31,7 @@ export function NavbarRouting() {
 
                 {/*Customer navbar routes*/}
                 <Route path="/customerHome" element={<CustomerHome/>}/>
-                <Route path="/products" element={<Catalog/>}/>
+                <Route path="/products" element={<ProductCatalog/>}/>
                 <Route path="/cart" element={<Cart/>}/>
                 <Route path="/customerProfile" element={<CustomerProfile/>}/>
                 <Route path="/refundRequests" element={<CustomerRefunds/>}/>

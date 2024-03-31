@@ -1,26 +1,9 @@
 import React from "react";
-import './Customer Home Page.css'
-import {styled} from "@mui/material/styles";
-import Button from "@mui/material/Button";
-import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
+import './Customer Home Page.css';
 import Footer from "../../../layout/footer/footer";
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
 import {Link} from "react-router-dom";
-
-const ShopNowButton = styled(Button)(({theme}) => ({
-    color: 'black',
-    backgroundColor: '#ffffff',
-    '&:hover': {
-        backgroundColor: '#d7d7d7'
-    },
-    '&.MuiButton-root': {
-        width: '13em',
-        height: '4em'
-    },
-    fontSize: '0.7em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em'
-}));
+import CustomizedButton from "../../../components/Button/button";
 
 function CustomerHome() {
     return (
@@ -37,7 +20,25 @@ function CustomerHome() {
                             <p>Best Place for the Construction Substances</p>
                             <div className="carouselButton">
                                 <Link to="/products">
-                                    <ShopNowButton>Shop Now</ShopNowButton>
+                                    <CustomizedButton
+                                        hoverBackgroundColor="#d7d7d7"
+                                        style={{
+                                            color: '#000000',
+                                            backgroundColor: '#ffffff',
+                                            border: '1px solid #242F9B',
+                                            width: '11em',
+                                            height: '3.75em',
+                                            fontSize: '0.7em',
+                                            fontFamily: 'inter',
+                                            padding: '0.5em 0.625em',
+                                            borderRadius: '0.35em',
+                                            fontWeight: '550',
+                                            marginTop: '0.625em',
+                                            textTransform: 'none',
+                                            textAlign: 'center',
+                                        }}>
+                                        Shop Now
+                                    </CustomizedButton>
                                 </Link>
                             </div>
                         </div>

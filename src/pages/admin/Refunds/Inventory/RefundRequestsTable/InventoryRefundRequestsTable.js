@@ -1,85 +1,36 @@
-import React, {useEffect, useState} from 'react';
-import {Box, Container, Modal, Paper, Typography} from '@mui/material';
-import ReusableTable from '../../../../../components/Reusable Table/Reusable Table';
-import {styled} from '@mui/system';
+import React, {useState} from 'react';
+import {Box, Container, Modal,Typography} from '@mui/material';
 import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
 import InventoryRefundRequest from "../../../../../pages/admin/Refunds/Inventory/Modal/InventoryRefundRequest";
 import CustomizedButton from "../../../../../components/Button/button";
+import inventoryRefunds from "../../../../../data/data.json";
+import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 
-
-const StyledPaper = styled(Paper)(({theme}) => ({
-    '& .MuiTableCell-root': {
-        textAlign: 'center',
-        paddingleft: '19rem',
-    },
-}));
-const fetchRequests = () => {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve([
-                // Mock data, adjust as per your requirement
-                {name: 'John Doe', requestId: '1', orderId: 'A1', amount: '100.00', status: 'Pending'},
-                {name: 'Jane Doe', requestId: '2', orderId: 'A2', amount: '200.00', status: 'Pending'},
-                {name: 'John Doe', requestId: '1', orderId: 'A1', amount: '100.00', status: 'Pending'},
-                {name: 'Jane Doe', requestId: '2', orderId: 'A2', amount: '200.00', status: 'Pending'},
-                {name: 'John Doe', requestId: '1', orderId: 'A1', amount: '100.00', status: 'Pending'},
-                {name: 'Jane Doe', requestId: '2', orderId: 'A2', amount: '200.00', status: 'Pending'},
-                {name: 'John Doe', requestId: '1', orderId: 'A1', amount: '100.00', status: 'Pending'},
-                {name: 'Jane Doe', requestId: '2', orderId: 'A2', amount: '200.00', status: 'Pending'}
-            ]);
-        }, 1000);
-    });
-};
 
 const InventoryRefundRequestsTable = ({onViewApproved}) => {
-    const [requests, setRequests] = useState([]);
     const [visible,setVisible] = useState(false)
 
-    useEffect(() => {
-        fetchRequests().then(data => {
-            setRequests(data);
-        });
-    }, []);
 
-    const handleStatusButtonClick = requestId => {
-        console.log('Button for request ID', requestId, 'was clicked');
-    };
+    const columns=[
+        { id: 'name', label: 'Name', minWidth: 70,align: 'center'  },
+        { id: 'requestId', label: 'Request Id', minWidth: 150,align: 'center'  },
+        { id: 'orderId', label: 'Order Id', minWidth: 120,align: 'center'  },
+        { id: 'amount', label:'Amount', minWidth: 200,align: 'center'  },
+        { id: 'status', label:'Status', minWidth: 200,align: 'center'  }
+    ];
 
-    const transformedData = requests.map(request => ({
-        Name: request.name,
-        "Request ID": request.requestId,
-        "Order ID": request.orderId,
-        Amount: request.amount,
-        Status: request.status === 'Pending' ? (
-            <CustomizedButton
-                onClick={() => handleStatusButtonClick(request.requestId)}
-                hoverBackgroundColor="#2d3ed2"
-                style={{
-                    color: '#ffffff',
-                    backgroundColor: '#242F9B',
-                    border: '1px solid #242F9B',
-                    width: '6em',
-                    height: '2.5em',
-                    fontSize: '0.95em',
-                    fontFamily: 'inter',
-                    padding: '0.5em 0.625em',
-                    borderRadius: '0.35em',
-                    fontWeight: '550',
-                    marginTop: '0.625em',
-                    marginRight: '1.5em',
-                    textTransform: 'none',
-                    textAlign: 'center',
-                }}>
-                View
-            </CustomizedButton>
-        ) : (
-            <Typography variant="body2" style={{color: 'gray'}}>
-                {request.status}
-            </Typography>
-        ),
+    const rows = inventoryRefunds.inventoryRefunds || [];
+
+    const mappedData = rows.map(row => ({
+        name: row.name,
+        requestId: row.requestId,
+        orderId: row.orderId,
+        amount: row.amount,
+        status: row.status
     }));
+
 
     return (
         <>
@@ -91,10 +42,11 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
                     {
                         backgroundColor: '#DBDFFD',
                         width: '100%',
+                        height: '40em'
                     }
                 }
             >
-                <Box sx={{my: 4}}>
+                <Box sx={{}}>
                     <Box
                         sx={{
                             display: 'flex',
@@ -153,11 +105,11 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
                             </Link>
                         </div>
                     </Box>
-                    <StyledPaper>
-                        <ReusableTable data={transformedData}/>
 
-                    </StyledPaper>
-                    <br/><br/>
+                    <CustomizedTable
+                        columns={columns}
+                        rows={mappedData}
+                    />
                 </Box>
             </Container>
             <Modal open={visible}>
