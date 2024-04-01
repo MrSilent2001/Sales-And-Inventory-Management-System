@@ -1,16 +1,12 @@
 .CustomerOrdersOuter{
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 40px 0;
+    
 }
 
 .CustomerOrdersInner{
-    width: 95%;
-    height: 40.625em;
+    width: 100%;
     background-color: #DBDFFD;
-    border-radius: 2%;
     display: flex;
     flex-direction: column;
     align-items: center;

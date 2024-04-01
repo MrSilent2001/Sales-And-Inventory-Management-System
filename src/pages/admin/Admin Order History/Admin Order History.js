@@ -92,7 +92,7 @@ function AdminOrderHistory() {
                         </div>
                     </div>
 
-                    <Paper sx={{width: '90%', overflow: 'hidden'}}>
+                    <Paper sx={{width: '90%', overflow: 'hidden',marginBottom:'5em'}}>
                         <TableContainer sx={{maxHeight: 440}}>
                             <Table stickyHeader aria-label="sticky table">
                                 <TableHead>
