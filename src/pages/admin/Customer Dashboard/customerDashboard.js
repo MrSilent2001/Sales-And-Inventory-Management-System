@@ -39,6 +39,7 @@ const columns = [
 const rows = customerDetails.customerDetails || [];
 console.log(rows[1]);
 
+
 function CustomerDashboard() {
 
     const mappedData = rows.map(row => ({

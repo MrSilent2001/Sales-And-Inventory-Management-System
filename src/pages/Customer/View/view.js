@@ -53,11 +53,12 @@ function View() {
 
                         <div className="avatar">
                             <Avatar src="/broken-image.jpg" sx={{ 
-                                width: 230,
-                                 height: 230,
+                                width: 250,
+                                 height: 250,
                                   border: 2,
                                    borderRadius: 3 ,
                                    marginLeft:24,
+                                   marginBottom:7,
                             
                             
                             }} />
@@ -73,7 +74,7 @@ function View() {
                             <div className="viewTextField">
                                 <h5>Customer ID</h5>
                             </div>
-                            <div className="viewTextField">
+                            <div className="viewInputField">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
@@ -82,7 +83,7 @@ function View() {
                             <div className="viewTextField">
                                 <h5>Name</h5>
                             </div>
-                            <div className="viewTextField">
+                            <div className="viewInputField">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
@@ -91,7 +92,7 @@ function View() {
                             <div className="viewTextField">
                                 <h5>Address</h5>
                             </div>
-                            <div className="viewTextField">
+                            <div className="viewInputField">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
@@ -100,7 +101,7 @@ function View() {
                             <div className="viewTextField">
                                 <h5>Contact</h5>
                             </div>
-                            <div className="viewTextField">
+                            <div className="viewInputField">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
@@ -109,7 +110,7 @@ function View() {
                             <div className="viewTextField">
                                 <h5>Email</h5>
                             </div>
-                            <div className="viewTextField">
+                            <div className="viewInputField">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
@@ -130,7 +131,7 @@ function View() {
                                         borderRadius: '0.35em',
                                         fontWeight: '550',
                                         marginTop: '0.625em',
-                                        marginRight: '1.5em',
+                                        marginLeft:'12em',
                                         textTransform: 'none',
                                         textAlign: 'center',
                                     }}>
