@@ -14,16 +14,16 @@ const UploadButtons = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#bec0bf'),
     backgroundColor: '#bec0bf',
     '&:hover': {
-        backgroundColor: '#2d3ed2'
+        backgroundColor: '#676767'
     },
     '&.MuiButton-root': {
         width: '16em',
-        height: '3em'
+        height: '2em',
     },
     fontSize: '0.95em',
     fontFamily: 'inter',
     padding: '1.75em 0.625em',
-    marginTop:'2em',
+    marginTop:'2.5em',
 }));
 
 
@@ -64,7 +64,7 @@ function UpdateCustomers() {
                     <div className="UpdateCustomerProfile">
                         <h3 className='UpdateTopicName'>W A P Saman Perera</h3>
                         <div className="updateAvatar">
-                            <Avatar src="/broken-image.jpg" sx={{ width: 230, height: 230, border: 2, borderRadius: 3 }} />
+                            <Avatar src="/broken-image.jpg" sx={{ width: 230, height: 230, border: 2, borderRadius: 2,marginTop:'-0.8em' }} />
                             <div className='uploadButton'>
                                 <UploadButtons>...Upload...</UploadButtons>
                             </div>
