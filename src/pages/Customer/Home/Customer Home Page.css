@@ -115,3 +115,33 @@
     font-size: 0.844em;
     font-weight: 500;
 }
+
+.contactUs{
+    margin: 0 0 4em 0;
+}
+
+.contactUsContent{
+    margin: 4em 0 0 0;
+}
+
+.contactUsContent{
+    display: flex;
+    flex-direction: row;
+}
+
+.mapContainer{
+    padding:  0 0 0 4.5em;
+}
+
+.addressContaier{
+    display: flex;
+    align-items: center;
+    margin: 0 0 0 11em;
+    text-align: left;
+}
+
+.address p{
+    font-family: Inter;
+    font-size: 0.9em;
+}
+
