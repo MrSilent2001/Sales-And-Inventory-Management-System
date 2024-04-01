@@ -1,0 +1,63 @@
+
+.cartOuter {
+    width: 100%;
+    /* height: 50em; */
+    overflow-y: scroll; 
+}
+
+.cartInner {
+    width: 20%;
+    height:50em;
+    float: left;
+    background-color: whitesmoke;
+    
+
+}
+
+.cardspace {
+    width: 80%;
+    /* height:50em; */
+    float: left;
+    display: flex;
+    flex-direction: column;
+    /* overflow-y: auto; */
+
+}
+
+
+
+.arrow{
+    padding-top: 1em;
+    padding-right: 15em;
+}
+
+.totalText{
+    margin-top: 70%;
+    margin-bottom: 50%;
+    align-items: center;
+    font-weight: bold;
+    font-size: larger;
+    line-height: 1em;
+}
+
+.amount{
+    color: rgb(109, 161, 213);
+}
+
+.text-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 4px;
+    margin: auto;
+    text-align: left;
+    margin-left: 16px;
+}
+
+.text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 130%;
+    margin: 0;
+    color: rgba(0, 0, 0, 1);
+}

@@ -1,43 +1,10 @@
 import './customerProfile.css'
 import * as React from "react";
-import {styled} from "@mui/material/styles";
-import Button from "@mui/material/Button";
 import Avatar from '@mui/material/Avatar';
 import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";
 import Footer from "../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
-
-const DeleteButtons = styled(Button)(({theme}) => ({
-    color: theme.palette.getContrastText('#FF0800'),
-    backgroundColor: '#FF0800',
-    '&:hover': {
-        backgroundColor: '#CA3433'
-    },
-    '&.MuiButton-root': {
-        width: '13.625em',
-        height: '3.5em'
-    },
-    fontSize: '0.75em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em',
-    marginRight: '2em'
-}));
-
-const CustomerProfileManagementButtons = styled(Button)(({theme}) => ({
-    color: theme.palette.getContrastText('#242F9B'),
-    backgroundColor: '#242F9B',
-    '&:hover': {
-        backgroundColor: '#2d3ed2'
-    },
-    '&.MuiButton-root': {
-        width: '13.625em',
-        height: '3.5em'
-    },
-    fontSize: '0.75em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em',
-    marginRight: '6em'
-}));
+import CustomizedButton from "../../../../components/Button/button";
 
 function CustomerProfile() {
     return (
@@ -99,17 +66,72 @@ function CustomerProfile() {
                                     </div>
                                     <div className="inputData">
                                         <Link to="/customerprofiledetails">
-                                            <CustomerProfileManagementButtons>View
-                                                Orders</CustomerProfileManagementButtons>
+                                            <CustomizedButton
+                                                hoverBackgroundColor="#2d3ed2"
+                                                style={{
+                                                    color: '#ffffff',
+                                                    backgroundColor: '#242F9B',
+                                                    border: '1px solid #242F9B',
+                                                    width: '4.5em',
+                                                    height: '2.25em',
+                                                    fontSize: '0.8em',
+                                                    fontFamily: 'inter',
+                                                    padding: '0.5em 0.625em',
+                                                    borderRadius: '0.35em',
+                                                    fontWeight: '550',
+                                                    marginTop: '0.625em',
+                                                    marginRight: '1.5em',
+                                                    textTransform: 'none',
+                                                    textAlign: 'center',
+                                                }}>
+                                                View
+                                            </CustomizedButton>
                                         </Link>
                                     </div>
                                 </div>
                             </div>
                             <div className='buttonStack'>
-                                <DeleteButtons>Delete Profile</DeleteButtons>
                                 <Link to="/updateCustomers">
-                                    <CustomerProfileManagementButtons>Update Profile</CustomerProfileManagementButtons>
+                                    <CustomizedButton
+                                        hoverBackgroundColor="#2d3ed2"
+                                        style={{
+                                            color: '#ffffff',
+                                            backgroundColor: '#242F9B',
+                                            border: '1px solid #242F9B',
+                                            width: '9.5em',
+                                            height: '2.5em',
+                                            fontSize: '0.85em',
+                                            fontFamily: 'inter',
+                                            padding: '0.5em 0.625em',
+                                            borderRadius: '0.35em',
+                                            fontWeight: '550',
+                                            marginTop: '0.625em',
+                                            marginRight: '1.5em',
+                                            textTransform: 'none',
+                                            textAlign: 'center',
+                                        }}>
+                                        Update Profile
+                                    </CustomizedButton>
                                 </Link>
+
+                                <CustomizedButton
+                                    hoverBackgroundColor="#f11717"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#960505',
+                                        width: '9.5em',
+                                        height: '2.5em',
+                                        fontSize: '0.85em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        fontWeight: '550',
+                                        marginTop: '0.625em',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                    }}>
+                                    Delete Profile
+                                </CustomizedButton>
                             </div>
                         </div>
 
