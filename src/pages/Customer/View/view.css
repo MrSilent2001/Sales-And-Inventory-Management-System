@@ -1,5 +1,4 @@
 
-
 .ViewOrdersOuter{
     position: relative;
     display: flex;
@@ -11,7 +10,6 @@
 
 .ViewOrdersInner{
     display: flex;
-
     align-items: center;
     width: 92.875em;
     height: 32em;
@@ -52,11 +50,9 @@
     width: 25em;
     height: 20em;
     padding: 1em;
-    
     border-radius: 0.5em;
     flex: 2;
     justify-content: center;
-    
     margin-top: 5em;
 }
 
@@ -67,13 +63,11 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    
     margin-left: 2em;
 }
 
 .viewTextField{
     padding: 0 0 0 1em;
-    
     margin-right: 2em;
 }
 
@@ -84,7 +78,6 @@
 }
 
 .textInput{
-   
     margin-left: 3em;
 }
 
@@ -102,7 +95,6 @@
 
 .avatar {
     flex: 1;
-    /*margin-right: 250px;*/
     display: flex;
     flex-direction: column;
     align-items: center;
