@@ -5,7 +5,7 @@ import Footer from "../../../layout/footer/footer";
 import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
-import customerData from "../../../data/data.json";
+import customerDetails from "../../../data/data.json";
 import {Paper, TableContainer} from "@mui/material";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 
@@ -36,7 +36,8 @@ const columns = [
 ];
 
 
-const rows = customerData.customerDetails || [];
+const rows = customerDetails.customerDetails || [];
+console.log(rows[1]);
 
 function CustomerDashboard() {
 
@@ -90,7 +91,7 @@ function CustomerDashboard() {
                         <TableContainer component={Paper} style={{ maxHeight: 500, width: '75%'}}>
                             <CustomizedTable
                                 columns={columns}
-                                data={mappedData}
+                                rows={mappedData}
                             />
                         </TableContainer>
                     </div>

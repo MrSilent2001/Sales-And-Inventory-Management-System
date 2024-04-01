@@ -15,6 +15,7 @@ import ProductCatalog from "../pages/Customer/Product Catelog/productCatalog";
 import PendingOrders from "../pages/admin/Orders/Sales/Pending Orders/pendingOrders";
 import InventoryDashboard from "../pages/Supplier/Inventory Dashboard/inventoryDashboard";
 import SupplierProfile from "../pages/Supplier/Supplier Profile/SupplierProfile";
+import AdminOrderHistory from "../pages/admin/Admin Order History/Admin Order History";
 
 export function NavbarRouting() {
     return (
@@ -24,7 +25,7 @@ export function NavbarRouting() {
                 {/*sales navbar routes*/}
                 <Route path="/pendingOrders" element={<PendingOrders/>}/>
                 <Route path="/paymentdashboard" element={<PaymentDashboard/>}/>
-                <Route path="/customerHome" element={<CustomerHome/>}/>
+                <Route path="/AdminOrderHistory" element={<AdminOrderHistory/>}/>
                 <Route path="/viewRefundRequests" element={<SalesRefundRequestsTable/>}/>
                 <Route path="/discountdashboard" element={<DiscountDashboard/>}/>
                 <Route path="/logout" element={<Login/>}/>

@@ -65,7 +65,7 @@ function CustomerProfile() {
                                         <h4>Previous Orders</h4>
                                     </div>
                                     <div className="inputData">
-                                        <Link to="/customerprofiledetails">
+                                        <Link to="/customerorderhistory">
                                             <CustomizedButton
                                                 hoverBackgroundColor="#2d3ed2"
                                                 style={{
