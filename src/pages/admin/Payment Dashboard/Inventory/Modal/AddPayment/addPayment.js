@@ -1,75 +1,17 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import './addPayment.css'
-import {styled} from "@mui/material/styles";
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-function BasicTextFields() {
-    return (
-        <Box
-            component="form"
-            sx={{
-                '& > :not(style)': {
-                    m: 1,
-                    width: '17.5em',
-                    "& .MuiInputBase-root":{
-                        height: '2.5em',
-                        backgroundColor: '#e9eeff'
-                    },
-                    "& .MuiInputLabel-root": {
-                        fontSize: '0.5em',
-                        textAlign: 'center',
-                    },
-                },
-            }}
-            noValidate
-            autoComplete="off"
-        >
-            <TextField id="outlined-basic" variant="outlined" margin='normal'/>
-        </Box>
-    );
-}
+import CenteredModal from "../../../../../../components/Modal/modal";
+import BasicTextField from "../../../../../../components/Form Inputs/textfield";
+import CustomizedButton from "../../../../../../components/Button/button";
+import ComboBox from "../../../../../../components/Form Inputs/comboBox";
 
-const CancelButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText('#D41400'),
-    backgroundColor: '#D41400',
-    '&:hover': {
-        backgroundColor: '#e03a26' // You can adjust the darken value as needed
-    },
-    '&.MuiButton-root': {
-        width: '11.625em',
-        height: '2.75em'
-    },
-    fontSize: '0.625em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em'
-}));
-
-const AddPaymentButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText('#242F9B'),
-    backgroundColor: '#242F9B',
-    '&:hover': {
-        backgroundColor: '#2d3ed2' // You can adjust the darken value as needed
-    },
-    '&.MuiButton-root': {
-        width: '11.625em',
-        height: '2.75em'
-    },
-    fontSize: '0.625em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em'
-}));
-
-const CenteredModal = styled('div')({
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh', // Make the container take the full height of the viewport
-});
+const options = [
+    { value: 'Supplier 1', label: 'Supplier 1' },
+    { value: 'Supplier 2', label: 'Supplier 2' },
+    { value: 'Supplier 3', label: 'Supplier 3' },
+];
 function AddPayment(props){
-    
+
     const [category, setCategory] = React.useState('');
 
     const handleChange = (event) => {
@@ -90,21 +32,14 @@ function AddPayment(props){
                                 <h5>Supplier:</h5>
                             </div>
                             <div className="addPaymentidInput">
-                                <Select
-                                    className="supplierInput"
-                                    id="demo-select-small"
+                                <ComboBox
                                     value={category}
-                                    onChange={handleChange}
+                                    onChange={(event) => handleChange(event)}
+                                    style={{width: '17.5em', marginRight:'0.5em'}}
+                                    options={options}
+                                    label="Category"
                                     size="small"
-                                    style={{width:"17.5em",left:"-.5em"}}
-                                >
-                                    <MenuItem value="None">
-                                        <em>None</em>
-                                    </MenuItem>
-                                    <MenuItem value="Category01">Supplier 01</MenuItem>
-                                    <MenuItem value="Category02">Supplier 02</MenuItem>
-                                    <MenuItem value="Category03">Supplier 03</MenuItem>
-                                </Select>
+                                />
                             </div>
                         </div>
 
@@ -113,7 +48,7 @@ function AddPayment(props){
                                 <h5>Item:</h5>
                             </div>
                             <div className="addPaymentidInput">
-                                <BasicTextFields></BasicTextFields>
+                                <BasicTextField/>
                             </div>
                         </div>
 
@@ -122,7 +57,7 @@ function AddPayment(props){
                                 <h5>Quantity:</h5>
                             </div>
                             <div className="addPaymentidInput">
-                                <BasicTextFields></BasicTextFields>
+                                <BasicTextField/>
                             </div>
                         </div>
 
@@ -131,7 +66,7 @@ function AddPayment(props){
                                 <h5>Address:</h5>
                             </div>
                             <div className="addPaymentidInput">
-                                <BasicTextFields></BasicTextFields>
+                                <BasicTextField/>
                             </div>
                         </div>
 
@@ -140,17 +75,54 @@ function AddPayment(props){
                                 <h5>Total Price:</h5>
                             </div>
                             <div className="addPaymentidInput">
-                                <BasicTextFields></BasicTextFields>
+                                <BasicTextField/>
                             </div>
                         </div>
 
 
                         <div className="addPaymentformFieldButtons">
                             <div className="addPaymentButton">
-                                <AddPaymentButton onClick={addPayment}>Add Payment</AddPaymentButton>
+                                <CustomizedButton
+                                    onClick={addPayment}
+                                    hoverBackgroundColor="#2d3ed2"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#242F9B',
+                                        width: '9.5em',
+                                        height: '2.5em',
+                                        fontSize: '0.95em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        fontWeight: '550',
+                                        marginTop: '2em',
+                                        marginRight: '1.5em',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                    }}>
+                                    Add Payment
+                                </CustomizedButton>
                             </div>
                             <div className="addPaymentcancelButton">
-                                <CancelButton onClick={() => props.onClose(false)}>Cancel</CancelButton>
+                                <CustomizedButton
+                                    onClick={() => props.onClose(false)}
+                                    hoverBackgroundColor="#e03a26"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#D41400',
+                                        width: '9.5em',
+                                        height: '2.5em',
+                                        fontSize: '0.95em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        fontWeight: '550',
+                                        marginTop: '2em',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                    }}>
+                                    Cancel
+                                </CustomizedButton>
                             </div>
                         </div>
                     </div>
