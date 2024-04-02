@@ -1142,53 +1142,67 @@
 
   "inventoryRefunds": [
     {
-      "name": "John Doe",
+      "name": "Alice Smith",
       "requestId": "1",
-      "orderId": "A1",
-      "amount": "100.00",
-      "status": "Pending"
+      "orderId": "B1",
+      "amount": "150.00",
+      "status": "Approved"
     },
     {
-      "name": "Jane Doe",
+      "name": "Alice Smith",
       "requestId": "2",
-      "orderId": "A2",
-      "amount": "200.00",
+      "orderId": "B2",
+      "amount": "150.00",
+      "status": "Approved"
+    },
+    {
+      "name": "Alice Smith",
+      "requestId": "3",
+      "orderId": "B3",
+      "amount": "150.00",
+      "status": "Approved"
+    },
+    {
+      "name": "Bob Johnson",
+      "requestId": "4",
+      "orderId": "B4",
+      "amount": "250.00",
+      "status": "Rejected"
+    },
+    {
+      "name": "Charlie Brown",
+      "requestId": "5",
+      "orderId": "C5",
+      "amount": "175.00",
       "status": "Pending"
     },
     {
-      "name": "John Doe",
-      "requestId": "1",
-      "orderId": "A1",
-      "amount": "100.00",
+      "name": "Diana Prince",
+      "requestId": "6",
+      "orderId": "D6",
+      "amount": "300.00",
+      "status": "Approved"
+    },
+    {
+      "name": "Ethan Hunt",
+      "requestId": "7",
+      "orderId": "E7",
+      "amount": "220.00",
       "status": "Pending"
     },
     {
-      "name": "Jane Doe",
-      "requestId": "2",
-      "orderId": "A2",
-      "amount": "200.00",
-      "status": "Pending"
+      "name": "Fiona Gallagher",
+      "requestId": "8",
+      "orderId": "F8",
+      "amount": "190.00",
+      "status": "Rejected"
     },
     {
-      "name": "John Doe",
-      "requestId": "1",
-      "orderId": "A1",
-      "amount": "100.00",
-      "status": "Pending"
-    },
-    {
-      "name": "Jane Doe",
-      "requestId": "2",
-      "orderId": "A2",
-      "amount": "200.00",
-      "status": "Pending"
-    },
-    {
-      "name": "John Doe",
-      "requestId": "1",
-      "orderId": "A1",
-      "amount": "100.00",
-      "status": "Pending"
+      "name": "George King",
+      "requestId": "9",
+      "orderId": "G9",
+      "amount": "210.00",
+      "status": "Approved"
     }
   ]
-}
+}  
