@@ -10,6 +10,7 @@ import Footer from "../../../../layout/footer/footer";
 import SalesNavbar from "../../../../layout/navbar/Sales navbar/sales navbar";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
+import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";
 
 function SelectItem() {
 
@@ -136,7 +137,7 @@ function BasicTextFields() {
 function CustomerRefundRequest() {
     return (
         <>
-            <SalesNavbar/>
+            <CustomerNavbar></CustomerNavbar>
             <div className="customerRefundRequestOuter">
                 <div className="customerRefundRequestInner">
 
