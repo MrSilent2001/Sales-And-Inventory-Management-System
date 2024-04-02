@@ -25,10 +25,10 @@ import SearchBar from "../../../components/search bar/search bar";
 
 function FilterItems(){
 
-    const [age, setAge] = React.useState('');
+    const [item, setItem] = React.useState('');
 
     const handleChange = (event) => {
-        setAge(event.target.value);
+        setItem(event.target.value);
     };
 
     return(
@@ -49,7 +49,7 @@ function FilterItems(){
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={age}
+                    value={item}
                     label="Age"
                     onChange={handleChange}
                     sx={{
@@ -73,10 +73,10 @@ function FilterItems(){
 
 function FilterAvailability(){
 
-    const [age, setAge] = React.useState('');
+    const [available, setAvailable] = React.useState('');
 
     const handleChange = (event) => {
-        setAge(event.target.value);
+        setAvailable(event.target.value);
     };
 
     return(
@@ -97,7 +97,7 @@ function FilterAvailability(){
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={age}
+                    value={available}
                     label="Age"
                     onChange={handleChange}
                     sx={{
