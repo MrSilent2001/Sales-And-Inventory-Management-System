@@ -43,7 +43,7 @@ const PurchaseOrderDashboard = () => {
             <div style={{ display: 'flex' }}>
                 <CustomizedButton
                     onClick={() => setViewOrderVisible(true)}
-                    hoverBackgroundColor="#transparent"
+                    hoverBackgroundColor="#242F9B"
                     style={{
                         color: 'white',
                         backgroundColor: '#242F9B',
@@ -65,7 +65,7 @@ const PurchaseOrderDashboard = () => {
 
                 <CustomizedButton
                     onClick={() => setPlaceOrderVisible(true)}
-                    hoverBackgroundColor="transparent"
+                    hoverBackgroundColor="#960505"
                     style={{
                         color: 'white',
                         backgroundColor: '#960505',
