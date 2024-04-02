@@ -16,6 +16,7 @@ import purchasedOrders from "../../../../../data/data.json";
 import SearchBar from "../../../../../components/search bar/search bar";
 import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 
+
 const PurchaseOrderDashboard = () => {
 
     const [placeOrderVisible, setPlaceOrderVisible] = useState(false);
@@ -64,7 +65,7 @@ const PurchaseOrderDashboard = () => {
                 </CustomizedButton>
 
                 <CustomizedButton
-                    onClick={() => setPlaceOrderVisible(true)}
+                    
                     hoverBackgroundColor="#960505"
                     style={{
                         color: 'white',
