@@ -42,7 +42,7 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
                     {
                         backgroundColor: '#DBDFFD',
                         width: '100%',
-                        height: '40em'
+                        height: '47rem'
                     }
                 }
             >
@@ -74,8 +74,8 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
                                     padding: '0.5em 0.625em',
                                     borderRadius: '0.35em',
                                     fontWeight: '550',
-                                    marginTop: '0.625em',
-                                    marginRight: '1.5em',
+                                    marginTop: '2.625em',
+                                    marginRight: '4.5em',
                                     textTransform: 'none',
                                     textAlign: 'center',
                                 }}>
@@ -96,9 +96,10 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
                                     padding: '0.5em 0.625em',
                                     borderRadius: '0.35em',
                                     fontWeight: '550',
-                                    marginTop: '0.625em',
+                                    marginTop: '2.625em',
                                     textTransform: 'none',
                                     textAlign: 'center',
+                                    marginRight:'5.5em'
                                 }}>
                                 Approved Refunds
                             </CustomizedButton>
@@ -106,10 +107,13 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
                         </div>
                     </Box>
 
-                    <CustomizedTable
-                        columns={columns}
-                        rows={mappedData}
-                    />
+                    <Box sx={{ mt:8}}> 
+                      <CustomizedTable
+                         style={{ width: '100%', overflowY: 'auto' }} 
+                         columns={columns}
+                         rows={mappedData}
+                      />
+</Box>
                 </Box>
             </Container>
             <Modal open={visible}>
