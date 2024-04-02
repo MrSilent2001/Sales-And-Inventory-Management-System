@@ -1,5 +1,6 @@
 .orderDetailsOuter{
     display: flex;
+    background-color: #DBDFFD;
 }
 
 .body{
@@ -55,10 +56,10 @@
 
 }
 
-.formbox{
+.updateFormbox{
     background-color: white;
     width:55em;
-    height:30em;
+    height:32em;
     border-radius : 0.2em;
     margin-left: 12em;
     margin-top: 1.5em;
@@ -87,8 +88,8 @@
 
 }
 
-.formButtons{
+.UpdateformButtons{
     display: flex;
-    margin-top: 0.5em;
-    margin-left: 34.5em;
+    margin-top: 1.5em;
+    margin-left: 34em;
 }

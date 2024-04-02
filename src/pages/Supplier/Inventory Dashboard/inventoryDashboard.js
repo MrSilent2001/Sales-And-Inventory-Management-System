@@ -46,6 +46,7 @@ const mappedData = rows.map(row => ({
     inventoryStatus: row.inventoryStatus
 }));
 
+
 function InventoryDashboard(){
 
     const [visible,setVisible] = useState(false);
@@ -79,7 +80,7 @@ function InventoryDashboard(){
                                     fontFamily: 'inter',
                                     padding: '0.5em 0.625em',
                                     borderRadius: '0.35em',
-                                    fontWeight: '550',
+                                    fontWeight: '500',
                                     marginTop: '0.625em',
                                     marginRight: '1.5em',
                                     textTransform: 'none',
@@ -100,7 +101,7 @@ function InventoryDashboard(){
                                     fontFamily: 'inter',
                                     padding: '0.5em 0.625em',
                                     borderRadius: '0.35em',
-                                    fontWeight: '550',
+                                    fontWeight: '500',
                                     marginTop: '0.625em',
                                     textTransform: 'none',
                                     textAlign: 'center',

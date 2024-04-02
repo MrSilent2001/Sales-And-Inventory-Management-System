@@ -25,44 +25,11 @@ const columns = [
         align: 'center',
         format: (accept, reject) => (
             <div style={{ display: 'flex' }}>
-                <CustomizedButton
-                    onClick={() => { alert("Order has been Accepted") }}
-                    hoverBackgroundColor="#2d3ed2"
-                    style={{
-                        color: '#ffffff',
-                        backgroundColor: '#242F9B',
-                        border: '1px solid #242F9B',
-                        width: '6em',
-                        height: '2.5em',
-                        fontSize: '0.95em',
-                        fontFamily: 'inter',
-                        padding: '0.5em 0.625em',
-                        borderRadius: '0.35em',
-                        fontWeight: '550',
-                        marginTop: '0.625em',
-                        marginRight: '1.5em',
-                        textTransform: 'none',
-                        textAlign: 'center',
-                    }}>
+                <CustomizedButton>
                     Accept
                 </CustomizedButton>
 
-                <CustomizedButton
-                    hoverBackgroundColor="#f11717"
-                    style={{
-                        color: '#ffffff',
-                        backgroundColor: '#960505',
-                        width: '6em',
-                        height: '2.5em',
-                        fontSize: '0.95em',
-                        fontFamily: 'inter',
-                        padding: '0.5em 0.625em',
-                        borderRadius: '0.35em',
-                        fontWeight: '550',
-                        marginTop: '0.625em',
-                        textTransform: 'none',
-                        textAlign: 'center',
-                    }}>
+                <CustomizedButton>
                     Reject
                 </CustomizedButton>
             </div>
@@ -81,8 +48,8 @@ const mappedData = rows.map(row => ({
             <CustomizedButton
                 hoverBackgroundColor="#transparent"
                 style={{
-                    color: '#242F9B',
-                    backgroundColor: 'transparent',
+                    color: '#ffffff',
+                    backgroundColor: '#242F9B',
                     border: '1px solid #242F9B',
                     width: '7.5em',
                     height: '2.75em',
@@ -102,8 +69,8 @@ const mappedData = rows.map(row => ({
             <CustomizedButton
                 hoverBackgroundColor="transparent"
                 style={{
-                    color: '#960505',
-                    backgroundColor: 'transparent',
+                    color: '#ffffff',
+                    backgroundColor: '#960505',
                     border: '1px solid #960505',
                     width: '7.5em',
                     height: '2.75em',

@@ -1,5 +1,6 @@
 .PendingOrdersOuter{
     display: flex;
+    background-color: #DBDF;
 }
 
 .body{
@@ -18,7 +19,7 @@
     width : 78.5em;
     height: 33em;
     margin: 1.5em 0 0 1em;
-    background-color: #DBDFFD;
+     background-color: #DBDFFD; 
 }
 
 .searchAndButtons{

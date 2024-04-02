@@ -10,6 +10,7 @@ import Footer from "../../../../layout/footer/footer";
 import SalesNavbar from "../../../../layout/navbar/Sales navbar/sales navbar";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
+import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";
 
 function SelectItem() {
 
@@ -136,7 +137,7 @@ function BasicTextFields() {
 function CustomerRefundRequest() {
     return (
         <>
-            <SalesNavbar/>
+            <CustomerNavbar></CustomerNavbar>
             <div className="customerRefundRequestOuter">
                 <div className="customerRefundRequestInner">
 
@@ -144,55 +145,55 @@ function CustomerRefundRequest() {
                         <h2>Refund Request</h2>
                     </div>
 
-                    <div className="refundRequestForm">
+                    <div className="customerRefundRequestForm">
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="customerFormField">
+                            <div className="customerTextField">
                                 <h5>Contact</h5>
                             </div>
-                            <div className="textInput">
+                            <div className="customerTextField">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="customerFormField">
+                            <div className="customerTextField">
                                 <h5>Item</h5>
                             </div>
-                            <div className="textInput">
+                            <div className="customerTextField">
                                 <SelectItem></SelectItem>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="customerFormField">
+                            <div className="customerTextField">
                                 <h5>Quantity</h5>
                             </div>
-                            <div className="textInput">
+                            <div className="customerTextField">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="customerFormField">
+                            <div className="customerTextField">
                                 <h5>Reason</h5>
                             </div>
-                            <div className="textInput">
+                            <div className="customerTextField">
                                 <SelectReason></SelectReason>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="customerFormField">
+                            <div className="customerTextField">
                                 <h5>Total Price</h5>
                             </div>
-                            <div className="textInput">
+                            <div className="customerTextField">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="refundButtonField">
-                            <div className="refundRequestButtons">
+                        <div className="customerRefundButtonField">
+                            <div className="customerRefundRequestButtons">
                                 <Link to="/generatedrefund">
                                     <CustomizedButton
                                         hoverBackgroundColor="#2d3ed2"
@@ -200,15 +201,14 @@ function CustomerRefundRequest() {
                                             color: '#ffffff',
                                             backgroundColor: '#242F9B',
                                             border: '1px solid #242F9B',
-                                            width: '9.5em',
-                                            height: '2.5em',
-                                            fontSize: '0.85em',
+                                            width: '10em',
+                                            height: '2.85em',
+                                            fontSize: '0.75em',
                                             fontFamily: 'inter',
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
-                                            fontWeight: '550',
+                                            fontWeight: '500',
                                             marginTop: '0.625em',
-                                            marginRight: '1.5em',
                                             textTransform: 'none',
                                             textAlign: 'center',
                                         }}>
@@ -220,14 +220,14 @@ function CustomerRefundRequest() {
                                     hoverBackgroundColor="#f11717"
                                     style={{
                                         color: '#ffffff',
-                                        backgroundColor: '#960505',
-                                        width: '9.5em',
-                                        height: '2.5em',
-                                        fontSize: '0.85em',
+                                        backgroundColor: '#ff0000',
+                                        width: '10em',
+                                        height: '2.85em',
+                                        fontSize: '0.75em',
                                         fontFamily: 'inter',
                                         padding: '0.5em 0.625em',
                                         borderRadius: '0.35em',
-                                        fontWeight: '550',
+                                        fontWeight: '500',
                                         marginTop: '0.625em',
                                         textTransform: 'none',
                                         textAlign: 'center',

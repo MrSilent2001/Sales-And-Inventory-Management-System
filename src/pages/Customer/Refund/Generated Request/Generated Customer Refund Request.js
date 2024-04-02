@@ -1,14 +1,14 @@
 import './Generated Customer Refund Request.css'
 import * as React from "react";
-import SalesNavbar from "../../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
+import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";
 
 function GeneratedCustomerRefundRequest() {
     return (
         <>
-            <SalesNavbar/>
+            <CustomerNavbar></CustomerNavbar>
             <div className="generatedCustomerRefundRequestOuter">
                 <div className="generatedCustomerRefundRequestInner">
 
@@ -16,58 +16,58 @@ function GeneratedCustomerRefundRequest() {
                         <h2>Generated Request</h2>
                     </div>
 
-                    <div className="refundRequestDetails">
+                    <div className="customerRefundRequestDetails">
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="customerRefundFormField">
+                            <div className="customerRefundTextField">
                                 <h5>Customer</h5>
                             </div>
-                            <div className="inputData">
+                            <div className="customerRefundInputData">
                                 <h6>WAP Saman Perera</h6>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="customerRefundFormField">
+                            <div className="customerRefundTextField">
                                 <h5>Contact</h5>
                             </div>
-                            <div className="inputData">
+                            <div className="customerRefundInputData">
                                 <h6>0771112234</h6>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="customerRefundFormField">
+                            <div className="customerRefundTextField">
                                 <h5>Item</h5>
                             </div>
-                            <div className="inputData">
+                            <div className="customerRefundInputData">
                                 <h6>I0001</h6>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="customerRefundFormField">
+                            <div className="customerRefundTextField">
                                 <h5>Quantity</h5>
                             </div>
-                            <div className="inputData">
+                            <div className="customerRefundInputData">
                                 <h6>35</h6>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="customerRefundFormField">
+                            <div className="customerRefundTextField">
                                 <h5>Reason</h5>
                             </div>
-                            <div className="inputData">
+                            <div className="customerRefundInputData">
                                 <h6>Defected Items</h6>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="customerRefundFormField">
+                            <div className="customerRefundTextField">
                                 <h5>Total Price</h5>
                             </div>
-                            <div className="inputData">
+                            <div className="customerRefundInputData">
                                 <h6>Rs.120,000</h6>
                             </div>
                         </div>

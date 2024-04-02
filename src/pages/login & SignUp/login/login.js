@@ -63,12 +63,20 @@ const Login = () => {
 }
 
     return (
-        <div className='loginOuter'>
-            <div className='loginInner'>
+        <div className='MainContainer'>
+        <div className='LeftContainer'>
+            
+                <h2 className='mainTitle'>TRADEASY</h2>
+            
+               
+                <img src="https://miro.medium.com/v2/resize:fit:740/1*PZK0jq9cUFpgRLZcs_aqwg.jpeg" alt="System image" className='image' />
+           
+            </div>
+            <div className='RightContainer'>
                 <div className="loginForm">
                     <h2 id="login">Login</h2>
                     <form >
-                        <div className="login Container">
+                        <div className="loginInnerContainer">
                             <div className="row">
                                 <label> Username: </label>
                                 <TextField
@@ -76,6 +84,7 @@ const Login = () => {
                                     size="small"
                                     id="outlined-required"
                                     label="Username"
+                                    style={{width: '14em', marginLeft: '2em'}}
                                     onChange={(e) => setUsername(e.target.value)}
                                     required
                                 />
@@ -85,7 +94,7 @@ const Login = () => {
                                 <label>Password: </label>
                                 <PasswordField
                                     placeholder="Password"
-                                    style={{width: '14.25em', marginLeft: '2em'}}
+                                    style={{width: '14em', marginLeft: '2em'}}
                                     onChange={(e) => setPassword(e.target.value)}
                                     showPassword={showPassword}
                                     handleClickShowPassword={handleClickShowPassword}
@@ -141,6 +150,7 @@ const Login = () => {
                 </div>
             </div>
         </div>
+        
     );
 }
 
