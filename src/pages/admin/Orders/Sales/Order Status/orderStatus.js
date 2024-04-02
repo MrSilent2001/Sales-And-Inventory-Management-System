@@ -47,10 +47,13 @@ function OrderStatus() {
         setStatuses(newStatuses);
     };
 
+        // Options to dropdown
     const options = [
         { value: 'Accepted', label: 'Accepted' },
         { value: 'In-Processing', label: 'In-Processing' },
         { value: 'Departed', label: 'Departed' },
+        
+     
     ];
 
     const mappedData = rows.map((row, index) => ({

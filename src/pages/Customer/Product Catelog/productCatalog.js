@@ -9,7 +9,7 @@ import CustomizedButton from "../../../components/Button/button";
 
 // Array of products
 const products = [
-    // Product data here...
+ 
     {
         "id": "I001",
         "title": "Steel Hammer",
@@ -93,7 +93,10 @@ const products = [
         "price": 675,
         "img": "https://transasia.lk/img/product/11543/11543-001_720X720.jpg",
         "amount": 1
-    }
+
+    
+    },
+
 ];
 
 function ProductCatalog() {

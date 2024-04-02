@@ -22,7 +22,7 @@ function Cart() {
 
     const [cart, setCart] = useState([]);
     const [totalAmount, setTotalAmount] = useState(0);
-    const [stripeError, setStripeError] = useState(null);
+    const [stripeError, setStripeError] = useState(null); // Payment Gateway
     const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -65,7 +65,7 @@ function Cart() {
         })
     );
 
-
+    //Payment gateway
     const checkoutOptions = {
         lineItems: lineItems, // Adjust this according to your data structure
         mode: "payment",

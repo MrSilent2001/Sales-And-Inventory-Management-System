@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import "./cancelOrders.css";
 import BasicTextFields from '../../../../../components/Form Inputs/textfield';
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
@@ -12,6 +12,7 @@ function CancelOrder() {
     const handleButtonClick = (buttonText) => {
         setActiveButton(buttonText);
     };
+
 
     return (
         <>
