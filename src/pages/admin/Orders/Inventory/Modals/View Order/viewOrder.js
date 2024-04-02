@@ -43,57 +43,57 @@ function ViewOrder(props){
             <div className="viewOrderOuter">
                 <div className="viewOrderModel">
                     <h2> Inventory Order</h2> <br/>
-                    <div className="viewOrderForm" >
-                        <div className="formField" >
-                            <div className="idField">
+                    <div className="viewOrderForm1" >
+                        <div className="formField1" >
+                            <div className="idField1">
                                 <h5>Order Id:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="idInput1">
                                 {orderDetails.orderId}
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="formField1">
+                            <div className="idField1">
                                 <h5>Supplier:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="idInput1">
                                 {orderDetails.supplier}
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="formField1">
+                            <div className="idField1">
                                 <h5>Delivery Address:</h5>
                             </div>
-                            <div className="idInput" >
+                            <div className="idInput1" >
                                 {orderDetails.deliveryAddress}
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="formField1">
+                            <div className="idField1">
                                 <h5>Email:</h5>
                             </div>
-                            <div className="idInput" >
+                            <div className="idInput1" >
                                 {orderDetails.email}
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="formField1">
+                            <div className="idField1">
                                 <h5>Contact Number:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="idInput1">
                                 {orderDetails.contactNumber}
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="idField">
+                        <div className="formField1">
+                            <div className="idField1">
                                 <h5>Items:</h5>
                             </div>
-                            <div className="idInput" id="items">
+                            <div className="idInput1" id="items">
                                 {orderDetails.items}
                             </div>
                         </div>
