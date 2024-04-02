@@ -1,13 +1,30 @@
-.loginOuter {
+.MainContainer{
+display: flex;
+flex-direction: row;
+height: 100vh;
+position: relative;
+
+}
+
+
+.LeftContainer{
     display: flex;
+    flex-direction: column;
+    width: 50%;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #646FD4;
+    background-color: white;
+    background-size:cover ;
 }
 
-.loginInner {
-    width: 425px;
+.RightContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    background-color: #646FD4;
 }
 
 #login{
@@ -15,13 +32,18 @@
 }
 
 .loginForm {
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #DBDFFD;
+    width:60%;
+    height:75% ;
 }
 
-.loginContainer {
+.loginInnerContainer{
     display: flex;
     flex-direction: column;
 }
@@ -31,7 +53,7 @@
 }
 
 .loginInput {
-    width: 60%;
+    width: 50%;
 }
 
 label{
@@ -41,6 +63,25 @@ label{
 .btn-row {
     display: flex;
     justify-content: center;
+}
+
+.image{
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 35em;
+margin-bottom: 3em;
+
+}
+
+.mainTitle{
+  font-weight: 2em;
+  font-size: 3.5em;
+  align-items: center;
+  color: rgb(6, 6, 63);
+  margin-top: 1em;
+
+ 
 }
 
 

@@ -32,12 +32,18 @@ const SignUp = () => {
     // }
 
     return (
-        <div className='signupOuter'>
-            <div className='signupInner'>
-                <div className="signupForm">
-                    <h2 id="signup">SignUp</h2>
+        <div className='S-MainContainer'>
+
+        <div className='S-LeftContainer'>
+        <h2 className='mainSignTitle'>TRADEASY</h2>
+        <img src="https://miro.medium.com/v2/resize:fit:740/1*PZK0jq9cUFpgRLZcs_aqwg.jpeg" alt="System image" className='SystemImage' />
+
+            </div>
+            <div className='S-RightContainer'>
+                <div className="SignupForm">
+                    <h2 id="Signup">SignUp</h2>
                     <form >
-                        <div className="signup Container">
+                        <div className="SignupInnerContainer">
                             <div className="row">
                                 <label style={{paddingRight: "60px"}}> Username: </label>
                                 <TextField
@@ -83,7 +89,7 @@ const SignUp = () => {
                                 <label>Password: </label>
                                 <PasswordField
                                     placeholder="Password"
-                                    style={{width:'16.85em', marginLeft: '-0.95em'}}
+                                    style={{width:'15.25em', marginLeft: '1em'}}
                                     showPassword={showPassword}
                                     handleClickShowPassword={handleClickShowPassword}
                                     handleMouseDownPassword={handleMouseDownPassword}
@@ -95,7 +101,7 @@ const SignUp = () => {
                                 <label style={{paddingRight: "5px"}}>Confirm Password: </label>
                                 <PasswordField
                                     placeholder="Password"
-                                    style={{width:'16.85em', marginLeft: '-0.95em'}}
+                                    style={{width:'15.25em', marginLeft: '1em'}}
                                     showPassword={showPassword}
                                     handleClickShowPassword={handleClickShowPassword}
                                     handleMouseDownPassword={handleMouseDownPassword}
