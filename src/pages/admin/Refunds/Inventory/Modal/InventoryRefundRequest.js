@@ -82,7 +82,7 @@ const CancelButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#D41400'),
     backgroundColor: '#D41400',
     '&:hover': {
-        backgroundColor: '#e03a26' // You can adjust the darken value as needed
+        backgroundColor: '#e03a26' 
     },
     '&.MuiButton-root': {
         width: '11.625em',
