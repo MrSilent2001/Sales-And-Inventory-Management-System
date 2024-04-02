@@ -145,54 +145,54 @@ function CustomerRefundRequest() {
                         <h2>Refund Request</h2>
                     </div>
 
-                    <div className="refundRequestForm">
+                    <div className="customerRefundRequestForm">
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="customerFormField">
+                            <div className="customerTextField">
                                 <h5>Contact</h5>
                             </div>
-                            <div className="textInput">
+                            <div className="customerTextField">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="customerFormField">
+                            <div className="customerTextField">
                                 <h5>Item</h5>
                             </div>
-                            <div className="textInput">
+                            <div className="customerTextField">
                                 <SelectItem></SelectItem>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="customerFormField">
+                            <div className="customerTextField">
                                 <h5>Quantity</h5>
                             </div>
-                            <div className="textInput">
+                            <div className="customerTextField">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="customerFormField">
+                            <div className="customerTextField">
                                 <h5>Reason</h5>
                             </div>
-                            <div className="textInput">
+                            <div className="customerTextField">
                                 <SelectReason></SelectReason>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="customerFormField">
+                            <div className="customerTextField">
                                 <h5>Total Price</h5>
                             </div>
-                            <div className="textInput">
+                            <div className="customerTextField">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="refundButtonField">
+                        <div className="customerRefundButtonField">
                             <div className="refundRequestButtons">
                                 <Link to="/generatedrefund">
                                     <CustomizedButton

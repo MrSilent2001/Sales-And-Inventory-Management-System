@@ -1,4 +1,3 @@
-
 .customerRefundRequestOuter{
     display: flex;
     justify-content: center;
@@ -22,11 +21,11 @@
     margin: 2em 0 0 0;
 }
 
-.refundRequestForm{
+.customerRefundRequestForm{
     margin: 1.5em 0 0 0;
 }
 
-.formField{
+.customerFormField{
     width: 34em;
     display: flex;
     flex-direction: row;
@@ -35,7 +34,7 @@
     margin: 0.1em 0 0 0;
 }
 
-.refundButtonField{
+.customerRefundButtonField{
     width: 34em;
     display: flex;
     flex-direction: column;
