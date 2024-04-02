@@ -40,7 +40,7 @@ function CustomerRefundRequestTables() {
 
     return (
         <TableContainer component={Paper}
-                        sx={{width: '70em', maxHeight: '25em', overflowY: 'auto', position: 'relative'}}>
+                        sx={{width: '88em', maxHeight: '25em', overflowY: 'auto', position: 'relative'}}>
             <Table sx={{minWidth: '30em'}} aria-label="customized table">
                 <TableBody>
                     {rows.map((row) => (
@@ -83,15 +83,14 @@ function CustomerRefunds() {
                                         color: '#ffffff',
                                         backgroundColor: '#242F9B',
                                         border: '1px solid #242F9B',
-                                        width: '11em',
-                                        height: '2.5em',
-                                        fontSize: '0.85em',
+                                        width: '12em',
+                                        height: '2.9em',
+                                        fontSize: '0.75em',
                                         fontFamily: 'inter',
                                         padding: '0.5em 0.625em',
                                         borderRadius: '0.35em',
-                                        fontWeight: '550',
+                                        fontWeight: '500',
                                         marginTop: '0.625em',
-                                        marginRight: '1.5em',
                                         textTransform: 'none',
                                         textAlign: 'center',
                                     }}>

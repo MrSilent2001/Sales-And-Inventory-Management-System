@@ -104,6 +104,28 @@ function CustomerHome() {
                     </div>
 
                 </div>
+
+                <div className="contactUs">
+                    <h3 className="contactUsTopic">
+                        Contact Us
+                    </h3>
+
+                    <div className="contactUsContent">
+                        <div className="mapContainer">
+
+                            <div className="map"> <iframe width="720" height="360" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0" src="https://maps.google.com/maps?width=720&amp;height=400&amp;hl=en&amp;q=No%2016/B,%20Galle%20Road,%20Colombo%203+(Tradeasy)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps trackers</a></iframe></div>
+
+                        </div>
+
+                        <div className="addressContaier">
+                            <div className="address">
+                                <p>No 16/B, Galle Road, Colombo 3</p>
+                                <p>011 5556667</p>
+                                <p>ContactUs@Tradeasy.com </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <Footer/>
         </>

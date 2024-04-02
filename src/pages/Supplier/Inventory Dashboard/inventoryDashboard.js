@@ -49,7 +49,7 @@ function CustomizedTables() {
     const [visible,setVisible] = useState(false)
 
     return (
-        <TableContainer component={Paper} sx={{ width: '100%', maxHeight: '25em', overflowY: 'auto', position: 'relative'}}>
+        <TableContainer component={Paper} sx={{ width: '96%', maxHeight: '27em', overflowY: 'auto', position: 'relative'}}>
             <Table aria-label="customized table">
                 <TableHead>
                     <TableRow>
@@ -132,13 +132,13 @@ function InventoryDashboard(){
                                     color: '#ffffff',
                                     backgroundColor: '#242F9B',
                                     border: '1px solid #242F9B',
-                                    width: '11em',
-                                    height: '2.5em',
-                                    fontSize: '0.95em',
+                                    width: '9.85em',
+                                    height: '2.85em',
+                                    fontSize: '0.75em',
                                     fontFamily: 'inter',
                                     padding: '0.5em 0.625em',
                                     borderRadius: '0.35em',
-                                    fontWeight: '550',
+                                    fontWeight: '500',
                                     marginTop: '0.625em',
                                     marginRight: '1.5em',
                                     textTransform: 'none',
@@ -152,14 +152,14 @@ function InventoryDashboard(){
                                 hoverBackgroundColor="#f11717"
                                 style={{
                                     color: '#ffffff',
-                                    backgroundColor: '#960505',
-                                    width: '11em',
-                                    height: '2.5em',
-                                    fontSize: '0.95em',
+                                    backgroundColor: '#ff0000',
+                                    width: '9.85em',
+                                    height: '2.85em',
+                                    fontSize: '0.75em',
                                     fontFamily: 'inter',
                                     padding: '0.5em 0.625em',
                                     borderRadius: '0.35em',
-                                    fontWeight: '550',
+                                    fontWeight: '500',
                                     marginTop: '0.625em',
                                     marginRight: '1.5em',
                                     textTransform: 'none',
