@@ -42,9 +42,9 @@ function ViewOrder(props){
         <CenteredModal>
             <div className="viewOrderOuter">
                 <div className="viewOrderModel">
-                    <h2>Inventory Order</h2>
-                    <div className="viewOrderForm">
-                        <div className="formField">
+                    <h2> Inventory Order</h2> <br/>
+                    <div className="viewOrderForm" >
+                        <div className="formField" >
                             <div className="idField">
                                 <h5>Order Id:</h5>
                             </div>
@@ -66,7 +66,7 @@ function ViewOrder(props){
                             <div className="idField">
                                 <h5>Delivery Address:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="idInput" >
                                 {orderDetails.deliveryAddress}
                             </div>
                         </div>
@@ -75,7 +75,7 @@ function ViewOrder(props){
                             <div className="idField">
                                 <h5>Email:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="idInput" >
                                 {orderDetails.email}
                             </div>
                         </div>
@@ -97,9 +97,9 @@ function ViewOrder(props){
                                 {orderDetails.items}
                             </div>
                         </div>
-
+                        <br/>
                         <div className="formFieldButtons">
-                            <div className="saveButton">
+                            <div className="saveButton" >
                                 <GoBackButton onClick={() => props.onClose(false)}>Go Back</GoBackButton>
                             </div>
                         </div>
