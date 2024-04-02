@@ -5,15 +5,14 @@ import Footer from "../../../layout/footer/footer";
 import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navbar";
 import SearchBar from "../../../components/search bar/search bar";
 import CustomizedButton from "../../../components/Button/button";
-
+import suppliers from "../../../data/data.json";
 
 function SupplierProfile() {
     return (
         <>
             <SupplierNavbar/>
-
             <div className="supplierProfileManagementOuter">
-                <div className="searchPanel">
+                <div className="supplierSearchPanel">
                     <SearchBar/>
                 </div>
                 <div className="supplierProfileManagementInner">
@@ -28,39 +27,39 @@ function SupplierProfile() {
                         <div className="supplier-profile-details">
                             <div className="supplierProfileManagementDetails">
 
-                                <div className="formField">
-                                    <div className="textField">
-                                        <h4>Customer ID</h4>
+                                <div className="supplierFormField">
+                                    <div className="supplierTextField">
+                                        <h3>Supplier ID</h3>
                                     </div>
-                                    <div className="inputData">
-                                        <h5>CU0004</h5>
-                                    </div>
-                                </div>
-
-                                <div className="formField">
-                                    <div className="textField">
-                                        <h4>Address</h4>
-                                    </div>
-                                    <div className="inputData">
-                                        <h5>151/A, Colombo, SriLanka.</h5>
+                                    <div className="supplierInputData">
+                                        <h4>{suppliers.suppliers[0].supplierId}</h4>
                                     </div>
                                 </div>
 
-                                <div className="formField">
-                                    <div className="textField">
-                                        <h4>E-mail</h4>
+                                <div className="supplierFormField">
+                                    <div className="supplierTextField">
+                                        <h3>Address</h3>
                                     </div>
-                                    <div className="inputData">
-                                        <h5>samanperera@gmail.com</h5>
+                                    <div className="supplierInputData">
+                                        <h4>{suppliers.suppliers[0].address}</h4>
                                     </div>
                                 </div>
 
-                                <div className="formField">
-                                    <div className="textField">
-                                        <h4>Contact</h4>
+                                <div className="supplierFormField">
+                                    <div className="supplierTextField">
+                                        <h3>E-mail</h3>
                                     </div>
-                                    <div className="inputData">
-                                        <h5>0771147935</h5>
+                                    <div className="supplierInputData">
+                                        <h4>{suppliers.suppliers[0].email}</h4>
+                                    </div>
+                                </div>
+
+                                <div className="supplierFormField">
+                                    <div className="supplierTextField">
+                                        <h3>Contact</h3>
+                                    </div>
+                                    <div className="supplierInputData">
+                                        <h4>{suppliers.suppliers[0].contact}</h4>
                                     </div>
                                 </div>
 
@@ -72,15 +71,14 @@ function SupplierProfile() {
                                         color: '#ffffff',
                                         backgroundColor: '#242F9B',
                                         border: '1px solid #242F9B',
-                                        width: '11em',
+                                        width: '9.5em',
                                         height: '2.5em',
                                         fontSize: '0.95em',
                                         fontFamily: 'inter',
                                         padding: '0.5em 0.625em',
                                         borderRadius: '0.35em',
                                         fontWeight: '550',
-                                        marginTop: '0.625em',
-                                        marginRight: '7.5em',
+                                        marginLeft: '7.5em',
                                         textTransform: 'none',
                                         textAlign: 'center',
                                     }}>

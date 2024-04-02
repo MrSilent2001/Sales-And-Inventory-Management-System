@@ -11,7 +11,7 @@ function SalesNavbar(){
                 <img src={logo} alt="Logo" style={{width:"30px", margin:"10px"}} />
             </div>
             <div className="navigation">
-                <NavLink to="/inventoryDashboard">Inventory</NavLink>
+                <NavLink to="/supplierDashboard">Inventory</NavLink>
                 <NavLink to="/supplierProfile">Profile</NavLink>
                 <NavLink to="/logout" className="lastNavLink">Logout</NavLink>
             </div>

@@ -265,6 +265,7 @@
       "email": "SarahTaylor@gmail.com"
     }
   ],
+
   "discountDetails": [
     {
       "id": "I001",
@@ -303,6 +304,7 @@
       "price": 3000.00
     }
   ],
+
   "purchasedOrders": [
     {
       "supplierId": "S0001",
@@ -377,6 +379,7 @@
       "actions": "View/Cancel"
     }
   ],
+
   "orderHistory": [
     {
       "id": "000000",
@@ -574,12 +577,13 @@
       "refundStatus": "Refunded"
     }
   ],
+
   "suppliers": [
     {
-      "supplierId": "I0001",
-      "address": "Tokyo Super Cement",
-      "email": "Cement",
-      "contact": 24,
+      "supplierId": "S0001",
+      "address": "xxxxxxxxxxxxxxxxxxxxxx",
+      "email": "xxxxx@gmail.com",
+      "contact": 3,
       "category": "In Stock"
     },
     {
@@ -618,6 +622,7 @@
       "category": "In Stock"
     }
   ],
+
   "items": [
     {
       "inventoryId": "I0001",
@@ -662,6 +667,8 @@
       "inventoryStatus": "In Stock"
     }
   ],
+
+
   "customerData": [
     {
       "id": "0001",
@@ -719,7 +726,30 @@
       "address": "No.65, Yorkshire, England"
     }
   ],
+
+
   "inventory": [
+    {
+      "inventoryId": "I0001",
+      "itemDescription": "Tokyo Super Cement",
+      "itemCategory": "Cement",
+      "Quantity": 24,
+      "inventoryStatus": "In Stock"
+    },
+    {
+      "inventoryId": "I0001",
+      "itemDescription": "Tokyo Super Cement",
+      "itemCategory": "Cement",
+      "Quantity": 24,
+      "inventoryStatus": "In Stock"
+    },
+    {
+      "inventoryId": "I0001",
+      "itemDescription": "Tokyo Super Cement",
+      "itemCategory": "Cement",
+      "Quantity": 24,
+      "inventoryStatus": "In Stock"
+    },
     {
       "inventoryId": "I0001",
       "itemDescription": "Tokyo Super Cement",
