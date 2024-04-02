@@ -39,7 +39,7 @@ function PlaceOrder(props){
                                 <h5>Order Id:</h5>
                             </div>
                             <div className="placeOrderidInput">
-                                <BasicTextField id="outlined-required" size="small"/>
+                                <BasicTextField id="outlined-required" size="small" type="num"/>
                             </div>
                         </div>
 
@@ -66,7 +66,7 @@ function PlaceOrder(props){
                                 <h5>Delivery Address:</h5>
                             </div>
                             <div className="idInput">
-                                <BasicTextField id="outlined-required" size="small" type="email"/>
+                                <BasicTextField id="outlined-required" size="small" />
                             </div>
                         </div>
 
@@ -84,7 +84,7 @@ function PlaceOrder(props){
                                 <h5>Contact Number:</h5>
                             </div>
                             <div className="placeOrderidInput">
-                                <BasicTextField id="outlined-required" size="small"/>
+                                <BasicTextField id="outlined-required" size="small" type="number"/>
                             </div>
                         </div>
 
