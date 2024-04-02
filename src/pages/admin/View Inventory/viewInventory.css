@@ -6,9 +6,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 14.375em;
+    width: 15.75em;
     height: 40em;
-    background-color: #646FD4
+    background-color: #646FD4;
+    margin: 0 0 0 -0.3em;
 }
 
 .itemCategoryFilter{
@@ -50,7 +51,7 @@
     padding: 1.5em 0 0 0;
 }
 
-.searchAndButtons{
+.InventorySearchAndButtons{
     display: flex;
     width: 81.25em;
     padding: 0.5em 0 0 0;

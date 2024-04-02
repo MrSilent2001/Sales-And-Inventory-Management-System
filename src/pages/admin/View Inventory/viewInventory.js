@@ -136,7 +136,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
         backgroundColor: theme.palette.action.hover,
     },
-    // hide last border
+
     '&:last-child td, &:last-child th': {
         border: 0,
     },
@@ -147,7 +147,7 @@ function CustomizedTables() {
     const [visible,setVisible] = useState(false);
 
     return (
-        <TableContainer component={Paper} sx={{ width: '76.875em', maxHeight: '25em', overflowY: 'auto', position: 'relative'}}>
+        <TableContainer component={Paper} sx={{ width: '76.875em', maxHeight: '27em', overflowY: 'auto', position: 'relative'}}>
             <Table sx={{ minWidth: '25em'}} aria-label="customized table">
                 <TableHead>
                     <TableRow>
@@ -232,7 +232,7 @@ function ViewInventory(){
                                 hoverBackgroundColor="#f11717"
                                 style={{
                                     color: '#ffffff',
-                                    backgroundColor: '#960505',
+                                    backgroundColor: '#ff0000',
                                     width: '11em',
                                     height: '2.5em',
                                     fontSize: '0.95em',
@@ -252,7 +252,7 @@ function ViewInventory(){
                     </div>
                 </div>
                 <div className="viewInventoryItemInner">
-                    <div className="searchAndButtons">
+                    <div className="InventorySearchAndButtons">
                         <div className="viewInventorySearch">
                             <SearchBar/>
                         </div>
@@ -264,13 +264,13 @@ function ViewInventory(){
                                     color: '#ffffff',
                                     backgroundColor: '#242F9B',
                                     border: '1px solid #242F9B',
-                                    width: '11em',
-                                    height: '2.5em',
-                                    fontSize: '0.95em',
+                                    width: '10em',
+                                    height: '2.65em',
+                                    fontSize: '0.75em',
                                     fontFamily: 'inter',
                                     padding: '0.5em 0.625em',
                                     borderRadius: '0.35em',
-                                    fontWeight: '550',
+                                    fontWeight: '500',
                                     marginTop: '0.625em',
                                     marginRight: '1.5em',
                                     textTransform: 'none',
@@ -284,14 +284,14 @@ function ViewInventory(){
                                 hoverBackgroundColor="#f11717"
                                 style={{
                                     color: '#ffffff',
-                                    backgroundColor: '#960505',
-                                    width: '11em',
-                                    height: '2.5em',
-                                    fontSize: '0.95em',
+                                    backgroundColor: '#ff0000',
+                                    width: '10em',
+                                    height: '2.65em',
+                                    fontSize: '0.75em',
                                     fontFamily: 'inter',
-                                    padding: '0.5em 0.625em',
+                                    padding: '0.5em',
                                     borderRadius: '0.35em',
-                                    fontWeight: '550',
+                                    fontWeight: '500',
                                     marginTop: '0.625em',
                                     textTransform: 'none',
                                     textAlign: 'center',
