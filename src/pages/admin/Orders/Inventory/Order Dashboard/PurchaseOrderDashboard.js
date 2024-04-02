@@ -45,9 +45,8 @@ const PurchaseOrderDashboard = () => {
                     onClick={() => setViewOrderVisible(true)}
                     hoverBackgroundColor="#transparent"
                     style={{
-                        color: '#242F9B',
-                        backgroundColor: 'transparent',
-                        border: '1px solid #242F9B',
+                        color: 'white',
+                        backgroundColor: '#242F9B',
                         width: '7.5em',
                         height: '2.75em',
                         fontSize: '0.95em',
@@ -56,7 +55,8 @@ const PurchaseOrderDashboard = () => {
                         borderRadius: '0.35em',
                         fontWeight: '550',
                         marginTop: '0.625em',
-                        marginRight: '1.5em',
+                        marginRight: '2.5em',
+                        marginLeft:'2.5em',
                         textTransform: 'none',
                         textAlign: 'center',
                     }}>
@@ -67,9 +67,8 @@ const PurchaseOrderDashboard = () => {
                     onClick={() => setPlaceOrderVisible(true)}
                     hoverBackgroundColor="transparent"
                     style={{
-                        color: '#960505',
-                        backgroundColor: 'transparent',
-                        border: '1px solid #960505',
+                        color: 'white',
+                        backgroundColor: '#960505',
                         width: '7.5em',
                         height: '2.75em',
                         fontSize: '0.95em',
@@ -92,7 +91,7 @@ const PurchaseOrderDashboard = () => {
     return (
         <>
             <InventoryNavbar />
-            <Box sx={{ display: 'flex', height: '100vh' }}>
+            <Box sx={{ display: 'flex', height: '47rem' }}>
                 {/* Sidebar */}
                 <Box sx={{ width: '15%', height: 'auto', bgcolor: '#646FD4', color: 'white', p: 2 }}>
                     <CustomizedButton
@@ -147,15 +146,18 @@ const PurchaseOrderDashboard = () => {
                 </Box>
 
                 {/* Main Content */}
-                <Container maxWidth="xl" sx={{ bgColor: 'white', flexGrow: 1, p: 4 }}>
-                    <SearchBar />
-                    <div style={{ overflow: 'auto', maxHeight: 'calc(100vh - 64px - 4em)' }}>
-                        <CustomizedTable
-                            style={{width: '100%', maxHeight:500,marginLeft: '2.5em'}}
-                            columns={columns}
-                            rows={mappedData}
-                        />
+                <Container maxWidth={false} sx={{ bgcolor: '#DBDFFD', height:'auto' }}>
+                   <Box sx={{ display: 'flex', justifyContent: 'flex-start', paddingTop:7,paddingBottom:7}}>
+                     <SearchBar />
+                    </Box>
+                    <div style={{ overflow: 'auto', maxHeight: '50vh' }}> 
+                    <CustomizedTable
+                      style={{ width: '100%', overflowY: 'auto' }} 
+                      columns={columns}
+                      rows={mappedData}
+                    />
                     </div>
+
 
                     <Modal open={viewOrderVisible}>
                         <ViewOrder onClose={(value) => { setViewOrderVisible(false) }} />
