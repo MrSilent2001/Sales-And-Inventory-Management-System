@@ -1,4 +1,5 @@
-import './customerOrderHistory.css';
+
+import './Admin Order History.css';
 import {styled} from '@mui/material/styles';
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -9,7 +10,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
+import SalesNavbar from '../../../layout/navbar/Sales navbar/sales navbar';
 import Footer from "../../../layout/footer/footer";
 import orderHistory from "../../../data/data.json";
 import SearchBar from "../../../components/search bar/search bar";
@@ -62,7 +63,7 @@ const columns = [
 
 const rows = orderHistory.orderHistory || [];
 
-function CustomerOrderHistory() {
+function AdminOrderHistory() {
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -78,15 +79,15 @@ function CustomerOrderHistory() {
 
     return (
         <>
-            <CustomerNavbar/>
-            <div className="CustomerOrdersOuter">
-                <div className="CustomerOrdersInner">
-                    <div className="customerOrdersTopicWithTextfield">
-                        <div className="customerOrdersTopic">
+            <SalesNavbar/>
+            <div className="AdminOrdersOuter">
+                <div className="AdminOrdersInner">
+                    <div className="AdminOrdersTopicWithTextfield">
+                        <div className="AdminOrdersTopic">
                             <h2>Orders</h2>
                         </div>
 
-                        <div className="customerOrdersTextField">
+                        <div className="AdminOrdersTextField">
                             <SearchBar/>
                         </div>
                     </div>
@@ -147,4 +148,4 @@ function CustomerOrderHistory() {
     );
 }
 
-export default CustomerOrderHistory;
+export default AdminOrderHistory;  

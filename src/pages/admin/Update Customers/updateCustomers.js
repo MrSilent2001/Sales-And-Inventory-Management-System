@@ -14,15 +14,16 @@ const UploadButtons = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#bec0bf'),
     backgroundColor: '#bec0bf',
     '&:hover': {
-        backgroundColor: '#2d3ed2'
+        backgroundColor: '#676767'
     },
     '&.MuiButton-root': {
-        width: '17.225em',
-        height: '3.5em'
+        width: '16em',
+        height: '2em',
     },
     fontSize: '0.95em',
     fontFamily: 'inter',
-    padding: '1.75em 0.625em'
+    padding: '1.75em 0.625em',
+    marginTop:'2.5em',
 }));
 
 
@@ -60,10 +61,10 @@ function UpdateCustomers() {
             <div className="UpdateCustomersOuter">
                 <div className="UpdateCustomersInner">
 
-                    <div className="customerProfile">
-                        <h3>W A P Saman Perera</h3>
-                        <div className="avatar">
-                            <Avatar src="/broken-image.jpg" sx={{ width: 230, height: 230, border: 2, borderRadius: 3 }} />
+                    <div className="UpdateCustomerProfile">
+                        <h3 className='UpdateTopicName'>W A P Saman Perera</h3>
+                        <div className="updateAvatar">
+                            <Avatar src="/broken-image.jpg" sx={{ width: 230, height: 230, border: 2, borderRadius: 2,marginTop:'-0.8em' }} />
                             <div className='uploadButton'>
                                 <UploadButtons>...Upload...</UploadButtons>
                             </div>
@@ -75,38 +76,38 @@ function UpdateCustomers() {
 
                     <div className="UpdateCustomerForm">
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="UpdateCustomerFormField">
+                            <div className="UpdateCustomerTextField">
                                 <h5>Name</h5>
                             </div>
-                            <div className="textInput">
+                            <div className="UpdateCustomerTextInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="UpdateCustomerFormField">
+                            <div className="UpdateCustomerTextField">
                                 <h5>Address</h5>
                             </div>
-                            <div className="textInput">
+                            <div className="UpdateCustomerTextInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="UpdateCustomerFormField">
+                            <div className="UpdateCustomerTextField">
                                 <h5>Contact</h5>
                             </div>
-                            <div className="textInput">
+                            <div className="UpdateCustomerTextInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>
 
-                        <div className="formField">
-                            <div className="textField">
+                        <div className="UpdateCustomerFormField">
+                            <div className="UpdateCustomerTextField">
                                 <h5>Email</h5>
                             </div>
-                            <div className="textInput">
+                            <div className="UpdateCustomerTextInput">
                                 <BasicTextFields></BasicTextFields>
                             </div>
                         </div>

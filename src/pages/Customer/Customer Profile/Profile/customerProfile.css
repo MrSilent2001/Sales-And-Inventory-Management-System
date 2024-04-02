@@ -22,6 +22,7 @@
 .customer-profile-details{
     margin: 5em 0 0 0;
     height: 100%;
+    width: 35em;
 }
 
 .customerProfileManagementTopic h2{
@@ -103,6 +104,8 @@
     align-items: center;
     justify-content: center;
     padding: 1em;
+    margin-right:2em;
+
 }
 
 .buttonStack {
@@ -110,5 +113,11 @@
     align-items: center;
     justify-content: center;
     margin-top: 1.5em;
-    margin-right: 3.5em;
+    margin-right: 6.5em;
+}
+
+.profileName{
+    margin-top: 1.5em;
+    
+    
 }

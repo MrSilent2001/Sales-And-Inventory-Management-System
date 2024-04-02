@@ -1,10 +1,10 @@
-.CustomerOrdersOuter{
+.AdminOrdersOuter{
     width: 100%;
     height: 100%;
     
 }
 
-.CustomerOrdersInner{
+.AdminOrdersInner{
     width: 100%;
     background-color: #DBDFFD;
     display: flex;
@@ -13,10 +13,10 @@
     justify-content: center;
 }
 
-/*.customerTitle{
+/*.AdminTitle{
     text-align: left;
 }*/
-.customerOrdersTopicWithTextfield{
+.AdminOrdersTopicWithTextfield{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,7 +24,7 @@
     margin: 2em 0 2em 0;
 }
 
-.customerOrdersTopic h2{
+.AdminOrdersTopic h2{
     margin: 0;
     font-family: Inter;
     font-size: 1.3em;
