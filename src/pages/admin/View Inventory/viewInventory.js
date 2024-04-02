@@ -205,7 +205,9 @@ function CustomizedTables() {
 
 function ViewInventory(){
 
-    const [visible,setVisible] = useState(false)
+    const [addItemVisible,setAddItemVisible] = useState(false)
+
+    const [deleteItemVisible,setDeleteItemVisible] = useState(false)
 
     return(
         <>
@@ -258,7 +260,7 @@ function ViewInventory(){
                         </div>
                         <div className="viewInventoryButtons">
                             <CustomizedButton
-                                onClick={()=>setVisible(true)}
+                                onClick={()=>setAddItemVisible(true)}
                                 hoverBackgroundColor="#2d3ed2"
                                 style={{
                                     color: '#ffffff',
@@ -280,7 +282,7 @@ function ViewInventory(){
                             </CustomizedButton>
 
                             <CustomizedButton
-                                onClick={()=>setVisible(true)}
+                                onClick={()=>setDeleteItemVisible(true)}
                                 hoverBackgroundColor="#f11717"
                                 style={{
                                     color: '#ffffff',
@@ -307,12 +309,12 @@ function ViewInventory(){
                     </div>
                 </div>
 
-                <Modal open={visible}>
-                    <AddItem onClose={(value) => { setVisible(false)}} />
+                <Modal open={addItemVisible}>
+                    <AddItem onClose={(value) => { setAddItemVisible(false)}} />
                 </Modal>
 
-                <Modal open={visible}>
-                    <DeleteItem onClose={(value) => { setVisible(false)}} />
+                <Modal open={deleteItemVisible}>
+                    <DeleteItem onClose={(value) => { setDeleteItemVisible(false)}} />
                 </Modal>
             </div>
 
