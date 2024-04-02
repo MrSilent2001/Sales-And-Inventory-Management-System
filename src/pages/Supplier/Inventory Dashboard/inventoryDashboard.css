@@ -9,34 +9,35 @@
 
 .viewInventoryInner {
     width: 100%;
-    max-height: 36.03em; /* Changed height to max-height */
+    height: 37em; /* Changed height to max-height */
     background-color: rgba(219, 223, 253, 0.8);
-    padding: 1.5em 0; /* Removed padding from right and left */
+    padding: 1em 0 0 0;
     overflow: auto; /* Added overflow property */
 }
 
 .searchAndButtons {
     display: flex;
     width: 100%;
-    padding: 0.5em 0; /* Removed padding from right and left */
     justify-content: space-between;
+    margin: -1em 0 0 0;
 }
 
 .viewInventorySearch {
     display: flex;
-    align-items: center;
-    padding-left: 2em; /* Adjusted left padding */
+    align-items: flex-start;
+    padding-left: -1em; /* Adjusted left padding */
 }
 
 .viewInventoryButtons {
     display: flex;
     align-items: center;
     justify-content: flex-end; /* Align buttons to the right */
-    width: 50%; /* Adjusted width */
+    width: 100%; /* Adjusted width */
 }
 
 .itemTable {
-    padding: 2em 0; /* Removed padding from right and left */
+    padding: 0 0 2em 5em; /* Removed padding from right and left */
+    margin: -0.75em 0 0 0.5em;
 }
 
 table {
