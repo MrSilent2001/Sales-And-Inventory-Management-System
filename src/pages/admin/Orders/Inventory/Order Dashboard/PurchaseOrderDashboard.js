@@ -96,7 +96,7 @@ const PurchaseOrderDashboard = () => {
                 <Box sx={{ width: '15%', height: 'auto', bgcolor: '#646FD4', color: 'white', p: 2 }}>
                     <CustomizedButton
                         onClick={() => setPlaceOrderVisible(true)}
-                        hoverBackgroundColor="#0aaf0b"
+                        hoverBackgroundColor="#0aaf1b"
                         style={{
                             color: '#ffffff',
                             backgroundColor: '#057007',
