@@ -1,27 +1,42 @@
-.signupOuter {
+.S-MainContainer{
     display: flex;
+    flex-direction: row;
+    height: 100vh;
+    position: relative;
+}
+
+.S-LeftContainer {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background-color: white;
+    background-size:cover ;
+}
+
+.S-RightContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
     background-color: #646FD4;
 }
 
-.signupInner {
-    width: 500px;
-}
-
-#signup{
+.Signup{
     margin-bottom: 1.75em;
 }
 
-.signupForm {
+.SignupForm {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #DBDFFD;
 }
 
-.signupContainer {
+.SignupInnerContainer {
     display: flex;
     flex-direction: column;
 }
@@ -47,4 +62,21 @@
 
 .btn:hover {
     background-color: #45a049;
+}
+
+.mainSignTitle{
+    font-weight: 2em;
+    font-size: 3.5em;
+    align-items: center;
+    color: rgb(6, 6, 63);
+    margin-top: 1em;
+}
+
+.SystemImage{
+
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 35em;
+margin-bottom: 3em;
 }
