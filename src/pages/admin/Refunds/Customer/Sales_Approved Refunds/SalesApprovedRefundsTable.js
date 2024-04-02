@@ -48,6 +48,10 @@ const SalesApprovedRefundsTable = ({ onBack }) => {
             <CustomizedTable
                 columns={columns}
                 rows={mappedData}
+                style={{
+                  height:'30rem'
+
+                }}
             />
           </Paper>
         </Box>
