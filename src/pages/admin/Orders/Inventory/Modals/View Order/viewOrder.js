@@ -8,7 +8,7 @@ const GoBackButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#242F9B'),
     backgroundColor: '#249b54',
     '&:hover': {
-        backgroundColor: '#2d3ed2' // You can adjust the darken value as needed
+        backgroundColor: '#2d3ed2' 
     },
     '&.MuiButton-root': {
         width: '15.625em',
@@ -23,7 +23,7 @@ const CenteredModal = styled('div')({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100vh', // Make the container take the full height of the viewport
+    height: '100vh', 
 });
 
 
