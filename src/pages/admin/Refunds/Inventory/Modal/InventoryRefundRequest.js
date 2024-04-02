@@ -132,7 +132,6 @@ function InventoryRefundRequest(props) {
                                 </div>
                                 <div className="refundRequestidInput">
                                     <Dropdown
-                                        label="Supplier"
                                         value={supplierCode}
                                         onChange={(e) => setSupplierCode(e.target.value)}
                                         options={suppliers}
@@ -146,7 +145,6 @@ function InventoryRefundRequest(props) {
                                 </div>
                                 <div className="refundRequestidInput">
                                     <Dropdown
-                                        label="Item"
                                         value={itemCode}
                                         onChange={(e) => setItemCode(e.target.value)}
                                         options={items}
@@ -169,7 +167,6 @@ function InventoryRefundRequest(props) {
                                 </div>
                                 <div className="refundRequestidInput">
                                     <Dropdown
-                                        label="Reason"
                                         value={reason}
                                         onChange={(e) => setReason(e.target.value)}
                                         options={[

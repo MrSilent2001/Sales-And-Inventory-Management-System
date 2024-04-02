@@ -109,7 +109,7 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
 
                     <Box sx={{ mt:8}}> 
                       <CustomizedTable
-                         style={{ width: '100%', overflowY: 'auto' }} 
+                        style={{ width: '100%', overflowY: 'auto' }} 
                          columns={columns}
                          rows={mappedData}
                       />

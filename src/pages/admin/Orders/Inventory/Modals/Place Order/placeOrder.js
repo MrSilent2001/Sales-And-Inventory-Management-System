@@ -6,11 +6,12 @@ import BasicTextField from "../../../../../../components/Form Inputs/textfield";
 import ComboBox from "../../../../../../components/Form Inputs/comboBox";
 
 function PlaceOrder(props){
-    const [category, setCategory] = React.useState('');
+    const [supplierCategory, setSupplierCategory] = React.useState('');
+    const [itemCategory, setItemCategory] = React.useState('');
 
     const options1 = [
-        { value: 'Category01', label: 'Primary' },
-        { value: 'Category02', label: 'Secondary' },
+        { value: 'Category01', label: 'Supplier01' },
+        { value: 'Category02', label: 'Supplier02' },
     ];
 
     const options2 = [
@@ -19,13 +20,23 @@ function PlaceOrder(props){
         { value: 'Item03', label: 'Item03' },
         { value: 'Item04', label: 'Item04' }
     ];
-    const handleChange = (event) => {
-        setCategory(event.target.value);
+    const handleSupplierChange = (event) => {
+        setSupplierCategory(event.target.value);
     };
+
+    const handleItemChange = (event) => {
+        setItemCategory(event.target.value);
+    };
+
 
     const placeOrder = () =>{
         console.log("Order Placed Successfully");
         alert("Order Placed Successfully");
+    }
+
+    const addItem = () =>{
+        console.log("Item added Successfully");
+        alert("Item added Successfully");
     }
 
     return(
@@ -39,7 +50,7 @@ function PlaceOrder(props){
                                 <h5>Order Id:</h5>
                             </div>
                             <div className="placeOrderidInput">
-                                <BasicTextField id="outlined-required" size="small" type="num"/>
+                                <BasicTextField id="outlined-required" size="small" type="number"/>
                             </div>
                         </div>
 
@@ -51,8 +62,8 @@ function PlaceOrder(props){
                                 <ComboBox
                                     className="supplierInput"
                                     id="demo-select-small"
-                                    value={category}
-                                    onChange={handleChange}
+                                    value={supplierCategory}
+                                    onChange={handleSupplierChange}
                                     options={options1}
                                     label="Category"
                                     size="small"
@@ -97,8 +108,8 @@ function PlaceOrder(props){
                                     <ComboBox
                                         className="supplierInput"
                                         id="demo-select-small"
-                                        value={category}
-                                        onChange={handleChange}
+                                        value={itemCategory}
+                                        onChange={handleItemChange}
                                         options={options2}
                                         label="Category"
                                         size="small"
@@ -107,7 +118,7 @@ function PlaceOrder(props){
                                 </div>
                                 <div>
                                     <CustomizedButton
-                                        onClick={placeOrder}
+                                        onClick={addItem}
                                         hoverBackgroundColor="#2d3ed2"
                                         style={{
                                             color: '#ffffff',
