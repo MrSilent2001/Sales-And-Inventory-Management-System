@@ -58,11 +58,11 @@
 
 .updateFormbox{
     background-color: white;
-    width:55em;
+    width:58em;
     height:32em;
     border-radius : 0.2em;
     margin-left: 12em;
-    margin-top: 1.5em;
+    margin-top: 1em;
 
 }
 
@@ -82,7 +82,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding-top: 0.8em;
+    padding-top: -8em !important;
 
 
 
@@ -90,6 +90,6 @@
 
 .UpdateformButtons{
     display: flex;
-    margin-top: 1.5em;
+    margin-top: 1.7em;
     margin-left: 34em;
 }

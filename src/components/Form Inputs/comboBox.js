@@ -11,6 +11,7 @@ const ComboBox = ({ value, onChange, options, style }) => {
             <MenuItem value="None">
                 <em>None</em>
             </MenuItem>
+            
             {options.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                     {option.label}
