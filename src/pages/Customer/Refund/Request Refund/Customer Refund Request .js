@@ -193,7 +193,7 @@ function CustomerRefundRequest() {
                         </div>
 
                         <div className="customerRefundButtonField">
-                            <div className="refundRequestButtons">
+                            <div className="customerRefundRequestButtons">
                                 <Link to="/generatedrefund">
                                     <CustomizedButton
                                         hoverBackgroundColor="#2d3ed2"
@@ -201,15 +201,14 @@ function CustomerRefundRequest() {
                                             color: '#ffffff',
                                             backgroundColor: '#242F9B',
                                             border: '1px solid #242F9B',
-                                            width: '9.5em',
-                                            height: '2.5em',
-                                            fontSize: '0.85em',
+                                            width: '10em',
+                                            height: '2.85em',
+                                            fontSize: '0.75em',
                                             fontFamily: 'inter',
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
-                                            fontWeight: '550',
+                                            fontWeight: '500',
                                             marginTop: '0.625em',
-                                            marginRight: '1.5em',
                                             textTransform: 'none',
                                             textAlign: 'center',
                                         }}>
@@ -221,14 +220,14 @@ function CustomerRefundRequest() {
                                     hoverBackgroundColor="#f11717"
                                     style={{
                                         color: '#ffffff',
-                                        backgroundColor: '#960505',
-                                        width: '9.5em',
-                                        height: '2.5em',
-                                        fontSize: '0.85em',
+                                        backgroundColor: '#ff0000',
+                                        width: '10em',
+                                        height: '2.85em',
+                                        fontSize: '0.75em',
                                         fontFamily: 'inter',
                                         padding: '0.5em 0.625em',
                                         borderRadius: '0.35em',
-                                        fontWeight: '550',
+                                        fontWeight: '500',
                                         marginTop: '0.625em',
                                         textTransform: 'none',
                                         textAlign: 'center',
