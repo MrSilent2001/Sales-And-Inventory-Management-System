@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TableContainer, Paper, Modal } from "@mui/material";
+import { Modal } from "@mui/material";
 import InventoryNavbar from "../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../layout/footer/footer";
 import CustomizedButton from "../../../components/Button/button";
@@ -8,11 +8,11 @@ import paymentData from "../../../data/data.json";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 
 const columns = [
-    { id: 'id', label: 'Id', minWidth: 170, align: 'center' },
+    { id: 'id', label: 'Id', minWidth: 100, align: 'center' },
     { id: 'name', label: 'Name', minWidth: 100, align: 'center' },
     { id: 'address', label: 'Address', minWidth: 170, align: 'center' },
     { id: 'items', label: 'Items (\u20A8.)', minWidth: 170, align: 'center' },
-    { id: 'amount', label: 'Total Amount', minWidth: 170, align: 'center' },
+    { id: 'amount', label: 'Total Amount', minWidth: 100, align: 'center' },
 ];
 
 function PaymentDashboard() {
@@ -58,18 +58,16 @@ function PaymentDashboard() {
                             </CustomizedButton>
                         </div>
                     </div>
-                    <div className="paymentDashboard">
-                        <TableContainer component={Paper} >
+                    <div className="paymentDashboard" style={{margin: '2.5em 0 5em 2.5em'}}>
                             <CustomizedTable
-                                style={{ maxHeight: 500, width: '95%', paddingBottom: '2em'}}
+                                style={{ maxHeight: 400, width: '100%'}}
                                 columns={columns}
                                 rows={mappedData}
                             />
-                        </TableContainer>
-                        <Modal open={visible}>
-                            <AddPayment onClose={() => setVisible(false)}></AddPayment>
-                        </Modal>
                     </div>
+                    <Modal open={visible}>
+                        <AddPayment onClose={() => setVisible(false)}></AddPayment>
+                    </Modal>
                 </div>
             </div>
             <Footer />

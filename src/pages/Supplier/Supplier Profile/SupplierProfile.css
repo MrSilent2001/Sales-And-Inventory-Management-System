@@ -1,104 +1,90 @@
-.supplierProfileManagementOuter{
+.supplierProfileManagementOuter {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     width: 100%;
-    height: 40em;
+    height: 45em;
     background-color: #DBDFFD;
 }
 
-.supplierProfileManagementInner{
-    margin-top: 1.5em;
+.supplierProfileManagementInner {
+    padding: 1em;
     width: 90%;
-    height: 32.5em;
+    height: 30em;
     border-radius: 0.5em;
     background-color: #ffffff;
 }
 
-.searchPanel{
+.supplierSearchPanel {
     margin-left: 65em;
 }
 
-.supplier-profile{
-    padding: 0 0 1.5em 2.5em;
-    width: 80%;
+.supplier-profile {
+    width: 100%;
     height: 30em;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.supplier-profile-details{
-    margin: 5em 0 0 0;
-    height: 100%;
+.avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
 }
 
-.supplierProfileManagementTopic h2{
+.supplier-profile-details {
+    height: 80%;
+    width: 60%;
+}
+
+.supplierProfileManagementTopic h2 {
     font-family: Inter;
-    margin: 1.45em 0 0 0;
 }
 
-.supplierProfileManagementDetails{
+.supplierProfileManagementDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5em auto 2em auto;
+    width: 60%;
+    padding: 0 2em;
+}
+
+.supplierFormField {
     width: 100%;
-    padding: 1em;
-    margin-top:2em ;
-
-}
-
-.formField{
-    width: 20em;
     height: 3.25em;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
+    padding: 0 2em;
 }
 
-.textField{
-    padding: 0 0 0 1em;
-}
-
-.textField h4{
+.supplierTextField h3 {
     font-family: Inter;
     font-weight: 700;
     font-size: 0.8em;
 }
 
-.inputData{
-    width: 8em;
-    text-align: left;
+.supplierInputData {
+    width: 50%;
+    padding: 0 1em;
 }
 
-.inputData h5{
+.supplierInputData h4 {
     font-family: Inter;
     font-weight: 500;
     font-size: 0.65em;
 }
 
-.refundButtonField{
-    width: 38em;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin: 1.25em 0 0 0;
-}
-
-.avatar {
-    margin-top: 2em;
-    margin-left: 3em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1em;
-}
-
 .buttonStack {
     display: flex;
     align-items: center;
-    justify-content: right;
+    justify-content: center;
     margin-top: 1.5em;
-
 }
