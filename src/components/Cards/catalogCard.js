@@ -16,7 +16,7 @@ export default function MultiActionAreaCard({item,handleClick}) {
                     component="img"
                     height="250"
                     image={img}
-                    alt="Hammer"
+                    alt={title}
                 />
                 <CardContent>
                     <Typography variant="body2" color="text.primary">

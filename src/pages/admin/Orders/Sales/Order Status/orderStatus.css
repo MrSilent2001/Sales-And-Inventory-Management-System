@@ -1,6 +1,7 @@
 
 .orderStatusOuter{
     display: flex;
+    background-color: #DBDFFD;
 }
 
 .body{
@@ -18,7 +19,7 @@
 .orderStatusInner{
     width : 78.5em;
     height: 33em;
-    margin: 1.5em 0 0 1em;
+    margin: 5em 0 0 3em;
     background-color: #DBDFFD;
 }
 

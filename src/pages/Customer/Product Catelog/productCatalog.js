@@ -11,98 +11,87 @@ import CustomizedButton from "../../../components/Button/button";
 const products = [
     // Product data here...
     {
-        "id": 1,
-        "title": "Item 1",
-        "price": 10,
-        "img": "https://m.media-amazon.com/images/I/71rmxx8P2qL._AC_UY327_FMwebp_QL65_.jpg",
+        "id": "I001",
+        "title": "Steel Hammer",
+        "price": 150,
+        "img": "https://tigersupplies-15a42.kxcdn.com/imagecache/893d96b3-ff5e-4173-90f9-a69b010d7add/Claw-Hammer---Steel-Shaft---16oz_1000x1000.jpg",
         "amount": 1
     },
     {
-        "id": 2,
-        "title": "108 Panchatantra Stories",
-        "author": "by Maple Press  | 1 September 2020",
-        "price": 98,
-        "img": "https://m.media-amazon.com/images/I/71rmxx8P2qL._AC_UY327_FMwebp_QL65_.jpg",
+        "id": "I002",
+        "title": "Wood Material",
+        "price": 1000,
+        "img": "https://vskills.in/certification/blog/wp-content/uploads/2015/02/timber-as-construction-material.jpg",
         "amount": 1
     },
     {
-        "id": 3,
-        "title": "Amazing Questions & Answers Science",
-        "author": "by Om Books Editorial Team  | 25 November 2018",
-        "price": 143,
-        "img": "https://m.media-amazon.com/images/I/81Gbz0XnW7L._AC_UY327_FMwebp_QL65_.jpg",
+        "id": "I003",
+        "title": "Metal Nails 100g",
+        "price": 140,
+        "img": "https://southatlanticllc.com/wp-content/uploads/2022/10/galvanized-masonry-nails-south-atlantic.jpg",
         "amount": 1
     },
     {
-        "id": 4,
-        "title": "My First Book of Pencil Control",
-        "author": "by Wonder House Books | 25 April 2018",
-        "price": 57,
-        "img": "https://m.media-amazon.com/images/I/81Gbz0XnW7L._AC_UY327_FMwebp_QL65_.jpg",
+        "id": "I004",
+        "title": "Cement Bag 1Kg",
+        "price": 3000,
+        "img": "https://www.ehardware.lk/wp-content/uploads/2020/06/cement2.png",
         "amount": 1
     },
     {
-        "id": 5,
-        "title": "My First 1000 Words",
-        "author": "by Wonder House Books  | 1 January 2018",
-        "price": 149,
-        "img": "https://m.media-amazon.com/images/I/71O-FI7QApL._AC_UY327_FMwebp_QL65_.jpg",
+        "id": "I005",
+        "title": "Showel",
+        "price": 1500,
+        "img": "https://down-my.img.susercontent.com/file/04c22b7a5e3a5fcb5d36a00636a3a151",
         "amount": 1
     },
     {
-        "id": 6,
-        "title": "101 Panchatantra Stories for Children",
-        "author": "by Om Books Editorial Team | 30 September 2020",
-        "price": 135,
-        "img": "https://m.media-amazon.com/images/I/9173YBkMIsL._AC_UY327_FMwebp_QL65_.jpg",
+        "id": "I006",
+        "title": "Block Stone",
+        "price": 2000,
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx1ag4WMC4_DIUbbuS0AG6VemDRCODZOk8lg&usqp=CAU",
         "amount": 1
     },
     {
-        "id": 7,
-        "title": "Pre-School Activities Pack ",
-        "author": "by Om Books Editorial Team  | 1 January 2021",
-        "price": 693,
-        "img": "https://m.media-amazon.com/images/I/913sv4sex3L._AC_UY327_FMwebp_QL65_.jpg",
+        "id": "I007",
+        "title": "WheelBarrow ",
+        "price": 2500,
+        "img": "https://media.wuerth.com/source/eshop/stmedia/wuerth/images/std.lang.all/resolutions/category/576px/133622211.jpg",
         "amount": 1
     },
     {
-        "id": 8,
-        "title": "Early Learning Library Pack 1",
-        "author": "by Wonder House Books  | 6 December 2020",
-        "price": 289,
-        "img": "https://m.media-amazon.com/images/I/71xMttNhr7L._AC_UY327_FMwebp_QL65_.jpg",
+        "id": "I008",
+        "title": "Screw Drivers Kit",
+        "price":6500 ,
+        "img": "https://empire-s3-production.bobvila.com/articles/wp-content/uploads/2017/04/Types_Of_Screwdrivers.jpg",
         "amount": 1
     },
     {
-        "id": 9,
-        "title": "Blossom Moral Story Book for Kids ",
-        "author": "by Content Team at Target Publications",
-        "price": 80,
-        "img": "https://m.media-amazon.com/images/I/7122h3jWvEL._AC_UY327_FMwebp_QL65_.jpg",
+        "id": "I009",
+        "title": "Measuring Tape",
+        "price": 1600,
+        "img": "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/at%2Farchive%2Fef366ebd17e58621c3b50c31fbf2d6fe81912422",
         "amount": 1
     },
     {
-        "id": 10,
-        "title": "Brain Activity Book for Kids",
-        "author": "by Maple Press | 1 September 2021",
-        "price": 86,
-        "img": "https://m.media-amazon.com/images/I/7175YpTSa7L._AC_UY327_FMwebp_QL65_.jpg",
+        "id": "I0010",
+        "title": "Sand 10kg",
+        "price": 5000,
+        "img": "https://5.imimg.com/data5/SELLER/Default/2022/1/SK/OE/ON/73706863/river-sand.jpeg",
         "amount": 1
     },
     {
-        "id": 11,
-        "title": "Willy the Silly Panda",
-        "author": "by Rebecca Smith  | 14 December 2021",
-        "price": 120,
-        "img": "https://m.media-amazon.com/images/I/71-ocPGQIJL._AC_UY327_FMwebp_QL65_.jpg",
+        "id": "I0011",
+        "title": "Ceiling Sheets - 1",
+        "price": 4500,
+        "img": "https://image.made-in-china.com/2f0j00nDckbqYLAuoZ/Best-Seller-PVC-Ceilings-and-Ceiling-Panels-Type-False-Ceiling-Designs.jpg",
         "amount": 1
     },
     {
-        "id": 12,
-        "title": "Grandma's Bag of Stories",
-        "author": "by Sudha Murty | 1 January 2015",
-        "price": 157,
-        "img": "https://m.media-amazon.com/images/I/81jv44QdNwL._AC_UY327_FMwebp_QL65_.jpg",
+        "id": "I0012",
+        "title": "Metalic Tape",
+        "price": 675,
+        "img": "https://transasia.lk/img/product/11543/11543-001_720X720.jpg",
         "amount": 1
     }
 ];

@@ -133,7 +133,7 @@ function OrderDetails() {
                     </div>
                     <div className="orderDetailsInner">
 
-                        <div className="formbox">
+                        <div className="updateFormbox">
                             <form>
                                 <div className="textSection">
 
@@ -183,7 +183,7 @@ function OrderDetails() {
 
                                 </div>
 
-                                <div className="formButtons">
+                                <div className="UpdateformButtons">
                                     <CustomizedButton
                                         onClick={() =>{alert("Order Details Successfully Updated")}}
                                         hoverBackgroundColor="#2d3ed2"
@@ -198,8 +198,9 @@ function OrderDetails() {
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
                                             fontWeight: '550',
-                                            marginTop: '0.625em',
+                                            marginTop: '-3em',
                                             marginRight: '1.5em',
+                                            marginLeft:'6em',
                                             textTransform: 'none',
                                             textAlign: 'center',
                                         }}>
@@ -218,7 +219,7 @@ function OrderDetails() {
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
                                             fontWeight: '550',
-                                            marginTop: '0.625em',
+                                            marginTop: '-3em',
                                             marginRight: '1.5em',
                                             textTransform: 'none',
                                             textAlign: 'center',
