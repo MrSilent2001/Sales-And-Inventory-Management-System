@@ -1,16 +1,14 @@
 import React from "react";
 import "./addDiscounts.css";
-import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import Button from '@mui/material/Button';
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../../../layout/footer/footer";
+import BasicTextField from "../../../../../components/Form Inputs/textfield";
+import CustomizedButton from "../../../../../components/Button/button";
 
 function AddDiscount(){
-
-    //There should be a useEffect hook for display the inventory values in the component
 
     return(
         <>
@@ -21,21 +19,39 @@ function AddDiscount(){
                         <form>
                             <div className="row">
                                 <label>Product Id: </label>
-                                <TextField className="input" size="small" id="outlined-required" label="Product Id" required />
+                                <BasicTextField
+                                    className="input"
+                                    size="small"
+                                    type="text"
+                                    id="outlined-required"
+                                    label="Product Id"
+                                />
                             </div>
 
                             <br/><br/>
 
                             <div className="row">
                                 <label>Selling Price: </label>
-                                <TextField className="input" size="small" type="number" id="outlined-required" label="Selling Price"  required/>
+                                <BasicTextField
+                                    className="input"
+                                    size="small"
+                                    type="number"
+                                    id="outlined-required"
+                                    label="Selling Price"
+                                />
                             </div>
 
                             <br/><br/>
 
                             <div className="row">
                                 <label>Discount Percentage:  </label>
-                                <TextField className="input" size="small" type="number" id="outlined-required" label="Discount Percentage" required/>
+                                <BasicTextField
+                                    className="input"
+                                    size="small"
+                                    type="number"
+                                    id="outlined-required"
+                                    label="Discount Percentage"
+                                />
                             </div>
 
                             <br/><br/>
@@ -43,7 +59,7 @@ function AddDiscount(){
                             <div className="row">
                                 <label>Start Date: </label>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker className="input" slotProps={{ textField: { size: 'small' } }}/>
+                                    <DatePicker className="input" slotProps={{ textField: { size: 'small' } }} required/>
                                 </LocalizationProvider>
                             </div>
 
@@ -52,15 +68,50 @@ function AddDiscount(){
                             <div className="row">
                                 <label>End Date: </label>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker className="input" slotProps={{ textField: { size: 'small' } }}/>
+                                    <DatePicker className="input" slotProps={{ textField: { size: 'small' } }} required/>
                                 </LocalizationProvider>
                             </div>
 
                             <br/><br/>
 
                             <div className="btn-row">
-                                <Button className="btn" variant="contained">Apply</Button>
-                                <Button className="btn" variant="contained">Cancel</Button>
+                                <CustomizedButton
+                                    hoverBackgroundColor="#2d3ed2"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#242F9B',
+                                        border: '1px solid #242F9B',
+                                        width: '8em',
+                                        height: '2.5em',
+                                        fontSize: '0.95em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        fontWeight: '550',
+                                        marginTop: '0.625em',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                    }}>
+                                    Apply
+                                </CustomizedButton>
+                                <CustomizedButton
+                                    hoverBackgroundColor="#f11717"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#960505',
+                                        width: '9.5em',
+                                        height: '2.5em',
+                                        fontSize: '0.95em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        fontWeight: '500',
+                                        marginTop: '0.625em',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                    }}>
+                                    Cancel
+                                </CustomizedButton>
                             </div>
 
                         </form>

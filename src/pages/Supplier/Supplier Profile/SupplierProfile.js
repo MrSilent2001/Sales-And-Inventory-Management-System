@@ -6,6 +6,7 @@ import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navb
 import SearchBar from "../../../components/search bar/search bar";
 import CustomizedButton from "../../../components/Button/button";
 import suppliers from "../../../data/data.json";
+import {Link} from "react-router-dom";
 
 function SupplierProfile() {
     return (
@@ -17,80 +18,51 @@ function SupplierProfile() {
                 </div>
                 <div className="supplierProfileManagementInner">
                     <div className="supplier-profile">
-
-                        <div className="avatar">
+                        <div className="supplierAvatar">
+                            <Avatar src="/broken-image.jpg" sx={{width: 225, height: 225, borderRadius: 3}}/>
                             <h1>Perera Holdings Pvt. Ltd</h1>
-                            <Avatar src="/broken-image.jpg" sx={{width: 230, height: 230, border: 2, borderRadius: 3}}/>
-                            <h2>Saman Perera</h2>
                         </div>
 
                         <div className="supplier-profile-details">
-                            <div className="supplierProfileManagementDetails">
+                            <div className="grid-item">Supplier ID</div>
+                            <div className="grid-item">{suppliers.suppliers[0].supplierId}</div>
 
-                                <div className="supplierFormField">
-                                    <div className="supplierTextField">
-                                        <h3>Supplier ID</h3>
-                                    </div>
-                                    <div className="supplierInputData">
-                                        <h4>{suppliers.suppliers[0].supplierId}</h4>
-                                    </div>
-                                </div>
+                            <div className="grid-item">Address</div>
+                            <div className="grid-item">{suppliers.suppliers[0].address}</div>
 
-                                <div className="supplierFormField">
-                                    <div className="supplierTextField">
-                                        <h3>Address</h3>
-                                    </div>
-                                    <div className="supplierInputData">
-                                        <h4>{suppliers.suppliers[0].address}</h4>
-                                    </div>
-                                </div>
+                            <div className="grid-item">E-mail</div>
+                            <div className="grid-item">{suppliers.suppliers[0].email}</div>
 
-                                <div className="supplierFormField">
-                                    <div className="supplierTextField">
-                                        <h3>E-mail</h3>
-                                    </div>
-                                    <div className="supplierInputData">
-                                        <h4>{suppliers.suppliers[0].email}</h4>
-                                    </div>
-                                </div>
+                            <div className="grid-item">Contact No.</div>
+                            <div className="grid-item">{suppliers.suppliers[0].contact}</div>
 
-                                <div className="supplierFormField">
-                                    <div className="supplierTextField">
-                                        <h3>Contact</h3>
-                                    </div>
-                                    <div className="supplierInputData">
-                                        <h4>{suppliers.suppliers[0].contact}</h4>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div className='buttonStack'>
-                                <CustomizedButton
-                                    hoverBackgroundColor="#2d3ed2"
-                                    style={{
-                                        color: '#ffffff',
-                                        backgroundColor: '#242F9B',
-                                        border: '1px solid #242F9B',
-                                        width: '9.5em',
-                                        height: '2.5em',
-                                        fontSize: '0.95em',
-                                        fontFamily: 'inter',
-                                        padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        fontWeight: '550',
-                                        marginLeft: '7.5em',
-                                        textTransform: 'none',
-                                        textAlign: 'center',
-                                    }}>
-                                    Update
-                                </CustomizedButton>
+                            <div  style={{marginLeft: '2.5em'}}>
+                                    <Link to="/updateSupplier">
+                                        <CustomizedButton
+                                            hoverBackgroundColor="#2d3ed2"
+                                            style={{
+                                                color: '#ffffff',
+                                                backgroundColor: '#242F9B',
+                                                border: '1px solid #242F9B',
+                                                width: '9.5em',
+                                                height: '2.5em',
+                                                fontSize: '0.95em',
+                                                fontFamily: 'inter',
+                                                padding: '0.5em 0.625em',
+                                                borderRadius: '0.35em',
+                                                fontWeight: '550',
+                                                marginTop: '2em',
+                                                marginLeft: '10em',
+                                                textTransform: 'none',
+                                                textAlign: 'center',
+                                            }}>
+                                            Edit Details
+                                        </CustomizedButton>
+                                    </Link>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
 
             <Footer/>

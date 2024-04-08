@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import "./orderDetails.css";
-import BasicTextFields from '../../../../../components/Form Inputs/textfield';
 import Footer from "../../../../../layout/footer/footer";
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../../../components/Button/button";
+import BasicTextField from "../../../../../components/Form Inputs/textfield";
 
 function OrderDetails() {
     const [activeButton, setActiveButton] = useState(null);
@@ -139,7 +139,7 @@ function OrderDetails() {
 
                                     <label className='label'>Order Id</label>
 
-                                    <BasicTextFields></BasicTextFields>
+                                    <BasicTextField/>
 
                                 </div>
 
@@ -147,7 +147,7 @@ function OrderDetails() {
 
                                     <label className='label'>Receiver</label>
 
-                                    <BasicTextFields></BasicTextFields>
+                                    <BasicTextField/>
 
                                 </div>
 
@@ -155,7 +155,7 @@ function OrderDetails() {
 
                                     <label className='label'>Address</label>
 
-                                    <BasicTextFields></BasicTextFields>
+                                    <BasicTextField/>
 
                                 </div>
 
@@ -163,7 +163,7 @@ function OrderDetails() {
 
                                     <label className='label'>Contact</label>
 
-                                    <BasicTextFields></BasicTextFields>
+                                    <BasicTextField/>
 
                                 </div>
 
@@ -171,7 +171,7 @@ function OrderDetails() {
 
                                     <label className='label'>Items</label>
 
-                                    <BasicTextFields></BasicTextFields>
+                                    <BasicTextField/>
 
                                 </div>
 
@@ -179,7 +179,7 @@ function OrderDetails() {
 
                                     <label className='label'>Amount</label>
 
-                                    <BasicTextFields></BasicTextFields>
+                                    <BasicTextField/>
 
                                 </div>
 

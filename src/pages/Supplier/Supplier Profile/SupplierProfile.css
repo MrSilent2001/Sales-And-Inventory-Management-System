@@ -4,41 +4,47 @@
     justify-content: center;
     flex-direction: column;
     width: 100%;
-    height: 45em;
+    height: 36em;
     background-color: #DBDFFD;
 }
 
 .supplierProfileManagementInner {
-    padding: 1em;
-    width: 90%;
-    height: 30em;
+    width: 80%;
+    height: 25em;
     border-radius: 0.5em;
     background-color: #ffffff;
 }
 
 .supplierSearchPanel {
-    margin-left: 65em;
+    margin-left: 57.5em;
 }
 
 .supplier-profile {
     width: 100%;
-    height: 30em;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.avatar {
+.supplierAvatar {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 20%;
+    height: 25em;
+    width: 45%;
 }
 
 .supplier-profile-details {
-    height: 80%;
-    width: 60%;
+    display: grid;
+    grid-template-columns: 30% auto;
+    width: 50%;
+}
+
+.grid-item{
+    padding: 20px;
+    text-align: left;
+    font-weight: bold;
 }
 
 .supplierProfileManagementTopic h2 {
@@ -52,7 +58,6 @@
     justify-content: center;
     margin: 5em auto 2em auto;
     width: 60%;
-    padding: 0 2em;
 }
 
 .supplierFormField {
@@ -82,9 +87,9 @@
     font-size: 0.65em;
 }
 
-.buttonStack {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1.5em;
-}
+/*.buttonStack {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    margin-top: 1.5em;*/
+/*}*/

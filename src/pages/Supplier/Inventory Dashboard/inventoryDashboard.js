@@ -7,7 +7,6 @@ import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navb
 import SearchBar from "../../../components/search bar/search bar";
 import CustomizedButton from "../../../components/Button/button";
 import inventory from "../../../data/data.json";
-import CustomizedAlert from "../../../components/Alert/alert";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 
 const columns = [
@@ -50,11 +49,6 @@ const mappedData = rows.map(row => ({
 function InventoryDashboard(){
 
     const [visible,setVisible] = useState(false);
-    const [showAlert, setShowAlert] = useState(false);
-
-    const handleDelete = () => {
-        setShowAlert(true);
-    };
 
     return(
         <>
@@ -90,7 +84,6 @@ function InventoryDashboard(){
                             </CustomizedButton>
 
                             <CustomizedButton
-                                onClick={handleDelete}
                                 hoverBackgroundColor="#f11717"
                                 style={{
                                     color: '#ffffff',
@@ -119,19 +112,8 @@ function InventoryDashboard(){
                     </div>
                 </div>
 
-                {showAlert && (
-                    <CustomizedAlert
-                        variant="contained"
-                        severity="error"
-                        onClose={() => setShowAlert(false)}
-
-                    >
-                        Alert Message
-                    </CustomizedAlert>
-                )}
-
                 <Modal open={visible}>
-                    <AddItem onClose={(value) => { setVisible(false)}} ></AddItem>
+                    <AddItem onClose={() => { setVisible(false)}} ></AddItem>
                 </Modal>
             </div>
 

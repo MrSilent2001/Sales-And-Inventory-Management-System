@@ -36,7 +36,7 @@ export default function BasicTextField({ id, variant, size, type }) {
         size={size}
         type={type}
         margin='normal'
-        required={true}
+        required
         value={value}
         onChange={handleChange}
         error={error}

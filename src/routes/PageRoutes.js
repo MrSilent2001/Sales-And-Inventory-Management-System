@@ -29,6 +29,7 @@ import ViewOrder from "../pages/admin/Orders/Inventory/Modals/View Order/viewOrd
 import InventoryDashboard from "../pages/Supplier/Inventory Dashboard/inventoryDashboard";
 import InventoryRefundRequestsTable
     from "../pages/admin/Refunds/Inventory/RefundRequestsTable/InventoryRefundRequestsTable";
+import UpdateSupplier from "../pages/Supplier/Update Supplier/updateSupplier";
 
 export function PageRouting() {
     return (
@@ -81,6 +82,8 @@ export function PageRouting() {
 
                 <Route path="/placeOrder" element={<PlaceOrder/>}/>
                 <Route path="/viewOrder" element={<ViewOrder/>}/>
+
+                <Route path="/updateSupplier" element={<UpdateSupplier/>}/>
 
             </Routes>
         </div>
