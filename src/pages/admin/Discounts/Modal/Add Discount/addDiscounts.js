@@ -78,37 +78,29 @@ function AddDiscount(){
                                 <CustomizedButton
                                     hoverBackgroundColor="#2d3ed2"
                                     style={{
-                                        color: '#ffffff',
                                         backgroundColor: '#242F9B',
                                         border: '1px solid #242F9B',
                                         width: '8em',
                                         height: '2.5em',
                                         fontSize: '0.95em',
-                                        fontFamily: 'inter',
                                         padding: '0.5em 0.625em',
                                         borderRadius: '0.35em',
                                         fontWeight: '550',
-                                        marginTop: '0.625em',
-                                        textTransform: 'none',
-                                        textAlign: 'center',
+                                        marginTop: '0.625em'
                                     }}>
                                     Apply
                                 </CustomizedButton>
                                 <CustomizedButton
                                     hoverBackgroundColor="#f11717"
                                     style={{
-                                        color: '#ffffff',
                                         backgroundColor: '#960505',
                                         width: '9.5em',
                                         height: '2.5em',
                                         fontSize: '0.95em',
-                                        fontFamily: 'inter',
                                         padding: '0.5em 0.625em',
                                         borderRadius: '0.35em',
                                         fontWeight: '500',
-                                        marginTop: '0.625em',
-                                        textTransform: 'none',
-                                        textAlign: 'center',
+                                        marginTop: '0.625em'
                                     }}>
                                     Cancel
                                 </CustomizedButton>

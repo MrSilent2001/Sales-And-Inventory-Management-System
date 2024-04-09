@@ -115,20 +115,16 @@ function AddSupplier(props){
                                     onClick={addSupplier}
                                     hoverBackgroundColor="#2d3ed2"
                                     style={{
-                                        color: '#ffffff',
                                         backgroundColor: '#242F9B',
                                         border: '1px solid #242F9B',
                                         width: '8em',
                                         height: '2.5em',
                                         fontSize: '0.8em',
-                                        fontFamily: 'inter',
                                         padding: '0.5em 0.625em',
                                         borderRadius: '0.35em',
                                         fontWeight: '550',
                                         marginTop: '0.625em',
                                         marginRight: '1.5em',
-                                        textTransform: 'none',
-                                        textAlign: 'center',
                                     }}>
                                     Add Supplier
                                 </CustomizedButton>
@@ -139,7 +135,6 @@ function AddSupplier(props){
                                     onClick={() => props.onClose(false)}
                                     hoverBackgroundColor="#f11717"
                                     style={{
-                                        color: '#ffffff',
                                         backgroundColor: '#960505',
                                         width: '9.5em',
                                         height: '2.5em',
@@ -149,8 +144,6 @@ function AddSupplier(props){
                                         borderRadius: '0.35em',
                                         fontWeight: '500',
                                         marginTop: '0.625em',
-                                        textTransform: 'none',
-                                        textAlign: 'center',
                                     }}>
                                     Cancel
                                 </CustomizedButton>

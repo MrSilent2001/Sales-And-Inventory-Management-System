@@ -101,14 +101,6 @@ function ViewInventory(){
     const [addItemVisible, setAddItemVisible] = useState(false);
     const [deleteItemVisible, setDeleteItemVisible] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
-
-    const [tableData, setTableData] = useState(inventory.inventory || []);
-
-    const handleAddItem = (newItem) => {
-        setTableData([...tableData, newItem]);
-        setVisible(false);
-    };
-
     const handleSetVisible = (row) => {
         setSelectedRow(row);
         setVisible(true);

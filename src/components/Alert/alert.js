@@ -1,11 +1,26 @@
 import React from 'react';
-import Alert from '@mui/material/Alert';
+import {Alert, Snackbar} from "@mui/material";
 
-function CustomizedAlert({ variant, severity, onClose, children }) {
+function CustomizedAlert({ onClose, open, message, severity, style }) {
     return (
-        <Alert variant={variant} severity={severity} onClose={onClose}>
-            {children}
-        </Alert>
+        <Snackbar
+            open={open}
+            autoHideDuration={5000}
+            onClose={onClose}
+            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        >
+            <Alert
+                onClose={onClose}
+                severity={severity}
+                variant="filled"
+                style={{
+                    ...style,
+                    width: '100%'
+                }}
+            >
+                {message}
+            </Alert>
+        </Snackbar>
     );
 }
 

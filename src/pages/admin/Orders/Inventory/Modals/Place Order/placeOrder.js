@@ -110,19 +110,15 @@ function PlaceOrder(props){
                                         onClick={placeOrder}
                                         hoverBackgroundColor="#2d3ed2"
                                         style={{
-                                            color: '#ffffff',
                                             backgroundColor: '#242F9B',
                                             border: '1px solid #242F9B',
                                             width: '5em',
                                             height: '3.25em',
                                             fontSize: '0.6em',
-                                            fontFamily: 'inter',
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
                                             fontWeight: '550',
                                             marginRight: '1.5em',
-                                            textTransform: 'none',
-                                            textAlign: 'center',
                                         }}>
                                         Add Items
                                     </CustomizedButton>
@@ -145,20 +141,16 @@ function PlaceOrder(props){
                                     onClick={placeOrder}
                                     hoverBackgroundColor="#2d3ed2"
                                     style={{
-                                        color: '#ffffff',
                                         backgroundColor: '#242F9B',
                                         border: '1px solid #242F9B',
                                         width: '11em',
                                         height: '2.5em',
                                         fontSize: '0.95em',
-                                        fontFamily: 'inter',
                                         padding: '0.5em 0.625em',
                                         borderRadius: '0.35em',
                                         fontWeight: '550',
                                         marginTop: '0.625em',
                                         marginRight: '1.5em',
-                                        textTransform: 'none',
-                                        textAlign: 'center',
                                     }}>
                                     Place Order
                                 </CustomizedButton>

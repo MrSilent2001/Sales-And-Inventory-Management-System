@@ -1,6 +1,5 @@
 import { Box } from '@mui/material';
-
-const CenteredModal = ({ children, style }) => {
+const CenteredModal = ({ children, style}) => {
     return (
         <Box
             display="flex"
@@ -9,7 +8,7 @@ const CenteredModal = ({ children, style }) => {
             height="100vh"
             style={style}
         >
-            {children}
+                {children}
         </Box>
     );
 };
