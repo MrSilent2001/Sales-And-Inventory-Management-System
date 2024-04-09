@@ -1,35 +1,32 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Box from '@mui/material/Box';
-import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import "./viewInventory.css";
-import {styled} from "@mui/material/styles";
-import TableCell, {tableCellClasses} from "@mui/material/TableCell";
-import TableRow from "@mui/material/TableRow";
-import TableContainer from "@mui/material/TableContainer";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
-import TableBody from "@mui/material/TableBody";
-import {Modal} from "@mui/material";
+import { Modal } from "@mui/material";
 import AddItem from "./Modals/Add Item/Add Item";
 import UpdateItem from "./Modals/Update Item/Update Item";
 import InventoryNavbar from "../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../layout/footer/footer";
 import DeleteItem from "./Modals/Delete Item/Delete Item";
 import CustomizedButton from "../../../components/Button/button";
-import items from "../../../data/data.json";
 import SearchBar from "../../../components/search bar/search bar";
+import inventory from "../../../data/data.json";
+import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
+import ComboBox from "../../../components/Form Inputs/comboBox";
 
 function FilterItems(){
+    const [category, setCategory] = React.useState('');
 
-    const [age, setAge] = React.useState('');
-
-    const handleChange = (event) => {
-        setAge(event.target.value);
+    const handleSelect = (event) => {
+        setCategory(event.target.value);
     };
+
+    const options = [
+        { value: 'All', label: 'All' },
+        { value: 'Metal', label: 'Metal' },
+        { value: 'Wood', label: 'Wood' }
+    ];
 
     return(
         <Box sx={{ minWidth: 80 }}>
@@ -46,38 +43,30 @@ function FilterItems(){
                 >
                     Select
                 </InputLabel>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={age}
-                    label="Age"
-                    onChange={handleChange}
-                    sx={{
-                        height: 40,
-                        width: 160,
-                        fontSize: 10,
-                        border: '1px solid white',
-                        '& .MuiInputLabel-root': {
-                            fontSize: 4,
-                        },
-                    }}
-                >
-                    <MenuItem value={10} >All</MenuItem>
-                    <MenuItem value={20}>Metal</MenuItem>
-                    <MenuItem value={30}>Wood</MenuItem>
-                </Select>
+                <ComboBox
+                    value={category}
+                    onChange={(event) => handleSelect(event)}
+                    style={{width: '10em', marginRight: '0.5em', border: '1px solid white'}}
+                    options={options}
+                    label="Category"
+                    size="small"
+                />
             </FormControl>
         </Box>
     )
 }
-
 function FilterAvailability(){
+    const [category, setCategory] = React.useState('');
 
-    const [age, setAge] = React.useState('');
-
-    const handleChange = (event) => {
-        setAge(event.target.value);
+    const handleSelect = (event) => {
+        setCategory(event.target.value);
     };
+
+    const options = [
+        { value: 'Category 01', label: 'Category 01' },
+        { value: 'Category 02', label: 'Category 02' },
+        { value: 'Category 03', label: 'Category 03' }
+    ];
 
     return(
         <Box sx={{ minWidth: 80 }}>
@@ -94,120 +83,77 @@ function FilterAvailability(){
                 >
                     Select
                 </InputLabel>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={age}
-                    label="Age"
-                    onChange={handleChange}
-                    sx={{
-                        height: 40,
-                        width: 160,
-                        fontSize: 10,
-                        border: '1px solid white',
-                        '& .MuiInputLabel-root': {
-                            fontSize: 4,
-                        },
-                    }}
-                >
-                    <MenuItem value={10} >All</MenuItem>
-                    <MenuItem value={20}>In Stock</MenuItem>
-                </Select>
+                <ComboBox
+                    value={category}
+                    onChange={(event) => handleSelect(event)}
+                    style={{width: '10em', marginRight: '0.5em',  border: '1px solid white'}}
+                    options={options}
+                    label="Category"
+                    size="small"
+                />
             </FormControl>
         </Box>
     )
-}
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor:'#646FD4',
-        color: theme.palette.common.white,
-        fontSize: '0.75em',
-        fontWeight: 500,
-        textAlign: 'center'
-    },
-    [`&.${tableCellClasses.body}`]: {
-        fontSize: '0.625em',
-        textAlign: 'center'
-    },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-    },
-
-    '&:last-child td, &:last-child th': {
-        border: 0,
-    },
-}));
-
-const rows = items.items || [];
-function CustomizedTables() {
-    const [visible,setVisible] = useState(false);
-
-    return (
-        <TableContainer component={Paper} sx={{ width: '76.875em', maxHeight: '27em', overflowY: 'auto', position: 'relative'}}>
-            <Table sx={{ minWidth: '25em'}} aria-label="customized table">
-                <TableHead>
-                    <TableRow>
-                        <StyledTableCell>Inventory ID</StyledTableCell>
-                        <StyledTableCell>Item Description</StyledTableCell>
-                        <StyledTableCell>Item Category</StyledTableCell>
-                        <StyledTableCell>Quantity</StyledTableCell>
-                        <StyledTableCell>Inventory Status</StyledTableCell>
-                        <StyledTableCell></StyledTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows.map((row) => (
-                        <StyledTableRow key={row.name}>
-                            <StyledTableCell component="th" scope="row" sx={{ height: '1.25em' }}>
-                                {row.inventoryId}
-                            </StyledTableCell>
-                            <StyledTableCell align="right">{row.itemDescription}</StyledTableCell>
-                            <StyledTableCell align="right">{row.itemCategory}</StyledTableCell>
-                            <StyledTableCell align="right">{row.Quantity}</StyledTableCell>
-                            <StyledTableCell align="right">{row.inventoryStatus}</StyledTableCell>
-                            <StyledTableCell>
-                                <CustomizedButton
-                                    onClick={()=>setVisible(true)}
-                                    hoverBackgroundColor="#2d3ed2"
-                                    style={{
-                                        color: '#ffffff',
-                                        backgroundColor: '#242F9B',
-                                        border: '1px solid #242F9B',
-                                        width: '6em',
-                                        height: '2.5em',
-                                        fontSize: '0.95em',
-                                        fontFamily: 'inter',
-                                        padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        fontWeight: '550',
-                                        marginTop: '0.625em',
-                                        marginRight: '1.5em',
-                                        textTransform: 'none',
-                                        textAlign: 'center',
-                                    }}>
-                                    View
-                                </CustomizedButton>
-                            </StyledTableCell>
-                        </StyledTableRow>
-                    ))}
-                </TableBody>
-            </Table>
-            <Modal open={visible}>
-                <UpdateItem onClose={(value) => { setVisible(false)}}></UpdateItem>
-            </Modal>
-        </TableContainer>
-    );
 }
 
 function ViewInventory(){
+    const [visible, setVisible] = useState(false);
+    const [addItemVisible, setAddItemVisible] = useState(false);
+    const [deleteItemVisible, setDeleteItemVisible] = useState(false);
+    const [selectedRow, setSelectedRow] = useState(null);
 
-    const [addItemVisible,setAddItemVisible] = useState(false)
+    const [tableData, setTableData] = useState(inventory.inventory || []);
 
-    const [deleteItemVisible,setDeleteItemVisible] = useState(false)
+    const handleAddItem = (newItem) => {
+        setTableData([...tableData, newItem]);
+        setVisible(false);
+    };
+
+    const handleSetVisible = (row) => {
+        setSelectedRow(row);
+        setVisible(true);
+    };
+
+    const handleButtonClick = () => {
+        console.log("view")
+    };
+
+    const columns = [
+        { id: 'inventoryId', label: 'Inventory Id', minWidth: 100, align: 'center' },
+        { id: 'itemDescription', label: 'Item Description', minWidth: 200, align: 'center' },
+        { id: 'itemCategory', label: 'Item Category', minWidth: 120, align: 'center' },
+        { id: 'Quantity', label: 'Quantity', minWidth: 100, align: 'center' },
+        { id: 'Price', label: 'Unit Price', minWidth: 100, align: 'center' },
+        { id: 'inventoryStatus', label: 'Inventory Status', minWidth: 170, align: 'center' },
+        { id: 'actions', label: '', minWidth: 100, align: 'center' }
+    ];
+
+    let rows = inventory.inventory || [];
+
+    const mappedData = rows.map(row => ({ ...row, actions: createViewButton(handleButtonClick) }));
+
+    function createViewButton(handleButtonClick) {
+        return (
+            <CustomizedButton
+                onClick={() => handleSetVisible}
+                hoverBackgroundColor="#2d3ed2"
+                style={{
+                    backgroundColor: '#242F9B',
+                    border: '1px solid #242F9B',
+                    width: '5em',
+                    height: '2.5em',
+                    fontSize: '0.75em',
+                    padding: '0.5em 0.625em',
+                    borderRadius: '0.35em',
+                    fontWeight: '550',
+                    marginTop: '0.625em',
+                    marginRight: '1.5em'
+                }}
+            >
+                View
+            </CustomizedButton>
+        );
+    }
 
     return(
         <>
@@ -233,21 +179,18 @@ function ViewInventory(){
                             <CustomizedButton
                                 hoverBackgroundColor="#f11717"
                                 style={{
-                                    color: '#ffffff',
                                     backgroundColor: '#ff0000',
                                     width: '11em',
                                     height: '2.5em',
                                     fontSize: '0.95em',
-                                    fontFamily: 'inter',
                                     padding: '0.5em 0.625em',
                                     borderRadius: '0.35em',
                                     fontWeight: '550',
                                     marginTop: '0.625em',
                                     marginRight:'1.5em',
                                     marginLeft: '1.5em',
-                                    textTransform: 'none',
-                                    textAlign: 'center',
-                                }}>
+                                }}
+                            >
                                 Apply
                             </CustomizedButton>
                         </div>
@@ -260,44 +203,37 @@ function ViewInventory(){
                         </div>
                         <div className="viewInventoryButtons">
                             <CustomizedButton
-                                onClick={()=>setAddItemVisible(true)}
+                                onClick={() => setAddItemVisible(true)}
                                 hoverBackgroundColor="#2d3ed2"
                                 style={{
-                                    color: '#ffffff',
                                     backgroundColor: '#242F9B',
                                     border: '1px solid #242F9B',
-                                    width: '10em',
+                                    width: '8.5em',
                                     height: '2.65em',
                                     fontSize: '0.75em',
-                                    fontFamily: 'inter',
                                     padding: '0.5em 0.625em',
                                     borderRadius: '0.35em',
                                     fontWeight: '500',
                                     marginTop: '0.625em',
-                                    marginRight: '1.5em',
-                                    textTransform: 'none',
-                                    textAlign: 'center',
-                                }}>
+                                }}
+                            >
                                 Add Item
                             </CustomizedButton>
 
                             <CustomizedButton
-                                onClick={()=>setDeleteItemVisible(true)}
+                                onClick={() => setDeleteItemVisible(true)}
                                 hoverBackgroundColor="#f11717"
                                 style={{
-                                    color: '#ffffff',
                                     backgroundColor: '#ff0000',
-                                    width: '10em',
+                                    width: '8.5em',
                                     height: '2.65em',
                                     fontSize: '0.75em',
-                                    fontFamily: 'inter',
                                     padding: '0.5em',
                                     borderRadius: '0.35em',
                                     fontWeight: '500',
                                     marginTop: '0.625em',
-                                    textTransform: 'none',
-                                    textAlign: 'center',
-                                }}>
+                                }}
+                            >
                                 Delete Item
                             </CustomizedButton>
 
@@ -305,7 +241,10 @@ function ViewInventory(){
                     </div>
 
                     <div className="itemTable">
-                        <CustomizedTables></CustomizedTables>
+                        <CustomizedTable
+                            columns={columns}
+                            rows={mappedData}
+                        />
                     </div>
                 </div>
 
@@ -315,6 +254,10 @@ function ViewInventory(){
 
                 <Modal open={deleteItemVisible}>
                     <DeleteItem onClose={(value) => { setDeleteItemVisible(false)}} />
+                </Modal>
+
+                <Modal open={visible}>
+                    <UpdateItem onClose={(value) => { setVisible(false)}} selectedRow={selectedRow} />
                 </Modal>
             </div>
 

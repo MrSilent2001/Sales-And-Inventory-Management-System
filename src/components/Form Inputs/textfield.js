@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-export default function BasicTextField({ id, variant, size, type }) {
+export default function BasicTextField({ id, variant, size, type, style}) {
   const [value, setValue] = useState('');
   const [error, setError] = useState(false);
 
@@ -19,7 +19,7 @@ export default function BasicTextField({ id, variant, size, type }) {
           m: 1,
           width: '17.5em',
           "& .MuiInputBase-root": {
-            height: '2.5em',
+            height: '2em',
             backgroundColor: '#e9eeff'
           },
           "& .MuiInputLabel-root": {
@@ -35,6 +35,7 @@ export default function BasicTextField({ id, variant, size, type }) {
         variant={variant}
         size={size}
         type={type}
+        style={style}
         margin='normal'
         required
         value={value}

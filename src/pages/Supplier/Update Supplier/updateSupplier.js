@@ -1,25 +1,11 @@
 import './updateSupplier.css'
 import * as React from "react";
-import {styled} from "@mui/material/styles";
-import Button from "@mui/material/Button";
 import Avatar from '@mui/material/Avatar';
 import Footer from "../../../layout/footer/footer";
 import CustomizedButton from "../../../components/Button/button";
 import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navbar";
 import BasicTextField from "../../../components/Form Inputs/textfield";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-
-const VisuallyHiddenInput = styled('input')({
-    clip: 'rect(0 0 0 0)',
-    clipPath: 'inset(50%)',
-    height: 1,
-    overflow: 'hidden',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    whiteSpace: 'nowrap',
-    width: 1,
-});
+import FileUpload from "../../../components/Form Inputs/fileUpload";
 
 function UpdateSupplier() {
     return (
@@ -29,19 +15,13 @@ function UpdateSupplier() {
                 <div className="UpdateSupplierInner">
 
                     <div className="UpdateSupplierProfile">
-                        <h3 className='UpdateTopicName'>W A P Saman Perera</h3>
                         <div className="updateAvatar">
                             <Avatar src="/broken-image.jpg"
                                     sx={{width: 230, height: 230, border: 2, borderRadius: 2, marginTop: '-0.8em'}}/>
                             <div className='uploadButton'>
-                                <Button component="label" variant="contained" startIcon={<CloudUploadIcon />} style={{width:"15em",top:"2em"}}>
-                                    Upload Image
-                                    <VisuallyHiddenInput type="file" />
-                                </Button>
+                                <FileUpload style={{width:"15em",top:"2em"}}/>
                             </div>
                         </div>
-
-
                     </div>
 
                     <div className="UpdateSupplierForm">
@@ -51,7 +31,7 @@ function UpdateSupplier() {
                                     <h5>Name</h5>
                                 </div>
                                 <div className="UpdateSupplierTextInput">
-                                    <BasicTextField/>
+                                    <BasicTextField style={{width:'20em'}}/>
                                 </div>
                             </div>
 
@@ -60,7 +40,7 @@ function UpdateSupplier() {
                                     <h5>Address</h5>
                                 </div>
                                 <div className="UpdateSupplierTextInput">
-                                    <BasicTextField/>
+                                    <BasicTextField style={{width:'20em'}}/>
                                 </div>
                             </div>
 
@@ -69,7 +49,7 @@ function UpdateSupplier() {
                                     <h5>Contact</h5>
                                 </div>
                                 <div className="UpdateSupplierTextInput">
-                                    <BasicTextField/>
+                                    <BasicTextField style={{width:'20em'}}/>
                                 </div>
                             </div>
 
@@ -78,7 +58,7 @@ function UpdateSupplier() {
                                     <h5>Email</h5>
                                 </div>
                                 <div className="UpdateSupplierTextInput">
-                                    <BasicTextField/>
+                                    <BasicTextField style={{width:'20em'}}/>
                                 </div>
                             </div>
 
@@ -93,14 +73,11 @@ function UpdateSupplier() {
                                             width: '8em',
                                             height: '2.5em',
                                             fontSize: '0.95em',
-                                            fontFamily: 'inter',
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
                                             fontWeight: '550',
                                             marginTop: '0.625em',
-                                            marginRight:'5em',
-                                            textTransform: 'none',
-                                            textAlign: 'center',
+                                            marginRight:'7.5em',
                                         }}>
                                         Update
                                     </CustomizedButton>

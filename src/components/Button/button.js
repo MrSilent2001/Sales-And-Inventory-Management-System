@@ -25,7 +25,11 @@ function CustomizedButton({ variant, size, type, id, style, onClick, children, h
                 style={{
                     ...style,
                     backgroundColor: isActive ? 'lightblue' : (isHovered ? hoverBackgroundColor : style.backgroundColor),
-                    cursor: isHovered ? 'pointer' : 'default'
+                    cursor: isHovered ? 'pointer' : 'default',
+                    fontFamily: 'inter',
+                    textTransform: 'none',
+                    color: '#ffffff',
+                    textAlign: 'center'
                 }}
                 onClick={onClick}
                 onMouseEnter={handleMouseEnter}
