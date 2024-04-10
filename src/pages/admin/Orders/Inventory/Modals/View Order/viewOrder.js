@@ -1,31 +1,7 @@
-import Button from "@mui/material/Button";
 import React from "react";
 import "./viewOrder.css";
-import {styled} from "@mui/material/styles";
-
-
-const GoBackButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText('#242F9B'),
-    backgroundColor: '#249b54',
-    '&:hover': {
-        backgroundColor: '#2d3ed2' // You can adjust the darken value as needed
-    },
-    '&.MuiButton-root': {
-        width: '15.625em',
-        height: '2.75em'
-    },
-    fontSize: '0.625em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em'
-}));
-
-const CenteredModal = styled('div')({
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh', // Make the container take the full height of the viewport
-});
-
+import CustomizedButton from "../../../../../../components/Button/button";
+import CenteredModal from "../../../../../../components/Modal/modal";
 
 function ViewOrder(props){
 
@@ -100,7 +76,23 @@ function ViewOrder(props){
 
                         <div className="formFieldButtons">
                             <div className="saveButton">
-                                <GoBackButton onClick={() => props.onClose(false)}>Go Back</GoBackButton>
+                                <CustomizedButton
+                                    onClick={() => props.onClose(false)}
+                                    hoverBackgroundColor="#2d3ed2"
+                                    style={{
+                                        backgroundColor: '#242F9B',
+                                        border: '1px solid #242F9B',
+                                        width: '11em',
+                                        height: '2.5em',
+                                        fontSize: '0.95em',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        fontWeight: '550',
+                                        marginTop: '0.625em',
+                                        marginRight: '1.5em',
+                                    }}>
+                                    Go Back
+                                </CustomizedButton>
                             </div>
                         </div>
                     </div>

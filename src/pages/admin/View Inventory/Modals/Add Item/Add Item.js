@@ -1,153 +1,189 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import './Add Item.css'
-import {styled} from "@mui/material/styles";
-import Button from "@mui/material/Button";
+import './Add Item.css';
+import BasicTextField from "../../../../../components/Form Inputs/textfield";
+import CustomizedButton from "../../../../../components/Button/button";
+import CenteredModal from "../../../../../components/Modal/modal";
+import ComboBox from "../../../../../components/Form Inputs/comboBox";
+import {useState} from "react";
+import FormControl from "@mui/material/FormControl";
 
-function BasicTextFields() {
+function AddItem(props) {
+    const [inventoryId, setInventoryId] = useState('');
+    const [description, setDescription] = useState('');
+    const [category, setCategory] = useState('');
+    const [quantity, setQuantity] = useState('');
+    const [unitPrice, setUnitPrice] = useState('');
+    const [inventoryStatus, setInventoryStatus] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const newItem = {
+            id: inventoryId,
+            description: description,
+            category: category,
+            quantity: quantity,
+            unitPrice: unitPrice,
+            inventoryStatus: inventoryStatus
+        };
+
+        console.log(newItem);
+
+        // Call the onSubmit function passed from the parent component
+        props.onSubmit(newItem);
+
+        // Clear the form fields after submission
+        setInventoryId('');
+        setDescription('');
+        setCategory('');
+        setQuantity('');
+        setUnitPrice('');
+        setInventoryStatus('');
+
+        // Close the modal
+        props.onClose();
+
+    }
+
+    const options = [
+        {value: 'Category 01', label: 'Category 01'},
+        {value: 'Category 02', label: 'Category 02'},
+        {value: 'Category 03', label: 'Category 03'}
+    ];
+
+    const options2 = [
+        {value: 'In-Stock', label: 'In-Stock'},
+        {value: 'Out-Of-Stock', label: 'Out-Of-Stock'}
+    ];
+
     return (
-        <Box
-            component="form"
-            sx={{
-                '& > :not(style)': {
-                    m: 1,
-                    width: '17.5em',
-                    "& .MuiInputBase-root":{
-                        height: '2.5em',
-                        backgroundColor: '#e9eeff'
-                    },
-                    "& .MuiInputLabel-root": {
-                        fontSize: '0.5em',
-                        textAlign: 'center',
-                    },
-                },
-            }}
-            noValidate
-            autoComplete="off"
-        >
-            <TextField id="outlined-basic" variant="outlined" margin='normal'/>
-        </Box>
-    );
-}
-
-const CancelButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText('#D41400'),
-    backgroundColor: '#D41400',
-    '&:hover': {
-        backgroundColor: '#e03a26' // You can adjust the darken value as needed
-    },
-    '&.MuiButton-root': {
-        width: '11.625em',
-        height: '2.75em'
-    },
-    fontSize: '0.625em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em'
-}));
-
-const SaveItemButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText('#242F9B'),
-    backgroundColor: '#242F9B',
-    '&:hover': {
-        backgroundColor: '#2d3ed2' // You can adjust the darken value as needed
-    },
-    '&.MuiButton-root': {
-        width: '11.625em',
-        height: '2.75em'
-    },
-    fontSize: '0.625em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em'
-}));
-
-const CenteredModal = styled('div')({
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh', // Make the container take the full height of the viewport
-});
-function AddItem(props){
-    return(
         <CenteredModal>
-            <div className="addItemOuter">
-                <div className="addItemModel">
-                    <h2>Add Item</h2>
-                    <div className="addItemForm">
-                        <div className="addItemformField">
-                            <div className="addItemidField">
-                                <h5>Inventory Id</h5>
+            <FormControl onSubmit={handleSubmit}>
+                <div className="addItemOuter">
+                    <div className="addItemModel">
+                        <h2>Add Item</h2>
+                        <div className="addItemForm">
+                            <div className="addItemformField">
+                                <div className="addItemidField">
+                                    <h5>Inventory Id</h5>
+                                </div>
+                                <div className="addItemidInput">
+                                    <BasicTextField value={inventoryId}
+                                                    onChange={(e) => setInventoryId(e.target.value)}/>
+                                </div>
                             </div>
-                            <div className="addItemidInput">
-                                <BasicTextFields></BasicTextFields>
-                            </div>
-                        </div>
 
-                        <div className="addItemformField">
-                            <div className="addItemidField">
-                                <h5>Item Description</h5>
+                            <div className="addItemformField">
+                                <div className="addItemidField">
+                                    <h5>Item Description</h5>
+                                </div>
+                                <div className="addItemidInput">
+                                    <BasicTextField value={description}
+                                                    onChange={(e) => setDescription(e.target.value)}/>
+                                </div>
                             </div>
-                            <div className="addItemidInput">
-                                <BasicTextFields></BasicTextFields>
-                            </div>
-                        </div>
 
-                        <div className="addItemformField">
-                            <div className="addItemidField">
-                                <h5>Item Category</h5>
+                            <div className="addItemformField">
+                                <div className="addItemidField">
+                                    <h5>Item Category</h5>
+                                </div>
+                                <div className="addItemidInput">
+                                    <ComboBox
+                                        value={category}
+                                        onChange={(e) => setCategory(e.target.value)}
+                                        style={{
+                                            width: '17.5em',
+                                            height: '2em',
+                                            marginRight: '0.5em',
+                                            border: '1px solid white'
+                                        }}
+                                        options={options}
+                                        label="Category"
+                                        size="small"
+                                    />
+                                </div>
                             </div>
-                            <div className="addItemidInput">
-                                <BasicTextFields></BasicTextFields>
-                            </div>
-                        </div>
 
-                        <div className="addItemformField">
-                            <div className="addItemidField">
-                                <h5>Quantity</h5>
+                            <div className="addItemformField">
+                                <div className="addItemidField">
+                                    <h5>Quantity</h5>
+                                </div>
+                                <div className="addItemidInput">
+                                    <BasicTextField value={quantity} onChange={(e) => setQuantity(e.target.value)}/>
+                                </div>
                             </div>
-                            <div className="addItemidInput">
-                                <BasicTextFields></BasicTextFields>
-                            </div>
-                        </div>
 
-                        <div className="addItemformField">
-                            <div className="addItemidField">
-                                <h5>Unit Price</h5>
+                            <div className="addItemformField">
+                                <div className="addItemidField">
+                                    <h5>Unit Price</h5>
+                                </div>
+                                <div className="addItemidInput">
+                                    <BasicTextField value={unitPrice} onChange={(e) => setUnitPrice(e.target.value)}/>
+                                </div>
                             </div>
-                            <div className="addItemidInput">
-                                <BasicTextFields></BasicTextFields>
-                            </div>
-                        </div>
 
-                        <div className="addItemformField">
-                            <div className="addItemidField">
-                                <h5>Manufacture Dated</h5>
+                            <div className="addItemformField">
+                                <div className="addItemidField">
+                                    <h5>Inventory Status</h5>
+                                </div>
+                                <div className="addItemidInput">
+                                    <ComboBox
+                                        value={inventoryStatus}
+                                        onChange={(e) => setInventoryStatus(e.target.value)}
+                                        style={{
+                                            width: '17.5em',
+                                            height: '2em',
+                                            marginRight: '0.5em',
+                                            border: '1px solid white'
+                                        }}
+                                        options={options2}
+                                        label="Category"
+                                        size="small"
+                                    />
+                                </div>
                             </div>
-                            <div className="addItemidInput">
-                                <BasicTextFields></BasicTextFields>
-                            </div>
-                        </div>
 
-                        <div className="addItemformField">
-                            <div className="addItemidField">
-                                <h5>Expire Date</h5>
-                            </div>
-                            <div className="addItemidInput">
-                                <BasicTextFields></BasicTextFields>
-                            </div>
-                        </div>
-
-                        <div className="addItemformFieldButtons">
-                            <div className="addItemcancelButton">
-                                <CancelButton onClick={() => props.onClose(false)}>Cancel</CancelButton>
-                            </div>
-                            <div className="addItemButton">
-                                <SaveItemButton>Add Item</SaveItemButton>
+                            <div className="addItemformFieldButtons">
+                                <div className="addItemButton">
+                                    <CustomizedButton
+                                        onClick={handleSubmit}
+                                        hoverBackgroundColor="#2d3ed2"
+                                        style={{
+                                            backgroundColor: '#242F9B',
+                                            border: '1px solid #242F9B',
+                                            width: '8em',
+                                            height: '2.5em',
+                                            fontSize: '0.8em',
+                                            padding: '0.5em 0.625em',
+                                            borderRadius: '0.35em',
+                                            fontWeight: '500',
+                                            marginTop: '0.625em'
+                                        }}>
+                                        Add Item
+                                    </CustomizedButton>
+                                </div>
+                                <div className="addItemcancelButton">
+                                    <CustomizedButton
+                                        onClick={() => props.onClose(false)}
+                                        hoverBackgroundColor="#f11717"
+                                        style={{
+                                            backgroundColor: '#960505',
+                                            width: '8em',
+                                            height: '2.5em',
+                                            fontSize: '0.8em',
+                                            padding: '0.5em 0.625em',
+                                            borderRadius: '0.35em',
+                                            fontWeight: '500',
+                                            marginTop: '0.625em'
+                                        }}>
+                                        Cancel
+                                    </CustomizedButton>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </FormControl>
         </CenteredModal>
     )
 }

@@ -5,9 +5,6 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
 import PasswordField from "../../../components/Form Inputs/passwordField";
 import ComboBox from "../../../components/Form Inputs/comboBox";
-// import {useLocation, useNavigate} from "react-router-dom";
-// import {useAuth} from "../../services/auth";
-
 
 const Login = () => {
 
@@ -35,13 +32,10 @@ const Login = () => {
     };
 
     const navigate = useNavigate();
-
-    //const auth = useAuth();
     const location = useLocation();
     const redirectPath = location.state?.path || "/login";
 
     const handleLogin = () => {
-        //auth.login(username);
         navigate(redirectPath, {replace:true});
 
         if (username === "admin" && password === "12345" && role === "admin") {
@@ -69,7 +63,7 @@ const Login = () => {
                 <h2 className='mainTitle'>TRADEASY</h2>
             
                
-                <img src="https://miro.medium.com/v2/resize:fit:740/1*PZK0jq9cUFpgRLZcs_aqwg.jpeg" alt="System image" className='image' />
+                <img src="https://miro.medium.com/v2/resize:fit:740/1*PZK0jq9cUFpgRLZcs_aqwg.jpeg" alt="System" className='image' />
            
             </div>
             <div className='RightContainer'>

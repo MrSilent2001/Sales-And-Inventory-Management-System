@@ -1,5 +1,6 @@
 .viewInventoryOuter{
     display: flex;
+    background-color: rgba(219, 223, 253, 0.8);
 }
 
 .viewInventoryFilter{
@@ -53,7 +54,7 @@
 
 .InventorySearchAndButtons{
     display: flex;
-    width: 81.25em;
+    width: 75.25em;
     padding: 0.5em 0 0 0;
     justify-content: space-between;
 }

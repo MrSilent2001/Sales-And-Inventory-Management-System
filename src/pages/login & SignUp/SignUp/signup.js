@@ -5,9 +5,6 @@ import {Link} from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
 import PasswordField from "../../../components/Form Inputs/passwordField";
 
-// import {useLocation, useNavigate} from "react-router-dom";
-// import {useAuth} from "../../services/auth";
-
 const SignUp = () => {
 
     const [showPassword, setShowPassword] = React.useState(false);
@@ -18,25 +15,13 @@ const SignUp = () => {
         event.preventDefault();
     };
 
-    // const navigate = useNavigate();
-    //
-    // const [username, setUsername] = useState("");
-    // const [password, setPassword] = useState("");
-    // //const auth = useAuth();
-    // const location = useLocation();
-    // const redirectPath = location.state?.path || "/inventoryLanding";
-    //
-    // const handleLogin = () => {
-    //     //auth.login(username);
-    //     navigate(redirectPath, {replace:true});
-    // }
 
     return (
         <div className='S-MainContainer'>
 
         <div className='S-LeftContainer'>
         <h2 className='mainSignTitle'>TRADEASY</h2>
-        <img src="https://miro.medium.com/v2/resize:fit:740/1*PZK0jq9cUFpgRLZcs_aqwg.jpeg" alt="System image" className='SystemImage' />
+        <img src="https://miro.medium.com/v2/resize:fit:740/1*PZK0jq9cUFpgRLZcs_aqwg.jpeg" alt="System" className='SystemImage' />
 
             </div>
             <div className='S-RightContainer'>
@@ -51,7 +36,6 @@ const SignUp = () => {
                                     size="small"
                                     id="outlined-required"
                                     label="Username"
-                                    //onChange={(e) => setUsername(e.target.value)}
                                     required
                                 />
                             </div>
@@ -66,7 +50,6 @@ const SignUp = () => {
                                     id="outlined-required"
                                     label="Email"
                                     type="email"
-                                    //onChange={(e) => setUsername(e.target.value)}
                                     required
                                 />
                             </div>
@@ -80,7 +63,6 @@ const SignUp = () => {
                                     id="outlined-required"
                                     label="Contact No"
                                     type="number"
-                                    //onChange={(e) => setUsername(e.target.value)}
                                     required
                                 />
                             </div>

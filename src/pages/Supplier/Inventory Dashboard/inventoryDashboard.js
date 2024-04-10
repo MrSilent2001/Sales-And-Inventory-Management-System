@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState} from "react";
 import "./inventoryDashboard.css";
 import {Modal} from "@mui/material";
 import AddItem from "../../admin/View Inventory/Modals/Add Item/Add Item";
@@ -7,8 +7,8 @@ import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navb
 import SearchBar from "../../../components/search bar/search bar";
 import CustomizedButton from "../../../components/Button/button";
 import inventory from "../../../data/data.json";
-import CustomizedAlert from "../../../components/Alert/alert";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
+import CustomizedAlert from "../../../components/Alert/alert";
 
 const columns = [
     {id: 'inventoryId', label: 'Inventory Id', minWidth: 170, align: 'center'},
@@ -48,12 +48,24 @@ const mappedData = rows.map(row => ({
 
 
 function InventoryDashboard(){
-
     const [visible,setVisible] = useState(false);
-    const [showAlert, setShowAlert] = useState(false);
+    const [open, setOpen] = useState(false);
 
-    const handleDelete = () => {
-        setShowAlert(true);
+    const [tableData, setTableData] = useState(mappedData);
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleAddItem = (newItem) => {
+        setTableData([...tableData, newItem]);
+        // You may also want to display a success message here
+
+        setVisible(false);
     };
 
     return(
@@ -62,7 +74,7 @@ function InventoryDashboard(){
 
             <div className="supplierViewInventoryOuter">
                 <div className="supplierViewInventoryInner">
-                    <div className="supplierSearchAndButtons">
+                    <div className="supplierInvSearchAndButtons">
                         <div className="supplierViewInventorySearch">
                             <SearchBar></SearchBar>
                         </div>
@@ -71,40 +83,32 @@ function InventoryDashboard(){
                                 onClick={()=>setVisible(true)}
                                 hoverBackgroundColor="#2d3ed2"
                                 style={{
-                                    color: '#ffffff',
                                     backgroundColor: '#242F9B',
                                     border: '1px solid #242F9B',
                                     width: '9.5em',
                                     height: '2.5em',
-                                    fontSize: '0.95em',
-                                    fontFamily: 'inter',
+                                    fontSize: '0.8em',
                                     padding: '0.5em 0.625em',
                                     borderRadius: '0.35em',
                                     fontWeight: '500',
                                     marginTop: '0.625em',
                                     marginRight: '1.5em',
-                                    textTransform: 'none',
-                                    textAlign: 'center',
                                 }}>
                                 Add Item
                             </CustomizedButton>
 
                             <CustomizedButton
-                                onClick={handleDelete}
+                                onClick={handleClick}
                                 hoverBackgroundColor="#f11717"
                                 style={{
-                                    color: '#ffffff',
                                     backgroundColor: '#960505',
                                     width: '9.5em',
                                     height: '2.5em',
-                                    fontSize: '0.95em',
-                                    fontFamily: 'inter',
+                                    fontSize: '0.8em',
                                     padding: '0.5em 0.625em',
                                     borderRadius: '0.35em',
                                     fontWeight: '500',
                                     marginTop: '0.625em',
-                                    textTransform: 'none',
-                                    textAlign: 'center',
                                 }}>
                                 Delete Item
                             </CustomizedButton>
@@ -119,22 +123,17 @@ function InventoryDashboard(){
                     </div>
                 </div>
 
-                {showAlert && (
-                    <CustomizedAlert
-                        variant="contained"
-                        severity="error"
-                        onClose={() => setShowAlert(false)}
-
-                    >
-                        Alert Message
-                    </CustomizedAlert>
-                )}
-
                 <Modal open={visible}>
-                    <AddItem onClose={(value) => { setVisible(false)}} ></AddItem>
+                    <AddItem onSubmit={handleAddItem} onClose={() => { setVisible(false)}} ></AddItem>
                 </Modal>
-            </div>
 
+                <CustomizedAlert
+                    open={open}
+                    onClose={handleClose}
+                    severity="error"
+                    message="Item Deleted Successfully!"
+                />
+            </div>
             <Footer/>
         </>
     )

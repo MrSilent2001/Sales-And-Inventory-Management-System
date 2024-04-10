@@ -11,7 +11,7 @@
 
 .addItemModel h2{
     font-family: Inter;
-    padding: 1.25em 0 0 0;
+    padding: 0.75em 0 0 0;
 }
 
 .addItemForm{
@@ -26,7 +26,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin: 0.1em 0 0 0;
 }
 
 .addItemformField h5{
@@ -35,16 +34,11 @@
     font-size: 0.75em;
 }
 
-.addItemForm{
-    margin-top: 0.3em;
-}
-
 .addItemformFieldButtons{
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 16.25em;
     justify-content: space-between;
-    margin: 1.4em 0 0 0;
-    padding-bottom: 3em;
+    padding: 2em 0;
 }
