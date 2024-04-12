@@ -34,11 +34,18 @@ function PlaceOrder(props){
         alert("Order Placed Successfully");
     }
 
-    const addItem = () =>{
-        console.log("Item added Successfully");
-        alert("Item added Successfully");
-    }
-
+    const addItem = () => {
+        
+        const selectedItem = options2.find(option => option.value === itemCategory);
+        if (selectedItem) {
+            const inputValue = document.getElementById("selectedItemInput").value;
+            const newItemValue = inputValue ? `${inputValue}, ${selectedItem.label}` : selectedItem.label;
+            document.getElementById("selectedItemInput").value = newItemValue;
+            setItemCategory('');
+            alert("Item added Successfully");
+        }
+    };
+    
     return(
         <CenteredModal>
             <div className="placeOrderOuter">
@@ -145,7 +152,10 @@ function PlaceOrder(props){
 
                             </div>
                             <div className="placeOrderidInput">
-                                <BasicTextField id="outlined-required" size="small"/>
+                                <BasicTextField 
+                                id="selectedItemInput"
+                                readOnly 
+                                size="small"/>
                             </div>
                         </div>
 
