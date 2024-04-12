@@ -579,48 +579,7 @@
   ],
 
   "suppliers": [
-    {
-      "supplierId": "S0001",
-      "address": "xxxxxxxxxxxxxxxxxxxxxx",
-      "email": "xxxxx@gmail.com",
-      "contact": 3,
-      "category": "In Stock"
-    },
-    {
-      "supplierId": "I0001",
-      "address": "Tokyo Super Cement",
-      "email": "Cement",
-      "contact": 37,
-      "category": "In Stock"
-    },
-    {
-      "supplierId": "I0001",
-      "address": "Tokyo Super Cement",
-      "email": "Cement",
-      "contact": 24,
-      "category": "In Stock"
-    },
-    {
-      "supplierId": "I0001",
-      "address": "Tokyo Super Cement",
-      "email": "Cement",
-      "contact": 67,
-      "category": "In Stock"
-    },
-    {
-      "supplierId": "I0001",
-      "address": "Tokyo Super Cement",
-      "email": "Cement",
-      "contact": 49,
-      "category": "In Stock"
-    },
-    {
-      "supplierId": "I0001",
-      "address": "Tokyo Super Cement",
-      "email": "Cement",
-      "contact": 49,
-      "category": "In Stock"
-    }
+
   ],
 
   "items": [
@@ -749,50 +708,10 @@
       "itemCategory": "Cement",
       "Quantity": 24,
       "inventoryStatus": "In Stock"
-    },
-    {
-      "inventoryId": "I0001",
-      "itemDescription": "Tokyo Super Cement",
-      "itemCategory": "Cement",
-      "Quantity": 24,
-      "inventoryStatus": "In Stock"
-    },
-    {
-      "inventoryId": "I0001",
-      "itemDescription": "Tokyo Super Cement",
-      "itemCategory": "Cement",
-      "Quantity": 37,
-      "inventoryStatus": "In Stock"
-    },
-    {
-      "inventoryId": "I0001",
-      "itemDescription": "Tokyo Super Cement",
-      "itemCategory": "Cement",
-      "Quantity": 24,
-      "inventoryStatus": "In Stock"
-    },
-    {
-      "inventoryId": "I0001",
-      "itemDescription": "Tokyo Super Cement",
-      "itemCategory": "Cement",
-      "Quantity": 67,
-      "inventoryStatus": "In Stock"
-    },
-    {
-      "inventoryId": "I0001",
-      "itemDescription": "Tokyo Super Cement",
-      "itemCategory": "Cement",
-      "Quantity": 49,
-      "inventoryStatus": "In Stock"
-    },
-    {
-      "inventoryId": "I0001",
-      "itemDescription": "Tokyo Super Cement",
-      "itemCategory": "Cement",
-      "Quantity": 49,
-      "inventoryStatus": "In Stock"
     }
   ],
+
+
   "orderStatus": [
     {
       "id": "OID001",

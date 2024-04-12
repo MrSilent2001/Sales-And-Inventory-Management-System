@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -9,10 +9,10 @@ import UpdateSupplier from "../Supplier Dashboard/Modals/UpdateSupplier/updateSu
 import InventoryNavbar from "../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../layout/footer/footer";
 import CustomizedButton from "../../../components/Button/button";
-import suppliers from "../../../data/data.json";
 import SearchBar from "../../../components/search bar/search bar";
 import ComboBox from "../../../components/Form Inputs/comboBox";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
+import axios from "axios";
 
 function FilterItems(){
     const [category, setCategory] = React.useState('');
@@ -58,25 +58,42 @@ function FilterItems(){
 function ViewSupplier(){
     const [visible, setVisible] = useState(false);
     const [updateVisible, setUpdateVisible] = useState(false);
-    const [selectedRow, setSelectedRow] = useState(null);
+    const [selectedSupplier, setSelectedSupplier] = useState(null);
+    const [suppliers, setSuppliers] = useState([]);
 
-    const handleSetVisible = (row) => {
-        setSelectedRow(row);
-        setVisible(true);
-    };
+    useEffect(() => {
+        const fetchSuppliers = async () => {
+            try {
+                const response = await axios.get('http://localhost:3001/supplier/getAllSuppliers');
+                setSuppliers(response.data);
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        };
+
+        fetchSuppliers();
+    }, []);
+
 
     const handleButtonClick = () => {
         console.log("view")
     };
 
-    let rows = suppliers.suppliers || [];
+    const handleUpdateSupplier = (row) => {
+        const {id} = row;
+        setSelectedSupplier(id);
+        setUpdateVisible(true);
+    };
+
+
+    let rows = suppliers;
 
     const columns = [
-        { id: 'inventoryId', label: 'Supplier Id', minWidth: 100, align: 'center' },
-        { id: 'itemDescription', label: 'Address', minWidth: 200, align: 'center' },
-        { id: 'itemCategory', label: 'E-mail', minWidth: 170, align: 'center' },
-        { id: 'Quantity', label: 'Contact', minWidth: 170, align: 'center' },
-        { id: 'inventoryStatus', label: 'Category', minWidth: 170, align: 'center' },
+        { id: 'id', label: 'Supplier Id', minWidth: 100, align: 'center' },
+        { id: 'supplierName', label: 'Address', minWidth: 200, align: 'center' },
+        { id: 'supplierEmail', label: 'E-mail', minWidth: 170, align: 'center' },
+        { id: 'supplierAddress', label: 'Contact', minWidth: 170, align: 'center' },
+        { id: 'supplierContact', label: 'Category', minWidth: 170, align: 'center' },
         { id: 'actions', label: '', minWidth: 100, align: 'center' }
     ];
 
@@ -84,10 +101,10 @@ function ViewSupplier(){
 
     const mappedData = rows.map(row => ({ ...row, actions: createViewButton(handleButtonClick) }));
 
-    function createViewButton(handleButtonClick) {
+    function createViewButton(row) {
         return (
             <CustomizedButton
-                onClick={() => handleSetVisible}
+                onClick={() => handleUpdateSupplier(row)}
                 hoverBackgroundColor="#2d3ed2"
                 style={{
                     backgroundColor: '#242F9B',
@@ -102,7 +119,7 @@ function ViewSupplier(){
                     marginRight: '1.5em'
                 }}
             >
-                View
+                Update
             </CustomizedButton>
         );
     }
@@ -193,7 +210,10 @@ function ViewSupplier(){
                     <AddSupplier onClose={(value) => { setVisible(false)}}/>
                 </Modal>
                 <Modal open={updateVisible}>
-                    <UpdateSupplier onClose={(value) => { setUpdateVisible(false)}} selectedRow={selectedRow}/>
+                    <UpdateSupplier
+                        onClose={(value) => { setUpdateVisible(false)}}
+                        selectedSupplier={selectedSupplier}
+                    />
                 </Modal>
             </div>
 
