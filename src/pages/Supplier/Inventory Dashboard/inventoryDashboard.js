@@ -21,52 +21,85 @@ const columns = [
         format: (value) => value.toLocaleString('en-US'),
     },
     {
-        id: 'Quantity',
+        id: 'quantity',
         label: 'Quantity',
         minWidth: 170,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
+
     {
-        id: 'inventoryStatus',
-        label: 'Inventory Status',
+        id: 'price',
+        label: 'Unit Price',
         minWidth: 170,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
-    }
+    },
+    // {
+    //     id: 'inventoryStatus',
+    //     label: 'Inventory Status',
+    //     minWidth: 170,
+    //     align: 'center',
+    //     format: (value) => value.toLocaleString('en-US'),
+    // }
 ];
 
-const rows = inventory.inventory || [];
+// const rows = inventory.inventory || [];
 
-const mappedData = rows.map(row => ({
-    inventoryId: row.inventoryId,
-    itemDescription: row.itemDescription,
-    itemCategory: row.itemCategory,
-    Quantity: row.Quantity,
-    inventoryStatus: row.inventoryStatus
-}));
+
+
 
 
 function InventoryDashboard(){
     const [visible,setVisible] = useState(false);
-    const [open, setOpen] = useState(false);
+    const [openSuccess, setOpenSuccess] = useState(false);
+    const [openError, setOpenError] = useState(false);
+    const [tableData, setTableData] = useState([]);
+    const [selectedRowId, setSelectedRowId] = useState(null);
 
-    const [tableData, setTableData] = useState(mappedData);
-
-    const handleClick = () => {
-        setOpen(true);
+    const handleClickSuccess = () => {
+        setOpenSuccess(true);
+    };
+    const handleClickError = () => {
+        setOpenError(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    const handleCloseSuccess = () => {
+        setOpenSuccess(false);
+    };
+
+    const handleCloseError = () => {
+        setOpenError(false);
     };
 
     const handleAddItem = (newItem) => {
         setTableData([...tableData, newItem]);
-        // You may also want to display a success message here
-
         setVisible(false);
+
+        handleClickSuccess();
+
     };
+
+    // Function to handle deletion of a row
+    const handleDeleteButtonClick = () => {
+        if (selectedRowId !== null) {
+            const updatedData = tableData.filter(row => row.id !== selectedRowId);
+            setTableData(updatedData);
+            handleClickError();
+        }
+    };
+
+    const rows = tableData;
+    //
+    // const mappedData = rows.map(row => ({
+    //     inventoryId: row.inventoryId,
+    //     itemDescription: row.itemDescription,
+    //     itemCategory: row.itemCategory,
+    //     Quantity: row.Quantity,
+    //     Price: row.Price
+    //
+    //     //inventoryStatus: row.inventoryStatus
+    // }));
 
     return(
         <>
@@ -98,7 +131,7 @@ function InventoryDashboard(){
                             </CustomizedButton>
 
                             <CustomizedButton
-                                onClick={handleClick}
+                                onClick={handleDeleteButtonClick}
                                 hoverBackgroundColor="#f11717"
                                 style={{
                                     backgroundColor: '#960505',
@@ -118,7 +151,8 @@ function InventoryDashboard(){
                     <div className="supplierItemTable">
                         <CustomizedTable
                             columns={columns}
-                            rows={mappedData}
+                            rows={tableData}
+                            onSelectRow={setSelectedRowId}
                         />
                     </div>
                 </div>
@@ -128,10 +162,17 @@ function InventoryDashboard(){
                 </Modal>
 
                 <CustomizedAlert
-                    open={open}
-                    onClose={handleClose}
+                    open={openError}
+                    onClose={handleCloseError}
                     severity="error"
                     message="Item Deleted Successfully!"
+                />
+
+                <CustomizedAlert
+                    open={openSuccess}
+                    onClose={handleCloseSuccess}
+                    severity="success"
+                    message="Item Added Successfully!"
                 />
             </div>
             <Footer/>

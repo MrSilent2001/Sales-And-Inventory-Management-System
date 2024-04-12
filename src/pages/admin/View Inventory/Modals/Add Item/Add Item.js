@@ -13,18 +13,18 @@ function AddItem(props) {
     const [category, setCategory] = useState('');
     const [quantity, setQuantity] = useState('');
     const [unitPrice, setUnitPrice] = useState('');
-    const [inventoryStatus, setInventoryStatus] = useState('');
+    //const [inventoryStatus, setInventoryStatus] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const newItem = {
-            id: inventoryId,
-            description: description,
-            category: category,
+            inventoryId: inventoryId,
+            itemDescription: description,
+            itemCategory: category,
             quantity: quantity,
-            unitPrice: unitPrice,
-            inventoryStatus: inventoryStatus
+            price: unitPrice,
+            //inventoryStatus: inventoryStatus
         };
 
         console.log(newItem);
@@ -38,10 +38,10 @@ function AddItem(props) {
         setCategory('');
         setQuantity('');
         setUnitPrice('');
-        setInventoryStatus('');
+        //setInventoryStatus('');
 
         // Close the modal
-        props.onClose();
+        //props.onClose();
 
     }
 
@@ -51,10 +51,10 @@ function AddItem(props) {
         {value: 'Category 03', label: 'Category 03'}
     ];
 
-    const options2 = [
-        {value: 'In-Stock', label: 'In-Stock'},
-        {value: 'Out-Of-Stock', label: 'Out-Of-Stock'}
-    ];
+    // const options2 = [
+    //     {value: 'In-Stock', label: 'In-Stock'},
+    //     {value: 'Out-Of-Stock', label: 'Out-Of-Stock'}
+    // ];
 
     return (
         <CenteredModal>
@@ -68,8 +68,13 @@ function AddItem(props) {
                                     <h5>Inventory Id</h5>
                                 </div>
                                 <div className="addItemidInput">
-                                    <BasicTextField value={inventoryId}
-                                                    onChange={(e) => setInventoryId(e.target.value)}/>
+                                    <BasicTextField
+                                        name="invId"
+                                        value={inventoryId}
+                                        onChange={(e) => {
+                                            setInventoryId(e.target.value);
+                                        }}
+                                    />
                                 </div>
                             </div>
 
@@ -78,8 +83,13 @@ function AddItem(props) {
                                     <h5>Item Description</h5>
                                 </div>
                                 <div className="addItemidInput">
-                                    <BasicTextField value={description}
-                                                    onChange={(e) => setDescription(e.target.value)}/>
+                                    <BasicTextField
+                                        name="Desc"
+                                        value={description}
+                                        onChange={(e) => {
+                                            setDescription(e.target.value);
+                                        }}
+                                    />
                                 </div>
                             </div>
 
@@ -89,8 +99,11 @@ function AddItem(props) {
                                 </div>
                                 <div className="addItemidInput">
                                     <ComboBox
+                                        name="category"
                                         value={category}
-                                        onChange={(e) => setCategory(e.target.value)}
+                                        onChange={(e) => {
+                                            setCategory(e.target.value);
+                                        }}
                                         style={{
                                             width: '17.5em',
                                             height: '2em',
@@ -109,7 +122,13 @@ function AddItem(props) {
                                     <h5>Quantity</h5>
                                 </div>
                                 <div className="addItemidInput">
-                                    <BasicTextField value={quantity} onChange={(e) => setQuantity(e.target.value)}/>
+                                    <BasicTextField
+                                        name="Qty"
+                                        value={quantity}
+                                        onChange={(e) => {
+                                            setQuantity(e.target.value);
+                                        }}
+                                    />
                                 </div>
                             </div>
 
@@ -118,30 +137,36 @@ function AddItem(props) {
                                     <h5>Unit Price</h5>
                                 </div>
                                 <div className="addItemidInput">
-                                    <BasicTextField value={unitPrice} onChange={(e) => setUnitPrice(e.target.value)}/>
-                                </div>
-                            </div>
-
-                            <div className="addItemformField">
-                                <div className="addItemidField">
-                                    <h5>Inventory Status</h5>
-                                </div>
-                                <div className="addItemidInput">
-                                    <ComboBox
-                                        value={inventoryStatus}
-                                        onChange={(e) => setInventoryStatus(e.target.value)}
-                                        style={{
-                                            width: '17.5em',
-                                            height: '2em',
-                                            marginRight: '0.5em',
-                                            border: '1px solid white'
+                                    <BasicTextField
+                                        name="Price"
+                                        value={unitPrice}
+                                        onChange={(e) => {
+                                            setUnitPrice(e.target.value);
                                         }}
-                                        options={options2}
-                                        label="Category"
-                                        size="small"
                                     />
                                 </div>
                             </div>
+
+                            {/*<div className="addItemformField">*/}
+                            {/*    <div className="addItemidField">*/}
+                            {/*        <h5>Inventory Status</h5>*/}
+                            {/*    </div>*/}
+                            {/*    <div className="addItemidInput">*/}
+                            {/*        <ComboBox*/}
+                            {/*            value={inventoryStatus}*/}
+                            {/*            onChange={(e) => setInventoryStatus(e.target.value)}*/}
+                            {/*            style={{*/}
+                            {/*                width: '17.5em',*/}
+                            {/*                height: '2em',*/}
+                            {/*                marginRight: '0.5em',*/}
+                            {/*                border: '1px solid white'*/}
+                            {/*            }}*/}
+                            {/*            options={options2}*/}
+                            {/*            label="Category"*/}
+                            {/*            size="small"*/}
+                            {/*        />*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
 
                             <div className="addItemformFieldButtons">
                                 <div className="addItemButton">
