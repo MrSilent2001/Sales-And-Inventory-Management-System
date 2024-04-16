@@ -7,7 +7,7 @@ import { CardActionArea, CardActions } from '@mui/material';
 import CustomizedButton from "../Button/button";
 
 export default function MultiActionAreaCard({item,handleClick}) {
-    const {title, price, img} = item;
+    const {productName, productPrice, productImage} = item;
     return (
         <Card sx={{ maxWidth: 300, width: 300 }}>
             <CardActionArea>
@@ -15,15 +15,15 @@ export default function MultiActionAreaCard({item,handleClick}) {
                 <CardMedia
                     component="img"
                     height="250"
-                    image={img}
-                    alt={title}
+                    image={productImage}
+                    alt={productName}
                 />
                 <CardContent>
                     <Typography variant="body2" color="text.primary">
-                        {title}
+                        {productName}
                     </Typography>
                     <Typography variant="body2" color="text.primary" sx={{ fontWeight: 'bold' }}>
-                        Rs.{price}
+                        Rs.{productPrice}
                     </Typography>
                 </CardContent>
 

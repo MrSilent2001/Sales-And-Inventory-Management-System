@@ -18,21 +18,21 @@ export default function MediaControlCard({ item, removeFromCart }) {
                 <CardMedia
                     component="img"
                     sx={{ width: 160, height: 160, marginLeft: 10, marginTop: 2 }}
-                    image={item.img}
+                    image={item.productImage}
                 />
                 <CardContent sx={{ flex: '1 0 auto', marginLeft: 10 }}>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
                         Item Id : {item.id}
                     </Typography>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
-                        Item Name : {item.title}
+                        Item Name : {item.productName}
                     </Typography>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
                         Quantity: {item.amount}
                         
                     </Typography>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
-                        Price : {item.price}
+                        Price : {item.productPrice}
                     </Typography>   
                 </CardContent>
             </Box>

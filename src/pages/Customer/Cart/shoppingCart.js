@@ -37,7 +37,7 @@ function Cart() {
         // Calculate total amount whenever cart changes
         let total = 0;
         cart.forEach(item => {
-            total += item.price * item.amount;
+            total += item.productPrice * item.amount;
         });
         setTotalAmount(total);
     }, [cart]);
@@ -60,7 +60,7 @@ function Cart() {
     }
 
     const lineItems = cart.map(item => ({
-            price: item.price.toString(),
+            price: item.productPrice.toString(),
             quantity: item.amount
         })
     );
