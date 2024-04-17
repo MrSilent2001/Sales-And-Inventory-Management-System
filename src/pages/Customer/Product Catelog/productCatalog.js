@@ -6,104 +6,112 @@ import Footer from "../../../layout/footer/footer";
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
+import axios from "axios";
+
 
 // Array of products
-const products = [
+// const products = [
  
-    {
-        "id": "I001",
-        "title": "Steel Hammer",
-        "price": 150,
-        "img": "https://tigersupplies-15a42.kxcdn.com/imagecache/893d96b3-ff5e-4173-90f9-a69b010d7add/Claw-Hammer---Steel-Shaft---16oz_1000x1000.jpg",
-        "amount": 1
-    },
-    {
-        "id": "I002",
-        "title": "Wood Material",
-        "price": 1000,
-        "img": "https://vskills.in/certification/blog/wp-content/uploads/2015/02/timber-as-construction-material.jpg",
-        "amount": 1
-    },
-    {
-        "id": "I003",
-        "title": "Metal Nails 100g",
-        "price": 140,
-        "img": "https://southatlanticllc.com/wp-content/uploads/2022/10/galvanized-masonry-nails-south-atlantic.jpg",
-        "amount": 1
-    },
-    {
-        "id": "I004",
-        "title": "Cement Bag 1Kg",
-        "price": 3000,
-        "img": "https://www.ehardware.lk/wp-content/uploads/2020/06/cement2.png",
-        "amount": 1
-    },
-    {
-        "id": "I005",
-        "title": "Showel",
-        "price": 1500,
-        "img": "https://down-my.img.susercontent.com/file/04c22b7a5e3a5fcb5d36a00636a3a151",
-        "amount": 1
-    },
-    {
-        "id": "I006",
-        "title": "Block Stone",
-        "price": 2000,
-        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx1ag4WMC4_DIUbbuS0AG6VemDRCODZOk8lg&usqp=CAU",
-        "amount": 1
-    },
-    {
-        "id": "I007",
-        "title": "WheelBarrow ",
-        "price": 2500,
-        "img": "https://media.wuerth.com/source/eshop/stmedia/wuerth/images/std.lang.all/resolutions/category/576px/133622211.jpg",
-        "amount": 1
-    },
-    {
-        "id": "I008",
-        "title": "Screw Drivers Kit",
-        "price":6500 ,
-        "img": "https://empire-s3-production.bobvila.com/articles/wp-content/uploads/2017/04/Types_Of_Screwdrivers.jpg",
-        "amount": 1
-    },
-    {
-        "id": "I009",
-        "title": "Measuring Tape",
-        "price": 1600,
-        "img": "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/at%2Farchive%2Fef366ebd17e58621c3b50c31fbf2d6fe81912422",
-        "amount": 1
-    },
-    {
-        "id": "I0010",
-        "title": "Sand 10kg",
-        "price": 5000,
-        "img": "https://5.imimg.com/data5/SELLER/Default/2022/1/SK/OE/ON/73706863/river-sand.jpeg",
-        "amount": 1
-    },
-    {
-        "id": "I0011",
-        "title": "Ceiling Sheets - 1",
-        "price": 4500,
-        "img": "https://image.made-in-china.com/2f0j00nDckbqYLAuoZ/Best-Seller-PVC-Ceilings-and-Ceiling-Panels-Type-False-Ceiling-Designs.jpg",
-        "amount": 1
-    },
-    {
-        "id": "I0012",
-        "title": "Metalic Tape",
-        "price": 675,
-        "img": "https://transasia.lk/img/product/11543/11543-001_720X720.jpg",
-        "amount": 1
+   
 
-    
-    },
+//     {
+//         "id": 1,
+//         "productName": "Steel Hammer",
+//         "productPrice": 150,
+//         "productImage": "https://tigersupplies-15a42.kxcdn.com/imagecache/893d96b3-ff5e-4173-90f9-a69b010d7add/Claw-Hammer---Steel-Shaft---16oz_1000x1000.jpg"
+//     },
+//     {
+//         "id": 2,
+//         "productName": "Wood Material",
+//         "productPrice": 1000,
+//         "productImage": "https://vskills.in/certification/blog/wp-content/uploads/2015/02/timber-as-construction-material.jpg"
+//     },
+//     {
+//         "id": 3,
+//         "productName": "Metal Nails 100g",
+//         "productPrice": 140,
+//         "productImage": "https://southatlanticllc.com/wp-content/uploads/2022/10/galvanized-masonry-nails-south-atlantic.jpg"
+//     },
+//     {
+//         "id": 4,
+//         "productName": "Cement Bag 1Kg",
+//         "productPrice": 3000,
+//         "productImage": "https://www.ehardware.lk/wp-content/uploads/2020/06/cement2.png"
+//     },
+//     {
+//         "id": 5,
+//         "productName": "Showel",
+//         "productPrice": 1500,
+//         "productImage": "https://down-my.img.susercontent.com/file/04c22b7a5e3a5fcb5d36a00636a3a151"
+//     },
+//     {
+//         "id": 6,
+//         "productName": "Block Stone",
+//         "productPrice": 2000,
+//         "productImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx1ag4WMC4_DIUbbuS0AG6VemDRCODZOk8lg&usqp=CAU"
+//     },
+//     {
+//         "id": 7,
+//         "productName": "WheelBarrow ",
+//         "productPrice": 2500,
+//         "productImage": "https://media.wuerth.com/source/eshop/stmedia/wuerth/images/std.lang.all/resolutions/category/576px/133622211.jpg"
+//     },
+//     {
+//         "id": 8,
+//         "productName": "Screw Drivers Kit",
+//         "productPrice": 6500,
+//         "productImage": "https://empire-s3-production.bobvila.com/articles/wp-content/uploads/2017/04/Types_Of_Screwdrivers.jpg"
+//     },
+//     {
+//         "id": 9,
+//         "productName": "Measuring Tape",
+//         "productPrice": 1600,
+//         "productImage": "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/at%2Farchive%2Fef366ebd17e58621c3b50c31fbf2d6fe81912422"
+//     },
+//     {
+//         "id": 10,
+//         "productName": "Sand 10kg",
+//         "productPrice": 5000,
+//         "productImage": "https://5.imimg.com/data5/SELLER/Default/2022/1/SK/OE/ON/73706863/river-sand.jpeg"
+//     },
+//     {
+//         "id": 11,
+//         "productName": "Ceiling Sheets - 1",
+//         "productPrice": 4500,
+//         "productImage": "https://image.made-in-china.com/2f0j00nDckbqYLAuoZ/Best-Seller-PVC-Ceilings-and-Ceiling-Panels-Type-False-Ceiling-Designs.jpg"
+//     },
+//     {
+//         "id": 12,
+//         "productName": "Metalic Tape",
+//         "productPrice": 675,
+//         "productImage": "https://transasia.lk/img/product/11543/11543-001_720X720.jpg"
+//     },
 
-];
+// ];
 
 function ProductCatalog() {
     // State variables
     //const [show, setShow] = useState(true);
     const [cart, setCart] = useState([]);
     //const [warning, setWarning] = useState(false);
+
+    //fecting all products from backend
+
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/product/getAllProducts');
+                setProducts(response.data);
+                console.log(products);
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        };
+
+        fetchProducts();
+    }, []);
 
     // Load cart from local storage on component mount
     useEffect(() => {
