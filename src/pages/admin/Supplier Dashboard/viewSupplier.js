@@ -60,17 +60,17 @@ function ViewSupplier(){
     const [updateVisible, setUpdateVisible] = useState(false);
     const [selectedSupplier, setSelectedSupplier] = useState(null);
     const [suppliers, setSuppliers] = useState([]);
+    //const socket = useContext(WebSocketContext);
 
     useEffect(() => {
         const fetchSuppliers = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/supplier/getAllSuppliers');
+                const response = await axios.get('http://localhost:9000/supplier/getAllSuppliers');
                 setSuppliers(response.data);
             } catch (error) {
                 console.error('Error fetching users:', error);
             }
         };
-
         fetchSuppliers();
     }, []);
 
@@ -123,6 +123,12 @@ function ViewSupplier(){
             </CustomizedButton>
         );
     }
+
+    const handleSupplierAdded = (updatedSuppliers) => {
+        setSuppliers(updatedSuppliers);
+    };
+
+
     return(
         <>
             <InventoryNavbar/>
@@ -207,7 +213,10 @@ function ViewSupplier(){
                 </div>
 
                 <Modal open={visible}>
-                    <AddSupplier onClose={(value) => { setVisible(false)}}/>
+                    <AddSupplier
+                        onClose={(value) => { setVisible(false)}}
+                        onSupplierAdded={handleSupplierAdded}
+                    />
                 </Modal>
                 <Modal open={updateVisible}>
                     <UpdateSupplier

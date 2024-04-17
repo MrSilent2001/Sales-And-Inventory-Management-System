@@ -22,7 +22,7 @@ function PaymentDashboard() {
     useEffect(() => {
         const fetchPayments = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/payment/customerPayment/getAllCustomerPayments');
+                const response = await axios.get('http://localhost:9000/payment/customerPayment/getAllCustomerPayments');
                 setPayments(response.data);
             } catch (error) {
                 console.error('Error fetching Payment data:', error);

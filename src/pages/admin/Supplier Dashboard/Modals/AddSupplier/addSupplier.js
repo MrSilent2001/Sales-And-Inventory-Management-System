@@ -52,13 +52,20 @@ const AddSupplier = forwardRef((props, ref) => {
 
         try {
 
-            await axios.post('http://localhost:3001/supplier/create', {
+            await axios.post('http://localhost:9000/supplier/create', {
                 supplierName: supplierName,
                 supplierEmail: email,
                 supplierAddress: address,
                 supplierContact: contact,
                 supplierPassword: category
             });
+
+            // Fetch the updated list of suppliers
+            const response = await axios.get('http://localhost:9000/supplier/getAllSuppliers');
+            const updatedSuppliers = response.data;
+
+            // Update the state of suppliers in the ViewSupplier component
+            props.onSupplierAdded(updatedSuppliers);
 
             console.log('Supplier added successfully');
             handleClickSuccess();
