@@ -1,56 +1,50 @@
-*{
-    font-family: Inter, serif;
-}
-
-.addDiscountsOuter{
-    width: 100%;
-    height: 100%;
+.addDiscountsModel{
     display: flex;
-    justify-content: center;
-    padding: 30px 0;
-}
-
-.addDiscountsInner{
-    width: 97.5%;
-    height: 50em;
+    flex-direction: column;
+    align-items: center;
+    width: 37.5em;
+    height: 25.75em;
+    padding: 0.25em 0 0 0;
     background-color: #DBDFFD;
-    border-radius: 2%;
+    border-radius: 0.5em;
+}
+
+.addDiscountsModel h2{
+    font-family: Inter;
+    padding: 1.25em 0 0 0;
+}
+
+.addDiscountsForm{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
-.discountForm{
-    width: 65%;
-    height: 35.625em;
-    background-color: #FFFFFF;
-    border-radius: 0.75%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.input{
-    width: 20em;
-}
-
-
-label{
-    padding-right: 50px;
-}
-
-.row{
+.addDiscountsFormField{
+    width: 27.5em;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    margin: 0.1em 0 0 0;
 }
 
-.btn-row{
+.addDiscountsFormField h5{
+    font-family: Inter;
+    font-weight: 600;
+    font-size: 0.75em;
+}
+
+.addDiscountsForm{
+    margin-top: 0.3em;
+}
+
+.addDiscountsFormFieldButtons{
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    width: 16.25em;
+    justify-content: space-between;
+    margin: 1.4em 0 0 0;
+    padding-bottom: 3em;
 }

@@ -60,7 +60,6 @@ function ViewSupplier(){
     const [updateVisible, setUpdateVisible] = useState(false);
     const [selectedSupplier, setSelectedSupplier] = useState(null);
     const [suppliers, setSuppliers] = useState([]);
-    //const socket = useContext(WebSocketContext);
 
     useEffect(() => {
         const fetchSuppliers = async () => {
@@ -127,7 +126,6 @@ function ViewSupplier(){
     const handleSupplierAdded = (updatedSuppliers) => {
         setSuppliers(updatedSuppliers);
     };
-
 
     return(
         <>
