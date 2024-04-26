@@ -1,8 +1,5 @@
-import React, {useState} from "react";
+import React, { forwardRef, useState } from "react";
 import "./addDiscounts.css";
-// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import BasicTextField from "../../../../../components/Form Inputs/textfield";
 import CustomizedButton from "../../../../../components/Button/button";
 import CenteredModal from "../../../../../components/Modal/modal";
@@ -10,16 +7,27 @@ import axios from "axios";
 import CustomizedAlert from "../../../../../components/Alert/alert";
 import FormControl from "@mui/material/FormControl";
 
-function AddDiscount(props) {
-    const [productName, setProductName] = useState('');
-    const [sellingPrice, setSellingPrice] = useState('');
-    const [discountRate, setDiscountRate] = useState('');
+const AddDiscount = forwardRef((props, ref) => {
+
+    const [formData, setFormData] = useState({
+        productName: '',
+        sellingPrice: '',
+        discountRate: ''
+    });
+
+    const [errors, setErrors] = useState({});
+
+    const handleChange = (e) => {
+        const {name,value} = e.target;
+        setFormData({
+            ...formData, [name]: value
+        });
+    }
 
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
 
     const handleClickSuccess = () => {
-        console.log("Success message should be displayed.");
         setOpenSuccess(true);
     };
 
@@ -28,7 +36,6 @@ function AddDiscount(props) {
     };
 
     const handleCloseSuccess = () => {
-        console.log("Success message should be closed.");
         setOpenSuccess(false);
     };
 
@@ -39,29 +46,41 @@ function AddDiscount(props) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            await axios.post('http://localhost:9000/discounts/create', {
-                productName: productName,
-                sellingPrice: sellingPrice,
-                discountRate: discountRate
-            });
-
-            // Fetch the updated list of suppliers
-            const response = await axios.get('http://localhost:9000/discounts/getAll');
-            const updatedDiscounts = response.data;
-
-            // Update the state of suppliers in the ViewSupplier component
-            props.onDiscountAdded(updatedDiscounts);
-
-            console.log('Discount applied successfully');
-            handleClickSuccess();
-
-            // Close the modal
-            props.onClose(false);
-        } catch (error) {
-            console.error('Error applying discount:', error);
-            handleClickError();
+        const validationErrors = {};
+        if (!formData.productName) {
+            validationErrors.productName = " *Product Name is required";
         }
+        if (!formData.sellingPrice) {
+            validationErrors.sellingPrice = " *Selling Price is required";
+        }
+        if (!formData.discountRate) {
+            validationErrors.discountRate = " *Discount Rate is required";
+        }
+
+        setErrors(validationErrors);
+        if(Object.keys(validationErrors).length === 0){
+            try {
+                await axios.post('http://localhost:9000/discounts/create', {
+                    productName: formData.productName,
+                    sellingPrice: formData.sellingPrice,
+                    discountRate: formData.discountRate
+                });
+
+                const response = await axios.get('http://localhost:9000/discounts/getAll');
+                const updatedDiscounts = response.data;
+
+                props.onDiscountAdded(updatedDiscounts);
+                handleClickSuccess();
+                props.onClose(false);
+            } catch (error) {
+                console.error('Error applying discount:', error);
+                handleClickError();
+            }
+        }else{
+            console.log("error");
+        }
+
+
     };
 
     return (
@@ -78,10 +97,12 @@ function AddDiscount(props) {
                                 <div className="addDiscountsInput">
                                     <BasicTextField
                                         id="outlined-required"
+                                        name="productName"
                                         size="small"
-                                        value={productName}
-                                        onChange={(e) => setProductName(e.target.value)}
+                                        type="text"
+                                        onChange={handleChange}
                                     />
+                                    {errors.productName && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em'}}>{errors.productName}</span>}
                                 </div>
                             </div>
 
@@ -92,10 +113,12 @@ function AddDiscount(props) {
                                 <div className="addDiscountsInput">
                                     <BasicTextField
                                         id="outlined-required"
+                                        name="sellingPrice"
                                         size="small"
-                                        value={sellingPrice}
-                                        onChange={(e) => setSellingPrice(e.target.value)}
+                                        type="number"
+                                        onChange={handleChange}
                                     />
+                                    {errors.sellingPrice && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.sellingPrice}</span>}
                                 </div>
                             </div>
 
@@ -106,10 +129,12 @@ function AddDiscount(props) {
                                 <div className="addDiscountsInput">
                                     <BasicTextField
                                         id="outlined-required"
+                                        name="discountRate"
                                         size="small"
-                                        value={discountRate}
-                                        onChange={(e) => setDiscountRate(e.target.value)}
+                                        type="number"
+                                        onChange={handleChange}
                                     />
+                                    {errors.discountRate && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.discountRate}</span>}
                                 </div>
                             </div>
 
@@ -172,6 +197,6 @@ function AddDiscount(props) {
             />
         </CenteredModal>
     );
-}
+});
 
 export default AddDiscount;

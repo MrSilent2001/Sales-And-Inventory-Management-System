@@ -6,7 +6,7 @@ const ComboBox = ({ value, onChange, options, style }) => {
         <Select
             value={value}
             onChange={onChange}
-            sx={{height: '2.5em', ...style}}
+            sx={{height: '2em', ...style}}
         >
             <MenuItem value="None">
                 <em>None</em>

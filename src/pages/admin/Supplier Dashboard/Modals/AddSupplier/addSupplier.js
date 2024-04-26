@@ -10,11 +10,23 @@ import CustomizedAlert from "../../../../../components/Alert/alert";
 import FileUpload from "../../../../../components/Form Inputs/fileUpload";
 
 const AddSupplier = forwardRef((props, ref) => {
-    const [supplierName, setSupplierName] = useState('');
-    const [address, setAddress] = useState('');
-    const [category, setCategory] = useState('');
-    const [email, setEmail] = useState('');
-    const [contact, setContact] = useState('');
+
+    const [formData, setFormData] = useState({
+        supplierName: '',
+        address: '',
+        category: '',
+        email: '',
+        contact: ''
+    });
+
+    const [errors, setErrors] = useState({});
+
+    const handleChange = (e) => {
+        const {name,value} = e.target;
+        setFormData({
+            ...formData, [name]: value
+        });
+    }
 
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
@@ -37,10 +49,6 @@ const AddSupplier = forwardRef((props, ref) => {
         setOpenError(false);
     };
 
-    const handleChange = (event) => {
-        setCategory(event.target.value);
-    };
-
     const options = [
         { value: 'Category 01', label: 'Category 01' },
         { value: 'Category 02', label: 'Category 02' },
@@ -50,34 +58,55 @@ const AddSupplier = forwardRef((props, ref) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-
-            await axios.post('http://localhost:9000/supplier/create', {
-                supplierName: supplierName,
-                supplierEmail: email,
-                supplierAddress: address,
-                supplierContact: contact,
-                supplierPassword: category
-            });
-
-            // Fetch the updated list of suppliers
-            const response = await axios.get('http://localhost:9000/supplier/getAllSuppliers');
-            const updatedSuppliers = response.data;
-
-            // Update the state of suppliers in the ViewSupplier component
-            props.onSupplierAdded(updatedSuppliers);
-
-            console.log('Supplier added successfully');
-            handleClickSuccess();
-
-            // Close the modal
-            console.log("Attempting to close modal.");
-            props.onClose(false);
-
-        } catch (error) {
-            console.error('Error adding user:', error);
-            handleClickError();
+        const validationErrors = {};
+        if (!formData.supplierName) {
+            validationErrors.supplierName = " *Supplier Name is required";
         }
+        if (!formData.address) {
+            validationErrors.address = " *Address is required";
+        }
+        if (!formData.email) {
+            validationErrors.email = " *Email is required";
+        }
+        if (!formData.contact) {
+            validationErrors.contact = " *Contact Number is required";
+        }
+        if (!formData.category) {
+            validationErrors.category = " *Category is required";
+        }
+
+        setErrors(validationErrors);
+        if(Object.keys(validationErrors).length === 0){
+            try {
+
+                await axios.post('http://localhost:9000/supplier/create', {
+                    supplierName: formData.supplierName,
+                    supplierEmail: formData.email,
+                    supplierAddress: formData.address,
+                    supplierContact: formData.contact,
+                    supplierPassword: formData.category
+                });
+
+                // Fetch the updated list of suppliers
+                const response = await axios.get('http://localhost:9000/supplier/getAllSuppliers');
+                const updatedSuppliers = response.data;
+
+                // Update the state of suppliers in the ViewSupplier component
+                props.onSupplierAdded(updatedSuppliers);
+
+                console.log('Supplier added successfully');
+                handleClickSuccess();
+
+                // Close the modal
+                console.log("Attempting to close modal.");
+                props.onClose(false);
+
+            } catch (error) {
+                console.error('Error adding user:', error);
+                handleClickError();
+            }
+        }
+
     };
 
     return (
@@ -94,12 +123,11 @@ const AddSupplier = forwardRef((props, ref) => {
                                 <div className="addSupplieridInput">
                                     <BasicTextField
                                         id="outlined-required"
+                                        name="supplierName"
                                         size="small"
-                                        value={supplierName}
-                                        onChange={(e) => {
-                                            setSupplierName(e.target.value);
-                                        }}
+                                        onChange={handleChange}
                                     />
+                                    {errors.supplierName && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em'}}>{errors.supplierName}</span>}
                                 </div>
                             </div>
 
@@ -110,12 +138,11 @@ const AddSupplier = forwardRef((props, ref) => {
                                 <div className="addSupplieridInput">
                                     <BasicTextField
                                         id="outlined-textarea"
+                                        name="address"
                                         size="small"
-                                        value={address}
-                                        onChange={(e) => {
-                                            setAddress(e.target.value);
-                                        }}
+                                        onChange={handleChange}
                                     />
+                                    {errors.address && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em'}}>{errors.address}</span>}
                                 </div>
                             </div>
 
@@ -126,13 +153,12 @@ const AddSupplier = forwardRef((props, ref) => {
                                 <div className="addSupplieridInput">
                                     <BasicTextField
                                         id="outlined-required"
+                                        name="email"
                                         size="small"
                                         type="email"
-                                        value={email}
-                                        onChange={(e) => {
-                                            setEmail(e.target.value);
-                                        }}
+                                        onChange={handleChange}
                                     />
+                                    {errors.email && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em'}}>{errors.email}</span>}
                                 </div>
                             </div>
 
@@ -143,12 +169,11 @@ const AddSupplier = forwardRef((props, ref) => {
                                 <div className="addSupplieridInput">
                                     <BasicTextField
                                         id="outlined-required"
+                                        name="contact"
                                         size="small"
-                                        value={contact}
-                                        onChange={(e) => {
-                                            setContact(e.target.value);
-                                        }}
+                                        onChange={handleChange}
                                     />
+                                    {errors.contact && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 1.5em 0.5em'}}>{errors.contact}</span>}
                                 </div>
                             </div>
 
@@ -158,13 +183,13 @@ const AddSupplier = forwardRef((props, ref) => {
                                 </div>
                                 <div className="addSupplieridInput">
                                     <ComboBox
-                                        value={category}
-                                        onChange={(event) => handleChange(event)}
+                                        name="category"
+                                        onChange={handleChange}
                                         style={{ width: '17.5em', marginRight: '0.5em' }}
                                         options={options}
                                         label="Category"
-                                        size="small"
                                     />
+                                    {errors.category && <p style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em'}}>{errors.category}</p>}
                                 </div>
                             </div>
 

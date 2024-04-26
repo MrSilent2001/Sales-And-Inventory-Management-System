@@ -3,12 +3,13 @@ import * as React from 'react';
 import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../layout/footer/footer";
 import Searchbar from "../../../components/search bar/search bar";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import CustomizedButton from "../../../components/Button/button";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 import axios from "axios";
 import AddDiscount from "./Modal/Add Discount/addDiscounts";
-import {Modal} from "@mui/material";
+import { Modal } from "@mui/material";
+import CustomizedAlert from "../../../components/Alert/alert";
 
 const columns = [
     { id: 'id', label: 'Id', minWidth: 170, align: 'center' },
@@ -18,42 +19,37 @@ const columns = [
     { id: 'actions', label: '', minWidth: 170, align: 'center' },
 ];
 
-const handleButtonClick = () => {
-    alert("Discount Has been Closed");
-};
-
-function createCancelButton(handleButtonClick) {
-    return (
-        <CustomizedButton
-            onClick={handleButtonClick}
-            hoverBackgroundColor="#f11717"
-            style={{
-                color: '#ffffff',
-                backgroundColor: '#960505',
-                width: '8.5em',
-                height: '3em',
-                fontSize: '0.95em',
-                padding: '0.5em 0.625em',
-                borderRadius: '0.625em',
-                fontWeight: '550',
-                border: 'none',
-                marginTop: '0.625em',
-            }}>
-            Cancel
-        </CustomizedButton>
-    );
-}
-
 function DiscountDashboard() {
     const [visible, setVisible] = useState(false);
     const [discount, setDiscount] = useState([]);
+
+    const [openSuccess, setOpenSuccess] = useState(false);
+    const [openError, setOpenError] = useState(false);
+
+    const handleClickSuccess = () => {
+        setOpenSuccess(true);
+    };
+
+    const handleClickError = () => {
+        setOpenError(true);
+    };
+
+    const handleCloseSuccess = () => {
+        setOpenSuccess(false);
+    };
+
+    const handleCloseError = () => {
+        setOpenError(false);
+    };
 
     useEffect(() => {
         const fetchDiscounts = async () => {
             try {
                 const response = await axios.get('http://localhost:9000/discounts/getAll');
                 setDiscount(response.data);
+
             } catch (error) {
+                handleClickError();
                 console.error('Error fetching users:', error);
             }
         };
@@ -62,7 +58,43 @@ function DiscountDashboard() {
 
     let rows = discount;
 
-    rows = rows.map(row => ({ ...row, actions: createCancelButton(handleButtonClick) }));
+    const handleButtonClick = async (id) => {
+        try {
+            await axios.delete(`http://localhost:9000/discounts/delete/${id}`);
+
+            // Fetching the updated list of discounts after deletion
+            const response = await axios.get('http://localhost:9000/discounts/getAll');
+            setDiscount(response.data);
+            handleClickSuccess();
+
+        } catch (error) {
+            console.error('Error canceling discount:', error);
+        }
+    };
+
+    const createCancelButton = (id) => {
+        return (
+            <CustomizedButton
+                onClick={() => handleButtonClick(id)}
+                hoverBackgroundColor="#f11717"
+                style={{
+                    color: '#ffffff',
+                    backgroundColor: '#960505',
+                    width: '8.5em',
+                    height: '2.5em',
+                    fontSize: '0.8em',
+                    padding: '0.5em 0.625em',
+                    borderRadius: '0.625em',
+                    fontWeight: '550',
+                    border: 'none',
+                    marginTop: '0.625em',
+                }}>
+                Cancel
+            </CustomizedButton>
+        );
+    };
+
+    rows = rows.map(row => ({ ...row, actions: createCancelButton(row.id) }));
 
     const handleDiscountAdded = (updatedDiscounts) => {
         setDiscount(updatedDiscounts);
@@ -76,10 +108,7 @@ function DiscountDashboard() {
                     <div className="discountTitleWithSearchbar">
                         <Searchbar />
                         <CustomizedButton
-                            onClick={() => {
-                                setVisible(true);
-                            }}
-
+                            onClick={() => setVisible(true)}
                             hoverBackgroundColor="#2d3ed2"
                             style={{
                                 backgroundColor: '#242F9B',
@@ -97,7 +126,7 @@ function DiscountDashboard() {
                     </div>
                     <div className="discount-dashboard">
                         <CustomizedTable
-                            style={{width: '100%'}}
+                            style={{ width: '100%' }}
                             columns={columns}
                             rows={rows}
                         />
@@ -112,6 +141,20 @@ function DiscountDashboard() {
                     onDiscountAdded={handleDiscountAdded}
                 />
             </Modal>
+
+            <CustomizedAlert
+                open={openSuccess}
+                onClose={handleCloseSuccess}
+                severity="success"
+                message="Discount Canceled Successfully!"
+            />
+
+            <CustomizedAlert
+                open={openError}
+                onClose={handleCloseError}
+                severity="error"
+                message="Something Went Wrong!"
+            />
         </>
     );
 }
