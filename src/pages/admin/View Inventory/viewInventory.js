@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -22,6 +22,8 @@ import DeleteItem from "./Modals/Delete Item/Delete Item";
 import CustomizedButton from "../../../components/Button/button";
 import items from "../../../data/data.json";
 import SearchBar from "../../../components/search bar/search bar";
+import axios from "axios";
+import baseURL from "../../../services/baseURL"
 
 function FilterItems(){
 
@@ -143,8 +145,26 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const rows = items.items || [];
+
 function CustomizedTables() {
     const [visible,setVisible] = useState(false);
+
+    const [deleteItemVisible,setDeleteItemVisible] = useState(false);
+
+    const [allInventoryItems, setAllInventoryItems] = useState([]);
+
+    const getAllInventoryItems = () => {
+        axios.get('http://localhost:9000/inventory/getAll').then(res=> {
+            setAllInventoryItems(res.data);
+            console.log(res.data);
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    useEffect(() => {
+        getAllInventoryItems();
+    }, []);
 
     return (
         <TableContainer component={Paper} sx={{ width: '76.875em', maxHeight: '27em', overflowY: 'auto', position: 'relative'}}>
@@ -157,18 +177,19 @@ function CustomizedTables() {
                         <StyledTableCell>Quantity</StyledTableCell>
                         <StyledTableCell>Inventory Status</StyledTableCell>
                         <StyledTableCell></StyledTableCell>
+                        <StyledTableCell></StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
-                        <StyledTableRow key={row.name}>
+                    {allInventoryItems.map((inventoryItem) => (
+                        <StyledTableRow key={inventoryItem.id}>
                             <StyledTableCell component="th" scope="row" sx={{ height: '1.25em' }}>
-                                {row.inventoryId}
+                                {inventoryItem.id}
                             </StyledTableCell>
-                            <StyledTableCell align="right">{row.itemDescription}</StyledTableCell>
-                            <StyledTableCell align="right">{row.itemCategory}</StyledTableCell>
-                            <StyledTableCell align="right">{row.Quantity}</StyledTableCell>
-                            <StyledTableCell align="right">{row.inventoryStatus}</StyledTableCell>
+                            <StyledTableCell align="right">{inventoryItem.itemDescription}</StyledTableCell>
+                            <StyledTableCell align="right">{inventoryItem.itemCategory}</StyledTableCell>
+                            <StyledTableCell align="right">{inventoryItem.itemQuantity}</StyledTableCell>
+                            <StyledTableCell align="right">{inventoryItem.itemUnitPrice}</StyledTableCell>
                             <StyledTableCell>
                                 <CustomizedButton
                                     onClick={()=>setVisible(true)}
@@ -177,7 +198,7 @@ function CustomizedTables() {
                                         color: '#ffffff',
                                         backgroundColor: '#242F9B',
                                         border: '1px solid #242F9B',
-                                        width: '6em',
+                                        width: '9em',
                                         height: '2.5em',
                                         fontSize: '0.95em',
                                         fontFamily: 'inter',
@@ -186,10 +207,37 @@ function CustomizedTables() {
                                         fontWeight: '550',
                                         marginTop: '0.625em',
                                         marginRight: '1.5em',
+                                        marginLeft: '-2em',
                                         textTransform: 'none',
                                         textAlign: 'center',
                                     }}>
                                     View
+                                </CustomizedButton>
+                            </StyledTableCell>
+
+                            <StyledTableCell>
+                                <CustomizedButton
+                                    onClick={()=>setDeleteItemVisible(true)}
+                                    hoverBackgroundColor="#f11717"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#ff0000',
+                                        border: '1px solid #242F9B',
+                                        width: '10em',
+                                        height: '2.5em',
+                                        fontSize: '0.95em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0em',
+                                        borderRadius: '0.35em',
+                                        fontWeight: '550',
+                                        marginTop: '0.625em',
+                                        marginRight: '1em',
+                                        marginLeft: '-4em',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                        borderStyle: 'none'
+                                    }}>
+                                    Delete Item
                                 </CustomizedButton>
                             </StyledTableCell>
                         </StyledTableRow>
@@ -199,6 +247,10 @@ function CustomizedTables() {
             <Modal open={visible}>
                 <UpdateItem onClose={(value) => { setVisible(false)}}></UpdateItem>
             </Modal>
+
+            <Modal open={deleteItemVisible}>
+                <DeleteItem onClose={(value) => { setDeleteItemVisible(false)}} />
+            </Modal>
         </TableContainer>
     );
 }
@@ -206,8 +258,6 @@ function CustomizedTables() {
 function ViewInventory(){
 
     const [addItemVisible,setAddItemVisible] = useState(false)
-
-    const [deleteItemVisible,setDeleteItemVisible] = useState(false)
 
     return(
         <>
@@ -281,26 +331,6 @@ function ViewInventory(){
                                 Add Item
                             </CustomizedButton>
 
-                            <CustomizedButton
-                                onClick={()=>setDeleteItemVisible(true)}
-                                hoverBackgroundColor="#f11717"
-                                style={{
-                                    color: '#ffffff',
-                                    backgroundColor: '#ff0000',
-                                    width: '10em',
-                                    height: '2.65em',
-                                    fontSize: '0.75em',
-                                    fontFamily: 'inter',
-                                    padding: '0.5em',
-                                    borderRadius: '0.35em',
-                                    fontWeight: '500',
-                                    marginTop: '0.625em',
-                                    textTransform: 'none',
-                                    textAlign: 'center',
-                                }}>
-                                Delete Item
-                            </CustomizedButton>
-
                         </div>
                     </div>
 
@@ -311,10 +341,6 @@ function ViewInventory(){
 
                 <Modal open={addItemVisible}>
                     <AddItem onClose={(value) => { setAddItemVisible(false)}} />
-                </Modal>
-
-                <Modal open={deleteItemVisible}>
-                    <DeleteItem onClose={(value) => { setDeleteItemVisible(false)}} />
                 </Modal>
             </div>
 

@@ -97,7 +97,13 @@ function AddItem(props){
                                 <h5>Item Category</h5>
                             </div>
                             <div className="addItemidInput">
-                                <BasicTextFields></BasicTextFields>
+                                <form>
+                                    <input type="radio" id="metal" name="category" value="metal"/>
+                                    <label for="metal">Metal</label> <br/>
+
+                                    <input type="radio" id="wood" name="category" value="wood"/>
+                                    <label htmlFor="wood">Wood</label>
+                                </form>
                             </div>
                         </div>
 
