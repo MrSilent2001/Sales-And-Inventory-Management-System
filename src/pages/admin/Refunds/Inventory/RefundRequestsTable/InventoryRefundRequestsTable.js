@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {Box, Container, Modal,Typography} from '@mui/material';
+import axios from 'axios';
 import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
@@ -11,23 +12,34 @@ import CustomizedTable from "../../../../../components/Table/Customized Table/cu
 
 const InventoryRefundRequestsTable = ({onViewApproved}) => {
     const [visible,setVisible] = useState(false)
+    
+    const [refundRequests, setRefundRequests] = useState([]);
 
+    useEffect(() => {
+        const fetchRefundRequests = async () => {
+            try {
+                const response = await axios.get('http://localhost:9000/refund/inventoryRefund/getAll');
+                setRefundRequests(response.data);
+            } catch (error) {
+                console.error('Error fetching refund requests:', error);
+            }
+        };
+        fetchRefundRequests();
+    }, []);
 
     const columns=[
         { id: 'name', label: 'Name', minWidth: 70,align: 'center'  },
-        { id: 'requestId', label: 'Request Id', minWidth: 150,align: 'center'  },
-        { id: 'orderId', label: 'Order Id', minWidth: 120,align: 'center'  },
-        { id: 'amount', label:'Amount', minWidth: 200,align: 'center'  },
+        { id: 'contact_number', label: 'Contact number', minWidth: 150,align: 'center'  },
+        { id: 'inventory_id', label: 'Refund Id', minWidth: 120,align: 'center'  },
+        { id: 'amount', label:'Price', minWidth: 200,align: 'center'  },
         { id: 'status', label:'Status', minWidth: 200,align: 'center'  }
     ];
 
-    const rows = inventoryRefunds.inventoryRefunds || [];
-
-    const mappedData = rows.map(row => ({
-        name: row.name,
-        requestId: row.requestId,
-        orderId: row.orderId,
-        amount: row.amount,
+    const mappedData = refundRequests.map(row => ({
+        name: row.supplier,
+        contact_number: row.phone,
+        inventory_id: row.inventory_id,
+        amount: row.price,
         status: row.status
     }));
 
