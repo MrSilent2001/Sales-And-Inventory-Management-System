@@ -102,7 +102,7 @@ function ProductCatalog() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/product/getAllProducts');
+                const response = await axios.get('http://localhost:9000/product/getAllProducts');
                 setProducts(response.data);
                 console.log(products);
             } catch (error) {
