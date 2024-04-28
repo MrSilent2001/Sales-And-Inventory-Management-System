@@ -189,7 +189,7 @@ function CustomizedTables() {
                             <StyledTableCell align="right">{inventoryItem.itemDescription}</StyledTableCell>
                             <StyledTableCell align="right">{inventoryItem.itemCategory}</StyledTableCell>
                             <StyledTableCell align="right">{inventoryItem.itemQuantity}</StyledTableCell>
-                            <StyledTableCell align="right">{inventoryItem.itemUnitPrice}</StyledTableCell>
+                            <StyledTableCell align="right">{(inventoryItem.itemUnitPrice)>0 ? "In stock" : "Out of Stock"}</StyledTableCell>
                             <StyledTableCell>
                                 <CustomizedButton
                                     onClick={()=>setVisible(true)}
