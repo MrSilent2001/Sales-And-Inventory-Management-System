@@ -5,18 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86fa9f19-6664-4b39-84ca-825aa0d16148" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/inventoryPayments.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/inventoryPayments.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/AddSupplier/addSupplier.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/AddSupplier/addSupplier.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Customized Table/customizedTable.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Table/Customized Table/customizedTable.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Customized Table/customizedTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Table/Customized Table/customizedTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/View Inventory/Modals/Add Item/Add Item.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/View Inventory/Modals/Add Item/Add Item.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/View Inventory/Modals/Add Item/Add Item.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/View Inventory/Modals/Add Item/Add Item.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/View Inventory/Modals/Update Item/Update Item.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/View Inventory/Modals/Update Item/Update Item.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/View Inventory/Modals/Update Item/Update Item.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/View Inventory/Modals/Update Item/Update Item.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/View Inventory/viewInventory.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/View Inventory/viewInventory.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/View Inventory/viewInventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/View Inventory/viewInventory.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -51,6 +56,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 5
@@ -65,7 +71,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dinuka#08&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev__test&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/dinuk/Desktop/My Docs/Projects/Sales-And-Inventory-Management-System&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -157,6 +163,7 @@
       <workItem from="1713298226669" duration="1198000" />
       <workItem from="1713300372556" duration="4000000" />
       <workItem from="1713360034129" duration="6012000" />
+      <workItem from="1714361991441" duration="16934000" />
     </task>
     <servers />
   </component>

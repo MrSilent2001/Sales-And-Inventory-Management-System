@@ -6,47 +6,47 @@ import CenteredModal from "../../../../../components/Modal/modal";
 import ComboBox from "../../../../../components/Form Inputs/comboBox";
 import {useState} from "react";
 import FormControl from "@mui/material/FormControl";
+import axios from "axios";
 
 function AddItem(props) {
-    const [inventoryId, setInventoryId] = useState('');
+
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('');
     const [quantity, setQuantity] = useState('');
     const [unitPrice, setUnitPrice] = useState('');
-    //const [inventoryStatus, setInventoryStatus] = useState('');
+    const [manufacturedDate, setManufacturedDate] = useState('');
+    const [expireDate, setExpireDate] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const newItem = {
-            inventoryId: inventoryId,
             itemDescription: description,
             itemCategory: category,
-            quantity: quantity,
-            price: unitPrice,
-            //inventoryStatus: inventoryStatus
+            itemQuantity: quantity,
+            itemUnitPrice: unitPrice,
+            manufacturedDate : manufacturedDate,
+            expireDate : expireDate
         };
 
-        console.log(newItem);
-
-        // Call the onSubmit function passed from the parent component
-        props.onSubmit(newItem);
+        axios.post('http://localhost:9000/inventory/add',newItem).then(res=>{
+            console.log(res.data);
+        }).catch(err=>{
+            console.log(err);
+        })
 
         // Clear the form fields after submission
-        setInventoryId('');
+        /*setInventoryId('');
         setDescription('');
         setCategory('');
         setQuantity('');
-        setUnitPrice('');
-        //setInventoryStatus('');
+        setUnitPrice('');*/
 
-        // Close the modal
-        //props.onClose();
 
     }
 
     const options = [
-        {value: 'Category 01', label: 'Category 01'},
+        {value: 'Building Material', label: 'Building Material'},
         {value: 'Category 02', label: 'Category 02'},
         {value: 'Category 03', label: 'Category 03'}
     ];
@@ -63,20 +63,6 @@ function AddItem(props) {
                     <div className="addItemModel">
                         <h2>Add Item</h2>
                         <div className="addItemForm">
-                            <div className="addItemformField">
-                                <div className="addItemidField">
-                                    <h5>Inventory Id</h5>
-                                </div>
-                                <div className="addItemidInput">
-                                    <BasicTextField
-                                        name="invId"
-                                        value={inventoryId}
-                                        onChange={(e) => {
-                                            setInventoryId(e.target.value);
-                                        }}
-                                    />
-                                </div>
-                            </div>
 
                             <div className="addItemformField">
                                 <div className="addItemidField">
@@ -168,33 +154,46 @@ function AddItem(props) {
                             {/*    </div>*/}
                             {/*</div>*/}
 
-                            <div className="addItemformFieldButtons">
-                                <div className="addItemButton">
-                                    <CustomizedButton
-                                        onClick={handleSubmit}
-                                        hoverBackgroundColor="#2d3ed2"
-                                        style={{
-                                            backgroundColor: '#242F9B',
-                                            border: '1px solid #242F9B',
-                                            width: '8em',
-                                            height: '2.5em',
-                                            fontSize: '0.8em',
-                                            padding: '0.5em 0.625em',
-                                            borderRadius: '0.35em',
-                                            fontWeight: '500',
-                                            marginTop: '0.625em'
-                                        }}>
-                                        Add Item
-                                    </CustomizedButton>
+                            <div className="addItemformField">
+                                <div className="addItemidField">
+                                    <h5>Manufactured Date</h5>
                                 </div>
+                                <div className="addItemidInput">
+                                    <BasicTextField
+                                        name="manufacturedDate"
+                                        value={manufacturedDate}
+                                        onChange={(e) => {
+                                            setManufacturedDate(e.target.value);
+                                        }}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="addItemformField">
+                                <div className="addItemidField">
+                                    <h5>Expire Date</h5>
+                                </div>
+                                <div className="addItemidInput">
+                                    <BasicTextField
+                                        name="expireDate"
+                                        value={expireDate}
+                                        onChange={(e) => {
+                                            setExpireDate(e.target.value);
+                                        }}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="addItemformFieldButtons">
+
                                 <div className="addItemcancelButton">
                                     <CustomizedButton
                                         onClick={() => props.onClose(false)}
                                         hoverBackgroundColor="#f11717"
                                         style={{
                                             backgroundColor: '#960505',
-                                            width: '8em',
-                                            height: '2.5em',
+                                            width: '10em',
+                                            height: '2.75em',
                                             fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
@@ -204,6 +203,26 @@ function AddItem(props) {
                                         Cancel
                                     </CustomizedButton>
                                 </div>
+
+                                <div className="addItemButton">
+                                    <CustomizedButton
+                                        onClick={handleSubmit}
+                                        hoverBackgroundColor="#2d3ed2"
+                                        style={{
+                                            backgroundColor: '#242F9B',
+                                            border: '1px solid #242F9B',
+                                            width: '10em',
+                                            height: '2.75em',
+                                            fontSize: '0.8em',
+                                            padding: '0.5em 0.625em',
+                                            borderRadius: '0.35em',
+                                            fontWeight: '500',
+                                            marginTop: '0.625em'
+                                        }}>
+                                        Add Item
+                                    </CustomizedButton>
+                                </div>
+
                             </div>
                         </div>
                     </div>
