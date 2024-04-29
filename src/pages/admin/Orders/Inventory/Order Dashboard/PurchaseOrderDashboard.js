@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
     Box,
     Card,
@@ -7,12 +7,12 @@ import {
     Container,
     Modal
 } from '@mui/material';
+import axios from 'axios';
 import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../../layout/footer/footer";
 import PlaceOrder from "../../../Orders/Inventory/Modals/Place Order/placeOrder";
 import ViewOrder from "../../../Orders/Inventory/Modals/View Order/viewOrder";
 import CustomizedButton from "../../../../../components/Button/button";
-import purchasedOrders from "../../../../../data/data.json";
 import SearchBar from "../../../../../components/search bar/search bar";
 import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 
@@ -21,24 +21,39 @@ const PurchaseOrderDashboard = () => {
     const [placeOrderVisible, setPlaceOrderVisible] = useState(false);
     const [viewOrderVisible, setViewOrderVisible] = useState(false);
 
+    const [purchasedOrders, setPurchasedOrders] = useState([]);
+    
+
+    useEffect(() => {
+        const fetchpurchasedOrders = async () => {
+            try {
+                const response = await axios.get('http://localhost:9000/purchaseOrder/getAll');
+                setPurchasedOrders(response.data);
+            } catch (error) {
+                console.error('Error fetching refund requests:', error);
+            }
+        };
+        fetchpurchasedOrders();
+    }, []);
+
+
    const columns=[
     { id: 'supplierId', label: 'Supplier ID', minWidth: 70,align: 'center'  },
     { id: 'address', label: 'Address', minWidth: 150,align: 'center'  },
     { id: 'email', label: 'Email', minWidth: 120,align: 'center'  },
     { id: 'contact', label: 'Contact', minWidth: 100,align: 'center'  },
-    { id: 'category', label: 'Category', minWidth: 100,align: 'center'  },
     { id: 'actions', label:'', minWidth: 200,align: 'center'  }
 ];
 
-    let rows = purchasedOrders.purchasedOrders || [];
+  
 
     // Map your data to the format ReusableTable expects
-    const mappedData = rows.map(row => ({
-        supplierId: row.supplierId,
-        address: row.address,
-        email: row.email,
-        contact: row.contact,
-        category: row.category,
+    const mappedData = purchasedOrders.map(row => ({
+        supplierId: row.supplier,
+        address: row.Address,
+        email: row.mail,
+        contact: row.contact_number,
+        
         actions: (
             <div style={{ display: 'flex' }}>
                 <CustomizedButton
