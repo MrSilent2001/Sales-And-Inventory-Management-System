@@ -108,13 +108,13 @@ function AddItem(props) {
                                     <h5>Quantity</h5>
                                 </div>
                                 <div className="addItemidInput">
-                                    <BasicTextField
-                                        name="Qty"
-                                        value={quantity}
-                                        onChange={(e) => {
-                                            setQuantity(e.target.value);
-                                        }}
-                                    />
+                                        <BasicTextField
+                                            name="Qty"
+                                            value={quantity}
+                                            onChange={(e) => {
+                                                setQuantity(e.target.value);
+                                            }}
+                                        />
                                 </div>
                             </div>
 
