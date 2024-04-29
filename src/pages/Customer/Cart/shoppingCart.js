@@ -3,9 +3,9 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import MediaControlCard from '../../../components/Cards/shoppingCartCard';
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
 import Footer from "../../../layout/footer/footer";
-import { loadStripe } from "@stripe/stripe-js";
 import React, { useEffect, useState } from 'react';
 import CustomizedButton from "../../../components/Button/button";
+import {loadStripe} from "@stripe/stripe-js";
 
 let stripePromise = "";
 
@@ -17,21 +17,25 @@ const getStripe = () => {
     return stripePromise;
 }
 
-
 function Cart() {
 
     const [cart, setCart] = useState([]);
     const [totalAmount, setTotalAmount] = useState(0);
+
     const [stripeError, setStripeError] = useState(null); // Payment Gateway
     const [isLoading, setLoading] = useState(false);
+
 
     useEffect(() => {
         // Retrieve cart data from local storage
         const storedCart = JSON.parse(localStorage.getItem("cart"));
+        console.log("storedCart",storedCart);
         if (storedCart) {
             setCart(storedCart);
         }
     }, []);
+
+    console.log("cart",cart)
 
     useEffect(() => {
         // Calculate total amount whenever cart changes
@@ -59,35 +63,35 @@ function Cart() {
         localStorage.setItem("cart", JSON.stringify(updatedCart));
     }
 
-    const lineItems = cart.map(item => ({
-            price: item.productPrice.toString(),
-            quantity: item.amount
-        })
-    );
 
-    //Payment gateway
+    const item =cart.map(item => ({
+        product: item.productName,
+        price: item.productPrice.toString(),
+        quantity: item.amount
+    }));
+
+    console.log("item",item)
+
     const checkoutOptions = {
-        lineItems: lineItems, // Adjust this according to your data structure
+        lineItems: item,
         mode: "payment",
         successUrl: `${window.location.origin}/success`,
         cancelUrl: `${window.location.origin}/cancel`
     };
 
-    console.log(checkoutOptions.lineItems);
-
-    const redirectToCheckout = async () => {
+    const redirectToCheckout = async() =>{
         setLoading(true);
         console.log("RedirectToCheckout");
 
-        const stripe = await getStripe();
-        const { error } = await stripe.redirectToCheckout(checkoutOptions);
+        const stripe = getStripe();
+        const {error} = await stripe.redirectToCheckout(checkoutOptions);
         console.log("stripe checkout error:", error);
 
-        if (error) setStripeError(error.message);
+        if(error) setStripeError(error.message);
         setLoading(false);
     }
 
-    if (stripeError) alert(setStripeError);
+    if(stripeError) alert(setStripeError);
 
     return (
         <>
@@ -119,15 +123,12 @@ function Cart() {
                                 width: '7.5em',
                                 height: '2.25em',
                                 fontSize: '0.85em',
-                                fontFamily: 'inter',
                                 padding: '0.5em 0.625em',
                                 borderRadius: '0.625em',
                                 fontWeight: '550',
                                 border: 'none',
                                 marginTop: '0.25em',
                                 marginBottom:'2em',
-                                textTransform: 'none',
-                                textAlign: 'center',
                             }}>
                             {isLoading ? "Loading..." : "Buy Now"}
                         </CustomizedButton>

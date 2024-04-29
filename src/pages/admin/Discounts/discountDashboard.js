@@ -2,7 +2,6 @@ import "./discountDashboard.css";
 import * as React from 'react';
 import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../layout/footer/footer";
-import Searchbar from "../../../components/search bar/search bar";
 import { useEffect, useState } from "react";
 import CustomizedButton from "../../../components/Button/button";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
@@ -10,6 +9,7 @@ import axios from "axios";
 import AddDiscount from "./Modal/Add Discount/addDiscounts";
 import { Modal } from "@mui/material";
 import CustomizedAlert from "../../../components/Alert/alert";
+import SearchBar from "../../../components/search bar/search bar";
 
 const columns = [
     { id: 'id', label: 'Id', minWidth: 170, align: 'center' },
@@ -43,7 +43,7 @@ function DiscountDashboard() {
     };
 
     useEffect(() => {
-        const fetchDiscounts = async () => {
+        const fetchSearchDiscounts = async () => {
             try {
                 const response = await axios.get('http://localhost:9000/discounts/getAll');
                 setDiscount(response.data);
@@ -53,7 +53,7 @@ function DiscountDashboard() {
                 console.error('Error fetching users:', error);
             }
         };
-        fetchDiscounts();
+        fetchSearchDiscounts();
     }, []);
 
     let rows = discount;
@@ -100,13 +100,29 @@ function DiscountDashboard() {
         setDiscount(updatedDiscounts);
     };
 
+    // Fetch discounts function with query parameter
+    const fetchDiscounts = async (query) => {
+        try {
+            const response = await axios.get(`http://localhost:9000/discounts/search?keyword=${query}`);
+            setDiscount(response.data);
+        } catch (error) {
+            handleClickError();
+            console.error('Error fetching discounts:', error);
+        }
+    };
+
+
+
     return (
         <>
             <SalesNavbar />
             <div className="discountDashboardOuter">
                 <div className="discountDashboardInner">
                     <div className="discountTitleWithSearchbar">
-                        <Searchbar />
+                        <SearchBar
+                            label="Search Products"
+                            onKeyPress={fetchDiscounts}
+                        />
                         <CustomizedButton
                             onClick={() => setVisible(true)}
                             hoverBackgroundColor="#2d3ed2"
