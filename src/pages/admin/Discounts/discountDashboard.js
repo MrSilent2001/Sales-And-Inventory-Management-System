@@ -111,8 +111,6 @@ function DiscountDashboard() {
         }
     };
 
-
-
     return (
         <>
             <SalesNavbar />

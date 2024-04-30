@@ -172,6 +172,17 @@ function ViewSupplier() {
         }
     };
 
+    // Fetch suppliers function with query parameter
+    const fetchSearchSuppliers = async (query) => {
+        try {
+            const response = await axios.get(`http://localhost:9000/supplier/search?keyword=${query}`);
+            setSuppliers(response.data);
+        } catch (error) {
+            handleClickError();
+            console.error('Error fetching discounts:', error);
+        }
+    };
+
 
     return (
         <>
@@ -212,7 +223,10 @@ function ViewSupplier() {
 
                     <div className="supplierSearchAndButtons">
                         <div className="viewSupplierSearch">
-                            <SearchBar />
+                            <SearchBar
+                                label="Search Products"
+                                onKeyPress={fetchSearchSuppliers}
+                            />
                         </div>
                         <div className="viewSupplierButtons">
                             <CustomizedButton
