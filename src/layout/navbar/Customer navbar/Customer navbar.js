@@ -1,11 +1,9 @@
 import React from "react";
-import "./Customer navbar.css";
+import "../navbar.css";
 import logo from "../../../assets/images/logo.png";
 import {NavLink} from "react-router-dom";
 import {FiPower} from "react-icons/fi";
 import CustomTooltip from "../../../components/Tooltip/tooltip";
-
-
 function CustomerNavbar(){
     return(
         <div className="navbar">

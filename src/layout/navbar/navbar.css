@@ -16,18 +16,19 @@
 }
 
 .navigation a{
-    color: white;
-    font-family: Inter;
+    float: left;
+    color: #f2f2f2;
     font-size: 12px;
     text-decoration: none;
-    margin: auto 14px auto 14px;
+    text-align: center;
+    padding: 20.5px 16px;
 }
 
-a:hover{
-    color: #858bcb;
+.navigation a:hover, a.selected{
+    background-color: #04AA6D;
+    color: white;
     font-weight: bold;
     font-size: 12.5px;
-    transition-duration: 0.3s;
 }
 
 .lastNavLink{

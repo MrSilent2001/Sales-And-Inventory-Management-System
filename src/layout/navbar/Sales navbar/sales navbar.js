@@ -1,5 +1,5 @@
 import React from "react";
-import "./sales navbar.css";
+import "../navbar.css";
 import logo from "../../../assets/images/logo.png";
 import {NavLink} from "react-router-dom";
 import {FiPower} from "react-icons/fi";

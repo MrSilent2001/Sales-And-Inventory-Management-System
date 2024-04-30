@@ -5,22 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86fa9f19-6664-4b39-84ca-825aa0d16148" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/favicon-64x64.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Form Inputs/label.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Tooltip/tooltip.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UserAccount/SubPopup.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UserAccount/userAccount.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UserAccount/userAccount.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/navbar.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Inventory navbar/Inventory navbar.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layout/navbar/Inventory navbar/Inventory navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Inventory navbar/Inventory navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Sales navbar/sales navbar.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layout/navbar/Sales navbar/sales navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Sales navbar/sales navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Supplier Navbar/Supplier Navbar.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layout/navbar/Supplier Navbar/Supplier Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Supplier Navbar/Supplier Navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Discounts/discountDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Discounts/discountDashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,11 +83,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Level 2 Project\Sales-And-Inventory-Management-System\public" />
-      <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Level 2 Project\Sales-And-Inventory-Management-System\src\pages\admin\Payment Dashboard\Inventory" />
-      <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Sales-And-Inventory-Management-System\src\components\Table\Customized Table" />
-      <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Sales-And-Inventory-Management-System\src\components\Form Inputs" />
-      <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Sales-And-Inventory-Management-System\src\components\Cards" />
+      <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Level 2 Project\Sales-And-Inventory-Management-System\src\layout\navbar\Supplier Navbar" />
+      <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Level 2 Project\Sales-And-Inventory-Management-System\src\layout\navbar\Sales navbar" />
+      <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Level 2 Project\Sales-And-Inventory-Management-System\src\layout\navbar\Inventory navbar" />
+      <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Level 2 Project\Sales-And-Inventory-Management-System\src\layout\navbar\Customer navbar" />
+      <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Level 2 Project\Sales-And-Inventory-Management-System\src\layout\navbar" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -167,7 +160,7 @@
       <workItem from="1713300372556" duration="4000000" />
       <workItem from="1713360034129" duration="6012000" />
       <workItem from="1714113819390" duration="21046000" />
-      <workItem from="1714404907978" duration="16522000" />
+      <workItem from="1714404907978" duration="20877000" />
     </task>
     <servers />
   </component>
