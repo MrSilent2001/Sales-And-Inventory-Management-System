@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -11,9 +11,9 @@ import Footer from "../../../layout/footer/footer";
 import DeleteItem from "./Modals/Delete Item/Delete Item";
 import CustomizedButton from "../../../components/Button/button";
 import SearchBar from "../../../components/search bar/search bar";
-import inventory from "../../../data/data.json";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 import ComboBox from "../../../components/Form Inputs/comboBox";
+import axios from "axios";
 
 function FilterItems(){
     const [category, setCategory] = React.useState('');
@@ -101,6 +101,7 @@ function ViewInventory(){
     const [addItemVisible, setAddItemVisible] = useState(false);
     const [deleteItemVisible, setDeleteItemVisible] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
+    const [allInventoryItems, setAllInventoryItems] = useState([]);
     const handleSetVisible = (row) => {
         setSelectedRow(row);
         setVisible(true);
@@ -111,41 +112,81 @@ function ViewInventory(){
     };
 
     const columns = [
-        { id: 'inventoryId', label: 'Inventory Id', minWidth: 100, align: 'center' },
-        { id: 'itemDescription', label: 'Item Description', minWidth: 200, align: 'center' },
-        { id: 'itemCategory', label: 'Item Category', minWidth: 120, align: 'center' },
-        { id: 'Quantity', label: 'Quantity', minWidth: 100, align: 'center' },
-        { id: 'Price', label: 'Unit Price', minWidth: 100, align: 'center' },
-        { id: 'inventoryStatus', label: 'Inventory Status', minWidth: 170, align: 'center' },
-        { id: 'actions', label: '', minWidth: 100, align: 'center' }
+        { columnId: 'id', label: 'Inventory Id', minWidth: 100, align: 'center' },
+        { columnId: 'itemDescription', label: 'Item Description', minWidth: 200, align: 'center' },
+        { columnId: 'itemCategory', label: 'Item Category', minWidth: 120, align: 'center' },
+        { columnId: 'itemQuantity', label: 'Quantity', minWidth: 100, align: 'center' },
+        { columnId: 'inventoryStatus', label: 'Inventory Status', minWidth: 170, align: 'center' },
+        { columnId: 'viewAction', label: '', minWidth: 100, align: 'center' },
+        { columnId: 'deleteAction', label: '', minWidth: 100, align: 'center' }
     ];
 
-    let rows = inventory.inventory || [];
+    const getAllInventoryItems = () => {
+        axios.get('http://localhost:9000/inventory/getAll').then(res=> {
+            setAllInventoryItems(res.data);
+            console.log(res.data);
+        }).catch(err => {
+            console.log(err);
+        })
+    }
 
-    const mappedData = rows.map(row => ({ ...row, actions: createViewButton(handleButtonClick) }));
+    useEffect(() => {
+        getAllInventoryItems();
+    }, []);
 
-    function createViewButton(handleButtonClick) {
+    const mappedData = allInventoryItems.map(inventoryItem => ({ ...inventoryItem,
+        viewAction: createViewButton(inventoryItem.id),
+        deleteAction: createDeleteButton(handleButtonClick),
+        inventoryStatus: inventoryItem.itemQuantity > 0 ? 'In Stock' : 'Out of Stock' }
+    ));
+
+    function createViewButton(id) {
         return (
             <CustomizedButton
-                onClick={() => handleSetVisible}
+                onClick={() => handleSetVisible(id)}
                 hoverBackgroundColor="#2d3ed2"
                 style={{
                     backgroundColor: '#242F9B',
                     border: '1px solid #242F9B',
-                    width: '5em',
-                    height: '2.5em',
-                    fontSize: '0.75em',
+                    width: '9em',
+                    height: '3em',
+                    fontSize: '0.9em',
                     padding: '0.5em 0.625em',
                     borderRadius: '0.35em',
-                    fontWeight: '550',
+                    fontWeight: '500',
                     marginTop: '0.625em',
-                    marginRight: '1.5em'
+                    marginRight: '-2em'
                 }}
             >
                 View
             </CustomizedButton>
         );
     }
+
+    function createDeleteButton(handleButtonClick) {
+        return (
+            <CustomizedButton
+                onClick={() => setDeleteItemVisible(true)}
+                hoverBackgroundColor="#f11717"
+                style={{
+                    backgroundColor: '#ff0000',
+                    border: '1px solid #242F9B',
+                    width: '9em',
+                    height: '3em',
+                    fontSize: '0.9em',
+                    padding: '0.5em 0.625em',
+                    borderRadius: '0.35em',
+                    fontWeight: '500',
+                    marginTop: '0.625em',
+                    marginLeft: '-3em',
+                    borderStyle: 'none'
+                }}
+            >
+                Delete
+            </CustomizedButton>
+        );
+    }
+
 
     return(
         <>
@@ -200,8 +241,8 @@ function ViewInventory(){
                                 style={{
                                     backgroundColor: '#242F9B',
                                     border: '1px solid #242F9B',
-                                    width: '8.5em',
-                                    height: '2.65em',
+                                    width: '11em',
+                                    height: '2.95em',
                                     fontSize: '0.75em',
                                     padding: '0.5em 0.625em',
                                     borderRadius: '0.35em',
@@ -210,23 +251,6 @@ function ViewInventory(){
                                 }}
                             >
                                 Add Item
-                            </CustomizedButton>
-
-                            <CustomizedButton
-                                onClick={() => setDeleteItemVisible(true)}
-                                hoverBackgroundColor="#f11717"
-                                style={{
-                                    backgroundColor: '#ff0000',
-                                    width: '8.5em',
-                                    height: '2.65em',
-                                    fontSize: '0.75em',
-                                    padding: '0.5em',
-                                    borderRadius: '0.35em',
-                                    fontWeight: '500',
-                                    marginTop: '0.625em',
-                                }}
-                            >
-                                Delete Item
                             </CustomizedButton>
 
                         </div>

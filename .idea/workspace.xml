@@ -5,18 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86fa9f19-6664-4b39-84ca-825aa0d16148" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/inventoryPayments.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/inventoryPayments.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/AddSupplier/addSupplier.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/AddSupplier/addSupplier.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/View Inventory/Modals/Add Item/Add Item.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/View Inventory/Modals/Add Item/Add Item.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/View Inventory/Modals/Update Item/Update Item.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/View Inventory/Modals/Update Item/Update Item.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -51,6 +50,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 5
@@ -60,25 +60,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dinuka#08&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/dinuk/Desktop/My Docs/Projects/Sales-And-Inventory-Management-System&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;two.files.diff.last.used.folder&quot;: &quot;C:/Users/dinuk/Desktop/My Docs/Projects/Sales-And-Inventory-Management-System&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Kavith4",
+    "last_opened_file_path": "C:/Users/dinuk/Desktop/My Docs/Projects/Sales-And-Inventory-Management-System",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "two.files.diff.last.used.folder": "C:/Users/dinuk/Desktop/My Docs/Projects/Sales-And-Inventory-Management-System",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Level 2 Project\Sales-And-Inventory-Management-System\src\pages\admin\Payment Dashboard\Inventory" />
@@ -157,6 +157,7 @@
       <workItem from="1713298226669" duration="1198000" />
       <workItem from="1713300372556" duration="4000000" />
       <workItem from="1713360034129" duration="6012000" />
+      <workItem from="1714361991441" duration="22136000" />
     </task>
     <servers />
   </component>
