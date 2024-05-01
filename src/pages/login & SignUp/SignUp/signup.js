@@ -4,11 +4,18 @@ import TextField from "@mui/material/TextField";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
 import PasswordField from "../../../components/Form Inputs/passwordField";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 // import {useLocation, useNavigate} from "react-router-dom";
 // import {useAuth} from "../../services/auth";
 
+const Notify=() =>  toast("SignUP is SUCCESSFUL!");
+
+
 const SignUp = () => {
+
 
     const [showPassword, setShowPassword] = React.useState(false);
 
@@ -32,6 +39,7 @@ const SignUp = () => {
     // }
 
     return (
+        
         <div className='S-MainContainer'>
 
         <div className='S-LeftContainer'>
@@ -110,7 +118,7 @@ const SignUp = () => {
 
 
                             <div className="btn-row">
-                                <CustomizedButton
+                                <CustomizedButton onClick={Notify}
                                     hoverBackgroundColor="#2d3ed2"
                                     style={{
                                         color: '#ffffff',
@@ -126,9 +134,23 @@ const SignUp = () => {
                                         marginTop: '0.625em',
                                         textTransform: 'none',
                                         textAlign: 'center',
+                                        marginLeft:'5.5em',
                                     }}>
                                     Sign Up
                                 </CustomizedButton>
+                                <ToastContainer
+                                  position="top-center"
+                                  autoClose={5000}
+                                  hideProgressBar={false}
+                                  newestOnTop={false}
+                                  closeOnClick
+                                  rtl={false}
+                                  pauseOnFocusLoss
+                                  draggable
+                                  pauseOnHover
+                                  theme="dark"
+                                  
+                                />
                             </div>
 
                             <div>

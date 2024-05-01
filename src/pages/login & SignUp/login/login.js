@@ -44,11 +44,11 @@ const Login = () => {
         //auth.login(username);
         navigate(redirectPath, {replace:true});
 
-        if (username === "admin" && password === "12345" && role === "admin") {
+        if (username === "admin" && password  && role === "admin") {
             console.log(username+" "+ password+" "+role);
             // Redirect to admin dashboard
-            navigate("/salesLanding", { replace: true });
-        } else if (username === "customer" && password === "12345" && role === "customer") {
+           navigate("/salesLanding", { replace: true });
+        } else if (username === "customer" && password  && role === "customer") {
             console.log(username+" "+ password+" "+role);
             // Redirect to customer dashboard
             navigate("/customerHome", { replace: true });

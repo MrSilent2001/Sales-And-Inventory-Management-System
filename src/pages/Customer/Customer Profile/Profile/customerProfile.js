@@ -5,6 +5,12 @@ import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer n
 import Footer from "../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+const Notify=() =>  toast("Profile is SUCCESSFULLY DELETED!");
+
 
 function CustomerProfile() {
     return (
@@ -115,6 +121,7 @@ function CustomerProfile() {
                                 </Link>
 
                                 <CustomizedButton
+                                    onClick={Notify}
                                     hoverBackgroundColor="#f11717"
                                     style={{
                                         color: '#ffffff',
@@ -133,6 +140,19 @@ function CustomerProfile() {
                                     }}>
                                     Delete Profile
                                 </CustomizedButton>
+                                <ToastContainer
+                                  position="top-center"
+                                  autoClose={5000}
+                                  hideProgressBar={false}
+                                  newestOnTop={false}
+                                  closeOnClick
+                                  rtl={false}
+                                  pauseOnFocusLoss
+                                  draggable
+                                  pauseOnHover
+                                  theme="dark"
+                                  
+                                />
                             </div>
                         </div>
 

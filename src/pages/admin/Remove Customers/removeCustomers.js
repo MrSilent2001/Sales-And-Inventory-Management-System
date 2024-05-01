@@ -13,6 +13,11 @@ import SearchBar from "../../../components/search bar/search bar";
 import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
 import CustomizedButton from "../../../components/Button/button";
 import customerData from "../../../data/data.json";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const Notify=() =>  toast("Customer has been REMOVED!");
+const Notification =() => toast("Order deatails has been updated");
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -56,7 +61,10 @@ function RemoveCustomers() {
         sendWarningButton:
             <CustomizedButton
                 key={`sendWarning_${id}`}
-                onClick={handleSendWarningButtonClick}
+                onClick={() => {
+                    handleRemoveButtonClick(id);
+                    Notification(); 
+                }}
                 hoverBackgroundColor="#2d3ed2"
                 style={{
                     color: '#ffffff',
@@ -79,7 +87,10 @@ function RemoveCustomers() {
         removeButton:
             <CustomizedButton
                 key={`removeButton_${id}`}
-                onClick={() => handleRemoveButtonClick(id)}
+                onClick={() => {
+                    handleRemoveButtonClick(id);
+                    Notify(); 
+                }}
                 hoverBackgroundColor="#f11717"
                 style={{
                     color: '#ffffff',
@@ -154,6 +165,18 @@ function RemoveCustomers() {
                 </div>
             </div>
             <Footer/>
+
+            <ToastContainer
+               position="top-center"
+               autoClose={5000}
+               hideProgressBar={false}
+               newestOnTop={false}
+               closeOnClick
+               rtl={false}
+               pauseOnFocusLoss
+               draggable
+               pauseOnHover
+                theme="dark" />
         </>
     );
 }

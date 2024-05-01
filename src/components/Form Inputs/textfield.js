@@ -21,7 +21,7 @@ export default function BasicTextField({id, variant, size, type}) {
                     },
                 },
             }}
-            noValidate
+            Validate
             autoComplete="off"
         >
             <TextField id={id} variant={variant} size={size} type={type} margin='normal'/>

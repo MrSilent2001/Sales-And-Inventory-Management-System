@@ -3,11 +3,14 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Avatar from '@mui/material/Avatar';
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
 import Footer from "../../../layout/footer/footer";
 import CustomizedButton from "../../../components/Button/button";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import BasicTextField from "../../../components/Form Inputs/textfield";
+
+const Notify=() =>  toast("Profile is SUCCESSFULLY UPDATED!");
 
 
 const UploadButtons = styled(Button)(({ theme }) => ({
@@ -26,32 +29,6 @@ const UploadButtons = styled(Button)(({ theme }) => ({
     marginTop:'2.5em',
 }));
 
-
-function BasicTextFields() {
-    return (
-        <Box
-            component="form"
-            sx={{
-                '& > :not(style)': {
-                    m: 1,
-                    width: '25.5em',
-                    "& .MuiInputBase-root":{
-                        height: '2.5em',
-                        backgroundColor: '#e9eeff'
-                    },
-                    "& .MuiInputLabel-root": {
-                        fontSize: '0.5em',
-                        textAlign: 'center',
-                    },
-                },
-            }}
-            noValidate
-            autoComplete="off"
-        >
-            <TextField id="outlined-basic" variant="outlined" margin='normal'/>
-        </Box>
-    );
-}
 
 
 function UpdateCustomers() {
@@ -81,7 +58,7 @@ function UpdateCustomers() {
                                 <h5>Name</h5>
                             </div>
                             <div className="UpdateCustomerTextInput">
-                                <BasicTextFields></BasicTextFields>
+                                <BasicTextField></BasicTextField>
                             </div>
                         </div>
 
@@ -90,7 +67,7 @@ function UpdateCustomers() {
                                 <h5>Address</h5>
                             </div>
                             <div className="UpdateCustomerTextInput">
-                                <BasicTextFields></BasicTextFields>
+                                <BasicTextField></BasicTextField>
                             </div>
                         </div>
 
@@ -99,7 +76,7 @@ function UpdateCustomers() {
                                 <h5>Contact</h5>
                             </div>
                             <div className="UpdateCustomerTextInput">
-                                <BasicTextFields></BasicTextFields>
+                                <BasicTextField/>
                             </div>
                         </div>
 
@@ -108,13 +85,15 @@ function UpdateCustomers() {
                                 <h5>Email</h5>
                             </div>
                             <div className="UpdateCustomerTextInput">
-                                <BasicTextFields></BasicTextFields>
+                                <BasicTextField ></BasicTextField>
                             </div>
                         </div>
 
                         <div className="UpdateCustomerButtonField">
                             <div className="UpdateCustomerButtons">
+
                                 <CustomizedButton
+                                   onClick={Notify}
                                     hoverBackgroundColor="#2d3ed2"
                                     style={{
                                         color: '#ffffff',
@@ -130,9 +109,22 @@ function UpdateCustomers() {
                                         marginTop: '0.625em',
                                         textTransform: 'none',
                                         textAlign: 'center',
+                                        marginLeft:'8.5em',
                                     }}>
                                     Update
                                 </CustomizedButton>
+                                <ToastContainer
+                                  position="top-center"
+                                  autoClose={5000}
+                                  hideProgressBar={false}
+                                  newestOnTop={false}
+                                  closeOnClick
+                                  rtl={false}
+                                  pauseOnFocusLoss
+                                  draggable
+                                  pauseOnHover
+                                  theme="dark"
+                                />
                             </div>
                         </div>
 
