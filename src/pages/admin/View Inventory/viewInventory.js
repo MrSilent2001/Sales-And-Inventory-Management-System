@@ -15,46 +15,6 @@ import CustomizedTable from "../../../components/Table/Customized Table/customiz
 import ComboBox from "../../../components/Form Inputs/comboBox";
 import axios from "axios";
 
-function FilterItems(){
-    const [category, setCategory] = React.useState('');
-
-    const handleSelect = (event) => {
-        setCategory(event.target.value);
-    };
-
-    const options = [
-        { value: 'All', label: 'All' },
-        { value: 'Metal', label: 'Metal' },
-        { value: 'Wood', label: 'Wood' }
-    ];
-
-    return(
-        <Box sx={{ minWidth: 80 }}>
-            <FormControl fullWidth>
-                <InputLabel
-                    id="demo-simple-select-label"
-                    sx={{
-                        fontSize: '10px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'rgba(255,255,255,0.7)'
-                    }}
-                >
-                    Select
-                </InputLabel>
-                <ComboBox
-                    value={category}
-                    onChange={(event) => handleSelect(event)}
-                    style={{width: '10em', marginRight: '0.5em', border: '1px solid white'}}
-                    options={options}
-                    label="Category"
-                    size="small"
-                />
-            </FormControl>
-        </Box>
-    )
-}
 function FilterAvailability(){
     const [category, setCategory] = React.useState('');
 
@@ -102,6 +62,18 @@ function ViewInventory(){
     const [deleteItemVisible, setDeleteItemVisible] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
     const [allInventoryItems, setAllInventoryItems] = useState([]);
+
+    const [category, setCategory] = React.useState('');
+
+    const handleSelect = (event) => {
+        setCategory(event.target.value);
+    };
+
+    const options = [
+        { value: 'Building Material', label: 'Building Material' },
+        { value: 'Plumbing Material', label: 'Plumbing Material' },
+    ];
+
     const handleSetVisible = (row) => {
         setSelectedRow(row);
         setVisible(true);
@@ -122,7 +94,12 @@ function ViewInventory(){
     ];
 
     const getAllInventoryItems = () => {
-        axios.get('http://localhost:9000/inventory/getAll').then(res=> {
+        const url =
+            category === 'Building Material' || category === 'Plumbing Material' ?
+                `http://localhost:9000/inventory/getByCategory?itemCategory=${encodeURIComponent(category)}`
+                : 'http://localhost:9000/inventory/getAll';
+
+        axios.get(url).then(res=> {
             setAllInventoryItems(res.data);
             console.log(res.data);
         }).catch(err => {
@@ -132,7 +109,7 @@ function ViewInventory(){
 
     useEffect(() => {
         getAllInventoryItems();
-    }, []);
+    }, [category]);
 
     const mappedData = allInventoryItems.map(inventoryItem => ({ ...inventoryItem,
         viewAction: createViewButton(inventoryItem.id),
@@ -200,7 +177,32 @@ function ViewInventory(){
                             <div className="itemCategoryTopic">
                                 <h5>Category</h5>
                             </div>
-                            <FilterItems></FilterItems>
+
+                            <Box sx={{ minWidth: 80 }}>
+                                <FormControl fullWidth>
+                                    <InputLabel
+                                        id="demo-simple-select-label"
+                                        sx={{
+                                            fontSize: '10px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            color: 'rgba(255,255,255,0.7)'
+                                        }}
+                                    >
+                                        Select
+                                    </InputLabel>
+                                    <ComboBox
+                                        value={category}
+                                        onChange={(event) => handleSelect(event)}
+                                        style={{width: '10em', marginRight: '0.5em', border: '1px solid white'}}
+                                        options={options}
+                                        label="Category"
+                                        size="small"
+                                    />
+                                </FormControl>
+                            </Box>
+
                         </div>
                         <div className="itemAvailabilityFilter">
                             <div className="itemAvailabilityTopic">
