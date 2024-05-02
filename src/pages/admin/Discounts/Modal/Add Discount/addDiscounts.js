@@ -1,118 +1,202 @@
-import React from "react";
+import React, { forwardRef, useState } from "react";
 import "./addDiscounts.css";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
-import Footer from "../../../../../layout/footer/footer";
 import BasicTextField from "../../../../../components/Form Inputs/textfield";
 import CustomizedButton from "../../../../../components/Button/button";
+import CenteredModal from "../../../../../components/Modal/modal";
+import axios from "axios";
+import CustomizedAlert from "../../../../../components/Alert/alert";
+import FormControl from "@mui/material/FormControl";
 
-function AddDiscount(){
+const AddDiscount = forwardRef((props, ref) => {
 
-    return(
-        <>
-            <SalesNavbar/>
-            <div className="addDiscountsOuter">
-                <div className="addDiscountsInner">
-                    <div className="discountForm">
-                        <form>
-                            <div className="row">
-                                <label>Product Id: </label>
-                                <BasicTextField
-                                    className="input"
-                                    size="small"
-                                    type="text"
-                                    id="outlined-required"
-                                    label="Product Id"
-                                />
+    const [formData, setFormData] = useState({
+        productName: '',
+        sellingPrice: '',
+        discountRate: ''
+    });
+
+    const [errors, setErrors] = useState({});
+
+    const handleChange = (e) => {
+        const {name,value} = e.target;
+        setFormData({
+            ...formData, [name]: value
+        });
+    }
+
+    const [openSuccess, setOpenSuccess] = useState(false);
+    const [openError, setOpenError] = useState(false);
+
+    const handleClickSuccess = () => {
+        setOpenSuccess(true);
+    };
+
+    const handleClickError = () => {
+        setOpenError(true);
+    };
+
+    const handleCloseSuccess = () => {
+        setOpenSuccess(false);
+    };
+
+    const handleCloseError = () => {
+        setOpenError(false);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const validationErrors = {};
+        if (!formData.productName) {
+            validationErrors.productName = " *Product Name is required";
+        }
+        if (!formData.sellingPrice) {
+            validationErrors.sellingPrice = " *Selling Price is required";
+        }
+        if (!formData.discountRate) {
+            validationErrors.discountRate = " *Discount Rate is required";
+        }
+
+        setErrors(validationErrors);
+        if(Object.keys(validationErrors).length === 0){
+            try {
+                await axios.post('http://localhost:9000/discounts/create', {
+                    productName: formData.productName,
+                    sellingPrice: formData.sellingPrice,
+                    discountRate: formData.discountRate
+                });
+
+                const response = await axios.get('http://localhost:9000/discounts/getAll');
+                const updatedDiscounts = response.data;
+
+                props.onDiscountAdded(updatedDiscounts);
+                handleClickSuccess();
+                props.onClose(false);
+            } catch (error) {
+                console.error('Error applying discount:', error);
+                handleClickError();
+            }
+        }else{
+            console.log("error");
+        }
+
+
+    };
+
+    return (
+        <CenteredModal>
+            <FormControl onSubmit={handleSubmit}>
+                <div className="addDiscountsOuter">
+                    <div className="addDiscountsModel">
+                        <h2>Add Discounts</h2>
+                        <div className="addDiscountsForm">
+                            <div className="addDiscountsFormField">
+                                <div className="addDiscountsLabelField">
+                                    <h5>Product Name:</h5>
+                                </div>
+                                <div className="addDiscountsInput">
+                                    <BasicTextField
+                                        id="outlined-required"
+                                        name="productName"
+                                        size="small"
+                                        type="text"
+                                        onChange={handleChange}
+                                    />
+                                    {errors.productName && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em'}}>{errors.productName}</span>}
+                                </div>
                             </div>
 
-                            <br/><br/>
-
-                            <div className="row">
-                                <label>Selling Price: </label>
-                                <BasicTextField
-                                    className="input"
-                                    size="small"
-                                    type="number"
-                                    id="outlined-required"
-                                    label="Selling Price"
-                                />
+                            <div className="addDiscountsFormField">
+                                <div className="addDiscountsLabelField">
+                                    <h5>Selling Price:</h5>
+                                </div>
+                                <div className="addDiscountsInput">
+                                    <BasicTextField
+                                        id="outlined-required"
+                                        name="sellingPrice"
+                                        size="small"
+                                        type="number"
+                                        onChange={handleChange}
+                                    />
+                                    {errors.sellingPrice && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.sellingPrice}</span>}
+                                </div>
                             </div>
 
-                            <br/><br/>
-
-                            <div className="row">
-                                <label>Discount Percentage:  </label>
-                                <BasicTextField
-                                    className="input"
-                                    size="small"
-                                    type="number"
-                                    id="outlined-required"
-                                    label="Discount Percentage"
-                                />
+                            <div className="addDiscountsFormField">
+                                <div className="addDiscountsLabelField">
+                                    <h5>Discount Rate:</h5>
+                                </div>
+                                <div className="addDiscountsInput">
+                                    <BasicTextField
+                                        id="outlined-required"
+                                        name="discountRate"
+                                        size="small"
+                                        type="number"
+                                        onChange={handleChange}
+                                    />
+                                    {errors.discountRate && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.discountRate}</span>}
+                                </div>
                             </div>
 
-                            <br/><br/>
+                            <div className="addDiscountsFormFieldButtons">
+                                <div className="addDiscountsButton">
+                                    <CustomizedButton
+                                        onClick={handleSubmit}
+                                        hoverBackgroundColor="#2d3ed2"
+                                        style={{
+                                            backgroundColor: '#242F9B',
+                                            border: '1px solid #242F9B',
+                                            width: '8em',
+                                            height: '2.5em',
+                                            fontSize: '0.8em',
+                                            padding: '0.5em 0.625em',
+                                            borderRadius: '0.35em',
+                                            fontWeight: '550',
+                                            marginTop: '0.625em',
+                                            marginRight: '1.5em',
+                                        }}>
+                                        Apply
+                                    </CustomizedButton>
+                                </div>
 
-                            <div className="row">
-                                <label>Start Date: </label>
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker className="input" slotProps={{ textField: { size: 'small' } }} required/>
-                                </LocalizationProvider>
+                                <div className="addDiscountscancelButton">
+                                    <CustomizedButton
+                                        onClick={() => props.onClose(false)}
+                                        hoverBackgroundColor="#f11717"
+                                        style={{
+                                            backgroundColor: '#960505',
+                                            width: '9.5em',
+                                            height: '2.5em',
+                                            fontSize: '0.8em',
+                                            fontFamily: 'inter',
+                                            padding: '0.5em 0.625em',
+                                            borderRadius: '0.35em',
+                                            fontWeight: '500',
+                                            marginTop: '0.625em',
+                                        }}>
+                                        Cancel
+                                    </CustomizedButton>
+                                </div>
                             </div>
-
-                            <br/><br/>
-
-                            <div className="row">
-                                <label>End Date: </label>
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker className="input" slotProps={{ textField: { size: 'small' } }} required/>
-                                </LocalizationProvider>
-                            </div>
-
-                            <br/><br/>
-
-                            <div className="btn-row">
-                                <CustomizedButton
-                                    hoverBackgroundColor="#2d3ed2"
-                                    style={{
-                                        backgroundColor: '#242F9B',
-                                        border: '1px solid #242F9B',
-                                        width: '8em',
-                                        height: '2.5em',
-                                        fontSize: '0.95em',
-                                        padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        fontWeight: '550',
-                                        marginTop: '0.625em'
-                                    }}>
-                                    Apply
-                                </CustomizedButton>
-                                <CustomizedButton
-                                    hoverBackgroundColor="#f11717"
-                                    style={{
-                                        backgroundColor: '#960505',
-                                        width: '9.5em',
-                                        height: '2.5em',
-                                        fontSize: '0.95em',
-                                        padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        fontWeight: '500',
-                                        marginTop: '0.625em'
-                                    }}>
-                                    Cancel
-                                </CustomizedButton>
-                            </div>
-
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <Footer/>
-        </>
-    )
-}
+            </FormControl>
+            <CustomizedAlert
+                open={openSuccess}
+                onClose={handleCloseSuccess}
+                severity="success"
+                message="Supplier Added Successfully!"
+            />
+
+            <CustomizedAlert
+                open={openError}
+                onClose={handleCloseError}
+                severity="error"
+                message="Something Went Wrong!"
+            />
+        </CenteredModal>
+    );
+});
 
 export default AddDiscount;
