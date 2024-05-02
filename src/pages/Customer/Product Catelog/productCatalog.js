@@ -213,12 +213,14 @@ function ProductCatalog() {
 
 
                 </div>
-                <div className="grid">
-                    {products.map((item) => (
-                        <div className="card" key={item.id} >
-                            <MultiActionAreaCard item={item} handleClick={handleClick} />
-                        </div>
-                    ))}
+                <div className="customerItems">
+                    <div className="customerItemGrid">
+                        {products.map((item) => (
+                            <div className="card" key={item.id} >
+                                <MultiActionAreaCard item={item} handleClick={handleClick} />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
             <Footer />

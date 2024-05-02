@@ -6,23 +6,29 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea, CardActions } from '@mui/material';
 import CustomizedButton from "../Button/button";
 
-export default function MultiActionAreaCard({item,handleClick}) {
-    const {productName, productPrice, productImage} = item;
+export default function MultiActionAreaCard({item,handleClick,buttonText}) {
+    const productName = item.productName;
+    const productPrice = item.productUnitPrice;
+    const productImage = item.productImage[0];
+    console.log(item.productImage[0])
     return (
-        <Card sx={{ maxWidth: 300, width: 300 }}>
-            <CardActionArea>
+        <Card sx={{ maxWidth: 320, width: 320, paddingTop: 5, paddingBottom:2 }}>
+            <CardActionArea sx={{ paddingTop:2.5 }}>
 
                 <CardMedia
                     component="img"
-                    height="250"
+                    height="200"
                     image={productImage}
                     alt={productName}
+                    sx={{
+                        objectFit: 'contain'
+                    }}
                 />
                 <CardContent>
                     <Typography variant="body2" color="text.primary">
                         {productName}
                     </Typography>
-                    <Typography variant="body2" color="text.primary" sx={{ fontWeight: 'bold' }}>
+                    <Typography variant="body2" color="text.primary" sx={{ fontWeight: 'bold', marginTop: '0.5em' }}>
                         Rs.{productPrice}
                     </Typography>
                 </CardContent>
@@ -39,18 +45,17 @@ export default function MultiActionAreaCard({item,handleClick}) {
                         color: '#ffffff',
                         backgroundColor: '#242F9B',
                         border: '1px solid #242F9B',
-                        width: '11em',
-                        height: '2.5em',
-                        fontSize: '0.95em',
+                        width: '10em',
+                        height: '3m',
+                        fontSize: '0.78em',
                         fontFamily: 'inter',
-                        padding: '0.5em 0.625em',
                         borderRadius: '0.35em',
-                        fontWeight: '550',
-                        margin: 'auto',
+                        padding: '1em',
+                        fontWeight: '500',
                         textTransform: 'none',
                         textAlign: 'center',
                     }}>
-                    Add to Cart
+                    {buttonText}
                 </CustomizedButton>
             </CardActions>
         </Card>

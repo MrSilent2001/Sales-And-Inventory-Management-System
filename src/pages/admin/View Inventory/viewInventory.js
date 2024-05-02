@@ -14,47 +14,7 @@ import SearchBar from "../../../components/search bar/search bar";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 import ComboBox from "../../../components/Form Inputs/comboBox";
 import axios from "axios";
-
-function FilterAvailability(){
-    const [category, setCategory] = React.useState('');
-
-    const handleSelect = (event) => {
-        setCategory(event.target.value);
-    };
-
-    const options = [
-        { value: 'Category 01', label: 'Category 01' },
-        { value: 'Category 02', label: 'Category 02' },
-        { value: 'Category 03', label: 'Category 03' }
-    ];
-
-    return(
-        <Box sx={{ minWidth: 80 }}>
-            <FormControl fullWidth>
-                <InputLabel
-                    id="demo-simple-select-label"
-                    sx={{
-                        fontSize: '10px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'rgba(255,255,255,0.7)'
-                    }}
-                >
-                    Select
-                </InputLabel>
-                <ComboBox
-                    value={category}
-                    onChange={(event) => handleSelect(event)}
-                    style={{width: '10em', marginRight: '0.5em',  border: '1px solid white'}}
-                    options={options}
-                    label="Category"
-                    size="small"
-                />
-            </FormControl>
-        </Box>
-    )
-}
+import MultiActionAreaCard from "../../../components/Cards/catalogCard";
 
 function ViewInventory(){
     const [visible, setVisible] = useState(false);
@@ -65,13 +25,24 @@ function ViewInventory(){
 
     const [category, setCategory] = React.useState('');
 
+    const [stock, setStock] = React.useState(true);
+
     const handleSelect = (event) => {
         setCategory(event.target.value);
     };
 
-    const options = [
+    const categoryOptions = [
         { value: 'Building Material', label: 'Building Material' },
         { value: 'Plumbing Material', label: 'Plumbing Material' },
+    ];
+
+    const handleAvailability = (event) => {
+        setStock(event.target.value);
+    };
+
+    const availabilityOptions = [
+        { value: 'In Stock', label: 'In Stock' },
+        { value: 'Out of Stock', label: 'Out of Stock' },
     ];
 
     const handleSetVisible = (row) => {
@@ -111,11 +82,11 @@ function ViewInventory(){
         getAllInventoryItems();
     }, [category]);
 
-    const mappedData = allInventoryItems.map(inventoryItem => ({ ...inventoryItem,
+    /*const mappedData = allInventoryItems.map(inventoryItem => ({ ...inventoryItem,
         viewAction: createViewButton(inventoryItem.id),
         deleteAction: createDeleteButton(handleButtonClick),
         inventoryStatus: inventoryItem.itemQuantity > 0 ? 'In Stock' : 'Out of Stock' }
-    ));
+    ));*/
 
     function createViewButton(id) {
         return (
@@ -171,63 +142,90 @@ function ViewInventory(){
 
             <div className="viewInventoryOuter">
                 <div className="viewInventoryFilter">
-                    <div className="filterHeader">
-                        <h2>Filter Items</h2>
-                        <div className="itemCategoryFilter">
-                            <div className="itemCategoryTopic">
-                                <h5>Category</h5>
-                            </div>
+                    <div className="viewInventoryFilterInner">
+                        <div className="filterHeader">
+                            <h2>Filter Items</h2>
+                            <div className="itemCategoryFilter">
+                                <div className="itemCategoryTopic">
+                                    <h5>Category</h5>
+                                </div>
 
-                            <Box sx={{ minWidth: 80 }}>
-                                <FormControl fullWidth>
-                                    <InputLabel
-                                        id="demo-simple-select-label"
-                                        sx={{
-                                            fontSize: '10px',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            color: 'rgba(255,255,255,0.7)'
-                                        }}
-                                    >
-                                        Select
-                                    </InputLabel>
-                                    <ComboBox
-                                        value={category}
-                                        onChange={(event) => handleSelect(event)}
-                                        style={{width: '10em', marginRight: '0.5em', border: '1px solid white'}}
-                                        options={options}
-                                        label="Category"
-                                        size="small"
-                                    />
-                                </FormControl>
-                            </Box>
+                                <Box sx={{ minWidth: 80 }}>
+                                    <FormControl fullWidth>
+                                        <InputLabel
+                                            id="category filter"
+                                            sx={{
+                                                fontSize: '10px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                color: 'rgba(255,255,255,0.7)'
+                                            }}
+                                        >
+                                            Select
+                                        </InputLabel>
+                                        <ComboBox
+                                            value={category}
+                                            onChange={(event) => handleSelect(event)}
+                                            style={{width: '10em', marginRight: '0.5em', border: '1px solid white'}}
+                                            options={categoryOptions}
+                                            label="Category"
+                                            size="small"
+                                        />
+                                    </FormControl>
+                                </Box>
 
-                        </div>
-                        <div className="itemAvailabilityFilter">
-                            <div className="itemAvailabilityTopic">
-                                <h5>Availability</h5>
                             </div>
-                            <FilterAvailability></FilterAvailability>
-                        </div>
-                        <div className="applyButton">
-                            <CustomizedButton
-                                hoverBackgroundColor="#f11717"
-                                style={{
-                                    backgroundColor: '#ff0000',
-                                    width: '11em',
-                                    height: '2.5em',
-                                    fontSize: '0.95em',
-                                    padding: '0.5em 0.625em',
-                                    borderRadius: '0.35em',
-                                    fontWeight: '550',
-                                    marginTop: '0.625em',
-                                    marginRight:'1.5em',
-                                    marginLeft: '1.5em',
-                                }}
-                            >
-                                Apply
-                            </CustomizedButton>
+                            <div className="itemAvailabilityFilter">
+                                <div className="itemAvailabilityTopic">
+                                    <h5>Availability</h5>
+                                </div>
+
+                                <Box sx={{ minWidth: 80 }}>
+                                    <FormControl fullWidth>
+                                        <InputLabel
+                                            id="availability Filter"
+                                            sx={{
+                                                fontSize: '10px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                color: 'rgba(255,255,255,0.7)'
+                                            }}
+                                        >
+                                            Select
+                                        </InputLabel>
+                                        <ComboBox
+                                            value={stock}
+                                            onChange={(event) => handleAvailability(event)}
+                                            style={{width: '10em', marginRight: '0.5em',  border: '1px solid white'}}
+                                            options={availabilityOptions}
+                                            label="Stock"
+                                            size="small"
+                                        />
+                                    </FormControl>
+                                </Box>
+
+                            </div>
+                            <div className="applyButton">
+                                <CustomizedButton
+                                    hoverBackgroundColor="#f11717"
+                                    style={{
+                                        backgroundColor: '#ff0000',
+                                        width: '11em',
+                                        height: '2.5em',
+                                        fontSize: '0.95em',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        fontWeight: '550',
+                                        marginTop: '0.625em',
+                                        marginRight:'1.5em',
+                                        marginLeft: '1.5em',
+                                    }}
+                                >
+                                    Apply
+                                </CustomizedButton>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -236,33 +234,17 @@ function ViewInventory(){
                         <div className="viewInventorySearch">
                             <SearchBar/>
                         </div>
-                        <div className="viewInventoryButtons">
-                            <CustomizedButton
-                                onClick={() => setAddItemVisible(true)}
-                                hoverBackgroundColor="#2d3ed2"
-                                style={{
-                                    backgroundColor: '#242F9B',
-                                    border: '1px solid #242F9B',
-                                    width: '11em',
-                                    height: '2.95em',
-                                    fontSize: '0.75em',
-                                    padding: '0.5em 0.625em',
-                                    borderRadius: '0.35em',
-                                    fontWeight: '500',
-                                    marginTop: '0.625em',
-                                }}
-                            >
-                                Add Item
-                            </CustomizedButton>
-
-                        </div>
                     </div>
 
-                    <div className="itemTable">
-                        <CustomizedTable
-                            columns={columns}
-                            rows={mappedData}
-                        />
+                    <div className="items">
+                        <div className="inventoryItemGrid">
+                            {allInventoryItems.map((item) => (
+                                <div className="card" key={item.id} >
+                                    <MultiActionAreaCard item={item} buttonText="View"/>
+                                    {/*handleClick={handleClick}*/}
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
 
