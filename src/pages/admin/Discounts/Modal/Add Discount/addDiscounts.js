@@ -6,6 +6,7 @@ import CenteredModal from "../../../../../components/Modal/modal";
 import axios from "axios";
 import CustomizedAlert from "../../../../../components/Alert/alert";
 import FormControl from "@mui/material/FormControl";
+import CustomDatePicker from "../../../../../components/DatePicker/datePicker";
 
 const AddDiscount = forwardRef((props, ref) => {
 
@@ -102,9 +103,10 @@ const AddDiscount = forwardRef((props, ref) => {
                                         type="text"
                                         onChange={handleChange}
                                     />
-                                    {errors.productName && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em'}}>{errors.productName}</span>}
                                 </div>
                             </div>
+                            {errors.productName && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em'}}>{errors.productName}</span>}
+
 
                             <div className="addDiscountsFormField">
                                 <div className="addDiscountsLabelField">
@@ -118,9 +120,10 @@ const AddDiscount = forwardRef((props, ref) => {
                                         type="number"
                                         onChange={handleChange}
                                     />
-                                    {errors.sellingPrice && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.sellingPrice}</span>}
                                 </div>
                             </div>
+                            {errors.sellingPrice && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.sellingPrice}</span>}
+
 
                             <div className="addDiscountsFormField">
                                 <div className="addDiscountsLabelField">
@@ -134,9 +137,30 @@ const AddDiscount = forwardRef((props, ref) => {
                                         type="number"
                                         onChange={handleChange}
                                     />
-                                    {errors.discountRate && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.discountRate}</span>}
                                 </div>
                             </div>
+                            {errors.discountRate && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.discountRate}</span>}
+
+                            <div className="addDiscountsFormField">
+                                <div className="addDiscountsLabelField">
+                                    <h5>Start Date: </h5>
+                                </div>
+                                <div className="addDiscountsInput">
+                                    <CustomDatePicker slotProps={{ textField: { size: 'small' } }} required/>
+                                </div>
+                            </div>
+                            {errors.discountRate && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.discountRate}</span>}
+
+                            <div className="addDiscountsFormField">
+                                <div className="addDiscountsLabelField">
+                                    <h5>End Date: </h5>
+                                </div>
+                                <div className="addDiscountsInput">
+                                    <CustomDatePicker slotProps={{ textField: { size: 'small' }}} required/>
+                                </div>
+                            </div>
+                            {errors.discountRate && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.discountRate}</span>}
+
 
                             <div className="addDiscountsFormFieldButtons">
                                 <div className="addDiscountsButton">

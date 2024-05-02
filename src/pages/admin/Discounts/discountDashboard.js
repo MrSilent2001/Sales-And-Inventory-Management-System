@@ -12,11 +12,11 @@ import CustomizedAlert from "../../../components/Alert/alert";
 import SearchBar from "../../../components/search bar/search bar";
 
 const columns = [
-    { id: 'id', label: 'Id', minWidth: 170, align: 'center' },
-    { id: 'productName', label: 'Product Name', minWidth: 100, align: 'center' },
-    { id: 'sellingPrice', label: 'Selling Price(\u20A8.)', minWidth: 170, align: 'center' },
-    { id: 'discountRate', label: 'Discount(%)', minWidth: 170, align: 'center' },
-    { id: 'actions', label: '', minWidth: 170, align: 'center' },
+    { columnId: 'id', label: 'Id', minWidth: 170, align: 'center' },
+    { columnId: 'productName', label: 'Product Name', minWidth: 100, align: 'center' },
+    { columnId: 'sellingPrice', label: 'Selling Price(\u20A8.)', minWidth: 170, align: 'center' },
+    { columnId: 'discountRate', label: 'Discount(%)', minWidth: 170, align: 'center' },
+    { columnId: 'actions', label: '', minWidth: 170, align: 'center' },
 ];
 
 function DiscountDashboard() {
