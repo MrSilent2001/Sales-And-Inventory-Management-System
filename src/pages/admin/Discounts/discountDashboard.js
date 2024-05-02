@@ -12,10 +12,12 @@ import CustomizedAlert from "../../../components/Alert/alert";
 import SearchBar from "../../../components/search bar/search bar";
 
 const columns = [
-    { columnId: 'id', label: 'Id', minWidth: 170, align: 'center' },
-    { columnId: 'productName', label: 'Product Name', minWidth: 100, align: 'center' },
-    { columnId: 'sellingPrice', label: 'Selling Price(\u20A8.)', minWidth: 170, align: 'center' },
-    { columnId: 'discountRate', label: 'Discount(%)', minWidth: 170, align: 'center' },
+    { columnId: 'productId', label: 'Product Id', minWidth: 120, align: 'center' },
+    { columnId: 'productName', label: 'Product Name', minWidth: 200, align: 'center' },
+    { columnId: 'sellingPrice', label: 'Selling Price(\u20A8.)', minWidth: 120, align: 'center' },
+    { columnId: 'discountRate', label: 'Discount(%)', minWidth: 120, align: 'center' },
+    { columnId: 'startDate', label: 'Start Date', minWidth: 120, align: 'center' },
+    { columnId: 'endDate', label: 'End Date', minWidth: 120, align: 'center' },
     { columnId: 'actions', label: '', minWidth: 170, align: 'center' },
 ];
 
@@ -116,7 +118,7 @@ function DiscountDashboard() {
             <SalesNavbar />
             <div className="discountDashboardOuter">
                 <div className="discountDashboardInner">
-                    <div className="discountTitleWithSearchbar">
+                    <div className="searchContainer">
                         <SearchBar
                             label="Search Products"
                             onKeyPress={fetchDiscounts}
@@ -132,17 +134,16 @@ function DiscountDashboard() {
                                 fontSize: '0.75em',
                                 padding: '0.5em 0.625em',
                                 borderRadius: '0.35em',
-                                fontWeight: '550',
-                                marginRight: '1.5em',
+                                fontWeight: '550'
                             }}>
                             Add Discount
                         </CustomizedButton>
                     </div>
                     <div className="discount-dashboard">
                         <CustomizedTable
-                            style={{ width: '100%' }}
                             columns={columns}
                             rows={rows}
+                            style={{width:'85%'}}
                         />
                     </div>
                 </div>

@@ -5,19 +5,31 @@ import Footer from "../../../layout/footer/footer";
 import AddPayment from "../../admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 import axios from "axios";
+import "./paymentDashboard.css";
+import SearchBar from "../../../components/search bar/search bar";
 
 const columns = [
-    { id: 'id', label: 'Id', minWidth: 100, align: 'center' },
-    { id: 'customerName', label: 'Customer Name', minWidth: 100, align: 'center' },
-    { id: 'contactNumber', label: 'Contact No.', minWidth: 170, align: 'center' },
-    { id: 'email', label: 'E-mail', minWidth: 170, align: 'center' },
-    { id: 'purchasedItems', label: 'Items Purchased', minWidth: 100, align: 'center' },
-    {id: 'totalAmount', label: 'Total Amount', minWidth: 170, align: 'center'}
+    { columnId: 'id', label: 'Id', minWidth: 100, align: 'center' },
+    { columnId: 'customerName', label: 'Customer Name', minWidth: 100, align: 'center' },
+    { columnId: 'contactNumber', label: 'Contact No.', minWidth: 170, align: 'center' },
+    { columnId: 'email', label: 'E-mail', minWidth: 170, align: 'center' },
+    { columnId: 'purchasedItems', label: 'Items Purchased', minWidth: 100, align: 'center' },
+    { columnId: 'totalAmount', label: 'Total Amount', minWidth: 170, align: 'center'}
 ];
 
 function PaymentDashboard() {
     const [visible, setVisible] = useState(false);
     const [payments, setPayments] = useState([]);
+
+    const [openError, setOpenError] = useState(false);
+
+    const handleClickError = () => {
+        setOpenError(true);
+    };
+    const handleCloseError = () => {
+        setOpenError(false);
+    };
+
 
     useEffect(() => {
         const fetchPayments = async () => {
@@ -32,6 +44,17 @@ function PaymentDashboard() {
         fetchPayments();
     }, []);
 
+    // Fetch payments function with query parameter
+    const fetchSearchedPayments = async (query) => {
+        try {
+            const response = await axios.get(`http://localhost:9000/payment/customerPayment/search?keyword=${query}`);
+            setPayments(response.data);
+        } catch (error) {
+            handleClickError();
+            console.error('Error fetching payments:', error);
+        }
+    };
+
     let rows = payments;
 
     const mappedData = rows.map(row => ({ ...row}));
@@ -43,15 +66,19 @@ function PaymentDashboard() {
             <div className="paymentDashboardOuter">
                 <div className="paymentDashboardInner">
                     <div className="payment-title">
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width:'92.5%'}}>
-                            <h2 style={{marginLeft: '5em'}}>Payments</h2>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                            <h2>Payments</h2>
+                            <SearchBar
+                                label="Search Payments"
+                                onKeyPress={fetchSearchedPayments}
+                            />
                         </div>
                     </div>
-                    <div className="paymentDashboard" style={{margin: '2.5em 0 5em 2.5em'}}>
+                    <div className="paymentDashboard" >
                             <CustomizedTable
-                                style={{ maxHeight: 400, width: '100%'}}
                                 columns={columns}
                                 rows={mappedData}
+                                style={{width: '100%'}}
                             />
                     </div>
                     <Modal open={visible}>

@@ -6,22 +6,22 @@ import Footer from "../../../layout/footer/footer";
 import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navbar";
 import SearchBar from "../../../components/search bar/search bar";
 import CustomizedButton from "../../../components/Button/button";
-import inventory from "../../../data/data.json";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 import CustomizedAlert from "../../../components/Alert/alert";
+import axios from "axios";
 
 const columns = [
-    {id: 'inventoryId', label: 'Inventory Id', minWidth: 170, align: 'center'},
-    {id: 'itemDescription', label: 'Item Description', minWidth: 100, align: 'center'},
+    {columnId: 'inventoryId', label: 'Inventory Id', minWidth: 170, align: 'center'},
+    {columnId: 'itemDescription', label: 'Item Description', minWidth: 100, align: 'center'},
     {
-        id: 'itemCategory',
+        columnId: 'itemCategory',
         label: 'Item Category',
         minWidth: 170,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
-        id: 'quantity',
+        columnId: 'quantity',
         label: 'Quantity',
         minWidth: 170,
         align: 'center',
@@ -29,7 +29,7 @@ const columns = [
     },
 
     {
-        id: 'price',
+        columnId: 'price',
         label: 'Unit Price',
         minWidth: 170,
         align: 'center',
@@ -89,6 +89,17 @@ function InventoryDashboard(){
         }
     };
 
+    // Fetch Items function with query parameter
+    const fetchItems = async (query) => {
+        try {
+            const response = await axios.get(`http://localhost:9000/supplier/search?keyword=${query}`);
+            //setSuppliers(response.data);
+        } catch (error) {
+            handleClickError();
+            console.error('Error fetching Items:', error);
+        }
+    };
+
     const rows = tableData;
     //
     // const mappedData = rows.map(row => ({
@@ -109,7 +120,10 @@ function InventoryDashboard(){
                 <div className="supplierViewInventoryInner">
                     <div className="supplierInvSearchAndButtons">
                         <div className="supplierViewInventorySearch">
-                            <SearchBar></SearchBar>
+                            <SearchBar
+                                label="Search Items"
+                                onKeyPress={fetchItems}
+                            />
                         </div>
                         <div className="supplierViewInventoryButtons">
                             <CustomizedButton
@@ -153,6 +167,7 @@ function InventoryDashboard(){
                             columns={columns}
                             rows={tableData}
                             onSelectRow={setSelectedRowId}
+                            style={{width: '85%'}}
                         />
                     </div>
                 </div>

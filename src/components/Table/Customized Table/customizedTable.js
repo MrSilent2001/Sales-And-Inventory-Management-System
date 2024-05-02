@@ -3,7 +3,7 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper}
 import {tableCellClasses} from "@mui/material/TableCell";
 import {styled} from "@mui/material/styles";
 
-function CustomizedTable({columns, rows}) {
+function CustomizedTable({columns, rows, style}) {
 
     const StyledTableCell = styled(TableCell)(({theme}) => ({
         [`&.${tableCellClasses.head}`]: {
@@ -31,7 +31,7 @@ function CustomizedTable({columns, rows}) {
     }));
 
     return (
-        <Paper sx={{width: '95%', overflow: 'auto',maxHeight: '400px'}}>
+        <Paper sx={{ overflow: 'auto',maxHeight: '400px', ...style}}>
             <TableContainer component={Paper}>
                 <Table>
                     <TableHead>

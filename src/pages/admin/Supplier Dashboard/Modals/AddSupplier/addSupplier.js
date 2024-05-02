@@ -1,20 +1,31 @@
-import React, { forwardRef, useState } from "react";
+import React, {forwardRef, useState} from "react";
 import "./addSupplier.css";
 import BasicTextField from "../../../../../components/Form Inputs/textfield";
-import ComboBox from "../../../../../components/Form Inputs/comboBox";
 import CustomizedButton from "../../../../../components/Button/button";
 import CenteredModal from "../../../../../components/Modal/modal";
 import FormControl from "@mui/material/FormControl";
 import axios from "axios";
 import CustomizedAlert from "../../../../../components/Alert/alert";
-import FileUpload from "../../../../../components/Form Inputs/fileUpload";
 
 const AddSupplier = forwardRef((props, ref) => {
-    const [supplierName, setSupplierName] = useState('');
-    const [address, setAddress] = useState('');
-    const [category, setCategory] = useState('');
-    const [email, setEmail] = useState('');
-    const [contact, setContact] = useState('');
+
+    const [formData, setFormData] = useState({
+        supplierName: '',
+        address: '',
+        email: '',
+        contact: '',
+        nic: '',
+    });
+
+    const [errors, setErrors] = useState({});
+
+    const handleChange = (name, value) => {
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+        console.log(formData);
+    };
 
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
@@ -37,46 +48,71 @@ const AddSupplier = forwardRef((props, ref) => {
         setOpenError(false);
     };
 
-    const handleChange = (event) => {
-        setCategory(event.target.value);
-    };
-
-    const options = [
-        { value: 'Category 01', label: 'Category 01' },
-        { value: 'Category 02', label: 'Category 02' },
-        { value: 'Category 03', label: 'Category 03' }
-    ];
+    // const handleChange = (event) => {
+    //     setCategory(event.target.value);
+    // };
+    //
+    // const options = [
+    //     { value: 'Category 01', label: 'Category 01' },
+    //     { value: 'Category 02', label: 'Category 02' },
+    //     { value: 'Category 03', label: 'Category 03' }
+    // ];
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
+        const validationErrors = {};
 
-            await axios.post('http://localhost:9000/supplier/create', {
-                supplierName: supplierName,
-                supplierEmail: email,
-                supplierAddress: address,
-                supplierContact: contact,
-                supplierPassword: category
-            });
+        if (!formData.supplierName) {
+            validationErrors.supplierName = " *This Field is required";
+        }
+        if (!formData.address) {
+            validationErrors.address = " *This Field is required";
+        }
+        if (!formData.email) {
+            validationErrors.email = " *This Field is required";
+        }
+        if (!formData.contact) {
+            validationErrors.contact = " *This Field is required";
+        }
+        if (!formData.nic) {
+            validationErrors.nic = " *This Field is required";
+        }
 
-            // Fetch the updated list of suppliers
-            const response = await axios.get('http://localhost:9000/supplier/getAllSuppliers');
-            const updatedSuppliers = response.data;
+        setErrors(validationErrors);
+        if (Object.keys(validationErrors).length === 0) {
+            try {
 
-            // Update the state of suppliers in the ViewSupplier component
-            props.onSupplierAdded(updatedSuppliers);
+                await axios.post('http://localhost:9000/supplier/create', {
+                    supplierName: formData.supplierName,
+                    supplierEmail: formData.email,
+                    supplierAddress: formData.address,
+                    supplierContact: formData.contact,
+                    nic: formData.nic,
+                    supplierPassword: 'SUP123',
+                    paymentMethod: '',
+                    paymentDetails: '',
+                    profilePicture: 'https://th.bing.com/th/id/OIP.IQqAakFVSW2T6n9Kibpe2AAAAA?rs=1&pid=ImgDetMain'
+                });
 
-            console.log('Supplier added successfully');
-            handleClickSuccess();
+                // Fetch the updated list of suppliers
+                const response = await axios.get('http://localhost:9000/supplier/getAllSuppliers');
+                const updatedSuppliers = response.data;
 
-            // Close the modal
-            console.log("Attempting to close modal.");
-            props.onClose(false);
+                // Update the state of suppliers in the ViewSupplier component
+                props.onSupplierAdded(updatedSuppliers);
 
-        } catch (error) {
-            console.error('Error adding user:', error);
-            handleClickError();
+                console.log('Supplier added successfully');
+                handleClickSuccess();
+
+                // Close the modal
+                console.log("Attempting to close modal.");
+                props.onClose(false);
+
+            } catch (error) {
+                console.error('Error adding user:', error);
+                handleClickError();
+            }
         }
     };
 
@@ -95,13 +131,16 @@ const AddSupplier = forwardRef((props, ref) => {
                                     <BasicTextField
                                         id="outlined-required"
                                         size="small"
-                                        value={supplierName}
-                                        onChange={(e) => {
-                                            setSupplierName(e.target.value);
-                                        }}
+                                        onChange={(e) => handleChange("supplierName", e.target.value)}
                                     />
                                 </div>
                             </div>
+                            {errors.supplierName && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.supplierName}</span>}
+
 
                             <div className="addSupplierformField">
                                 <div className="addSupplieridField">
@@ -111,13 +150,17 @@ const AddSupplier = forwardRef((props, ref) => {
                                     <BasicTextField
                                         id="outlined-textarea"
                                         size="small"
-                                        value={address}
-                                        onChange={(e) => {
-                                            setAddress(e.target.value);
-                                        }}
+                                        onChange={(e) => handleChange("address", e.target.value)}
+
                                     />
                                 </div>
                             </div>
+                            {errors.address && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.address}</span>}
+
 
                             <div className="addSupplierformField">
                                 <div className="addSupplieridField">
@@ -128,13 +171,17 @@ const AddSupplier = forwardRef((props, ref) => {
                                         id="outlined-required"
                                         size="small"
                                         type="email"
-                                        value={email}
-                                        onChange={(e) => {
-                                            setEmail(e.target.value);
-                                        }}
+                                        onChange={(e) => handleChange("email", e.target.value)}
+
                                     />
                                 </div>
                             </div>
+                            {errors.email && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.email}</span>}
+
 
                             <div className="addSupplierformField">
                                 <div className="addSupplieridField">
@@ -144,38 +191,62 @@ const AddSupplier = forwardRef((props, ref) => {
                                     <BasicTextField
                                         id="outlined-required"
                                         size="small"
-                                        value={contact}
-                                        onChange={(e) => {
-                                            setContact(e.target.value);
-                                        }}
+                                        onChange={(e) => handleChange("contact", e.target.value)}
+
                                     />
                                 </div>
                             </div>
+                            {errors.contact && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.contact}</span>}
+
 
                             <div className="addSupplierformField">
                                 <div className="addSupplieridField">
-                                    <h5>Category:</h5>
+                                    <h5>NIC:</h5>
                                 </div>
                                 <div className="addSupplieridInput">
-                                    <ComboBox
-                                        value={category}
-                                        onChange={(event) => handleChange(event)}
-                                        style={{ width: '17.5em', marginRight: '0.5em' }}
-                                        options={options}
-                                        label="Category"
+                                    <BasicTextField
+                                        id="outlined-required"
                                         size="small"
+                                        onChange={(e) => handleChange("nic", e.target.value)}
+
                                     />
                                 </div>
                             </div>
+                            {errors.nic && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.nic}</span>}
 
-                            <div className="addSupplierformField">
-                                <div className="addSupplieridField">
-                                    <h5>Photo:</h5>
-                                </div>
-                                <div className="addSupplieridInput">
-                                    <FileUpload style={{ width: "20em", left: "-.5em" }}/>
-                                </div>
-                            </div>
+
+                            {/*<div className="addSupplierformField">*/}
+                            {/*    <div className="addSupplieridField">*/}
+                            {/*        <h5>Category:</h5>*/}
+                            {/*    </div>*/}
+                            {/*    <div className="addSupplieridInput">*/}
+                            {/*        <ComboBox*/}
+                            {/*            value={category}*/}
+                            {/*            onChange={(event) => handleChange(event)}*/}
+                            {/*            style={{ width: '17.5em', marginRight: '0.5em' }}*/}
+                            {/*            options={options}*/}
+                            {/*            label="Category"*/}
+                            {/*            size="small"*/}
+                            {/*        />*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
+
+                            {/*<div className="addSupplierformField">*/}
+                            {/*    <div className="addSupplieridField">*/}
+                            {/*        <h5>Photo:</h5>*/}
+                            {/*    </div>*/}
+                            {/*    <div className="addSupplieridInput">*/}
+                            {/*        <FileUpload style={{ width: "20em", left: "-.5em" }}/>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
 
 
                             <div className="addSupplierformFieldButtons">

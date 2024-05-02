@@ -5,16 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="deadbc32-7837-4427-b601-fc4c933a9650" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Sales-And-Inventory-Management-System.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/DatePicker/datePicker.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DatePicker/datePicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DatePicker/datePicker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Customized Table/customizedTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Table/Customized Table/customizedTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/inventoryDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/inventoryDashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Discounts/discountDashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Discounts/discountDashboard.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/Discounts/discountDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Discounts/discountDashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/AddSupplier/addSupplier.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/AddSupplier/addSupplier.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,30 +40,30 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2fv9uLNzJXTXh7vnyMMB0LIcgqv" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "dev__test",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev__test&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -66,7 +72,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1714670908450</updated>
-      <workItem from="1714670912618" duration="1900000" />
+      <workItem from="1714670912618" duration="4167000" />
+      <workItem from="1714675403571" duration="15142000" />
     </task>
     <servers />
   </component>

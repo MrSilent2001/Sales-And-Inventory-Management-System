@@ -7,23 +7,29 @@ import axios from "axios";
 import CustomizedAlert from "../../../../../components/Alert/alert";
 import FormControl from "@mui/material/FormControl";
 import CustomDatePicker from "../../../../../components/DatePicker/datePicker";
+import dayjs from "dayjs";
 
 const AddDiscount = forwardRef((props, ref) => {
 
     const [formData, setFormData] = useState({
+        productId: '',
         productName: '',
         sellingPrice: '',
-        discountRate: ''
+        discountRate: '',
+        startDate: '',
+        endDate: ''
     });
 
     const [errors, setErrors] = useState({});
 
-    const handleChange = (e) => {
-        const {name,value} = e.target;
-        setFormData({
-            ...formData, [name]: value
-        });
-    }
+    const handleChange = (name, value) => {
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+        console.log(formData);
+    };
+
 
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
@@ -48,23 +54,36 @@ const AddDiscount = forwardRef((props, ref) => {
         e.preventDefault();
 
         const validationErrors = {};
+
+        if (!formData.productId) {
+            validationErrors.productId = " *This Field is required";
+        }
         if (!formData.productName) {
-            validationErrors.productName = " *Product Name is required";
+            validationErrors.productName = " *This Field is required";
         }
         if (!formData.sellingPrice) {
-            validationErrors.sellingPrice = " *Selling Price is required";
+            validationErrors.sellingPrice = " *This Field is required";
         }
         if (!formData.discountRate) {
-            validationErrors.discountRate = " *Discount Rate is required";
+            validationErrors.discountRate = " *This Field is required";
+        }
+        if (!formData.startDate) {
+            validationErrors.startDate = " *This Field is required";
+        }
+        if (!formData.endDate) {
+            validationErrors.endDate = " *This Field is required";
         }
 
         setErrors(validationErrors);
         if(Object.keys(validationErrors).length === 0){
             try {
                 await axios.post('http://localhost:9000/discounts/create', {
+                    productId: formData.productId,
                     productName: formData.productName,
                     sellingPrice: formData.sellingPrice,
-                    discountRate: formData.discountRate
+                    discountRate: formData.discountRate,
+                    startDate: formData.startDate,
+                    endDate: formData.endDate
                 });
 
                 const response = await axios.get('http://localhost:9000/discounts/getAll');
@@ -93,6 +112,23 @@ const AddDiscount = forwardRef((props, ref) => {
                         <div className="addDiscountsForm">
                             <div className="addDiscountsFormField">
                                 <div className="addDiscountsLabelField">
+                                    <h5>Product Id:</h5>
+                                </div>
+                                <div className="addDiscountsInput">
+                                    <BasicTextField
+                                        id="outlined-required"
+                                        name="productId"
+                                        size="small"
+                                        type="text"
+                                        onChange={(e) => handleChange("productId", e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                            {errors.productId && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em'}}>{errors.productName}</span>}
+
+
+                            <div className="addDiscountsFormField">
+                                <div className="addDiscountsLabelField">
                                     <h5>Product Name:</h5>
                                 </div>
                                 <div className="addDiscountsInput">
@@ -101,7 +137,7 @@ const AddDiscount = forwardRef((props, ref) => {
                                         name="productName"
                                         size="small"
                                         type="text"
-                                        onChange={handleChange}
+                                        onChange={(e) => handleChange("productName", e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -118,7 +154,7 @@ const AddDiscount = forwardRef((props, ref) => {
                                         name="sellingPrice"
                                         size="small"
                                         type="number"
-                                        onChange={handleChange}
+                                        onChange={(e) => handleChange("sellingPrice", e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -135,7 +171,7 @@ const AddDiscount = forwardRef((props, ref) => {
                                         name="discountRate"
                                         size="small"
                                         type="number"
-                                        onChange={handleChange}
+                                        onChange={(e) => handleChange("discountRate", e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -146,20 +182,37 @@ const AddDiscount = forwardRef((props, ref) => {
                                     <h5>Start Date: </h5>
                                 </div>
                                 <div className="addDiscountsInput">
-                                    <CustomDatePicker slotProps={{ textField: { size: 'small' } }} required/>
+                                    <CustomDatePicker
+                                        name="startDate"
+                                        slotProps={{ textField: { size: 'small' } }}
+                                        required
+                                        onChange={(date) => {
+                                            const formattedDate = dayjs(date).format('YYYY-MM-DD');
+                                            console.log(formattedDate);
+                                            handleChange("startDate",formattedDate);
+                                        }}                                   />
                                 </div>
                             </div>
-                            {errors.discountRate && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.discountRate}</span>}
+                            {errors.startDate && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.discountRate}</span>}
 
                             <div className="addDiscountsFormField">
                                 <div className="addDiscountsLabelField">
                                     <h5>End Date: </h5>
                                 </div>
                                 <div className="addDiscountsInput">
-                                    <CustomDatePicker slotProps={{ textField: { size: 'small' }}} required/>
+                                    <CustomDatePicker
+                                        name="endDate"
+                                        slotProps={{ textField: { size: 'small' }}}
+                                        required
+                                        onChange={(date) => {
+                                            const formattedDate = dayjs(date).format('YYYY-MM-DD');
+                                            console.log(formattedDate);
+                                            handleChange("endDate",formattedDate);
+                                        }}
+                                    />
                                 </div>
                             </div>
-                            {errors.discountRate && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.discountRate}</span>}
+                            {errors.endDate && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.discountRate}</span>}
 
 
                             <div className="addDiscountsFormFieldButtons">
@@ -176,8 +229,7 @@ const AddDiscount = forwardRef((props, ref) => {
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
                                             fontWeight: '550',
-                                            marginTop: '0.625em',
-                                            marginRight: '1.5em',
+                                            margin:'0.625em 1.5em 0 2.5em',
                                         }}>
                                         Apply
                                     </CustomizedButton>
@@ -196,7 +248,7 @@ const AddDiscount = forwardRef((props, ref) => {
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
                                             fontWeight: '500',
-                                            marginTop: '0.625em',
+                                            margin:'0.625em 0 0 2.5em'
                                         }}>
                                         Cancel
                                     </CustomizedButton>

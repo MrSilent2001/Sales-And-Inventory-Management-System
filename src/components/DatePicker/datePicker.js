@@ -3,7 +3,7 @@ import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 
 function CustomDatePicker(props) {
-    const { className, slotProps, required, ...otherProps } = props;
+    const { className, slotProps, required, onChange, style, ...otherProps } = props;
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -11,6 +11,8 @@ function CustomDatePicker(props) {
                 className={className}
                 slotProps={slotProps}
                 required={required}
+                style={style}
+                onChange={onChange}
                 {...otherProps}
             />
         </LocalizationProvider>
