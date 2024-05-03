@@ -7,7 +7,7 @@ import PasswordField from "../../../components/Form Inputs/passwordField";
 import { useState } from 'react';
 import Validation from './validation';
  
-const SignUp = () => {
+function SignUp() {
 
     const [showPassword, setShowPassword] = React.useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -23,18 +23,16 @@ const [values, setValues] = useState({
     confirmPassword:''
 })
 
-const [errors,setErrors] = useState({})
+const handleInput = (e) => {
+    setValues({...values, [e.target.name]: [e.target.value]})
+}
+const [errors,setErrors] = useState({});
 
-function handleInput (event){
-    const newObj = {...values, [event.target.name]: event.target.value}
-    setValues(newObj)
-};
 
-function handleValidation(event){
-    event.preventDefault();
+function handleValidation(e){
+    e.preventDefault();
     setErrors(Validation(values));
 };
-
 
 
 
@@ -65,6 +63,7 @@ function handleValidation(event){
                                     size="small"
                                     id="outlined-required"
                                     label="Username"
+                                    name="username"
                                     onChange={handleInput}
                                 />
                                 {errors.username && <p style={{color:"red"}}>{errors.username}</p>}
@@ -79,6 +78,7 @@ function handleValidation(event){
                                     id="outlined-required"
                                     label="Email"
                                     type="email"
+                                    name="email"
                                     onChange={handleInput}
                                 />
                                 {errors.email && <p style={{color:"red"}}>{errors.email}</p>}
@@ -93,6 +93,7 @@ function handleValidation(event){
                                     id="outlined-required"
                                     label="Contact No"
                                     type="number"
+                                    name="contactNo"
                                     onChange={handleInput}
                                 />
                                 {errors.contactNo && <p style={{color:"red"}}>{errors.contactNo}</p>}
@@ -106,7 +107,8 @@ function handleValidation(event){
                                     style={{width:'15.25em', marginLeft: '1em'}}
                                     showPassword={showPassword}
                                     handleClickShowPassword={handleClickShowPassword}
-                                    handleMouseDownPassword={handleMouseDownPassword} 
+                                    handleMouseDownPassword={handleMouseDownPassword}
+                                    name="password" 
                                     onChange={handleInput}
                                 />
                                 {errors.password && <p style={{color:"red"}}>{errors.password}</p>}
@@ -122,6 +124,7 @@ function handleValidation(event){
                                     showPassword={showPassword}
                                     handleClickShowPassword={handleClickShowPassword}
                                     handleMouseDownPassword={handleMouseDownPassword} 
+                                    name="confirmPassword"
                                     onChange={handleInput}
                                 />
                                 {errors.confirmPassword && <p style={{color:"red"}}>{errors.confirmPassword}</p>}
