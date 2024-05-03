@@ -67,7 +67,7 @@ function ViewInventory(){
     const getAllInventoryItems = () => {
         const url =
             category === 'Building Material' || category === 'Plumbing Material' ?
-                `http://localhost:9000/inventory/getByCategory?itemCategory=${encodeURIComponent(category)}`
+                `http://localhost:9000/inventory/getByCategory?productCategory=${encodeURIComponent(category)}`
                 : 'http://localhost:9000/inventory/getAll';
 
         axios.get(url).then(res=> {

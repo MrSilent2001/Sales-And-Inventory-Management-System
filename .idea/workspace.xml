@@ -6,11 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="86fa9f19-6664-4b39-84ca-825aa0d16148" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Cards/catalogCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Cards/catalogCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/footer/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/footer/footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/catalog.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/catalog.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/productCatalog.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/productCatalog.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/View Inventory/viewInventory.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/View Inventory/viewInventory.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/View Inventory/viewInventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/View Inventory/viewInventory.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -165,7 +160,7 @@
       <workItem from="1713360034129" duration="6012000" />
       <workItem from="1714361991441" duration="22432000" />
       <workItem from="1714541121838" duration="7854000" />
-      <workItem from="1714624552054" duration="15188000" />
+      <workItem from="1714624552054" duration="15522000" />
     </task>
     <servers />
   </component>
