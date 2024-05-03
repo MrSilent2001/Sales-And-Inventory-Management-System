@@ -1,19 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./signup.css";
 import TextField from "@mui/material/TextField";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
 import PasswordField from "../../../components/Form Inputs/passwordField";
-import { useState } from 'react';
 import Validation from './validation';
  
 function SignUp() {
-
-    const [showPassword, setShowPassword] = React.useState(false);
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
 
 const [values, setValues] = useState({
     username: '',
@@ -21,21 +14,26 @@ const [values, setValues] = useState({
     contactNo: '',
     password: '',
     confirmPassword:''
-})
+});
 
-const handleInput = (e) => {
-    setValues({...values, [e.target.name]: [e.target.value]})
-}
 const [errors,setErrors] = useState({});
 
-
-function handleValidation(e){
-    e.preventDefault();
-    setErrors(Validation(values));
-};
+const handleInput = (e) => {
+    setValues({...values, [e.target.name]: e.target.value});
+}
 
 
-
+    const handleValidation = (e) => {
+        e.preventDefault();
+        const validationErrors = Validation(values);
+        setErrors(validationErrors);
+        if (Object.keys(validationErrors).length === 0) {
+            // Proceed with form submission
+            console.log("Form submitted successfully!");
+        } else {
+            console.log("Form validation failed!");
+        }
+    };
 
     return (
         <div className='S-MainContainer'>
@@ -105,9 +103,6 @@ function handleValidation(e){
                                 <PasswordField
                                     placeholder="Password"
                                     style={{width:'15.25em', marginLeft: '1em'}}
-                                    showPassword={showPassword}
-                                    handleClickShowPassword={handleClickShowPassword}
-                                    handleMouseDownPassword={handleMouseDownPassword}
                                     name="password" 
                                     onChange={handleInput}
                                 />
@@ -119,11 +114,8 @@ function handleValidation(e){
                             <div className="row">
                                 <label style={{paddingRight: "5px"}}>Confirm Password: </label>
                                 <PasswordField
-                                    placeholder="Password"
+                                    placeholder="ConfirmPassword"
                                     style={{width:'15.25em', marginLeft: '1em'}}
-                                    showPassword={showPassword}
-                                    handleClickShowPassword={handleClickShowPassword}
-                                    handleMouseDownPassword={handleMouseDownPassword} 
                                     name="confirmPassword"
                                     onChange={handleInput}
                                 />
