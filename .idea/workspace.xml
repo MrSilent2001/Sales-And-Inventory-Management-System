@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="deadbc32-7837-4427-b601-fc4c933a9650" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Inventory navbar/Inventory navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Inventory navbar/Inventory navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Supplier Navbar/Supplier Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Supplier Navbar/Supplier Navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Update Supplier/updateSupplier.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Update Supplier/updateSupplier.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

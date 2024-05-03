@@ -62,6 +62,24 @@ function UpdateSupplier() {
                                 </div>
                             </div>
 
+                            <div className="UpdateSupplierFormField">
+                                <div className="UpdateCustomerTextField">
+                                    <h5>Payment Method</h5>
+                                </div>
+                                <div className="UpdateSupplierTextInput">
+                                    <BasicTextField style={{width:'20em'}}/>
+                                </div>
+                            </div>
+
+                            <div className="UpdateSupplierFormField">
+                                <div className="UpdateCustomerTextField">
+                                    <h5>Payment Details</h5>
+                                </div>
+                                <div className="UpdateSupplierTextInput">
+                                    <BasicTextField style={{width:'20em'}}/>
+                                </div>
+                            </div>
+
                             <div className="UpdateSupplierButtonField">
                                 <div className="UpdateSupplierButtons">
                                     <CustomizedButton
@@ -72,7 +90,7 @@ function UpdateSupplier() {
                                             border: '1px solid #242F9B',
                                             width: '8em',
                                             height: '2.5em',
-                                            fontSize: '0.95em',
+                                            fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
                                             fontWeight: '550',
