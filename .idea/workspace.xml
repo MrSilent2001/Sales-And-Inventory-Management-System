@@ -6,21 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="deadbc32-7837-4427-b601-fc4c933a9650" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/DatePicker/datePicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DatePicker/datePicker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Table/Customized Table/customizedTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Table/Customized Table/customizedTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/inventoryDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/inventoryDashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Discounts/discountDashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Discounts/discountDashboard.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Discounts/discountDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Discounts/discountDashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/AddSupplier/addSupplier.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/AddSupplier/addSupplier.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/navbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Inventory navbar/Inventory navbar.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Inventory navbar/Inventory navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Inventory navbar/Inventory navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Sales navbar/sales navbar.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Sales navbar/sales navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Sales navbar/sales navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Supplier Navbar/Supplier Navbar.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Supplier Navbar/Supplier Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Supplier Navbar/Supplier Navbar.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +57,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Level 2 Project\Sales-And-Inventory-Management-System\src\layout\navbar" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

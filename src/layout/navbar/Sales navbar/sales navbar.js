@@ -1,10 +1,15 @@
-import React from "react";
-import "./sales navbar.css";
+import React, {useState} from "react";
+import "../navbar.css";
 import logo from "../../../assets/images/logo.png";
 import {NavLink} from "react-router-dom";
-
+import {MdLogout} from "react-icons/md";
 
 function SalesNavbar(){
+    const [selectedNavLink, setSelectedNavLink] = useState(null);
+    const handleNavLinkClick = (event) => {
+        setSelectedNavLink(event.target.name);
+    };
+
     return(
         <div className="navbar">
             <div className="logo">
@@ -17,7 +22,14 @@ function SalesNavbar(){
                 <NavLink to="/viewRefundRequests">Refunds</NavLink>
                 <NavLink to="/discountdashboard">Discounts</NavLink>
                 <NavLink to="/inventoryLanding">Inventory</NavLink>
-                <NavLink to="/logout" className="lastNavLink">Logout</NavLink>
+                <NavLink
+                    to="/logout"
+                    name="logout"
+                    className={`navLink ${selectedNavLink === "logout" ? "selected" : ""}`}
+                    onClick={handleNavLinkClick}
+                >
+                    <MdLogout style={{width:'18px', height:'18px'}}/>
+                </NavLink>
             </div>
         </div>
     )
