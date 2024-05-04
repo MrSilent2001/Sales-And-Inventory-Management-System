@@ -53,18 +53,18 @@ const Login = () => {
         } else {
             console.log(username+" "+ password+" "+role);
             console.log("Invalid username, password, or role");
+        }
     }
-}
 
     return (
         <div className='MainContainer'>
-        <div className='LeftContainer'>
-            
+            <div className='LeftContainer'>
+
                 <h2 className='mainTitle'>TRADEASY</h2>
-            
-               
+
+
                 <img src="https://miro.medium.com/v2/resize:fit:740/1*PZK0jq9cUFpgRLZcs_aqwg.jpeg" alt="System" className='image' />
-           
+
             </div>
             <div className='RightContainer'>
                 <div className="loginForm">
@@ -78,7 +78,7 @@ const Login = () => {
                                     size="small"
                                     id="outlined-required"
                                     label="Username"
-                                    style={{width: '14em', marginLeft: '2em'}}
+                                    style={{width: '14em', marginLeft: '2em',marginBottom:'1em'}}
                                     onChange={(e) => setUsername(e.target.value)}
                                     required
                                 />
@@ -88,7 +88,7 @@ const Login = () => {
                                 <label>Password: </label>
                                 <PasswordField
                                     placeholder="Password"
-                                    style={{width: '14em', marginLeft: '2em'}}
+                                    style={{width: '14em', marginLeft: '2em',marginBottom:'1em'}}
                                     onChange={(e) => setPassword(e.target.value)}
                                     showPassword={showPassword}
                                     handleClickShowPassword={handleClickShowPassword}
@@ -98,7 +98,7 @@ const Login = () => {
 
 
                             <div className="row">
-                                <label style={{paddingRight: "50px"}}>Role: </label>
+                                <label style={{paddingRight: "50px",marginBottom:'1em'}}>Role: </label>
                                 <ComboBox
                                     className="loginInput"
                                     value={role}
@@ -144,7 +144,7 @@ const Login = () => {
                 </div>
             </div>
         </div>
-        
+
     );
 }
 

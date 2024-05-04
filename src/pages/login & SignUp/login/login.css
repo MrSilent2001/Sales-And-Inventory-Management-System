@@ -1,8 +1,8 @@
 .MainContainer{
-display: flex;
-flex-direction: row;
-height: 100vh;
-position: relative;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    position: relative;
 
 }
 
@@ -28,7 +28,8 @@ position: relative;
 }
 
 #login{
-    margin-bottom: 1.75em;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
 }
 
 .loginForm {
@@ -37,7 +38,7 @@ position: relative;
     gap: 1em;
     align-items: center;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 20px;
     background-color: #DBDFFD;
     width:60%;
     height:75% ;
@@ -66,24 +67,20 @@ label{
 }
 
 .image{
-display: flex;
-flex-direction: column;
-align-items: center;
-width: 35em;
-margin-bottom: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 35em;
+    margin-bottom: 3em;
 
 }
 
 .mainTitle{
-  font-weight: 2em;
-  font-size: 3.5em;
-  align-items: center;
-  color: rgb(6, 6, 63);
-  margin-top: 1em;
+    font-weight: 2em;
+    font-size: 3.5em;
+    align-items: center;
+    color: rgb(6, 6, 63);
+    margin-top: 1em;
 
- 
+
 }
-
-
-
-
