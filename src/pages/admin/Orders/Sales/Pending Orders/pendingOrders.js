@@ -28,7 +28,7 @@ function PendingOrders() {
 
     const handleOrderStatus = async (orderId, orderStatus) => {
         try {
-            await axios.put(`http://localhost:9000/order/update-status/${orderId}`, { orderStatus });
+            await axios.put(`http://localhost:9000/order/update/${orderId}`, { orderStatus });
             const updatedRows = rows.map(row => {
                 if (row.orderId === orderId) {
                     return { ...row, orderStatus };

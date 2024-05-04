@@ -1,10 +1,12 @@
-import React, { useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "./cancelOrders.css";
 import BasicTextFields from '../../../../../components/Form Inputs/textfield';
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../../../components/Button/button";
+import axios from "axios";
+import BasicTextField from "../../../../../components/Form Inputs/textfield";
 
 function CancelOrder() {
     const [activeButton, setActiveButton] = useState(null);
@@ -12,6 +14,61 @@ function CancelOrder() {
     const handleButtonClick = (buttonText) => {
         setActiveButton(buttonText);
     };
+
+    const [orderId, setOrderId] = useState('');
+    const [orderCancelReason, setOrderCancelReason] = useState('');
+    const [order, setOrder] = useState({
+        orderId: '',
+        orderReceiverName: '',
+        orderItems: '',
+        orderPrice: '',
+        orderCancelReason: ''
+    });
+
+    const fetchOrderById = async (orderId) => {
+        try {
+            const response = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`);
+            setOrder(response.data);
+            setOrderCancelReason(response.data.orderCancelReason);
+        } catch (error) {
+            console.error('Error fetching order:', error);
+        }
+    };
+
+    const handleCancelOrder = async () => {
+        try {
+            const updatedOrder = {
+                orderCancelReason: orderCancelReason,
+                orderStatus:"Cancelled",
+            };
+            const response = await axios.put(`http://localhost:9000/order/update/${orderId}`, updatedOrder);
+            if (response.status === 200) {
+                alert("Order Details Successfully Updated");
+                // Optionally, you can fetch the order again to update the state
+                fetchOrderById(orderId);
+            } else {
+                alert("Failed to update order details");
+            }
+        } catch (error) {
+            console.error('Error updating order:', error);
+            alert("Failed to update order details");
+        }
+    };
+
+    const handleEnterPress = async (event) => {
+        if (event.key === 'Enter') {
+            fetchOrderById(orderId);
+            await event.preventDefault();
+        }
+    };
+
+    const handleIdChange = (event) => {
+        setOrderId(event.target.value);
+    };
+
+    useEffect(() => {
+        fetchOrderById(orderId);
+    }, []);
 
 
     return (
@@ -140,7 +197,11 @@ function CancelOrder() {
 
                                     <label className='label'>Order Id</label>
 
-                                    <BasicTextFields></BasicTextFields>
+                                    <BasicTextField
+                                        value={orderId}
+                                        onChange={handleIdChange}
+                                        onKeyDown={handleEnterPress}
+                                    />
 
                                 </div>
 
@@ -148,7 +209,9 @@ function CancelOrder() {
 
                                     <label className='label'>Receiver</label>
 
-                                    <BasicTextFields></BasicTextFields>
+                                    <BasicTextField
+                                        value={order.orderReceiverName}
+                                    />
 
                                 </div>
 
@@ -156,7 +219,9 @@ function CancelOrder() {
 
                                     <label className='label'>Items</label>
 
-                                    <BasicTextFields></BasicTextFields>
+                                    <BasicTextField
+                                        value={order.orderItems}
+                                    />
 
                                 </div>
 
@@ -164,7 +229,9 @@ function CancelOrder() {
 
                                     <label className='label'>Amount</label>
 
-                                    <BasicTextFields></BasicTextFields>
+                                    <BasicTextField
+                                        value={order.orderPrice}
+                                    />
 
                                 </div>
 
@@ -172,7 +239,10 @@ function CancelOrder() {
 
                                     <label className='label'>Reasons</label>
 
-                                    <BasicTextFields></BasicTextFields>
+                                    <BasicTextField
+                                        value={orderCancelReason}
+                                        onChange={(e) => setOrderCancelReason(e.target.value)}
+                                    />
 
                                 </div>
 
@@ -201,7 +271,7 @@ function CancelOrder() {
                                     </CustomizedButton>
 
                                     <CustomizedButton
-                                        onClick={() =>{alert("Order has been Cancelled")}}
+                                        onClick={handleCancelOrder}
                                         hoverBackgroundColor="#f11717"
                                         style={{
                                             color: '#ffffff',

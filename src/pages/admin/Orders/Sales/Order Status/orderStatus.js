@@ -60,7 +60,7 @@ function OrderStatus() {
         newStatuses[index] = event.target.value;
         setStatuses(newStatuses);
         try {
-            await axios.put(`http://localhost:9000/order/update-status/${orderId}`, { orderStatus: event.target.value });
+            await axios.put(`http://localhost:9000/order/update/${orderId}`, { orderStatus: event.target.value });
         } catch (error) {
             console.error('Error updating order status:', error);
         }
