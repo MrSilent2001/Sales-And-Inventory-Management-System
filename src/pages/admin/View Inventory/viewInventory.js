@@ -14,7 +14,7 @@ import SearchBar from "../../../components/search bar/search bar";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 import ComboBox from "../../../components/Form Inputs/comboBox";
 import axios from "axios";
-import MultiActionAreaCard from "../../../components/Cards/catalogCard";
+import MultiActionAreaCard from "../../../components/Cards/inventoryCard";
 
 function ViewInventory(){
     const [visible, setVisible] = useState(false);

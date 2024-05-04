@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./catalog.css";
-import MultiActionAreaCard from '../../../../src/components/Cards/catalogCard';
+import MultiActionAreaCard from '../../../components/Cards/catalogCard';
 import Checkboxes from '../../../components/Form Inputs/checkbox';
 import Footer from "../../../layout/footer/footer";
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
@@ -216,7 +216,7 @@ function ProductCatalog() {
                 <div className="customerItemGrid">
                     {products.map((item) => (
                         <div className="card" key={item.id} >
-                            <MultiActionAreaCard item={item} handleClick={handleClick} />
+                            <MultiActionAreaCard item={item} handleClick={handleClick}/>
                         </div>
                     ))}
                 </div>
