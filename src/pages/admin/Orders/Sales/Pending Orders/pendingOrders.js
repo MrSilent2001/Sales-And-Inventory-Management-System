@@ -5,7 +5,6 @@ import Footer from "../../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../../../components/Button/button";
 import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
-import pendingOrders from "../../../../../data/data.json";
 import axios from "axios";
 
 function PendingOrders() {
@@ -36,6 +35,7 @@ function PendingOrders() {
                 return row;
             });
             setRows(updatedRows);
+            alert("Order " + orderStatus);
         } catch (error) {
             console.error('Error updating order status:', error);
         }
@@ -103,61 +103,6 @@ function PendingOrders() {
             ),
         }
     ];
-
-    // const mappedData = rows.map(row => ({
-    //     order_id: row.orderId,
-    //     customer_name: row.orderReceiverName,
-    //     amount: row.orderPrice,
-    //     orderStatus: row.orderStatus,
-    //
-    //
-    //     actions: (
-    //         <div style={{ display: 'flex' }}>
-    //             <CustomizedButton
-    //                 // onClick={() => { alert("Order has been Accepted") }}
-    //                 onClick={() => handleOrderStatus(row.orderId, "Accepted")}
-    //                 hoverBackgroundColor="#2d3ed2"
-    //                 style={{
-    //                     color: '#ffffff',
-    //                     backgroundColor: '#242F9B',
-    //                     border: '1px solid #242F9B',
-    //                     width: '6em',
-    //                     height: '2.5em',
-    //                     fontSize: '0.95em',
-    //                     fontFamily: 'inter',
-    //                     padding: '0.5em 0.625em',
-    //                     borderRadius: '0.35em',
-    //                     fontWeight: '550',
-    //                     marginTop: '0.625em',
-    //                     marginRight: '1.5em',
-    //                     textTransform: 'none',
-    //                     textAlign: 'center',
-    //                 }}>
-    //                 Accept
-    //             </CustomizedButton>
-    //
-    //             <CustomizedButton
-    //                 onClick={() => { alert("Order has been Rejected") }}
-    //                 hoverBackgroundColor="#f11717"
-    //                 style={{
-    //                     color: '#ffffff',
-    //                     backgroundColor: '#960505',
-    //                     width: '6em',
-    //                     height: '2.5em',
-    //                     fontSize: '0.95em',
-    //                     fontFamily: 'inter',
-    //                     padding: '0.5em 0.625em',
-    //                     borderRadius: '0.35em',
-    //                     fontWeight: '550',
-    //                     marginTop: '0.625em',
-    //                     textTransform: 'none',
-    //                     textAlign: 'center',
-    //                 }}>
-    //                 Reject
-    //             </CustomizedButton>
-    //         </div>
-    //     )
-    // }));
 
     const mappedData = rows
         .filter(row => row.orderStatus === 'Pending')

@@ -43,7 +43,7 @@ function CancelOrder() {
             };
             const response = await axios.put(`http://localhost:9000/order/update/${orderId}`, updatedOrder);
             if (response.status === 200) {
-                alert("Order Details Successfully Updated");
+                alert("Order Successfully Cancelled");
                 // Optionally, you can fetch the order again to update the state
                 fetchOrderById(orderId);
             } else {

@@ -68,15 +68,18 @@ function OrderStatus() {
 
         // Options to dropdown
     const options = [
+        { value: 'Pending', label: 'Pending' },
         { value: 'Accepted', label: 'Accepted' },
+        { value: 'Rejected', label: 'Rejected' },
         { value: 'In-Processing', label: 'In-Processing' },
         { value: 'Departed', label: 'Departed' },
+        { value: 'Cancelled', label: 'Cancelled' },
         
      
     ];
 
     const mappedData = orderStatusRows
-        .filter(row => row.orderStatus === 'Accepted' || row.orderStatus === 'In-Processing' || row.orderStatus === 'Departed')
+        .filter(row => row.orderStatus === 'Accepted' || row.orderStatus === 'In-Processing' || row.orderStatus === 'Departed' || row.orderStatus === 'Rejected' || row.orderStatus === 'Cancelled')
         .sort((a, b) => a.orderId - b.orderId)
         .map((row, index) => ({
         id: row.orderId,
