@@ -16,12 +16,17 @@ const [values, setValues] = useState({
     confirmPassword:''
 });
 
+const [showPassword, setShowPassword] = React.useState(false);
+
 const [errors,setErrors] = useState({});
 
 const handleInput = (e) => {
     setValues({...values, [e.target.name]: e.target.value});
 }
 
+const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+};
 
     const handleValidation = (e) => {
         e.preventDefault();
@@ -61,12 +66,12 @@ const handleInput = (e) => {
                                     size="small"
                                     id="outlined-required"
                                     label="Username"
+                                    style={{marginBottom:'0.4em'}}
                                     name="username"
                                     onChange={handleInput}
                                 />
-                                {errors.username && <p style={{color:"red"}}>{errors.username}</p>}
                             </div>
-                            
+                            {errors.username && <p className= "displayError" style={{color:"red"}}>{errors.username}</p>}
 
                             <div className="row">
                                 <label style={{paddingRight: "90px"}}> Email: </label>
@@ -75,13 +80,13 @@ const handleInput = (e) => {
                                     size="small"
                                     id="outlined-required"
                                     label="Email"
+                                    style={{marginBottom:'0.4em'}}
                                     type="email"
                                     name="email"
                                     onChange={handleInput}
                                 />
-                                {errors.email && <p style={{color:"red"}}>{errors.email}</p>}
                             </div>
-                            
+                            {errors.email && <p className= "displayError" style={{color:"red"}}>{errors.email}</p>}
 
                             <div className="row">
                                 <label style={{paddingRight: "50px"}}> Contact No: </label>
@@ -90,41 +95,46 @@ const handleInput = (e) => {
                                     size="small"
                                     id="outlined-required"
                                     label="Contact No"
+                                    style={{marginBottom:'0.4em'}}
                                     type="number"
                                     name="contactNo"
                                     onChange={handleInput}
                                 />
-                                {errors.contactNo && <p style={{color:"red"}}>{errors.contactNo}</p>}
                             </div>
-                            
+                            {errors.contactNo && <p className= "displayError" style={{color:"red"}}>{errors.contactNo}</p>}
 
                             <div className="row">
                                 <label>Password: </label>
                                 <PasswordField
                                     placeholder="Password"
-                                    style={{width:'15.25em', marginLeft: '1em'}}
+                                    style={{width:'15.25em', marginLeft: '0.85em',marginBottom:'0'}}
                                     name="password" 
                                     onChange={handleInput}
+                                    showPassword={showPassword}
+                                    handleClickShowPassword={handleClickShowPassword}
                                 />
-                                {errors.password && <p style={{color:"red"}}>{errors.password}</p>}
+                                
                             </div>
-                            
+                            {errors.password && <p  className= "displayError"style={{color:"red"}}>{errors.password}</p>}
 
 
                             <div className="row">
                                 <label style={{paddingRight: "5px"}}>Confirm Password: </label>
                                 <PasswordField
                                     placeholder="ConfirmPassword"
-                                    style={{width:'15.25em', marginLeft: '1em'}}
+                                    style={{width:'15.25em', marginLeft: '0.85em',marginBottom:'0'}}
                                     name="confirmPassword"
                                     onChange={handleInput}
+                                    showPassword={showPassword}
+                                    handleClickShowPassword={handleClickShowPassword}
                                 />
-                                {errors.confirmPassword && <p style={{color:"red"}}>{errors.confirmPassword}</p>}
+                               
                             </div>
-                            
+                            {errors.confirmPassword && <p className= "displayError" style={{color:"red"}}>{errors.confirmPassword}</p>}
+
                             <div className="btn-row">
                                 <CustomizedButton
-                                    hoverBackgroundColor="#2d3ed2"
+                                     onClick={handleValidation}
                                     style={{
                                         color: '#ffffff',
                                         backgroundColor: '#242F9B',
@@ -139,6 +149,7 @@ const handleInput = (e) => {
                                         marginTop: '0.625em',
                                         textTransform: 'none',
                                         textAlign: 'center',
+                                        hoverBackgroundColor:'#2d3ed2'
                                     }}>
                                     Sign Up
                                 </CustomizedButton>

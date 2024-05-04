@@ -21,7 +21,7 @@
  if (values.contactNo.trim() === ""){
     errors.contactNo="Contact No is required!";
  } else if(!contactNo_pattern.test(values.contactNo)) {
-    errors.contactNo="This is not valid email format!";
+    errors.contactNo="This is not valid contact number!";
  } else if(isNaN(values.contactNo)) {
     errors.contactNo="This is not a valid contact number!";
  }
@@ -35,8 +35,9 @@
 
  if (values.confirmPassword.trim() === ""){
     errors.confirmPassword="Confirm Password is required!";
- } else if (values.confirmPassword !== values.password) {
-    errors.confirmPassword = "Passwords did not matched!";
+ } else if (values.confirmPassword === "" || String (values.confirmPassword !== values.password)) {
+   console.log(values.confirmPassword + "___" + values.password)
+   errors.confirmPassword = "Passwords did not matched!";
 }
   return errors;
 
