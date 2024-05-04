@@ -1,15 +1,46 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import "../navbar.css";
 import logo from "../../../assets/images/logo.png";
 import {NavLink} from "react-router-dom";
 import {MdLogout} from "react-icons/md";
+import Badge from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { CartElement } from "@stripe/react-stripe-js";
+
 
 function CustomerNavbar(){
-
     const [selectedNavLink, setSelectedNavLink] = useState(null);
     const handleNavLinkClick = (event) => {
         setSelectedNavLink(event.target.name);
     };
+
+    const [cartItemCount, setCartItemCount] = useState(0);
+    const [storedCart, setStoredCart] = useState([]);
+
+    useEffect(() => {
+        setStoredCart(JSON.parse(localStorage.getItem("cart")));
+        if (storedCart) {
+            // Calculate total amount for all items in the cart
+            const totalAmount = storedCart.reduce((total, item) => total + (item.amount), 0);
+
+            // Store total amount in cartItemCount
+            setCartItemCount(totalAmount);
+        }
+    }, [storedCart]);
+
+
+    const StyledBadge = styled(Badge)(({ theme }) => ({
+        '& .MuiBadge-badge': {
+            right: -3,
+            top: 13,
+            padding: '0 4px',
+
+        },
+    }));
+
+
 
     return(
         <div className="navbar">
@@ -19,16 +50,22 @@ function CustomerNavbar(){
             <div className="navigation">
                 <NavLink to="/customerHome">Home</NavLink>
                 <NavLink to="/products">Products</NavLink>
-                <NavLink to="/cart">Cart</NavLink>
                 <NavLink to="/customerProfile">Profile</NavLink>
                 <NavLink to="/refundRequests">Refunds</NavLink>
+                <NavLink to="/cart">
+                    <IconButton aria-label="cart">
+                        <StyledBadge badgeContent={cartItemCount} color="primary">
+                            <ShoppingCartIcon sx={{color:'white'}} />
+                        </StyledBadge>
+                    </IconButton>
+                </NavLink>
                 <NavLink
                     to="/logout"
                     name="logout"
-                    className={`navLink ${selectedNavLink === "logout" ? "selected" : ""}`}
+                    className={'navLink ${selectedNavLink === "logout" ? "selected" : ""}'}
                     onClick={handleNavLinkClick}
                 >
-                    <MdLogout style={{width:'18px', height:'18px'}}/>
+                    <MdLogout />
                 </NavLink>
             </div>
         </div>
