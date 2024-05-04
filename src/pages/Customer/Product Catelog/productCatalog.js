@@ -213,7 +213,7 @@ function ProductCatalog() {
 
 
                 </div>
-                <div className="grid">
+                <div className="customerItemGrid">
                     {products.map((item) => (
                         <div className="card" key={item.id} >
                             <MultiActionAreaCard item={item} handleClick={handleClick} />
