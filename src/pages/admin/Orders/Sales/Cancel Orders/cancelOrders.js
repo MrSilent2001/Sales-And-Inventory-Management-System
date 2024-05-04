@@ -68,7 +68,7 @@ function CancelOrder() {
 
     useEffect(() => {
         fetchOrderById(orderId);
-    }, []);
+    }, [orderId]);
 
 
     return (
@@ -201,6 +201,8 @@ function CancelOrder() {
                                         value={orderId}
                                         onChange={handleIdChange}
                                         onKeyDown={handleEnterPress}
+                                        helperText={orderId === '' ? 'Please enter the ID' : ''}
+                                        error={orderId === '' ? 'Please enter the ID' : ''}
                                     />
 
                                 </div>
@@ -211,6 +213,7 @@ function CancelOrder() {
 
                                     <BasicTextField
                                         value={order.orderReceiverName}
+                                        disabled={!orderId}
                                     />
 
                                 </div>
@@ -221,6 +224,7 @@ function CancelOrder() {
 
                                     <BasicTextField
                                         value={order.orderItems}
+                                        disabled={!orderId}
                                     />
 
                                 </div>
@@ -231,6 +235,7 @@ function CancelOrder() {
 
                                     <BasicTextField
                                         value={order.orderPrice}
+                                        disabled={!orderId}
                                     />
 
                                 </div>
@@ -242,6 +247,7 @@ function CancelOrder() {
                                     <BasicTextField
                                         value={orderCancelReason}
                                         onChange={(e) => setOrderCancelReason(e.target.value)}
+                                        disabled={!orderId}
                                     />
 
                                 </div>
