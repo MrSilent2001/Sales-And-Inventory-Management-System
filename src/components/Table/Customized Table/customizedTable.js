@@ -16,7 +16,8 @@ function CustomizedTable({columns, rows, style}) {
 
         [`&.${tableCellClasses.body}`]: {
             fontSize: '0.70em',
-            textAlign: 'center'
+            textAlign: 'center',
+            color:'black'
         }
     }));
 

@@ -5,6 +5,7 @@ import {NavLink} from "react-router-dom";
 import {MdLogout} from "react-icons/md";
 
 function CustomerNavbar(){
+
     const [selectedNavLink, setSelectedNavLink] = useState(null);
     const handleNavLinkClick = (event) => {
         setSelectedNavLink(event.target.name);

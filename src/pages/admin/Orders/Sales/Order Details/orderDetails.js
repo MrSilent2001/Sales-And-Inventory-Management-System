@@ -1,17 +1,90 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./orderDetails.css";
 import Footer from "../../../../../layout/footer/footer";
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import CustomizedButton from "../../../../../components/Button/button";
 import BasicTextField from "../../../../../components/Form Inputs/textfield";
+import axios from "axios";
 
 function OrderDetails() {
     const [activeButton, setActiveButton] = useState(null);
+    const [orderId, setOrderId] = useState('');
+    const [order, setOrder] = useState({
+        orderId: '',
+        orderReceiverName: '',
+        orderReceiverAddress: '',
+        orderReceiverContact: '',
+        orderItems: '',
+        orderPrice: '',
+        orderStatus: '',
+        orderCancelReason: ''
+    });
+
+    // Separate state variables for each text field
+    const [receiverName, setReceiverName] = useState('');
+    const [receiverAddress, setReceiverAddress] = useState('');
+    const [receiverContact, setReceiverContact] = useState('');
+    const [orderItems, setOrderItems] = useState('');
+    const [orderPrice, setOrderPrice] = useState('');
+
+    const fetchOrderById = async (orderId) => {
+        try {
+            const response = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`);
+            setOrder(response.data);
+            // Set the text field values when order is fetched
+            setReceiverName(response.data.orderReceiverName);
+            setReceiverAddress(response.data.orderReceiverAddress);
+            setReceiverContact(response.data.orderReceiverContact);
+            setOrderItems(response.data.orderItems);
+            setOrderPrice(response.data.orderPrice);
+        } catch (error) {
+            console.error('Error fetching order:', error);
+        }
+    };
+
+    const handleUpdateOrder = async () => {
+        try {
+            const updatedOrder = {
+                orderReceiverName: receiverName,
+                orderReceiverAddress: receiverAddress,
+                orderReceiverContact: receiverContact,
+                orderItems: orderItems,
+                orderPrice: orderPrice
+            };
+            const response = await axios.put(`http://localhost:9000/order/update/${orderId}`, updatedOrder);
+            if (response.status === 200) {
+                alert("Order Details Successfully Updated");
+                // Optionally, you can fetch the order again to update the state
+                fetchOrderById(orderId);
+            } else {
+                alert("Failed to update order details");
+            }
+        } catch (error) {
+            console.error('Error updating order:', error);
+            alert("Failed to update order details");
+        }
+    };
 
     const handleButtonClick = (buttonText) => {
         setActiveButton(buttonText);
     };
+
+    const handleEnterPress = async (event) => {
+        if (event.key === 'Enter') {
+            fetchOrderById(orderId);
+            await event.preventDefault();
+        }
+    };
+
+    const handleIdChange = (event) => {
+        setOrderId(event.target.value);
+    };
+
+    useEffect(() => {
+        fetchOrderById(orderId);
+    }, []);
+
 
     return (
         <>
@@ -136,56 +209,57 @@ function OrderDetails() {
                         <div className="updateFormbox">
                             <form>
                                 <div className="textSection">
-
                                     <label className='label'>Order Id</label>
-
-                                    <BasicTextField/>
-
+                                    <BasicTextField
+                                        value={orderId}
+                                        onChange={handleIdChange}
+                                        onKeyDown={handleEnterPress}
+                                    />
                                 </div>
 
                                 <div className="textSection">
-
                                     <label className='label'>Receiver</label>
-
-                                    <BasicTextField/>
-
+                                    <BasicTextField
+                                        value={receiverName}
+                                        onChange={(e) => setReceiverName(e.target.value)}
+                                    />
                                 </div>
 
                                 <div className="textSection">
-
                                     <label className='label'>Address</label>
-
-                                    <BasicTextField/>
-
+                                    <BasicTextField
+                                        value={receiverAddress}
+                                        onChange={(e) => setReceiverAddress(e.target.value)}
+                                    />
                                 </div>
 
                                 <div className="textSection">
-
                                     <label className='label'>Contact</label>
-
-                                    <BasicTextField/>
-
+                                    <BasicTextField
+                                        value={receiverContact}
+                                        onChange={(e) => setReceiverContact(e.target.value)}
+                                    />
                                 </div>
 
                                 <div className="textSection">
-
                                     <label className='label'>Items</label>
-
-                                    <BasicTextField/>
-
+                                    <BasicTextField
+                                        value={orderItems}
+                                        onChange={(e) => setOrderItems(e.target.value)}
+                                    />
                                 </div>
 
                                 <div className="textSection">
-
                                     <label className='label'>Amount</label>
-
-                                    <BasicTextField/>
-
+                                    <BasicTextField
+                                        value={orderPrice}
+                                        onChange={(e) => setOrderPrice(e.target.value)}
+                                    />
                                 </div>
 
                                 <div className="UpdateformButtons">
                                     <CustomizedButton
-                                        onClick={() =>{alert("Order Details Successfully Updated")}}
+                                        onClick={handleUpdateOrder}
                                         hoverBackgroundColor="#2d3ed2"
                                         style={{
                                             color: '#ffffff',
@@ -200,7 +274,7 @@ function OrderDetails() {
                                             fontWeight: '550',
                                             marginTop: '-3em',
                                             marginRight: '1.5em',
-                                            marginLeft:'6em',
+                                            marginLeft: '6em',
                                             textTransform: 'none',
                                             textAlign: 'center',
                                         }}>

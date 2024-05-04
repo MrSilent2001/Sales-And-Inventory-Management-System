@@ -2,7 +2,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-export default function BasicTextField({ id, name, variant, size, type, style, value, onChange, error }) {
+export default function BasicTextField({ id, name, variant, size, type, style, value, onChange, error, onKeyDown }) {
   return (
       <Box
           component="form"
@@ -33,6 +33,7 @@ export default function BasicTextField({ id, name, variant, size, type, style, v
             required
             value={value}
             onChange={onChange}
+            onKeyDown={onKeyDown}
             error={error}
             helperText={error ? "This field is required" : ""}
             InputLabelProps={{
