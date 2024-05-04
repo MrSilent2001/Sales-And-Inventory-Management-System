@@ -59,7 +59,7 @@
 .updateFormbox{
     background-color: white;
     width:58em;
-    height:32em;
+    height:29em;
     border-radius : 0.2em;
     margin-left: 12em;
     margin-top: 1em;
@@ -90,6 +90,6 @@
 
 .UpdateformButtons{
     display: flex;
-    margin-top: 1.7em;
+    margin-top: 2.5em;
     margin-left: 34em;
 }

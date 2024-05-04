@@ -80,9 +80,9 @@ function CancelOrder() {
                     <div className="cancelOrderFilter">
                         <SalesOrderSidebar/>
                     </div>
-                    <div className="orderDetailsInner">
+                    <div className="cancelOrderInner">
 
-                        <div className="formbox">
+                        <div className="cancelOrderformbox">
                             <form>
                                 <div className="textSection">
 
