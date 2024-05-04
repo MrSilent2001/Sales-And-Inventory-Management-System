@@ -17,13 +17,19 @@ function CustomerNavbar(){
     };
 
     const [cartItemCount, setCartItemCount] = useState(0);
+    const [storedCart, setStoredCart] = useState([]);
 
     useEffect(() => {
-        const storedCart = JSON.parse(localStorage.getItem("cart"));
+        setStoredCart(JSON.parse(localStorage.getItem("cart")));
         if (storedCart) {
-            setCartItemCount(storedCart.length); // Update item count when cart is loaded
+            // Calculate total amount for all items in the cart
+            const totalAmount = storedCart.reduce((total, item) => total + (item.amount), 0);
+
+            // Store total amount in cartItemCount
+            setCartItemCount(totalAmount);
         }
-    }, []);
+    }, [storedCart]);
+
 
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
