@@ -1,58 +1,75 @@
 import React, {useState} from 'react';
 import "./login.css";
 import TextField from "@mui/material/TextField";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
 import PasswordField from "../../../components/Form Inputs/passwordField";
-import ComboBox from "../../../components/Form Inputs/comboBox";
+import FormControl from "@mui/material/FormControl";
+import axios from "axios";
 
 const Login = () => {
+    const navigate = useNavigate();
 
     const [showPassword, setShowPassword] = React.useState(false);
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [role, setRole] = useState("");
-
-    const handleChange = (event) => {
-        setRole(event.target.value);
-    };
-
-    const options = [
-        { value: 'admin', label: 'Admin' },
-        { value: 'customer', label: 'Customer' },
-        { value: 'supplier', label: 'Supplier' },
-    ];
+    const [formData, setFormData] = useState({
+        username: '',
+        password: ''
+    });
 
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
-
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
 
-    const navigate = useNavigate();
-    const location = useLocation();
-    const redirectPath = location.state?.path || "/login";
 
-    const handleLogin = () => {
-        navigate(redirectPath, {replace:true});
+    const handleChange = (name, value) => {
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+        console.log(formData);
+    };
 
-        if (username === "admin" && password === "12345" && role === "admin") {
-            console.log(username+" "+ password+" "+role);
-            // Redirect to admin dashboard
-            navigate("/salesLanding", { replace: true });
-        } else if (username === "customer" && password === "12345" && role === "customer") {
-            console.log(username+" "+ password+" "+role);
-            // Redirect to customer dashboard
-            navigate("/customerHome", { replace: true });
-        } else if (username === "supplier" && password === "12345" && role === "supplier") {
-            console.log(username+" "+ password+" "+role);
-            // Redirect to supplier dashboard
-            navigate("/supplierDashboard", { replace: true });
-        } else {
-            console.log(username+" "+ password+" "+role);
-            console.log("Invalid username, password, or role");
+    const handleSubmit = async (e) =>{
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:9000/auth/login', {
+                username: formData.username,
+                password: formData.password
+            });
+
+            // backend returned tokens in the response data
+            const { accessToken, refreshToken, id, username, email, contactNo, role } = response.data.result;
+
+            // Store tokens in localStorage or sessionStorage
+            localStorage.setItem('accessToken', accessToken);
+            localStorage.setItem('refreshToken', refreshToken);
+            localStorage.setItem('role', role);
+            localStorage.setItem('contactNo', contactNo);
+            localStorage.setItem('email', email);
+            localStorage.setItem('username', username);
+            localStorage.setItem('id', id);
+
+            // Optionally, you can return the tokens or any other data from the response
+            console.log(id);
+
+
+            if(role === "admin"){
+                navigate("/salesLanding");
+            }
+            if(role === "customer"){
+                navigate("/customerHome");
+            }
+            if(role === "supplier"){
+                navigate("/supplierDashboard");
+            }
+
+        } catch (error) {
+            // Handle login error
+            console.error('Login error:', error);
+            throw error;
         }
     }
 
@@ -69,7 +86,7 @@ const Login = () => {
             <div className='RightContainer'>
                 <div className="loginForm">
                     <h2 id="login">Login</h2>
-                    <form >
+                    <FormControl onSubmit={handleSubmit} >
                         <div className="loginInnerContainer">
                             <div className="row">
                                 <label> Username: </label>
@@ -79,7 +96,7 @@ const Login = () => {
                                     id="outlined-required"
                                     label="Username"
                                     style={{width: '14em', marginLeft: '2em',marginBottom:'1em'}}
-                                    onChange={(e) => setUsername(e.target.value)}
+                                    onChange={(e) => handleChange("username", e.target.value)}
                                     required
                                 />
                             </div>
@@ -89,30 +106,16 @@ const Login = () => {
                                 <PasswordField
                                     placeholder="Password"
                                     style={{width: '14em', marginLeft: '2em',marginBottom:'1em'}}
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    onChange={(e) => handleChange("password", e.target.value)}
                                     showPassword={showPassword}
                                     handleClickShowPassword={handleClickShowPassword}
                                     handleMouseDownPassword={handleMouseDownPassword}
                                 />
                             </div>
 
-
-                            <div className="row">
-                                <label style={{paddingRight: "50px",marginBottom:'1em'}}>Role: </label>
-                                <ComboBox
-                                    className="loginInput"
-                                    value={role}
-                                    onChange={handleChange}
-                                    style={{width: '14em'}}
-                                    options={options}
-                                    label="Category"
-                                    size="small"
-                                />
-                            </div>
-
                             <div className="btn-row">
                                 <CustomizedButton
-                                    onClick={handleLogin}
+                                    onClick={handleSubmit}
                                     hoverBackgroundColor="#2d3ed2"
                                     style={{
                                         color: '#ffffff',
@@ -125,9 +128,7 @@ const Login = () => {
                                         borderRadius: '0.625em',
                                         fontWeight: '550',
                                         border: 'none',
-                                        marginTop: '0.625em',
-                                        textTransform: 'none',
-                                        textAlign: 'center',
+                                        marginTop: '0.625em'
                                     }}>
                                     Login
                                 </CustomizedButton>
@@ -140,7 +141,7 @@ const Login = () => {
                                 <a href="/">Forgot Password?</a>
                             </div>
                         </div>
-                    </form>
+                    </FormControl>
                 </div>
             </div>
         </div>

@@ -1,44 +1,81 @@
 import React, { useState } from 'react';
 import "./signup.css";
 import TextField from "@mui/material/TextField";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
 import PasswordField from "../../../components/Form Inputs/passwordField";
 import Validation from '../validation';
+import axios from "axios";
+import FormControl from "@mui/material/FormControl";
+import ComboBox from "../../../components/Form Inputs/comboBox";
 
 function SignUp() {
+    const navigate = useNavigate();
 
-    const [values, setValues] = useState({
+    const [formData, setFormData] = useState({
         username: '',
         email: '',
         contactNo: '',
         password: '',
-        confirmPassword:''
+        role: ''
     });
 
     const [showPassword, setShowPassword] = React.useState(false);
-
     const [errors,setErrors] = useState({});
 
+    const handleChange = (event) => {
+        setFormData({ ...formData, role: event.target.value });
+    };
+
+
+    const options = [
+        { value: 'admin', label: 'Admin' },
+        { value: 'customer', label: 'Customer' },
+        { value: 'supplier', label: 'Supplier' },
+    ];
+
     const handleInput = (e) => {
-        setValues({...values, [e.target.name]: e.target.value});
+        setFormData({...formData, [e.target.name]: e.target.value});
+        console.log(formData)
     }
 
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
 
-    const handleValidation = (e) => {
+    // const handleValidation = (e) => {
+    //     const validationErrors = Validation(formData);
+    //     setErrors(validationErrors);
+    //     if (Object.keys(validationErrors).length === 0) {
+    //         // Proceed with form submission
+    //         console.log("Form submitted successfully!");
+    //     } else {
+    //         console.log("Form validation failed!");
+    //     }
+    // };
+
+    const handleSubmit = async (e) =>{
         e.preventDefault();
-        const validationErrors = Validation(values);
-        setErrors(validationErrors);
-        if (Object.keys(validationErrors).length === 0) {
-            // Proceed with form submission
-            console.log("Form submitted successfully!");
-        } else {
-            console.log("Form validation failed!");
+        try {
+            const response = await axios.post('http://localhost:9000/auth/signup', {
+                username: formData.username,
+                password: formData.password,
+                email: formData.email,
+                contactNo: formData.contactNo,
+                role: formData.role
+            });
+
+            console.log(formData.role);
+
+            navigate("/login");
+
+
+        } catch (error) {
+            // Handle login error
+            console.error('Login error:', error);
+            throw error;
         }
-    };
+    }
 
     return (
         <div className='S-MainContainer'>
@@ -51,13 +88,8 @@ function SignUp() {
             <div className='S-RightContainer'>
                 <div className="SignupForm">
                     <h2 id="Signup">SignUp</h2>
-                    {/*{Object.keys(formErrors).length === 0 && isSubmit ? (
-                <div className="ui message success">Signed in Successfully!</div>
-                ): (
-                    <pre>{JSON.stringify(formValues,undefined,2)}</pre>
-                )}*/}
 
-                    <form onSubmit={handleValidation}>
+                    <FormControl onSubmit={handleSubmit} >
                         <div className="SignupInnerContainer">
                             <div className="row">
                                 <label style={{paddingRight: "60px"}}> Username: </label>
@@ -132,9 +164,21 @@ function SignUp() {
                             </div>
                             {errors.confirmPassword && <p className= "displayError" style={{color:"red"}}>{errors.confirmPassword}</p>}
 
+                            <div className="row">
+                                <label style={{paddingRight: "50px",marginBottom:'1em'}}>Role: </label>
+                                <ComboBox
+                                    className="loginInput"
+                                    onChange={handleChange}
+                                    style={{width: '14em'}}
+                                    options={options}
+                                    label="Category"
+                                    size="small"
+                                />
+                            </div>
+
                             <div className="btn-row">
                                 <CustomizedButton
-                                    onClick={handleValidation}
+                                    onClick={handleSubmit}
                                     style={{
                                         color: '#ffffff',
                                         backgroundColor: '#242F9B',
@@ -161,7 +205,7 @@ function SignUp() {
                                 </p>
                             </div>
                         </div>
-                    </form>
+                    </FormControl>
                 </div>
             </div>
         </div>
