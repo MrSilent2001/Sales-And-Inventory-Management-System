@@ -13,7 +13,7 @@ import BasicTextField from "../../../components/Form Inputs/textfield";
 
 function SupplierProfile() {
 
-    const [supplier, setSupplier] = useState('');
+    const [supplier, setSupplier] = useState({});
     const [openError, setOpenError] = useState(false);
 
     const handleClickError = () => {
@@ -107,8 +107,8 @@ function SupplierProfile() {
                             <Avatar src="/broken-image.jpg"
                                     sx={{width: 230, height: 230, border: 2, borderRadius: 2, marginTop: '-0.8em'}}
                             />
-                            <h3>{supplier[0].supplierName}</h3>
-                            <h4 style={{textAlign:'left'}}>ID:{supplier[0].id}</h4>
+                            <h3>{supplier[0]?.supplierName}</h3>
+                            <h4 style={{textAlign:'left'}}>ID:{supplier[0]?.id}</h4>
 
                         </div>
                     </div>
@@ -120,7 +120,7 @@ function SupplierProfile() {
                                     <h5>Address:</h5>
                                 </div>
                                 <div className="SupplierProfileInput">
-                                    <span>{supplier[0].supplierAddress}</span>
+                                    <span>{supplier[0]?.supplierAddress}</span>
                                 </div>
                             </div>
 
@@ -129,7 +129,7 @@ function SupplierProfile() {
                                     <h5>Email:</h5>
                                 </div>
                                 <div className="SupplierProfileInput">
-                                    <span>{supplier[0].supplierEmail}</span>
+                                    <span>{supplier[0]?.supplierEmail}</span>
                                 </div>
                             </div>
 
@@ -138,7 +138,7 @@ function SupplierProfile() {
                                     <h5>Contact No:</h5>
                                 </div>
                                 <div className="SupplierProfileInput">
-                                    <span>{supplier[0].supplierContact}</span>
+                                    <span>{supplier[0]?.supplierContact}</span>
                                 </div>
                             </div>
 
@@ -147,7 +147,7 @@ function SupplierProfile() {
                                     <h5>NIC:</h5>
                                 </div>
                                 <div className="SupplierProfileInput">
-                                    <span>{supplier[0].nic}</span>
+                                    <span>{supplier[0]?.nic}</span>
                                 </div>
                             </div>
 
@@ -156,7 +156,7 @@ function SupplierProfile() {
                                     <h5>Payment Method:</h5>
                                 </div>
                                 <div className="SupplierProfileInput">
-                                    <span>{supplier[0].paymentMethod}</span>
+                                    <span>{supplier[0]?.paymentMethod}</span>
                                 </div>
                             </div>
 
@@ -165,13 +165,13 @@ function SupplierProfile() {
                                     <h5>Payment Details:</h5>
                                 </div>
                                 <div className="SupplierProfileInput">
-                                    <span>{supplier[0].paymentDetails}</span>
+                                    <span>{supplier[0]?.paymentDetails}</span>
                                 </div>
                             </div>
 
                             <div className="SupplierProfileButtonField">
                                 <div className="SupplierProfileButtons">
-                                    <Link to="/updateSupplier">
+                                    <Link to={{ pathname: "/updateSupplier", state: { supplierData: supplier[0] } }}>
                                     <CustomizedButton
                                         hoverBackgroundColor="#2d3ed2"
                                         style={{

@@ -6,8 +6,21 @@ import CustomizedButton from "../../../components/Button/button";
 import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navbar";
 import BasicTextField from "../../../components/Form Inputs/textfield";
 import FileUpload from "../../../components/Form Inputs/fileUpload";
+import {useState} from "react";
 
-function UpdateSupplier() {
+function UpdateSupplier(props) {
+    const { supplierData } = props.location.state;
+    const [formData, setFormData] = useState(supplierData);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Add logic to submit updated supplier data
+    };
     return (
         <>
             <SupplierNavbar/>
