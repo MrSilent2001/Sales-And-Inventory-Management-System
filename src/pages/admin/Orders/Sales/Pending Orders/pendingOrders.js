@@ -7,10 +7,30 @@ import CustomizedButton from "../../../../../components/Button/button";
 import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 import axios from "axios";
 import SalesOrderSidebar from "../../../../../layout/sidebar/salesOrderSidebar";
+import CustomizedAlert from "../../../../../components/Alert/alert";
 
 function PendingOrders() {
     const [activeButton, setActiveButton] = useState(null);
     const [rows, setRows] = useState([]);
+
+    const [openAccept, setOpenAccept] = useState(false);
+    const [openReject, setOpenReject] = useState(false);
+
+    const handleClickAccept = () => {
+        setOpenAccept(true);
+    };
+
+    const handleClickReject = () => {
+        setOpenReject(true);
+    };
+
+    const handleCloseAccept = () => {
+        setOpenAccept(false);
+    };
+
+    const handleCloseReject = () => {
+        setOpenReject(false);
+    };
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -36,7 +56,13 @@ function PendingOrders() {
                 return row;
             });
             setRows(updatedRows);
-            alert("Order " + orderStatus);
+            if (orderStatus === "Accepted"){
+                handleClickAccept()
+            }
+
+            if (orderStatus === "Rejected"){
+                handleClickReject()
+            }
         } catch (error) {
             console.error('Error updating order status:', error);
         }
@@ -185,6 +211,21 @@ function PendingOrders() {
                     </div>
                 </div>
             </div>
+
+            <CustomizedAlert
+                open={openAccept}
+                onClose={handleCloseAccept}
+                severity="success"
+                message="Order Accepted!"
+            />
+
+            <CustomizedAlert
+                open={openReject}
+                onClose={handleCloseReject}
+                severity="error"
+                message="Order Rejected!"
+            />
+
             <Footer/>
         </>
     );

@@ -9,6 +9,7 @@ import orderStatus from "../../../../../data/data.json";
 import ComboBox from "../../../../../components/Form Inputs/comboBox";
 import axios from "axios";
 import SalesOrderSidebar from "../../../../../layout/sidebar/salesOrderSidebar";
+import CustomizedAlert from "../../../../../components/Alert/alert";
 
 let columns = [
     {columnId: 'id', label: 'Id', minWidth: 170, align: 'center'},
@@ -33,6 +34,16 @@ let columns = [
 function OrderStatus() {
     const [activeButton, setActiveButton] = useState(null);
 
+    const [openSuccess, setOpenSuccess] = useState(false);
+
+    const handleClickSuccess = () => {
+        setOpenSuccess(true);
+    };
+
+    const handleCloseSuccess = () => {
+        setOpenSuccess(false);
+    };
+
     const handleButtonClick = (buttonText) => {
         setActiveButton(buttonText);
     };
@@ -44,6 +55,7 @@ function OrderStatus() {
             try {
                 const response = await axios.get('http://localhost:9000/order/getAllOrders');
                 setOrderStatusRows(response.data);
+
             } catch (error) {
                 console.error('Error fetching users:', error);
             }
@@ -62,6 +74,7 @@ function OrderStatus() {
         setStatuses(newStatuses);
         try {
             await axios.put(`http://localhost:9000/order/update/${orderId}`, { orderStatus: event.target.value });
+            handleClickSuccess();
         } catch (error) {
             console.error('Error updating order status:', error);
         }
@@ -117,6 +130,13 @@ function OrderStatus() {
                     </div>
                 </div>
             </div>
+
+            <CustomizedAlert
+                open={openSuccess}
+                onClose={handleCloseSuccess}
+                severity="success"
+                message="Order Status Updated!"
+            />
             <Footer/>
         </>
     );

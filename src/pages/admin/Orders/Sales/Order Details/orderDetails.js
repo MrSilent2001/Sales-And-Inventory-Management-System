@@ -7,10 +7,21 @@ import CustomizedButton from "../../../../../components/Button/button";
 import BasicTextField from "../../../../../components/Form Inputs/textfield";
 import axios from "axios";
 import SalesOrderSidebar from "../../../../../layout/sidebar/salesOrderSidebar";
+import CustomizedAlert from "../../../../../components/Alert/alert";
 
 function OrderDetails() {
     const [activeButton, setActiveButton] = useState(null);
     const [orderId, setOrderId] = useState('');
+    const [openSuccess, setOpenSuccess] = useState(false);
+
+    const handleClickSuccess = () => {
+        setOpenSuccess(true);
+    };
+
+    const handleCloseSuccess = () => {
+        setOpenSuccess(false);
+    };
+
     const [order, setOrder] = useState({
         orderId: '',
         orderReceiverName: '',
@@ -32,8 +43,6 @@ function OrderDetails() {
     const fetchOrderById = async (orderId) => {
         try {
             const response = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`);
-            setOrder(response.data);
-            // Set the text field values when order is fetched
             setReceiverName(response.data.orderReceiverName);
             setReceiverAddress(response.data.orderReceiverAddress);
             setReceiverContact(response.data.orderReceiverContact);
@@ -42,6 +51,15 @@ function OrderDetails() {
         } catch (error) {
             console.error('Error fetching order:', error);
         }
+    };
+
+    const handleCancel = async () => {
+        setOrderId('');
+        setReceiverName('');
+        setReceiverAddress('');
+        setReceiverContact('');
+        setOrderItems('');
+        setOrderPrice('');
     };
 
     const handleUpdateOrder = async () => {
@@ -55,7 +73,7 @@ function OrderDetails() {
             };
             const response = await axios.put(`http://localhost:9000/order/update/${orderId}`, updatedOrder);
             if (response.status === 200) {
-                alert("Order Details Successfully Updated");
+                handleClickSuccess();
                 // Optionally, you can fetch the order again to update the state
                 fetchOrderById(orderId);
             } else {
@@ -180,6 +198,7 @@ function OrderDetails() {
                                     </CustomizedButton>
 
                                     <CustomizedButton
+                                        onClick={handleCancel}
                                         hoverBackgroundColor="#f11717"
                                         style={{
                                             color: '#ffffff',
@@ -208,6 +227,13 @@ function OrderDetails() {
                     </div>
                 </div>
             </div>
+            <CustomizedAlert
+                open={openSuccess}
+                onClose={handleCloseSuccess}
+                severity="success"
+                message="Order Details Updated Succefully!"
+            />
+            <Footer/>
             <Footer/>
         </>
     );

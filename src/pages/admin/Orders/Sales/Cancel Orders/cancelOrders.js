@@ -8,9 +8,20 @@ import CustomizedButton from "../../../../../components/Button/button";
 import axios from "axios";
 import BasicTextField from "../../../../../components/Form Inputs/textfield";
 import SalesOrderSidebar from "../../../../../layout/sidebar/salesOrderSidebar";
+import CustomizedAlert from "../../../../../components/Alert/alert";
 
 function CancelOrder() {
     const [activeButton, setActiveButton] = useState(null);
+
+    const [openSuccess, setOpenSuccess] = useState(false);
+
+    const handleClickSuccess = () => {
+        setOpenSuccess(true);
+    };
+
+    const handleCloseSuccess = () => {
+        setOpenSuccess(false);
+    };
 
     const handleButtonClick = (buttonText) => {
         setActiveButton(buttonText);
@@ -44,7 +55,7 @@ function CancelOrder() {
             };
             const response = await axios.put(`http://localhost:9000/order/update/${orderId}`, updatedOrder);
             if (response.status === 200) {
-                alert("Order Successfully Cancelled");
+                handleClickSuccess();
                 // Optionally, you can fetch the order again to update the state
                 fetchOrderById(orderId);
             } else {
@@ -54,6 +65,10 @@ function CancelOrder() {
             console.error('Error updating order:', error);
             alert("Failed to update order details");
         }
+    };
+
+    const handleCancel = async () => {
+        setOrderId('');
     };
 
     const handleEnterPress = async (event) => {
@@ -147,6 +162,7 @@ function CancelOrder() {
 
                                 <div className="formButtons">
                                     <CustomizedButton
+                                        onClick={handleCancel}
                                         hoverBackgroundColor="#2d3ed2"
                                         style={{
                                             color: '#ffffff',
@@ -198,6 +214,13 @@ function CancelOrder() {
                     </div>
                 </div>
             </div>
+            <CustomizedAlert
+                open={openSuccess}
+                onClose={handleCloseSuccess}
+                severity="success"
+                message="Order Cancelled Sucessfully!"
+            />
+            <Footer/>
             <Footer/>
         </>
     );
