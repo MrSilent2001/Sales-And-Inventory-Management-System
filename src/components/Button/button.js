@@ -1,9 +1,25 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import "./button.css";
 import Button from "@mui/material/Button";
+import axios from "axios";
 
-function CustomizedButton({ variant, size, type, id, style, onClick, children, hoverBackgroundColor, disabled, isActive}) {
+function CustomizedButton({ variant, size, type, id, style, onClick, children, hoverBackgroundColor, disabled, isActive, defaultTextColor, hoverTextColor}) {
     const [isHovered, setIsHovered] = useState(false);
+    const [defaultTextColorInner, setDefaultTextColorInner] = useState('#ffffff');
+    const [hoverTextColorInner, setHoverTextColorInner] = useState('#ffffff');
+
+    useEffect(() => {
+        const setColor = () => {
+            if (defaultTextColor){
+                setDefaultTextColorInner(defaultTextColor);
+            }
+
+            if (hoverTextColor){
+                setHoverTextColorInner(hoverTextColor);
+            }
+        };
+        setColor();
+    }, []);
 
     const handleMouseEnter = () => {
         setIsHovered(true);
@@ -28,7 +44,9 @@ function CustomizedButton({ variant, size, type, id, style, onClick, children, h
                     cursor: isHovered ? 'pointer' : 'default',
                     fontFamily: 'inter',
                     textTransform: 'none',
-                    color: '#ffffff',
+                    // color: '#ffffff',
+                    color: isActive ? hoverTextColorInner : (isHovered ? hoverBackgroundColor : defaultTextColorInner),
+
                     textAlign: 'center'
                 }}
                 onClick={onClick}
