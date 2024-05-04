@@ -15,9 +15,9 @@
 
 }
 
-.orderDetailsInner{
+.cancelOrderInner{
     width : 78.5em;
-    height: 33em;
+    height: 31em;
     margin: 1.5em 0 0 1em;
     background-color: #DBDFFD;
 }
@@ -56,10 +56,10 @@
 
 }
 
-.formbox{
+.cancelOrderformbox{
     background-color: white;
     width:55em;
-    height:30em;
+    height:29em;
     border-radius : 0.2em;
     margin-left: 12em;
     margin-top: 1.5em;

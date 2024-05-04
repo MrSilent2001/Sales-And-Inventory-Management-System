@@ -6,10 +6,22 @@ import { Link } from "react-router-dom";
 import CustomizedButton from "../../../../../components/Button/button";
 import BasicTextField from "../../../../../components/Form Inputs/textfield";
 import axios from "axios";
+import SalesOrderSidebar from "../../../../../layout/sidebar/salesOrderSidebar";
+import CustomizedAlert from "../../../../../components/Alert/alert";
 
 function OrderDetails() {
     const [activeButton, setActiveButton] = useState(null);
     const [orderId, setOrderId] = useState('');
+    const [openSuccess, setOpenSuccess] = useState(false);
+
+    const handleClickSuccess = () => {
+        setOpenSuccess(true);
+    };
+
+    const handleCloseSuccess = () => {
+        setOpenSuccess(false);
+    };
+
     const [order, setOrder] = useState({
         orderId: '',
         orderReceiverName: '',
@@ -31,8 +43,6 @@ function OrderDetails() {
     const fetchOrderById = async (orderId) => {
         try {
             const response = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`);
-            setOrder(response.data);
-            // Set the text field values when order is fetched
             setReceiverName(response.data.orderReceiverName);
             setReceiverAddress(response.data.orderReceiverAddress);
             setReceiverContact(response.data.orderReceiverContact);
@@ -41,6 +51,15 @@ function OrderDetails() {
         } catch (error) {
             console.error('Error fetching order:', error);
         }
+    };
+
+    const handleCancel = async () => {
+        setOrderId('');
+        setReceiverName('');
+        setReceiverAddress('');
+        setReceiverContact('');
+        setOrderItems('');
+        setOrderPrice('');
     };
 
     const handleUpdateOrder = async () => {
@@ -54,7 +73,7 @@ function OrderDetails() {
             };
             const response = await axios.put(`http://localhost:9000/order/update/${orderId}`, updatedOrder);
             if (response.status === 200) {
-                alert("Order Details Successfully Updated");
+                handleClickSuccess();
                 // Optionally, you can fetch the order again to update the state
                 fetchOrderById(orderId);
             } else {
@@ -92,117 +111,7 @@ function OrderDetails() {
             <div className="orderDetailsOuter">
                 <div className="body">
                     <div className="orderDetailsFilter">
-                        <div className="Button1">
-                            <Link to="/pendingOrders">
-                                <CustomizedButton
-                                    children="Pending Orders"
-                                    onClick={() => handleButtonClick("Button 1")}
-                                    variant="contained"
-                                    size="large"
-                                    style={{
-                                        color: '#646FD4',
-                                        backgroundColor: activeButton === "Button 1" ? 'lightblue' : 'white',
-                                        width: '11.8em',
-                                        height: '3em',
-                                        fontSize: '0.95em',
-                                        fontFamily: 'inter',
-                                        borderRadius: '0.625em',
-                                        fontWeight: '550',
-                                        border: 'none',
-                                        marginTop: '1.5em',
-                                        marginBottom: '2em',
-                                        textTransform: 'none',
-                                        textAlign: 'center',
-                                        padding: '2.2em 2.2em',
-                                        lineHeight: '1.4em',
-                                    }}/>
-                            </Link>
-
-                        </div>
-
-                        <div className="Button1">
-                            <Link to="/orderStatus">
-                                <CustomizedButton
-                                    children="Update Order Status"
-                                    onClick={() => handleButtonClick("Button 1")}
-                                    variant="contained"
-                                    size="large"
-                                    style={{
-                                        color: '#646FD4',
-                                        backgroundColor: activeButton === "Button 1" ? 'lightblue' : 'white',
-                                        width: '11.8em',
-                                        height: '3em',
-                                        fontSize: '0.95em',
-                                        fontFamily: 'inter',
-                                        borderRadius: '0.625em',
-                                        fontWeight: '550',
-                                        border: 'none',
-                                        marginTop: '0.005em',
-                                        marginBottom: '2em',
-                                        textTransform: 'none',
-                                        textAlign: 'center',
-                                        padding: '2.2em 2.2em',
-                                        lineHeight: '1.4em',
-                                    }}/>
-                            </Link>
-
-                        </div>
-
-                        <div className="Button1">
-                            <Link to="/orderDetails">
-                                <CustomizedButton
-                                    children="Update Order Details"
-                                    onClick={() => handleButtonClick("Button 1")}
-                                    variant="contained"
-                                    size="large"
-                                    style={{
-                                        color: '#646FD4',
-                                        backgroundColor: activeButton === "Button 1" ? 'lightblue' : 'white',
-                                        width: '11.8em',
-                                        height: '3em',
-                                        fontSize: '0.95em',
-                                        fontFamily: 'inter',
-                                        borderRadius: '0.625em',
-                                        fontWeight: '550',
-                                        border: 'none',
-                                        marginTop: '0.005em',
-                                        marginBottom: '2em',
-                                        textTransform: 'none',
-                                        textAlign: 'center',
-                                        padding: '2.2em 2.2em',
-                                        lineHeight: '1.4em',
-                                    }}/>
-                            </Link>
-
-                        </div>
-
-                        <div className="Button1">
-                            <Link to="/cancelOrders">
-                                <CustomizedButton
-                                    children="Cancel Order"
-                                    onClick={() => handleButtonClick("Button 1")}
-                                    variant="contained"
-                                    size="large"
-                                    style={{
-                                        color: '#646FD4',
-                                        backgroundColor: activeButton === "Button 1" ? 'lightblue' : 'white',
-                                        width: '11.8em',
-                                        height: '3em',
-                                        fontSize: '0.95em',
-                                        fontFamily: 'inter',
-                                        borderRadius: '0.625em',
-                                        fontWeight: '550',
-                                        border: 'none',
-                                        marginTop: '0.005em',
-                                        marginBottom: '2em',
-                                        textTransform: 'none',
-                                        textAlign: 'center',
-                                        padding: '2.2em 2.2em',
-                                        lineHeight: '1.4em',
-                                    }}/>
-                            </Link>
-
-                        </div>
+                        <SalesOrderSidebar/>
                     </div>
                     <div className="orderDetailsInner">
 
@@ -289,6 +198,7 @@ function OrderDetails() {
                                     </CustomizedButton>
 
                                     <CustomizedButton
+                                        onClick={handleCancel}
                                         hoverBackgroundColor="#f11717"
                                         style={{
                                             color: '#ffffff',
@@ -317,6 +227,13 @@ function OrderDetails() {
                     </div>
                 </div>
             </div>
+            <CustomizedAlert
+                open={openSuccess}
+                onClose={handleCloseSuccess}
+                severity="success"
+                message="Order Details Updated Succefully!"
+            />
+            <Footer/>
             <Footer/>
         </>
     );
