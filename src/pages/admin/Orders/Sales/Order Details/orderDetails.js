@@ -83,7 +83,7 @@ function OrderDetails() {
 
     useEffect(() => {
         fetchOrderById(orderId);
-    }, []);
+    }, [orderId]);
 
 
     return (
@@ -214,12 +214,15 @@ function OrderDetails() {
                                         value={orderId}
                                         onChange={handleIdChange}
                                         onKeyDown={handleEnterPress}
+                                        helperText={orderId === '' ? 'Please enter the ID' : ''}
+                                        error={orderId === '' ? 'Please enter the ID' : ''}
                                     />
                                 </div>
 
                                 <div className="textSection">
                                     <label className='label'>Receiver</label>
                                     <BasicTextField
+                                        disabled={!orderId}
                                         value={receiverName}
                                         onChange={(e) => setReceiverName(e.target.value)}
                                     />
@@ -228,6 +231,7 @@ function OrderDetails() {
                                 <div className="textSection">
                                     <label className='label'>Address</label>
                                     <BasicTextField
+                                        disabled={!orderId}
                                         value={receiverAddress}
                                         onChange={(e) => setReceiverAddress(e.target.value)}
                                     />
@@ -236,6 +240,7 @@ function OrderDetails() {
                                 <div className="textSection">
                                     <label className='label'>Contact</label>
                                     <BasicTextField
+                                        disabled={!orderId}
                                         value={receiverContact}
                                         onChange={(e) => setReceiverContact(e.target.value)}
                                     />
@@ -244,6 +249,7 @@ function OrderDetails() {
                                 <div className="textSection">
                                     <label className='label'>Items</label>
                                     <BasicTextField
+                                        disabled={!orderId}
                                         value={orderItems}
                                         onChange={(e) => setOrderItems(e.target.value)}
                                     />
@@ -252,6 +258,7 @@ function OrderDetails() {
                                 <div className="textSection">
                                     <label className='label'>Amount</label>
                                     <BasicTextField
+                                        disabled={!orderId}
                                         value={orderPrice}
                                         onChange={(e) => setOrderPrice(e.target.value)}
                                     />
