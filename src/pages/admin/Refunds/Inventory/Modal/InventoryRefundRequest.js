@@ -222,7 +222,7 @@ function InventoryRefundRequest(props) {
                                       variant="outlined"
                                       size="small"
                                       type="number"
-                                      value={totalPrice}
+                                      value={price}
                                       onChange={(e) => setPrice(e.target.value)}
                                     />
                                 </div>
