@@ -9,6 +9,8 @@ import MenuItem from "@mui/material/MenuItem";
 import {styled} from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import {Link} from "react-router-dom";
+import axios from 'axios';
+import { useState } from 'react';
 
 // Mock data for suppliers and items, replace with your actual data
 const suppliers = [
@@ -116,9 +118,31 @@ const CenteredModal = styled('div')({
 });
 
 function InventoryRefundRequest(props) {
-    const [supplierCode, setSupplierCode] = React.useState('');
-    const [itemCode, setItemCode] = React.useState('');
-    const [reason, setReason] = React.useState('');
+    const [supplierCode, setSupplierCode] = useState('');
+    const [itemCode, setItemCode] = useState('');
+    let [quantity, setQuantity] = useState(0);
+    const [reason, setReason] = useState('');
+    let [totalPrice, setTotalPrice] = useState(0);
+
+    const handleSubmit = async () => {
+        const refundRequestData = {
+            supplierCode,
+            itemCode,
+            quantity,
+            reason,
+            totalPrice,
+        };
+
+
+          
+        try {
+            await axios.post('http://localhost:9000/refund/inventoryRefund/create', refundRequestData);
+            console.log('Refund request submitted successfully');
+            props.history.push('/InventoryGeneratedRequest'); // Assuming you are using React Router
+        } catch (error) {
+            console.error('Error submitting refund request:', error);
+        }
+    };
 
     return (
             <CenteredModal>
@@ -159,7 +183,14 @@ function InventoryRefundRequest(props) {
                                     <h5>Quantity:</h5>
                                 </div>
                                 <div className="refundRequestidInput">
-                                    <BasicTextFields label="Quantity"/>
+                                    <BasicTextFields 
+                                       id="quantity"
+                                       variant="outlined"
+                                       size="small"
+                                       type="number"
+                                       value={quantity}
+                                       onChange={(e) => setQuantity(e.target.value)}
+                                       />
                                 </div>
                             </div>
 
@@ -186,14 +217,21 @@ function InventoryRefundRequest(props) {
                                     <h5>Total Price:</h5>
                                 </div>
                                 <div className="refundRequestidInput">
-                                    <BasicTextFields label="Total Price"/>
+                                    <BasicTextFields 
+                                      id="total-price"
+                                      variant="outlined"
+                                      size="small"
+                                      type="number"
+                                      value={totalPrice}
+                                      onChange={(e) => setTotalPrice(e.target.value)}
+                                    />
                                 </div>
                             </div>
 
                             <div className="refundRequestformFieldButtons">
                                 <div className="addSupplierButton">
                                     <Link to="/InventoryGeneratedRequest">
-                                        <CreateRequestButton>Create Request</CreateRequestButton>
+                                        <CreateRequestButton onClick={handleSubmit}>Create Request</CreateRequestButton>
                                     </Link>
                                 </div>
 

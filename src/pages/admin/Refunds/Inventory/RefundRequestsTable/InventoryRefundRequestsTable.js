@@ -54,7 +54,7 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
                     {
                         backgroundColor: '#DBDFFD',
                         width: '100%',
-                        height: '40em'
+                        height: '47em'
                     }
                 }
             >
@@ -117,10 +117,14 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
                             </Link>
                         </div>
                     </Box>
-
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
                     <CustomizedTable
                         columns={columns}
                         rows={mappedData}
+                        style={{minWidth: 700,height:21000}}
                     />
                 </Box>
             </Container>

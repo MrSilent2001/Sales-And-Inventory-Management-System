@@ -1,11 +1,11 @@
 import React from 'react';
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material';
 
-function CustomizedTable({columns, rows}) {
+function CustomizedTable({columns, rows,style}) {
 
     return (
         <Paper sx={{width: '95%', overflow: 'auto',maxHeight: '400px'}}>
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} style={style}>
                 <Table>
                     <TableHead>
                         <TableRow>
