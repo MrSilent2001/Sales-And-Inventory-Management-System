@@ -40,6 +40,8 @@ const Login = () => {
                 password: formData.password
             });
 
+            console.log(response.data);
+
             // backend returned tokens in the response data
             const { accessToken, refreshToken, id, username, email, contactNo, role } = response.data.result;
 

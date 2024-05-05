@@ -57,6 +57,7 @@ function SignUp() {
     const handleSubmit = async (e) =>{
         e.preventDefault();
         try {
+            console.log("beforesubmmit",formData)
             const response = await axios.post('http://localhost:9000/auth/signup', {
                 username: formData.username,
                 password: formData.password,
@@ -138,6 +139,7 @@ function SignUp() {
                             <div className="row">
                                 <label>Password: </label>
                                 <PasswordField
+                                    label="Password"
                                     placeholder="Password"
                                     style={{width:'15.25em', marginLeft: '0.85em',marginBottom:'0'}}
                                     name="password"
