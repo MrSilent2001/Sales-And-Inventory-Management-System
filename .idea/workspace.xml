@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="deadbc32-7837-4427-b601-fc4c933a9650" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Cards/catalogCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Cards/catalogCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/catalog.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/catalog.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/productCatalog.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/productCatalog.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/View Inventory/viewInventory.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/View Inventory/viewInventory.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/View Inventory/viewInventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/View Inventory/viewInventory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/footer/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/footer/footer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Refund/Refund Dashboard/Customer Refunds.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Refund/Refund Dashboard/Customer Refunds.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Refund/Refund Dashboard/Customer Refunds.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Refund/Refund Dashboard/Customer Refunds.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +47,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "dev__test",
+    "git-widget-placeholder": "Kavith5",
     "last_opened_file_path": "D:/University/Projects/L2/Software Project/Front End Release/Test/Sales-And-Inventory-Management-System",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -75,7 +72,8 @@
       <updated>1714670908450</updated>
       <workItem from="1714670912618" duration="4167000" />
       <workItem from="1714675403571" duration="15142000" />
-      <workItem from="1714791084953" duration="2671000" />
+      <workItem from="1714791084953" duration="3248000" />
+      <workItem from="1714875822665" duration="14970000" />
     </task>
     <servers />
   </component>

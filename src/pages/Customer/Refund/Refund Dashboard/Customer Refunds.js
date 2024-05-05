@@ -2,7 +2,7 @@ import './Customer Refunds.css'
 import {styled} from "@mui/material/styles";
 import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -14,56 +14,55 @@ import Footer from "../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
 import customerRefunds from "../../../../data/data.json";
+import CustomizedTable from "../../../../components/Table/Customized Table/customizedTable";
+import axios from "axios";
 
 
-const StyledTableCell = styled(TableCell)(({theme}) => ({
-    [`&.${tableCellClasses.body}`]: {
-        fontSize: '0.7em',
-        textAlign: 'center',
-        height: '2em',
-    },
-}));
 
-const StyledTableRow = styled(TableRow)(({theme}) => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-    },
-    '&:last-child td, &:last-child th': {
-        border: 0,
-    },
-}));
 
-const rows = customerRefunds.customerRefunds || [];
-
-function CustomerRefundRequestTables() {
-    const [visible, setVisible] = useState(false)
-
-    return (
-        <TableContainer component={Paper}
-                        sx={{width: '88em', maxHeight: '25em', overflowY: 'auto', position: 'relative'}}>
-            <Table sx={{minWidth: '30em'}} aria-label="customized table">
-                <TableBody>
-                    {rows.map((row) => (
-                        <StyledTableRow key={row.name}>
-                            <StyledTableCell align="right">{row.customerName}</StyledTableCell>
-                            <StyledTableCell align="right">{row.mobileNumber}</StyledTableCell>
-                            <StyledTableCell align="right">{row.itemId}</StyledTableCell>
-                            <StyledTableCell align="right">{row.payment}</StyledTableCell>
-                            <StyledTableCell align="right">{row.refundStatus}</StyledTableCell>
-                        </StyledTableRow>
-                    ))}
-                </TableBody>
-            </Table>
-            <Modal open={visible}>
-                <UpdateItem onClose={(value) => {
-                    setVisible(false)
-                }}></UpdateItem>
-            </Modal>
-        </TableContainer>
-    );
-}
 
 function CustomerRefunds() {
+
+    const [refundData, setRefundData] = useState([]);
+    const [status, setStatus] = useState('');
+
+    const getAllCustomerRefundData = () => {
+        let url = 'http://localhost:9000/refund/customerRefund/getAll';
+        /*if(status === 'pending'){
+            url = 'http://localhost:9000/refund/customerRefund/getRefundByStatus?refundStatus=pending';
+        }else if(status === 'approved'){
+            url = 'http://localhost:9000/refund/customerRefund/getRefundByStatus?refundStatus=approved';
+        }else{
+            url = 'http://localhost:9000/refund/customerRefund/getRefundByStatus?refundStatus=rejected';
+        }*/
+
+        axios.get(url).then(res=>{
+            setRefundData(res.data);
+            console.log(res.data);
+        }).catch(err=>{
+            console.log(err);
+        })
+
+    }
+
+    const columns = [
+        { columnId: 'orderId', label: 'Order Id', minWidth: 70, align: 'center' },
+        { columnId: 'item', label: 'Purchased Item', minWidth: 180, align: 'center' },
+        { columnId: 'reason', label: 'Reason', minWidth: 200, align: 'center' },
+        { columnId: 'quantity', label: 'Item Quantity', minWidth: 120, align: 'center' },
+        { columnId: 'totalPrice', label: 'Price', minWidth: 100, align: 'center' },
+        { columnId: 'date', label: 'Date', minWidth: 170, align: 'center' },
+        { columnId: 'status', label: 'Status', minWidth: 100, align: 'center' },
+    ];
+
+    const mappedData = refundData.map(customerRefund => ({
+        ...customerRefund
+    }));
+
+    useEffect(() => {
+        getAllCustomerRefundData()
+    }, []);
+
     return (
         <>
             <CustomerNavbar/>
@@ -100,8 +99,26 @@ function CustomerRefunds() {
                         </div>
                     </div>
 
+                    <div className="customerRefundInstructions">
+                        <div className="customerRefundInstructionsTopic">
+                            <h3>Our Policies</h3>
+                        </div>
+                        <div className="customerRefundInstructionsParagraph">
+                            <p>
+                                At Tradeasy, we strive to ensure your complete satisfaction with every purchase.
+                                Our 30-day return policy allows you to return unused and unopened products within 30 days of delivery for a full refund or exchange.
+                                Should you receive a defective or damaged item, please contact us within 48 hours for prompt assistance.
+                                While customers are responsible for return shipping costs, we expedite refunds to the original payment method upon receipt of returned items.
+                                Certain non-refundable or specialized products may be subject to restocking fees. Rest assured, your satisfaction is our priority, and we are always available to address any questions or concerns regarding our policies
+                            </p>
+                        </div>
+                    </div>
+
                     <div className="customerRefundTable">
-                        <CustomerRefundRequestTables></CustomerRefundRequestTables>
+                       <CustomizedTable
+                           columns={columns}
+                           rows={mappedData}
+                       />
                     </div>
 
                 </div>
