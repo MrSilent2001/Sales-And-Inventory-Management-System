@@ -12,19 +12,20 @@ import ComboBox from "../../../components/Form Inputs/comboBox";
 function SignUp() {
     const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
+    const [values, setValues] = useState({
         username: '',
         email: '',
         contactNo: '',
         password: '',
+        confirmPassword:'',
         role: ''
     });
 
     const [showPassword, setShowPassword] = React.useState(false);
     const [errors,setErrors] = useState({});
 
-    const handleChange = (event) => {
-        setFormData({ ...formData, role: event.target.value });
+    const handleChange = (e) => {
+        setValues({ ...values, role: e.target.value });
     };
 
 
@@ -35,37 +36,33 @@ function SignUp() {
     ];
 
     const handleInput = (e) => {
-        setFormData({...formData, [e.target.name]: e.target.value});
-        console.log(formData)
+        setValues({...values, [e.target.name]: e.target.value});
+        console.log(values)
     }
 
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
 
-    // const handleValidation = (e) => {
-    //     const validationErrors = Validation(formData);
-    //     setErrors(validationErrors);
-    //     if (Object.keys(validationErrors).length === 0) {
-    //         // Proceed with form submission
-    //         console.log("Form submitted successfully!");
-    //     } else {
-    //         console.log("Form validation failed!");
-    //     }
-    // };
+    
 
-    const handleSubmit = async (e) =>{
+    const handleValidation = async (e) =>{
         e.preventDefault();
+
+        const validationErrors = Validation(values);
+        setErrors(validationErrors);
+
         try {
             const response = await axios.post('http://localhost:9000/auth/signup', {
-                username: formData.username,
-                password: formData.password,
-                email: formData.email,
-                contactNo: formData.contactNo,
-                role: formData.role
+                username: values.username,
+                password: values.password,
+                confirmPassword:values.confirmPassword,
+                email: values.email,
+                contactNo: values.contactNo,
+                role: values.role
             });
 
-            console.log(formData.role);
+            console.log(values.role);
 
             navigate("/login");
 
@@ -89,10 +86,10 @@ function SignUp() {
                 <div className="SignupForm">
                     <h2 id="Signup">SignUp</h2>
 
-                    <FormControl onSubmit={handleSubmit} >
+                    <FormControl onSubmit={handleValidation} >
                         <div className="SignupInnerContainer">
                             <div className="row">
-                                <label style={{paddingRight: "60px"}}> Username: </label>
+                                <label style={{paddingRight: "70px"}}> Username: </label>
                                 <TextField
                                     className="signupInput"
                                     size="small"
@@ -106,7 +103,7 @@ function SignUp() {
                             {errors.username && <p className= "displayError" style={{color:"red"}}>{errors.username}</p>}
 
                             <div className="row">
-                                <label style={{paddingRight: "90px"}}> Email: </label>
+                                <label style={{paddingRight: "100px"}}> Email: </label>
                                 <TextField
                                     className="signupInput"
                                     size="small"
@@ -121,7 +118,7 @@ function SignUp() {
                             {errors.email && <p className= "displayError" style={{color:"red"}}>{errors.email}</p>}
 
                             <div className="row">
-                                <label style={{paddingRight: "50px"}}> Contact No: </label>
+                                <label style={{paddingRight: "60px"}}> Contact No: </label>
                                 <TextField
                                     className="signupInput"
                                     size="small"
@@ -136,10 +133,10 @@ function SignUp() {
                             {errors.contactNo && <p className= "displayError" style={{color:"red"}}>{errors.contactNo}</p>}
 
                             <div className="row">
-                                <label>Password: </label>
+                                <label style={{paddingRight: "80px"}}>Password: </label>
                                 <PasswordField
                                     placeholder="Password"
-                                    style={{width:'15.25em', marginLeft: '0.85em',marginBottom:'0'}}
+                                    style={{width:'17.25em', marginLeft: '-1.1em',marginBottom:'0'}}
                                     name="password"
                                     onChange={handleInput}
                                     showPassword={showPassword}
@@ -151,10 +148,10 @@ function SignUp() {
 
 
                             <div className="row">
-                                <label style={{paddingRight: "5px"}}>Confirm Password: </label>
+                                <label style={{paddingRight: "50px"}}>Confirm Password: </label>
                                 <PasswordField
                                     placeholder="ConfirmPassword"
-                                    style={{width:'15.25em', marginLeft: '0.85em',marginBottom:'0'}}
+                                    style={{width:'17.25em',marginLeft:'-2em',marginBottom:'0'}}
                                     name="confirmPassword"
                                     onChange={handleInput}
                                     showPassword={showPassword}
@@ -165,11 +162,11 @@ function SignUp() {
                             {errors.confirmPassword && <p className= "displayError" style={{color:"red"}}>{errors.confirmPassword}</p>}
 
                             <div className="row">
-                                <label style={{paddingRight: "50px",marginBottom:'1em'}}>Role: </label>
+                                <label style={{paddingRight: "110px",marginBottom:'1em'}}>Role: </label>
                                 <ComboBox
                                     className="loginInput"
                                     onChange={handleChange}
-                                    style={{width: '14em'}}
+                                    style={{width: '17.25em'}}
                                     options={options}
                                     label="Category"
                                     size="small"
@@ -178,7 +175,7 @@ function SignUp() {
 
                             <div className="btn-row">
                                 <CustomizedButton
-                                    onClick={handleSubmit}
+                                    onClick={handleValidation}
                                     style={{
                                         color: '#ffffff',
                                         backgroundColor: '#242F9B',
@@ -194,6 +191,7 @@ function SignUp() {
                                         textTransform: 'none',
                                         textAlign: 'center',
                                         hoverBackgroundColor:'#2d3ed2'
+                                        
                                     }}>
                                     Sign Up
                                 </CustomizedButton>
