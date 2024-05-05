@@ -115,10 +115,10 @@ function CustomerRefunds() {
                     </div>
 
                     <div className="customerRefundTable">
-                       <CustomizedTable
-                           columns={columns}
-                           rows={mappedData}
-                       />
+                        <CustomizedTable
+                            columns={columns}
+                            rows={mappedData}
+                        />
                     </div>
 
                 </div>
