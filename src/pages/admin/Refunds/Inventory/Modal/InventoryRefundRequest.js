@@ -118,19 +118,19 @@ const CenteredModal = styled('div')({
 });
 
 function InventoryRefundRequest(props) {
-    const [supplierCode, setSupplierCode] = useState('');
-    const [itemCode, setItemCode] = useState('');
+    const [supplier, setSupplier] = useState('');
+    const [item, setItem] = useState('');
     let [quantity, setQuantity] = useState(0);
     const [reason, setReason] = useState('');
-    let [totalPrice, setTotalPrice] = useState(0);
+    let [price, setPrice] = useState(0);
 
     const handleSubmit = async () => {
         const refundRequestData = {
-            supplierCode,
-            itemCode,
+            supplier,
+            item,
             quantity,
             reason,
-            totalPrice,
+            price,
         };
 
 
@@ -157,8 +157,8 @@ function InventoryRefundRequest(props) {
                                 <div className="refundRequestidInput">
                                     <Dropdown
                                         label="Supplier"
-                                        value={supplierCode}
-                                        onChange={(e) => setSupplierCode(e.target.value)}
+                                        value={supplier}
+                                        onChange={(e) => setSupplier(e.target.value)}
                                         options={suppliers}
                                     />
                                 </div>
@@ -171,8 +171,8 @@ function InventoryRefundRequest(props) {
                                 <div className="refundRequestidInput">
                                     <Dropdown
                                         label="Item"
-                                        value={itemCode}
-                                        onChange={(e) => setItemCode(e.target.value)}
+                                        value={item}
+                                        onChange={(e) => setItem(e.target.value)}
                                         options={items}
                                     />
                                 </div>
@@ -223,7 +223,7 @@ function InventoryRefundRequest(props) {
                                       size="small"
                                       type="number"
                                       value={totalPrice}
-                                      onChange={(e) => setTotalPrice(e.target.value)}
+                                      onChange={(e) => setPrice(e.target.value)}
                                     />
                                 </div>
                             </div>
