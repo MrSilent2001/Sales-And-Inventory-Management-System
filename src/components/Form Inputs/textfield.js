@@ -23,7 +23,7 @@ export default function BasicTextField({ id, name, variant, size, type, style, v
           autoComplete="off"
       >
         <TextField
-            id={id}
+            id="outlined-required"
             name={name}
             variant={variant}
             size={size}

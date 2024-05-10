@@ -1,0 +1,53 @@
+.updateSupplierItemModel{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30.5em;
+    height: 35em;
+    padding: 0.5em 0 0 0;
+    background-color: #DBDFFD;
+    border-radius: 0.5em;
+}
+
+
+.updateSupplierItemForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.updateSupplierItemformField{
+    width: 27.5em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.updateSupplierItemformField-custom{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.updateSupplierItemformField h5{
+    font-family: Inter;
+    font-weight: 600;
+    font-size: 0.75em;
+}
+
+.updateSupplierItemformFieldButtons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 18em;
+    justify-content: center;
+    padding: 2em 0;
+}
+
+.customRow{
+    width: 50%;
+    display: flex;
+}

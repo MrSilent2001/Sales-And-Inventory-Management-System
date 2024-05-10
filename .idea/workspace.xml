@@ -5,10 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="deadbc32-7837-4427-b601-fc4c933a9650" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Add Item/AddItem.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Add Item/AddItem.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Update Item/UpdateItem.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Update Item/UpdateItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Form Inputs/passwordField.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Form Inputs/passwordField.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Button/button.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Button/button.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Form Inputs/fileUpload.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Form Inputs/fileUpload.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Form Inputs/textfield.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Form Inputs/textfield.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/navbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Home/Customer Home Page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Home/Customer Home Page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/inventoryDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/inventoryDashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/View Inventory/viewInventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/View Inventory/viewInventory.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/login &amp; SignUp/SignUp/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login &amp; SignUp/SignUp/signup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login &amp; SignUp/login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login &amp; SignUp/login/login.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,10 +34,16 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="mahee#n02" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -49,6 +67,7 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "dev__test",
     "last_opened_file_path": "D:/University/Projects/L2/Software Project/Front End Release/Test/Sales-And-Inventory-Management-System",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -74,6 +93,7 @@
       <workItem from="1714670912618" duration="4167000" />
       <workItem from="1714675403571" duration="15142000" />
       <workItem from="1714791084953" duration="2671000" />
+      <workItem from="1715233835137" duration="16257000" />
     </task>
     <servers />
   </component>
@@ -89,7 +109,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/Form Inputs/passwordField.js</url>
           <line>1</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

@@ -11,7 +11,6 @@ import Footer from "../../../layout/footer/footer";
 import DeleteItem from "./Modals/Delete Item/Delete Item";
 import CustomizedButton from "../../../components/Button/button";
 import SearchBar from "../../../components/search bar/search bar";
-import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 import ComboBox from "../../../components/Form Inputs/comboBox";
 import axios from "axios";
 import MultiActionAreaCard from "../../../components/Cards/inventoryCard";

@@ -133,7 +133,6 @@ const AddDiscount = forwardRef((props, ref) => {
                                 </div>
                                 <div className="addDiscountsInput">
                                     <BasicTextField
-                                        id="outlined-required"
                                         name="productName"
                                         size="small"
                                         type="text"
@@ -190,7 +189,8 @@ const AddDiscount = forwardRef((props, ref) => {
                                             const formattedDate = dayjs(date).format('YYYY-MM-DD');
                                             console.log(formattedDate);
                                             handleChange("startDate",formattedDate);
-                                        }}                                   />
+                                        }}
+                                    />
                                 </div>
                             </div>
                             {errors.startDate && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.discountRate}</span>}
@@ -228,7 +228,6 @@ const AddDiscount = forwardRef((props, ref) => {
                                             fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
-                                            fontWeight: '550',
                                             margin:'0.625em 1.5em 0 2.5em',
                                         }}>
                                         Apply
@@ -247,7 +246,6 @@ const AddDiscount = forwardRef((props, ref) => {
                                             fontFamily: 'inter',
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
-                                            fontWeight: '500',
                                             margin:'0.625em 0 0 2.5em'
                                         }}>
                                         Cancel

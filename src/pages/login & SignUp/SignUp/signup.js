@@ -53,7 +53,7 @@ function SignUp() {
         setErrors(validationErrors);
 
         try {
-            console.log("beforesubmmit",formData)
+            console.log("beforesubmmit", values)
             const response = await axios.post('http://localhost:9000/auth/signup', {
                 username: values.username,
                 password: values.password,

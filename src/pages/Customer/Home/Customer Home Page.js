@@ -21,10 +21,10 @@ function CustomerHome() {
                             <div className="carouselButton">
                                 <Link to="/products">
                                     <CustomizedButton
-                                        hoverBackgroundColor="#d7d7d7"
+                                        // hoverBackgroundColor="#d7d7d7"
                                         style={{
                                             color: '#000000',
-                                            backgroundColor: '#ffffff',
+                                            backgroundColor: '#620707',
                                             border: '1px solid #242F9B',
                                             width: '11em',
                                             height: '3.75em',
@@ -81,7 +81,7 @@ function CustomerHome() {
                                 <p className="productCategoryCardName">Hardware and Tools</p>
                             </div>
                             <div className="productCategoryCard">
-                                <p className="productCategoryCardName">Safety Equipment</p>
+                                <p className="productCategoryCardName">Safety Equipments</p>
                             </div>
                             <div className="productCategoryCard">
                                 <p className="productCategoryCardName">Electrical Supplies</p>

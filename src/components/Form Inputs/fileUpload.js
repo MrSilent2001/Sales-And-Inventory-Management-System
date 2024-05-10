@@ -8,7 +8,7 @@ function FileUpload({style}) {
     const VisuallyHiddenInput = styled('input')({
         clip: 'rect(0 0 0 0)',
         clipPath: 'inset(50%)',
-        height: 1,
+        height: 0.5,
         overflow: 'hidden',
         position: 'absolute',
         bottom: 0,
@@ -23,9 +23,13 @@ function FileUpload({style}) {
             component="label"
             variant="contained"
             startIcon={<CloudUploadIcon/>}
-            style={style}
+            sx={{
+                ...style,
+                width: '80%',
+                float: 'left'
+            }}
         >
-            Upload Image
+            Upload File
             <VisuallyHiddenInput type="file"/>
         </Button>
     );

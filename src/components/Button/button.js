@@ -44,6 +44,7 @@ function CustomizedButton({ variant, size, type, id, style, onClick, children, h
                     cursor: isHovered ? 'pointer' : 'default',
                     fontFamily: 'inter',
                     textTransform: 'none',
+                    fontWeight: '500',
                     // color: '#ffffff',
                     color: isActive ? hoverTextColorInner : (isHovered ? hoverBackgroundColor : defaultTextColorInner),
 
