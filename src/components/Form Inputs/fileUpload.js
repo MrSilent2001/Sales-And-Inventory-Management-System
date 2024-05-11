@@ -25,8 +25,6 @@ function FileUpload({style}) {
             startIcon={<CloudUploadIcon/>}
             sx={{
                 ...style,
-                width: '80%',
-                float: 'left'
             }}
         >
             Upload File

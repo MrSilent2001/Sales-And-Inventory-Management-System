@@ -156,9 +156,7 @@ function AddSupplierInventoryItem(props) {
                                     />
                                 </div>
                             </div>
-                            {errors.supplierId
-                                && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.supplierId}</span>}
-
+                            {errors.supplierId && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.supplierId}</span>}
 
                             <div className="addSupplierItemformField">
                                 <div className="addSupplierItemidField">

@@ -27,8 +27,7 @@ import SalesRefundRequestsTable from "../pages/admin/Refunds/Customer/View Sales
 import PlaceOrder from "../pages/admin/Orders/Inventory/Modals/Place Order/placeOrder";
 import ViewOrder from "../pages/admin/Orders/Inventory/Modals/View Order/viewOrder";
 import InventoryDashboard from "../pages/Supplier/Inventory Dashboard/inventoryDashboard";
-import InventoryRefundRequestsTable
-    from "../pages/admin/Refunds/Inventory/RefundRequestsTable/InventoryRefundRequestsTable";
+import InventoryRefundRequestsTable from "../pages/admin/Refunds/Inventory/RefundRequestsTable/InventoryRefundRequestsTable";
 import UpdateSupplier from "../pages/Supplier/Update Supplier/updateSupplier";
 
 export function PageRouting() {

@@ -1,19 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import { Modal } from "@mui/material";
-import InventoryNavbar from "../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../layout/footer/footer";
-import AddPayment from "../../admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 import axios from "axios";
 import "./paymentDashboard.css";
 import SearchBar from "../../../components/search bar/search bar";
+import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
 
 const columns = [
     { columnId: 'id', label: 'Id', minWidth: 100, align: 'center' },
     { columnId: 'customerName', label: 'Customer Name', minWidth: 100, align: 'center' },
-    { columnId: 'contactNumber', label: 'Contact No.', minWidth: 170, align: 'center' },
-    { columnId: 'email', label: 'E-mail', minWidth: 170, align: 'center' },
-    { columnId: 'purchasedItems', label: 'Items Purchased', minWidth: 100, align: 'center' },
+    { columnId: 'contactNo', label: 'Contact No.', minWidth: 170, align: 'center' },
+    { columnId: 'customerEmail', label: 'E-mail', minWidth: 170, align: 'center' },
     { columnId: 'totalAmount', label: 'Total Amount', minWidth: 170, align: 'center'}
 ];
 
@@ -62,7 +59,7 @@ function PaymentDashboard() {
 
     return (
         <>
-            <InventoryNavbar />
+            <SalesNavbar />
             <div className="paymentDashboardOuter">
                 <div className="paymentDashboardInner">
                     <div className="payment-title">
@@ -81,9 +78,6 @@ function PaymentDashboard() {
                                 style={{width: '100%'}}
                             />
                     </div>
-                    <Modal open={visible}>
-                        <AddPayment onClose={() => setVisible(false)}></AddPayment>
-                    </Modal>
                 </div>
             </div>
             <Footer />

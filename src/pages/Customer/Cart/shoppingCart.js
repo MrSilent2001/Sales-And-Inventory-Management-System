@@ -3,30 +3,26 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import MediaControlCard from '../../../components/Cards/shoppingCartCard';
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
 import Footer from "../../../layout/footer/footer";
-import { loadStripe } from "@stripe/stripe-js";
-import React, { useEffect, useState } from 'react';
+import {loadStripe} from "@stripe/stripe-js";
+import React, {useEffect, useState} from 'react';
 import CustomizedButton from "../../../components/Button/button";
-
-let stripePromise = "";
+import axios from "axios";
 
 const getStripe = () => {
+    let stripePromise = '';
     if (!stripePromise) {
-        //stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
-        stripePromise = loadStripe('pk_test_51OaaAGG6hT4n4c8nfxnNFoOroCTuVGkZJeOB63fTdNGluws7CDw36bOR8HDlMAXwybMqfvDK9KSubfJljBvVvmV300D1erYeiI');
+        stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
     }
+    console.log(stripePromise);
     return stripePromise;
 }
 
-
 function Cart() {
-
     const [cart, setCart] = useState([]);
     const [totalAmount, setTotalAmount] = useState(0);
-    const [stripeError, setStripeError] = useState(null); // Payment Gateway
     const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {
-        // Retrieve cart data from local storage
         const storedCart = JSON.parse(localStorage.getItem("cart"));
         if (storedCart) {
             setCart(storedCart);
@@ -34,7 +30,6 @@ function Cart() {
     }, []);
 
     useEffect(() => {
-        // Calculate total amount whenever cart changes
         let total = 0;
         cart.forEach(item => {
             total += item.productPrice * item.amount;
@@ -46,69 +41,87 @@ function Cart() {
         const updatedCart = cart.map(item => {
             if (item.id === itemId) {
                 if (item.amount === 1) {
-                    // If amount is 1, remove the item
                     return null;
                 } else {
-                    // Otherwise, decrement the amount
-                    return { ...item, amount: item.amount - 1 };
+                    return {...item, amount: item.amount - 1};
                 }
             }
             return item;
-        }).filter(Boolean); // Filter out null values (removed items)
+        }).filter(Boolean);
         setCart(updatedCart);
         localStorage.setItem("cart", JSON.stringify(updatedCart));
     }
 
-    const lineItems = cart.map(item => ({
-            price: item.productPrice.toString(),
-            quantity: item.amount
-        })
-    );
-
-    //Payment gateway
-    const checkoutOptions = {
-        lineItems: lineItems, // Adjust this according to your data structure
-        mode: "payment",
-        successUrl: `${window.location.origin}/success`,
-        cancelUrl: `${window.location.origin}/cancel`
-    };
-
-    console.log(checkoutOptions.lineItems);
+    const handlePaymentSuccess = async (paymentData) => {
+        console.log('Payment Data:', paymentData)
+        try {
+            const response = await axios.post('http://localhost:9000/payment/customerPayment/create', paymentData);
+            console.log(response.data); // Handle success response from backend
+        } catch (error) {
+            console.error('Error sending payment data to backend:', error);
+            // Handle error
+        }
+    }
 
     const redirectToCheckout = async () => {
         setLoading(true);
-        console.log("RedirectToCheckout");
+        const stripe = getStripe();
+        const lineItems = cart.map(item => ({
+            price_data: {
+                currency: 'lkr',
+                product_data: {
+                    name: item.productName,
+                    images:[item.productImage]
+                },
+                unit_amount: item.productPrice * 100,
+            },
+            quantity: item.amount,
+        }));
 
-        const stripe = await getStripe();
-        const { error } = await stripe.redirectToCheckout(checkoutOptions);
-        console.log("stripe checkout error:", error);
+        console.log(lineItems);
 
-        if (error) setStripeError(error.message);
-        setLoading(false);
+        try {
+            const response = await axios.post('http://localhost:9000/payment/customerPayment/checkout', {
+                lineItems: lineItems
+            });
+
+            setLoading(false);
+
+            const customerData = JSON.parse(localStorage.getItem('user'));
+            const paymentData = {
+                customerId: customerData[2],
+                customerName: customerData[3],
+                customerEmail:customerData[4],
+                contactNo: customerData[5],
+                totalAmount: response.data.amount_total/100,
+                //stripeCheckoutSessionId: response.data.id // Assuming the Stripe session ID is returned in the response
+            };
+            handlePaymentSuccess(paymentData);
+            window.location.href = response.data.url;
+        } catch (error) {
+            console.error('Error creating checkout session:', error);
+            setLoading(false);
+        }
     }
 
-    if (stripeError) alert(setStripeError);
 
     return (
         <>
-            <CustomerNavbar />
+            <CustomerNavbar/>
             <div className="cartOuter">
-
                 <div className="cardspace">
                     {cart.map(item => (
-                        <MediaControlCard key={item.id} item={item} removeFromCart={removeFromCart} />
+                        <MediaControlCard key={item.id} item={item} removeFromCart={removeFromCart}/>
                     ))}
                 </div>
 
                 <div className="cartInner">
-
                     <div className="arrow">
-                        <ArrowBackIosIcon />
+                        <ArrowBackIosIcon/>
                     </div>
-
                     <div className="totalText">
                         <p>Total Amount</p>
-                        <p className="amount ">Rs {totalAmount.toFixed(2)}</p>
+                        <p className="amount">Rs {totalAmount.toFixed(2)}</p>
                         <CustomizedButton
                             onClick={redirectToCheckout}
                             disabled={isLoading}
@@ -119,24 +132,22 @@ function Cart() {
                                 width: '7.5em',
                                 height: '2.25em',
                                 fontSize: '0.85em',
-                                fontFamily: 'inter',
                                 padding: '0.5em 0.625em',
                                 borderRadius: '0.625em',
-                                fontWeight: '550',
                                 border: 'none',
                                 marginTop: '0.25em',
-                                marginBottom:'2em',
-                                textTransform: 'none',
-                                textAlign: 'center',
+                                marginBottom: '2em',
                             }}>
                             {isLoading ? "Loading..." : "Buy Now"}
                         </CustomizedButton>
                     </div>
                 </div>
             </div>
-
-            <Footer />
+            <Footer/>
         </>
     );
 }
 export default Cart;
+
+
+

@@ -52,9 +52,9 @@ function InventoryNavbar(){
                 </NavLink>
 
                 <NavLink
-                    to="/paymentdashboard"
-                    name="paymentdashboard"
-                    className={`navLink ${selectedNavLink === "paymentdashboard" ? "selected" : ""}`}
+                    to="/inventoryPayments"
+                    name="inventoryPayments"
+                    className={`navLink ${selectedNavLink === "inventoryPayments" ? "selected" : ""}`}
                     onClick={handleNavLinkClick}
                 >
                     Payment

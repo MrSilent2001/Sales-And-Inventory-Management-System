@@ -45,17 +45,16 @@ const Login = () => {
             // backend returned tokens in the response data
             const { accessToken, refreshToken, id, username, email, contactNo, role } = response.data.result;
 
-            // Store tokens in localStorage or sessionStorage
-            localStorage.setItem('accessToken', accessToken);
-            localStorage.setItem('refreshToken', refreshToken);
-            localStorage.setItem('role', role);
-            localStorage.setItem('contactNo', contactNo);
-            localStorage.setItem('email', email);
-            localStorage.setItem('username', username);
-            localStorage.setItem('id', id);
+            // Create an array with the user-related data
+            const userArray = [accessToken, refreshToken, id, username, email, contactNo, role];
+
+            // Convert the array to JSON string and store it in localStorage
+            localStorage.setItem('user', JSON.stringify(userArray));
+
+            const storedUserData = JSON.parse(localStorage.getItem('user'));
 
             // Optionally, you can return the tokens or any other data from the response
-            console.log(id);
+            console.log(storedUserData.id);
 
 
             if(role === "admin"){

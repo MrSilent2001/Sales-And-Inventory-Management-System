@@ -7,7 +7,6 @@ import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { CartElement } from "@stripe/react-stripe-js";
 
 
 function CustomerNavbar(){
@@ -20,15 +19,17 @@ function CustomerNavbar(){
     const [storedCart, setStoredCart] = useState([]);
 
     useEffect(() => {
-        setStoredCart(JSON.parse(localStorage.getItem("cart")));
-        if (storedCart) {
+        const cartFromStorage = JSON.parse(localStorage.getItem("cart"));
+        if (cartFromStorage) {
             // Calculate total amount for all items in the cart
-            const totalAmount = storedCart.reduce((total, item) => total + (item.amount), 0);
+            const totalAmount = cartFromStorage.reduce((total, item) => total + item.amount, 0);
 
             // Store total amount in cartItemCount
             setCartItemCount(totalAmount);
+            setStoredCart(cartFromStorage);
         }
-    }, [storedCart]);
+    }, []);
+
 
 
     const StyledBadge = styled(Badge)(({ theme }) => ({

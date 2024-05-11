@@ -1,31 +1,34 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal } from "@mui/material";
-import InventoryNavbar from "../../../layout/navbar/Inventory navbar/Inventory navbar";
-import Footer from "../../../layout/footer/footer";
-import CustomizedButton from "../../../components/Button/button";
-import AddPayment from "../../admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment";
-import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
+import InventoryNavbar from "../../../../layout/navbar/Inventory navbar/Inventory navbar";
+import Footer from "../../../../layout/footer/footer";
+import AddPayment from "../../../admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment";
+import CustomizedTable from "../../../../components/Table/Customized Table/customizedTable";
 import axios from "axios";
+import SearchBar from "../../../../components/search bar/search bar";
+import CustomizedButton from "../../../../components/Button/button";
+import "./inventoryPayments.css";
 
 const columns = [
-    { id: 'id', label: 'Id', minWidth: 100, align: 'center' },
-    { id: 'customerName', label: 'Customer Name', minWidth: 100, align: 'center' },
-    { id: 'contactNumber', label: 'Contact No.', minWidth: 170, align: 'center' },
-    { id: 'email', label: 'E-mail', minWidth: 170, align: 'center' },
-    { id: 'purchasedItems', label: 'Items Purchased', minWidth: 100, align: 'center' },
-    {id: 'totalAmount', label: 'Total Amount', minWidth: 170, align: 'center'}
+    { columnId: 'supplierId', label: 'Supplier Id', minWidth: 100, align: 'center' },
+    { columnId: 'supplierName', label: 'Supplier Name', minWidth: 100, align: 'center' },
+    { columnId: 'date', label: 'Purchased Date', minWidth: 100, align: 'center' },
+    { columnId: 'itemsPurchased', label: 'Items Purchased', minWidth: 170, align: 'center' },
+    { columnId: 'billAmount', label: 'Total Amount', minWidth: 170, align: 'center' }
 ];
 
 function InventoryPayments() {
     const [visible, setVisible] = useState(false);
     const [payments, setPayments] = useState([]);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchPayments = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/payment/customerPayment/getAllCustomerPayments');
+                const response = await axios.get('http://localhost:9000/payment/supplierPayment/getAll');
                 setPayments(response.data);
             } catch (error) {
+                setError(error);
                 console.error('Error fetching Payment data:', error);
             }
         };
@@ -33,49 +36,58 @@ function InventoryPayments() {
         fetchPayments();
     }, []);
 
-    let rows = payments;
+    const fetchSearchedPayments = async (query) => {
+        try {
+            const response = await axios.get(`http://localhost:9000/payment/supplierPayment/search?keyword=${query}`);
+            setPayments(response.data);
+        } catch (error) {
+            setError(error);
+            console.error('Error fetching payments:', error);
+        }
+    };
 
-    const mappedData = rows.map(row => ({ ...row}));
-
+    const handlePaymentAdded = (updatedPayments) => {
+        setPayments(updatedPayments);
+    };
 
     return (
         <>
             <InventoryNavbar />
-            <div className="paymentDashboardOuter">
-                <div className="paymentDashboardInner">
-                    <div className="payment-title">
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width:'92.5%'}}>
-                            <h2 style={{marginLeft: '5em'}}>Payments</h2>
-                            <CustomizedButton
-                                onClick={() => setVisible(true)}
-                                hoverBackgroundColor="#2d3ed2"
-                                style={{
-                                    color: '#ffffff',
-                                    backgroundColor: '#242F9B',
-                                    border: '1px solid #242F9B',
-                                    width: '11em',
-                                    height: '2.5em',
-                                    fontSize: '0.95em',
-                                    fontFamily: 'inter',
-                                    padding: '0.5em 0.625em',
-                                    borderRadius: '0.35em',
-                                    fontWeight: '550',
-                                    textTransform: 'none',
-                                    textAlign: 'center',
-                                }}>
-                                Add Payment
-                            </CustomizedButton>
-                        </div>
+            <div className="invPaymentDashboardOuter">
+                <div className="invPaymentDashboardInner">
+                    <div className="invSearchContainer">
+                        <SearchBar
+                            label="Search Products"
+                            onKeyPress={fetchSearchedPayments}
+                        />
+                        <CustomizedButton
+                            onClick={() => setVisible(true)}
+                            hoverBackgroundColor="#2d3ed2"
+                            style={{
+                                backgroundColor: '#242F9B',
+                                border: '1px solid #242F9B',
+                                width: '9.5em',
+                                height: '2.5em',
+                                fontSize: '0.75em',
+                                padding: '0.5em 0.625em',
+                                borderRadius: '0.35em',
+                                fontWeight: '550'
+                            }}>
+                            Add Payment
+                        </CustomizedButton>
                     </div>
-                    <div className="paymentDashboard" style={{margin: '2.5em 0 5em 2.5em'}}>
+                    <div className="invPaymentDashboard" >
                         <CustomizedTable
-                            style={{ maxHeight: 400, width: '100%'}}
                             columns={columns}
-                            rows={mappedData}
+                            rows={payments}
+                            style={{width: '100%'}}
                         />
                     </div>
                     <Modal open={visible}>
-                        <AddPayment onClose={() => setVisible(false)}></AddPayment>
+                        <AddPayment
+                            onClose={() => setVisible(false)}
+                            onPaymentAdded={handlePaymentAdded}
+                        />
                     </Modal>
                 </div>
             </div>
@@ -83,5 +95,4 @@ function InventoryPayments() {
         </>
     );
 }
-
 export default InventoryPayments;

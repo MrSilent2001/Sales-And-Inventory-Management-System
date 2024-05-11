@@ -16,6 +16,7 @@ import PendingOrders from "../pages/admin/Orders/Sales/Pending Orders/pendingOrd
 import InventoryDashboard from "../pages/Supplier/Inventory Dashboard/inventoryDashboard";
 import SupplierProfile from "../pages/Supplier/Supplier Profile/SupplierProfile";
 import AdminOrderHistory from "../pages/admin/Admin Order History/Admin Order History";
+import InventoryPayments from "../pages/admin/Payment Dashboard/Inventory/inventoryPayments";
 
 export function NavbarRouting() {
     return (
@@ -49,7 +50,7 @@ export function NavbarRouting() {
                 <Route path="/viewSupplier" element={<ViewSupplier/>}/>
                 <Route path="/purchasedOrder" element={<PurchaseOrderDashboard/>}/>
                 <Route path="/InventoryRefundRequestsTable" element={<InventoryRefundRequestsTable/>}/>
-                <Route path="/paymentsDashboard" element={<PaymentDashboard/>}/>
+                <Route path="/inventoryPayments" element={<InventoryPayments/>}/>
                 <Route path="/logout" element={<Login/>}/>
 
             </Routes>

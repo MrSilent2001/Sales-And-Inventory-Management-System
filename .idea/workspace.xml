@@ -4,31 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="deadbc32-7837-4427-b601-fc4c933a9650" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Add Item/AddItem.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Add Item/AddItem.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Update Item/UpdateItem.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Update Item/UpdateItem.js" afterDir="false" />
+    <list default="true" id="5d2ad5e6-b3f3-4fe7-9ca2-56f2badaa8b6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Button/button.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Button/button.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Form Inputs/fileUpload.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Form Inputs/fileUpload.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Form Inputs/textfield.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Form Inputs/textfield.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/navbar/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/navbar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Home/Customer Home Page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Home/Customer Home Page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/inventoryDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/inventoryDashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/View Inventory/viewInventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/View Inventory/viewInventory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login &amp; SignUp/SignUp/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login &amp; SignUp/SignUp/signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Inventory navbar/Inventory navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Inventory navbar/Inventory navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Cart/productStore.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Cart/shoppingCart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Cart/shoppingCart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/productCatalog.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/productCatalog.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Add Item/AddItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Add Item/AddItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/inventoryPayments.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/inventoryPayments.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/inventoryPayments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/inventoryPayments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/login &amp; SignUp/login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login &amp; SignUp/login/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/NavbarRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/NavbarRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/PageRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/PageRoutes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="ComposerSettings">
-    <execution />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -39,22 +40,15 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="mahee#n02" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 5
-}</component>
-  <component name="ProjectId" id="2fv9uLNzJXTXh7vnyMMB0LIcgqv" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="2gG8n4liEetUgCiTXrvXtQiRUjD" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -63,55 +57,31 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "dev__test",
-    "last_opened_file_path": "D:/University/Projects/L2/Software Project/Front End Release/Test/Sales-And-Inventory-Management-System",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Jetbrains\\PhpStorm\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "settings.editor.selected.configurable": "inlay.hints",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Level 2 Project\Sales-And-Inventory-Management-System\src\layout\navbar" />
-    </key>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="deadbc32-7837-4427-b601-fc4c933a9650" name="Changes" comment="" />
-      <created>1714670908450</created>
+      <changelist id="5d2ad5e6-b3f3-4fe7-9ca2-56f2badaa8b6" name="Changes" comment="" />
+      <created>1715312719117</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1714670908450</updated>
-      <workItem from="1714670912618" duration="4167000" />
-      <workItem from="1714675403571" duration="15142000" />
-      <workItem from="1714791084953" duration="2671000" />
-      <workItem from="1715233835137" duration="16257000" />
+      <updated>1715312719117</updated>
+      <workItem from="1715312722548" duration="58465000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/components/Form Inputs/passwordField.js</url>
-          <line>1</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
