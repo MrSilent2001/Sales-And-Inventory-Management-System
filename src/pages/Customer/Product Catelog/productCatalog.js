@@ -9,13 +9,9 @@ import CustomizedButton from "../../../components/Button/button";
 import axios from "axios";
 
 function ProductCatalog() {
-    // State variables
-    //const [show, setShow] = useState(true);
     const [cart, setCart] = useState([]);
-    //const [warning, setWarning] = useState(false);
 
-    //fecting all products from backend
-
+    //fetcting all products from backend
     const [products, setProducts] = useState([]);
 
     useEffect(() => {

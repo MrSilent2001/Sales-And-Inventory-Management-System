@@ -5,26 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d2ad5e6-b3f3-4fe7-9ca2-56f2badaa8b6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Form Inputs/fileUpload.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Form Inputs/fileUpload.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Inventory navbar/Inventory navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Inventory navbar/Inventory navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Cart/productStore.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Customer/Cart/shoppingCart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Cart/shoppingCart.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/productCatalog.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/productCatalog.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Add Item/AddItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Add Item/AddItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/inventoryPayments.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/inventoryPayments.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/inventoryPayments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/inventoryPayments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login &amp; SignUp/login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login &amp; SignUp/login/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/NavbarRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/NavbarRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/PageRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/PageRoutes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +60,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1715312719117</updated>
-      <workItem from="1715312722548" duration="58465000" />
+      <workItem from="1715312722548" duration="59433000" />
     </task>
     <servers />
   </component>

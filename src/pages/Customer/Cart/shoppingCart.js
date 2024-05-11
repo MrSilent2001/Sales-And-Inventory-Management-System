@@ -56,10 +56,10 @@ function Cart() {
         console.log('Payment Data:', paymentData)
         try {
             const response = await axios.post('http://localhost:9000/payment/customerPayment/create', paymentData);
-            console.log(response.data); // Handle success response from backend
+            console.log(response.data);
         } catch (error) {
             console.error('Error sending payment data to backend:', error);
-            // Handle error
+
         }
     }
 
@@ -94,7 +94,7 @@ function Cart() {
                 customerEmail:customerData[4],
                 contactNo: customerData[5],
                 totalAmount: response.data.amount_total/100,
-                //stripeCheckoutSessionId: response.data.id // Assuming the Stripe session ID is returned in the response
+                //stripeCheckoutSessionId: response.data.id
             };
             handlePaymentSuccess(paymentData);
             window.location.href = response.data.url;
