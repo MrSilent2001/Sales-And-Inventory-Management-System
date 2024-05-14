@@ -60,7 +60,6 @@ function UpdateItem(props) {
         async function fetchItemData(id) {
             try {
                 const response = await axios.get(`http://localhost:9000/inventory/getItem/${id}`);
-                const itemData = response.data;
             } catch (error) {
                 console.error('Error fetching item data:', error);
             }

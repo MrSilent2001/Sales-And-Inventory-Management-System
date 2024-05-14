@@ -85,10 +85,6 @@ function OrderDetails() {
         }
     };
 
-    const handleButtonClick = (buttonText) => {
-        setActiveButton(buttonText);
-    };
-
     const handleEnterPress = async (event) => {
         if (event.key === 'Enter') {
             fetchOrderById(orderId);

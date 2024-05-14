@@ -23,13 +23,11 @@ const Login = () => {
         event.preventDefault();
     };
 
-
     const handleChange = (name, value) => {
         setFormData(prevState => ({
             ...prevState,
             [name]: value
         }));
-        console.log(formData);
     };
 
     const handleSubmit = async (e) =>{
@@ -41,31 +39,6 @@ const Login = () => {
             });
 
             console.log(response.data);
-
-            // backend returned tokens in the response data
-            const { accessToken, refreshToken, id, username, email, contactNo, role } = response.data.result;
-
-            // Create an array with the user-related data
-            const userArray = [accessToken, refreshToken, id, username, email, contactNo, role];
-
-            // Convert the array to JSON string and store it in localStorage
-            localStorage.setItem('user', JSON.stringify(userArray));
-
-            const storedUserData = JSON.parse(localStorage.getItem('user'));
-
-            // Optionally, you can return the tokens or any other data from the response
-            console.log(storedUserData.id);
-
-
-            if(role === "admin"){
-                navigate("/salesLanding");
-            }
-            if(role === "customer"){
-                navigate("/customerHome");
-            }
-            if(role === "supplier"){
-                navigate("/supplierDashboard");
-            }
 
         } catch (error) {
             // Handle login error

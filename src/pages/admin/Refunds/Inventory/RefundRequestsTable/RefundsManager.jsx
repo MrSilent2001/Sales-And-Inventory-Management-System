@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ApprovedRefundsTable from '../../../../admin/Refunds/Customer/Approved Refunds/ApprovedRefundsTable';
+import ApprovedRefundsTable from '../../Customer/Approved Refunds/ApprovedRefundsTable';
 import InventoryRefundRequestsTable from './InventoryRefundRequestsTable';
 const RefundsManager = () => {
   const [view, setView] = useState('requests'); 

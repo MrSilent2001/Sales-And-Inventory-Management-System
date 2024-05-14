@@ -8,9 +8,10 @@ import Validation from '../validation';
 import axios from "axios";
 import FormControl from "@mui/material/FormControl";
 import ComboBox from "../../../components/Form Inputs/comboBox";
+import {Navigate} from "react-router-dom";
 
 function SignUp() {
-    const navigate = useNavigate();
+    const [navigate, setNavigate] = useState(false);
 
     const [values, setValues] = useState({
         username: '',
@@ -23,6 +24,10 @@ function SignUp() {
 
     const [showPassword, setShowPassword] = React.useState(false);
     const [errors,setErrors] = useState({});
+
+    if(navigate){
+        return <Navigate to="/login"/>
+    }
 
     const handleChange = (e) => {
         setValues({ ...values, role: e.target.value });
@@ -65,7 +70,7 @@ function SignUp() {
 
             console.log(values.role);
 
-            navigate("/login");
+            setNavigate(true);
 
 
         } catch (error) {

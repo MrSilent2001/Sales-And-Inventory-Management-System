@@ -7,9 +7,10 @@ import CustomizedButton from "../../../components/Button/button";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 import axios from "axios";
 import AddDiscount from "./Modal/Add Discount/addDiscounts";
-import { Modal } from "@mui/material";
+import {Modal} from "@mui/material";
 import CustomizedAlert from "../../../components/Alert/alert";
 import SearchBar from "../../../components/search bar/search bar";
+import PageLoader from "../../../components/Page Loader/pageLoader";
 
 const columns = [
     { columnId: 'productId', label: 'Product Id', minWidth: 120, align: 'center' },
@@ -24,6 +25,7 @@ const columns = [
 function DiscountDashboard() {
     const [visible, setVisible] = useState(false);
     const [discount, setDiscount] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
@@ -107,6 +109,7 @@ function DiscountDashboard() {
         try {
             const response = await axios.get(`http://localhost:9000/discounts/search?keyword=${query}`);
             setDiscount(response.data);
+            setIsLoading(false);
         } catch (error) {
             handleClickError();
             console.error('Error fetching discounts:', error);
@@ -140,11 +143,15 @@ function DiscountDashboard() {
                         </CustomizedButton>
                     </div>
                     <div className="discount-dashboard">
-                        <CustomizedTable
-                            columns={columns}
-                            rows={rows}
-                            style={{width:'85%'}}
-                        />
+                        {isLoading ? (
+                            <PageLoader />
+                        ) : (
+                            <CustomizedTable
+                                columns={columns}
+                                rows={rows}
+                                style={{ width: '85%' }}
+                            />
+                        )}
                     </div>
                 </div>
             </div>

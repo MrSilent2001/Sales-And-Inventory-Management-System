@@ -35,7 +35,7 @@ const ApprovedRefundsTable = ({ onBack }) => {
           <Box sx={{pt: 4, display: 'flex', flexDirection: 'column' }}>
             <div style={{display: 'flex',alignItems: 'flex-start', padding: '0.65em 0 0.65em 0', marginTop: '2em 0'}}>
 
-              <Link to="/InventoryRefundRequestsTable">
+              <Link to="/viewRefundRequests">
                 <BackArrow
                     onClick={onBack}
                     style={{marginTop: '-0.1em'}}

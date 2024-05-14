@@ -29,7 +29,6 @@ const PasswordField = ({ label, onChange, showPassword, handleClickShowPassword,
                         </IconButton>
                     </InputAdornment>
                 }
-                label={label}
             />
         </FormControl>
     );

@@ -8,8 +8,6 @@ import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import CustomizedAlert from "../../../components/Alert/alert";
-import FileUpload from "../../../components/Form Inputs/fileUpload";
-import BasicTextField from "../../../components/Form Inputs/textfield";
 
 function SupplierProfile() {
 

@@ -9,8 +9,8 @@ import {
 } from '@mui/material';
 import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../../layout/footer/footer";
-import PlaceOrder from "../../../Orders/Inventory/Modals/Place Order/placeOrder";
-import ViewOrder from "../../../Orders/Inventory/Modals/View Order/viewOrder";
+import PlaceOrder from "../Modals/Place Order/placeOrder";
+import ViewOrder from "../Modals/View Order/viewOrder";
 import CustomizedButton from "../../../../../components/Button/button";
 import purchasedOrders from "../../../../../data/data.json";
 import SearchBar from "../../../../../components/search bar/search bar";

@@ -3,7 +3,7 @@ import {Box, Container, Modal,Typography} from '@mui/material';
 import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
-import InventoryRefundRequest from "../../../../../pages/admin/Refunds/Inventory/Modal/InventoryRefundRequest";
+import InventoryRefundRequest from "../Modal/InventoryRefundRequest";
 import CustomizedButton from "../../../../../components/Button/button";
 import inventoryRefunds from "../../../../../data/data.json";
 import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";

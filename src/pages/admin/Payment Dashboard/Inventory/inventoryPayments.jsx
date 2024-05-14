@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Modal } from "@mui/material";
 import InventoryNavbar from "../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../layout/footer/footer";
-import AddPayment from "../../../admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment";
+import AddPayment from "./Modal/AddPayment/addPayment";
 import CustomizedTable from "../../../../components/Table/Customized Table/customizedTable";
 import axios from "axios";
 import SearchBar from "../../../../components/search bar/search bar";
 import CustomizedButton from "../../../../components/Button/button";
 import "./inventoryPayments.css";
+import PageLoader from "../../../../components/Page Loader/pageLoader";
 
 const columns = [
     { columnId: 'supplierId', label: 'Supplier Id', minWidth: 100, align: 'center' },
@@ -21,12 +22,14 @@ function InventoryPayments() {
     const [visible, setVisible] = useState(false);
     const [payments, setPayments] = useState([]);
     const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const fetchPayments = async () => {
             try {
                 const response = await axios.get('http://localhost:9000/payment/supplierPayment/getAll');
                 setPayments(response.data);
+                setIsLoading(true);
             } catch (error) {
                 setError(error);
                 console.error('Error fetching Payment data:', error);
@@ -77,11 +80,15 @@ function InventoryPayments() {
                         </CustomizedButton>
                     </div>
                     <div className="invPaymentDashboard" >
-                        <CustomizedTable
-                            columns={columns}
-                            rows={payments}
-                            style={{width: '100%'}}
-                        />
+                        {isLoading ? (
+                            <PageLoader />
+                        ) : (
+                            <CustomizedTable
+                                columns={columns}
+                                rows={payments}
+                                style={{ width: '85%' }}
+                            />
+                        )}
                     </div>
                     <Modal open={visible}>
                         <AddPayment

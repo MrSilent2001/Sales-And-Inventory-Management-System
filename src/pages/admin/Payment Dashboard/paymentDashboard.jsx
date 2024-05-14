@@ -5,6 +5,7 @@ import axios from "axios";
 import "./paymentDashboard.css";
 import SearchBar from "../../../components/search bar/search bar";
 import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
+import PageLoader from "../../../components/Page Loader/pageLoader";
 
 const columns = [
     { columnId: 'id', label: 'Id', minWidth: 100, align: 'center' },
@@ -17,6 +18,7 @@ const columns = [
 function PaymentDashboard() {
     const [visible, setVisible] = useState(false);
     const [payments, setPayments] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const [openError, setOpenError] = useState(false);
 
@@ -33,6 +35,7 @@ function PaymentDashboard() {
             try {
                 const response = await axios.get('http://localhost:9000/payment/customerPayment/getAllCustomerPayments');
                 setPayments(response.data);
+                setIsLoading(true);
             } catch (error) {
                 console.error('Error fetching Payment data:', error);
             }
@@ -72,11 +75,15 @@ function PaymentDashboard() {
                         </div>
                     </div>
                     <div className="paymentDashboard" >
+                        {isLoading ? (
+                            <PageLoader />
+                        ) : (
                             <CustomizedTable
                                 columns={columns}
-                                rows={mappedData}
-                                style={{width: '100%'}}
+                                rows={rows}
+                                style={{ width: '85%' }}
                             />
+                        )}
                     </div>
                 </div>
             </div>

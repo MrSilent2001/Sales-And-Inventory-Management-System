@@ -96,7 +96,9 @@ function Cart() {
                 totalAmount: response.data.amount_total/100,
                 //stripeCheckoutSessionId: response.data.id
             };
-            handlePaymentSuccess(paymentData);
+            await handlePaymentSuccess(paymentData);
+            //await stripe.invoices.sendInvoice(response.data.id);
+
             window.location.href = response.data.url;
         } catch (error) {
             console.error('Error creating checkout session:', error);

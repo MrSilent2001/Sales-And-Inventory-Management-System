@@ -51,7 +51,7 @@ function CustomizedTable({columns, rows, style}) {
                     <TableBody>
                         {rows.map((row) => (
                             <StyledTableRow
-                                key={row.columnId}
+                                key={row.id}
                                 style={{
                                     cursor: 'pointer',
                                     backgroundColor:  'inherit'
@@ -60,7 +60,7 @@ function CustomizedTable({columns, rows, style}) {
                                 {columns.map((column) => {
                                     const value = row[column.columnId];
                                     return (
-                                        <StyledTableCell key={column.columnId} align={column.align}>
+                                        <StyledTableCell key={`${row.id}-${column.columnId}`} align={column.align}>
                                             {column.format && typeof value === 'number' ? column.format(value) : value}
                                         </StyledTableCell>
                                     );

@@ -113,7 +113,7 @@ function CustomerHome() {
                     <div className="contactUsContent">
                         <div className="mapContainer">
 
-                            <div className="map"> <iframe width="720" height="360" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0" src="https://maps.google.com/maps?width=720&amp;height=400&amp;hl=en&amp;q=No%2016/B,%20Galle%20Road,%20Colombo%203+(Tradeasy)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps trackers</a></iframe></div>
+                            <div className="map"> <iframe title="map" width="720" height="360" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0" src="https://maps.google.com/maps?width=720&amp;height=400&amp;hl=en&amp;q=No%2016/B,%20Galle%20Road,%20Colombo%203+(Tradeasy)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps trackers</a></iframe></div>
 
                         </div>
 

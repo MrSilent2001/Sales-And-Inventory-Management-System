@@ -4,7 +4,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import "./viewSupplier.css";
 import {Modal} from "@mui/material";
-import AddSupplier from "../Supplier Dashboard/Modals/AddSupplier/addSupplier";
+import AddSupplier from "./Modals/AddSupplier/addSupplier";
 import InventoryNavbar from "../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../layout/footer/footer";
 import CustomizedButton from "../../../components/Button/button";
@@ -13,6 +13,7 @@ import ComboBox from "../../../components/Form Inputs/comboBox";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 import axios from "axios";
 import CustomizedAlert from "../../../components/Alert/alert";
+import PageLoader from "../../../components/Page Loader/pageLoader";
 
 function FilterItems(){
     const [category, setCategory] = React.useState('');
@@ -58,6 +59,7 @@ function FilterItems(){
 function ViewSupplier(){
     const [visible, setVisible] = useState(false);
     const [suppliers, setSuppliers] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
@@ -83,6 +85,7 @@ function ViewSupplier(){
             try {
                 const response = await axios.get('http://localhost:9000/supplier/getAllSuppliers');
                 setSuppliers(response.data);
+                setIsLoading(true);
             } catch (error) {
                 console.error('Error fetching users:', error);
             }
@@ -217,11 +220,15 @@ function ViewSupplier(){
                     </div>
 
                     <div className="itemTable">
-                        <CustomizedTable
-                            columns={columns}
-                            rows={mappedData}
-                            style={{width: '90%'}}
-                        />
+                        {isLoading ? (
+                            <PageLoader />
+                        ) : (
+                            <CustomizedTable
+                                columns={columns}
+                                rows={mappedData}
+                                style={{ width: '85%' }}
+                            />
+                        )}
                     </div>
                 </div>
             </div>

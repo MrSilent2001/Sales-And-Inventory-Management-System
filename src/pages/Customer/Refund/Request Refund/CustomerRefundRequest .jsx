@@ -7,7 +7,6 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Footer from "../../../../layout/footer/footer";
-import SalesNavbar from "../../../../layout/navbar/Sales navbar/sales navbar";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
 import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";

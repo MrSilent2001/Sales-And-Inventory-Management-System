@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import "./inventoryDashboard.css";
 import {Modal} from "@mui/material";
-import AddItem from "../Inventory Dashboard/Modals/Add Item/AddItem";
-import UpdateItem from "../Inventory Dashboard/Modals/Update Item/UpdateItem";
+import AddItem from "./Modals/Add Item/AddItem";
+import UpdateItem from "./Modals/Update Item/UpdateItem";
 import Footer from "../../../layout/footer/footer";
 import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navbar";
 import SearchBar from "../../../components/search bar/search bar";
