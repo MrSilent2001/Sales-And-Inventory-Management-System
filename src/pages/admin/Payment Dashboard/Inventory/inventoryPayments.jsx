@@ -26,13 +26,15 @@ function InventoryPayments() {
 
     useEffect(() => {
         const fetchPayments = async () => {
+            setIsLoading(true);
             try {
                 const response = await axios.get('http://localhost:9000/payment/supplierPayment/getAll');
                 setPayments(response.data);
-                setIsLoading(true);
             } catch (error) {
                 setError(error);
                 console.error('Error fetching Payment data:', error);
+            }finally {
+                setIsLoading(false);
             }
         };
 
@@ -86,7 +88,7 @@ function InventoryPayments() {
                             <CustomizedTable
                                 columns={columns}
                                 rows={payments}
-                                style={{ width: '85%' }}
+                                style={{ width: '100%' }}
                             />
                         )}
                     </div>

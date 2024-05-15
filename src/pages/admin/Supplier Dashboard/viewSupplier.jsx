@@ -82,12 +82,15 @@ function ViewSupplier(){
 
     useEffect(() => {
         const fetchSuppliers = async () => {
+            setIsLoading(true);
             try {
                 const response = await axios.get('http://localhost:9000/supplier/getAllSuppliers');
                 setSuppliers(response.data);
                 setIsLoading(true);
             } catch (error) {
                 console.error('Error fetching users:', error);
+            }finally {
+                setIsLoading(false);
             }
         };
         fetchSuppliers();
@@ -226,7 +229,7 @@ function ViewSupplier(){
                             <CustomizedTable
                                 columns={columns}
                                 rows={mappedData}
-                                style={{ width: '85%' }}
+                                style={{ width: '90%' }}
                             />
                         )}
                     </div>

@@ -20,14 +20,13 @@ const AddDiscount = forwardRef((props, ref) => {
         endDate: ''
     });
 
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState();
 
     const handleChange = (name, value) => {
         setFormData(prevState => ({
             ...prevState,
             [name]: value
         }));
-        console.log(formData);
     };
 
 

@@ -5,98 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d2ad5e6-b3f3-4fe7-9ca2-56f2badaa8b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/routes/adminRoutes.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/test.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/HomeCarousel-e0p38dlY.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/index-CH8EBJ-z.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/index-CH8EBJ-z.css.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/index-D5V35u8k.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/index-D5V35u8k.js.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/index.html.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/logo192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/logo512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/robots.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.test.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Alert/alert.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Alert/alert.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Button/button.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Button/button.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Cards/LandingPageCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Cards/LandingPageCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Cards/catalogCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Cards/catalogCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Cards/inventoryCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Cards/inventoryCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Cards/shoppingCartCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Cards/shoppingCartCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/DatePicker/datePicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DatePicker/datePicker.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Form Inputs/checkbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Form Inputs/checkbox.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Form Inputs/comboBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Form Inputs/comboBox.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Form Inputs/fileUpload.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Form Inputs/fileUpload.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Form Inputs/passwordField.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Form Inputs/passwordField.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Form Inputs/textfield.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Form Inputs/textfield.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Icons/backArrow.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Icons/backArrow.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Modal/modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Modal/modal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Table/Customized Table/customizedTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Table/Customized Table/customizedTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/search bar/search bar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/search bar/search bar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/footer/footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/footer/footer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Inventory navbar/Inventory navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Inventory navbar/Inventory navbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Sales navbar/sales navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Sales navbar/sales navbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Supplier Navbar/Supplier Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Supplier Navbar/Supplier Navbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/sidebar/salesOrderSidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/sidebar/salesOrderSidebar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Cart/cancel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Cart/cancel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Cart/shoppingCart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Cart/shoppingCart.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Cart/success.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Cart/success.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Customer Profile/Profile/customerProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Customer Profile/Profile/customerProfile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Home/Customer Home Page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Home/Customer Home Page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Order History/customerOrderHistory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Order History/customerOrderHistory.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/productCatalog.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/productCatalog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Refund/Generated Request/Generated Customer Refund Request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Refund/Generated Request/Generated Customer Refund Request.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Refund/Refund Dashboard/Customer Refunds.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Refund/Refund Dashboard/Customer Refunds.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Refund/Request Refund/Customer Refund Request .js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Refund/Request Refund/CustomerRefundRequest .jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/View/view.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/View/view.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Add Item/AddItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Add Item/AddItem.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Update Item/UpdateItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Update Item/UpdateItem.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/inventoryDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/inventoryDashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Update Supplier/updateSupplier.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Update Supplier/updateSupplier.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Admin Order History/Admin Order History.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Admin Order History/Admin Order History.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Customer Dashboard/customerDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Customer Dashboard/customerDashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Discounts/discountDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Discounts/discountDashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Inventory Landing/inventoryLanding.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Inventory Landing/inventoryLanding.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Sales Landing/salesLanding.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Sales Landing/salesLanding.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Orders/Inventory/Modals/Place Order/placeOrder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Orders/Inventory/Modals/Place Order/placeOrder.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Orders/Inventory/Modals/View Order/viewOrder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Orders/Inventory/Modals/View Order/viewOrder.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Orders/Inventory/Order Dashboard/PurchaseOrderDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Orders/Inventory/Order Dashboard/PurchaseOrderDashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Orders/Sales/Cancel Orders/cancelOrders.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Orders/Sales/Cancel Orders/cancelOrders.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Orders/Sales/Order Details/orderDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Orders/Sales/Order Details/orderDetails.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Orders/Sales/Order Status/orderStatus.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Orders/Sales/Order Status/orderStatus.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Orders/Sales/Pending Orders/pendingOrders.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Orders/Sales/Pending Orders/pendingOrders.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/inventoryPayments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/inventoryPayments.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/Approved Refunds/ApprovedRefundsTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/Approved Refunds/ApprovedRefundsTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/Generated Refund Request/SalesViewRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/Generated Refund Request/SalesViewRequest.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/Refund Denial Form/SalesRefundDenialForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/Refund Denial Form/SalesRefundDenialForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/Sales_Approved Refunds/SalesApprovedRefundsTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/Sales_Approved Refunds/SalesApprovedRefundsTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/View Sales Refund Requests/SalesRefundRequestsTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/View Sales Refund Requests/SalesRefundRequestsTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Refunds/Inventory/Modal/InventoryRefundRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Refunds/Inventory/Modal/InventoryRefundRequest.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Refunds/Inventory/RefundRequestsTable/InventoryRefundRequestsTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Refunds/Inventory/RefundRequestsTable/InventoryRefundRequestsTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Refunds/Inventory/RefundRequestsTable/RefundsManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Refunds/Inventory/RefundRequestsTable/RefundsManager.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Refunds/Inventory/generatedRequests/InventoryGeneratedRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Refunds/Inventory/generatedRequests/InventoryGeneratedRequest.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Remove Customers/removeCustomers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Remove Customers/removeCustomers.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/AddSupplier/addSupplier.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/AddSupplier/addSupplier.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/UpdateSupplier/updateSupplier.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/UpdateSupplier/updateSupplier.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Update Customers/updateCustomers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Update Customers/updateCustomers.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/View Inventory/Modals/Add Item/Add Item.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/View Inventory/Modals/Add Item/Add Item.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/View Inventory/Modals/Delete Item/Delete Item.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/View Inventory/Modals/Delete Item/Delete Item.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/View Inventory/Modals/Update Item/Update Item.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/View Inventory/Modals/Update Item/Update Item.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/View Inventory/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/View Inventory/test.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/View Inventory/viewInventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/View Inventory/viewInventory.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login &amp; SignUp/SignUp/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login &amp; SignUp/SignUp/signup.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login &amp; SignUp/SignUp/validation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login &amp; SignUp/SignUp/validation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login &amp; SignUp/login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login &amp; SignUp/login/login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login &amp; SignUp/validation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login &amp; SignUp/validation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reportWebVitals.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reportWebVitals.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/NavbarRoutes.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/PageRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/PageRoutes.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Page Loader/pageLoader.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/setupTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/setupTests.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DatePicker/datePicker.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DatePicker/datePicker.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Discounts/discountDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Discounts/discountDashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/inventoryPayments.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/inventoryPayments.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/AddSupplier/addSupplier.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/AddSupplier/addSupplier.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +83,7 @@
       <option name="presentableId" value="Default" />
       <updated>1715312719117</updated>
       <workItem from="1715312722548" duration="60062000" />
-      <workItem from="1715543580000" duration="23220000" />
+      <workItem from="1715543580000" duration="31967000" />
     </task>
     <servers />
   </component>

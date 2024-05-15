@@ -48,6 +48,7 @@ function DiscountDashboard() {
 
     useEffect(() => {
         const fetchSearchDiscounts = async () => {
+            setIsLoading(true);
             try {
                 const response = await axios.get('http://localhost:9000/discounts/getAll');
                 setDiscount(response.data);
@@ -55,6 +56,8 @@ function DiscountDashboard() {
             } catch (error) {
                 handleClickError();
                 console.error('Error fetching users:', error);
+            }finally {
+                setIsLoading(false);
             }
         };
         fetchSearchDiscounts();
