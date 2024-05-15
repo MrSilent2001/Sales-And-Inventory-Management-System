@@ -11,7 +11,6 @@ import InventoryLanding from "../pages/admin/Landing Pages/Inventory Landing/inv
 import ApprovedRefundsTable from "../pages/admin/Refunds/Customer/Approved Refunds/ApprovedRefundsTable";
 import InventoryGeneratedRequest from "../pages/admin/Refunds/Inventory/generatedRequests/InventoryGeneratedRequest";
 import InventoryRefundRequest from "../pages/admin/Refunds/Inventory/Modal/InventoryRefundRequest";
-import RefundsManager from "../pages/admin/Refunds/Inventory/RefundRequestsTable/RefundsManager";
 import SalesApprovedRefundsTable from "../pages/admin/Refunds/Customer/Sales_Approved Refunds/SalesApprovedRefundsTable";
 import SalesRefundDenialForm from "../pages/admin/Refunds/Customer/Refund Denial Form/SalesRefundDenialForm";
 import SalesViewRequest from "../pages/admin/Refunds/Customer/Generated Refund Request/SalesViewRequest";
@@ -68,7 +67,7 @@ export function PageRouting() {
                 <Route path="/InventoryRefundRequestTable" element={<InventoryRefundRequestsTable/>}/>
                 <Route path="/inventoryDashbaord" element={<InventoryDashboard/>}/>
 
-                <Route path="/RefundsManager" element={<RefundsManager/>}/>
+              
 
                 <Route path="/orderDetails" element={<OrderDetails/>}/>
                 <Route path="/orderStatus" element={<OrderStatus/>}/>

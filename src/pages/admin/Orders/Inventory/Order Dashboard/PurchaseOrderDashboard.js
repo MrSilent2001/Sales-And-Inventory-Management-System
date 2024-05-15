@@ -29,6 +29,7 @@ const PurchaseOrderDashboard = () => {
             try {
                 const response = await axios.get('http://localhost:9000/purchaseOrder/getAll');
                 setPurchasedOrders(response.data);
+                console.log(response.data);
             } catch (error) {
                 console.error('Error fetching refund requests:', error);
             }
@@ -38,21 +39,22 @@ const PurchaseOrderDashboard = () => {
 
 
    const columns=[
-    { id: 'supplierId', label: 'Supplier ID', minWidth: 70,align: 'center'  },
-    { id: 'address', label: 'Address', minWidth: 150,align: 'center'  },
-    { id: 'email', label: 'Email', minWidth: 120,align: 'center'  },
-    { id: 'contact', label: 'Contact', minWidth: 100,align: 'center'  },
+    { id: 'supplier', label: 'Supplier ID', minWidth: 70,align: 'center'  },
+    { id: 'Address', label: 'Address', minWidth: 150,align: 'center'  },
+    { id: 'mail', label: 'Email', minWidth: 120,align: 'center'  },
+    { id: 'contact_number', label: 'Contact', minWidth: 100,align: 'center'  },
     { id: 'actions', label:'', minWidth: 200,align: 'center'  }
 ];
 
   
 
-    // Map your data to the format ReusableTable expects
-    const mappedData = purchasedOrders.map(row => ({
-        supplierId: row.supplier,
-        address: row.Address,
-        email: row.mail,
-        contact: row.contact_number,
+
+        const mappedData = purchasedOrders.map(row => ({
+            supplier: row.supplier,
+            Address: row.Address,
+            mail: row.mail,
+            contact_number: row.contact_number,
+        
         
         actions: (
             <div style={{ display: 'flex' }}>

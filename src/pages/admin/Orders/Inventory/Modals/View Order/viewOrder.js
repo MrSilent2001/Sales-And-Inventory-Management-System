@@ -1,20 +1,44 @@
-import React from "react";
 import "./viewOrder.css";
 import CustomizedButton from "../../../../../../components/Button/button";
 import CenteredModal from "../../../../../../components/Modal/modal";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-function ViewOrder(props){
+function ViewOrder({ orderId, onClose }) {
+    const [orderDetails, setOrderDetails] = useState({
+        orderId: '',
+        supplier: '',
+        deliveryAddress: '',
+        email: '',
+        contactNumber: '',
+        items: []
+    });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
-    const orderDetails = {
-        orderId: 'OID0001',
-        supplier: 'S0001',
-        deliveryAddress: '1234 Delivery Ln, City, State',
-        email: 'customer@example.com',
-        contactNumber: '0771112223',
-        items: ['I0001', 'I0002', 'I0003']
-    };
+    useEffect(() => {
+        const fetchOrderDetails = async () => {
+            setLoading(true);
+            try {
+                const response = await axios.get(`http://localhost:9000/api/orders/${orderId}`);
+                setOrderDetails(response.data);
+            } catch (err) {
+                console.error('Failed to fetch order details:', err);
+                setError('Failed to load order details');
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    return(
+        if (orderId) {
+            fetchOrderDetails();
+        }
+    }, [orderId]);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
+
+    return (
         <CenteredModal>
             <div className="viewOrderOuter">
                 <div className="viewOrderModel">
@@ -70,14 +94,14 @@ function ViewOrder(props){
                                 <h5>Items:</h5>
                             </div>
                             <div className="idInput" id="items">
-                                {orderDetails.items}
+                                {orderDetails.items.join(', ')}
                             </div>
                         </div>
 
                         <div className="formFieldButtons">
                             <div className="saveButton">
                                 <CustomizedButton
-                                    onClick={() => props.onClose(false)}
+                                    onClick={() => onClose(false)}
                                     hoverBackgroundColor="#2d3ed2"
                                     style={{
                                         backgroundColor: '#242F9B',
@@ -99,7 +123,7 @@ function ViewOrder(props){
                 </div>
             </div>
         </CenteredModal>
-    )
+    );
 }
 
 export default ViewOrder;
