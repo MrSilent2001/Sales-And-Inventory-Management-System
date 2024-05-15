@@ -120,9 +120,9 @@ const CenteredModal = styled('div')({
 function InventoryRefundRequest(props) {
     const [supplier, setSupplier] = useState('');
     const [item, setItem] = useState('');
-    let [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState('');
     const [reason, setReason] = useState('');
-    let [price, setPrice] = useState(0);
+    const [price, setPrice] = useState('');
 
     const handleSubmit = async () => {
         const refundRequestData = {
@@ -188,8 +188,8 @@ function InventoryRefundRequest(props) {
                                        variant="outlined"
                                        size="small"
                                        type="number"
-                                       value={quantity}
-                                       onChange={(e) => setQuantity(Number(e.target.value))} 
+                                       value={0}
+                                       onChange={(e) => setQuantity(e.target.value)}
                                        />
                                 </div>
                             </div>
@@ -222,8 +222,8 @@ function InventoryRefundRequest(props) {
                                       variant="outlined"
                                       size="small"
                                       type="number"
-                                      value={price}
-                                      onChange={(e) => setPrice(Number(e.target.value))}
+                                      value={0}
+                                      onChange={(e) => setPrice(e.target.value)}
                                     />
                                 </div>
                             </div>

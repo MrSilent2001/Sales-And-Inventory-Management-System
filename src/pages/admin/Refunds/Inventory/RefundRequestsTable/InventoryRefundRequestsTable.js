@@ -20,6 +20,7 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
             try {
                 const response = await axios.get('http://localhost:9000/refund/inventoryRefund/getAll');
                 setRefundRequests(response.data);
+                console.log(response.data);
             } catch (error) {
                 console.error('Error fetching refund requests:', error);
                 setError('Failed to fetch refund requests. Please try again later.');
