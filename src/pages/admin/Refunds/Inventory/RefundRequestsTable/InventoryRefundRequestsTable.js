@@ -12,8 +12,8 @@ import CustomizedTable from "../../../../../components/Table/Customized Table/cu
 
 const InventoryRefundRequestsTable = ({onViewApproved}) => {
     const [visible,setVisible] = useState(false)
-    
     const [refundRequests, setRefundRequests] = useState([]);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         const fetchRefundRequests = async () => {
@@ -22,6 +22,7 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
                 setRefundRequests(response.data);
             } catch (error) {
                 console.error('Error fetching refund requests:', error);
+                setError('Failed to fetch refund requests. Please try again later.');
             }
         };
         fetchRefundRequests();
@@ -29,7 +30,7 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
 
     const columns=[
         { id: 'name', label: 'Name', minWidth: 70,align: 'center'  },
-        { id: 'contact_number', label: 'Contact number', minWidth: 150,align: 'center'  },
+        {  id: 'contact_number', label: 'Contact number', minWidth: 150,align: 'center'  },
         { id: 'inventory_id', label: 'Refund Id', minWidth: 120,align: 'center'  },
         { id: 'amount', label:'Price', minWidth: 200,align: 'center'  },
         { id: 'status', label:'Status', minWidth: 200,align: 'center'  }

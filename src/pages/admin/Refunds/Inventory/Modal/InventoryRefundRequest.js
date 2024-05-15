@@ -138,7 +138,7 @@ function InventoryRefundRequest(props) {
         try {
             await axios.post('http://localhost:9000/refund/inventoryRefund/create', refundRequestData);
             console.log('Refund request submitted successfully');
-            props.history.push('/InventoryGeneratedRequest'); // Assuming you are using React Router
+            
         } catch (error) {
             console.error('Error submitting refund request:', error);
         }
@@ -189,7 +189,7 @@ function InventoryRefundRequest(props) {
                                        size="small"
                                        type="number"
                                        value={quantity}
-                                       onChange={(e) => setQuantity(e.target.value)}
+                                       onChange={(e) => setQuantity(Number(e.target.value))} 
                                        />
                                 </div>
                             </div>
@@ -223,7 +223,7 @@ function InventoryRefundRequest(props) {
                                       size="small"
                                       type="number"
                                       value={price}
-                                      onChange={(e) => setPrice(e.target.value)}
+                                      onChange={(e) => setPrice(Number(e.target.value))}
                                     />
                                 </div>
                             </div>
