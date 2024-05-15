@@ -18,21 +18,25 @@ function ViewOrder({ orderId, onClose }) {
 
     useEffect(() => {
         const fetchOrderDetails = async () => {
+            if (!orderId) {
+                setError('No order ID provided');
+                return;
+            }
+
             setLoading(true);
             try {
                 const response = await axios.get(`http://localhost:9000/api/orders/${orderId}`);
                 setOrderDetails(response.data);
+                setError(''); // Clear any previous errors
             } catch (err) {
                 console.error('Failed to fetch order details:', err);
-                setError('Failed to load order details');
+                setError(`Failed to load order details: ${err.response ? err.response.data.message : err.message}`);
             } finally {
                 setLoading(false);
             }
         };
 
-        if (orderId) {
-            fetchOrderDetails();
-        }
+        fetchOrderDetails();
     }, [orderId]);
 
     if (loading) return <p>Loading...</p>;
