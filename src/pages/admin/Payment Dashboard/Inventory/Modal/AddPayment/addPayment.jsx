@@ -18,17 +18,33 @@ function AddPayment(props){
         date: '',
         itemsPurchased: '',
         billAmount: '',
-        receipt: ''
+        receipt: null
     });
 
     const [errors, setErrors] = useState({});
 
     const handleChange = (name, value) => {
+        if (name === 'receipt') {
+
+            console.log(value);
+            setFormData(prevState => ({
+                ...prevState,
+                [name]: value[0]
+            }));
+        } else {
+            setFormData(prevState => ({
+                ...prevState,
+                [name]: value
+            }));
+        }
+        console.log(formData);
+    };
+
+    const handleFileUpload = (file) => {
         setFormData(prevState => ({
             ...prevState,
-            [name]: value
+            receipt: file
         }));
-        console.log(formData);
     };
 
     const [openSuccess, setOpenSuccess] = useState(false);
@@ -51,6 +67,7 @@ function AddPayment(props){
     };
 
     const handleSubmit = async (e) => {
+        console.log(formData);
         e.preventDefault();
 
         const validationErrors = {};
@@ -70,9 +87,9 @@ function AddPayment(props){
         if (!formData.billAmount) {
             validationErrors.billAmount = " *This Field is required";
         }
-        // if (!formData.image) {
-        //     validationErrors.image = " *This Field is required";
-        // }
+        if (!formData.receipt) {
+            validationErrors.receipt = " *This Field is required";
+        }
 
         setErrors(validationErrors);
         if(Object.keys(validationErrors).length === 0){
@@ -82,8 +99,8 @@ function AddPayment(props){
                     supplierName: formData.supplierName,
                     date: formData.date,
                     itemsPurchased: formData.itemsPurchased,
-                    billAmount: formData.billAmount
-                    // productImage: formData.image
+                    billAmount: formData.billAmount,
+                    filePath: formData.receipt
                 });
 
                 const response = await axios.get('http://localhost:9000/payment/supplierPayment/getAll');
@@ -194,7 +211,10 @@ function AddPayment(props){
                                 <h5>Payment Receipt:</h5>
                             </div>
                             <div className="addPaymentidInput">
-                                <FileUpload style={{display: 'flex', justifyContent: 'center', width: '100%', float: 'left'}}/>
+                                <FileUpload
+                                    style={{display: 'flex', justifyContent: 'center', width: '100%', float: 'left'}}
+                                    onChange={handleFileUpload}
+                                />
                             </div>
                         </div>
                         {/*{errors.billAmount && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.billAmount}</span>}*/}

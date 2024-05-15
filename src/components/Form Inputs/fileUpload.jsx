@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import * as React from "react";
 import {styled} from "@mui/material/styles";
 
-function FileUpload({style}) {
+function FileUpload({style, onChange}) {
 
     const VisuallyHiddenInput = styled('input')({
         clip: 'rect(0 0 0 0)',
@@ -17,6 +17,10 @@ function FileUpload({style}) {
         width: 1,
     });
 
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        onChange(file);
+    };
 
     return (
         <Button
@@ -28,7 +32,7 @@ function FileUpload({style}) {
             }}
         >
             Upload File
-            <VisuallyHiddenInput type="file"/>
+            <VisuallyHiddenInput type="file" onChange={handleFileChange}/>
         </Button>
     );
 }

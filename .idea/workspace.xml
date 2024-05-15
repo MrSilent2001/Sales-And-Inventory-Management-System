@@ -5,31 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d2ad5e6-b3f3-4fe7-9ca2-56f2badaa8b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/dist/Logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/assets/HomeCarousel-e0p38dlY.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/assets/index-CH8EBJ-z.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/assets/index-CH8EBJ-z.css.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/assets/index-D5V35u8k.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/assets/index-D5V35u8k.js.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/index.html.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/logo192.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/logo512.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/robots.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/DatePicker/datePicker.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DatePicker/datePicker.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Discounts/discountDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Discounts/discountDashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/inventoryPayments.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/inventoryPayments.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/AddSupplier/addSupplier.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/AddSupplier/addSupplier.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Form Inputs/fileUpload.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Form Inputs/fileUpload.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +61,7 @@
       <option name="presentableId" value="Default" />
       <updated>1715312719117</updated>
       <workItem from="1715312722548" duration="60062000" />
-      <workItem from="1715543580000" duration="31967000" />
+      <workItem from="1715543580000" duration="35934000" />
     </task>
     <servers />
   </component>
