@@ -48,16 +48,6 @@ const AddSupplier = forwardRef((props, ref) => {
         setOpenError(false);
     };
 
-    // const handleChange = (event) => {
-    //     setCategory(event.target.value);
-    // };
-    //
-    // const options = [
-    //     { value: 'Category 01', label: 'Category 01' },
-    //     { value: 'Category 02', label: 'Category 02' },
-    //     { value: 'Category 03', label: 'Category 03' }
-    // ];
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -89,7 +79,7 @@ const AddSupplier = forwardRef((props, ref) => {
                     supplierAddress: formData.address,
                     supplierContact: formData.contact,
                     nic: formData.nic,
-                    supplierPassword: 'SUP123',
+                    supplierPassword: '',
                     paymentMethod: '',
                     paymentDetails: '',
                     profilePicture: 'https://th.bing.com/th/id/OIP.IQqAakFVSW2T6n9Kibpe2AAAAA?rs=1&pid=ImgDetMain'
@@ -212,7 +202,6 @@ const AddSupplier = forwardRef((props, ref) => {
                                         id="outlined-required"
                                         size="small"
                                         onChange={(e) => handleChange("nic", e.target.value)}
-
                                     />
                                 </div>
                             </div>
@@ -221,32 +210,6 @@ const AddSupplier = forwardRef((props, ref) => {
                                 fontSize: '0.8em',
                                 padding: '0 0 0.5em 0.5em'
                             }}>{errors.nic}</span>}
-
-
-                            {/*<div className="addSupplierformField">*/}
-                            {/*    <div className="addSupplieridField">*/}
-                            {/*        <h5>Category:</h5>*/}
-                            {/*    </div>*/}
-                            {/*    <div className="addSupplieridInput">*/}
-                            {/*        <ComboBox*/}
-                            {/*            value={category}*/}
-                            {/*            onChange={(event) => handleChange(event)}*/}
-                            {/*            style={{ width: '17.5em', marginRight: '0.5em' }}*/}
-                            {/*            options={options}*/}
-                            {/*            label="Category"*/}
-                            {/*            size="small"*/}
-                            {/*        />*/}
-                            {/*    </div>*/}
-                            {/*</div>*/}
-
-                            {/*<div className="addSupplierformField">*/}
-                            {/*    <div className="addSupplieridField">*/}
-                            {/*        <h5>Photo:</h5>*/}
-                            {/*    </div>*/}
-                            {/*    <div className="addSupplieridInput">*/}
-                            {/*        <FileUpload style={{ width: "20em", left: "-.5em" }}/>*/}
-                            {/*    </div>*/}
-                            {/*</div>*/}
 
 
                             <div className="addSupplierformFieldButtons">

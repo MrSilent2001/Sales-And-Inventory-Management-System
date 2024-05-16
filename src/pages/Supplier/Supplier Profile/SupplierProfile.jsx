@@ -4,7 +4,7 @@ import Avatar from '@mui/material/Avatar';
 import Footer from "../../../layout/footer/footer";
 import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navbar";
 import CustomizedButton from "../../../components/Button/button";
-import {Link} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import CustomizedAlert from "../../../components/Alert/alert";
@@ -13,6 +13,7 @@ function SupplierProfile() {
 
     const [supplier, setSupplier] = useState({});
     const [openError, setOpenError] = useState(false);
+    const [navigate, setNavigate] = useState(false);
 
     const handleClickError = () => {
         setOpenError(true);
@@ -21,20 +22,30 @@ function SupplierProfile() {
         setOpenError(false);
     };
 
+    const handleNavigate = () =>{
+        setNavigate(true);
+    }
+
+    if(navigate){
+        return <Navigate to="/updateSupplier"/>
+    }
+
     useEffect(() => {
-        const fetchSupplier = async () => {
+        const id = parseInt(localStorage.getItem('id'));
+        const fetchSupplier = async (id) => {
             try {
-                const response = await axios.get('http://localhost:9000/supplier/getAllSuppliers');
+                const response = await axios.get(`http://localhost:9000/supplier/getSupplier/${id}`);
                 setSupplier(response.data);
-                console.log(supplier[0])
+                console.log(response.data)
 
             } catch (error) {
                 handleClickError();
                 console.error('Error fetching users:', error);
             }
         };
-        fetchSupplier();
+        fetchSupplier(id);
     }, []);
+
     return (
         <>
             <SupplierNavbar/>
@@ -47,7 +58,7 @@ function SupplierProfile() {
                             <Avatar src="/broken-image.jpg"
                                     sx={{width: 230, height: 230, border: 2, borderRadius: 2, marginTop: '-0.8em'}}
                             />
-                            <h3>{localStorage.getItem('username')}</h3>
+                            <h3>{supplier.supplierName}</h3>
                             <h4 style={{textAlign:'left'}}>ID:{localStorage.getItem('id')}</h4>
 
                         </div>
@@ -60,7 +71,7 @@ function SupplierProfile() {
                                     <h5>Address:</h5>
                                 </div>
                                 <div className="SupplierProfileInput">
-                                    <span>{"-"}</span>
+                                    <span>{supplier.supplierAddress}</span>
                                 </div>
                             </div>
 
@@ -69,7 +80,7 @@ function SupplierProfile() {
                                     <h5>Email:</h5>
                                 </div>
                                 <div className="SupplierProfileInput">
-                                    <span>{localStorage.getItem('email')}</span>
+                                    <span>{supplier.supplierEmail}</span>
                                 </div>
                             </div>
 
@@ -78,7 +89,7 @@ function SupplierProfile() {
                                     <h5>Contact No:</h5>
                                 </div>
                                 <div className="SupplierProfileInput">
-                                    <span>{localStorage.getItem('contactNo')}</span>
+                                    <span>{supplier.supplierContact}</span>
                                 </div>
                             </div>
 
@@ -87,7 +98,7 @@ function SupplierProfile() {
                                     <h5>NIC:</h5>
                                 </div>
                                 <div className="SupplierProfileInput">
-                                    <span>{'-'}</span>
+                                    <span>{supplier.nic}</span>
                                 </div>
                             </div>
 
@@ -96,7 +107,7 @@ function SupplierProfile() {
                                     <h5>Payment Method:</h5>
                                 </div>
                                 <div className="SupplierProfileInput">
-                                    <span>{'-'}</span>
+                                    <span>{supplier.paymentMethod || '-'}</span>
                                 </div>
                             </div>
 
@@ -105,14 +116,15 @@ function SupplierProfile() {
                                     <h5>Payment Details:</h5>
                                 </div>
                                 <div className="SupplierProfileInput">
-                                    <span>{'-'}</span>
+                                    <span>{supplier.paymentDetails || '-'}</span>
                                 </div>
                             </div>
 
                             <div className="SupplierProfileButtonField">
                                 <div className="SupplierProfileButtons">
-                                    <Link to={{ pathname: "/updateSupplier", state: { supplierData: supplier[0] } }}>
+                                    <Navigate to= "/updateSupplier">
                                     <CustomizedButton
+                                        onClick={handleNavigate}
                                         hoverBackgroundColor="#2d3ed2"
                                         style={{
                                             color: '#ffffff',
@@ -129,7 +141,7 @@ function SupplierProfile() {
                                         }}>
                                         Edit Profile
                                     </CustomizedButton>
-                                    </Link>
+                                    </Navigate>
                                 </div>
                             </div>
                         </form>

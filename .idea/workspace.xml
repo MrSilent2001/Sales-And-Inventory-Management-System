@@ -6,8 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="5d2ad5e6-b3f3-4fe7-9ca2-56f2badaa8b6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Form Inputs/fileUpload.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Form Inputs/fileUpload.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/index-CH8EBJ-z.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/index-CH8EBJ-z.css.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/index-D5V35u8k.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/index-D5V35u8k.js.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.html.gz" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Inventory navbar/Inventory navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Inventory navbar/Inventory navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Sales navbar/sales navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Sales navbar/sales navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/navbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Update Supplier/updateSupplier.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Update Supplier/updateSupplier.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/AddSupplier/addSupplier.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/AddSupplier/addSupplier.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/login &amp; SignUp/SignUp/signup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login &amp; SignUp/SignUp/signup.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/login &amp; SignUp/login/login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login &amp; SignUp/login/login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/PageRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/PageRoutes.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

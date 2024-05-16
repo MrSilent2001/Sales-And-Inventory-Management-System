@@ -1,19 +1,28 @@
 import React, {useState} from "react";
 import "../navbar.css";
 import logo from "../../../assets/images/logo.png";
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import {MdLogout} from "react-icons/md";
 
 function SalesNavbar(){
     const [selectedNavLink, setSelectedNavLink] = useState(null);
+    const [navigate, setNavigate] = useState(false);
     const handleNavLinkClick = (event) => {
         setSelectedNavLink(event.target.name);
     };
 
+    const handleClick = () =>{
+        setNavigate(true);
+    }
+
+    if(navigate){
+        return <Navigate to="/salesLanding"/>
+    }
+
     return(
         <div className="navbar">
             <div className="logo">
-                <img src={logo} alt="Logo" style={{width:"30px", margin:"10px"}} />
+                <img src={logo} alt="Logo" style={{width:"30px", margin:"10px"}} onClick={handleClick} />
             </div>
             <div className="navigation">
                 <NavLink to="/pendingOrders">Sales</NavLink>

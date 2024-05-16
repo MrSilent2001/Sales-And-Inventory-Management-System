@@ -38,10 +38,25 @@ const Login = () => {
                 password: formData.password
             });
 
-            console.log(response.data);
 
+            // backend response data
+            const { access_token, id, role } = response.data;
+
+            // Store tokens in localStorage
+            localStorage.setItem('accessToken', access_token);
+            localStorage.setItem('role', role);
+            localStorage.setItem('id', id);
+
+            if(role === "admin"){
+                navigate("/salesLanding");
+            }
+            if(role === "customer"){
+                navigate("/customerHome");
+            }
+            if(role === "supplier"){
+                navigate("/supplierDashboard");
+            }
         } catch (error) {
-            // Handle login error
             console.error('Login error:', error);
             throw error;
         }

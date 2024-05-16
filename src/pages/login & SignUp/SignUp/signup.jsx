@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./signup.css";
 import TextField from "@mui/material/TextField";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
 import PasswordField from "../../../components/Form Inputs/passwordField";
 import Validation from '../validation';
