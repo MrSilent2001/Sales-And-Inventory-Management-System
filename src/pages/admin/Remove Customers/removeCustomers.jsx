@@ -37,6 +37,8 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
 const columns = [
     {id: 'id', label: 'ID', minWidth: 170, align: 'center'},
     {id: 'name', label: 'Name', minWidth: 170, align: 'center'},
+    {id: 'email', label: 'Email', minWidth: 250, align: 'center'},
+    {id: 'contact', label: 'Contact', minWidth: 170, align: 'center'},
     {id: 'address', label: 'Address', minWidth: 300, align: 'center'},
     {id: 'actions', label: 'Actions', minWidth: 170, align: 'center'},
 ];
@@ -111,7 +113,27 @@ function RemoveCustomers() {
                         <div className="removeCustomersTopic">
                             <h2>Customers</h2>
                         </div>
-                        <div className="removeCustomersTextfield">
+                        <div className="removeCustomersBtnWithSearchBar">
+                        <CustomizedButton
+                                    hoverBackgroundColor="#f11717"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#960505',
+                                        width: '12.25em',
+                                        height: '2.25em',
+                                        fontSize: '0.9em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.625em',
+                                        fontWeight: '550',
+                                        border: 'none',
+                                        marginTop: '0.625em',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                    }}>
+                                    Inactive Customers
+                                </CustomizedButton>
+                                
                             <SearchBar/>
                         </div>
                     </div>

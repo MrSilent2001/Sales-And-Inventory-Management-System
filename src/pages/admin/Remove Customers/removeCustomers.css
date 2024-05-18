@@ -1,8 +1,7 @@
 .removeCustomersOuter{
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
+
 }
 
 .removeCustomersInner{
@@ -20,12 +19,22 @@
     justify-content: space-between;
     align-items: center;
     width: 75em;
-    margin: 0.25em 0 1em 0;
-
+    margin: -1.1em 0 1em 0;
+    
 }
 
 .removeCustomersTopic h2{
     margin: 0;
     font-family: Inter;
     font-size: 1.3em;
+    padding: 1.5em 0;
+    
+}
+
+.removeCustomersBtnWithSearchBar{
+    width: 40%;
+    height: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
