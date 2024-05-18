@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d2ad5e6-b3f3-4fe7-9ca2-56f2badaa8b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/layout/adminPanel/adminPanel.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/layout/adminPanel/header.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/layout/adminPanel/home.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/layout/adminPanel/sidebar.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.html.gz" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/adminPanel/adminPanel.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/adminPanel/adminPanel.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/adminPanel/header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/adminPanel/header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/adminPanel/home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/adminPanel/home.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Inventory Landing/inventoryLanding.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Inventory Landing/inventoryLanding.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Inventory Landing/inventoryLanding.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Inventory Landing/inventoryLanding.jsx" afterDir="false" />
     </list>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './adminPanel.css';
 import
 { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill}
@@ -6,54 +6,96 @@ import
 import
 { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line }
     from 'recharts';
+import axios from "axios";
 
 function Home() {
+    const [no0fCustomers, setNoOfCustomers] = useState(0);
+    const [no0fRefunds, setNoOfRefunds] = useState(0);
+    const [no0fCategories, setNoOfCategories] = useState(0);
+    const [no0fProducts, setNoOfProducts] = useState(0);
+
+    const [dailySale, setDailySale] = useState(0);
+    const [monthlySale, setMonthlySale] = useState(0);
+    const [stockLevel, setStockLevel] = useState(0);
+    const [monthlyRevenue, setMonthlyRevenue] = useState(0);
 
     const data = [
         {
-            name: 'Page A',
-            uv: 4000,
-            pv: 2400,
-            amt: 2400,
-        },
-        {
-            name: 'Page B',
-            uv: 3000,
-            pv: 1398,
-            amt: 2210,
-        },
-        {
-            name: 'Page C',
-            uv: 2000,
-            pv: 9800,
-            amt: 2290,
-        },
-        {
-            name: 'Page D',
-            uv: 2780,
-            pv: 3908,
-            amt: 2000,
-        },
-        {
-            name: 'Page E',
-            uv: 1890,
-            pv: 4800,
-            amt: 2181,
-        },
-        {
-            name: 'Page F',
-            uv: 2390,
-            pv: 3800,
-            amt: 2500,
-        },
-        {
-            name: 'Page G',
-            uv: 3490,
-            pv: 4300,
-            amt: 2100,
-        },
+        }
     ];
 
+
+    const Items = async() =>{
+        try {
+            const response = await axios.get('http://localhost:9000/');
+            setDailySale(response.data);
+        } catch (error) {
+            console.error('Error fetching Payment data:', error);
+        }
+    }
+
+    const sale = async() =>{
+        try {
+            const response = await axios.get('http://localhost:9000/');
+            setMonthlySale(response.data);
+        } catch (error) {
+            console.error('Error fetching Payment data:', error);
+        }
+    }
+
+    const stock = async() =>{
+        try {
+            const response = await axios.get('http://localhost:9000/');
+            setStockLevel(response.data);
+        } catch (error) {
+            console.error('Error fetching Payment data:', error);
+        }
+    }
+
+    const revenue = async() =>{
+        try {
+            const response = await axios.get('http://localhost:9000/');
+            setMonthlyRevenue(response.data);
+        } catch (error) {
+            console.error('Error fetching Payment data:', error);
+        }
+    }
+
+    const customers = async() =>{
+        try {
+            const response = await axios.get('http://localhost:9000/customer/activeCustomers');
+            setNoOfCustomers(response.data);
+        } catch (error) {
+            console.error('Error fetching Payment data:', error);
+        }
+    }
+
+    const refunds = async() =>{
+        try {
+            const response = await axios.get('http://localhost:9000/refund/customerRefundCount');
+            setNoOfRefunds(response.data);
+        } catch (error) {
+            console.error('Error fetching Payment data:', error);
+        }
+    }
+
+    const categories = async() =>{
+        try {
+            const response = await axios.get('http://localhost:9000/');
+            setNoOfCategories(response.data);
+        } catch (error) {
+            console.error('Error fetching Payment data:', error);
+        }
+    }
+
+    const products = async() =>{
+        try {
+            const response = await axios.get('http://localhost:9000/');
+            setNoOfProducts(response.data);
+        } catch (error) {
+            console.error('Error fetching Payment data:', error);
+        }
+    }
 
     return (
         <main className='main-container'>
@@ -67,37 +109,38 @@ function Home() {
                         <h3>PRODUCTS</h3>
                         <BsFillArchiveFill className='card_icon'/>
                     </div>
-                    <h1>300</h1>
+                    <h1>{no0fProducts}</h1>
                 </div>
                 <div className='card'>
                     <div className='card-inner'>
                         <h3>CATEGORIES</h3>
                         <BsFillGrid3X3GapFill className='card_icon'/>
                     </div>
-                    <h1>12</h1>
+                    <h1>{no0fCategories}</h1>
                 </div>
                 <div className='card'>
                     <div className='card-inner'>
                         <h3>ACTIVE CUSTOMERS</h3>
                         <BsPeopleFill className='card_icon'/>
                     </div>
-                    <h1>33</h1>
+                    <h1>{no0fCustomers}</h1>
                 </div>
                 <div className='card'>
                     <div className='card-inner'>
                         <h3>REFUND REQUEST</h3>
                         <BsFillBellFill className='card_icon'/>
                     </div>
-                    <h1>42</h1>
+                    <h1>{no0fRefunds}</h1>
                 </div>
             </div>
 
             <div className='charts'>
                 <ResponsiveContainer width="100%" height="100%">
+                    {/*Daily sale of Items*/}
                     <BarChart
                         width={500}
                         height={300}
-                        data={data}
+                        data={dailySale}
                         margin={{
                             top: 5,
                             right: 30,
@@ -106,20 +149,20 @@ function Home() {
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
+                        <XAxis dataKey="name" scale="point" padding={{ left: 10, right: 10 }} />
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Bar dataKey="pv" fill="#8884d8" />
-                        <Bar dataKey="uv" fill="#82ca9d" />
+                        <Bar dataKey="Item" fill="#82ca9d" />
                     </BarChart>
                 </ResponsiveContainer>
 
                 <ResponsiveContainer width="100%" height="100%">
+                    {/*Monthly Sale*/}
                     <LineChart
                         width={500}
                         height={300}
-                        data={data}
+                        data={monthlySale}
                         margin={{
                             top: 5,
                             right: 30,
@@ -132,16 +175,16 @@ function Home() {
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-                        <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                        <Line type="monotone" dataKey="month" stroke="#82ca9d" activeDot={{ r: 8 }} />
                     </LineChart>
                 </ResponsiveContainer>
 
                 <ResponsiveContainer width="100%" height="100%">
+                    {/*Stock level of Items*/}
                     <BarChart
                         width={500}
                         height={300}
-                        data={data}
+                        data={stockLevel}
                         margin={{
                             top: 5,
                             right: 30,
@@ -150,20 +193,20 @@ function Home() {
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
+                        <XAxis dataKey="name" scale="point" padding={{ left: 10, right: 10 }} />
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Bar dataKey="pv" fill="#8884d8" />
-                        <Bar dataKey="uv" fill="#82ca9d" />
+                        <Bar dataKey="Item" fill="#82ca9d" />
                     </BarChart>
                 </ResponsiveContainer>
 
                 <ResponsiveContainer width="100%" height="100%">
+                    {/*Monthly Income*/}
                     <LineChart
                         width={500}
                         height={300}
-                        data={data}
+                        data={monthlyRevenue}
                         margin={{
                             top: 5,
                             right: 30,
@@ -176,8 +219,7 @@ function Home() {
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-                        <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                        <Line type="monotone" dataKey="Month" stroke="#82ca9d" />
                     </LineChart>
                 </ResponsiveContainer>
             </div>

@@ -55,7 +55,7 @@ import Sidebar from '../../../../layout/adminPanel/sidebar'
 import Home from '../../../../layout/adminPanel/home'
 
 function InventoryLanding() {
-    const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
+    const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
 
     const OpenSidebar = () => {
         setOpenSidebarToggle(!openSidebarToggle)
