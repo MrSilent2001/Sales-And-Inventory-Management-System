@@ -9,6 +9,9 @@ function InventoryNavbar(){
     const [navigate, setNavigate] = useState(false);
     const handleNavLinkClick = (event) => {
         setSelectedNavLink(event.target.name);
+        localStorage.setItem('accessToken', '');
+        localStorage.setItem('role', '');
+        localStorage.setItem('id', '');
     };
 
     const handleClick = () =>{
@@ -16,7 +19,7 @@ function InventoryNavbar(){
     }
 
     if(navigate){
-        return <Navigate to="/inventoryLanding"/>
+        return <Navigate to="/adminDashboard"/>
     }
 
     return(
@@ -67,15 +70,6 @@ function InventoryNavbar(){
                     onClick={handleNavLinkClick}
                 >
                     Payment
-                </NavLink>
-
-                <NavLink
-                    to="/salesLanding"
-                    name="salesLanding"
-                    className={`navLink ${selectedNavLink === "salesLanding" ? "selected" : ""}`}
-                    onClick={handleNavLinkClick}
-                >
-                    Sales
                 </NavLink>
 
                 <NavLink

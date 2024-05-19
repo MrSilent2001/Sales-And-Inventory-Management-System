@@ -52,10 +52,15 @@ function Cart() {
         localStorage.setItem("cart", JSON.stringify(updatedCart));
     }
 
+    const token = localStorage.getItem('accessToken');
     const handlePaymentSuccess = async (paymentData) => {
         console.log('Payment Data:', paymentData)
         try {
-            const response = await axios.post('http://localhost:9000/payment/customerPayment/create', paymentData);
+            const response = await axios.post('http://localhost:9000/payment/customerPayment/create', paymentData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             console.log(response.data);
         } catch (error) {
             console.error('Error sending payment data to backend:', error);
@@ -71,7 +76,7 @@ function Cart() {
                 currency: 'lkr',
                 product_data: {
                     name: item.productName,
-                    images:[item.productImage]
+                    images: [item.productImage]
                 },
                 unit_amount: item.productPrice * 100,
             },
@@ -83,6 +88,10 @@ function Cart() {
         try {
             const response = await axios.post('http://localhost:9000/payment/customerPayment/checkout', {
                 lineItems: lineItems
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             });
 
             setLoading(false);
@@ -91,9 +100,9 @@ function Cart() {
             const paymentData = {
                 customerId: customerData[2],
                 customerName: customerData[3],
-                customerEmail:customerData[4],
+                customerEmail: customerData[4],
                 contactNo: customerData[5],
-                totalAmount: response.data.amount_total/100,
+                totalAmount: response.data.amount_total / 100,
                 //stripeCheckoutSessionId: response.data.id
             };
             await handlePaymentSuccess(paymentData);
@@ -149,6 +158,7 @@ function Cart() {
         </>
     );
 }
+
 export default Cart;
 
 

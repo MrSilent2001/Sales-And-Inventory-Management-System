@@ -13,6 +13,9 @@ function CustomerNavbar(){
     const [selectedNavLink, setSelectedNavLink] = useState(null);
     const handleNavLinkClick = (event) => {
         setSelectedNavLink(event.target.name);
+        localStorage.setItem('accessToken', '');
+        localStorage.setItem('role', '');
+        localStorage.setItem('id', '');
     };
 
     const [cartItemCount, setCartItemCount] = useState(0);

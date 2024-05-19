@@ -24,11 +24,17 @@ function InventoryPayments() {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
+    const token = localStorage.getItem('accessToken');
+
     useEffect(() => {
         const fetchPayments = async () => {
             setIsLoading(true);
             try {
-                const response = await axios.get('http://localhost:9000/payment/supplierPayment/getAll');
+                const response = await axios.get('http://localhost:9000/payment/supplierPayment/getAll' , {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 setPayments(response.data);
             } catch (error) {
                 setError(error);
@@ -43,7 +49,11 @@ function InventoryPayments() {
 
     const fetchSearchedPayments = async (query) => {
         try {
-            const response = await axios.get(`http://localhost:9000/payment/supplierPayment/search?keyword=${query}`);
+            const response = await axios.get(`http://localhost:9000/payment/supplierPayment/search?keyword=${query}`,{
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setPayments(response.data);
         } catch (error) {
             setError(error);

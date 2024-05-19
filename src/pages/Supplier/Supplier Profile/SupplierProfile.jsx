@@ -10,7 +10,6 @@ import axios from "axios";
 import CustomizedAlert from "../../../components/Alert/alert";
 
 function SupplierProfile() {
-
     const [supplier, setSupplier] = useState({});
     const [openError, setOpenError] = useState(false);
     const [navigate, setNavigate] = useState(false);
@@ -30,11 +29,17 @@ function SupplierProfile() {
         return <Navigate to="/updateSupplier"/>
     }
 
+    const token = localStorage.getItem('accessToken');
+
     useEffect(() => {
         const id = parseInt(localStorage.getItem('id'));
         const fetchSupplier = async (id) => {
             try {
-                const response = await axios.get(`http://localhost:9000/supplier/getSupplier/${id}`);
+                const response = await axios.get(`http://localhost:9000/supplier/getSupplier/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 setSupplier(response.data);
                 console.log(response.data)
 
@@ -122,7 +127,6 @@ function SupplierProfile() {
 
                             <div className="SupplierProfileButtonField">
                                 <div className="SupplierProfileButtons">
-                                    <Navigate to= "/updateSupplier">
                                     <CustomizedButton
                                         onClick={handleNavigate}
                                         hoverBackgroundColor="#2d3ed2"
@@ -141,7 +145,6 @@ function SupplierProfile() {
                                         }}>
                                         Edit Profile
                                     </CustomizedButton>
-                                    </Navigate>
                                 </div>
                             </div>
                         </form>

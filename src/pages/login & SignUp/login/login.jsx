@@ -48,7 +48,7 @@ const Login = () => {
             localStorage.setItem('id', id);
 
             if(role === "admin"){
-                navigate("/salesLanding");
+                navigate("/adminDashboard");
             }
             if(role === "customer"){
                 navigate("/customerHome");

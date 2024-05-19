@@ -1,13 +1,9 @@
 import Login from "../pages/login & SignUp/login/login";
 import {Link, Route, Routes} from "react-router-dom";
 import Signup from "../pages/login & SignUp/SignUp/signup";
-import SalesLanding from "../pages/admin/Landing Pages/Sales Landing/salesLanding";
 import CustomerDashboard from "../pages/admin/Customer Dashboard/customerDashboard";
 import CustomerOrderHistory from "../pages/Customer/Order History/customerOrderHistory";
-import RemoveCustomers from "../pages/admin/Remove Customers/removeCustomers";
-import UpdateCustomers from "../pages/admin/Update Customers/updateCustomers";
 import View from "../pages/Customer/View/view";
-import InventoryLanding from "../pages/admin/Landing Pages/Inventory Landing/inventoryLanding";
 import ApprovedRefundsTable from "../pages/admin/Refunds/Customer/Approved Refunds/ApprovedRefundsTable";
 import RefundsManager from "../pages/admin/Refunds/Inventory/RefundRequestsTable/RefundsManager";
 import SalesApprovedRefundsTable from "../pages/admin/Refunds/Customer/Sales_Approved Refunds/SalesApprovedRefundsTable";
@@ -38,6 +34,8 @@ import ViewInventory from "../pages/admin/View Inventory/viewInventory";
 import ViewSupplier from "../pages/admin/Supplier Dashboard/viewSupplier";
 import PurchaseOrderDashboard from "../pages/admin/Orders/Inventory/Order Dashboard/PurchaseOrderDashboard";
 import InventoryPayments from "../pages/admin/Payment Dashboard/Inventory/inventoryPayments";
+import AdminDashboard from "../pages/admin/Admin Dashboard/AdminDashboard";
+import UpdateCustomers from "../pages/Customer/Update Customers/updateCustomers";
 
 export function PageRouting() {
     return (
@@ -70,8 +68,8 @@ export function PageRouting() {
                 <Route path="/cancel" element={<Cancel/>}/>
 
                 <Route path="/customerProfile" element={<CustomerProfile/>}/>
-                <Route path="/customerorderhistory" element={<CustomerOrderHistory/>}/>
-                <Route path="/updateCustomers" element={<UpdateCustomers/>}/>
+                <Route path="/previousOrders" element={<CustomerOrderHistory/>}/>
+                <Route path="/updateProfile" element={<UpdateCustomers/>}/>
 
                 <Route path="/refundRequests" element={<CustomerRefunds/>}/>
                 <Route path="/createrefund" element={<CustomerRefundRequest/>}/>
@@ -79,7 +77,7 @@ export function PageRouting() {
 
 
                 {/*Admin view routes - sales*/}
-                <Route path="/salesLanding" element={<SalesLanding/>}/>
+                <Route path="/adminDashboard" element={<AdminDashboard/>}/>
 
                 <Route path="/pendingOrders" element={<PendingOrders/>}/>
                 <Route path="/orderStatus" element={<OrderStatus/>}/>
@@ -89,7 +87,6 @@ export function PageRouting() {
                 <Route path="/paymentdashboard" element={<PaymentDashboard/>}/>
 
                 <Route path="/customerdashboard" element={<CustomerDashboard/>}/>
-                <Route path="/removeCustomers" element={<RemoveCustomers/>}/>
 
                 <Route path="/viewRefundRequests" element={<SalesRefundRequestsTable/>}/>
                 <Route path="/ApprovedRefundsTable" element={<ApprovedRefundsTable/>}/>
@@ -99,7 +96,6 @@ export function PageRouting() {
 
 
                 {/*Admin view routes - Inventory*/}
-                <Route path="/inventoryLanding" element={<InventoryLanding/>}/>
 
                 <Route path="/viewInventory" element={<ViewInventory/>}/>
                 <Route path="/viewSupplier" element={<ViewSupplier/>}/>
@@ -109,7 +105,6 @@ export function PageRouting() {
                 <Route path="/SalesApprovedRefundsTable" element={<SalesApprovedRefundsTable/>}/>
 
                 <Route path="/inventoryPayments" element={<InventoryPayments/>}/>
-                <Route path="/logout" element={<Login/>}/>
 
 
                 <Route path="/AdminOrderHistory" element={<AdminOrderHistory/>}/>

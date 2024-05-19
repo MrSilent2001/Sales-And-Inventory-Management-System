@@ -47,11 +47,16 @@ function UpdateSupplier(props) {
     }
 
     const id = parseInt(localStorage.getItem('id'));
+    const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
         const fetchSupplier = async () => {
             try {
-                const response = await axios.get(`http://localhost:9000/supplier/getSupplier/${id}`);
+                const response = await axios.get(`http://localhost:9000/supplier/getSupplier/${id}` , {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 setSupplier(prevSupplier => ({
                     ...prevSupplier,
                     ...response.data
@@ -89,6 +94,10 @@ function UpdateSupplier(props) {
                 paymentMethod: formData.paymentMethod,
                 paymentDetails: formData.paymentDetails,
                 profilePicture: formData.profilePicture
+            } , {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             });
 
             console.log('Supplier added successfully');
@@ -213,7 +222,6 @@ function UpdateSupplier(props) {
                                             fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
-                                            fontWeight: '550',
                                             marginTop: '0.625em',
                                             marginRight: '7.5em',
                                         }}>

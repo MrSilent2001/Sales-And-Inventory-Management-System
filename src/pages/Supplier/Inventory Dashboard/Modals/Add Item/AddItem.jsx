@@ -29,6 +29,7 @@ function AddSupplierInventoryItem(props) {
     });
 
     const [errors, setErrors] = useState({});
+    const token = localStorage.getItem('accessToken');
 
     const handleChange = (name, value) => {
         setFormData(prevState => ({
@@ -109,7 +110,11 @@ function AddSupplierInventoryItem(props) {
                     // productImage: formData.image
                 });
 
-                const response = await axios.get('http://localhost:9000/inventory/getAll');
+                const response = await axios.get('http://localhost:9000/inventory/getAll' , {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 const updatedInventory = response.data;
 
                 props.onInventoryAdded(updatedInventory);

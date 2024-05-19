@@ -2,10 +2,7 @@ import React, {useEffect, useState} from 'react';
 import "./orderStatus.css";
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../../../layout/footer/footer";
-import {Link} from "react-router-dom";
-import CustomizedButton from "../../../../../components/Button/button";
 import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
-import orderStatus from "../../../../../data/data.json";
 import ComboBox from "../../../../../components/Form Inputs/comboBox";
 import axios from "axios";
 import SalesOrderSidebar from "../../../../../layout/sidebar/salesOrderSidebar";
@@ -49,11 +46,16 @@ function OrderStatus() {
     };
 
     const [orderStatusRows, setOrderStatusRows] = useState([]);
+    const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await axios.get('http://localhost:9000/order/getAllOrders');
+                const response = await axios.get('http://localhost:9000/order/getAllOrders' ,  {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 setOrderStatusRows(response.data);
 
             } catch (error) {
@@ -73,7 +75,11 @@ function OrderStatus() {
         newStatuses[index] = event.target.value;
         setStatuses(newStatuses);
         try {
-            await axios.put(`http://localhost:9000/order/update/${orderId}`, { orderStatus: event.target.value });
+            await axios.put(`http://localhost:9000/order/update/${orderId}`, { orderStatus: event.target.value } ,  {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },}
+            );
             handleClickSuccess();
         } catch (error) {
             console.error('Error updating order status:', error);

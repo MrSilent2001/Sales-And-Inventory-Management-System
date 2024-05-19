@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import "./orderDetails.css";
 import Footer from "../../../../../layout/footer/footer";
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
-import { Link } from "react-router-dom";
 import CustomizedButton from "../../../../../components/Button/button";
 import BasicTextField from "../../../../../components/Form Inputs/textfield";
 import axios from "axios";
@@ -40,9 +39,14 @@ function OrderDetails() {
     const [orderItems, setOrderItems] = useState('');
     const [orderPrice, setOrderPrice] = useState('');
 
+    const token = localStorage.getItem('accessToken');
     const fetchOrderById = async (orderId) => {
         try {
-            const response = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`);
+            const response = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`,  {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setReceiverName(response.data.orderReceiverName);
             setReceiverAddress(response.data.orderReceiverAddress);
             setReceiverContact(response.data.orderReceiverContact);
@@ -71,7 +75,11 @@ function OrderDetails() {
                 orderItems: orderItems,
                 orderPrice: orderPrice
             };
-            const response = await axios.put(`http://localhost:9000/order/update/${orderId}`, updatedOrder);
+            const response = await axios.put(`http://localhost:9000/order/update/${orderId}`, updatedOrder,  {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             if (response.status === 200) {
                 handleClickSuccess();
                 // Optionally, you can fetch the order again to update the state

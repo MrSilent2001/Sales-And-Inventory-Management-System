@@ -18,6 +18,7 @@ const AddSupplier = forwardRef((props, ref) => {
     });
 
     const [errors, setErrors] = useState({});
+    const token = localStorage.getItem('accessToken');
 
     const handleChange = (name, value) => {
         setFormData(prevState => ({
@@ -86,7 +87,11 @@ const AddSupplier = forwardRef((props, ref) => {
                 });
 
                 // Fetch the updated list of suppliers
-                const response = await axios.get('http://localhost:9000/supplier/getAllSuppliers');
+                const response = await axios.get('http://localhost:9000/supplier/getAllSuppliers', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 const updatedSuppliers = response.data;
 
                 // Update the state of suppliers in the ViewSupplier component

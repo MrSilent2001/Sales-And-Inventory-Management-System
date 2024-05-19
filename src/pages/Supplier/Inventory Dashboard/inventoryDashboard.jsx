@@ -68,28 +68,46 @@ function InventoryDashboard(){
         setOpenError(false);
     };
 
+    const token = localStorage.getItem('accessToken');
+
     let rows = inventory;
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:9000/inventory/delete/${id}`);
+            await axios.delete(`http://localhost:9000/inventory/delete/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
             // Fetching the updated list of items after deletion
-            const response = await axios.get('http://localhost:9000/inventory/getAll');
+            const response = await axios.get('http://localhost:9000/inventory/getAll', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setInventory(response.data);
             handleClickSuccess();
 
         } catch (error) {
-            console.error('Error canceling discount:', error);
+            console.error('Error Deleting Items:', error);
         }
     };
 
     const handleUpdate = async (id) => {
         try {
-            await axios.delete(`http://localhost:9000/inventory/update/${id}`);
+            await axios.delete(`http://localhost:9000/inventory/update/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
             // Fetching the updated list of items after deletion
-            const response = await axios.get('http://localhost:9000/inventory/getAll');
+            const response = await axios.get('http://localhost:9000/inventory/getAll', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setInventory(response.data);
             handleClickSuccess();
 
@@ -101,12 +119,16 @@ function InventoryDashboard(){
     useEffect(() => {
         const fetchInventory = async () => {
             try {
-                const response = await axios.get('http://localhost:9000/inventory/getAll');
+                const response = await axios.get('http://localhost:9000/inventory/getAll', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 setInventory(response.data);
 
             } catch (error) {
                 handleClickError();
-                console.error('Error fetching users:', error);
+                console.error('Error fetching items:', error);
             }
         };
         fetchInventory();
@@ -166,7 +188,11 @@ function InventoryDashboard(){
     // Fetch Items function with query parameter
     const fetchItems = async (query) => {
         try {
-            const response = await axios.get(`http://localhost:9000/inventory/search?keyword=${query}`);
+            const response = await axios.get(`http://localhost:9000/inventory/search?keyword=${query}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setInventory(response.data);
         } catch (error) {
             console.error('Error fetching Items:', error);

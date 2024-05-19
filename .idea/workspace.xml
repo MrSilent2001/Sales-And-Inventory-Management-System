@@ -6,11 +6,46 @@
   <component name="ChangeListManager">
     <list default="true" id="5d2ad5e6-b3f3-4fe7-9ca2-56f2badaa8b6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/adminPanel/adminPanel.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/adminPanel/adminPanel.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/adminPanel/header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/adminPanel/header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/adminPanel/home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/adminPanel/home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Inventory Landing/inventoryLanding.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Inventory Landing/inventoryLanding.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Inventory Landing/inventoryLanding.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Inventory Landing/inventoryLanding.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Inventory navbar/Inventory navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Inventory navbar/Inventory navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Sales navbar/sales navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Sales navbar/sales navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Supplier Navbar/Supplier Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Supplier Navbar/Supplier Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Cart/shoppingCart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Cart/shoppingCart.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Customer Profile/Profile/customerProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Customer Profile/Profile/customerProfile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Order History/customerOrderHistory.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Order History/customerOrderHistory.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Order History/customerOrderHistory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Order History/customerOrderHistory.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/productCatalog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/productCatalog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Add Item/AddItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Add Item/AddItem.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Update Item/UpdateItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/Modals/Update Item/UpdateItem.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/inventoryDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Inventory Dashboard/inventoryDashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Update Supplier/updateSupplier.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Update Supplier/updateSupplier.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Admin Order History/Admin Order History.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Admin Order History/Admin Order History.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Customer Dashboard/customerDashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Customer Dashboard/customerDashboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Customer Dashboard/customerDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Customer Dashboard/customerDashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Discounts/Modal/Add Discount/addDiscounts.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Discounts/discountDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Discounts/discountDashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Inventory Landing/inventoryLanding.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Admin Dashboard/AdminDashboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Inventory Landing/inventoryLanding.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Admin Dashboard/AdminDashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Sales Landing/salesLanding.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Sales Landing/salesLanding.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Orders/Sales/Cancel Orders/cancelOrders.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Orders/Sales/Cancel Orders/cancelOrders.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Orders/Sales/Order Details/orderDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Orders/Sales/Order Details/orderDetails.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Orders/Sales/Order Status/orderStatus.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Orders/Sales/Order Status/orderStatus.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Orders/Sales/Pending Orders/pendingOrders.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Orders/Sales/Pending Orders/pendingOrders.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/Modal/AddPayment/addPayment.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/inventoryPayments.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/Inventory/inventoryPayments.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Payment Dashboard/paymentDashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Remove Customers/removeCustomers.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Remove Customers/removeCustomers.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/AddSupplier/addSupplier.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/AddSupplier/addSupplier.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/UpdateSupplier/updateSupplier.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/Modals/UpdateSupplier/updateSupplier.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Supplier Dashboard/viewSupplier.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Update Customers/updateCustomers.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Update Customers/updateCustomers.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Update Customers/updateCustomers.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Update Customers/updateCustomers.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/login &amp; SignUp/login/login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login &amp; SignUp/login/login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/PageRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/PageRoutes.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +90,12 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Tradeasy\Sales-And-Inventory-Management-System\src\pages\Customer" />
+      <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Tradeasy\Sales-And-Inventory-Management-System\src\pages\admin\Landing Pages" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

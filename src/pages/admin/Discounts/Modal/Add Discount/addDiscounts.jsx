@@ -49,6 +49,8 @@ const AddDiscount = forwardRef((props, ref) => {
         setOpenError(false);
     };
 
+    const token = localStorage.getItem('accessToken');
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -85,7 +87,12 @@ const AddDiscount = forwardRef((props, ref) => {
                     endDate: formData.endDate
                 });
 
-                const response = await axios.get('http://localhost:9000/discounts/getAll');
+                const response = await axios.get('http://localhost:9000/discounts/getAll',  {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+
+                });
                 const updatedDiscounts = response.data;
 
                 props.onDiscountAdded(updatedDiscounts);

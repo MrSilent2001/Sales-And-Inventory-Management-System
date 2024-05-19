@@ -46,11 +46,17 @@ function DiscountDashboard() {
         setOpenError(false);
     };
 
+    const token = localStorage.getItem('accessToken');
+
     useEffect(() => {
         const fetchSearchDiscounts = async () => {
             setIsLoading(true);
             try {
-                const response = await axios.get('http://localhost:9000/discounts/getAll');
+                const response = await axios.get('http://localhost:9000/discounts/getAll' ,{
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 setDiscount(response.data);
 
             } catch (error) {
@@ -67,10 +73,18 @@ function DiscountDashboard() {
 
     const handleButtonClick = async (id) => {
         try {
-            await axios.delete(`http://localhost:9000/discounts/delete/${id}`);
+            await axios.delete(`http://localhost:9000/discounts/delete/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
             // Fetching the updated list of discounts after deletion
-            const response = await axios.get('http://localhost:9000/discounts/getAll');
+            const response = await axios.get('http://localhost:9000/discounts/getAll',  {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setDiscount(response.data);
             handleClickSuccess();
 
@@ -110,7 +124,11 @@ function DiscountDashboard() {
     // Fetch discounts function with query parameter
     const fetchDiscounts = async (query) => {
         try {
-            const response = await axios.get(`http://localhost:9000/discounts/search?keyword=${query}`);
+            const response = await axios.get(`http://localhost:9000/discounts/search?keyword=${query}`,  {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setDiscount(response.data);
             setIsLoading(false);
         } catch (error) {

@@ -13,11 +13,16 @@ function ProductCatalog() {
 
     //fetcting all products from backend
     const [products, setProducts] = useState([]);
+    const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:9000/product/getAllProducts');
+                const response = await axios.get('http://localhost:9000/product/getAllProducts', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 setProducts(response.data);
                 console.log(products);
             } catch (error) {
