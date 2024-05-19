@@ -13,7 +13,8 @@ function ViewOrder({ orderId, onClose }) {
         contactNumber: '',
         items: []
     });
-
+   console.log(orderDetails);
+   
     useEffect(() => {
         const fetchOrderDetails = async () => {
             if (!orderId) return;
