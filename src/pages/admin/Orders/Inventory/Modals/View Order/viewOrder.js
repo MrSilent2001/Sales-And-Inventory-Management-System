@@ -19,7 +19,7 @@ function ViewOrder({ orderId, onClose }) {
             if (!orderId) return;
 
             try {
-                const response = await axios.get(`http://localhost:9000/api/orders/${orderId}`);
+                const response = await axios.get(`http://localhost:9000/purchaseOrder/get/${orderId}`);
                 setOrderDetails(response.data);
                 console.log(response.data); 
             } catch (err) {
