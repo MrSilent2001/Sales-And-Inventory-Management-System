@@ -20,7 +20,7 @@ const PurchaseOrderDashboard = () => {
 
     const [placeOrderVisible, setPlaceOrderVisible] = useState(false);
     const [viewOrderVisible, setViewOrderVisible] = useState(false);
-
+    const [currentMonth, setCurrentMonth] = useState('');
     const [purchasedOrders, setPurchasedOrders] = useState([]);
     
 
@@ -34,8 +34,20 @@ const PurchaseOrderDashboard = () => {
                 console.error('Error fetching refund requests:', error);
             }
         };
+
+        const fetchCurrentMonthName = async () => {
+            try {
+                const response = await axios.get('http://localhost:9000/purchaseOrder/getCurrentMonthName');
+                setCurrentMonth(response.data);
+            } catch (error) {
+                console.error('Error fetching current month name:', error);
+            }
+        };
         fetchpurchasedOrders();
+        fetchCurrentMonthName();
     }, []);
+
+    
 
 
    const columns=[
@@ -136,21 +148,21 @@ const PurchaseOrderDashboard = () => {
 
                     <Card sx={{ mb: 2, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
                         <CardContent>
-                            <Typography variant="subtitle1" sx={{ color: '#E74646', fontWeight: 'bold', mr: 6 }}>December</Typography>
+                            <Typography variant="subtitle1" sx={{ color: '#E74646', fontWeight: 'bold', mr: 6 }}>{currentMonth}</Typography>
                             <Typography variant="h6">Total Orders</Typography>
                             <Typography variant="h6" sx={{ textAlign: 'center' }}>15</Typography>
                         </CardContent>
                     </Card>
                     <Card sx={{ mb: 2, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
                         <CardContent>
-                            <Typography variant="subtitle1" sx={{ color: '#E74646', fontWeight: 'bold', mr: 6 }}>December</Typography>
+                            <Typography variant="subtitle1" sx={{ color: '#E74646', fontWeight: 'bold', mr: 6 }}>{currentMonth}</Typography>
                             <Typography variant="h6">In-Progress</Typography>
                             <Typography variant="h6" sx={{ textAlign: 'center' }}>5</Typography>
                         </CardContent>
                     </Card>
                     <Card sx={{ mb: 2, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
                         <CardContent>
-                            <Typography variant="subtitle1" sx={{ color: '#E74646', fontWeight: 'bold', mr: 6 }}>December</Typography>
+                            <Typography variant="subtitle1" sx={{ color: '#E74646', fontWeight: 'bold', mr: 6 }}>{currentMonth}</Typography>
                             <Typography variant="h6">Completed</Typography>
                             <Typography variant="h6" sx={{ textAlign: 'center' }}>10</Typography>
                         </CardContent>
