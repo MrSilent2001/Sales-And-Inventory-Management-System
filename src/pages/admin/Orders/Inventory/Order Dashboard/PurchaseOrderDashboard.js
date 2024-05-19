@@ -25,6 +25,8 @@ const PurchaseOrderDashboard = () => {
     const [totalOrders, setTotalOrders] = useState(0);
     const [inProgressOrders, setInProgressOrders] = useState(0);
     const [completedOrders, setCompletedOrders] = useState(0);
+    const [selectedOrder, setSelectedOrder] = useState(null);
+
 
     useEffect(() => {
         const fetchpurchasedOrders = async () => {
@@ -74,7 +76,11 @@ const PurchaseOrderDashboard = () => {
         }
     };
 
-
+    const handleViewOrder = (order) => {
+        setSelectedOrder(order);
+        setViewOrderVisible(true);
+    };
+    
    const columns=[
     
     { id: 'supplier', label: 'Supplier ID', minWidth: 70,align: 'center'  },
@@ -98,7 +104,7 @@ const PurchaseOrderDashboard = () => {
         actions: (
             <div style={{ display: 'flex' }}>
                 <CustomizedButton
-                    onClick={() => setViewOrderVisible(true)}
+                    onClick={() => handleViewOrder(row.id)}
                     hoverBackgroundColor="#242F9B"
                     style={{
                         color: 'white',
@@ -216,7 +222,7 @@ const PurchaseOrderDashboard = () => {
 
 
                     <Modal open={viewOrderVisible}>
-                        <ViewOrder onClose={(value) => { setViewOrderVisible(false) }} />
+                       <ViewOrder order={selectedOrder} onClose={(value) => { setViewOrderVisible(false) }} />
                     </Modal>
 
                 </Container>

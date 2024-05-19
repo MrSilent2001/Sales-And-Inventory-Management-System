@@ -1,8 +1,8 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import "./viewOrder.css";
 import CustomizedButton from "../../../../../../components/Button/button";
 import CenteredModal from "../../../../../../components/Modal/modal";
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 function ViewOrder({ orderId, onClose }) {
     const [orderDetails, setOrderDetails] = useState({
@@ -13,34 +13,22 @@ function ViewOrder({ orderId, onClose }) {
         contactNumber: '',
         items: []
     });
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
 
     useEffect(() => {
         const fetchOrderDetails = async () => {
-            if (!orderId) {
-                setError('No order ID provided');
-                return;
-            }
+            if (!orderId) return;
 
-            setLoading(true);
             try {
                 const response = await axios.get(`http://localhost:9000/api/orders/${orderId}`);
                 setOrderDetails(response.data);
-                setError(''); // Clear any previous errors
+                console.log(response.data); 
             } catch (err) {
                 console.error('Failed to fetch order details:', err);
-                setError(`Failed to load order details: ${err.response ? err.response.data.message : err.message}`);
-            } finally {
-                setLoading(false);
             }
         };
 
         fetchOrderDetails();
     }, [orderId]);
-
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error}</p>;
 
     return (
         <CenteredModal>
