@@ -18,7 +18,7 @@ export default function MediaControlCard({ item, removeFromCart }) {
                 <CardMedia
                     component="img"
                     sx={{ width: 160, height: 160, marginLeft: 10, marginTop: 2 }}
-                    image={item.productImage}
+                    image={item.productImage[0]}
                 />
                 <CardContent sx={{ flex: '1 0 auto', marginLeft: 10 }}>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
