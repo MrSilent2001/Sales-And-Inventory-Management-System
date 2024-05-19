@@ -15,7 +15,7 @@ export default function MultiActionAreaCard({ item, handleClick, handleBodyClick
                 <CardMedia
                     component="img"
                     height="250"
-                    image={productImage}
+                    image={productImage[0]}
                     alt={productName}
                     onClick={(e) => {
                         e.stopPropagation();
