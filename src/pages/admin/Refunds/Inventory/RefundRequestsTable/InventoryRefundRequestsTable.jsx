@@ -5,7 +5,7 @@ import Footer from "../../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
 import InventoryRefundRequest from "../Modal/InventoryRefundRequest";
 import CustomizedButton from "../../../../../components/Button/button";
-import inventoryRefunds from "../../../../../data/data.json";
+import inventoryRefunds from "../../../../../context/data.json";
 import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 
 

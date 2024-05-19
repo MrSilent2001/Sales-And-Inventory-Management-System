@@ -11,7 +11,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import SalesNavbar from '../../../layout/navbar/Sales navbar/sales navbar';
 import Footer from "../../../layout/footer/footer";
-import orderHistory from "../../../data/data.json";
+import orderHistory from "../../../context/data.json";
 import SearchBar from "../../../components/search bar/search bar";
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({

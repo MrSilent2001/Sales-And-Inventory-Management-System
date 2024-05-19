@@ -4,7 +4,7 @@ import Footer from "../../../../../layout/footer/footer";
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../../../components/Button/button";
-import viewRefunds from "../../../../../data/data.json";
+import viewRefunds from "../../../../../context/data.json";
 import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 
 

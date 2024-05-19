@@ -13,7 +13,7 @@ import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer n
 import Footer from "../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
-import customerRefunds from "../../../../data/data.json";
+import customerRefunds from "../../../../context/data.json";
 
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({

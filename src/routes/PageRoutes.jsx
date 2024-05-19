@@ -1,5 +1,5 @@
 import Login from "../pages/login & SignUp/login/login";
-import {Link, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import Signup from "../pages/login & SignUp/SignUp/signup";
 import CustomerDashboard from "../pages/admin/Customer Dashboard/customerDashboard";
 import CustomerOrderHistory from "../pages/Customer/Order History/customerOrderHistory";
@@ -36,6 +36,7 @@ import PurchaseOrderDashboard from "../pages/admin/Orders/Inventory/Order Dashbo
 import InventoryPayments from "../pages/admin/Payment Dashboard/Inventory/inventoryPayments";
 import AdminDashboard from "../pages/admin/Admin Dashboard/AdminDashboard";
 import UpdateCustomers from "../pages/Customer/Update Customers/updateCustomers";
+import ProtectedRoute from "./protectedRoutes";
 
 export function PageRouting() {
     return (
@@ -51,71 +52,73 @@ export function PageRouting() {
                 <Route path="/signup" element={<Signup/>}/>
 
 {/*===================================================Protected Routes==============================================================*/}
+                <Route element={<ProtectedRoute />}>
 
-                {/*Supplier view routes*/}
-                <Route path="/supplierDashboard" element={<InventoryDashboard/>}/>
-                <Route path="/supplierProfile" element={<SupplierProfile/>}/>
-                <Route path="/updateSupplier" element={<UpdateSupplier/>}/>
-
-
-                {/*Customer view routes*/}
-                <Route path="/customerHome" element={<CustomerHome/>}/>
-                <Route path="/products" element={<ProductCatalog/>}/>
-                <Route path="/cart" element={<Cart/>}/>
-
-                {/*Payment Gateway*/}
-                <Route path="/success" element={<Success/>}/>
-                <Route path="/cancel" element={<Cancel/>}/>
-
-                <Route path="/customerProfile" element={<CustomerProfile/>}/>
-                <Route path="/previousOrders" element={<CustomerOrderHistory/>}/>
-                <Route path="/updateProfile" element={<UpdateCustomers/>}/>
-
-                <Route path="/refundRequests" element={<CustomerRefunds/>}/>
-                <Route path="/createrefund" element={<CustomerRefundRequest/>}/>
-                <Route path="/generatedrefund" element={<GeneratedCustomerRefundRequest/>}/>
+                    {/*Supplier view routes*/}
+                    <Route path="/supplierDashboard" element={<InventoryDashboard/>}/>
+                    <Route path="/supplierProfile" element={<SupplierProfile/>}/>
+                    <Route path="/updateSupplier" element={<UpdateSupplier/>}/>
 
 
-                {/*Admin view routes - sales*/}
-                <Route path="/adminDashboard" element={<AdminDashboard/>}/>
+                    {/*Customer view routes*/}
+                    <Route path="/customerHome" element={<CustomerHome/>}/>
+                    <Route path="/products" element={<ProductCatalog/>}/>
+                    <Route path="/cart" element={<Cart/>}/>
 
-                <Route path="/pendingOrders" element={<PendingOrders/>}/>
-                <Route path="/orderStatus" element={<OrderStatus/>}/>
-                <Route path="/orderDetails" element={<OrderDetails/>}/>
-                <Route path="/cancelOrders" element={<CancelOrder/>}/>
+                    {/*Payment Gateway*/}
+                    <Route path="/success" element={<Success/>}/>
+                    <Route path="/cancel" element={<Cancel/>}/>
 
-                <Route path="/paymentdashboard" element={<PaymentDashboard/>}/>
+                    <Route path="/customerProfile" element={<CustomerProfile/>}/>
+                    <Route path="/previousOrders" element={<CustomerOrderHistory/>}/>
+                    <Route path="/updateProfile" element={<UpdateCustomers/>}/>
 
-                <Route path="/customerdashboard" element={<CustomerDashboard/>}/>
-
-                <Route path="/viewRefundRequests" element={<SalesRefundRequestsTable/>}/>
-                <Route path="/ApprovedRefundsTable" element={<ApprovedRefundsTable/>}/>
-
-                <Route path="/discountdashboard" element={<DiscountDashboard/>}/>
-
-
-
-                {/*Admin view routes - Inventory*/}
-
-                <Route path="/viewInventory" element={<ViewInventory/>}/>
-                <Route path="/viewSupplier" element={<ViewSupplier/>}/>
-                <Route path="/purchasedOrder" element={<PurchaseOrderDashboard/>}/>
-
-                <Route path="/InventoryRefundRequestsTable" element={<InventoryRefundRequestsTable/>}/>
-                <Route path="/SalesApprovedRefundsTable" element={<SalesApprovedRefundsTable/>}/>
-
-                <Route path="/inventoryPayments" element={<InventoryPayments/>}/>
+                    <Route path="/refundRequests" element={<CustomerRefunds/>}/>
+                    <Route path="/createrefund" element={<CustomerRefundRequest/>}/>
+                    <Route path="/generatedrefund" element={<GeneratedCustomerRefundRequest/>}/>
 
 
-                <Route path="/AdminOrderHistory" element={<AdminOrderHistory/>}/>
-                <Route path="/view" element={<View/>}/>
+                    {/*Admin view routes - sales*/}
+                    <Route path="/adminDashboard" element={<AdminDashboard/>}/>
 
-                <Route path="/RefundsManager" element={<RefundsManager/>}/>
+                    <Route path="/pendingOrders" element={<PendingOrders/>}/>
+                    <Route path="/orderStatus" element={<OrderStatus/>}/>
+                    <Route path="/orderDetails" element={<OrderDetails/>}/>
+                    <Route path="/cancelOrders" element={<CancelOrder/>}/>
 
-                <Route path="/SalesRefundDenialForm" element={<SalesRefundDenialForm/>}/>
-                <Route path="/SalesViewRequest" element={<SalesViewRequest/>}/>
-                <Route path="/SalesRefundRequestTable" element={<SalesRefundRequestsTable/>}/>
+                    <Route path="/paymentdashboard" element={<PaymentDashboard/>}/>
 
+                    <Route path="/customerdashboard" element={<CustomerDashboard/>}/>
+
+                    <Route path="/viewRefundRequests" element={<SalesRefundRequestsTable/>}/>
+                    <Route path="/ApprovedRefundsTable" element={<ApprovedRefundsTable/>}/>
+
+                    <Route path="/discountdashboard" element={<DiscountDashboard/>}/>
+
+
+
+                    {/*Admin view routes - Inventory*/}
+
+                    <Route path="/viewInventory" element={<ViewInventory/>}/>
+                    <Route path="/viewSupplier" element={<ViewSupplier/>}/>
+                    <Route path="/purchasedOrder" element={<PurchaseOrderDashboard/>}/>
+
+                    <Route path="/InventoryRefundRequestsTable" element={<InventoryRefundRequestsTable/>}/>
+                    <Route path="/SalesApprovedRefundsTable" element={<SalesApprovedRefundsTable/>}/>
+
+                    <Route path="/inventoryPayments" element={<InventoryPayments/>}/>
+
+
+                    <Route path="/AdminOrderHistory" element={<AdminOrderHistory/>}/>
+                    <Route path="/view" element={<View/>}/>
+
+                    <Route path="/RefundsManager" element={<RefundsManager/>}/>
+
+                    <Route path="/SalesRefundDenialForm" element={<SalesRefundDenialForm/>}/>
+                    <Route path="/SalesViewRequest" element={<SalesViewRequest/>}/>
+                    <Route path="/SalesRefundRequestTable" element={<SalesRefundRequestsTable/>}/>
+
+                </Route>
             </Routes>
         </div>
     );
