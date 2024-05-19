@@ -22,7 +22,9 @@ const PurchaseOrderDashboard = () => {
     const [viewOrderVisible, setViewOrderVisible] = useState(false);
     const [currentMonth, setCurrentMonth] = useState('');
     const [purchasedOrders, setPurchasedOrders] = useState([]);
-    
+    const [totalOrders, setTotalOrders] = useState(0);
+    const [inProgressOrders, setInProgressOrders] = useState(0);
+    const [completedOrders, setCompletedOrders] = useState(0);
 
     useEffect(() => {
         const fetchpurchasedOrders = async () => {
@@ -43,8 +45,24 @@ const PurchaseOrderDashboard = () => {
                 console.error('Error fetching current month name:', error);
             }
         };
+
+        const fetchOrderCounts = async () => {
+            try {
+                const totalResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/total');
+                const inProgressResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/pending');
+                const completedResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/completed');
+
+                setTotalOrders(totalResponse.data);
+                setInProgressOrders(inProgressResponse.data);
+                setCompletedOrders(completedResponse.data);
+            } catch (error) {
+                console.error('Error fetching order counts:', error);
+            }
+        };
+
         fetchpurchasedOrders();
         fetchCurrentMonthName();
+        fetchOrderCounts();
     }, []);
 
     
@@ -150,21 +168,21 @@ const PurchaseOrderDashboard = () => {
                         <CardContent>
                             <Typography variant="subtitle1" sx={{ color: '#E74646', fontWeight: 'bold', mr: 6 }}>{currentMonth}</Typography>
                             <Typography variant="h6">Total Orders</Typography>
-                            <Typography variant="h6" sx={{ textAlign: 'center' }}>15</Typography>
+                            <Typography variant="h6" sx={{ textAlign: 'center' }}>{totalOrders}</Typography>
                         </CardContent>
                     </Card>
                     <Card sx={{ mb: 2, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
                         <CardContent>
                             <Typography variant="subtitle1" sx={{ color: '#E74646', fontWeight: 'bold', mr: 6 }}>{currentMonth}</Typography>
                             <Typography variant="h6">In-Progress</Typography>
-                            <Typography variant="h6" sx={{ textAlign: 'center' }}>5</Typography>
+                            <Typography variant="h6" sx={{ textAlign: 'center' }}>{inProgressOrders}</Typography>
                         </CardContent>
                     </Card>
                     <Card sx={{ mb: 2, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
                         <CardContent>
                             <Typography variant="subtitle1" sx={{ color: '#E74646', fontWeight: 'bold', mr: 6 }}>{currentMonth}</Typography>
                             <Typography variant="h6">Completed</Typography>
-                            <Typography variant="h6" sx={{ textAlign: 'center' }}>10</Typography>
+                            <Typography variant="h6" sx={{ textAlign: 'center' }}>{completedOrders}</Typography>
                         </CardContent>
                     </Card>
 
