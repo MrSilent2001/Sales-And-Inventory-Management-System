@@ -65,7 +65,14 @@ const PurchaseOrderDashboard = () => {
         fetchOrderCounts();
     }, []);
 
-    
+    const handleCancelOrder = async (orderId) => {
+        try {
+            await axios.delete(`http://localhost:9000/purchaseOrder/delete/${orderId}`);
+            setPurchasedOrders(prevOrders => prevOrders.filter(order => order.id !== orderId));
+        } catch (error) {
+            console.error('Error deleting order:', error);
+        }
+    };
 
 
    const columns=[
@@ -81,6 +88,7 @@ const PurchaseOrderDashboard = () => {
 
 
         const mappedData = purchasedOrders.map(row => ({
+            id: row.id,
             supplier: row.supplier,
             Address: row.Address,
             mail: row.mail,
@@ -112,7 +120,7 @@ const PurchaseOrderDashboard = () => {
                 </CustomizedButton>
 
                 <CustomizedButton
-                    onClick={() => setPlaceOrderVisible(true)}
+                    onClick={() => handleCancelOrder(row.id)}
                     hoverBackgroundColor="#960505"
                     style={{
                         color: 'white',
