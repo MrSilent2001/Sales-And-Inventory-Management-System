@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import "./pendingOrders.css";
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../../../layout/footer/footer";
-import {Link} from "react-router-dom";
 import CustomizedButton from "../../../../../components/Button/button";
 import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 import axios from "axios";
@@ -32,10 +31,16 @@ function PendingOrders() {
         setOpenReject(false);
     };
 
+    const token = localStorage.getItem('accessToken');
+
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await axios.get('http://localhost:9000/order/getAllOrders');
+                const response = await axios.get('http://localhost:9000/order/getAllOrders' , {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },}
+                );
                 setRows(response.data);
                 console.log(rows);
             } catch (error) {
@@ -48,7 +53,11 @@ function PendingOrders() {
 
     const handleOrderStatus = async (orderId, orderStatus) => {
         try {
-            await axios.put(`http://localhost:9000/order/update/${orderId}`, { orderStatus });
+            await axios.put(`http://localhost:9000/order/update/${orderId}`, { orderStatus } , {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             const updatedRows = rows.map(row => {
                 if (row.orderId === orderId) {
                     return { ...row, orderStatus };

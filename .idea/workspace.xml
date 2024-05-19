@@ -5,17 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d2ad5e6-b3f3-4fe7-9ca2-56f2badaa8b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/layout/adminPanel/adminPanel.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/layout/adminPanel/header.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/layout/adminPanel/home.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/layout/adminPanel/sidebar.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/context/AuthContext.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.html.gz" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Inventory Landing/inventoryLanding.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Inventory Landing/inventoryLanding.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Inventory Landing/inventoryLanding.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Landing Pages/Inventory Landing/inventoryLanding.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/context/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Refund/Refund Dashboard/Customer Refunds.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Refund/Refund Dashboard/Customer Refunds.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Admin Order History/Admin Order History.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Admin Order History/Admin Order History.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Orders/Inventory/Order Dashboard/PurchaseOrderDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Orders/Inventory/Order Dashboard/PurchaseOrderDashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/Approved Refunds/ApprovedRefundsTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/Approved Refunds/ApprovedRefundsTable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/Sales_Approved Refunds/SalesApprovedRefundsTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/Sales_Approved Refunds/SalesApprovedRefundsTable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/View Sales Refund Requests/SalesRefundRequestsTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/View Sales Refund Requests/SalesRefundRequestsTable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Refunds/Inventory/RefundRequestsTable/InventoryRefundRequestsTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Refunds/Inventory/RefundRequestsTable/InventoryRefundRequestsTable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/login &amp; SignUp/login/login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login &amp; SignUp/login/login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/PageRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/PageRoutes.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/adminRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/protectedRoutes.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +65,12 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Tradeasy\Sales-And-Inventory-Management-System\src\pages\Customer" />
+      <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Tradeasy\Sales-And-Inventory-Management-System\src\pages\admin\Landing Pages" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

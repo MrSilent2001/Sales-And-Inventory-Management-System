@@ -8,6 +8,9 @@ function SupplierNavbar(){
     const [selectedNavLink, setSelectedNavLink] = useState(null);
     const handleNavLinkClick = (event) => {
         setSelectedNavLink(event.target.name);
+        localStorage.setItem('accessToken', '');
+        localStorage.setItem('role', '');
+        localStorage.setItem('id', '');
     };
     return(
         <div className="navbar">
@@ -18,7 +21,7 @@ function SupplierNavbar(){
                 <NavLink to="/supplierDashboard">Inventory</NavLink>
                 <NavLink to="/supplierProfile">Profile</NavLink>
                 <NavLink
-                    to="/logout"
+                    to="/"
                     name="logout"
                     className={`navLink ${selectedNavLink === "logout" ? "selected" : ""}`}
                     onClick={handleNavLinkClick}

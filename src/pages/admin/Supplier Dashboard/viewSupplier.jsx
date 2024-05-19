@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import "./viewSupplier.css";
-import {Modal} from "@mui/material";
+import { Modal } from "@mui/material";
 import AddSupplier from "./Modals/AddSupplier/addSupplier";
 import InventoryNavbar from "../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../layout/footer/footer";
@@ -15,8 +15,8 @@ import axios from "axios";
 import CustomizedAlert from "../../../components/Alert/alert";
 import PageLoader from "../../../components/Page Loader/pageLoader";
 
-function FilterItems(){
-    const [category, setCategory] = React.useState('');
+function FilterItems() {
+    const [category, setCategory] = useState('');
 
     const handleSelect = (event) => {
         setCategory(event.target.value);
@@ -28,7 +28,7 @@ function FilterItems(){
         { value: 'Wood', label: 'Wood' }
     ];
 
-    return(
+    return (
         <Box sx={{ minWidth: 80 }}>
             <FormControl fullWidth>
                 <InputLabel
@@ -46,17 +46,17 @@ function FilterItems(){
                 <ComboBox
                     value={category}
                     onChange={(event) => handleSelect(event)}
-                    style={{width: '10em', marginRight: '0.5em', border: '1px solid white'}}
+                    style={{ width: '10em', marginRight: '0.5em', border: '1px solid white' }}
                     options={options}
                     label="Category"
                     size="small"
                 />
             </FormControl>
         </Box>
-    )
+    );
 }
 
-function ViewSupplier(){
+function ViewSupplier() {
     const [visible, setVisible] = useState(false);
     const [suppliers, setSuppliers] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -80,49 +80,88 @@ function ViewSupplier(){
         setOpenError(false);
     };
 
+    const token = localStorage.getItem('accessToken');
+
     useEffect(() => {
         const fetchSuppliers = async () => {
+            if (!token) {
+                console.error('No access token found');
+                return;
+            }
             setIsLoading(true);
             try {
-                const response = await axios.get('http://localhost:9000/supplier/getAllSuppliers');
+                const response = await axios.get('http://localhost:9000/supplier/getAllSuppliers', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 setSuppliers(response.data);
-                setIsLoading(true);
             } catch (error) {
-                console.error('Error fetching users:', error);
-            }finally {
+                if (error.response && error.response.status === 401) {
+                    console.error('Unauthorized access - perhaps the token is invalid or expired');
+                } else {
+                    console.error('Error fetching suppliers:', error);
+                }
+            } finally {
                 setIsLoading(false);
             }
         };
         fetchSuppliers();
     }, []);
 
-
     const handleButtonClick = async (id) => {
         try {
-            await axios.delete(`http://localhost:9000/supplier/delete/${id}`);
+            if (!token) {
+                console.error('No access token found');
+                return;
+            }
+            await axios.delete(`http://localhost:9000/supplier/delete/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
             // Fetching the updated list of discounts after deletion
-            const response = await axios.get('http://localhost:9000/supplier/getAllSuppliers');
+            const response = await axios.get('http://localhost:9000/supplier/getAllSuppliers', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setSuppliers(response.data);
             handleClickSuccess();
 
         } catch (error) {
-            console.error('Error canceling discount:', error);
+            if (error.response && error.response.status === 401) {
+                console.error('Unauthorized access - perhaps the token is invalid or expired');
+            } else {
+                console.error('Error canceling discount:', error);
+            }
+            handleClickError();
         }
     };
 
     // Fetch supplier function with query parameter
-    const fetchSuppliers = async (query) => {
+    const fetchSuppliersWithQuery = async (query) => {
         try {
-            const response = await axios.get(`http://localhost:9000/supplier/search?keyword=${query}`);
+            if (!token) {
+                console.error('No access token found');
+                return;
+            }
+            const response = await axios.get(`http://localhost:9000/supplier/search?keyword=${query}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setSuppliers(response.data);
         } catch (error) {
+            if (error.response && error.response.status === 401) {
+                console.error('Unauthorized access - perhaps the token is invalid or expired');
+            } else {
+                console.error('Error fetching suppliers:', error);
+            }
             handleClickError();
-            console.error('Error fetching discounts:', error);
         }
     };
-
-    let rows = suppliers;
 
     const columns = [
         { columnId: 'id', label: 'Supplier Id', minWidth: 100, align: 'center' },
@@ -131,10 +170,13 @@ function ViewSupplier(){
         { columnId: 'nic', label: 'NIC', minWidth: 100, align: 'center' },
         { columnId: 'supplierAddress', label: 'Address', minWidth: 170, align: 'center' },
         { columnId: 'supplierContact', label: 'Contact No.', minWidth: 100, align: 'center' },
-        { columnId: 'actions', label: '', minWidth: 100, align: 'center' }
+        { columnId: 'actions', label: '', minWidth: 100, align: 'center' },
     ];
 
-    const mappedData = rows.map(row => ({ ...row, actions: createViewButton(handleButtonClick) }));
+    const mappedData = suppliers.map(row => ({
+        ...row,
+        actions: createViewButton(row.id)
+    }));
 
     function createViewButton(rowId) {
         return (
@@ -149,7 +191,8 @@ function ViewSupplier(){
                     padding: '0.5em 0.625em',
                     borderRadius: '0.35em',
                     fontWeight: '550',
-                }}>
+                }}
+            >
                 Delete
             </CustomizedButton>
         );
@@ -159,10 +202,9 @@ function ViewSupplier(){
         setSuppliers(updatedSuppliers);
     };
 
-
-    return(
+    return (
         <>
-            <InventoryNavbar/>
+            <InventoryNavbar />
 
             <div className="viewSupplierOuter">
                 <div className="viewSupplierFilter">
@@ -172,7 +214,7 @@ function ViewSupplier(){
                             <div className="itemCategoryTopic">
                                 <h5>Category</h5>
                             </div>
-                            <FilterItems/>
+                            <FilterItems />
                         </div>
                         <div className="applyButton">
                             <CustomizedButton
@@ -186,9 +228,10 @@ function ViewSupplier(){
                                     borderRadius: '0.35em',
                                     fontWeight: '550',
                                     marginTop: '0.625em',
-                                    marginRight:'1.5em',
+                                    marginRight: '1.5em',
                                     marginLeft: '1.5em'
-                                }}>
+                                }}
+                            >
                                 Apply
                             </CustomizedButton>
                         </div>
@@ -200,12 +243,12 @@ function ViewSupplier(){
                         <div className="viewSupplierSearch">
                             <SearchBar
                                 label="Search Supplier"
-                                onKeyPress={fetchSuppliers}
+                                onKeyPress={fetchSuppliersWithQuery}
                             />
                         </div>
                         <div className="viewSupplierButtons">
                             <CustomizedButton
-                                onClick={()=>setVisible(true)}
+                                onClick={() => setVisible(true)}
                                 hoverBackgroundColor="#2d3ed2"
                                 style={{
                                     backgroundColor: '#242F9B',
@@ -216,7 +259,8 @@ function ViewSupplier(){
                                     padding: '0.5em 0.625em',
                                     borderRadius: '0.35em',
                                     fontWeight: '550',
-                                }}>
+                                }}
+                            >
                                 Add Supplier
                             </CustomizedButton>
                         </div>
@@ -236,32 +280,32 @@ function ViewSupplier(){
                 </div>
             </div>
 
-            {/*Model*/}
+            {/* Model */}
             <Modal open={visible}>
                 <AddSupplier
-                    onClose={(value) => { setVisible(false)}}
+                    onClose={() => setVisible(false)}
                     onSupplierAdded={handleSupplierAdded}
                 />
             </Modal>
 
-            {/*Alerts*/}
+            {/* Alerts */}
             <CustomizedAlert
                 open={openSuccess}
                 onClose={handleCloseSuccess}
                 severity="success"
-                message="Discount Canceled Successfully!"
+                message="Supplier action completed successfully!"
             />
 
             <CustomizedAlert
                 open={openError}
                 onClose={handleCloseError}
                 severity="error"
-                message="Something Went Wrong!"
+                message="Something went wrong!"
             />
 
-            <Footer/>
+            <Footer />
         </>
-    )
+    );
 }
 
 export default ViewSupplier;

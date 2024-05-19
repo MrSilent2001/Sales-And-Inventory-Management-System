@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../../layout/footer/footer";
 import BackArrow from "../../../../../components/Icons/backArrow";
-import salesApprovedRefunds from "../../../../../data/data.json";
+import salesApprovedRefunds from "../../../../../context/data.json";
 import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 
 const SalesApprovedRefundsTable = ({ onBack }) => {

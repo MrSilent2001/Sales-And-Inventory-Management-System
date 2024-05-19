@@ -37,9 +37,14 @@ function CancelOrder() {
         orderCancelReason: ''
     });
 
+    const token = localStorage.getItem('accessToken');
     const fetchOrderById = async (orderId) => {
         try {
-            const response = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`);
+            const response = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`,  {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setOrder(response.data);
             setOrderCancelReason(response.data.orderCancelReason);
         } catch (error) {
@@ -53,7 +58,11 @@ function CancelOrder() {
                 orderCancelReason: orderCancelReason,
                 orderStatus:"Cancelled",
             };
-            const response = await axios.put(`http://localhost:9000/order/update/${orderId}`, updatedOrder);
+            const response = await axios.put(`http://localhost:9000/order/update/${orderId}`, updatedOrder,  {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             if (response.status === 200) {
                 handleClickSuccess();
                 // Optionally, you can fetch the order again to update the state

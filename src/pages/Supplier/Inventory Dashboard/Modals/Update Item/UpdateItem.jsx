@@ -55,11 +55,17 @@ function UpdateItem(props) {
         setOpenError(false);
     };
 
+    const token = localStorage.getItem('accessToken');
+
     useEffect(() => {
         // Fetch item data from backend and set form data
         async function fetchItemData(id) {
             try {
-                const response = await axios.get(`http://localhost:9000/inventory/getItem/${id}`);
+                const response = await axios.get(`http://localhost:9000/inventory/getItem/${id}` , {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
             } catch (error) {
                 console.error('Error fetching item data:', error);
             }
@@ -83,9 +89,17 @@ function UpdateItem(props) {
                 productQuantity: formData.quantity,
                 productUnitPrice: formData.price,
                 // productImage: formData.image
+            } , {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             });
 
-            const response = await axios.get('http://localhost:9000/inventory/getAll');
+            const response = await axios.get('http://localhost:9000/inventory/getAll' , {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             const updatedInventory = response.data;
 
             props.onInventoryAdded(updatedInventory);

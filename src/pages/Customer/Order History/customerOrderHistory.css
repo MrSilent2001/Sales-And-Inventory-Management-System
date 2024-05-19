@@ -1,7 +1,6 @@
 .CustomerOrdersOuter{
     width: 100%;
     height: 100%;
-    
 }
 
 .CustomerOrdersInner{
@@ -11,21 +10,28 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 37.625em;
 }
 
-/*.customerTitle{
-    text-align: left;
-}*/
+.orderHistory{
+    width: 85%;
+    height: 37.625em;
+}
+
 .customerOrdersTopicWithTextfield{
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 87em;
-    margin: 2em 0 2em 0;
+    margin: 2em 0;
+}
+
+.customerOrdersTextField{
+    margin: 0 3.5em 0 0;
 }
 
 .customerOrdersTopic h2{
-    margin: 0;
+    margin: 0 0 0 3.5em;
     font-family: Inter;
     font-size: 1.3em;
 }

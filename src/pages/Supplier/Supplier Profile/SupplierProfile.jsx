@@ -4,16 +4,15 @@ import Avatar from '@mui/material/Avatar';
 import Footer from "../../../layout/footer/footer";
 import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navbar";
 import CustomizedButton from "../../../components/Button/button";
-import {Navigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom"; // Update: import useNavigate
 import {useEffect, useState} from "react";
 import axios from "axios";
 import CustomizedAlert from "../../../components/Alert/alert";
 
 function SupplierProfile() {
-
     const [supplier, setSupplier] = useState({});
     const [openError, setOpenError] = useState(false);
-    const [navigate, setNavigate] = useState(false);
+    const navigate = useNavigate(); // Update: use useNavigate
 
     const handleClickError = () => {
         setOpenError(true);
@@ -22,25 +21,26 @@ function SupplierProfile() {
         setOpenError(false);
     };
 
-    const handleNavigate = () =>{
-        setNavigate(true);
-    }
+    const handleNavigate = () => {
+        navigate('/updateSupplier'); // Update: use navigate function
+    };
 
-    if(navigate){
-        return <Navigate to="/updateSupplier"/>
-    }
+    const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
         const id = parseInt(localStorage.getItem('id'));
         const fetchSupplier = async (id) => {
             try {
-                const response = await axios.get(`http://localhost:9000/supplier/getSupplier/${id}`);
+                const response = await axios.get(`http://localhost:9000/supplier/getSupplier/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 setSupplier(response.data);
-                console.log(response.data)
-
+                console.log(response.data);
             } catch (error) {
                 handleClickError();
-                console.error('Error fetching users:', error);
+                console.error('Error fetching supplier:', error);
             }
         };
         fetchSupplier(id);
@@ -52,7 +52,6 @@ function SupplierProfile() {
 
             <div className="SupplierProfileOuter">
                 <div className="SupplierProfileInner">
-
                     <div className="SupplierProfile">
                         <div className="profileAvatar">
                             <Avatar src="/broken-image.jpg"
@@ -60,7 +59,6 @@ function SupplierProfile() {
                             />
                             <h3>{supplier.supplierName}</h3>
                             <h4 style={{textAlign:'left'}}>ID:{localStorage.getItem('id')}</h4>
-
                         </div>
                     </div>
 
@@ -122,9 +120,8 @@ function SupplierProfile() {
 
                             <div className="SupplierProfileButtonField">
                                 <div className="SupplierProfileButtons">
-                                    <Navigate to= "/updateSupplier">
                                     <CustomizedButton
-                                        onClick={handleNavigate}
+                                        onClick={handleNavigate} // Update: onClick to navigate
                                         hoverBackgroundColor="#2d3ed2"
                                         style={{
                                             color: '#ffffff',
@@ -141,14 +138,11 @@ function SupplierProfile() {
                                         }}>
                                         Edit Profile
                                     </CustomizedButton>
-                                    </Navigate>
                                 </div>
                             </div>
                         </form>
                     </div>
-
                 </div>
-
             </div>
 
             <Footer/>
@@ -160,7 +154,7 @@ function SupplierProfile() {
                 message="Something Went Wrong!"
             />
         </>
-    )
+    );
 }
 
 export default SupplierProfile;

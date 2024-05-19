@@ -9,6 +9,9 @@ function SalesNavbar(){
     const [navigate, setNavigate] = useState(false);
     const handleNavLinkClick = (event) => {
         setSelectedNavLink(event.target.name);
+        localStorage.setItem('accessToken', '');
+        localStorage.setItem('role', '');
+        localStorage.setItem('id', '');
     };
 
     const handleClick = () =>{
@@ -16,7 +19,7 @@ function SalesNavbar(){
     }
 
     if(navigate){
-        return <Navigate to="/salesLanding"/>
+        return <Navigate to="/adminDashboard"/>
     }
 
     return(
@@ -30,9 +33,8 @@ function SalesNavbar(){
                 <NavLink to="/customerdashboard">Customers</NavLink>
                 <NavLink to="/viewRefundRequests">Refunds</NavLink>
                 <NavLink to="/discountdashboard">Discounts</NavLink>
-                <NavLink to="/inventoryLanding">Inventory</NavLink>
                 <NavLink
-                    to="/logout"
+                    to="/"
                     name="logout"
                     className={`navLink ${selectedNavLink === "logout" ? "selected" : ""}`}
                     onClick={handleNavLinkClick}

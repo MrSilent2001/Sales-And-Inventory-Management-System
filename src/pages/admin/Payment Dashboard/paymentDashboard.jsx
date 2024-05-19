@@ -29,12 +29,17 @@ function PaymentDashboard() {
         setOpenError(false);
     };
 
+    const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
         const fetchPayments = async () => {
             setIsLoading(true);
             try {
-                const response = await axios.get('http://localhost:9000/payment/customerPayment/getAllCustomerPayments');
+                const response = await axios.get('http://localhost:9000/payment/customerPayment/getAllCustomerPayments' , {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },}
+                );
                 setPayments(response.data);
             } catch (error) {
                 console.error('Error fetching Payment data:', error);
@@ -49,7 +54,11 @@ function PaymentDashboard() {
     // Fetch payments function with query parameter
     const fetchSearchedPayments = async (query) => {
         try {
-            const response = await axios.get(`http://localhost:9000/payment/customerPayment/search?keyword=${query}`);
+            const response = await axios.get(`http://localhost:9000/payment/customerPayment/search?keyword=${query}`,{
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setPayments(response.data);
         } catch (error) {
             handleClickError();

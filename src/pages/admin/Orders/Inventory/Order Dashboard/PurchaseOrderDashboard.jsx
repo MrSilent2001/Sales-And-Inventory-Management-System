@@ -12,7 +12,7 @@ import Footer from "../../../../../layout/footer/footer";
 import PlaceOrder from "../Modals/Place Order/placeOrder";
 import ViewOrder from "../Modals/View Order/viewOrder";
 import CustomizedButton from "../../../../../components/Button/button";
-import purchasedOrders from "../../../../../data/data.json";
+import purchasedOrders from "../../../../../context/data.json";
 import SearchBar from "../../../../../components/search bar/search bar";
 import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 

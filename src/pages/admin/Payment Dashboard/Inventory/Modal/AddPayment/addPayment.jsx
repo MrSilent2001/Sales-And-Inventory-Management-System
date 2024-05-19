@@ -22,6 +22,7 @@ function AddPayment(props){
     });
 
     const [errors, setErrors] = useState({});
+    const token = localStorage.getItem('accessToken');
 
     const handleChange = (name, value) => {
         if (name === 'receipt') {
@@ -101,9 +102,17 @@ function AddPayment(props){
                     itemsPurchased: formData.itemsPurchased,
                     billAmount: formData.billAmount,
                     filePath: formData.receipt
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
 
-                const response = await axios.get('http://localhost:9000/payment/supplierPayment/getAll');
+                const response = await axios.get('http://localhost:9000/payment/supplierPayment/getAll', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 const updatedPayments = response.data;
 
                 props.onPaymentAdded(updatedPayments);

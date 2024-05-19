@@ -1,10 +1,10 @@
 //import React from "react";
-// import "./inventoryLanding.css"
+// import "./AdminDashboard.css"
 // import InventoryLandingCard from "../../../../components/Cards/LandingPageCard";
 // import InventoryNavbar from "../../../../layout/navbar/Inventory navbar/Inventory navbar";
 // import Footer from "../../../../layout/footer/footer";
 //
-// function InventoryLanding(){
+// function AdminDashboard(){
 //
 //     //There should be a useEffect hook for display the inventory values in the component
 //
@@ -46,16 +46,16 @@
 //     )
 // }
 //
-// export default InventoryLanding;
+// export default AdminDashboard;
 
 import { useState } from 'react'
-import './inventoryLanding.css'
-import Header from '../../../../layout/adminPanel/header'
-import Sidebar from '../../../../layout/adminPanel/sidebar'
-import Home from '../../../../layout/adminPanel/home'
+import './AdminDashboard.css'
+import Header from '../../../layout/adminPanel/header'
+import Sidebar from '../../../layout/adminPanel/sidebar'
+import Home from '../../../layout/adminPanel/home'
 
-function InventoryLanding() {
-    const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
+function AdminDashboard() {
+    const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
 
     const OpenSidebar = () => {
         setOpenSidebarToggle(!openSidebarToggle)
@@ -70,4 +70,4 @@ function InventoryLanding() {
     )
 }
 
-export default InventoryLanding;
+export default AdminDashboard;
