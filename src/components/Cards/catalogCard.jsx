@@ -6,17 +6,21 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea, CardActions } from '@mui/material';
 import CustomizedButton from "../Button/button";
 
-export default function MultiActionAreaCard({item,handleClick}) {
-    const {productName, productPrice, productImage} = item;
+export default function MultiActionAreaCard({ item, handleClick, handleBodyClick, handleImageClick }) {
+    const { productName, productPrice, productImage } = item;
+
     return (
         <Card sx={{ maxWidth: 300, width: 300 }}>
-            <CardActionArea>
-
+            <CardActionArea onClick={() => handleBodyClick(item)}>
                 <CardMedia
                     component="img"
                     height="250"
                     image={productImage}
                     alt={productName}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        handleImageClick(item);
+                    }}
                 />
                 <CardContent>
                     <Typography variant="body2" color="text.primary">
@@ -26,13 +30,10 @@ export default function MultiActionAreaCard({item,handleClick}) {
                         Rs.{productPrice}
                     </Typography>
                 </CardContent>
-
             </CardActionArea>
-
-            <CardActions sx={{justifyContent: 'center'}}>
-
+            <CardActions sx={{ justifyContent: 'center' }}>
                 <CustomizedButton
-                    onClick={()=>handleClick(item)}
+                    onClick={() => handleClick(item)}
                     hoverBackgroundColor="#2d3ed2"
                     disableElevation
                     style={{
@@ -49,7 +50,8 @@ export default function MultiActionAreaCard({item,handleClick}) {
                         margin: 'auto',
                         textTransform: 'none',
                         textAlign: 'center',
-                    }}>
+                    }}
+                >
                     Add to Cart
                 </CustomizedButton>
             </CardActions>

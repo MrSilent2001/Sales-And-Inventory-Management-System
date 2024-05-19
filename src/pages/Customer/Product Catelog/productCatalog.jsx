@@ -4,11 +4,12 @@ import MultiActionAreaCard from '../../../components/Cards/catalogCard';
 import Checkboxes from '../../../components/Form Inputs/checkbox';
 import Footer from "../../../layout/footer/footer";
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
 import axios from "axios";
 
 function ProductCatalog() {
+    const navigate = useNavigate();
     const [cart, setCart] = useState([]);
 
     //fetcting all products from backend
@@ -37,7 +38,7 @@ function ProductCatalog() {
     }, []);
 
     // Function to handle click event on item
-    const handleClick = (item) => {
+    const handleAddToCart = (item) => {
         const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
 
         // If item already exists in cart, increase its quantity
@@ -53,6 +54,15 @@ function ProductCatalog() {
             localStorage.setItem("cart", JSON.stringify([...cart, { ...item, amount: 1 }]));
         }
     }
+
+    const handleBodyClick = (item) => {
+        navigate(`/product/${item.id}`);
+    };
+
+    const handleImageClick = (item) => {
+        // Handle image click logic here, if different from body click
+        navigate(`/product/${item.id}`);
+    };
 
     // Render component
     return (
@@ -131,7 +141,12 @@ function ProductCatalog() {
                 <div className="customerItemGrid">
                     {products.map((item) => (
                         <div className="card" key={item.id} >
-                            <MultiActionAreaCard item={item} handleClick={handleClick}/>
+                            <MultiActionAreaCard
+                                item={item}
+                                handleClick={handleAddToCart}
+                                handleBodyClick={handleBodyClick}
+                                handleImageClick={handleImageClick}
+                            />
                         </div>
                     ))}
                 </div>
