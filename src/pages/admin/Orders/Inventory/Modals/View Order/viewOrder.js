@@ -4,7 +4,7 @@ import "./viewOrder.css";
 import CustomizedButton from "../../../../../../components/Button/button";
 import CenteredModal from "../../../../../../components/Modal/modal";
 
-function ViewOrder({ orderId, onClose }) {
+function ViewOrder({ order, onClose }) {
     const [orderDetails, setOrderDetails] = useState({
         orderId: '',
         supplier: '',
@@ -13,23 +13,25 @@ function ViewOrder({ orderId, onClose }) {
         contactNumber: '',
         items: []
     });
-   console.log(orderDetails);
-   
+
     useEffect(() => {
         const fetchOrderDetails = async () => {
-            if (!orderId) return;
+            if (!order) return;
 
             try {
-                const response = await axios.get(`http://localhost:9000/purchaseOrder/get/${orderId}`);
-                setOrderDetails(response.data);
-                console.log(response.data); 
+                const response = await axios.get(`http://localhost:9000/purchaseOrder/get/${order}`);
+                setOrderDetails({
+                    ...response.data,
+                    items: response.data.items || [] // Ensure items is an array
+                });
+                console.log("fetchdata", response.data);
             } catch (err) {
                 console.error('Failed to fetch order details:', err);
             }
         };
 
         fetchOrderDetails();
-    }, [orderId]);
+    }, [order]);
 
     return (
         <CenteredModal>
@@ -42,7 +44,7 @@ function ViewOrder({ orderId, onClose }) {
                                 <h5>Order Id:</h5>
                             </div>
                             <div className="idInput">
-                                {orderDetails.orderId}
+                                {orderDetails.id}
                             </div>
                         </div>
 
@@ -60,7 +62,7 @@ function ViewOrder({ orderId, onClose }) {
                                 <h5>Delivery Address:</h5>
                             </div>
                             <div className="idInput">
-                                {orderDetails.deliveryAddress}
+                                {orderDetails.Address}
                             </div>
                         </div>
 
@@ -69,7 +71,7 @@ function ViewOrder({ orderId, onClose }) {
                                 <h5>Email:</h5>
                             </div>
                             <div className="idInput">
-                                {orderDetails.email}
+                                {orderDetails.mail}
                             </div>
                         </div>
 
@@ -78,7 +80,7 @@ function ViewOrder({ orderId, onClose }) {
                                 <h5>Contact Number:</h5>
                             </div>
                             <div className="idInput">
-                                {orderDetails.contactNumber}
+                                {orderDetails.contact_number}
                             </div>
                         </div>
 
@@ -87,7 +89,8 @@ function ViewOrder({ orderId, onClose }) {
                                 <h5>Items:</h5>
                             </div>
                             <div className="idInput" id="items">
-                                {orderDetails.items.join(', ')}
+                                {/*{Array.isArray(orderDetails.items) ? orderDetails.items.join(', ') : ''}*/}
+                                {orderDetails.items}
                             </div>
                         </div>
 
