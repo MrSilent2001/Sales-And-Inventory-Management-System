@@ -221,8 +221,12 @@ const PurchaseOrderDashboard = () => {
                     </div>
 
 
+                    {/*<Modal open={viewOrderVisible}>*/}
+                    {/*   <ViewOrder order={selectedOrder} onClose={(value) => { setViewOrderVisible(false) }} />*/}
+                    {/*</Modal>*/}
+
                     <Modal open={viewOrderVisible}>
-                       <ViewOrder order={selectedOrder} onClose={(value) => { setViewOrderVisible(false) }} />
+                        <ViewOrder order={selectedOrder} onClose={() => setViewOrderVisible(false)} />
                     </Modal>
 
                 </Container>
