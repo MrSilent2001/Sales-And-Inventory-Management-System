@@ -5,27 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d2ad5e6-b3f3-4fe7-9ca2-56f2badaa8b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/context/AuthContext.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/context/data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Refund/Refund Dashboard/Customer Refunds.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Refund/Refund Dashboard/Customer Refunds.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Supplier/Supplier Profile/SupplierProfile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Admin Order History/Admin Order History.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Admin Order History/Admin Order History.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Orders/Inventory/Order Dashboard/PurchaseOrderDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Orders/Inventory/Order Dashboard/PurchaseOrderDashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/Approved Refunds/ApprovedRefundsTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/Approved Refunds/ApprovedRefundsTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/Sales_Approved Refunds/SalesApprovedRefundsTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/Sales_Approved Refunds/SalesApprovedRefundsTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/View Sales Refund Requests/SalesRefundRequestsTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Refunds/Customer/View Sales Refund Requests/SalesRefundRequestsTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Refunds/Inventory/RefundRequestsTable/InventoryRefundRequestsTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Refunds/Inventory/RefundRequestsTable/InventoryRefundRequestsTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login &amp; SignUp/login/login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login &amp; SignUp/login/login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/PageRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/PageRoutes.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/adminRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/protectedRoutes.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">

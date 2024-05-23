@@ -34,7 +34,7 @@ import ViewInventory from "../pages/admin/View Inventory/viewInventory";
 import ViewSupplier from "../pages/admin/Supplier Dashboard/viewSupplier";
 import PurchaseOrderDashboard from "../pages/admin/Orders/Inventory/Order Dashboard/PurchaseOrderDashboard";
 import InventoryPayments from "../pages/admin/Payment Dashboard/Inventory/inventoryPayments";
-import ProductDetail from "../pages/Customer/Product Detail/productDetail";
+// import ProductDetail from "../pages/Customer/Product Detail/productDetail";
 import AdminDashboard from "../pages/admin/Admin Dashboard/AdminDashboard";
 import UpdateCustomers from "../pages/Customer/Update Customers/updateCustomers";
 import ProtectedRoute from "./protectedRoutes";
@@ -64,7 +64,7 @@ export function PageRouting() {
 
                     {/*Customer view routes*/}
                     <Route path="/customerHome" element={<CustomerHome/>}/>
-                    <Route path="/product/:productId" element={<ProductDetail />} />
+                    {/*<Route path="/product/:productId" element={<ProductDetail />} />*/}
                     <Route path="/products" element={<ProductCatalog/>}/>
                     <Route path="/cart" element={<Cart/>}/>
 
