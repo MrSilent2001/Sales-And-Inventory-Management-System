@@ -36,6 +36,10 @@
     padding-right: 20px;
 }
 
+.logo{
+    cursor: pointer;
+}
+
 .logo h5{
     color: white;
     font-family: inter;
