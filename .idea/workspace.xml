@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d2ad5e6-b3f3-4fe7-9ca2-56f2badaa8b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/DraftproductDetail.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/DraftproductDetail.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Cards/catalogCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Cards/catalogCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Cards/shoppingCartCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Cards/shoppingCartCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Cart/shoppingCart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Cart/shoppingCart.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/catalog.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/catalog.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/PageRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/PageRoutes.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,6 +45,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "tuks#10",
+    "last_opened_file_path": "C:/Tun Tun/FE/Sales-And-Inventory-Management-System/src/pages/Customer/Product Detail/Componets/Icons/iconImages",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -65,6 +58,10 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Tun Tun\FE\Sales-And-Inventory-Management-System\src\pages\Customer\Product Detail\Componets\Icons\iconImages" />
+      <recent name="C:\Tun Tun\FE\Sales-And-Inventory-Management-System\src\pages\Customer\Product Detail\Componets" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Tradeasy\Sales-And-Inventory-Management-System\src\pages\Customer" />
       <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Tradeasy\Sales-And-Inventory-Management-System\src\pages\admin\Landing Pages" />
@@ -94,5 +91,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
