@@ -7,9 +7,13 @@ import Typography from '@mui/material/Typography';
 import CustomizedButton from "../Button/button";
 
 export default function MediaControlCard({ item, removeFromCart }) {
+    const { id, productName, productImage, productSellingPrice, discountRate, amount } = item;
+
+    // Calculate the final price after discount if discountRate is present
+    const finalPrice = discountRate ? productSellingPrice * (1 - discountRate / 100) : productSellingPrice;
 
     const handleRemoveClick = () => {
-        removeFromCart(item.id);
+        removeFromCart(id);
     }
 
     return (
@@ -18,22 +22,21 @@ export default function MediaControlCard({ item, removeFromCart }) {
                 <CardMedia
                     component="img"
                     sx={{ width: 160, height: 160, marginLeft: 10, marginTop: 2 }}
-                    image={item.productImage[0]}
+                    image={productImage[0]}
                 />
                 <CardContent sx={{ flex: '1 0 auto', marginLeft: 10 }}>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
-                        Item Id : {item.id}
+                        Item Id : {id}
                     </Typography>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
-                        Item Name : {item.productName}
+                        Item Name : {productName}
                     </Typography>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
-                        Quantity: {item.amount}
-                        
+                        Quantity: {amount}
                     </Typography>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
-                        Price : {item.productSellingPrice}
-                    </Typography>   
+                        Price : Rs.{finalPrice.toFixed(2)}
+                    </Typography>
                 </CardContent>
             </Box>
             <Box sx={{ alignSelf: 'right', marginLeft: 100 }}>

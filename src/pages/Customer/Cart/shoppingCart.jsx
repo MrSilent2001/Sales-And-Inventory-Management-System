@@ -29,13 +29,26 @@ function Cart() {
         }
     }, []);
 
+    // useEffect(() => {
+    //     let total = 0;
+    //     cart.forEach(item => {
+    //         total += item.productSellingPrice * item.amount;
+    //     });
+    //     setTotalAmount(total);
+    // }, [cart]);
+
     useEffect(() => {
         let total = 0;
         cart.forEach(item => {
-            total += item.productSellingPrice * item.amount;
+            // Calculate the discounted price for each item if discountRate is present
+            const finalPrice = item.discountRate
+                ? item.productSellingPrice * (1 - item.discountRate / 100)
+                : item.productSellingPrice;
+            total += finalPrice * item.amount;
         });
         setTotalAmount(total);
     }, [cart]);
+
 
     const removeFromCart = (itemId) => {
         const updatedCart = cart.map(item => {
@@ -71,17 +84,25 @@ function Cart() {
     const redirectToCheckout = async () => {
         setLoading(true);
         const stripe = getStripe();
-        const lineItems = cart.map(item => ({
-            price_data: {
-                currency: 'lkr',
-                product_data: {
-                    name: item.productName,
-                    images: [item.productImage]
+        const lineItems = cart.map(item => {
+            // Calculate the discounted price for each item if discountRate is present
+            const finalPrice = item.discountRate
+                ? item.productSellingPrice * (1 - item.discountRate / 100)
+                : item.productSellingPrice;
+
+            return {
+                price_data: {
+                    currency: 'lkr',
+                    product_data: {
+                        name: item.productName,
+                        images: [item.productImage]
+                    },
+                    unit_amount: finalPrice * 100, // Use the discounted price for unit_amount
                 },
-                unit_amount: item.productSellingPrice * 100,
-            },
-            quantity: item.amount,
-        }));
+                quantity: item.amount,
+            };
+        });
+
 
         console.log(lineItems);
 

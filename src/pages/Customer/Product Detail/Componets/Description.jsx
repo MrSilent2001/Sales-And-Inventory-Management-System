@@ -5,6 +5,7 @@ import QuantityButton from "./QuantityButton";
 const Description = ({ onQuant, onAdd, onRemove, onAddToCart, title, description, quantity, price, offer, category }) => {
 
     const finalPrice = price - (price * offer / 100);
+    const earlierPrice = price + (price * offer / 100);
 
     return (
         <section className="productDetailDescription">
@@ -15,10 +16,10 @@ const Description = ({ onQuant, onAdd, onRemove, onAddToCart, title, description
             </p>
             <div className="price">
                 <div className="main-tag">
-                    <p>{finalPrice.toFixed(2)}</p> {/* Display the final price */}
+                    <p>{price.toFixed(2)}</p> {/* Display the final price */}
                     <p>{offer}%</p> {/* Display the offer percentage */}
                 </div>
-                <s>${price.toFixed(2)}</s> {/* Display the original price */}
+                <s>${earlierPrice.toFixed(2)}</s> {/* Display the original price */}
             </div>
             <div className="buttons">
                 <QuantityButton onQuant={onQuant} onRemove={onRemove} onAdd={onAdd} productQuantity={quantity}/>

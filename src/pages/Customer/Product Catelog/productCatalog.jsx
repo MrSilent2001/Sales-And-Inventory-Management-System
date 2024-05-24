@@ -26,24 +26,57 @@ function ProductCatalog() {
 
     const [searchQuery, setSearchQuery] = useState('');
     const [products, setProducts] = useState([]);
+    const [offers, setOffers] = useState([]);
     const token = localStorage.getItem('accessToken');
+    const [productsWithOffers, setProductsWithOffers] = useState([]);
+
 
     useEffect(() => {
-        const fetchProducts = async () => {
+        const fetchProductsWithOffers = async () => {
             try {
-                const response = await axios.get('http://localhost:9000/product/getAllProducts', {
+                const responseProducts = await axios.get('http://localhost:9000/product/getAllProducts', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                setProducts(response.data);
+
+                setProducts(responseProducts.data);
+
+
+                const responseOffers = await axios.get('http://localhost:9000/discounts/getAll', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                setOffers(responseOffers.data);
+
+
+                const today = new Date().toISOString().slice(0, 10); // Get today's date in 'YYYY-MM-DD' format
+
+                // Merge products with offers
+                const mergedProducts = responseProducts.data.map(product => {
+                    const offer = responseOffers.data.find(offer => parseInt(offer.productId) === product.id && offer.startDate <= today && offer.endDate >= today);
+                    const discountRate = offer ? offer.discountRate : null;
+                    return {
+                        ...product,
+                        discountRate: discountRate // Assign discountRate if found, otherwise null
+                    };
+                });
+
+
+                setProductsWithOffers(mergedProducts);
             } catch (error) {
-                console.error('Error fetching products:', error);
+                console.error('Error fetching products with offers:', error);
             }
         };
 
-        fetchProducts();
+        fetchProductsWithOffers();
     }, []);
+
+
+
+    console.log("productwithOffers",productsWithOffers);
 
     useEffect(() => {
         const storedCart = JSON.parse(localStorage.getItem("cart"));
@@ -90,7 +123,7 @@ function ProductCatalog() {
         setSearchQuery(query);
     };
 
-    const filteredProducts = products.filter(product => {
+    const filteredProducts = productsWithOffers.filter(product => {
         const matchesCategory = Object.entries(checkedItems).every(([category, checked]) => {
             return !checked || product.productCategory.includes(category);
         });
