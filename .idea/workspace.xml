@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d2ad5e6-b3f3-4fe7-9ca2-56f2badaa8b6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/DraftproductDetail.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/DraftproductDetail.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Cards/catalogCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Cards/catalogCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Cards/shoppingCartCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Cards/shoppingCartCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Cart/shoppingCart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Cart/shoppingCart.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/catalog.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/catalog.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/PageRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/PageRoutes.jsx" afterDir="false" />
@@ -23,6 +28,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="JSX File" />
         <option value="CSS File" />
       </list>
     </option>
@@ -41,27 +47,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev__test&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "tuks#10",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Jetbrains\\PhpStorm\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Tradeasy\Sales-And-Inventory-Management-System\src\pages\Customer" />
       <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Tradeasy\Sales-And-Inventory-Management-System\src\pages\admin\Landing Pages" />
     </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-PS-241.15989.102" />
+        <option value="bundled-php-predefined-ba97393d7c68-c76157a7178b-com.jetbrains.php.sharedIndexes-PS-241.15989.102" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -73,6 +88,7 @@
       <updated>1715312719117</updated>
       <workItem from="1715312722548" duration="60062000" />
       <workItem from="1715543580000" duration="35934000" />
+      <workItem from="1716542683416" duration="2518000" />
     </task>
     <servers />
   </component>

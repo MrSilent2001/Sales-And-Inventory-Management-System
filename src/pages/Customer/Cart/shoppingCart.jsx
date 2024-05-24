@@ -32,7 +32,7 @@ function Cart() {
     useEffect(() => {
         let total = 0;
         cart.forEach(item => {
-            total += item.productPrice * item.amount;
+            total += item.productSellingPrice * item.amount;
         });
         setTotalAmount(total);
     }, [cart]);
@@ -78,7 +78,7 @@ function Cart() {
                     name: item.productName,
                     images: [item.productImage]
                 },
-                unit_amount: item.productPrice * 100,
+                unit_amount: item.productSellingPrice * 100,
             },
             quantity: item.amount,
         }));
