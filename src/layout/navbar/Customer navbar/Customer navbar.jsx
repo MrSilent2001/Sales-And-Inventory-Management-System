@@ -20,9 +20,10 @@ function CustomerNavbar(){
 
     const [cartItemCount, setCartItemCount] = useState(0);
     const [storedCart, setStoredCart] = useState([]);
+    const [cartFromStorage, setcartFromStorage] = useState([]);
 
     useEffect(() => {
-        const cartFromStorage = JSON.parse(localStorage.getItem("cart"));
+        setcartFromStorage(JSON.parse(localStorage.getItem("cart")));
         if (cartFromStorage) {
             // Calculate total amount for all items in the cart
             const totalAmount = cartFromStorage.reduce((total, item) => total + item.amount, 0);
@@ -31,7 +32,7 @@ function CustomerNavbar(){
             setCartItemCount(totalAmount);
             setStoredCart(cartFromStorage);
         }
-    }, []);
+    }, [cartFromStorage]);
 
 
 
