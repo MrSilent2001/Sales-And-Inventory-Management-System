@@ -31,7 +31,7 @@ const Gallery = ({ images, thumbnails }) => {
 
   return (
       <section className="gallery-holder hide-in-mobile">
-        <section className="gallery">
+        <section className="ProductDetailGallery">
           <div className="image">
             <img src={currentImage} alt="product-1" onClick={handleToggle} />
           </div>

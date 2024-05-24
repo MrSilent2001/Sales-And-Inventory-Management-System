@@ -39,6 +39,7 @@ function ProductDetail(){
             updatedCart[existingItemIndex].amount += count;
             setCart(updatedCart);
             localStorage.setItem("cart", JSON.stringify(updatedCart));
+            resetQuant;
         }
         // If item is not in cart, add it with quantity 1
         else {
@@ -84,7 +85,7 @@ function ProductDetail(){
             <CustomerNavbar />
             <Container component="section">
 
-                <section className="core">
+                <section className="productDetailCore">
                     {product && product.productImage && (
                         <Gallery images={product.productImage} thumbnails={product.productImage} />
                     )}

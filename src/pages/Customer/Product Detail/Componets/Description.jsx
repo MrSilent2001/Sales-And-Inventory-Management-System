@@ -7,7 +7,7 @@ const Description = ({ onQuant, onAdd, onRemove, onAddToCart, title, description
     const finalPrice = price - (price * offer / 100);
 
     return (
-        <section className="description">
+        <section className="productDetailDescription">
             <p className="pre">{category}</p>
             <h1>{title}</h1>
             <p className="desc">

@@ -5,30 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d2ad5e6-b3f3-4fe7-9ca2-56f2badaa8b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/BackdropGallery.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Description.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Gallery.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/CartIcon.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/CloseIcon.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/NextIcon.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/PreviousIcon.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/iconImages/favicon-32x32.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/iconImages/icon-cart.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/iconImages/icon-close.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/iconImages/icon-delete.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/iconImages/icon-menu.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/iconImages/icon-minus.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/iconImages/icon-next.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/iconImages/icon-plus.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/iconImages/icon-previous.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/MobileGallery.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/QuantityButton.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Detail/DraftproductDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/DraftproductDetail.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Description.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Description.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Gallery.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Gallery.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/iconImages/favicon-32x32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/iconImages/icon-cart.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/iconImages/icon-menu.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/iconImages/icon-minus.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/iconImages/icon-minus.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/iconImages/icon-plus.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/Icons/iconImages/icon-plus.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/MobileGallery.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/MobileGallery.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/PageRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/PageRoutes.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
