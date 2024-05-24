@@ -11,8 +11,18 @@ import axios from "axios";
 function ProductCatalog() {
     const navigate = useNavigate();
     const [cart, setCart] = useState([]);
+    const [checkedItems, setCheckedItems] = useState({
+        "Building Material": false,
+        "Hardware and Tools": false,
+        "Safety Equipments": false,
+        "Electrical Supplies": false,
+        "Plumbing Supplies": false,
+        "Interior Finishes": false,
+        "Landscaping Products": false,
+        "Construction Chemicals": false
+    });
 
-    //fetcting all products from backend
+    // Fetching all products from backend
     const [products, setProducts] = useState([]);
     const token = localStorage.getItem('accessToken');
 
@@ -27,7 +37,7 @@ function ProductCatalog() {
                 setProducts(response.data);
                 console.log(products);
             } catch (error) {
-                console.error('Error fetching users:', error);
+                console.error('Error fetching products:', error);
             }
         };
 
@@ -58,7 +68,7 @@ function ProductCatalog() {
             setCart([...cart, { ...item, amount: 1 }]);
             localStorage.setItem("cart", JSON.stringify([...cart, { ...item, amount: 1 }]));
         }
-    }
+    };
 
     const handleBodyClick = (item) => {
         navigate(`/product/${item.id}`);
@@ -69,56 +79,42 @@ function ProductCatalog() {
         navigate(`/product/${item.id}`);
     };
 
+    const handleCheckboxChange = (event, name) => {
+        const isChecked = event.target.checked;
+        setCheckedItems(prevState => ({
+            ...prevState,
+            [name]: isChecked
+        }));
+    };
+
+
+    // Filter products based on selected categories
+    const filteredProducts = products.filter(product => {
+        return Object.entries(checkedItems).every(([category, checked]) => {
+            return !checked || product.productCategory.includes(category);
+        });
+    });
+
+
+
+
     // Render component
     return (
         <>
             <CustomerNavbar />
             <div className="Catalogouter">
                 <div className="sidebar">
-                    <div className="content">
-                        <Checkboxes/>
-                        <label>Building Matrial</label>
+                    {Object.keys(checkedItems).map((name) => (
+                        <div className="content" key={name}>
+                            <Checkboxes
+                                checked={checkedItems[name]}
+                                onChange={(event) => handleCheckboxChange(event, name)}
+                            />
 
-                    </div>
-
-                    <div className="content">
-                        <Checkboxes/>
-                        <label>Building Matrial</label>
-
-                    </div>
-
-                    <div className="content">
-                        <Checkboxes/>
-                        <label>Building Matrial</label>
-
-                    </div>
-
-
-                    <div className="content">
-                        <Checkboxes/>
-                        <label>Building Matrial</label>
-
-                    </div>
-
-                    <div className="content">
-                        <Checkboxes/>
-                        <label>Building Matrial</label>
-
-                    </div>
-
-                    <div className="content">
-                        <Checkboxes/>
-                        <label>Building Matrial</label>
-
-                    </div>
-
-                    <div className="content">
-                        <Checkboxes/>
-                        <label>Building Matrial</label>
-
-                    </div>
-
-                    <div className="content">
+                            <label>{name}</label>
+                        </div>
+                    ))}
+                    <div className="content-cart-button">
                         <Link to="/cart">
                             <CustomizedButton
                                 hoverBackgroundColor="#2ec931"
@@ -140,11 +136,9 @@ function ProductCatalog() {
                             </CustomizedButton>
                         </Link>
                     </div>
-
-
                 </div>
                 <div className="customerItemGrid">
-                    {products.map((item) => (
+                    {filteredProducts.map((item) => (
                         <div className="card" key={item.id} >
                             <MultiActionAreaCard
                                 item={item}
@@ -162,4 +156,3 @@ function ProductCatalog() {
 }
 
 export default ProductCatalog;
-
