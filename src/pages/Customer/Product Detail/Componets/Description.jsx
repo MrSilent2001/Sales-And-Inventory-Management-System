@@ -3,9 +3,8 @@ import CartIcon from "./Icons/CartIcon";
 import QuantityButton from "./QuantityButton";
 
 const Description = ({ onQuant, onAdd, onRemove, onAddToCart, title, description, quantity, price, offer, category }) => {
-
-    const finalPrice = price - (price * offer / 100);
-    const earlierPrice = price + (price * offer / 100);
+    // Calculate the final price based on the offer if available
+    const finalPrice = offer !== null ? price - (price * offer / 100) : price;
 
     return (
         <section className="productDetailDescription">
@@ -16,10 +15,10 @@ const Description = ({ onQuant, onAdd, onRemove, onAddToCart, title, description
             </p>
             <div className="price">
                 <div className="main-tag">
-                    <p>{price.toFixed(2)}</p> {/* Display the final price */}
-                    <p>{offer}%</p> {/* Display the offer percentage */}
+                    <p>${finalPrice.toFixed(2)}</p> {/* Display the final price */}
+                    {offer !== null && <p>{offer}%</p>} {/* Display the offer percentage if available */}
                 </div>
-                <s>${earlierPrice.toFixed(2)}</s> {/* Display the original price */}
+                {offer !== null && <s>{price.toFixed(2)}</s>} {/* Display the original price if offer is available */}
             </div>
             <div className="buttons">
                 <QuantityButton onQuant={onQuant} onRemove={onRemove} onAdd={onAdd} productQuantity={quantity}/>

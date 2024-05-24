@@ -49,27 +49,49 @@ function ProductDetail(){
     }
 
     useEffect(() => {
-
-        const fetchProduct = async () => {
+        const fetchProductandOffers = async () => {
             try {
-                console.log(productId);
-                const response = await axios.get(`http://localhost:9000/product/findProduct/${productId}`, {
+                const responseProduct = await axios.get(`http://localhost:9000/product/findProduct/${productId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
 
-                setProduct(response.data);
-                console.log(product);
-                console.log(response.data);
+                const product = responseProduct.data;
+
+                const responseAllOffers = await axios.get(`http://localhost:9000/discounts/getAll`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                const allOffers = responseAllOffers.data;
+
+                const today = new Date().toISOString().slice(0, 10); // Get today's date in 'YYYY-MM-DD' format
+
+                // Find the offer applicable to the fetched product for today's date (if any)
+                const offer = allOffers.find(offer => offer.productId === productId && offer.startDate <= today && offer.endDate >= today);
+
+                // Create product with offer variable
+                const productWithOffer = {
+                    ...product,
+                    discountRate: offer ? offer.discountRate : null // Assign the offer's discountRate or null if no valid offer found
+                };
+
+                setProduct(productWithOffer);
 
             } catch (error) {
-                console.error('Error fetching product:', error);
+                console.error('Error fetching product and offers:', error);
             }
         };
-        fetchProduct();
 
-    }, [productId]);
+        fetchProductandOffers();
+
+    }, [productId, token]);
+
+
+    console.log(product)
+
 
     useEffect(() => {
         const storedCart = JSON.parse(localStorage.getItem("cart"));
@@ -105,7 +127,7 @@ function ProductDetail(){
                             description={product.productDescription}
                             title={product.productName}
                             category={product.productCategory}
-                            offer={50}
+                            offer={product.discountRate}
                         />
                     )}
                 </section>
