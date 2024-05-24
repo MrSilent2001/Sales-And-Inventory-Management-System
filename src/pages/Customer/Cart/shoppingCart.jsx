@@ -7,6 +7,7 @@ import {loadStripe} from "@stripe/stripe-js";
 import React, {useEffect, useState} from 'react';
 import CustomizedButton from "../../../components/Button/button";
 import axios from "axios";
+import {useAuth} from "../../../context/AuthContext";
 
 const getStripe = () => {
     let stripePromise = '';
@@ -18,6 +19,7 @@ const getStripe = () => {
 }
 
 function Cart() {
+    const { auth } = useAuth();
     const [cart, setCart] = useState([]);
     const [totalAmount, setTotalAmount] = useState(0);
     const [isLoading, setLoading] = useState(false);
@@ -52,13 +54,13 @@ function Cart() {
         localStorage.setItem("cart", JSON.stringify(updatedCart));
     }
 
-    const token = localStorage.getItem('accessToken');
+    //const token = localStorage.getItem('accessToken');
     const handlePaymentSuccess = async (paymentData) => {
         console.log('Payment Data:', paymentData)
         try {
             const response = await axios.post('http://localhost:9000/payment/customerPayment/create', paymentData, {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${auth.access_token}`,
                 },
             });
             console.log(response.data);
@@ -90,7 +92,7 @@ function Cart() {
                 lineItems: lineItems
             }, {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${auth.access_token}`,
                 },
             });
 
@@ -106,7 +108,6 @@ function Cart() {
                 //stripeCheckoutSessionId: response.data.id
             };
             await handlePaymentSuccess(paymentData);
-            //await stripe.invoices.sendInvoice(response.data.id);
 
             window.location.href = response.data.url;
         } catch (error) {
@@ -115,6 +116,46 @@ function Cart() {
         }
     }
 
+    const createInvoice = async () => {
+        setLoading(true);
+        const lineItems = cart.map(item => ({
+            price_data: {
+                currency: 'lkr',
+                product_data: {
+                    name: item.productName,
+                    images: [item.productImage]
+                },
+                unit_amount: item.productPrice * 100,
+            },
+            quantity: item.amount,
+        }));
+
+        try {
+            const customerData = JSON.parse(localStorage.getItem('user'));
+            const response = await axios.post('http://localhost:9000/payment/customerPayment/invoice', {
+                lineItems: lineItems,
+                customerEmail: customerData[4],
+            }, {
+                headers: {
+                    Authorization: `Bearer ${auth.access_token}`,
+                },
+            });
+
+            const paymentData = {
+                customerId: customerData[2],
+                customerName: customerData[3],
+                customerEmail: customerData[4],
+                contactNo: customerData[5],
+                totalAmount: response.data.total / 100,
+            };
+            await handlePaymentSuccess(paymentData);
+
+            window.location.href = response.data.hosted_invoice_url;
+        } catch (error) {
+            console.error('Error creating invoice:', error);
+            setLoading(false);
+        }
+    }
 
     return (
         <>

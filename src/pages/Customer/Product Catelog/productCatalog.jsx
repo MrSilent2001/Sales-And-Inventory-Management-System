@@ -7,8 +7,10 @@ import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navb
 import {Link, useNavigate} from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
 import axios from "axios";
+import {useAuth} from "../../../context/AuthContext";
 
 function ProductCatalog() {
+    const { auth } = useAuth();
     const navigate = useNavigate();
     const [cart, setCart] = useState([]);
 
@@ -21,7 +23,8 @@ function ProductCatalog() {
             try {
                 const response = await axios.get('http://localhost:9000/product/getAllProducts', {
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        //Authorization: `Bearer ${auth.access_token}`,
+                        Authorization: `Bearer ${token}`
                     },
                 });
                 setProducts(response.data);
@@ -39,6 +42,7 @@ function ProductCatalog() {
         const storedCart = JSON.parse(localStorage.getItem("cart"));
         if (storedCart) {
             setCart(storedCart);
+            console.log(storedCart)
         }
     }, []);
 

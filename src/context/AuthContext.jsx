@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('role', role);
         localStorage.setItem('id', id);
 
-        return { id, role };
+        return { id, role, access_token };
     };
 
     const logout = () => {
