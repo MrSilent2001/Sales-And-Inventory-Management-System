@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5d2ad5e6-b3f3-4fe7-9ca2-56f2badaa8b6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Form Inputs/checkbox.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Form Inputs/checkbox.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/navbar/Customer navbar/Customer navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/search bar/search bar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/search bar/search bar.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/catalog.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/catalog.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/productCatalog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/productCatalog.jsx" afterDir="false" />
     </list>

@@ -4,9 +4,11 @@ import MultiActionAreaCard from '../../../components/Cards/catalogCard';
 import Checkboxes from '../../../components/Form Inputs/checkbox';
 import Footer from "../../../layout/footer/footer";
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
 import axios from "axios";
+import SearchBar from "../../../components/search bar/search bar";
+
 
 function ProductCatalog() {
     const navigate = useNavigate();
@@ -22,7 +24,7 @@ function ProductCatalog() {
         "Construction Chemicals": false
     });
 
-    // Fetching all products from backend
+    const [searchQuery, setSearchQuery] = useState('');
     const [products, setProducts] = useState([]);
     const token = localStorage.getItem('accessToken');
 
@@ -35,7 +37,6 @@ function ProductCatalog() {
                     },
                 });
                 setProducts(response.data);
-                console.log(products);
             } catch (error) {
                 console.error('Error fetching products:', error);
             }
@@ -44,7 +45,6 @@ function ProductCatalog() {
         fetchProducts();
     }, []);
 
-    // Load cart from local storage on component mount
     useEffect(() => {
         const storedCart = JSON.parse(localStorage.getItem("cart"));
         if (storedCart) {
@@ -52,19 +52,15 @@ function ProductCatalog() {
         }
     }, []);
 
-    // Function to handle click event on item
     const handleAddToCart = (item) => {
         const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
 
-        // If item already exists in cart, increase its quantity
         if (existingItemIndex !== -1) {
             const updatedCart = [...cart];
             updatedCart[existingItemIndex].amount += 1;
             setCart(updatedCart);
             localStorage.setItem("cart", JSON.stringify(updatedCart));
-        }
-        // If item is not in cart, add it with quantity 1
-        else {
+        } else {
             setCart([...cart, { ...item, amount: 1 }]);
             localStorage.setItem("cart", JSON.stringify([...cart, { ...item, amount: 1 }]));
         }
@@ -75,7 +71,6 @@ function ProductCatalog() {
     };
 
     const handleImageClick = (item) => {
-        // Handle image click logic here, if different from body click
         navigate(`/product/${item.id}`);
     };
 
@@ -87,18 +82,24 @@ function ProductCatalog() {
         }));
     };
 
+    const handleSearchKeyPress = (query) => {
+        setSearchQuery(query);
+    };
 
-    // Filter products based on selected categories
+    const handleSearchChange = (query) => {
+        setSearchQuery(query);
+    };
+
     const filteredProducts = products.filter(product => {
-        return Object.entries(checkedItems).every(([category, checked]) => {
+        const matchesCategory = Object.entries(checkedItems).every(([category, checked]) => {
             return !checked || product.productCategory.includes(category);
         });
+
+        const matchesSearchQuery = product.productName.toLowerCase().includes(searchQuery.toLowerCase());
+
+        return matchesCategory && matchesSearchQuery;
     });
 
-
-
-
-    // Render component
     return (
         <>
             <CustomerNavbar />
@@ -110,7 +111,6 @@ function ProductCatalog() {
                                 checked={checkedItems[name]}
                                 onChange={(event) => handleCheckboxChange(event, name)}
                             />
-
                             <label>{name}</label>
                         </div>
                     ))}
@@ -137,20 +137,29 @@ function ProductCatalog() {
                         </Link>
                     </div>
                 </div>
-                <div className="customerItemGrid">
-                    {filteredProducts.map((item) => (
-                        <div className="card" key={item.id} >
-                            <MultiActionAreaCard
-                                item={item}
-                                handleClick={handleAddToCart}
-                                handleBodyClick={handleBodyClick}
-                                handleImageClick={handleImageClick}
-                            />
-                        </div>
-                    ))}
+                <div className="prodcutDetailRight">
+                    <div className="search-bar-container">
+                        <SearchBar
+                            onKeyPress={handleSearchKeyPress}
+                            onChange={handleSearchChange}
+                            width = {'20.5em'}
+                        />
+                    </div>
+                    <div className="customerItemGrid">
+                        {filteredProducts.map((item) => (
+                            <div className="card" key={item.id}>
+                                <MultiActionAreaCard
+                                    item={item}
+                                    handleClick={handleAddToCart}
+                                    handleBodyClick={handleBodyClick}
+                                    handleImageClick={handleImageClick}
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
-            <Footer />
+            <Footer/>
         </>
     );
 }
