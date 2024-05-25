@@ -11,6 +11,7 @@ import MediaControlCard from "./Componets/relatedproductCard";
 import ProductReviewTabs from "./Componets/productReviewTabs";
 import ProductReviewCard from "./Componets/productReviewCard";
 import Footer from "../../../layout/footer/footer";
+import ProductReviewSubmitForm from "./Componets/productReviewSubmitForm";
 
 
 function ProductDetail(){
@@ -175,18 +176,20 @@ function ProductDetail(){
                 <div className="productDetailReviewSection">
                     <h2>Product Reviews</h2>
 
-                    {productReview && productReview.map(reviews => (
-                        <ProductReviewCard key={reviews.id} reviews={reviews}/>
-                    ))}
-
+                    {productReview && productReview.length > 0 ? (
+                        productReview.map(reviews => (
+                            <ProductReviewCard key={reviews.id} reviews={reviews}/>
+                        ))
+                    ) : (
+                        <p>Currently no Reviews Available</p>
+                    )}
                 </div>
 
-                <div className="productDetailReviewSubmitSection">
-                    <h2>Submit a Review</h2>
 
-                    {productReview && productReview.map(reviews => (
-                        <ProductReviewCard key={reviews.id} reviews={reviews}/>
-                    ))}
+                <div className="productDetailReviewSubmitSection">
+                    <h2>Submit a Reviews</h2>
+
+                    <ProductReviewSubmitForm productId={productId}/>
 
                 </div>
 
