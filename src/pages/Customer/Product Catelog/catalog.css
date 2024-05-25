@@ -24,16 +24,39 @@
 
 }
 
+.search-bar-container {
+    /*width: 80%;*/
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+
+
 .sidebar{
 
     background-color:#DBDFFD;
-    width: 16.5em;
+    display: flex;
+    flex-direction: column;
+    width: 18.5em;
     float: left;
     padding-top: 3em;
     line-height: 3em;
+    justify-content: left;
+    justify-items: left;
 }
 
 .content{
+
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    width: 80%;
+
+
+}
+
+.content-cart-button{
 
     display: flex;
     align-items: center;

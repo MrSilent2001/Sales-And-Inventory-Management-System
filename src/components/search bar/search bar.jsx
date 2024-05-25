@@ -9,7 +9,8 @@ function SearchBar({
                        height = '1.95em',
                        hoverCursor = 'pointer',
                        defaultCursor = 'default',
-                       onKeyPress
+                       onKeyPress,
+                       onChange
                    }) {
 
     const [isHovered, setIsHovered] = useState(false);
@@ -25,6 +26,7 @@ function SearchBar({
 
     const handleChange = (event) => {
         setQuery(event.target.value);
+        onChange(event.target.value);
     };
 
     const handleKeyPress = (e) => {
@@ -40,7 +42,7 @@ function SearchBar({
             sx={{
                 '& > :not(style)': {
                     m: 2,
-                    width: '17.5em',
+                    width: {width},
                     "& .MuiInputBase-root": {
                         height: '1.95em',
                         borderRadius: '1.5em',

@@ -4,25 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7234010f-9bca-4f5a-ad90-eff9b268e336" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Cart/Bill/invoce.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Cart/Bill/invoice.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="5d2ad5e6-b3f3-4fe7-9ca2-56f2badaa8b6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/context/AuthContext.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/context/AuthContext.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Cart/shoppingCart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Cart/shoppingCart.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/productCatalog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Catelog/productCatalog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/protectedRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/protectedRoutes.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/PageRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/PageRoutes.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="JSX File" />
         <option value="CSS File" />
       </list>
     </option>
@@ -33,11 +31,10 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 8
-}]]></component>
-  <component name="ProjectId" id="2guGYMY8bdo8lJrTtzy0I9GJ5tn" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2gG8n4liEetUgCiTXrvXtQiRUjD" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -47,29 +44,63 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "dev__test",
+    "git-widget-placeholder": "tuks#10",
+    "last_opened_file_path": "C:/Tun Tun/FE/Sales-And-Inventory-Management-System/src/pages/Customer/Product Detail/Componets/Icons/iconImages",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Jetbrains\\PhpStorm\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Tun Tun\FE\Sales-And-Inventory-Management-System\src\pages\Customer\Product Detail\Componets\Icons\iconImages" />
+      <recent name="C:\Tun Tun\FE\Sales-And-Inventory-Management-System\src\pages\Customer\Product Detail\Componets" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Tradeasy\Sales-And-Inventory-Management-System\src\pages\Customer" />
+      <recent name="C:\Users\dinuk\Desktop\My Docs\Projects\Tradeasy\Sales-And-Inventory-Management-System\src\pages\admin\Landing Pages" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-PS-241.15989.102" />
+        <option value="bundled-php-predefined-ba97393d7c68-c76157a7178b-com.jetbrains.php.sharedIndexes-PS-241.15989.102" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7234010f-9bca-4f5a-ad90-eff9b268e336" name="Changes" comment="" />
-      <created>1716540099140</created>
+      <changelist id="5d2ad5e6-b3f3-4fe7-9ca2-56f2badaa8b6" name="Changes" comment="" />
+      <created>1715312719117</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1716540099140</updated>
-      <workItem from="1716540101293" duration="5038000" />
+      <updated>1715312719117</updated>
+      <workItem from="1715312722548" duration="60062000" />
+      <workItem from="1715543580000" duration="35934000" />
+      <workItem from="1716542683416" duration="2518000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

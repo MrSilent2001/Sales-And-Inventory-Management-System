@@ -4,125 +4,150 @@ import MultiActionAreaCard from '../../../components/Cards/catalogCard';
 import Checkboxes from '../../../components/Form Inputs/checkbox';
 import Footer from "../../../layout/footer/footer";
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
 import axios from "axios";
-import {useAuth} from "../../../context/AuthContext";
+import SearchBar from "../../../components/search bar/search bar";
+
 
 function ProductCatalog() {
-    const { auth } = useAuth();
     const navigate = useNavigate();
     const [cart, setCart] = useState([]);
+    const [checkedItems, setCheckedItems] = useState({
+        "Building Material": false,
+        "Hardware and Tools": false,
+        "Safety Equipments": false,
+        "Electrical Supplies": false,
+        "Plumbing Supplies": false,
+        "Interior Finishes": false,
+        "Landscaping Products": false,
+        "Construction Chemicals": false
+    });
 
-    //fetcting all products from backend
+    const [searchQuery, setSearchQuery] = useState('');
     const [products, setProducts] = useState([]);
+    const [offers, setOffers] = useState([]);
     const token = localStorage.getItem('accessToken');
+    const [productsWithOffers, setProductsWithOffers] = useState([]);
+
 
     useEffect(() => {
-        const fetchProducts = async () => {
+        const fetchProductsWithOffers = async () => {
             try {
-                const response = await axios.get('http://localhost:9000/product/getAllProducts', {
+                const responseProducts = await axios.get('http://localhost:9000/product/getAllProducts', {
                     headers: {
-                        //Authorization: `Bearer ${auth.access_token}`,
-                        Authorization: `Bearer ${token}`
+                        Authorization: `Bearer ${token}`,
                     },
                 });
-                setProducts(response.data);
-                console.log(products);
+
+                setProducts(responseProducts.data);
+
+
+                const responseOffers = await axios.get('http://localhost:9000/discounts/getAll', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                setOffers(responseOffers.data);
+
+
+                const today = new Date().toISOString().slice(0, 10); // Get today's date in 'YYYY-MM-DD' format
+
+                // Merge products with offers
+                const mergedProducts = responseProducts.data.map(product => {
+                    const offer = responseOffers.data.find(offer => parseInt(offer.productId) === product.id && offer.startDate <= today && offer.endDate >= today);
+                    const discountRate = offer ? offer.discountRate : null;
+                    return {
+                        ...product,
+                        discountRate: discountRate // Assign discountRate if found, otherwise null
+                    };
+                });
+
+
+                setProductsWithOffers(mergedProducts);
             } catch (error) {
-                console.error('Error fetching users:', error);
+                console.error('Error fetching products with offers:', error);
             }
         };
 
-        fetchProducts();
+        fetchProductsWithOffers();
     }, []);
 
-    // Load cart from local storage on component mount
+
+
+    console.log("productwithOffers",productsWithOffers);
+
     useEffect(() => {
         const storedCart = JSON.parse(localStorage.getItem("cart"));
         if (storedCart) {
             setCart(storedCart);
-            console.log(storedCart)
         }
     }, []);
 
-    // Function to handle click event on item
     const handleAddToCart = (item) => {
         const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
 
-        // If item already exists in cart, increase its quantity
         if (existingItemIndex !== -1) {
             const updatedCart = [...cart];
             updatedCart[existingItemIndex].amount += 1;
             setCart(updatedCart);
             localStorage.setItem("cart", JSON.stringify(updatedCart));
-        }
-        // If item is not in cart, add it with quantity 1
-        else {
+        } else {
             setCart([...cart, { ...item, amount: 1 }]);
             localStorage.setItem("cart", JSON.stringify([...cart, { ...item, amount: 1 }]));
         }
-    }
+    };
 
     const handleBodyClick = (item) => {
         navigate(`/product/${item.id}`);
     };
 
     const handleImageClick = (item) => {
-        // Handle image click logic here, if different from body click
         navigate(`/product/${item.id}`);
     };
 
-    // Render component
+    const handleCheckboxChange = (event, name) => {
+        const isChecked = event.target.checked;
+        setCheckedItems(prevState => ({
+            ...prevState,
+            [name]: isChecked
+        }));
+    };
+
+    const handleSearchKeyPress = (query) => {
+        setSearchQuery(query);
+    };
+
+    const handleSearchChange = (query) => {
+        setSearchQuery(query);
+    };
+
+    const filteredProducts = productsWithOffers.filter(product => {
+        const matchesCategory = Object.entries(checkedItems).every(([category, checked]) => {
+            return !checked || product.productCategory.includes(category);
+        });
+
+        const matchesSearchQuery = product.productName.toLowerCase().includes(searchQuery.toLowerCase());
+
+        return matchesCategory && matchesSearchQuery;
+    });
+
     return (
         <>
             <CustomerNavbar />
             <div className="Catalogouter">
                 <div className="sidebar">
-                    <div className="content">
-                        <Checkboxes/>
-                        <label>Building Matrial</label>
-
-                    </div>
-
-                    <div className="content">
-                        <Checkboxes/>
-                        <label>Building Matrial</label>
-
-                    </div>
-
-                    <div className="content">
-                        <Checkboxes/>
-                        <label>Building Matrial</label>
-
-                    </div>
-
-
-                    <div className="content">
-                        <Checkboxes/>
-                        <label>Building Matrial</label>
-
-                    </div>
-
-                    <div className="content">
-                        <Checkboxes/>
-                        <label>Building Matrial</label>
-
-                    </div>
-
-                    <div className="content">
-                        <Checkboxes/>
-                        <label>Building Matrial</label>
-
-                    </div>
-
-                    <div className="content">
-                        <Checkboxes/>
-                        <label>Building Matrial</label>
-
-                    </div>
-
-                    <div className="content">
+                    {Object.keys(checkedItems).map((name) => (
+                        <div className="content" key={name}>
+                            <Checkboxes
+                                checked={checkedItems[name]}
+                                onChange={(event) => handleCheckboxChange(event, name)}
+                            />
+                            <label>{name}</label>
+                        </div>
+                    ))}
+                    <div className="content-cart-button">
                         <Link to="/cart">
                             <CustomizedButton
                                 hoverBackgroundColor="#2ec931"
@@ -144,26 +169,32 @@ function ProductCatalog() {
                             </CustomizedButton>
                         </Link>
                     </div>
-
-
                 </div>
-                <div className="customerItemGrid">
-                    {products.map((item) => (
-                        <div className="card" key={item.id} >
-                            <MultiActionAreaCard
-                                item={item}
-                                handleClick={handleAddToCart}
-                                handleBodyClick={handleBodyClick}
-                                handleImageClick={handleImageClick}
-                            />
-                        </div>
-                    ))}
+                <div className="prodcutDetailRight">
+                    <div className="search-bar-container">
+                        <SearchBar
+                            onKeyPress={handleSearchKeyPress}
+                            onChange={handleSearchChange}
+                            width = {'20.5em'}
+                        />
+                    </div>
+                    <div className="customerItemGrid">
+                        {filteredProducts.map((item) => (
+                            <div className="card" key={item.id}>
+                                <MultiActionAreaCard
+                                    item={item}
+                                    handleClick={handleAddToCart}
+                                    handleBodyClick={handleBodyClick}
+                                    handleImageClick={handleImageClick}
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
-            <Footer />
+            <Footer/>
         </>
     );
 }
 
 export default ProductCatalog;
-
