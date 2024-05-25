@@ -78,7 +78,11 @@ ul {
     width: 100vw !important;
     max-width: 100vw !important;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
 
 }
 .productDetailIntter {
@@ -92,6 +96,29 @@ ul {
     margin: 100px ;
     gap: 100px;
 }
+
+.productDetailReviewSection{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 400px;
+    padding-left: 0;
+    width: 100%;
+    margin-bottom: 100px;
+}
+
+.productDetailReviewSubmitSection{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 400px;
+    padding-left: 0;
+    width: 100%;
+    margin-bottom: 100px;
+
+}
+
+
 @media (max-width: 992px) {
     .productDetailCore {
         gap: 70px;

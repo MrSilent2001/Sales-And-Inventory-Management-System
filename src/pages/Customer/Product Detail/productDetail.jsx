@@ -8,6 +8,9 @@ import "./productDetail.css"
 import MobileGallery from "./Componets/MobileGallery";
 import Description from "./Componets/Description";
 import MediaControlCard from "./Componets/relatedproductCard";
+import ProductReviewTabs from "./Componets/productReviewTabs";
+import ProductReviewCard from "./Componets/productReviewCard";
+import Footer from "../../../layout/footer/footer";
 
 
 function ProductDetail(){
@@ -17,6 +20,7 @@ function ProductDetail(){
     const [product, setProduct] = useState(null);
     const [productsWithOffers, setProductsWithOffers] = useState([]);
     const [relatedProducts, setRelatedProducts] = useState([]);
+    const [productReview, setProductReview] = useState([]);
     const [quant, setQuant] = useState(0);
     const [orderedQuant, setOrderedQuant] = useState(0);
     const [cart, setCart] = useState([]);
@@ -75,6 +79,12 @@ function ProductDetail(){
                     },
                 });
 
+                const responseReviews = await axios.get('http://localhost:9000/product/review/getAllProductsReview', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
                 const today = new Date().toISOString().slice(0, 10); // Get today's date in 'YYYY-MM-DD' format
 
                 // Merge products with offers
@@ -98,6 +108,12 @@ function ProductDetail(){
                     const relatedProducts = mergedProducts.filter(product => product.productCategory === singleProductWithOffer.productCategory && product.id !== singleProductWithOffer.id);
                     setRelatedProducts(relatedProducts);
                 }
+
+                // Filter reviews based on productId
+                const filteredReviews = responseReviews.data.filter(review => parseInt(review.productId) === parseInt(productId));
+                setProductReview(filteredReviews.length > 0 ? filteredReviews : null);
+
+                console.log("review", filteredReviews);
 
             } catch (error) {
                 console.error('Error fetching products with offers:', error);
@@ -147,7 +163,7 @@ function ProductDetail(){
                     </section>
 
                     <div className="relatedProducts">
-                        <h2>                           Related Products</h2>
+                        <h2> Related Products</h2>
                         <section className="realatedProductDetailCore">
                             {relatedProducts && relatedProducts.map(item => (
                                 <MediaControlCard key={item.id} item={item} handleBodyClick={handleBodyClick}/>
@@ -156,7 +172,27 @@ function ProductDetail(){
                     </div>
 
                 </div>
+                <div className="productDetailReviewSection">
+                    <h2>Product Reviews</h2>
+
+                    {productReview && productReview.map(reviews => (
+                        <ProductReviewCard key={reviews.id} reviews={reviews}/>
+                    ))}
+
+                </div>
+
+                <div className="productDetailReviewSubmitSection">
+                    <h2>Submit a Review</h2>
+
+                    {productReview && productReview.map(reviews => (
+                        <ProductReviewCard key={reviews.id} reviews={reviews}/>
+                    ))}
+
+                </div>
+
+
             </div>
+            <Footer/>
 
         </>
 

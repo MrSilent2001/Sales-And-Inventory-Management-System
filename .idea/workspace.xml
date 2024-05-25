@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d2ad5e6-b3f3-4fe7-9ca2-56f2badaa8b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/relatedproductCard.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/productReviewCard.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/Componets/productReviewTabs.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Product Detail/productDetail.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/PageRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/PageRoutes.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +23,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
-        <option value="JSX File" />
         <option value="CSS File" />
+        <option value="JSX File" />
       </list>
     </option>
   </component>
