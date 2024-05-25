@@ -38,6 +38,6 @@ const Cancel = () => {
             </div>
         </div>
     );
-};
+
 
 export default Cancel;
