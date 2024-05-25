@@ -9,7 +9,6 @@ import CustomizedButton from "../../../components/Button/button";
 import axios from "axios";
 import SearchBar from "../../../components/search bar/search bar";
 
-
 function ProductCatalog() {
     const navigate = useNavigate();
     const [cart, setCart] = useState([]);
@@ -30,7 +29,6 @@ function ProductCatalog() {
     const token = localStorage.getItem('accessToken');
     const [productsWithOffers, setProductsWithOffers] = useState([]);
 
-
     useEffect(() => {
         const fetchProductsWithOffers = async () => {
             try {
@@ -42,7 +40,6 @@ function ProductCatalog() {
 
                 setProducts(responseProducts.data);
 
-
                 const responseOffers = await axios.get('http://localhost:9000/discounts/getAll', {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -50,7 +47,6 @@ function ProductCatalog() {
                 });
 
                 setOffers(responseOffers.data);
-
 
                 const today = new Date().toISOString().slice(0, 10); // Get today's date in 'YYYY-MM-DD' format
 
@@ -64,7 +60,6 @@ function ProductCatalog() {
                     };
                 });
 
-
                 setProductsWithOffers(mergedProducts);
             } catch (error) {
                 console.error('Error fetching products with offers:', error);
@@ -72,16 +67,21 @@ function ProductCatalog() {
         };
 
         fetchProductsWithOffers();
-    }, []);
-
-
-
-    console.log("productwithOffers",productsWithOffers);
+    }, [token]);
 
     useEffect(() => {
-        const storedCart = JSON.parse(localStorage.getItem("cart"));
+        const storedCart = localStorage.getItem("cart");
         if (storedCart) {
-            setCart(storedCart);
+            try {
+                const parsedCart = JSON.parse(storedCart);
+                if (Array.isArray(parsedCart)) {
+                    setCart(parsedCart);
+                } else {
+                    console.error("Parsed cart data is not an array:", parsedCart);
+                }
+            } catch (error) {
+                console.error("Error parsing cart data from localStorage:", error);
+            }
         }
     }, []);
 
@@ -175,7 +175,7 @@ function ProductCatalog() {
                         <SearchBar
                             onKeyPress={handleSearchKeyPress}
                             onChange={handleSearchChange}
-                            width = {'20.5em'}
+                            width={'20.5em'}
                         />
                     </div>
                     <div className="customerItemGrid">
@@ -192,7 +192,7 @@ function ProductCatalog() {
                     </div>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </>
     );
 }

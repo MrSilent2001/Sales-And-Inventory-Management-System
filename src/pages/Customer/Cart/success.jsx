@@ -1,11 +1,16 @@
 import CustomizedButton from "../../../components/Button/button";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
+import SalesReceipt from '../../Customer/Cart/Bill/invoice';
+import { useReactToPrint } from 'react-to-print';
+import {Navigate} from "react-router-dom";
 
 const Success = () => {
     const sessionId = localStorage.getItem('sessionId');
     const [purchasedItems, setPurchasedItems] = useState([]);
     const token = localStorage.getItem('accessToken');
+    const [navigate, setNavigate] = useState(false);
+    const componentRef = useRef();
 
     useEffect(() => {
         const fetchSession = async () => {
@@ -19,6 +24,7 @@ const Success = () => {
                 console.log(session);
                 const items = JSON.parse(session.metadata.items);
                 setPurchasedItems(items);
+                console.log(items);
             } catch (error) {
                 console.error('Error fetching session:', error);
             }
@@ -29,19 +35,25 @@ const Success = () => {
         }
     }, [sessionId]);
 
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+    });
+
+    const handleRedirect = ()=>{
+        localStorage.setItem("cart", []);
+        setNavigate(true);
+    }
+
+    if(navigate){
+        return <Navigate to="/products"/>
+    }
+
     return (
-        <div style={{textAlign: 'center'}}>
+        <div style={{ textAlign: 'center' }}>
             <h1>Success</h1>
             <h2>Thank you for your purchase!</h2>
-            <h2>Purchased Items:</h2>
-            {/*<ul>*/}
-            {/*    {purchasedItems.map(item => (*/}
-            {/*        <li key={item.id}>*/}
-            {/*            {item.productName} - Rs {item.productSellingPrice} x {item.amount}*/}
-            {/*        </li>*/}
-            {/*    ))}*/}
-            {/*</ul>*/}
-            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <CustomizedButton
                     hoverBackgroundColor="#0aaf0b"
                     style={{
@@ -55,11 +67,14 @@ const Success = () => {
                         border: 'none',
                         marginTop: '0.25em',
                         marginBottom: '2em',
-                    }}>
+                    }}
+                    onClick={handleRedirect}
+                >
                     Go Back
                 </CustomizedButton>
 
                 <CustomizedButton
+                    onClick={handlePrint}
                     hoverBackgroundColor="#0aaf0b"
                     style={{
                         color: '#ffffff',
@@ -72,9 +87,13 @@ const Success = () => {
                         border: 'none',
                         marginTop: '0.25em',
                         marginBottom: '2em',
-                    }}>
+                    }}
+                >
                     Download
                 </CustomizedButton>
+            </div>
+            <div style={{ display: 'none' }}>
+                <SalesReceipt ref={componentRef} purchasedItems={purchasedItems} />
             </div>
         </div>
     );

@@ -6,12 +6,15 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [authState, setAuthState] = useState({ token: null, user: null });
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [loading, setLoading] = useState(true); // Add loading state
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
         if (token) {
+            setAuthState({ ...authState, token });
             setIsAuthenticated(true);
         }
+        setLoading(false); // Set loading to false after checking localStorage
     }, []);
 
     const login = async (username, password) => {
@@ -35,7 +38,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ authState, isAuthenticated, login, logout }}>
+        <AuthContext.Provider value={{ authState, isAuthenticated, loading, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

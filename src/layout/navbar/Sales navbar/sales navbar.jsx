@@ -9,9 +9,7 @@ function SalesNavbar(){
     const [navigate, setNavigate] = useState(false);
     const handleNavLinkClick = (event) => {
         setSelectedNavLink(event.target.name);
-        localStorage.setItem('accessToken', '');
-        localStorage.setItem('role', '');
-        localStorage.setItem('id', '');
+        localStorage.clear();
     };
 
     const handleClick = () =>{

@@ -10,6 +10,7 @@ function Header({OpenSidebar}) {
     const [navigate, setNavigate] = useState(false);
     const handleClick = () =>{
         setNavigate(true);
+        localStorage.clear();
     }
 
     if(navigate){

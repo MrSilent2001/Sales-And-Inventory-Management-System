@@ -27,9 +27,18 @@ function Cart() {
     const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
-        const storedCart = JSON.parse(localStorage.getItem("cart"));
+        const storedCart = localStorage.getItem("cart");
         if (storedCart) {
-            setCart(storedCart);
+            try {
+                const parsedCart = JSON.parse(storedCart);
+                if (Array.isArray(parsedCart)) {
+                    setCart(parsedCart);
+                } else {
+                    console.error("Parsed cart data is not an array:", parsedCart);
+                }
+            } catch (error) {
+                console.error("Error parsing cart data from localStorage:", error);
+            }
         }
     }, []);
 
@@ -44,7 +53,6 @@ function Cart() {
         });
         setTotalAmount(total);
     }, [cart]);
-
 
     const removeFromCart = (itemId) => {
         const updatedCart = cart.map(item => {
@@ -77,7 +85,7 @@ function Cart() {
                         name: item.productName,
                         images: [item.productImage]
                     },
-                    unit_amount: finalPrice * 100, // Use the discounted price for unit_amount
+                    unit_amount: finalPrice * 100,
                 },
                 quantity: item.amount,
             };
@@ -88,8 +96,7 @@ function Cart() {
             qty: item.amount,
             price: item.productSellingPrice,
         }));
-        console.log('cart',JSON.stringify(metadata))
-
+        console.log('cart', JSON.stringify(metadata))
 
         try {
             const response = await axios.post('http://localhost:9000/payment/customerPayment/checkout', {
@@ -104,7 +111,7 @@ function Cart() {
             });
 
             setLoading(false);
-            localStorage.setItem("session", response.data.metadata);
+            localStorage.setItem("sessionId", response.data.id);
             window.location.href = response.data.url;
 
         } catch (error) {
@@ -112,7 +119,6 @@ function Cart() {
             setLoading(false);
         }
     }
-
 
     return (
         <>
@@ -158,6 +164,3 @@ function Cart() {
 }
 
 export default Cart;
-
-
-

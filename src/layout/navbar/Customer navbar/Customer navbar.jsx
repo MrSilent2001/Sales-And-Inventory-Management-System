@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import "../navbar.css";
 import logo from "../../../assets/images/logo.png";
 import {NavLink} from "react-router-dom";
@@ -8,46 +8,44 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-
 function CustomerNavbar(){
     const [selectedNavLink, setSelectedNavLink] = useState(null);
     const handleNavLinkClick = (event) => {
         setSelectedNavLink(event.target.name);
-        localStorage.setItem('accessToken', '');
-        localStorage.setItem('role', '');
-        localStorage.setItem('id', '');
+        localStorage.clear();
     };
 
     const [cartItemCount, setCartItemCount] = useState(0);
     const [storedCart, setStoredCart] = useState([]);
-    const [cartFromStorage, setCartFromStorage] = useState([]);
 
     useEffect(() => {
-        setCartFromStorage(JSON.parse(localStorage.getItem("cart")));
-        if (cartFromStorage) {
-            // Calculate total amount for all items in the cart
-            const totalAmount = cartFromStorage.reduce((total, item) => total + item.amount, 0);
+        const cartData = localStorage.getItem("cart");
+        if (cartData) {
+            try {
+                const cartFromStorage = JSON.parse(cartData);
+                if (cartFromStorage && Array.isArray(cartFromStorage)) {
+                    // Calculate total amount for all items in the cart
+                    const totalAmount = cartFromStorage.reduce((total, item) => total + item.amount, 0);
 
-            // Store total amount in cartItemCount
-            setCartItemCount(totalAmount);
-            setStoredCart(cartFromStorage);
+                    // Store total amount in cartItemCount
+                    setCartItemCount(totalAmount);
+                    setStoredCart(cartFromStorage);
+                }
+            } catch (error) {
+                console.error("Error parsing cart data from localStorage:", error);
+            }
         }
-    }, [cartFromStorage]);
-
-
+    }, []);
 
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
             right: -3,
             top: 13,
             padding: '0 4px',
-
         },
     }));
 
-
-
-    return(
+    return (
         <div className="navbar">
             <div className="logo">
                 <img src={logo} alt="Logo" style={{width:"30px", margin:"10px"}} />
@@ -60,21 +58,21 @@ function CustomerNavbar(){
                 <NavLink to="/cart">
                     <IconButton aria-label="cart">
                         <StyledBadge badgeContent={cartItemCount} color="primary">
-                            <ShoppingCartIcon sx={{color:'white',width:'18px', height:'18px'}} />
+                            <ShoppingCartIcon sx={{color:'white', width:'18px', height:'18px'}} />
                         </StyledBadge>
                     </IconButton>
                 </NavLink>
                 <NavLink
-                    to="/logout"
+                    to="/"
                     name="logout"
-                    className={'navLink ${selectedNavLink === "logout" ? "selected" : ""}'}
+                    className={`navLink ${selectedNavLink === "logout" ? "selected" : ""}`}
                     onClick={handleNavLinkClick}
                 >
                     <MdLogout style={{width:'18px', height:'18px'}}/>
                 </NavLink>
             </div>
         </div>
-    )
+    );
 }
 
 export default CustomerNavbar;

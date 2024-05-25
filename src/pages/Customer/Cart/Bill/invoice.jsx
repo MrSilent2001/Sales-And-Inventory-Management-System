@@ -1,43 +1,34 @@
 import React from 'react';
 import './invoice.css';
+import dayjs from 'dayjs';
 
-const SalesReceipt = ({ billData, onClose }) => {
-    if (!billData) {
-        return null;
-    }
+const SalesReceipt = React.forwardRef(({ purchasedItems }, ref) => {
 
-    const { billNo, billedAt, billedBy, customerName, paymentMethod, contactNo, billedItems } = billData;
     let totalQuantity = 0;
     let grossTotal = 0;
     let discount = 0;
     let netTotal = 0;
-    let received = 5000.00;
-    let balance = 0;
+    let billedAt = dayjs().format('YYYY-MM-DD HH:mm:ss');
 
-    billedItems.forEach(item => {
-        totalQuantity += item.quantity;
-        grossTotal += item.rate * item.quantity;
+    purchasedItems.forEach(item => {
+        totalQuantity += item.qty;
+        grossTotal += item.price * item.qty;
     });
 
     discount = 0.00;
     netTotal = grossTotal - discount;
-    balance = received - netTotal;
 
-    const handleReprintReceipt = () => {
-        window.print();
-    };
-
-    const receiptContent = (
-        <div className="sales-receipt">
+    return (
+        <div className="sales-receipt" ref={ref}>
             <div className="sales-receipt-header">
                 <div className="logo">
-                    <img className="sales-receipt-sys-logo" src={greenleaf} alt="greenmart logo" />
+                    <img className="sales-receipt-sys-logo" src="Logo.png" alt="tradeasy logo" />
                 </div>
                 <div className="sales-receipt-store-details">
-                    <h5 className='shopName'>Green Leaf Super Mart</h5>
+                    <h5 className='shopName'>Tradeasy Pvt. Ltd.</h5>
                     <p className='branchAddress'>No: 30, Main Street, Galle</p>
-                    <p className='branchPhone'>091 222 223 1</p>
-                    <p className='branchEmail'>galle@greenleaf.com</p>
+                    <p className='branchPhone'>+94 912 222 231</p>
+                    <p className='branchEmail'>office@tradeasy.com</p>
                 </div>
             </div>
             <hr className='invoice-line-top' />
@@ -47,28 +38,24 @@ const SalesReceipt = ({ billData, onClose }) => {
                 <table className='receipt-details-table'>
                     <tbody>
                     <tr>
-                        <td className='receipt-details-label'>Bill No:</td>
-                        <td className='receipt-details-value'>{billNo}</td>
+                        <td className='receipt-details-label'>Invoice No:</td>
+                        <td className='receipt-details-value'>1</td>
                     </tr>
                     <tr>
-                        <td className='receipt-details-label'>Billed At:</td>
+                        <td className='receipt-details-label'>Invoiced At:</td>
                         <td className='receipt-details-value'>{billedAt}</td>
                     </tr>
                     <tr>
-                        <td className='receipt-details-label'>User:</td>
-                        <td className='receipt-details-value'>{billedBy}</td>
+                        <td className='receipt-details-label'>Customer:</td>
+                        <td className='receipt-details-value'>'abc'</td>
                     </tr>
                     <tr>
-                        <td className='receipt-details-label'>Payment Method:</td>
-                        <td className='receipt-details-value'>{paymentMethod}</td>
+                        <td className='receipt-details-label'>Email:</td>
+                        <td className='receipt-details-value'>"customerName"</td>
                     </tr>
                     <tr>
-                        <td className='receipt-details-label'>Name:</td>
-                        <td className='receipt-details-value'>{customerName}</td>
-                    </tr>
-                    <tr>
-                        <td className='receipt-details-label'>Phone:</td>
-                        <td className='receipt-details-value'>{contactNo}</td>
+                        <td className='receipt-details-label'>Contact No:</td>
+                        <td className='receipt-details-value'>"contactNo"</td>
                     </tr>
                     </tbody>
                 </table>
@@ -85,18 +72,13 @@ const SalesReceipt = ({ billData, onClose }) => {
                         </tr>
                         </thead>
                         <tbody>
-                        {billedItems.map((item, index) => (
-                            <React.Fragment key={index}>
-                                <tr>
-                                    <td colSpan={4}>{item.name}</td>
-                                </tr>
-                                <tr>
-                                    <td style={{ textAlign: '' }}>{item.productId}</td>
-                                    <td style={{ textAlign: 'left' }}>{(item.rate).toFixed(2)}</td>
-                                    <td style={{ textAlign: 'right' }}>{(item.quantity).toFixed(2)}</td>
-                                    <td style={{ textAlign: 'right' }}>{(item.rate * item.quantity).toFixed(2)}</td>
-                                </tr>
-                            </React.Fragment>
+                        {purchasedItems.map((item, index) => (
+                            <tr key={index}>
+                                <td>{item.name}</td>
+                                <td style={{ textAlign: 'left' }}>{(item.price).toFixed(2)}</td>
+                                <td style={{ textAlign: 'right' }}>{(item.qty)}</td>
+                                <td style={{ textAlign: 'right' }}>{(item.price * item.qty).toFixed(2)}</td>
+                            </tr>
                         ))}
                         </tbody>
                     </table>
@@ -107,7 +89,7 @@ const SalesReceipt = ({ billData, onClose }) => {
                 <div className="inquaryQR">
                     For any inquiry
                     <small>Scan me</small>
-                    <img className="qrImg" src={SugesstionQR} alt="Sugession QR" />
+                    {/*<img className="qrImg" src={SugesstionQR} alt="Sugession QR" />*/}
                 </div>
                 <div className="total">
                     <table className='total-table'>
@@ -128,14 +110,6 @@ const SalesReceipt = ({ billData, onClose }) => {
                             <td>Net Total </td>
                             <td style={{ textAlign: 'right' }}>{netTotal.toFixed(2)}</td>
                         </tr>
-                        <tr>
-                            <td>Received </td>
-                            <td style={{ textAlign: 'right' }}>{received.toFixed(2)}</td>
-                        </tr>
-                        <tr>
-                            <td>Balance </td>
-                            <td style={{ textAlign: 'right' }}>{balance.toFixed(2)}</td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -143,16 +117,12 @@ const SalesReceipt = ({ billData, onClose }) => {
             <hr className='invoice-line-top' />
             <div className="footer">
                 <h5> Thank you, Come again!</h5>
-                <p> © <span style={{ fontFamily: "Princess Sofia, cursive" }}> Flex Flow -</span>Powered By HexaCode Solutions Pvt Ltd.</p>
+                <p> © <span style={{ fontFamily: "Princess Sofia, cursive" }}> Tradeasy -</span>Powered By 99X Pvt Ltd.</p>
                 <hr className='invoice-line' />
                 <p className='special-note'> Please use this bill as a reference if you have any price discrepancies, refunds or product returns. Only applicable for 7 days from today.</p>
             </div>
         </div>
     );
-
-    return (
-        <></>
-    );
-};
+});
 
 export default SalesReceipt;
