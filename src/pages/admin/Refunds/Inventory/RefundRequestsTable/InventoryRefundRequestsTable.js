@@ -96,7 +96,7 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
                                 Refund Requests
                             </CustomizedButton>
 
-                            <Link to="/SalesApprovedRefundsTable">
+                            <Link to="/ApprovedRefundsTable">          
                             <CustomizedButton
                                 onClick={onViewApproved}
                                 hoverBackgroundColor="#f11717"
