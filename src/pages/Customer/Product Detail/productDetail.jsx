@@ -1,5 +1,5 @@
-import {useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
 import {Container} from "@mui/material";
@@ -7,12 +7,21 @@ import Gallery from "./Componets/Gallery";
 import "./productDetail.css"
 import MobileGallery from "./Componets/MobileGallery";
 import Description from "./Componets/Description";
+import MediaControlCard from "./Componets/relatedproductCard";
+import ProductReviewTabs from "./Componets/productReviewTabs";
+import ProductReviewCard from "./Componets/productReviewCard";
+import Footer from "../../../layout/footer/footer";
+import ProductReviewSubmitForm from "./Componets/productReviewSubmitForm";
 
 
 function ProductDetail(){
+    const navigate = useNavigate();
     const token = localStorage.getItem('accessToken');
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
+    const [productsWithOffers, setProductsWithOffers] = useState([]);
+    const [relatedProducts, setRelatedProducts] = useState([]);
+    const [productReview, setProductReview] = useState([]);
     const [quant, setQuant] = useState(0);
     const [orderedQuant, setOrderedQuant] = useState(0);
     const [cart, setCart] = useState([]);
@@ -46,52 +55,74 @@ function ProductDetail(){
             setCart([...cart, { ...product, amount: count }]);
             localStorage.setItem("cart", JSON.stringify([...cart, { ...product, amount: count }]));
         }
-    }
+    };
+
+    const handleBodyClick = (item) => {
+        navigate(`/product/${item.id}`);
+    };
+
+    const handleImageClick = (item) => {
+        navigate(`/product/${item.id}`);
+    };
 
     useEffect(() => {
-        const fetchProductandOffers = async () => {
+        const fetchProductsWithOffers = async () => {
             try {
-                const responseProduct = await axios.get(`http://localhost:9000/product/findProduct/${productId}`, {
+                const responseProducts = await axios.get('http://localhost:9000/product/getAllProducts', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
 
-                const product = responseProduct.data;
-
-                const responseAllOffers = await axios.get(`http://localhost:9000/discounts/getAll`, {
+                const responseOffers = await axios.get('http://localhost:9000/discounts/getAll', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
 
-                const allOffers = responseAllOffers.data;
+                const responseReviews = await axios.get('http://localhost:9000/product/review/getAllProductsReview', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
 
                 const today = new Date().toISOString().slice(0, 10); // Get today's date in 'YYYY-MM-DD' format
 
-                // Find the offer applicable to the fetched product for today's date (if any)
-                const offer = allOffers.find(offer => offer.productId === productId && offer.startDate <= today && offer.endDate >= today);
+                // Merge products with offers
+                const mergedProducts = responseProducts.data.map(product => {
+                    const offer = responseOffers.data.find(offer => parseInt(offer.productId) === product.id && offer.startDate <= today && offer.endDate >= today);
+                    const discountRate = offer ? offer.discountRate : null;
+                    return {
+                        ...product,
+                        discountRate: discountRate // Assign discountRate if found, otherwise null
+                    };
+                });
 
-                // Create product with offer variable
-                const productWithOffer = {
-                    ...product,
-                    discountRate: offer ? offer.discountRate : null // Assign the offer's discountRate or null if no valid offer found
-                };
+                setProductsWithOffers(mergedProducts);
 
-                setProduct(productWithOffer);
+                // Find and set the single product with offers using productId
+                const singleProductWithOffer = mergedProducts.find(product => product.id === parseInt(productId));
+                setProduct(singleProductWithOffer);
+
+                // Find and set related products based on productCategory
+                if (singleProductWithOffer) {
+                    const relatedProducts = mergedProducts.filter(product => product.productCategory === singleProductWithOffer.productCategory && product.id !== singleProductWithOffer.id);
+                    setRelatedProducts(relatedProducts);
+                }
+
+                // Filter reviews based on productId
+                const filteredReviews = responseReviews.data.filter(review => parseInt(review.productId) === parseInt(productId));
+                setProductReview(filteredReviews.length > 0 ? filteredReviews : null);
+
+                console.log("review", filteredReviews);
 
             } catch (error) {
-                console.error('Error fetching product and offers:', error);
+                console.error('Error fetching products with offers:', error);
             }
         };
 
-        fetchProductandOffers();
-
+        fetchProductsWithOffers();
     }, [productId, token]);
-
-
-    console.log(product)
-
 
     useEffect(() => {
         const storedCart = JSON.parse(localStorage.getItem("cart"));
@@ -105,33 +136,66 @@ function ProductDetail(){
     return(
         <>
             <CustomerNavbar />
-            <Container component="section">
+            <div className="productDetailsection">
+                <div className="productDetailIntter">
+                    <section className="productDetailCore">
+                        {product && product.productImage && (
+                            <Gallery images={product.productImage} thumbnails={product.productImage}/>
+                        )}
 
-                <section className="productDetailCore">
-                    {product && product.productImage && (
-                        <Gallery images={product.productImage} thumbnails={product.productImage} />
-                    )}
+                        {product && product.productImage && (
+                            <MobileGallery images={product.productImage}/>
+                        )}
 
-                    {product && product.productImage && (
-                        <MobileGallery images={product.productImage} />
-                    )}
+                        {product && product.productQuantity && (
+                            <Description
+                                onQuant={quant}
+                                onAdd={addQuant}
+                                onRemove={removeQuant}
+                                onAddToCart={handleAddToCart}
+                                quantity={product.productQuantity}
+                                price={product.productSellingPrice}
+                                description={product.productDescription}
+                                title={product.productName}
+                                category={product.productCategory}
+                                offer={product.discountRate}
+                            />
+                        )}
+                    </section>
 
-                    {product && product.productQuantity && (
-                        <Description
-                            onQuant={quant}
-                            onAdd={addQuant}
-                            onRemove={removeQuant}
-                            onAddToCart={handleAddToCart}
-                            quantity={product.productQuantity}
-                            price={product.productSellingPrice}
-                            description={product.productDescription}
-                            title={product.productName}
-                            category={product.productCategory}
-                            offer={product.discountRate}
-                        />
+                    <div className="relatedProducts">
+                        <h2> Related Products</h2>
+                        <section className="realatedProductDetailCore">
+                            {relatedProducts && relatedProducts.map(item => (
+                                <MediaControlCard key={item.id} item={item} handleBodyClick={handleBodyClick}/>
+                            ))}
+                        </section>
+                    </div>
+
+                </div>
+                <div className="productDetailReviewSection">
+                    <h2>Product Reviews</h2>
+
+                    {productReview && productReview.length > 0 ? (
+                        productReview.map(reviews => (
+                            <ProductReviewCard key={reviews.id} reviews={reviews}/>
+                        ))
+                    ) : (
+                        <p>Currently no Reviews Available</p>
                     )}
-                </section>
-            </Container>
+                </div>
+
+
+                <div className="productDetailReviewSubmitSection">
+                    <h2>Submit a Reviews</h2>
+
+                    <ProductReviewSubmitForm productId={productId}/>
+
+                </div>
+
+
+            </div>
+            <Footer/>
 
         </>
 
