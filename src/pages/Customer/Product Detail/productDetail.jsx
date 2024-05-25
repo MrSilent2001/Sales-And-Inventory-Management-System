@@ -2,13 +2,11 @@ import {useNavigate, useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
-import {Container} from "@mui/material";
 import Gallery from "./Componets/Gallery";
 import "./productDetail.css"
 import MobileGallery from "./Componets/MobileGallery";
 import Description from "./Componets/Description";
 import MediaControlCard from "./Componets/relatedproductCard";
-import ProductReviewTabs from "./Componets/productReviewTabs";
 import ProductReviewCard from "./Componets/productReviewCard";
 import Footer from "../../../layout/footer/footer";
 import ProductReviewSubmitForm from "./Componets/productReviewSubmitForm";
