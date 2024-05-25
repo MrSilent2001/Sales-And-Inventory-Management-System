@@ -151,7 +151,7 @@ const SalesReceipt = ({ billData, onClose }) => {
     );
 
     return (
-        <ReceiptPopup bodyContent={receiptContent} onClose={onClose} onPrint={handleReprintReceipt} />
+        <></>
     );
 };
 

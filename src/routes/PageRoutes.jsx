@@ -52,6 +52,10 @@ export function PageRouting() {
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/signup" element={<Signup/>}/>
 
+                {/*Payment Gateway*/}
+                <Route path="/success" element={<Success/>}/>
+                <Route path="/cancel" element={<Cancel/>}/>
+
 {/*===================================================Protected Routes==============================================================*/}
                 <Route element={<ProtectedRoute />}>
 
@@ -67,10 +71,6 @@ export function PageRouting() {
                     <Route path="/product/:productId" element={<ProductDetail />} />
                     <Route path="/products" element={<ProductCatalog/>}/>
                     <Route path="/cart" element={<Cart/>}/>
-
-                    {/*Payment Gateway*/}
-                    <Route path="/success" element={<Success/>}/>
-                    <Route path="/cancel" element={<Cancel/>}/>
 
                     <Route path="/customerProfile" element={<CustomerProfile/>}/>
                     <Route path="/previousOrders" element={<CustomerOrderHistory/>}/>
