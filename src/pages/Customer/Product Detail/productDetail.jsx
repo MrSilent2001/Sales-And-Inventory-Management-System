@@ -126,9 +126,10 @@ function ProductDetail(){
         const storedCart = JSON.parse(localStorage.getItem("cart"));
         if (storedCart) {
             setCart(storedCart);
+        } else {
+            setCart([]); // Set to an empty array if no cart is found in local storage
         }
     }, []);
-
 
 
     return(

@@ -35,7 +35,7 @@ function CustomerNavbar(){
                 console.error("Error parsing cart data from localStorage:", error);
             }
         }
-    }, []);
+    }, [storedCart]);
 
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {

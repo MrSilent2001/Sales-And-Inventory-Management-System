@@ -40,7 +40,8 @@ const Success = () => {
     });
 
     const handleRedirect = ()=>{
-        localStorage.setItem("cart", []);
+        localStorage.setItem("cart", JSON.stringify([]));
+
         setNavigate(true);
     }
 
