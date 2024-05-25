@@ -1,21 +1,22 @@
 import React, {useState} from "react";
 import {Navigate} from "react-router-dom";
+import CustomizedButton from "../../../components/Button/button";
+
 
 const Cancel = () => {
     const [navigate, setNavigate] = useState(false);
-    const handleRedirect = ()=>{
-        localStorage.setItem("cart", []);
+    const handleRedirect = () => {
         setNavigate(true);
     }
 
-    if(navigate){
+    if (navigate) {
         return <Navigate to="/cart"/>
     }
     return (
         <div>
             <h1>Cancel</h1>
             <h2>Your payment was canceled.</h2>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                 <CustomizedButton
                     hoverBackgroundColor="#0aaf0b"
                     style={{
@@ -39,5 +40,5 @@ const Cancel = () => {
         </div>
     );
 
-
+}
 export default Cancel;
