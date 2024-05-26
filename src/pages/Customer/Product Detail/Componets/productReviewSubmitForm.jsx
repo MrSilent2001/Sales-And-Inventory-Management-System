@@ -46,7 +46,7 @@ export default function ProductReviewSubmitForm({ productId, submitAlert ,submit
     };
 
     return (
-        <Paper elevation={3} sx={{width: 900, marginLeft: 2,marginTop: 4,marginBottom: 4 }}>
+        <Paper elevation={3} sx={{width: 900, marginLeft: 2, paddingRight: 4,marginTop: 4,marginBottom: 10 }}>
             <Box sx={{ padding: 5 }} component="form" onSubmit={handleSubmit}>
                 <Typography variant="h6" gutterBottom sx={{ paddingBottom: 5 }}>
                     Submit a Review

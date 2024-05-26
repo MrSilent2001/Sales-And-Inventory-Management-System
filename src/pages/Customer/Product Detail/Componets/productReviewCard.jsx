@@ -14,7 +14,7 @@ export default function ProductReviewCard({ reviews }) {
         <Card sx={{
             display: 'flex',
             flexDirection: 'column',
-            height: 190,
+            height: 200,
             width: 900,
             marginTop: 3,
             marginLeft: 2,
