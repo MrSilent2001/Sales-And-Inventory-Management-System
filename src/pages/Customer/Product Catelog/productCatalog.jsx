@@ -176,7 +176,7 @@ function ProductCatalog() {
                         </Link>
                     </div>
                 </div>
-                <div className="prodcutDetailRight">
+                <div className="productCatalogRight">
                     <div className="search-bar-container">
                         <SearchBar
                             onKeyPress={handleSearchKeyPress}
