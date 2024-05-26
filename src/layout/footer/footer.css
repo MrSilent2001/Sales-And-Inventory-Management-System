@@ -4,6 +4,7 @@
     width: 100%;
     height: 6.875em;
     background-color: #242F9B;
+    z-index: 5;
 }
 
 .logoName{
