@@ -210,7 +210,7 @@ function ProductDetail(){
                     </div>
 
                     <div className="productDetailReviewSection">
-                        
+
                         <h2>Product Reviews</h2>
 
                         {productReview && productReview.length > 0 ? (
