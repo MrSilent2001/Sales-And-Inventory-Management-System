@@ -28,7 +28,6 @@ export default function ProductReviewSubmitForm({ productId, submitAlert ,submit
         };
 
 
-
         try {
             console.log("formdata",reviewData);
             const response = await axios.post('http://localhost:9000/product/review/create', reviewData, {
@@ -38,14 +37,16 @@ export default function ProductReviewSubmitForm({ productId, submitAlert ,submit
             });
             console.log('Review submitted successfully:', response.data);
             submitAlert();
+
         } catch (error) {
             console.error('Error submitting review:', error);
             submitErrorAlert();
+
         }
     };
 
     return (
-        <Paper elevation={3} sx={{ marginRight: "36%", marginLeft: "4%" }}>
+        <Paper elevation={3} sx={{width: 900, marginLeft: 2, paddingRight: 4,marginTop: 4,marginBottom: 10 }}>
             <Box sx={{ padding: 5 }} component="form" onSubmit={handleSubmit}>
                 <Typography variant="h6" gutterBottom sx={{ paddingBottom: 5 }}>
                     Submit a Review

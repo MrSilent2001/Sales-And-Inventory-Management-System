@@ -16,6 +16,8 @@ function PendingOrders() {
     const [openReject, setOpenReject] = useState(false);
     //data fetching error Alert Variables
     const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
+    //data Update error Alert Variables
+    const [updateErrorOpenSuccess, setUpdateErrorOpenSuccess] = useState(false);
 
 
     const handleClickAccept = () => {
@@ -41,6 +43,15 @@ function PendingOrders() {
 
     const dataErrorHandleClickSuccess = () => {
         setDataErrorOpenSuccess(true);
+    };
+
+    //Handle Update Data Error Alert Variable
+    const updateErrorHandleCloseSuccess = () => {
+        setUpdateErrorOpenSuccess(false);
+    };
+
+    const updateErrorHandleClickSuccess = () => {
+        setUpdateErrorOpenSuccess(true);
     };
 
 
@@ -88,6 +99,7 @@ function PendingOrders() {
             }
         } catch (error) {
             console.error('Error updating order status:', error);
+            updateErrorHandleClickSuccess();
         }
     };
 
@@ -254,6 +266,13 @@ function PendingOrders() {
                 onClose={dataErrorHandleCloseSuccess}
                 severity="error"
                 message="Error Fetching Data!"
+            />
+
+            <CustomizedAlert
+                open={updateErrorOpenSuccess}
+                onClose={updateErrorHandleCloseSuccess}
+                severity="error"
+                message="Error Occurs!"
             />
 
             <Footer/>

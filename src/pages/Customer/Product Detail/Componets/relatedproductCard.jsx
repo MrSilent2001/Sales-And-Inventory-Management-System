@@ -12,16 +12,16 @@ export default function MediaControlCard({ item, handleBodyClick }) {
     const finalPrice = discountRate ? productSellingPrice * (1 - discountRate / 100) : productSellingPrice;
 
     return (
-        <Card sx={{ display: 'flex', flexDirection: 'column', height: 200, minHeight: 200 ,width: 600, marginTop: 4, marginLeft: 10, backgroundColor: 'whitesmoke' }} onClick={() => handleBodyClick(item)}>
+        <Card sx={{ display: 'flex', flexDirection: 'column', height: 120, minHeight: 120 ,width: 400, marginTop: 4, backgroundColor: 'whitesmoke' }} onClick={() => handleBodyClick(item)}>
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                 <CardMedia
                     component="img"
-                    sx={{ width: 160, height: 160, marginLeft: 4, marginTop: 2 }}
+                    sx={{ width: 80, height: 80, marginLeft: 2, marginTop: 2 }}
                     image={productImage[0]}
                 />
-                <CardContent sx={{ flex: '1 0 auto', marginLeft: 10 }}>
+                <CardContent sx={{ flex: '1 0 auto', marginLeft: 4 }}>
                     <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
-                        Item Name : {productName}
+                        {productName}
                     </Typography>
                     {discountRate ? (
                         <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
@@ -29,7 +29,7 @@ export default function MediaControlCard({ item, handleBodyClick }) {
                         </Typography>
                     ) : (
                         <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
-                            Price : Rs.{finalPrice.toFixed(2)}
+                            Rs.{finalPrice.toFixed(2)}
                         </Typography>
                     )}
                 </CardContent>
