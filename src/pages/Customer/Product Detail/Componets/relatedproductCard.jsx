@@ -12,7 +12,7 @@ export default function MediaControlCard({ item, handleBodyClick }) {
     const finalPrice = discountRate ? productSellingPrice * (1 - discountRate / 100) : productSellingPrice;
 
     return (
-        <Card sx={{ display: 'flex', flexDirection: 'column', height: 230, width: 600, marginTop: 4, marginLeft: 10, backgroundColor: 'whitesmoke' }} onClick={() => handleBodyClick(item)}>
+        <Card sx={{ display: 'flex', flexDirection: 'column', height: 200, minHeight: 200 ,width: 600, marginTop: 4, marginLeft: 10, backgroundColor: 'whitesmoke' }} onClick={() => handleBodyClick(item)}>
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                 <CardMedia
                     component="img"
