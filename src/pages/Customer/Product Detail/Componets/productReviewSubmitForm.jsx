@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import Rating from "@mui/material/Rating";
 import axios from 'axios';
 
-export default function ProductReviewSubmitForm({ productId, submitAlert }) {
+export default function ProductReviewSubmitForm({ productId, submitAlert ,submitErrorAlert }) {
     const [value, setValue] = useState(2);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -40,6 +40,7 @@ export default function ProductReviewSubmitForm({ productId, submitAlert }) {
             submitAlert();
         } catch (error) {
             console.error('Error submitting review:', error);
+            submitErrorAlert();
         }
     };
 

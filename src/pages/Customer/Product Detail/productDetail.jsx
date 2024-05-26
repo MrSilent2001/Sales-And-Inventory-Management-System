@@ -31,6 +31,9 @@ function ProductDetail(){
     //add to Review Submit Variables
     const [reviewSubmitOpenSuccess, setReviewSubmitOpenSuccess] = useState(false);
 
+    //add to Review Submit Error Variables
+    const [reviewSubmitErrorOpenSuccess, setReviewSubmitErrorOpenSuccess] = useState(false);
+
     //data fetching error Alert Variables
     const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
 
@@ -93,6 +96,15 @@ function ProductDetail(){
 
     const reviewSubmitHandleClickSuccess = () => {
         setReviewSubmitOpenSuccess(true);
+    };
+
+    //Handle Review Submit Error Alert Variable
+    const reviewSubmitErrorHandleCloseSuccess = () => {
+        setReviewSubmitErrorOpenSuccess(false);
+    };
+
+    const reviewSubmitHandleErrorClickSuccess = () => {
+        setReviewSubmitErrorOpenSuccess(true);
     };
 
     //Handle Data Error Alert Variable
@@ -238,7 +250,7 @@ function ProductDetail(){
                     <div className="productDetailReviewSubmitSection">
                         <h2>Submit a Reviews</h2>
 
-                        <ProductReviewSubmitForm productId={productId} submitAlert={reviewSubmitHandleClickSuccess}/>
+                        <ProductReviewSubmitForm productId={productId} submitAlert={reviewSubmitHandleClickSuccess} submitErrorAlert={reviewSubmitHandleErrorClickSuccess}/>
 
                     </div>
 
@@ -256,6 +268,13 @@ function ProductDetail(){
                     onClose={reviewSubmitHandleCloseSuccess}
                     severity="success"
                     message="Review Submitted Succesfully!"
+                />
+
+                <CustomizedAlert
+                    open={reviewSubmitErrorOpenSuccess}
+                    onClose={reviewSubmitErrorHandleCloseSuccess}
+                    severity="error"
+                    message="Error Occured!"
                 />
 
                 <CustomizedAlert
