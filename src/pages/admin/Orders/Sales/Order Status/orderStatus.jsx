@@ -32,6 +32,9 @@ function OrderStatus() {
     const [activeButton, setActiveButton] = useState(null);
 
     const [openSuccess, setOpenSuccess] = useState(false);
+    //data fetching error Alert Variables
+    const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
+
 
     const handleClickSuccess = () => {
         setOpenSuccess(true);
@@ -40,6 +43,16 @@ function OrderStatus() {
     const handleCloseSuccess = () => {
         setOpenSuccess(false);
     };
+
+    //Handle Data Error Alert Variable
+    const dataErrorHandleCloseSuccess = () => {
+        setDataErrorOpenSuccess(false);
+    };
+
+    const dataErrorHandleClickSuccess = () => {
+        setDataErrorOpenSuccess(true);
+    };
+
 
     const handleButtonClick = (buttonText) => {
         setActiveButton(buttonText);
@@ -59,7 +72,8 @@ function OrderStatus() {
                 setOrderStatusRows(response.data);
 
             } catch (error) {
-                console.error('Error fetching users:', error);
+                console.error('Error fetching orders:', error);
+                dataErrorHandleClickSuccess();
             }
         };
 
@@ -142,6 +156,13 @@ function OrderStatus() {
                 onClose={handleCloseSuccess}
                 severity="success"
                 message="Order Status Updated!"
+            />
+
+            <CustomizedAlert
+                open={dataErrorOpenSuccess}
+                onClose={dataErrorHandleCloseSuccess}
+                severity="error"
+                message="Error Fetching Data!"
             />
             <Footer/>
         </>

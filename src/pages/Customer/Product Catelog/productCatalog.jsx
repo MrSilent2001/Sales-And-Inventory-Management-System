@@ -16,6 +16,9 @@ function ProductCatalog() {
     //add to cart Alert Variables
     const [addToCartOpenSuccess, setAddToCartOpenSuccess] = useState(false);
 
+    //data fetching error Alert Variables
+    const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
+
     const [cart, setCart] = useState([]);
     const [checkedItems, setCheckedItems] = useState({
         "Building Material": false,
@@ -65,6 +68,7 @@ function ProductCatalog() {
                 setProductsWithOffers(mergedProducts);
             } catch (error) {
                 console.error('Error fetching products with offers:', error);
+                dataErrorHandleClickSuccess();
             }
         };
 
@@ -153,6 +157,15 @@ function ProductCatalog() {
         setAddToCartOpenSuccess(true);
     };
 
+    //Handle Data Error Alert Variable
+    const dataErrorHandleCloseSuccess = () => {
+        setDataErrorOpenSuccess(false);
+    };
+
+    const dataErrorHandleClickSuccess = () => {
+        setDataErrorOpenSuccess(true);
+    };
+
     return (
         <>
             <div className="productCatalogBody">
@@ -221,6 +234,15 @@ function ProductCatalog() {
                     severity="success"
                     message="Item added to the cart!"
                 />
+
+                <CustomizedAlert
+                    open={dataErrorOpenSuccess}
+                    onClose={dataErrorHandleCloseSuccess}
+                    severity="error"
+                    message="Error Fetching Data!"
+                />
+
+
                 <Footer />
             </div>
         </>

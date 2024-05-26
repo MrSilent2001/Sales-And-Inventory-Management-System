@@ -14,6 +14,8 @@ function CancelOrder() {
     const [activeButton, setActiveButton] = useState(null);
 
     const [openSuccess, setOpenSuccess] = useState(false);
+    //data fetching error Alert Variables
+    const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
 
     const handleClickSuccess = () => {
         setOpenSuccess(true);
@@ -22,6 +24,16 @@ function CancelOrder() {
     const handleCloseSuccess = () => {
         setOpenSuccess(false);
     };
+
+    //Handle Data Error Alert Variable
+    const dataErrorHandleCloseSuccess = () => {
+        setDataErrorOpenSuccess(false);
+    };
+
+    const dataErrorHandleClickSuccess = () => {
+        setDataErrorOpenSuccess(true);
+    };
+
 
     const handleButtonClick = (buttonText) => {
         setActiveButton(buttonText);
@@ -49,6 +61,7 @@ function CancelOrder() {
             setOrderCancelReason(response.data.orderCancelReason);
         } catch (error) {
             console.error('Error fetching order:', error);
+            dataErrorHandleClickSuccess();
         }
     };
 
@@ -229,7 +242,14 @@ function CancelOrder() {
                 severity="success"
                 message="Order Cancelled Sucessfully!"
             />
-            <Footer/>
+
+            <CustomizedAlert
+                open={dataErrorOpenSuccess}
+                onClose={dataErrorHandleCloseSuccess}
+                severity="error"
+                message="Error Fetching Data!"
+            />
+
             <Footer/>
         </>
     );

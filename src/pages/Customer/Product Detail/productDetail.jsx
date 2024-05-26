@@ -31,6 +31,8 @@ function ProductDetail(){
     //add to Review Submit Variables
     const [reviewSubmitOpenSuccess, setReviewSubmitOpenSuccess] = useState(false);
 
+    //data fetching error Alert Variables
+    const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
 
     //handle add to cart increments, decrements and reset
     const addQuant = () => {
@@ -93,6 +95,15 @@ function ProductDetail(){
         setReviewSubmitOpenSuccess(true);
     };
 
+    //Handle Data Error Alert Variable
+    const dataErrorHandleCloseSuccess = () => {
+        setDataErrorOpenSuccess(false);
+    };
+
+    const dataErrorHandleClickSuccess = () => {
+        setDataErrorOpenSuccess(true);
+    };
+
     useEffect(() => {
         const fetchProductsWithOffers = async () => {
             try {
@@ -146,6 +157,7 @@ function ProductDetail(){
 
             } catch (error) {
                 console.error('Error fetching products with offers:', error);
+                dataErrorHandleClickSuccess();
             }
         };
 
@@ -245,6 +257,14 @@ function ProductDetail(){
                     severity="success"
                     message="Review Submitted Succesfully!"
                 />
+
+                <CustomizedAlert
+                    open={dataErrorOpenSuccess}
+                    onClose={dataErrorHandleCloseSuccess}
+                    severity="error"
+                    message="Error Fetching Data!"
+                />
+
                 <Footer/>
             </div>
 
