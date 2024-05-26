@@ -11,6 +11,7 @@ import SearchBar from "../../../components/search bar/search bar";
 
 function ProductCatalog() {
     const navigate = useNavigate();
+
     const [cart, setCart] = useState([]);
     const [checkedItems, setCheckedItems] = useState({
         "Building Material": false,
@@ -22,28 +23,24 @@ function ProductCatalog() {
         "Landscaping Products": false,
         "Construction Chemicals": false
     });
-
     const [searchQuery, setSearchQuery] = useState('');
     const [products, setProducts] = useState([]);
     const [offers, setOffers] = useState([]);
     const token = localStorage.getItem('accessToken');
     const [productsWithOffers, setProductsWithOffers] = useState([]);
 
+    // Fetch products and offers from the server and merge them
     useEffect(() => {
         const fetchProductsWithOffers = async () => {
             try {
                 const responseProducts = await axios.get('http://localhost:9000/product/getAllProducts', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
+                    headers: { Authorization: `Bearer ${token}` },
                 });
 
                 setProducts(responseProducts.data);
 
                 const responseOffers = await axios.get('http://localhost:9000/discounts/getAll', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
+                    headers: { Authorization: `Bearer ${token}` },
                 });
 
                 setOffers(responseOffers.data);
@@ -52,12 +49,13 @@ function ProductCatalog() {
 
                 // Merge products with offers
                 const mergedProducts = responseProducts.data.map(product => {
-                    const offer = responseOffers.data.find(offer => parseInt(offer.productId) === product.id && offer.startDate <= today && offer.endDate >= today);
+                    const offer = responseOffers.data.find(offer =>
+                        parseInt(offer.productId) === product.id &&
+                        offer.startDate <= today &&
+                        offer.endDate >= today
+                    );
                     const discountRate = offer ? offer.discountRate : null;
-                    return {
-                        ...product,
-                        discountRate: discountRate // Assign discountRate if found, otherwise null
-                    };
+                    return { ...product, discountRate };
                 });
 
                 setProductsWithOffers(mergedProducts);
@@ -69,6 +67,7 @@ function ProductCatalog() {
         fetchProductsWithOffers();
     }, [token]);
 
+    // Load cart data from local storage
     useEffect(() => {
         const storedCart = localStorage.getItem("cart");
         if (storedCart) {
@@ -85,6 +84,7 @@ function ProductCatalog() {
         }
     }, []);
 
+    // Handle adding items to the cart
     const handleAddToCart = (item) => {
         const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
 
@@ -94,11 +94,13 @@ function ProductCatalog() {
             setCart(updatedCart);
             localStorage.setItem("cart", JSON.stringify(updatedCart));
         } else {
-            setCart([...cart, { ...item, amount: 1 }]);
-            localStorage.setItem("cart", JSON.stringify([...cart, { ...item, amount: 1 }]));
+            const newCart = [...cart, { ...item, amount: 1 }];
+            setCart(newCart);
+            localStorage.setItem("cart", JSON.stringify(newCart));
         }
     };
 
+    // Navigate to product detail page
     const handleBodyClick = (item) => {
         navigate(`/product/${item.id}`);
     };
@@ -107,6 +109,7 @@ function ProductCatalog() {
         navigate(`/product/${item.id}`);
     };
 
+    // Handle checkbox state changes
     const handleCheckboxChange = (event, name) => {
         const isChecked = event.target.checked;
         setCheckedItems(prevState => ({
@@ -115,6 +118,7 @@ function ProductCatalog() {
         }));
     };
 
+    // Handle search query input changes
     const handleSearchKeyPress = (query) => {
         setSearchQuery(query);
     };
@@ -123,10 +127,11 @@ function ProductCatalog() {
         setSearchQuery(query);
     };
 
+    // Filter products based on category and search query
     const filteredProducts = productsWithOffers.filter(product => {
-        const matchesCategory = Object.entries(checkedItems).every(([category, checked]) => {
-            return !checked || product.productCategory.includes(category);
-        });
+        const matchesCategory = Object.entries(checkedItems).every(([category, checked]) =>
+            !checked || product.productCategory.includes(category)
+        );
 
         const matchesSearchQuery = product.productName.toLowerCase().includes(searchQuery.toLowerCase());
 
@@ -164,7 +169,8 @@ function ProductCatalog() {
                                     margin: 'auto',
                                     textTransform: 'none',
                                     textAlign: 'center',
-                                }}>
+                                }}
+                            >
                                 Go to Cart
                             </CustomizedButton>
                         </Link>
