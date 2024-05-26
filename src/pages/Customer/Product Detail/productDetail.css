@@ -58,6 +58,12 @@ ul {
     margin: 0;
 }
 
+.productDetailBody{
+    max-height: 100vh;
+    max-width: 100vw;
+    overflow-y: clip;
+}
+
 .relatedProducts {
     display: flex;
     flex-direction: column;
@@ -80,9 +86,10 @@ ul {
     max-width: 100vw !important;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-content: center;
     align-items: center;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .productDetailIntter {

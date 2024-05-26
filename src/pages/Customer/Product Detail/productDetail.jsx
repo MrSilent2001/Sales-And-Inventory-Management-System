@@ -134,67 +134,69 @@ function ProductDetail(){
 
     return(
         <>
-            <CustomerNavbar />
-            <div className="productDetailsection">
-                <div className="productDetailIntter">
-                    <section className="productDetailCore">
-                        {product && product.productImage && (
-                            <Gallery images={product.productImage} thumbnails={product.productImage}/>
-                        )}
+            <div className="productDetailBody">
+                <CustomerNavbar />
+                <div className="productDetailsection">
+                    <div className="productDetailIntter">
+                        <section className="productDetailCore">
+                            {product && product.productImage && (
+                                <Gallery images={product.productImage} thumbnails={product.productImage}/>
+                            )}
 
-                        {product && product.productImage && (
-                            <MobileGallery images={product.productImage}/>
-                        )}
+                            {product && product.productImage && (
+                                <MobileGallery images={product.productImage}/>
+                            )}
 
-                        {product && product.productQuantity && (
-                            <Description
-                                onQuant={quant}
-                                onAdd={addQuant}
-                                onRemove={removeQuant}
-                                onAddToCart={handleAddToCart}
-                                quantity={product.productQuantity}
-                                price={product.productSellingPrice}
-                                description={product.productDescription}
-                                title={product.productName}
-                                category={product.productCategory}
-                                offer={product.discountRate}
-                            />
-                        )}
-                    </section>
-
-                    <div className="relatedProducts">
-                        <h2> Related Products</h2>
-                        <section className="realatedProductDetailCore">
-                            {relatedProducts && relatedProducts.map(item => (
-                                <MediaControlCard key={item.id} item={item} handleBodyClick={handleBodyClick}/>
-                            ))}
+                            {product && product.productQuantity && (
+                                <Description
+                                    onQuant={quant}
+                                    onAdd={addQuant}
+                                    onRemove={removeQuant}
+                                    onAddToCart={handleAddToCart}
+                                    quantity={product.productQuantity}
+                                    price={product.productSellingPrice}
+                                    description={product.productDescription}
+                                    title={product.productName}
+                                    category={product.productCategory}
+                                    offer={product.discountRate}
+                                />
+                            )}
                         </section>
+
+                        <div className="relatedProducts">
+                            <h2> Related Products</h2>
+                            <section className="realatedProductDetailCore">
+                                {relatedProducts && relatedProducts.map(item => (
+                                    <MediaControlCard key={item.id} item={item} handleBodyClick={handleBodyClick}/>
+                                ))}
+                            </section>
+                        </div>
+
+                    </div>
+                    <div className="productDetailReviewSection">
+                        <h2>Product Reviews</h2>
+
+                        {productReview && productReview.length > 0 ? (
+                            productReview.map(reviews => (
+                                <ProductReviewCard key={reviews.id} reviews={reviews}/>
+                            ))
+                        ) : (
+                            <p>Currently no Reviews Available</p>
+                        )}
                     </div>
 
-                </div>
-                <div className="productDetailReviewSection">
-                    <h2>Product Reviews</h2>
 
-                    {productReview && productReview.length > 0 ? (
-                        productReview.map(reviews => (
-                            <ProductReviewCard key={reviews.id} reviews={reviews}/>
-                        ))
-                    ) : (
-                        <p>Currently no Reviews Available</p>
-                    )}
-                </div>
+                    <div className="productDetailReviewSubmitSection">
+                        <h2>Submit a Reviews</h2>
 
+                        <ProductReviewSubmitForm productId={productId}/>
 
-                <div className="productDetailReviewSubmitSection">
-                    <h2>Submit a Reviews</h2>
+                    </div>
 
-                    <ProductReviewSubmitForm productId={productId}/>
 
                 </div>
-
-
+                <Footer/>
             </div>
-            <Footer/>
 
         </>
 

@@ -140,65 +140,67 @@ function ProductCatalog() {
 
     return (
         <>
-            <CustomerNavbar />
-            <div className="Catalogouter">
-                <div className="sidebar">
-                    {Object.keys(checkedItems).map((name) => (
-                        <div className="content" key={name}>
-                            <Checkboxes
-                                checked={checkedItems[name]}
-                                onChange={(event) => handleCheckboxChange(event, name)}
-                            />
-                            <label>{name}</label>
-                        </div>
-                    ))}
-                    <div className="content-cart-button">
-                        <Link to="/cart">
-                            <CustomizedButton
-                                hoverBackgroundColor="#2ec931"
-                                style={{
-                                    color: '#ffffff',
-                                    backgroundColor: '#1d8a1f',
-                                    width: '7.5em',
-                                    height: '2.5em',
-                                    fontSize: '0.95em',
-                                    fontFamily: 'inter',
-                                    padding: '0.5em 0.625em',
-                                    borderRadius: '0.35em',
-                                    fontWeight: '550',
-                                    margin: 'auto',
-                                    textTransform: 'none',
-                                    textAlign: 'center',
-                                }}
-                            >
-                                Go to Cart
-                            </CustomizedButton>
-                        </Link>
-                    </div>
-                </div>
-                <div className="productCatalogRight">
-                    <div className="search-bar-container">
-                        <SearchBar
-                            onKeyPress={handleSearchKeyPress}
-                            onChange={handleSearchChange}
-                            width={'20.5em'}
-                        />
-                    </div>
-                    <div className="customerItemGrid">
-                        {filteredProducts.map((item) => (
-                            <div className="card" key={item.id}>
-                                <MultiActionAreaCard
-                                    item={item}
-                                    handleClick={handleAddToCart}
-                                    handleBodyClick={handleBodyClick}
-                                    handleImageClick={handleImageClick}
+            <div className="productCatalogBody">
+                <CustomerNavbar />
+                <div className="Catalogouter">
+                    <div className="sidebar">
+                        {Object.keys(checkedItems).map((name) => (
+                            <div className="content" key={name}>
+                                <Checkboxes
+                                    checked={checkedItems[name]}
+                                    onChange={(event) => handleCheckboxChange(event, name)}
                                 />
+                                <label>{name}</label>
                             </div>
                         ))}
+                        <div className="content-cart-button">
+                            <Link to="/cart">
+                                <CustomizedButton
+                                    hoverBackgroundColor="#2ec931"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#1d8a1f',
+                                        width: '7.5em',
+                                        height: '2.5em',
+                                        fontSize: '0.95em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        fontWeight: '550',
+                                        margin: 'auto',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                    }}
+                                >
+                                    Go to Cart
+                                </CustomizedButton>
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="productCatalogRight">
+                        <div className="search-bar-container">
+                            <SearchBar
+                                onKeyPress={handleSearchKeyPress}
+                                onChange={handleSearchChange}
+                                width={'20.5em'}
+                            />
+                        </div>
+                        <div className="customerItemGrid">
+                            {filteredProducts.map((item) => (
+                                <div className="card" key={item.id}>
+                                    <MultiActionAreaCard
+                                        item={item}
+                                        handleClick={handleAddToCart}
+                                        handleBodyClick={handleBodyClick}
+                                        handleImageClick={handleImageClick}
+                                    />
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
+                <Footer />
             </div>
-            <Footer />
         </>
     );
 }

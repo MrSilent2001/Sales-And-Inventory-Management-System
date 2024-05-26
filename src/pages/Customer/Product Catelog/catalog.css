@@ -1,3 +1,9 @@
+.productCatalogBody{
+    overflow-y: clip;
+    max-height: 100vh;
+}
+
+
 .Catalogouter{
     display: grid;
     grid-template-columns: 10em 1fr;
