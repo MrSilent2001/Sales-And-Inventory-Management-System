@@ -10,6 +10,7 @@ import MediaControlCard from "./Componets/relatedproductCard";
 import ProductReviewCard from "./Componets/productReviewCard";
 import Footer from "../../../layout/footer/footer";
 import ProductReviewSubmitForm from "./Componets/productReviewSubmitForm";
+import CustomizedAlert from "../../../components/Alert/alert";
 
 
 function ProductDetail(){
@@ -23,6 +24,12 @@ function ProductDetail(){
     const [quant, setQuant] = useState(0);
     const [orderedQuant, setOrderedQuant] = useState(0);
     const [cart, setCart] = useState([]);
+
+    //add to cart Alert Variables
+    const [addToCartOpenSuccess, setAddToCartOpenSuccess] = useState(false);
+
+    //add to Review Submit Variables
+    const [reviewSubmitOpenSuccess, setReviewSubmitOpenSuccess] = useState(false);
 
     const addQuant = () => {
         setQuant(quant + 1);
@@ -47,11 +54,13 @@ function ProductDetail(){
             setCart(updatedCart);
             localStorage.setItem("cart", JSON.stringify(updatedCart));
             resetQuant;
+            addToCartHandleClickSuccess();
         }
         // If item is not in cart, add it with quantity 1
         else {
             setCart([...cart, { ...product, amount: count }]);
             localStorage.setItem("cart", JSON.stringify([...cart, { ...product, amount: count }]));
+            addToCartHandleClickSuccess();
         }
     };
 
@@ -61,6 +70,24 @@ function ProductDetail(){
 
     const handleImageClick = (item) => {
         navigate(`/product/${item.id}`);
+    };
+
+    //Handle add to cart Alert Variable
+    const addToCartHandleCloseSuccess = () => {
+        setAddToCartOpenSuccess(false);
+    };
+
+    const addToCartHandleClickSuccess = () => {
+        setAddToCartOpenSuccess(true);
+    };
+
+    //Handle Review Submit Alert Variable
+    const reviewSubmitHandleCloseSuccess = () => {
+        setReviewSubmitOpenSuccess(false);
+    };
+
+    const reviewSubmitHandleClickSuccess = () => {
+        setReviewSubmitOpenSuccess(true);
     };
 
     useEffect(() => {
@@ -189,12 +216,25 @@ function ProductDetail(){
                     <div className="productDetailReviewSubmitSection">
                         <h2>Submit a Reviews</h2>
 
-                        <ProductReviewSubmitForm productId={productId}/>
+                        <ProductReviewSubmitForm productId={productId} submitAlert={reviewSubmitHandleClickSuccess}/>
 
                     </div>
 
 
                 </div>
+                <CustomizedAlert
+                    open={addToCartOpenSuccess}
+                    onClose={addToCartHandleCloseSuccess}
+                    severity="success"
+                    message="Item added to the cart!"
+                />
+
+                <CustomizedAlert
+                    open={reviewSubmitOpenSuccess}
+                    onClose={reviewSubmitHandleCloseSuccess}
+                    severity="success"
+                    message="Review Submitted Succesfully!"
+                />
                 <Footer/>
             </div>
 
