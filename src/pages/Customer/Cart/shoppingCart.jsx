@@ -8,6 +8,7 @@ import React, {useEffect, useState} from 'react';
 import CustomizedButton from "../../../components/Button/button";
 import axios from "axios";
 import {useAuth} from "../../../context/AuthContext";
+import CustomizedAlert from "../../../components/Alert/alert";
 
 const getStripe = () => {
     let stripePromise = '';
@@ -23,6 +24,9 @@ function Cart() {
     const [cart, setCart] = useState([]);
     const [totalAmount, setTotalAmount] = useState(0);
     const [isLoading, setLoading] = useState(false);
+
+    //add to cart Alert Variables
+    const [removeFromCartOpenSuccess, setRemoveFromCartOpenSuccess] = useState(false);
 
     const token = localStorage.getItem('accessToken');
 
@@ -67,6 +71,7 @@ function Cart() {
         }).filter(Boolean);
         setCart(updatedCart);
         localStorage.setItem("cart", JSON.stringify(updatedCart));
+        removeFromCartHandleClickSuccess();
     }
 
     const redirectToCheckout = async () => {
@@ -120,6 +125,15 @@ function Cart() {
         }
     }
 
+    //Handle add to cart Alert Variable
+    const removeFromCartHandleCloseSuccess = () => {
+        setRemoveFromCartOpenSuccess(false);
+    };
+
+    const removeFromCartHandleClickSuccess = () => {
+        setRemoveFromCartOpenSuccess(true);
+    };
+
     return (
         <>
             <CustomerNavbar/>
@@ -158,6 +172,15 @@ function Cart() {
                     </div>
                 </div>
             </div>
+
+            <CustomizedAlert
+                open={removeFromCartOpenSuccess}
+                onClose={removeFromCartHandleCloseSuccess}
+                severity="error"
+                message="Item revomed from Cart!"
+            />
+
+
             <Footer/>
         </>
     );
