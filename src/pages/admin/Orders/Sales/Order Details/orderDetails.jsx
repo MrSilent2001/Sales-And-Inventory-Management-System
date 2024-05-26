@@ -285,7 +285,6 @@ function OrderDetails() {
             />
 
             <Footer/>
-            <Footer/>
         </>
     );
 }
