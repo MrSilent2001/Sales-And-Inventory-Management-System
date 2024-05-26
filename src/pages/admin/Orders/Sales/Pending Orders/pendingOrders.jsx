@@ -14,6 +14,9 @@ function PendingOrders() {
 
     const [openAccept, setOpenAccept] = useState(false);
     const [openReject, setOpenReject] = useState(false);
+    //data fetching error Alert Variables
+    const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
+
 
     const handleClickAccept = () => {
         setOpenAccept(true);
@@ -31,6 +34,16 @@ function PendingOrders() {
         setOpenReject(false);
     };
 
+    //Handle Data Error Alert Variable
+    const dataErrorHandleCloseSuccess = () => {
+        setDataErrorOpenSuccess(false);
+    };
+
+    const dataErrorHandleClickSuccess = () => {
+        setDataErrorOpenSuccess(true);
+    };
+
+
     const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
@@ -44,7 +57,8 @@ function PendingOrders() {
                 setRows(response.data);
                 console.log(rows);
             } catch (error) {
-                console.error('Error fetching users:', error);
+                console.error('Error fetching orders:', error);
+                dataErrorHandleClickSuccess();
             }
         };
 
@@ -233,6 +247,13 @@ function PendingOrders() {
                 onClose={handleCloseReject}
                 severity="error"
                 message="Order Rejected!"
+            />
+
+            <CustomizedAlert
+                open={dataErrorOpenSuccess}
+                onClose={dataErrorHandleCloseSuccess}
+                severity="error"
+                message="Error Fetching Data!"
             />
 
             <Footer/>

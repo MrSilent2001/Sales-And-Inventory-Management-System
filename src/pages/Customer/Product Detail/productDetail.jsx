@@ -10,6 +10,7 @@ import MediaControlCard from "./Componets/relatedproductCard";
 import ProductReviewCard from "./Componets/productReviewCard";
 import Footer from "../../../layout/footer/footer";
 import ProductReviewSubmitForm from "./Componets/productReviewSubmitForm";
+import CustomizedAlert from "../../../components/Alert/alert";
 
 
 function ProductDetail(){
@@ -24,6 +25,19 @@ function ProductDetail(){
     const [orderedQuant, setOrderedQuant] = useState(0);
     const [cart, setCart] = useState([]);
 
+    //add to cart Alert Variables
+    const [addToCartOpenSuccess, setAddToCartOpenSuccess] = useState(false);
+
+    //add to Review Submit Variables
+    const [reviewSubmitOpenSuccess, setReviewSubmitOpenSuccess] = useState(false);
+
+    //add to Review Submit Error Variables
+    const [reviewSubmitErrorOpenSuccess, setReviewSubmitErrorOpenSuccess] = useState(false);
+
+    //data fetching error Alert Variables
+    const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
+
+    //handle add to cart increments, decrements and reset
     const addQuant = () => {
         setQuant(quant + 1);
     };
@@ -47,20 +61,59 @@ function ProductDetail(){
             setCart(updatedCart);
             localStorage.setItem("cart", JSON.stringify(updatedCart));
             resetQuant;
+            addToCartHandleClickSuccess();
         }
         // If item is not in cart, add it with quantity 1
         else {
             setCart([...cart, { ...product, amount: count }]);
             localStorage.setItem("cart", JSON.stringify([...cart, { ...product, amount: count }]));
+            addToCartHandleClickSuccess();
         }
     };
 
+    //related product cart handle clicks
     const handleBodyClick = (item) => {
         navigate(`/product/${item.id}`);
     };
 
     const handleImageClick = (item) => {
         navigate(`/product/${item.id}`);
+    };
+
+    //Handle add to cart Alert Variable
+    const addToCartHandleCloseSuccess = () => {
+        setAddToCartOpenSuccess(false);
+    };
+
+    const addToCartHandleClickSuccess = () => {
+        setAddToCartOpenSuccess(true);
+    };
+
+    //Handle Review Submit Alert Variable
+    const reviewSubmitHandleCloseSuccess = () => {
+        setReviewSubmitOpenSuccess(false);
+    };
+
+    const reviewSubmitHandleClickSuccess = () => {
+        setReviewSubmitOpenSuccess(true);
+    };
+
+    //Handle Review Submit Error Alert Variable
+    const reviewSubmitErrorHandleCloseSuccess = () => {
+        setReviewSubmitErrorOpenSuccess(false);
+    };
+
+    const reviewSubmitHandleErrorClickSuccess = () => {
+        setReviewSubmitErrorOpenSuccess(true);
+    };
+
+    //Handle Data Error Alert Variable
+    const dataErrorHandleCloseSuccess = () => {
+        setDataErrorOpenSuccess(false);
+    };
+
+    const dataErrorHandleClickSuccess = () => {
+        setDataErrorOpenSuccess(true);
     };
 
     useEffect(() => {
@@ -116,6 +169,7 @@ function ProductDetail(){
 
             } catch (error) {
                 console.error('Error fetching products with offers:', error);
+                dataErrorHandleClickSuccess();
             }
         };
 
@@ -134,67 +188,104 @@ function ProductDetail(){
 
     return(
         <>
-            <CustomerNavbar />
-            <div className="productDetailsection">
-                <div className="productDetailIntter">
-                    <section className="productDetailCore">
-                        {product && product.productImage && (
-                            <Gallery images={product.productImage} thumbnails={product.productImage}/>
-                        )}
+            <div className="productDetailBody">
+                <CustomerNavbar />
+                <div className="productDetailsection">
+                    <div className="productDetailIntter">
+                        <section className="productDetailCore">
 
-                        {product && product.productImage && (
-                            <MobileGallery images={product.productImage}/>
-                        )}
+                            {product && product.productImage && (
+                                <Gallery images={product.productImage} thumbnails={product.productImage}/>
+                            )}
 
-                        {product && product.productQuantity && (
-                            <Description
-                                onQuant={quant}
-                                onAdd={addQuant}
-                                onRemove={removeQuant}
-                                onAddToCart={handleAddToCart}
-                                quantity={product.productQuantity}
-                                price={product.productSellingPrice}
-                                description={product.productDescription}
-                                title={product.productName}
-                                category={product.productCategory}
-                                offer={product.discountRate}
-                            />
-                        )}
-                    </section>
+                            {product && product.productImage && (
+                                <MobileGallery images={product.productImage}/>
+                            )}
 
-                    <div className="relatedProducts">
-                        <h2> Related Products</h2>
-                        <section className="realatedProductDetailCore">
-                            {relatedProducts && relatedProducts.map(item => (
-                                <MediaControlCard key={item.id} item={item} handleBodyClick={handleBodyClick}/>
-                            ))}
+                            {product && product.productQuantity && (
+                                <Description
+                                    onQuant={quant}
+                                    onAdd={addQuant}
+                                    onRemove={removeQuant}
+                                    onAddToCart={handleAddToCart}
+                                    quantity={product.productQuantity}
+                                    price={product.productSellingPrice}
+                                    description={product.productDescription}
+                                    title={product.productName}
+                                    category={product.productCategory}
+                                    offer={product.discountRate}
+                                />
+                            )}
                         </section>
+
+                        <div className="relatedProducts">
+
+                            <h2> Related Products</h2>
+
+                            <section className="realatedProductDetailCore">
+
+                                {relatedProducts && relatedProducts.map(item => (
+                                    <MediaControlCard key={item.id} item={item} handleBodyClick={handleBodyClick}/>
+                                ))}
+
+                            </section>
+                        </div>
+
                     </div>
 
+                    <div className="productDetailReviewSection">
+
+                        <h2>Product Reviews</h2>
+
+                        {productReview && productReview.length > 0 ? (
+                            productReview.map(reviews => (
+                                <ProductReviewCard key={reviews.id} reviews={reviews}/>
+                            ))
+                        ) : (
+                            <p>Currently no Reviews Available</p>
+                        )}
+                    </div>
+
+
+                    <div className="productDetailReviewSubmitSection">
+                        <h2>Submit a Reviews</h2>
+
+                        <ProductReviewSubmitForm productId={productId} submitAlert={reviewSubmitHandleClickSuccess} submitErrorAlert={reviewSubmitHandleErrorClickSuccess}/>
+
+                    </div>
+
+
                 </div>
-                <div className="productDetailReviewSection">
-                    <h2>Product Reviews</h2>
+                <CustomizedAlert
+                    open={addToCartOpenSuccess}
+                    onClose={addToCartHandleCloseSuccess}
+                    severity="success"
+                    message="Item added to the cart!"
+                />
 
-                    {productReview && productReview.length > 0 ? (
-                        productReview.map(reviews => (
-                            <ProductReviewCard key={reviews.id} reviews={reviews}/>
-                        ))
-                    ) : (
-                        <p>Currently no Reviews Available</p>
-                    )}
-                </div>
+                <CustomizedAlert
+                    open={reviewSubmitOpenSuccess}
+                    onClose={reviewSubmitHandleCloseSuccess}
+                    severity="success"
+                    message="Review Submitted Succesfully!"
+                />
 
+                <CustomizedAlert
+                    open={reviewSubmitErrorOpenSuccess}
+                    onClose={reviewSubmitErrorHandleCloseSuccess}
+                    severity="error"
+                    message="Error Occured!"
+                />
 
-                <div className="productDetailReviewSubmitSection">
-                    <h2>Submit a Reviews</h2>
+                <CustomizedAlert
+                    open={dataErrorOpenSuccess}
+                    onClose={dataErrorHandleCloseSuccess}
+                    severity="error"
+                    message="Error Fetching Data!"
+                />
 
-                    <ProductReviewSubmitForm productId={productId}/>
-
-                </div>
-
-
+                <Footer/>
             </div>
-            <Footer/>
 
         </>
 

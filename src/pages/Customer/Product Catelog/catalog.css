@@ -1,3 +1,9 @@
+.productCatalogBody{
+    overflow-y: clip;
+    max-height: 100vh;
+}
+
+
 .Catalogouter{
     display: grid;
     grid-template-columns: 10em 1fr;
@@ -12,6 +18,12 @@
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: -5em;
     row-gap: 3em;
+}
+
+.productCatalogRight{
+    overflow-y: auto;
+    max-height: 85vh;
+
 }
 
 .card{
@@ -34,7 +46,6 @@
 
 
 .sidebar{
-
     background-color:#DBDFFD;
     display: flex;
     flex-direction: column;

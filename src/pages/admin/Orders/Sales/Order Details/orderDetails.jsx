@@ -12,6 +12,8 @@ function OrderDetails() {
     const [activeButton, setActiveButton] = useState(null);
     const [orderId, setOrderId] = useState('');
     const [openSuccess, setOpenSuccess] = useState(false);
+    //data fetching error Alert Variables
+    const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
 
     const handleClickSuccess = () => {
         setOpenSuccess(true);
@@ -20,6 +22,16 @@ function OrderDetails() {
     const handleCloseSuccess = () => {
         setOpenSuccess(false);
     };
+
+    //Handle Data Error Alert Variable
+    const dataErrorHandleCloseSuccess = () => {
+        setDataErrorOpenSuccess(false);
+    };
+
+    const dataErrorHandleClickSuccess = () => {
+        setDataErrorOpenSuccess(true);
+    };
+
 
     const [order, setOrder] = useState({
         orderId: '',
@@ -54,6 +66,7 @@ function OrderDetails() {
             setOrderPrice(response.data.orderPrice);
         } catch (error) {
             console.error('Error fetching order:', error);
+            dataErrorHandleClickSuccess();
         }
     };
 
@@ -237,6 +250,14 @@ function OrderDetails() {
                 severity="success"
                 message="Order Details Updated Succefully!"
             />
+
+            <CustomizedAlert
+                open={dataErrorOpenSuccess}
+                onClose={dataErrorHandleCloseSuccess}
+                severity="error"
+                message="Error Fetching Data!"
+            />
+
             <Footer/>
             <Footer/>
         </>
