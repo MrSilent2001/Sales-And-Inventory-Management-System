@@ -31,6 +31,8 @@ function ProductDetail(){
     //add to Review Submit Variables
     const [reviewSubmitOpenSuccess, setReviewSubmitOpenSuccess] = useState(false);
 
+
+    //handle add to cart increments, decrements and reset
     const addQuant = () => {
         setQuant(quant + 1);
     };
@@ -64,6 +66,7 @@ function ProductDetail(){
         }
     };
 
+    //related product cart handle clicks
     const handleBodyClick = (item) => {
         navigate(`/product/${item.id}`);
     };
@@ -166,6 +169,7 @@ function ProductDetail(){
                 <div className="productDetailsection">
                     <div className="productDetailIntter">
                         <section className="productDetailCore">
+
                             {product && product.productImage && (
                                 <Gallery images={product.productImage} thumbnails={product.productImage}/>
                             )}
@@ -191,16 +195,22 @@ function ProductDetail(){
                         </section>
 
                         <div className="relatedProducts">
+
                             <h2> Related Products</h2>
+
                             <section className="realatedProductDetailCore">
+
                                 {relatedProducts && relatedProducts.map(item => (
                                     <MediaControlCard key={item.id} item={item} handleBodyClick={handleBodyClick}/>
                                 ))}
+
                             </section>
                         </div>
 
                     </div>
+
                     <div className="productDetailReviewSection">
+                        
                         <h2>Product Reviews</h2>
 
                         {productReview && productReview.length > 0 ? (
