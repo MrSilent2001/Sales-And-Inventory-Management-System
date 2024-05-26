@@ -28,7 +28,6 @@ export default function ProductReviewSubmitForm({ productId, submitAlert ,submit
         };
 
 
-
         try {
             console.log("formdata",reviewData);
             const response = await axios.post('http://localhost:9000/product/review/create', reviewData, {
@@ -38,9 +37,11 @@ export default function ProductReviewSubmitForm({ productId, submitAlert ,submit
             });
             console.log('Review submitted successfully:', response.data);
             submitAlert();
+
         } catch (error) {
             console.error('Error submitting review:', error);
             submitErrorAlert();
+
         }
     };
 

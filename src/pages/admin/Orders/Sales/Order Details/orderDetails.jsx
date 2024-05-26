@@ -14,6 +14,8 @@ function OrderDetails() {
     const [openSuccess, setOpenSuccess] = useState(false);
     //data fetching error Alert Variables
     const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
+    //data Update error Alert Variables
+    const [updateErrorOpenSuccess, setUpdateErrorOpenSuccess] = useState(false);
 
     const handleClickSuccess = () => {
         setOpenSuccess(true);
@@ -30,6 +32,15 @@ function OrderDetails() {
 
     const dataErrorHandleClickSuccess = () => {
         setDataErrorOpenSuccess(true);
+    };
+
+    //Handle Update Data Error Alert Variable
+    const updateErrorHandleCloseSuccess = () => {
+        setUpdateErrorOpenSuccess(false);
+    };
+
+    const updateErrorHandleClickSuccess = () => {
+        setUpdateErrorOpenSuccess(true);
     };
 
 
@@ -53,8 +64,13 @@ function OrderDetails() {
 
     const token = localStorage.getItem('accessToken');
     const fetchOrderById = async (orderId) => {
+        if (!orderId) {
+            console.log('Order ID is empty. Fetch operation aborted.');
+            return;
+        }
+
         try {
-            const response = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`,  {
+            const response = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -69,6 +85,7 @@ function OrderDetails() {
             dataErrorHandleClickSuccess();
         }
     };
+
 
     const handleCancel = async () => {
         setOrderId('');
@@ -98,11 +115,13 @@ function OrderDetails() {
                 // Optionally, you can fetch the order again to update the state
                 fetchOrderById(orderId);
             } else {
-                alert("Failed to update order details");
+                // alert("Failed to update order details");
+                updateErrorHandleClickSuccess();
             }
         } catch (error) {
             console.error('Error updating order:', error);
-            alert("Failed to update order details");
+            // alert("Failed to update order details");
+            updateErrorHandleClickSuccess();
         }
     };
 
@@ -256,6 +275,13 @@ function OrderDetails() {
                 onClose={dataErrorHandleCloseSuccess}
                 severity="error"
                 message="Error Fetching Data!"
+            />
+
+            <CustomizedAlert
+                open={updateErrorOpenSuccess}
+                onClose={updateErrorHandleCloseSuccess}
+                severity="error"
+                message="Failed to update order details!"
             />
 
             <Footer/>

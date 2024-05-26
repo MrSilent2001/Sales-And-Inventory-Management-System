@@ -34,6 +34,8 @@ function OrderStatus() {
     const [openSuccess, setOpenSuccess] = useState(false);
     //data fetching error Alert Variables
     const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
+    //data Update error Alert Variables
+    const [updateErrorOpenSuccess, setUpdateErrorOpenSuccess] = useState(false);
 
 
     const handleClickSuccess = () => {
@@ -51,6 +53,15 @@ function OrderStatus() {
 
     const dataErrorHandleClickSuccess = () => {
         setDataErrorOpenSuccess(true);
+    };
+
+    //Handle Update Data Error Alert Variable
+    const updateErrorHandleCloseSuccess = () => {
+        setUpdateErrorOpenSuccess(false);
+    };
+
+    const updateErrorHandleClickSuccess = () => {
+        setUpdateErrorOpenSuccess(true);
     };
 
 
@@ -97,6 +108,7 @@ function OrderStatus() {
             handleClickSuccess();
         } catch (error) {
             console.error('Error updating order status:', error);
+            updateErrorHandleClickSuccess();
         }
     };
 
@@ -163,6 +175,13 @@ function OrderStatus() {
                 onClose={dataErrorHandleCloseSuccess}
                 severity="error"
                 message="Error Fetching Data!"
+            />
+
+            <CustomizedAlert
+                open={updateErrorOpenSuccess}
+                onClose={updateErrorHandleCloseSuccess}
+                severity="error"
+                message="Failed to Update Order Status!"
             />
             <Footer/>
         </>
