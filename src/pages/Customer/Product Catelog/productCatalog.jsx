@@ -8,9 +8,13 @@ import { Link, useNavigate } from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
 import axios from "axios";
 import SearchBar from "../../../components/search bar/search bar";
+import CustomizedAlert from "../../../components/Alert/alert";
 
 function ProductCatalog() {
     const navigate = useNavigate();
+
+    //add to cart Alert Variables
+    const [addToCartOpenSuccess, setAddToCartOpenSuccess] = useState(false);
 
     const [cart, setCart] = useState([]);
     const [checkedItems, setCheckedItems] = useState({
@@ -93,10 +97,12 @@ function ProductCatalog() {
             updatedCart[existingItemIndex].amount += 1;
             setCart(updatedCart);
             localStorage.setItem("cart", JSON.stringify(updatedCart));
+            addToCartHandleClickSuccess();
         } else {
             const newCart = [...cart, { ...item, amount: 1 }];
             setCart(newCart);
             localStorage.setItem("cart", JSON.stringify(newCart));
+            addToCartHandleClickSuccess();
         }
     };
 
@@ -137,6 +143,15 @@ function ProductCatalog() {
 
         return matchesCategory && matchesSearchQuery;
     });
+
+    //Handle add to cart Alert Variable
+    const addToCartHandleCloseSuccess = () => {
+        setAddToCartOpenSuccess(false);
+    };
+
+    const addToCartHandleClickSuccess = () => {
+        setAddToCartOpenSuccess(true);
+    };
 
     return (
         <>
@@ -199,6 +214,13 @@ function ProductCatalog() {
                         </div>
                     </div>
                 </div>
+
+                <CustomizedAlert
+                    open={addToCartOpenSuccess}
+                    onClose={addToCartHandleCloseSuccess}
+                    severity="success"
+                    message="Item added to the cart!"
+                />
                 <Footer />
             </div>
         </>
