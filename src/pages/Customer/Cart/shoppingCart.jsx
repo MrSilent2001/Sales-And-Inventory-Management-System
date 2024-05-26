@@ -3,11 +3,11 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import MediaControlCard from '../../../components/Cards/shoppingCartCard';
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
 import Footer from "../../../layout/footer/footer";
-import {loadStripe} from "@stripe/stripe-js";
-import React, {useEffect, useState} from 'react';
+import { loadStripe } from "@stripe/stripe-js";
+import React, { useEffect, useState } from 'react';
 import CustomizedButton from "../../../components/Button/button";
 import axios from "axios";
-import {useAuth} from "../../../context/AuthContext";
+import { useAuth } from "../../../context/AuthContext";
 import CustomizedAlert from "../../../components/Alert/alert";
 
 const getStripe = () => {
@@ -17,7 +17,7 @@ const getStripe = () => {
     }
     console.log(stripePromise);
     return stripePromise;
-}
+};
 
 function Cart() {
     const { auth } = useAuth();
@@ -25,11 +25,12 @@ function Cart() {
     const [totalAmount, setTotalAmount] = useState(0);
     const [isLoading, setLoading] = useState(false);
 
-    //add to cart Alert Variables
+    // Alert state for removing items from cart
     const [removeFromCartOpenSuccess, setRemoveFromCartOpenSuccess] = useState(false);
 
     const token = localStorage.getItem('accessToken');
 
+    // Load cart data from local storage
     useEffect(() => {
         const storedCart = localStorage.getItem("cart");
         if (storedCart) {
@@ -46,6 +47,7 @@ function Cart() {
         }
     }, []);
 
+    // Calculate total amount whenever cart changes
     useEffect(() => {
         let total = 0;
         cart.forEach(item => {
@@ -58,13 +60,14 @@ function Cart() {
         setTotalAmount(total);
     }, [cart]);
 
+    // Remove an item from the cart
     const removeFromCart = (itemId) => {
         const updatedCart = cart.map(item => {
             if (item.id === itemId) {
                 if (item.amount === 1) {
                     return null;
                 } else {
-                    return {...item, amount: item.amount - 1};
+                    return { ...item, amount: item.amount - 1 };
                 }
             }
             return item;
@@ -72,8 +75,9 @@ function Cart() {
         setCart(updatedCart);
         localStorage.setItem("cart", JSON.stringify(updatedCart));
         removeFromCartHandleClickSuccess();
-    }
+    };
 
+    // Redirect to Stripe checkout
     const redirectToCheckout = async () => {
         setLoading(true);
         const stripe = getStripe();
@@ -101,7 +105,7 @@ function Cart() {
             qty: item.amount,
             price: item.productSellingPrice,
         }));
-        console.log('cart', JSON.stringify(metadata))
+        console.log('cart', JSON.stringify(metadata));
 
         try {
             const response = await axios.post('http://localhost:9000/payment/customerPayment/checkout', {
@@ -123,30 +127,31 @@ function Cart() {
             console.error('Error creating checkout session:', error);
             setLoading(false);
         }
-    }
+    };
 
-    //Handle add to cart Alert Variable
+    // Handle closing the alert
     const removeFromCartHandleCloseSuccess = () => {
         setRemoveFromCartOpenSuccess(false);
     };
 
+    // Handle opening the alert
     const removeFromCartHandleClickSuccess = () => {
         setRemoveFromCartOpenSuccess(true);
     };
 
     return (
         <>
-            <CustomerNavbar/>
+            <CustomerNavbar />
             <div className="cartOuter">
                 <div className="cardspace">
                     {cart.map(item => (
-                        <MediaControlCard key={item.id} item={item} removeFromCart={removeFromCart}/>
+                        <MediaControlCard key={item.id} item={item} removeFromCart={removeFromCart} />
                     ))}
                 </div>
 
                 <div className="cartInner">
                     <div className="arrow">
-                        <ArrowBackIosIcon/>
+                        <ArrowBackIosIcon />
                     </div>
                     <div className="totalText">
                         <p>Total Amount</p>
@@ -166,7 +171,8 @@ function Cart() {
                                 border: 'none',
                                 marginTop: '0.25em',
                                 marginBottom: '2em',
-                            }}>
+                            }}
+                        >
                             {isLoading ? "Loading..." : "Buy Now"}
                         </CustomizedButton>
                     </div>
@@ -177,11 +183,10 @@ function Cart() {
                 open={removeFromCartOpenSuccess}
                 onClose={removeFromCartHandleCloseSuccess}
                 severity="error"
-                message="Item revomed from Cart!"
+                message="Item removed from Cart!"
             />
 
-
-            <Footer/>
+            <Footer />
         </>
     );
 }
