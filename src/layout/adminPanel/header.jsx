@@ -14,7 +14,7 @@ function Header({OpenSidebar}) {
     }
 
     if(navigate){
-        return <Navigate to="/"/>
+        return <Navigate to="/admin"/>
     }
     return (
         <header className='header'>

@@ -37,6 +37,7 @@ import InventoryPayments from "../pages/admin/Payment Dashboard/Inventory/invent
 import ProductDetail from "../pages/Customer/Product Detail/productDetail";
 import AdminDashboard from "../pages/admin/Admin Dashboard/AdminDashboard";
 import UpdateCustomers from "../pages/Customer/Update Customers/updateCustomers";
+import AdminLogin from "../pages/login & SignUp/login/adminLogin";
 import ProtectedRoute from "./protectedRoutes";
 
 export function PageRouting() {
@@ -51,6 +52,8 @@ export function PageRouting() {
 
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/signup" element={<Signup/>}/>
+
+                <Route path="/admin" element={<AdminLogin/>}/>
 
                 {/*Payment Gateway*/}
                 <Route path="/success" element={<Success/>}/>

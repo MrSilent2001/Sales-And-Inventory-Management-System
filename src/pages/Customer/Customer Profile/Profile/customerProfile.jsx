@@ -22,12 +22,12 @@ function CustomerProfile() {
     };
 
     const token = localStorage.getItem('accessToken');
-    const id = parseInt(localStorage.getItem('id'));
+    const username = localStorage.getItem('username');
 
     useEffect(() => {
         const fetchCustomer = async () => {
             try {
-                const response = await axios.get(`http://localhost:9000/customer/findCustomer/${id}`, {
+                const response = await axios.get(`http://localhost:9000/customer/findCustomerByUsername/${username}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     }
@@ -41,7 +41,7 @@ function CustomerProfile() {
             }
         };
         fetchCustomer();
-    }, [id, token]);
+    }, [username, token]);
 
     const handleDelete = async () => {
         try {
