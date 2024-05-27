@@ -1,220 +1,3 @@
-// import React, { useState } from 'react';
-// import "./signup.css";
-// import TextField from "@mui/material/TextField";
-// import {Link} from "react-router-dom";
-// import CustomizedButton from "../../../components/Button/button";
-// import PasswordField from "../../../components/Form Inputs/passwordField";
-// import Validation from '../validation';
-// import axios from "axios";
-// import FormControl from "@mui/material/FormControl";
-// import ComboBox from "../../../components/Form Inputs/comboBox";
-// import {Navigate} from "react-router-dom";
-//
-// function SignUp() {
-//     const [navigate, setNavigate] = useState(false);
-//
-//     const [values, setValues] = useState({
-//         username: '',
-//         email: '',
-//         contactNo: '',
-//         password: '',
-//         confirmPassword:'',
-//         role: ''
-//     });
-//
-//     const [showPassword, setShowPassword] = React.useState(false);
-//     const [errors,setErrors] = useState({});
-//
-//     if(navigate){
-//         return <Navigate to="/login"/>
-//     }
-//
-//     const handleChange = (e) => {
-//         setValues({ ...values, role: e.target.value });
-//     };
-//
-//
-//     const options = [
-//         { value: 'admin', label: 'Admin' },
-//         { value: 'customer', label: 'Customer' },
-//         { value: 'supplier', label: 'Supplier' },
-//     ];
-//
-//     const handleInput = (e) => {
-//         setValues({...values, [e.target.name]: e.target.value});
-//         console.log(values)
-//     }
-//
-//     const handleClickShowPassword = () => {
-//         setShowPassword(!showPassword);
-//     };
-//
-//
-//
-//     const handleValidation = async (e) =>{
-//         e.preventDefault();
-//
-//         const validationErrors = Validation(values);
-//         setErrors(validationErrors);
-//
-//         try {
-//             console.log("beforesubmmit", values)
-//             const response = await axios.post('http://localhost:9000/auth/signup', {
-//                 username: values.username,
-//                 password: values.password,
-//                 confirmPassword:values.confirmPassword,
-//                 email: values.email,
-//                 contactNo: values.contactNo,
-//                 role: values.role
-//             });
-//
-//             console.log(values.role);
-//
-//             setNavigate(true);
-//
-//
-//         } catch (error) {
-//             // Handle login error
-//             console.error('Login error:', error);
-//             throw error;
-//         }
-//     }
-//
-//     return (
-//         <div className='S-MainContainer'>
-//
-//             <div className='S-LeftContainer'>
-//                 <h2 className='mainSignTitle'>TRADEASY</h2>
-//                 <img src="https://miro.medium.com/v2/resize:fit:740/1*PZK0jq9cUFpgRLZcs_aqwg.jpeg" alt="System" className='SystemImage' />
-//
-//             </div>
-//             <div className='S-RightContainer'>
-//                 <div className="SignupForm">
-//                     <h2 id="Signup">SignUp</h2>
-//
-//                     <FormControl onSubmit={handleValidation} >
-//                         <div className="SignupInnerContainer">
-//                             <div className="row">
-//                                 <label style={{paddingRight: "70px"}}> Username: </label>
-//                                 <TextField
-//                                     className="signupInput"
-//                                     size="small"
-//                                     id="outlined-required"
-//                                     label="Username"
-//                                     style={{marginBottom:'0.4em'}}
-//                                     name="username"
-//                                     onChange={handleInput}
-//                                 />
-//                             </div>
-//                             {errors.username && <p className= "displayError" style={{color:"red"}}>{errors.username}</p>}
-//
-//                             <div className="row">
-//                                 <label style={{paddingRight: "100px"}}> Email: </label>
-//                                 <TextField
-//                                     className="signupInput"
-//                                     size="small"
-//                                     id="outlined-required"
-//                                     label="Email"
-//                                     style={{marginBottom:'0.4em'}}
-//                                     type="email"
-//                                     name="email"
-//                                     onChange={handleInput}
-//                                 />
-//                             </div>
-//                             {errors.email && <p className= "displayError" style={{color:"red"}}>{errors.email}</p>}
-//
-//                             <div className="row">
-//                                 <label style={{paddingRight: "60px"}}> Contact No: </label>
-//                                 <TextField
-//                                     className="signupInput"
-//                                     size="small"
-//                                     id="outlined-required"
-//                                     label="Contact No"
-//                                     style={{marginBottom:'0.4em'}}
-//                                     type="number"
-//                                     name="contactNo"
-//                                     onChange={handleInput}
-//                                 />
-//                             </div>
-//                             {errors.contactNo && <p className= "displayError" style={{color:"red"}}>{errors.contactNo}</p>}
-//
-//                             <div className="row">
-//                                 <label style={{paddingRight: "80px"}}>Password: </label>
-//                                 <PasswordField
-//                                     label="Password"
-//                                     placeholder="Password"
-//                                     style={{width:'17.25em', marginLeft: '-1.1em',marginBottom:'0'}}
-//                                     name="password"
-//                                     onChange={handleInput}
-//                                     showPassword={showPassword}
-//                                     handleClickShowPassword={handleClickShowPassword}
-//                                 />
-//
-//                             </div>
-//                             {errors.password && <p  className= "displayError"style={{color:"red"}}>{errors.password}</p>}
-//
-//
-//                             <div className="row">
-//                                 <label style={{paddingRight: "50px"}}>Confirm Password: </label>
-//                                 <PasswordField
-//                                     placeholder="ConfirmPassword"
-//                                     style={{width:'17.25em',marginLeft:'-2em',marginBottom:'0'}}
-//                                     name="confirmPassword"
-//                                     onChange={handleInput}
-//                                     showPassword={showPassword}
-//                                     handleClickShowPassword={handleClickShowPassword}
-//                                 />
-//                             </div>
-//                             {errors.confirmPassword && <p className= "displayError" style={{color:"red"}}>{errors.confirmPassword}</p>}
-//
-//                             <div className="row">
-//                                 <label style={{paddingRight: "110px",marginBottom:'1em'}}>Role: </label>
-//                                 <ComboBox
-//                                     className="loginInput"
-//                                     onChange={handleChange}
-//                                     style={{width: '17.25em'}}
-//                                     options={options}
-//                                     label="Category"
-//                                     size="small"
-//                                 />
-//                             </div>
-//
-//                             <div className="btn-row">
-//                                 <CustomizedButton
-//                                     onClick={handleValidation}
-//                                     style={{
-//                                         color: '#ffffff',
-//                                         backgroundColor: '#242F9B',
-//                                         width: '11.5em',
-//                                         height: '2.75em',
-//                                         fontSize: '0.95em',
-//                                         padding: '0.5em 0.625em',
-//                                         borderRadius: '0.625em',
-//                                         fontWeight: '550',
-//                                         border: 'none',
-//                                         marginTop: '0.625em',
-//                                         hoverBackgroundColor:'#2d3ed2'
-//
-//                                     }}>
-//                                     Sign Up
-//                                 </CustomizedButton>
-//                             </div>
-//
-//                             <div>
-//                                 <p>Already have an Account?
-//                                     <Link to="/login">Login</Link>
-//                                 </p>
-//                             </div>
-//                         </div>
-//                     </FormControl>
-//                 </div>
-//             </div>
-//         </div>
-//     )
-// }
-//
-// export default SignUp;
-
 import React, { useState } from 'react';
 import './signup.css';
 import BasicTextField from "../../../components/Form Inputs/textfield";
@@ -222,9 +5,8 @@ import PasswordField from "../../../components/Form Inputs/passwordField";
 import CustomizedButton from "../../../components/Button/button";
 import FormControl from "@mui/material/FormControl";
 import { useAuth } from '../../../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from "axios";
-
 
 function SignUp() {
     const { adminLogin } = useAuth();
@@ -235,7 +17,7 @@ function SignUp() {
         email: '',
         contactNo: '',
         password: '',
-        confirmPassword:'',
+        confirmPassword: '',
         address: ''
     });
 
@@ -244,10 +26,12 @@ function SignUp() {
         email: '',
         contactNo: '',
         password: '',
-        confirmPassword:'',
+        confirmPassword: '',
         nic: '',
         paymentDetails: ''
     });
+
+    const [errors, setErrors] = useState({});
 
     const navigate = useNavigate();
 
@@ -259,25 +43,48 @@ function SignUp() {
         event.preventDefault();
     };
 
-
-
     const handleChangeCustomer = (name, value) => {
-        setLoginFormData(prevState => ({
+        setCustomerFormData(prevState => ({
             ...prevState,
             [name]: value
         }));
     };
 
     const handleChangeSupplier = (name, value) => {
-        setSignupFormData(prevState => ({
+        setSupplierFormData(prevState => ({
             ...prevState,
             [name]: value
         }));
     };
 
+    const validateCustomerForm = () => {
+        const newErrors = {};
+        if (!customerData.username) newErrors.username = 'Username is required';
+        if (!customerData.email) newErrors.email = 'Email is required';
+        if (!customerData.contactNo) newErrors.contactNo = 'Contact number is required';
+        if (!customerData.address) newErrors.address = 'Address is required';
+        if (!customerData.password) newErrors.password = 'Password is required';
+        if (customerData.password !== customerData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const validateSupplierForm = () => {
+        const newErrors = {};
+        if (!supplierData.username) newErrors.username = 'Username is required';
+        if (!supplierData.email) newErrors.email = 'Email is required';
+        if (!supplierData.contactNo) newErrors.contactNo = 'Contact number is required';
+        if (!supplierData.nic) newErrors.nic = 'NIC is required';
+        if (!supplierData.paymentDetails) newErrors.paymentDetails = 'Payment details are required';
+        if (!supplierData.password) newErrors.password = 'Password is required';
+        if (supplierData.password !== supplierData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
     const handleSubmitCustomer = async (e) => {
         e.preventDefault();
-        console.log(customerData);
+        if (!validateCustomerForm()) return;
         try {
             const response = await axios.post('http://localhost:9000/auth/signup', {
                 username: customerData.username,
@@ -285,22 +92,20 @@ function SignUp() {
                 email: customerData.email,
                 contactNo: customerData.contactNo,
                 address: customerData.address,
-                nic: customerData.nic,
                 role: 'customer'
             });
 
             setActiveTab('login');
 
         } catch (error) {
-            console.error('Login error:', error);
+            console.error('Sign up error:', error);
             throw error;
         }
     };
 
     const handleSubmitSupplier = async (e) => {
         e.preventDefault();
-        console.log(supplierData);
-
+        if (!validateSupplierForm()) return;
         try {
             const response = await axios.post('http://localhost:9000/auth/signup', {
                 username: supplierData.username,
@@ -315,11 +120,10 @@ function SignUp() {
             setActiveTab('login');
 
         } catch (error) {
-            console.error('Login error:', error);
+            console.error('Sign up error:', error);
             throw error;
         }
     };
-
 
     return (
         <div className="adminLoginContainer">
@@ -352,98 +156,104 @@ function SignUp() {
                                     size="small"
                                     type="text"
                                     id="outlined-required"
-                                    style={{width: '14em', marginLeft: '2em'}}
                                     onChange={(e) => handleChangeCustomer("username", e.target.value)}
                                     required
                                 />
+                                {errors.username && <div className="error-message">{errors.username}</div>}
                             </div>
 
                             <div className="form-outline">
-                                <label style={{paddingRight: "100px"}}> Email: </label>
+                                <label> Email: </label>
                                 <BasicTextField
                                     size="small"
                                     id="outlined-required"
-                                    style={{width: '14em', marginLeft: '2em'}}
                                     type="email"
                                     onChange={(e) => handleChangeCustomer("email", e.target.value)}
                                     required
                                 />
+                                {errors.email && <div className="error-message">{errors.email}</div>}
                             </div>
 
                             <div className="form-outline">
-                                <label style={{paddingRight: "60px"}}> Contact No: </label>
+                                <label> Contact No: </label>
                                 <BasicTextField
                                     size="small"
                                     id="outlined-required"
-                                    style={{width: '14em', marginLeft: '2em'}}
                                     type="text"
                                     onChange={(e) => handleChangeCustomer("contactNo", e.target.value)}
                                     required
                                 />
+                                {errors.contactNo && <div className="error-message">{errors.contactNo}</div>}
                             </div>
 
                             <div className="form-outline">
-                                <label style={{paddingRight: "60px"}}> Address: </label>
+                                <label> Address: </label>
                                 <BasicTextField
                                     size="small"
                                     id="outlined-required"
-                                    style={{width: '14em', marginLeft: '2em'}}
                                     type="text"
                                     onChange={(e) => handleChangeCustomer("address", e.target.value)}
                                     required
                                 />
+                                {errors.address && <div className="error-message">{errors.address}</div>}
                             </div>
 
-                            <div className="form-outline mb-4">
+                            <div className="form-outline">
                                 <label> Password: </label>
                                 <PasswordField
+                                    style={{width: '17.25em', marginLeft: '-0.75em'}}
                                     size="small"
                                     id="outlined-adornment-password"
-                                    style={{width: '14em', marginLeft: '2em'}}
                                     onChange={(e) => handleChangeCustomer("password", e.target.value)}
                                     showPassword={showPassword}
                                     handleClickShowPassword={handleClickShowPassword}
                                     handleMouseDownPassword={handleMouseDownPassword}
                                     required
                                 />
+                                {errors.password && <div className="error-message">{errors.password}</div>}
                             </div>
 
-                            <div className="form-outline mb-4">
+                            <div className="form-outline">
                                 <label> Confirm Password: </label>
                                 <PasswordField
+                                    style={{width: '17.25em', marginLeft: '-0.75em'}}
                                     size="small"
                                     id="outlined-adornment-confirm-password"
-                                    style={{width: '14em', marginLeft: '2em'}}
                                     onChange={(e) => handleChangeCustomer("confirmPassword", e.target.value)}
                                     showPassword={showPassword}
                                     handleClickShowPassword={handleClickShowPassword}
                                     handleMouseDownPassword={handleMouseDownPassword}
                                     required
                                 />
+                                {errors.confirmPassword && <div className="error-message">{errors.confirmPassword}</div>}
                             </div>
 
-                            <CustomizedButton
-                                type="submit"
-                                style={{
-                                    color: '#ffffff',
-                                    backgroundColor: '#242F9B',
-                                    width: '11.5em',
-                                    height: '2.75em',
-                                    fontSize: '0.95em',
-                                    padding: '0.5em 0.625em',
-                                    borderRadius: '0.625em',
-                                    fontWeight: '550',
-                                    border: 'none',
-                                    marginTop: '0.625em',
-                                    hoverBackgroundColor: '#2d3ed2'
-                                }}>
-                                Sign Up
-                            </CustomizedButton>
+                            <div className="buttonContainer">
+                                <CustomizedButton
+                                    type="submit"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#242F9B',
+                                        width: '11.5em',
+                                        height: '2.75em',
+                                        fontSize: '0.95em',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.625em',
+                                        fontWeight: '550',
+                                        border: 'none',
+                                        marginTop: '0.625em',
+                                        hoverBackgroundColor: '#2d3ed2'
+                                    }}>
+                                    Sign Up
+                                </CustomizedButton>
+                            </div>
+                            <div>
+                                <p>Already Have an Account? <Link to="/login">Login</Link></p>
+                            </div>
                         </FormControl>
                     </form>
                 </div>
 
-                {/*==========================SIGN-UP===================================*/}
                 <div className={`tab-pane ${activeTab === 'supplier' ? 'active' : ''}`} id="pills-register">
                     <form onSubmit={handleSubmitSupplier}>
                         <FormControl fullWidth>
@@ -453,106 +263,112 @@ function SignUp() {
                                     size="small"
                                     type="text"
                                     id="outlined-required"
-                                    style={{width: '14em', marginLeft: '2em'}}
                                     onChange={(e) => handleChangeSupplier("username", e.target.value)}
                                     required
                                 />
+                                {errors.username && <div className="error-message">{errors.username}</div>}
                             </div>
 
                             <div className="form-outline">
-                                <label style={{paddingRight: "100px"}}> Email: </label>
+                                <label> Email: </label>
                                 <BasicTextField
                                     size="small"
                                     id="outlined-required"
-                                    style={{width: '14em', marginLeft: '2em'}}
                                     type="email"
                                     onChange={(e) => handleChangeSupplier("email", e.target.value)}
                                     required
                                 />
+                                {errors.email && <div className="error-message">{errors.email}</div>}
                             </div>
 
                             <div className="form-outline">
-                                <label style={{paddingRight: "60px"}}> Contact No: </label>
+                                <label> Contact No: </label>
                                 <BasicTextField
                                     size="small"
                                     id="outlined-required"
-                                    style={{width: '14em', marginLeft: '2em'}}
                                     type="text"
                                     onChange={(e) => handleChangeSupplier("contactNo", e.target.value)}
                                     required
                                 />
+                                {errors.contactNo && <div className="error-message">{errors.contactNo}</div>}
                             </div>
 
                             <div className="form-outline">
                                 <label> Password: </label>
                                 <PasswordField
+                                    style={{width: '17.25em', marginLeft: '-0.75em'}}
                                     size="small"
                                     id="outlined-adornment-password"
-                                    style={{width: '14em', marginLeft: '2em'}}
                                     onChange={(e) => handleChangeSupplier("password", e.target.value)}
                                     showPassword={showPassword}
                                     handleClickShowPassword={handleClickShowPassword}
                                     handleMouseDownPassword={handleMouseDownPassword}
                                     required
                                 />
+                                {errors.password && <div className="error-message">{errors.password}</div>}
                             </div>
 
                             <div className="form-outline">
                                 <label> Confirm Password: </label>
                                 <PasswordField
+                                    style={{width: '17.25em', marginLeft: '-0.75em'}}
                                     size="small"
                                     id="outlined-adornment-confirm-password"
-                                    style={{width: '14em', marginLeft: '2em'}}
                                     onChange={(e) => handleChangeSupplier("confirmPassword", e.target.value)}
                                     showPassword={showPassword}
                                     handleClickShowPassword={handleClickShowPassword}
                                     handleMouseDownPassword={handleMouseDownPassword}
                                     required
                                 />
+                                {errors.confirmPassword && <div className="error-message">{errors.confirmPassword}</div>}
                             </div>
 
                             <div className="form-outline">
-                                <label style={{paddingRight: "60px"}}> NIC: </label>
+                                <label> NIC: </label>
                                 <BasicTextField
                                     size="small"
                                     id="outlined-required"
-                                    style={{width: '14em', marginLeft: '2em'}}
                                     type="text"
                                     onChange={(e) => handleChangeSupplier("nic", e.target.value)}
                                     required
                                 />
+                                {errors.nic && <div className="error-message">{errors.nic}</div>}
                             </div>
 
                             <div className="form-outline">
-                                <label style={{paddingRight: "60px"}}> Payment Details: </label>
+                                <label> Payment Details: </label>
                                 <BasicTextField
                                     size="small"
                                     id="outlined-required"
-                                    style={{width: '14em', marginLeft: '2em'}}
                                     type="text"
-                                    onChange={(e) => handleChangeSignUp("paymentDetails", e.target.value)}
+                                    onChange={(e) => handleChangeSupplier("paymentDetails", e.target.value)}
                                     required
                                 />
+                                {errors.paymentDetails && <div className="error-message">{errors.paymentDetails}</div>}
                             </div>
 
-                            <CustomizedButton
-                                type="submit"
-                                style={{
-                                    color: '#ffffff',
-                                    backgroundColor: '#242F9B',
-                                    width: '11.5em',
-                                    height: '2.75em',
-                                    fontSize: '0.95em',
-                                    padding: '0.5em 0.625em',
-                                    borderRadius: '0.625em',
-                                    fontWeight: '550',
-                                    border: 'none',
-                                    marginTop: '0.625em',
-                                    hoverBackgroundColor: '#2d3ed2'
-                                }}>
-                                Sign Up
-                            </CustomizedButton>
-
+                            <div className="buttonContainer">
+                                <CustomizedButton
+                                    type="submit"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#242F9B',
+                                        width: '11.5em',
+                                        height: '2.75em',
+                                        fontSize: '0.95em',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.625em',
+                                        fontWeight: '550',
+                                        border: 'none',
+                                        marginTop: '0.625em',
+                                        hoverBackgroundColor: '#2d3ed2'
+                                    }}>
+                                    Sign Up
+                                </CustomizedButton>
+                            </div>
+                            <div>
+                                <p>Already Have an Account? <Link to="/login">Login</Link></p>
+                            </div>
                         </FormControl>
                     </form>
                 </div>

@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const customerLogin = async (username, password) => {
-        const response = await axios.post('http://localhost:9000/customer/login', { username, password });
+        const response = await axios.post('http://localhost:9000/customer/login', { username, password, role });
         const { access_token, id, role, usn } = response.data;
         setAuthState({ token: access_token, id, role, usn });
         setIsAuthenticated(true);
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     const supplierLogin = async (username, password) => {
-        const response = await axios.post('http://localhost:9000/supplier/login', { username, password });
+        const response = await axios.post('http://localhost:9000/supplier/login', { username, password, role });
         const { access_token, id, role, usn } = response.data;
         setAuthState({ token: access_token, id, role, usn });
         setIsAuthenticated(true);
