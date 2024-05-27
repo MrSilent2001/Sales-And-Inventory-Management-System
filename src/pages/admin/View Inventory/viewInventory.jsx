@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import "./viewInventory.css";
