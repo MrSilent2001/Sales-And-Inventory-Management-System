@@ -3,7 +3,10 @@ import axios from 'axios';
 const sendOrderStatusEmail = async (orderId,token, reason = null) => {
     try {
         // Fetch order details
-        const orderResponse = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`);
+        const orderResponse = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`,  {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },});
         const orderData = orderResponse.data;
 
         // Fetch customer details
@@ -42,7 +45,7 @@ const sendOrderStatusEmail = async (orderId,token, reason = null) => {
         };
 
         // Send email
-        await axios.post('http://localhost:9000/email/send', emailData,  {
+        await axios.post('http://localhost:9000/email/send/orderStatus', emailData,  {
             headers: {
                 Authorization: `Bearer ${token}`,
             },}
