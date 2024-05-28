@@ -22,12 +22,12 @@ function CustomerProfile() {
     };
 
     const token = localStorage.getItem('accessToken');
-    const username = localStorage.getItem('username');
+    const id = localStorage.getItem('id');
 
     useEffect(() => {
         const fetchCustomer = async () => {
             try {
-                const response = await axios.get(`http://localhost:9000/customer/findCustomerByUsername/${username}`, {
+                const response = await axios.get(`http://localhost:9000/customer/findCustomer/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     }
@@ -41,7 +41,7 @@ function CustomerProfile() {
             }
         };
         fetchCustomer();
-    }, [username, token]);
+    }, [token]);
 
     const handleDelete = async () => {
         try {
@@ -88,7 +88,7 @@ function CustomerProfile() {
                                         <h4>Address</h4>
                                     </div>
                                     <div className="inputData">
-                                        <h5>{customer.customerAddress}</h5>
+                                        <h5>{customer.address}</h5>
                                     </div>
                                 </div>
 
@@ -97,7 +97,7 @@ function CustomerProfile() {
                                         <h4>E-mail</h4>
                                     </div>
                                     <div className="inputData">
-                                        <h5>{customer.customerEmail}</h5>
+                                        <h5>{customer.email}</h5>
                                     </div>
                                 </div>
 
@@ -106,13 +106,13 @@ function CustomerProfile() {
                                         <h4>Contact</h4>
                                     </div>
                                     <div className="inputData">
-                                        <h5>{customer.customerContact}</h5>
+                                        <h5>{customer.contactNo}</h5>
                                     </div>
                                 </div>
 
                                 <div className="formField">
                                     <div className="textField">
-                                        <h4>Previous Orders</h4>
+                                        <h4>My Orders</h4>
                                     </div>
                                     <div className="inputData">
                                         <CustomizedButton

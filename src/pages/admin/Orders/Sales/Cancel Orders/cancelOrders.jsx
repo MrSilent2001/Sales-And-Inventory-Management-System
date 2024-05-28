@@ -9,6 +9,7 @@ import axios from "axios";
 import BasicTextField from "../../../../../components/Form Inputs/textfield";
 import SalesOrderSidebar from "../../../../../layout/sidebar/salesOrderSidebar";
 import CustomizedAlert from "../../../../../components/Alert/alert";
+import sendOrderStatusEmail from "../_Component/orderStatusChangedEmailSend";
 
 function CancelOrder() {
     const [activeButton, setActiveButton] = useState(null);
@@ -93,6 +94,8 @@ function CancelOrder() {
                     Authorization: `Bearer ${token}`,
                 },
             });
+
+            sendOrderStatusEmail(orderId, token, orderCancelReason);
             if (response.status === 200) {
                 handleClickSuccess();
                 // Optionally, you can fetch the order again to update the state

@@ -7,6 +7,7 @@ import ComboBox from "../../../../../components/Form Inputs/comboBox";
 import axios from "axios";
 import SalesOrderSidebar from "../../../../../layout/sidebar/salesOrderSidebar";
 import CustomizedAlert from "../../../../../components/Alert/alert";
+import sendOrderStatusEmail from "../_Component/orderStatusChangedEmailSend";
 
 let columns = [
     {columnId: 'id', label: 'Id', minWidth: 170, align: 'center'},
@@ -106,6 +107,7 @@ function OrderStatus() {
                 },}
             );
             handleClickSuccess();
+            sendOrderStatusEmail(orderId, token);
         } catch (error) {
             console.error('Error updating order status:', error);
             updateErrorHandleClickSuccess();

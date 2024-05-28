@@ -10,7 +10,7 @@ import axios from "axios";
 
 
 const columns = [
-    {columnId: 'orderId', label: 'OrderId', minWidth: 170, align: 'center'},
+    // {columnId: 'orderId', label: 'OrderId', minWidth: 170, align: 'center'},
     {columnId: 'orderItems', label: 'Ordered Items', minWidth: 100, align: 'center'},
     {
         columnId: 'orderPrice',
@@ -20,19 +20,21 @@ const columns = [
         format: (value) => value.toLocaleString('en-US'),
     },
     {
-        columnId: 'date',
+        columnId: 'orderDate',
         label: 'Date',
         minWidth: 170,
         align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
-    // {
-    //     columnId: 'totalAmount',
-    //     label: 'Total Amount',
-    //     minWidth: 170,
-    //     align: 'center',
-    //     format: (value) => value.toLocaleString('en-US'),
-    // }
+
+    {
+        columnId: 'orderStatus',
+        label: 'Order Status',
+        minWidth: 170,
+        align: 'center',
+        format: (value) => value.toLocaleString('en-US'),
+    }
+
 ];
 
 
@@ -65,24 +67,59 @@ function CustomerOrderHistory() {
     useEffect(() => {
         const fetchPreviousOrders = async () => {
             const id = localStorage.getItem('id');
+            const role = localStorage.getItem('role');
+
+            if (role !== 'customer') {
+                console.error('Error: Only customers can fetch previous orders.');
+                return;
+            }
+
             setIsLoading(true);
             try {
-                const response = await axios.get(`http://localhost:9000/order/findOrder/${id}` ,{
+                // Fetch all products
+                const productsResponse = await axios.get('http://localhost:9000/product/getAllProducts', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                setPreviousOrders(response.data);
+                const products = productsResponse.data.reduce((acc, product) => {
+                    acc[product.id] = product.productName; // Map product ID to its name
+                    return acc;
+                }, {});
 
+                const response = await axios.get('http://localhost:9000/order/getAllOrders', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                // Filter orders by orderCustomerId
+                const filteredOrders = response.data.filter(order => order.orderCustomerId === id);
+
+                // Replace item IDs with names and format orderItems
+                const ordersWithNamesAndFormattedItems = filteredOrders.map(order => {
+                    const orderItemsWithName = order.orderItems.map(itemId => products[itemId]);
+                    const formattedOrderItems = orderItemsWithName.join(', ');
+                    return { ...order, orderItems: formattedOrderItems };
+                });
+
+                // Sort orders by date (latest to oldest)
+                const sortedOrders = ordersWithNamesAndFormattedItems.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
+
+                console.log(sortedOrders);
+                setPreviousOrders(sortedOrders);
             } catch (error) {
                 handleClickError();
-                console.error('Error fetching users:', error);
-            }finally {
+                console.error('Error fetching orders:', error);
+            } finally {
                 setIsLoading(false);
             }
         };
+
         fetchPreviousOrders();
+
     }, []);
+
 
 
     rows = rows.map(row => ({ ...row}));
@@ -94,7 +131,7 @@ function CustomerOrderHistory() {
                 <div className="CustomerOrdersInner">
                     <div className="customerOrdersTopicWithTextfield">
                         <div className="customerOrdersTopic">
-                            <h2>Previous Orders</h2>
+                            <h2>My Orders</h2>
                         </div>
 
                         <div className="customerOrdersTextField">
@@ -107,7 +144,7 @@ function CustomerOrderHistory() {
                         ) : (
                             <CustomizedTable
                                 columns={columns}
-                                rows={rows}
+                                rows={previousOrders}
                             />
                         )}
                     </div>
