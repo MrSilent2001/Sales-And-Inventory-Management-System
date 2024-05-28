@@ -1,13 +1,12 @@
+import React, { useEffect, useState } from 'react';
 import "./discountDashboard.css";
-import * as React from 'react';
 import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../layout/footer/footer";
-import { useEffect, useState } from "react";
 import CustomizedButton from "../../../components/Button/button";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 import axios from "axios";
 import AddDiscount from "./Modal/Add Discount/addDiscounts";
-import {Modal} from "@mui/material";
+import { Modal } from "@mui/material";
 import CustomizedAlert from "../../../components/Alert/alert";
 import SearchBar from "../../../components/search bar/search bar";
 import PageLoader from "../../../components/Page Loader/pageLoader";
@@ -30,21 +29,10 @@ function DiscountDashboard() {
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
 
-    const handleClickSuccess = () => {
-        setOpenSuccess(true);
-    };
-
-    const handleClickError = () => {
-        setOpenError(true);
-    };
-
-    const handleCloseSuccess = () => {
-        setOpenSuccess(false);
-    };
-
-    const handleCloseError = () => {
-        setOpenError(false);
-    };
+    const handleClickSuccess = () => setOpenSuccess(true);
+    const handleClickError = () => setOpenError(true);
+    const handleCloseSuccess = () => setOpenSuccess(false);
+    const handleCloseError = () => setOpenError(false);
 
     const token = localStorage.getItem('accessToken');
 
@@ -52,24 +40,21 @@ function DiscountDashboard() {
         const fetchSearchDiscounts = async () => {
             setIsLoading(true);
             try {
-                const response = await axios.get('http://localhost:9000/discounts/getAll' ,{
+                const response = await axios.get('http://localhost:9000/discounts/getAll', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
                 setDiscount(response.data);
-
             } catch (error) {
                 handleClickError();
-                console.error('Error fetching users:', error);
-            }finally {
+                console.error('Error fetching discounts:', error);
+            } finally {
                 setIsLoading(false);
             }
         };
         fetchSearchDiscounts();
-    }, []);
-
-    let rows = discount;
+    }, [token]);
 
     const handleButtonClick = async (id) => {
         try {
@@ -79,63 +64,61 @@ function DiscountDashboard() {
                 },
             });
 
-            // Fetching the updated list of discounts after deletion
-            const response = await axios.get('http://localhost:9000/discounts/getAll',  {
+            const response = await axios.get('http://localhost:9000/discounts/getAll', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
             setDiscount(response.data);
             handleClickSuccess();
-
         } catch (error) {
             console.error('Error canceling discount:', error);
         }
     };
 
-    const createCancelButton = (id) => {
-        return (
-            <CustomizedButton
-                onClick={() => handleButtonClick(id)}
-                hoverBackgroundColor="#f11717"
-                style={{
-                    color: '#ffffff',
-                    backgroundColor: '#960505',
-                    width: '8.5em',
-                    height: '2.5em',
-                    fontSize: '0.8em',
-                    padding: '0.5em 0.625em',
-                    borderRadius: '0.625em',
-                    fontWeight: '550',
-                    border: 'none',
-                    marginTop: '0.625em',
-                }}>
-                Cancel
-            </CustomizedButton>
-        );
-    };
+    const createCancelButton = (id) => (
+        <CustomizedButton
+            onClick={() => handleButtonClick(id)}
+            hoverBackgroundColor="#f11717"
+            style={{
+                color: '#ffffff',
+                backgroundColor: '#960505',
+                width: '8.5em',
+                height: '2.5em',
+                fontSize: '0.8em',
+                padding: '0.5em 0.625em',
+                borderRadius: '0.625em',
+                fontWeight: '550',
+                border: 'none',
+                marginTop: '0.625em',
+            }}>
+            Cancel
+        </CustomizedButton>
+    );
 
-    rows = rows.map(row => ({ ...row, actions: createCancelButton(row.id) }));
+    const handleDiscountAdded = (updatedDiscounts) => setDiscount(updatedDiscounts);
 
-    const handleDiscountAdded = (updatedDiscounts) => {
-        setDiscount(updatedDiscounts);
-    };
-
-    // Fetch discounts function with query parameter
     const fetchDiscounts = async (query) => {
+        setIsLoading(true);
         try {
-            const response = await axios.get(`http://localhost:9000/discounts/search?keyword=${query}`,  {
+            const response = await axios.get(`http://localhost:9000/discounts/search?keyword=${query}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
             setDiscount(response.data);
-            setIsLoading(false);
         } catch (error) {
             handleClickError();
             console.error('Error fetching discounts:', error);
+        } finally {
+            setIsLoading(false);
         }
     };
+
+    const rows = discount.map((row) => ({
+        ...row,
+        actions: createCancelButton(row.id),
+    }));
 
     return (
         <>
@@ -143,10 +126,7 @@ function DiscountDashboard() {
             <div className="discountDashboardOuter">
                 <div className="discountDashboardInner">
                     <div className="searchContainer">
-                        <SearchBar
-                            label="Search Products"
-                            onKeyPress={fetchDiscounts}
-                        />
+                        <SearchBar label="Search Products" onKeyPress={fetchDiscounts} />
                         <CustomizedButton
                             onClick={() => setVisible(true)}
                             hoverBackgroundColor="#2d3ed2"
@@ -158,7 +138,7 @@ function DiscountDashboard() {
                                 fontSize: '0.75em',
                                 padding: '0.5em 0.625em',
                                 borderRadius: '0.35em',
-                                fontWeight: '550'
+                                fontWeight: '550',
                             }}>
                             Add Discount
                         </CustomizedButton>
@@ -167,22 +147,15 @@ function DiscountDashboard() {
                         {isLoading ? (
                             <PageLoader />
                         ) : (
-                            <CustomizedTable
-                                columns={columns}
-                                rows={rows}
-                                style={{ width: '85%' }}
-                            />
+                            <CustomizedTable columns={columns} rows={rows} style={{ width: '85%' }} />
                         )}
                     </div>
                 </div>
             </div>
             <Footer />
 
-            <Modal open={visible}>
-                <AddDiscount
-                    onClose={() => setVisible(false)}
-                    onDiscountAdded={handleDiscountAdded}
-                />
+            <Modal open={visible} onClose={() => setVisible(false)}>
+                <AddDiscount onClose={() => setVisible(false)} onDiscountAdded={handleDiscountAdded} />
             </Modal>
 
             <CustomizedAlert
