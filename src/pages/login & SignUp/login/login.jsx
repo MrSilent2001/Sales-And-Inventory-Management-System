@@ -9,9 +9,9 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from "axios";
 
 function Login() {
-    const { adminLogin } = useAuth();
+    const { customerLogin, supplierLogin  } = useAuth();
     const [activeTab, setActiveTab] = useState('customer');
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(true);
     const [customerData, setCustomerFormData] = useState({
         username: '',
         password: ''
@@ -25,7 +25,7 @@ function Login() {
     const navigate = useNavigate();
 
     const handleClickShowPassword = () => {
-        setShowPassword(!showPassword);
+        setShowPassword(false);
     };
 
     const handleMouseDownPassword = (event) => {
@@ -46,27 +46,11 @@ function Login() {
         }));
     };
 
-    const customerLogin = async (username, password) => {
-        const response = await axios.post('http://localhost:9000/auth/customer/login', {
-            username,
-            password
-        });
-        return response.data;
-    };
-
-    const supplierLogin = async (username, password) => {
-        const response = await axios.post('http://localhost:9000/auth/supplier/login', {
-            username,
-            password
-        });
-        return response.data;
-    };
-
     const handleSubmitCustomer = async (e) => {
         e.preventDefault();
         console.log(customerData);
         try {
-            const { id, role } = await customerLogin(customerData.username, customerData.password);
+            const response = await customerLogin(customerData.username, customerData.password);
             navigate("/customerHome");
         } catch (error) {
             console.error('Login error:', error);
@@ -78,7 +62,7 @@ function Login() {
         console.log(supplierData);
 
         try {
-            const { id, role } = await supplierLogin(supplierData.username, supplierData.password);
+            const response = await supplierLogin(supplierData.username, supplierData.password);
             navigate("/supplierDashboard");
         } catch (error) {
             console.error('Login error:', error);
@@ -89,20 +73,36 @@ function Login() {
         <div className="adminLoginContainer">
             <div className="tabPanel">
                 <div>
-                    <button
+                    <CustomizedButton
                         className={`nav-link ${activeTab === 'customer' ? 'active' : ''}`}
                         onClick={() => setActiveTab('customer')}
+                        style={{
+                            width: '7.5em',
+                            padding: '1.25em 1em',
+                            marginRight: '1em',
+                            backgroundColor: activeTab === 'customer' ? '#007bff' : 'transparent',
+                            color: activeTab === 'customer' ? '#ffffff' : '#007bff',
+                            border: '1px solid #007bff'
+                        }}
                     >
                         Customer
-                    </button>
+                    </CustomizedButton>
                 </div>
                 <div>
-                    <button
+                    <CustomizedButton
                         className={`nav-link ${activeTab === 'supplier' ? 'active' : ''}`}
                         onClick={() => setActiveTab('supplier')}
+                        style={{
+                            width: '7.5em',
+                            padding: '1.25em 1em',
+                            marginLeft: '1em',
+                            backgroundColor: activeTab === 'supplier' ? '#007bff' : 'transparent',
+                            color: activeTab === 'supplier' ? '#007bff' : '#ffffff',
+                            border: '1px solid #007bff'
+                        }}
                     >
                         Supplier
-                    </button>
+                    </CustomizedButton>
                 </div>
             </div>
 
@@ -116,7 +116,7 @@ function Login() {
                                     size="small"
                                     type="text"
                                     id="outlined-required"
-                                    style={{width: '14em', marginLeft: '2em'}}
+                                    style={{width: '17.25em', height: '2em'}}
                                     onChange={(e) => handleChangeCustomer("username", e.target.value)}
                                     required
                                 />
@@ -127,7 +127,7 @@ function Login() {
                                 <PasswordField
                                     size="small"
                                     id="outlined-adornment-password"
-                                    style={{width: '14em', marginLeft: '2em'}}
+                                    style={{width: '17.25em', marginLeft: '0.2em', height: '2em'}}
                                     onChange={(e) => handleChangeCustomer("password", e.target.value)}
                                     showPassword={showPassword}
                                     handleClickShowPassword={handleClickShowPassword}
@@ -160,7 +160,6 @@ function Login() {
                     </form>
                 </div>
 
-                {/*==========================SIGN-UP===================================*/}
                 <div className={`tab-pane ${activeTab === 'supplier' ? 'active' : ''}`} id="pills-register">
                     <form onSubmit={handleSubmitSupplier}>
                         <FormControl fullWidth>
@@ -169,8 +168,8 @@ function Login() {
                                 <BasicTextField
                                     size="small"
                                     type="text"
+                                    style={{width: '17.25em', height: '2em'}}
                                     id="outlined-required"
-                                    style={{width: '14em', marginLeft: '2em'}}
                                     onChange={(e) => handleChangeSupplier("username", e.target.value)}
                                     required
                                 />
@@ -181,7 +180,7 @@ function Login() {
                                 <PasswordField
                                     size="small"
                                     id="outlined-adornment-password"
-                                    style={{width: '14em', marginLeft: '2em'}}
+                                    style={{width: '17.25em', marginLeft: '0.2em', height: '2em'}}
                                     onChange={(e) => handleChangeSupplier("password", e.target.value)}
                                     showPassword={showPassword}
                                     handleClickShowPassword={handleClickShowPassword}

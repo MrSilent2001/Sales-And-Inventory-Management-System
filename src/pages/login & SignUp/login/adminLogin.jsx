@@ -51,7 +51,7 @@ function AdminLogin() {
     const handleSubmitLogin = async (values, { setSubmitting }) => {
         console.log(values);
         try {
-            const { id, role } = await adminLogin(values.username, values.password);
+            const response = await adminLogin(values.username, values.password);
             navigate("/adminDashboard");
         } catch (error) {
             console.error('Login error:', error);
@@ -83,31 +83,47 @@ function AdminLogin() {
         <div className="adminLoginContainer">
             <div className="tabPanel">
                 <div>
-                    <button
+                    <CustomizedButton
                         className={`nav-link ${activeTab === 'login' ? 'active' : ''}`}
                         onClick={() => setActiveTab('login')}
+                        style={{
+                            width: '7.5em',
+                            padding: '1.25em 1em',
+                            marginRight: '1em',
+                            backgroundColor: activeTab === 'login' ? '#007bff' : 'transparent',
+                            color: activeTab === 'login' ? '#ffffff' : '#007bff',
+                            border: '1px solid #007bff'
+                        }}
                     >
                         Login
-                    </button>
+                    </CustomizedButton>
                 </div>
                 <div>
-                    <button
+                    <CustomizedButton
                         className={`nav-link ${activeTab === 'signup' ? 'active' : ''}`}
                         onClick={() => setActiveTab('signup')}
+                        style={{
+                            width: '7.5em',
+                            padding: '1.25em 1em',
+                            marginLeft: '1em',
+                            backgroundColor: activeTab === 'signup' ? '#007bff' : 'transparent',
+                            color: activeTab === 'signup' ? '#007bff' : '#ffffff',
+                            border: '1px solid #007bff'
+                        }}
                     >
-                        Sign-Up
-                    </button>
+                        Sign Up
+                    </CustomizedButton>
                 </div>
             </div>
 
             <div className="bodyContainer">
                 <div className={`tab-pane ${activeTab === 'login' ? 'active' : ''}`} id="pills-login">
                     <Formik
-                        initialValues={{ username: '', password: '' }}
+                        initialValues={{username: '', password: ''}}
                         validationSchema={LoginSchema}
                         onSubmit={handleSubmitLogin}
                     >
-                        {({ isSubmitting }) => (
+                        {({isSubmitting}) => (
                             <Form>
                                 <FormControl fullWidth>
                                     <div className="form-outline">
@@ -119,20 +135,21 @@ function AdminLogin() {
                                             type="text"
                                             className="loginInput"
                                         />
-                                        <ErrorMessage name="username" component="div" className="error-message" />
+                                        <ErrorMessage name="username" component="div" className="error-message"/>
                                     </div>
 
                                     <div className="form-outline">
                                         <label>Password:</label>
                                         <Field
                                             name="password"
+                                            style={{width: '17.25em', marginLeft: '0.2em', height: '2em'}}
                                             as={PasswordField}
                                             size="small"
                                             showPassword={showPassword}
                                             handleClickShowPassword={handleClickShowPassword}
                                             handleMouseDownPassword={handleMouseDownPassword}
                                         />
-                                        <ErrorMessage name="password" component="div" className="error-message" />
+                                        <ErrorMessage name="password" component="div" className="error-message"/>
                                     </div>
 
                                     <div className="buttonContainer">
@@ -158,7 +175,8 @@ function AdminLogin() {
                                     </div>
 
                                     <div className="text-center">
-                                        <p>Not a member? <a href="#!" onClick={() => setActiveTab('signup')}>Sign-Up</a></p>
+                                        <p>Not a member? <a href="#!" onClick={() => setActiveTab('signup')}>Sign-Up</a>
+                                        </p>
                                     </div>
                                     <div className="text-center">
                                         <a href="#!">Forgot password?</a>
@@ -171,11 +189,11 @@ function AdminLogin() {
 
                 <div className={`tab-pane ${activeTab === 'signup' ? 'active' : ''}`} id="pills-register">
                     <Formik
-                        initialValues={{ username: '', email: '', contactNo: '', password: '', confirmPassword: '' }}
+                        initialValues={{username: '', email: '', contactNo: '', password: '', confirmPassword: ''}}
                         validationSchema={SignupSchema}
                         onSubmit={handleSubmitSignup}
                     >
-                        {({ isSubmitting }) => (
+                        {({isSubmitting}) => (
                             <Form>
                                 <FormControl fullWidth>
                                     <div className="form-outline">
@@ -186,7 +204,7 @@ function AdminLogin() {
                                             size="small"
                                             type="text"
                                         />
-                                        <ErrorMessage name="username" component="div" className="error-message" />
+                                        <ErrorMessage name="username" component="div" className="error-message"/>
                                     </div>
 
                                     <div className="form-outline">
@@ -197,7 +215,7 @@ function AdminLogin() {
                                             size="small"
                                             type="email"
                                         />
-                                        <ErrorMessage name="email" component="div" className="error-message" />
+                                        <ErrorMessage name="email" component="div" className="error-message"/>
                                     </div>
 
                                     <div className="form-outline">
@@ -208,33 +226,35 @@ function AdminLogin() {
                                             size="small"
                                             type="text"
                                         />
-                                        <ErrorMessage name="contactNo" component="div" className="error-message" />
+                                        <ErrorMessage name="contactNo" component="div" className="error-message"/>
                                     </div>
 
                                     <div className="form-outline">
                                         <label>Password:</label>
                                         <Field
                                             name="password"
+                                            style={{width: '17.25em', marginLeft: '0.2em', height: '2em'}}
                                             as={PasswordField}
                                             size="small"
                                             showPassword={showPassword}
                                             handleClickShowPassword={handleClickShowPassword}
                                             handleMouseDownPassword={handleMouseDownPassword}
                                         />
-                                        <ErrorMessage name="password" component="div" className="error-message" />
+                                        <ErrorMessage name="password" component="div" className="error-message"/>
                                     </div>
 
                                     <div className="form-outline">
                                         <label>Confirm Password:</label>
                                         <Field
                                             name="confirmPassword"
+                                            style={{width: '17.25em', marginLeft: '0.2em', height: '2em'}}
                                             as={PasswordField}
                                             size="small"
                                             showPassword={showPassword}
                                             handleClickShowPassword={handleClickShowPassword}
                                             handleMouseDownPassword={handleMouseDownPassword}
                                         />
-                                        <ErrorMessage name="confirmPassword" component="div" className="error-message" />
+                                        <ErrorMessage name="confirmPassword" component="div" className="error-message"/>
                                     </div>
 
                                     <div className="buttonContainer">
@@ -260,7 +280,9 @@ function AdminLogin() {
                                     </div>
 
                                     <div className="text-center">
-                                        <p>Already Have an Account? <a href="#!" onClick={() => setActiveTab('login')}>Login</a></p>
+                                        <p>Already Have an Account? <a href="#!"
+                                                                       onClick={() => setActiveTab('login')}>Login</a>
+                                        </p>
                                     </div>
                                 </FormControl>
                             </Form>

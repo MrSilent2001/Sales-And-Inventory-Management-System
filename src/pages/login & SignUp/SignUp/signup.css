@@ -35,7 +35,7 @@
 }
 
 .form-outline label {
-    width: 120px; /* Adjust the width as needed */
+    width: 120px;
     text-align: right;
     margin-right: 1em;
 }
@@ -52,7 +52,6 @@
 .error-message {
     color: red;
     font-size: 0.875em;
-    margin-top: 0.25em;
 }
 
 .form-outline label {

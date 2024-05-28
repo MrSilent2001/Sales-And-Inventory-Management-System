@@ -4,12 +4,10 @@ import BasicTextField from "../../../components/Form Inputs/textfield";
 import PasswordField from "../../../components/Form Inputs/passwordField";
 import CustomizedButton from "../../../components/Button/button";
 import FormControl from "@mui/material/FormControl";
-import { useAuth } from '../../../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from "axios";
 
 function SignUp() {
-    const { adminLogin } = useAuth();
     const [activeTab, setActiveTab] = useState('customer');
     const [showPassword, setShowPassword] = useState(false);
     const [customerData, setCustomerFormData] = useState({
@@ -129,20 +127,36 @@ function SignUp() {
         <div className="adminLoginContainer">
             <div className="tabPanel">
                 <div>
-                    <button
+                    <CustomizedButton
                         className={`nav-link ${activeTab === 'customer' ? 'active' : ''}`}
                         onClick={() => setActiveTab('customer')}
+                        style={{
+                            width: '7.5em',
+                            padding: '1.25em 1em',
+                            marginRight: '1em',
+                            backgroundColor: activeTab === 'customer' ? '#007bff' : 'transparent',
+                            color: activeTab === 'customer' ? '#ffffff' : '#007bff',
+                            border: '1px solid #007bff'
+                        }}
                     >
                         Customer
-                    </button>
+                    </CustomizedButton>
                 </div>
                 <div>
-                    <button
+                    <CustomizedButton
                         className={`nav-link ${activeTab === 'supplier' ? 'active' : ''}`}
                         onClick={() => setActiveTab('supplier')}
+                        style={{
+                            width: '7.5em',
+                            padding: '1.25em 1em',
+                            marginLeft: '1em',
+                            backgroundColor: activeTab === 'supplier' ? '#007bff' : 'transparent',
+                            color: activeTab === 'supplier' ? '#007bff' : '#ffffff',
+                            border: '1px solid #007bff'
+                        }}
                     >
                         Supplier
-                    </button>
+                    </CustomizedButton>
                 </div>
             </div>
 
@@ -159,8 +173,8 @@ function SignUp() {
                                     onChange={(e) => handleChangeCustomer("username", e.target.value)}
                                     required
                                 />
-                                {errors.username && <div className="error-message">{errors.username}</div>}
                             </div>
+                            {errors.username && <div className="error-message">{errors.username}</div>}
 
                             <div className="form-outline">
                                 <label> Email: </label>
@@ -171,8 +185,8 @@ function SignUp() {
                                     onChange={(e) => handleChangeCustomer("email", e.target.value)}
                                     required
                                 />
-                                {errors.email && <div className="error-message">{errors.email}</div>}
                             </div>
+                            {errors.email && <div className="error-message">{errors.email}</div>}
 
                             <div className="form-outline">
                                 <label> Contact No: </label>
@@ -183,8 +197,8 @@ function SignUp() {
                                     onChange={(e) => handleChangeCustomer("contactNo", e.target.value)}
                                     required
                                 />
-                                {errors.contactNo && <div className="error-message">{errors.contactNo}</div>}
                             </div>
+                            {errors.contactNo && <div className="error-message">{errors.contactNo}</div>}
 
                             <div className="form-outline">
                                 <label> Address: </label>
@@ -195,13 +209,13 @@ function SignUp() {
                                     onChange={(e) => handleChangeCustomer("address", e.target.value)}
                                     required
                                 />
-                                {errors.address && <div className="error-message">{errors.address}</div>}
                             </div>
+                            {errors.address && <div className="error-message">{errors.address}</div>}
 
                             <div className="form-outline">
                                 <label> Password: </label>
                                 <PasswordField
-                                    style={{width: '17.25em', marginLeft: '-0.75em'}}
+                                    style={{width: '17.25em', marginLeft: '0.2em', height: '2em'}}
                                     size="small"
                                     id="outlined-adornment-password"
                                     onChange={(e) => handleChangeCustomer("password", e.target.value)}
@@ -210,13 +224,13 @@ function SignUp() {
                                     handleMouseDownPassword={handleMouseDownPassword}
                                     required
                                 />
-                                {errors.password && <div className="error-message">{errors.password}</div>}
                             </div>
+                            {errors.password && <div className="error-message">{errors.password}</div>}
 
                             <div className="form-outline">
                                 <label> Confirm Password: </label>
                                 <PasswordField
-                                    style={{width: '17.25em', marginLeft: '-0.75em'}}
+                                    style={{width: '17.25em', marginLeft: '0.2em', height: '2em'}}
                                     size="small"
                                     id="outlined-adornment-confirm-password"
                                     onChange={(e) => handleChangeCustomer("confirmPassword", e.target.value)}
@@ -225,8 +239,8 @@ function SignUp() {
                                     handleMouseDownPassword={handleMouseDownPassword}
                                     required
                                 />
-                                {errors.confirmPassword && <div className="error-message">{errors.confirmPassword}</div>}
                             </div>
+                            {errors.confirmPassword && <div className="error-message">{errors.confirmPassword}</div>}
 
                             <div className="buttonContainer">
                                 <CustomizedButton
@@ -266,8 +280,8 @@ function SignUp() {
                                     onChange={(e) => handleChangeSupplier("username", e.target.value)}
                                     required
                                 />
-                                {errors.username && <div className="error-message">{errors.username}</div>}
                             </div>
+                            {errors.username && <div className="error-message">{errors.username}</div>}
 
                             <div className="form-outline">
                                 <label> Email: </label>
@@ -278,8 +292,8 @@ function SignUp() {
                                     onChange={(e) => handleChangeSupplier("email", e.target.value)}
                                     required
                                 />
-                                {errors.email && <div className="error-message">{errors.email}</div>}
                             </div>
+                            {errors.email && <div className="error-message">{errors.email}</div>}
 
                             <div className="form-outline">
                                 <label> Contact No: </label>
@@ -290,13 +304,13 @@ function SignUp() {
                                     onChange={(e) => handleChangeSupplier("contactNo", e.target.value)}
                                     required
                                 />
-                                {errors.contactNo && <div className="error-message">{errors.contactNo}</div>}
                             </div>
+                            {errors.contactNo && <div className="error-message">{errors.contactNo}</div>}
 
                             <div className="form-outline">
                                 <label> Password: </label>
                                 <PasswordField
-                                    style={{width: '17.25em', marginLeft: '-0.75em'}}
+                                    style={{width: '17.25em', marginLeft: '0.2em', height: '2em'}}
                                     size="small"
                                     id="outlined-adornment-password"
                                     onChange={(e) => handleChangeSupplier("password", e.target.value)}
@@ -305,13 +319,13 @@ function SignUp() {
                                     handleMouseDownPassword={handleMouseDownPassword}
                                     required
                                 />
-                                {errors.password && <div className="error-message">{errors.password}</div>}
                             </div>
+                            {errors.password && <div className="error-message">{errors.password}</div>}
 
                             <div className="form-outline">
                                 <label> Confirm Password: </label>
                                 <PasswordField
-                                    style={{width: '17.25em', marginLeft: '-0.75em'}}
+                                    style={{width: '17.25em', marginLeft: '0.2em', height: '2em'}}
                                     size="small"
                                     id="outlined-adornment-confirm-password"
                                     onChange={(e) => handleChangeSupplier("confirmPassword", e.target.value)}
@@ -320,8 +334,9 @@ function SignUp() {
                                     handleMouseDownPassword={handleMouseDownPassword}
                                     required
                                 />
-                                {errors.confirmPassword && <div className="error-message">{errors.confirmPassword}</div>}
                             </div>
+                            {errors.confirmPassword && <div className="error-message">{errors.confirmPassword}</div>}
+
 
                             <div className="form-outline">
                                 <label> NIC: </label>
@@ -332,8 +347,8 @@ function SignUp() {
                                     onChange={(e) => handleChangeSupplier("nic", e.target.value)}
                                     required
                                 />
-                                {errors.nic && <div className="error-message">{errors.nic}</div>}
                             </div>
+                            {errors.nic && <div className="error-message">{errors.nic}</div>}
 
                             <div className="form-outline">
                                 <label> Payment Details: </label>
@@ -344,8 +359,8 @@ function SignUp() {
                                     onChange={(e) => handleChangeSupplier("paymentDetails", e.target.value)}
                                     required
                                 />
-                                {errors.paymentDetails && <div className="error-message">{errors.paymentDetails}</div>}
                             </div>
+                            {errors.paymentDetails && <div className="error-message">{errors.paymentDetails}</div>}
 
                             <div className="buttonContainer">
                                 <CustomizedButton

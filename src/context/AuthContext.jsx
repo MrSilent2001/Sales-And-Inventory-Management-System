@@ -18,48 +18,45 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const customerLogin = async (username, password) => {
-        const response = await axios.post('http://localhost:9000/customer/login', { username, password, role });
-        const { access_token, id, role, usn } = response.data;
-        setAuthState({ token: access_token, id, role, usn });
+        const response = await axios.post('http://localhost:9000/auth/customer/login', { username, password});
+        const { access_token, id, role} = response.data;
+        setAuthState({ token: access_token, id, role});
         setIsAuthenticated(true);
 
         // Store tokens in localStorage
         localStorage.setItem('accessToken', access_token);
         localStorage.setItem('role', role);
         localStorage.setItem('id', id);
-        localStorage.setItem('username', usn);
 
-        return { id, usn, role, access_token };
+        return { id, role, access_token };
     };
 
     const supplierLogin = async (username, password) => {
-        const response = await axios.post('http://localhost:9000/supplier/login', { username, password, role });
-        const { access_token, id, role, usn } = response.data;
-        setAuthState({ token: access_token, id, role, usn });
+        const response = await axios.post('http://localhost:9000/auth/supplier/login', { username, password});
+        const { access_token, id, role} = response.data;
+        setAuthState({ token: access_token, id, role});
         setIsAuthenticated(true);
 
         // Store tokens in localStorage
         localStorage.setItem('accessToken', access_token);
         localStorage.setItem('role', role);
         localStorage.setItem('id', id);
-        localStorage.setItem('username', usn);
 
-        return { id, usn, role, access_token };
+        return { id, role, access_token };
     };
 
     const adminLogin = async (username, password) => {
         const response = await axios.post('http://localhost:9000/auth/admin/login', { username, password });
-        const { access_token, id, role, usn } = response.data;
-        setAuthState({ token: access_token, id, role, usn });
+        const { access_token, id, role} = response.data;
+        setAuthState({ token: access_token, id, role});
         setIsAuthenticated(true);
 
         // Store tokens in localStorage
         localStorage.setItem('accessToken', access_token);
         localStorage.setItem('role', role);
         localStorage.setItem('id', id);
-        localStorage.setItem('username', usn);
 
-        return { id, usn, role, access_token };
+        return { id, role, access_token };
     };
 
     const logout = () => {
