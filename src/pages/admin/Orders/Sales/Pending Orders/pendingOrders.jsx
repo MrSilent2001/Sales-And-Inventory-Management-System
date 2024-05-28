@@ -85,6 +85,8 @@ function PendingOrders() {
                 },
             });
 
+            sendOrderStatusEmail(orderId, token);
+
             const updatedRows = rows.map(row => {
                 if (row.orderId === orderId) {
                     return { ...row, orderStatus };
@@ -97,7 +99,6 @@ function PendingOrders() {
             }
 
             if (orderStatus === "Rejected"){
-                sendOrderStatusEmail(orderId, token);
                 handleClickReject()
             }
         } catch (error) {
