@@ -7,6 +7,7 @@ import CustomizedTable from "../../../../../components/Table/Customized Table/cu
 import axios from "axios";
 import SalesOrderSidebar from "../../../../../layout/sidebar/salesOrderSidebar";
 import CustomizedAlert from "../../../../../components/Alert/alert";
+import sendOrderStatusEmail from "../_Component/orderStatusChangedEmailSend";
 
 function PendingOrders() {
     const [activeButton, setActiveButton] = useState(null);
@@ -83,6 +84,7 @@ function PendingOrders() {
                     Authorization: `Bearer ${token}`,
                 },
             });
+
             const updatedRows = rows.map(row => {
                 if (row.orderId === orderId) {
                     return { ...row, orderStatus };
@@ -95,6 +97,7 @@ function PendingOrders() {
             }
 
             if (orderStatus === "Rejected"){
+                sendOrderStatusEmail(orderId, token);
                 handleClickReject()
             }
         } catch (error) {
