@@ -10,7 +10,7 @@ import axios from "axios";
 
 
 const columns = [
-    {columnId: 'orderId', label: 'OrderId', minWidth: 170, align: 'center'},
+    // {columnId: 'orderId', label: 'OrderId', minWidth: 170, align: 'center'},
     {columnId: 'orderItems', label: 'Ordered Items', minWidth: 100, align: 'center'},
     {
         columnId: 'orderPrice',

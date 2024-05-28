@@ -88,7 +88,7 @@ function CustomerProfile() {
                                         <h4>Address</h4>
                                     </div>
                                     <div className="inputData">
-                                        <h5>{customer.customerAddress}</h5>
+                                        <h5>{customer.address}</h5>
                                     </div>
                                 </div>
 
@@ -97,7 +97,7 @@ function CustomerProfile() {
                                         <h4>E-mail</h4>
                                     </div>
                                     <div className="inputData">
-                                        <h5>{customer.customerEmail}</h5>
+                                        <h5>{customer.email}</h5>
                                     </div>
                                 </div>
 
@@ -106,7 +106,7 @@ function CustomerProfile() {
                                         <h4>Contact</h4>
                                     </div>
                                     <div className="inputData">
-                                        <h5>{customer.customerContact}</h5>
+                                        <h5>{customer.contactNo}</h5>
                                     </div>
                                 </div>
 
