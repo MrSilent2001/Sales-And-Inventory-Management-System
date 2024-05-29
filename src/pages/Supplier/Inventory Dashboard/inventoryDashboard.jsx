@@ -10,6 +10,7 @@ import CustomizedButton from "../../../components/Button/button";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 import CustomizedAlert from "../../../components/Alert/alert";
 import axios from "axios";
+import PageLoader from "../../../components/Page Loader/pageLoader";
 
 const columns = [
     {columnId: 'sellerId', label: 'Supplier Id', minWidth: 70, align: 'center'},
@@ -47,7 +48,7 @@ const columns = [
 function InventoryDashboard(){
     const [addVisible,setAddVisible] = useState(false);
     const [updateVisible,setUpdateVisible] = useState(false);
-
+    const [isLoading, setIsLoading] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
     const [inventory, setInventory] = useState([]);
@@ -118,6 +119,7 @@ function InventoryDashboard(){
 
     useEffect(() => {
         const fetchInventory = async () => {
+            setIsLoading(true);
             try {
                 const response = await axios.get('http://localhost:9000/inventory/getAll', {
                     headers: {
@@ -127,8 +129,9 @@ function InventoryDashboard(){
                 setInventory(response.data);
 
             } catch (error) {
-                handleClickError();
                 console.error('Error fetching items:', error);
+            }finally {
+                setIsLoading(false);
             }
         };
         fetchInventory();
@@ -235,11 +238,11 @@ function InventoryDashboard(){
                     </div>
 
                     <div className="supplierItemTable">
-                        <CustomizedTable
-                            columns={columns}
-                            rows={rows}
-                            style={{width: '95%'}}
-                        />
+                        {isLoading ? (
+                            <PageLoader />
+                        ) : (
+                            <CustomizedTable columns={columns} rows={rows} style={{ width: '85%' }} />
+                        )}
                     </div>
                 </div>
 

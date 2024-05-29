@@ -29,6 +29,7 @@ function Cart() {
     const [removeFromCartOpenSuccess, setRemoveFromCartOpenSuccess] = useState(false);
 
     const token = localStorage.getItem('accessToken');
+    const id = localStorage.getItem('id');
 
     // Load cart data from local storage
     useEffect(() => {

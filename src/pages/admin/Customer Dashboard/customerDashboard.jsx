@@ -5,19 +5,18 @@ import Footer from "../../../layout/footer/footer";
 import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
 import CustomizedButton from "../../../components/Button/button";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import CustomizedAlert from "../../../components/Alert/alert";
 import PageLoader from "../../../components/Page Loader/pageLoader";
 
 const columns = [
-    {id: 'id', label: 'Customer Id', minWidth: 100, align: 'center'},
-    {id: 'username', label: 'Name', minWidth: 150, align: 'center'},
-    {id: 'email', label: 'Email', minWidth: 120, align: 'center'},
-    {id: 'contactNo', label: 'Contact', minWidth: 120, align: 'center'},
-    {id: 'address', label: 'Address', minWidth: 200, align: 'center'},
-    {id: 'lastLogin', label: 'Last Login', minWidth: 150, align: 'center'},
-    {id: 'actions', label: '', minWidth: 170, align: 'center'},
+    { columnId: 'id', label: 'Customer Id', minWidth: 100, align: 'center' },
+    { columnId: 'username', label: 'Name', minWidth: 150, align: 'center' },
+    { columnId: 'email', label: 'Email', minWidth: 120, align: 'center' },
+    { columnId: 'contactNo', label: 'Contact', minWidth: 120, align: 'center' },
+    { columnId: 'address', label: 'Address', minWidth: 200, align: 'center' },
+    { columnId: 'actions', label: '', minWidth: 170, align: 'center' },
 ];
 
 function CustomerDashboard() {
@@ -26,6 +25,8 @@ function CustomerDashboard() {
 
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
+
+    const token = localStorage.getItem('accessToken');
 
     const handleClickSuccess = () => {
         setOpenSuccess(true);
@@ -47,8 +48,6 @@ function CustomerDashboard() {
         console.log("Please Login to the system");
     }
 
-    const token = localStorage.getItem('accessToken');
-
     useEffect(() => {
         const fetchCustomers = async () => {
             setIsLoading(true);
@@ -59,7 +58,7 @@ function CustomerDashboard() {
                     },
                 });
                 setCustomer(response.data);
-                console.log(customer)
+                console.log(response.data)
             } catch (error) {
                 handleClickError();
                 console.error('Error fetching users:', error);
@@ -71,7 +70,7 @@ function CustomerDashboard() {
     }, [token]);
 
 
-    const handleRemove = async(id) => {
+    const handleRemove = async (id) => {
         try {
             await axios.delete(`http://localhost:9000/customer/delete/${id}`, {
                 headers: {
@@ -97,9 +96,10 @@ function CustomerDashboard() {
 
     let rows = customer;
 
-    const createActions = (id) => ({
-        sendWarningButton:
+    const createActions = (id) => ([
+        <div style={{display: "flex", justifyContent: "space-between"}}>
             <CustomizedButton
+                key={`sendWarning-${id}`}
                 onClick={() => handleSendWarning(id)}
                 hoverBackgroundColor="#2d3ed2"
                 style={{
@@ -117,8 +117,8 @@ function CustomerDashboard() {
                 }}>
                 Send Warning
             </CustomizedButton>,
-        removeButton:
             <CustomizedButton
+                key={`remove-${id}`}
                 onClick={() => handleRemove(id)}
                 hoverBackgroundColor="#f11717"
                 style={{
@@ -134,10 +134,14 @@ function CustomerDashboard() {
                     marginRight: '1.5em',
                 }}>
                 Remove
-            </CustomizedButton>,
-    });
+            </CustomizedButton>
+        </div>
+    ]);
 
-    rows = rows.map(row => ({...row, actions: createActions(row.id)}));
+    rows = rows.map(row => ({
+        ...row,
+        actions: createActions(row.id)
+    }));
 
     const searchCustomers = async (query) => {
         setIsLoading(true);
@@ -154,7 +158,7 @@ function CustomerDashboard() {
 
     return (
         <>
-            <SalesNavbar/>
+            <SalesNavbar />
             <div className="CustomerManagementOuter">
                 <div className="CustomerManagementInner">
 
@@ -185,7 +189,7 @@ function CustomerDashboard() {
                 </div>
             </div>
 
-            <Footer/>
+            <Footer />
             <CustomizedAlert
                 open={openSuccess}
                 onClose={handleCloseSuccess}

@@ -235,7 +235,8 @@ const AddDiscount = forwardRef((props, ref) => {
                                 <div className="addDiscountsInput">
                                     <CustomDatePicker
                                         name="startDate"
-                                        slotProps={{ textField: { size: 'small', width: '17.25em', height: '2em' } }}
+                                        slotProps={{ textField: { size: 'small' } }}
+                                        sx={{ width: '17.5em', height: '0.75em', marginRight: '0.5em', marginTop: '-0.5em' }}
                                         required
                                         onChange={(date) => {
                                             const formattedDate = dayjs(date).format('YYYY-MM-DD');
@@ -255,6 +256,7 @@ const AddDiscount = forwardRef((props, ref) => {
                                     <CustomDatePicker
                                         name="endDate"
                                         slotProps={{ textField: { size: 'small' } }}
+                                        sx={{ width: '17.5em', height: '0.75em', marginRight: '0.5em' }}
                                         required
                                         onChange={(date) => {
                                             const formattedDate = dayjs(date).format('YYYY-MM-DD');
