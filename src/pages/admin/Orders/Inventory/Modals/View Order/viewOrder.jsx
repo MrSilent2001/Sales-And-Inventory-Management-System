@@ -1,20 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import "./viewOrder.css";
 import CustomizedButton from "../../../../../../components/Button/button";
 import CenteredModal from "../../../../../../components/Modal/modal";
 
-function ViewOrder(props){
+function ViewOrder({ order, onClose }) {
+    const [orderDetails, setOrderDetails] = useState({
+        orderId: '',
+        supplier: '',
+        deliveryAddress: '',
+        email: '',
+        contactNumber: '',
+        items: []
+    });
 
-    const orderDetails = {
-        orderId: 'OID0001',
-        supplier: 'S0001',
-        deliveryAddress: '1234 Delivery Ln, City, State',
-        email: 'customer@example.com',
-        contactNumber: '0771112223',
-        items: ['I0001', 'I0002', 'I0003']
-    };
+    useEffect(() => {
+        const fetchOrderDetails = async () => {
+            if (!order) return;
 
-    return(
+            try {
+                const response = await axios.get(`http://localhost:9000/purchaseOrder/get/${order}`);
+                setOrderDetails({
+                    ...response.data,
+                    items: response.data.items || [] // Ensure items is an array
+                });
+                console.log("fetchdata", response.data);
+            } catch (err) {
+                console.error('Failed to fetch order details:', err);
+            }
+        };
+
+        fetchOrderDetails();
+    }, [order]);
+
+    return (
         <CenteredModal>
             <div className="viewOrderOuter">
                 <div className="viewOrderModel">
@@ -25,7 +44,7 @@ function ViewOrder(props){
                                 <h5>Order Id:</h5>
                             </div>
                             <div className="idInput">
-                                {orderDetails.orderId}
+                                {orderDetails.id}
                             </div>
                         </div>
 
@@ -43,7 +62,7 @@ function ViewOrder(props){
                                 <h5>Delivery Address:</h5>
                             </div>
                             <div className="idInput">
-                                {orderDetails.deliveryAddress}
+                                {orderDetails.Address}
                             </div>
                         </div>
 
@@ -52,7 +71,7 @@ function ViewOrder(props){
                                 <h5>Email:</h5>
                             </div>
                             <div className="idInput">
-                                {orderDetails.email}
+                                {orderDetails.mail}
                             </div>
                         </div>
 
@@ -61,7 +80,7 @@ function ViewOrder(props){
                                 <h5>Contact Number:</h5>
                             </div>
                             <div className="idInput">
-                                {orderDetails.contactNumber}
+                                {orderDetails.contact_number}
                             </div>
                         </div>
 
@@ -70,6 +89,7 @@ function ViewOrder(props){
                                 <h5>Items:</h5>
                             </div>
                             <div className="idInput" id="items">
+                                {/*{Array.isArray(orderDetails.items) ? orderDetails.items.join(', ') : ''}*/}
                                 {orderDetails.items}
                             </div>
                         </div>
@@ -77,7 +97,7 @@ function ViewOrder(props){
                         <div className="formFieldButtons">
                             <div className="saveButton">
                                 <CustomizedButton
-                                    onClick={() => props.onClose(false)}
+                                    onClick={() => onClose(false)}
                                     hoverBackgroundColor="#2d3ed2"
                                     style={{
                                         backgroundColor: '#242F9B',
@@ -99,7 +119,7 @@ function ViewOrder(props){
                 </div>
             </div>
         </CenteredModal>
-    )
+    );
 }
 
 export default ViewOrder;
