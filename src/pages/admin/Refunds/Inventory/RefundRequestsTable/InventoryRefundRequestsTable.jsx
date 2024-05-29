@@ -1,33 +1,46 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {Box, Container, Modal,Typography} from '@mui/material';
+import axios from 'axios';
 import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
-import InventoryRefundRequest from "../Modal/InventoryRefundRequest";
+import InventoryRefundRequest from "../../../../../pages/admin/Refunds/Inventory/Modal/InventoryRefundRequest";
 import CustomizedButton from "../../../../../components/Button/button";
-import inventoryRefunds from "../../../../../context/data.json";
 import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 
 
 const InventoryRefundRequestsTable = ({onViewApproved}) => {
     const [visible,setVisible] = useState(false)
+    const [refundRequests, setRefundRequests] = useState([]);
+    const [error, setError] = useState('');
 
+    useEffect(() => {
+        const fetchRefundRequests = async () => {
+            try {
+                const response = await axios.get('http://localhost:9000/refund/inventoryRefund/getAll');
+                setRefundRequests(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error fetching refund requests:', error);
+                setError('Failed to fetch refund requests. Please try again later.');
+            }
+        };
+        fetchRefundRequests();
+    }, []);
 
     const columns=[
-        { id: 'name', label: 'Name', minWidth: 70,align: 'center'  },
-        { id: 'requestId', label: 'Request Id', minWidth: 150,align: 'center'  },
-        { id: 'orderId', label: 'Order Id', minWidth: 120,align: 'center'  },
-        { id: 'amount', label:'Amount', minWidth: 200,align: 'center'  },
-        { id: 'status', label:'Status', minWidth: 200,align: 'center'  }
+        { columnId: 'name', label: 'Name', minWidth: 70,align: 'center'  },
+        {  columnId: 'contact_number', label: 'Contact number', minWidth: 150,align: 'center'  },
+        { columnId: 'inventory_id', label: 'Refund Id', minWidth: 120,align: 'center'  },
+        { columnId: 'amount', label:'Price', minWidth: 200,align: 'center'  },
+        { columnId: 'status', label:'Status', minWidth: 200,align: 'center'  }
     ];
 
-    const rows = inventoryRefunds.inventoryRefunds || [];
-
-    const mappedData = rows.map(row => ({
-        name: row.name,
-        requestId: row.requestId,
-        orderId: row.orderId,
-        amount: row.amount,
+    const mappedData = refundRequests.map(row => ({
+        name: row.supplier,
+        contact_number: row.phone,
+        inventory_id: row.inventory_id,
+        amount: row.price,
         status: row.status
     }));
 
@@ -42,7 +55,7 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
                     {
                         backgroundColor: '#DBDFFD',
                         width: '100%',
-                        height: '40em'
+                        height: '47em'
                     }
                 }
             >
@@ -82,7 +95,7 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
                                 Refund Requests
                             </CustomizedButton>
 
-                            <Link to="/SalesApprovedRefundsTable">
+                            <Link to="/ApprovedRefundsTable">          
                             <CustomizedButton
                                 onClick={onViewApproved}
                                 hoverBackgroundColor="#f11717"
@@ -105,10 +118,14 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
                             </Link>
                         </div>
                     </Box>
-
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
                     <CustomizedTable
                         columns={columns}
                         rows={mappedData}
+                        style={{minWidth: 700,height:21000}}
                     />
                 </Box>
             </Container>
