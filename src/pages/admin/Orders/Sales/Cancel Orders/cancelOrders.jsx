@@ -14,16 +14,18 @@ import sendOrderStatusEmail from "../_Component/orderStatusChangedEmailSend";
 function CancelOrder() {
     const [activeButton, setActiveButton] = useState(null);
 
+    //Successful Alert Variables
     const [openSuccess, setOpenSuccess] = useState(false);
     //data fetching error Alert Variables
     const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
     //IDNotExist fetching error Alert Variables
     const [IDNotExistErrorOpenSuccess, setIDNotExistErrorOpenSuccess] = useState(false);
-    //IDNotExist fetching error Alert Variables
+    //Already Cancelled error Alert Variables
     const [orderAlreadyCancelledOpenSuccess, setOrderAlreadyCancelledOpenSuccess] = useState(false);
     //data Update error Alert Variables
     const [updateErrorOpenSuccess, setUpdateErrorOpenSuccess] = useState(false);
 
+    //Handle Submit Successful Alert Variables
     const handleClickSuccess = () => {
         setOpenSuccess(true);
     };
