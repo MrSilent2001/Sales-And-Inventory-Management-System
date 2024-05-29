@@ -5,7 +5,7 @@ import CustomerDashboard from "../pages/admin/Customer Dashboard/customerDashboa
 import CustomerOrderHistory from "../pages/Customer/Order History/customerOrderHistory";
 import View from "../pages/Customer/View/view";
 import ApprovedRefundsTable from "../pages/admin/Refunds/Customer/Approved Refunds/ApprovedRefundsTable";
-import RefundsManager from "../pages/admin/Refunds/Inventory/RefundRequestsTable/RefundsManager";
+
 import SalesApprovedRefundsTable from "../pages/admin/Refunds/Customer/Sales_Approved Refunds/SalesApprovedRefundsTable";
 import SalesRefundDenialForm from "../pages/admin/Refunds/Customer/Refund Denial Form/SalesRefundDenialForm";
 import SalesViewRequest from "../pages/admin/Refunds/Customer/Generated Refund Request/SalesViewRequest";
@@ -115,7 +115,6 @@ export function PageRouting() {
                     <Route path="/AdminOrderHistory" element={<AdminOrderHistory/>}/>
                     <Route path="/view" element={<View/>}/>
 
-                    <Route path="/RefundsManager" element={<RefundsManager/>}/>
 
                     <Route path="/SalesRefundDenialForm" element={<SalesRefundDenialForm/>}/>
                     <Route path="/SalesViewRequest" element={<SalesViewRequest/>}/>
