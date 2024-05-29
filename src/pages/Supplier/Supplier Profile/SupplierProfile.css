@@ -59,11 +59,17 @@
 
 .SupplierProfileButtonField{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;
     margin-left: 13em;
     margin-top: 1.5em;
+}
+
+.SupplierProfileButtons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .profileAvatar {

@@ -8,11 +8,16 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import CustomizedAlert from "../../../components/Alert/alert";
+import DialogBox from "../../../components/Dialog Box/DialogBox";
 
 function SupplierProfile() {
     const [supplier, setSupplier] = useState({});
     const [openError, setOpenError] = useState(false);
-    const navigate = useNavigate(); // Update: use useNavigate
+    const [openDialog, setOpenDialog] = useState(false);
+    const navigate = useNavigate();
+
+    const id = parseInt(localStorage.getItem('id'));
+    const token = localStorage.getItem('accessToken');
 
     const handleClickError = () => {
         setOpenError(true);
@@ -22,13 +27,37 @@ function SupplierProfile() {
     };
 
     const handleNavigate = () => {
-        navigate('/updateSupplier'); // Update: use navigate function
+        navigate('/updateSupplier');
     };
 
-    const token = localStorage.getItem('accessToken');
+    const handleDialogOpen = () => {
+        setOpenDialog(true);
+    };
+
+    const handleDialogClose = () => {
+        setOpenDialog(false);
+    };
+
+    const handleAgree = async() => {
+        try {
+            await axios.delete(`http://localhost:9000/supplier/delete/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });
+            handleDialogClose();
+            navigate('/');
+        } catch (error) {
+            handleClickError();
+            console.error('Error deleting supplier:', error);
+        }
+    };
+
+    const handleDisagree = () => {
+        handleDialogClose();
+    };
 
     useEffect(() => {
-        const id = parseInt(localStorage.getItem('id'));
         const fetchSupplier = async (id) => {
             try {
                 const response = await axios.get(`http://localhost:9000/supplier/getSupplier/${id}`, {
@@ -45,6 +74,10 @@ function SupplierProfile() {
         };
         fetchSupplier(id);
     }, []);
+
+    const handleDelete = () => {
+        handleDialogOpen();
+    };
 
     return (
         <>
@@ -121,13 +154,13 @@ function SupplierProfile() {
                             <div className="SupplierProfileButtonField">
                                 <div className="SupplierProfileButtons">
                                     <CustomizedButton
-                                        onClick={handleNavigate} // Update: onClick to navigate
+                                        onClick={handleNavigate}
                                         hoverBackgroundColor="#2d3ed2"
                                         style={{
                                             color: '#ffffff',
                                             backgroundColor: '#242F9B',
                                             border: '1px solid #242F9B',
-                                            width: '8em',
+                                            width: '9em',
                                             height: '2.5em',
                                             fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
@@ -138,21 +171,44 @@ function SupplierProfile() {
                                         }}>
                                         Edit Profile
                                     </CustomizedButton>
+
+                                    <CustomizedButton
+                                        onClick={handleDelete}
+                                        hoverBackgroundColor="#f11717"
+                                        style={{
+                                            color: '#ffffff',
+                                            backgroundColor: '#960505',
+                                            width: '9em',
+                                            height: '2.5em',
+                                            fontSize: '0.85em',
+                                            padding: '0.5em 0.625em',
+                                            borderRadius: '0.35em',
+                                            marginLeft: '1em',
+                                        }}>
+                                        Delete Profile
+                                    </CustomizedButton>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
-            <Footer/>
-
             <CustomizedAlert
                 open={openError}
                 onClose={handleCloseError}
                 severity="error"
                 message="Something Went Wrong!"
             />
+
+            <DialogBox
+                open={openDialog}
+                onClose={handleDialogClose}
+                title="Delete your Profile?"
+                content="Are you really want to delete your profile?"
+                onAgree={handleAgree}
+                onDisagree={handleDisagree}
+            />
+            <Footer/>
         </>
     );
 }

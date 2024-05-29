@@ -9,11 +9,16 @@ import { Link, useNavigate } from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import DialogBox from "../../../../components/Dialog Box/DialogBox";
 
 function CustomerProfile() {
     const [customer, setCustomer] = useState({});
     const [openError, setOpenError] = useState(false);
+    const [openDialog, setOpenDialog] = useState(false);
     const navigate = useNavigate();
+
+    const token = localStorage.getItem('accessToken');
+    const id = localStorage.getItem('id');
 
     const handleClickError = () => {
         setOpenError(true);
@@ -23,8 +28,32 @@ function CustomerProfile() {
         setOpenError(false);
     };
 
-    const token = localStorage.getItem('accessToken');
-    const id = localStorage.getItem('id');
+    const handleDialogOpen = () => {
+        setOpenDialog(true);
+    };
+
+    const handleDialogClose = () => {
+        setOpenDialog(false);
+    };
+
+    const handleAgree = async() => {
+        try {
+            await axios.delete(`http://localhost:9000/customer/delete/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });
+            handleDialogClose();
+            navigate('/');
+        } catch (error) {
+            handleClickError();
+            console.error('Error deleting customer:', error);
+        }
+    };
+
+    const handleDisagree = () => {
+        handleDialogClose();
+    };
 
     useEffect(() => {
         const fetchCustomer = async () => {
@@ -45,18 +74,8 @@ function CustomerProfile() {
         fetchCustomer();
     }, [token, id]);
 
-    const handleDelete = async () => {
-        try {
-            await axios.delete(`http://localhost:9000/customer/delete/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                }
-            });
-            navigate('/');
-        } catch (error) {
-            handleClickError();
-            console.error('Error deleting customer:', error);
-        }
+    const handleDelete = () => {
+        handleDialogOpen();
     };
 
     return (
@@ -176,13 +195,17 @@ function CustomerProfile() {
                                 </CustomizedButton>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
+            <DialogBox
+                open={openDialog}
+                onClose={handleDialogClose}
+                title="Delete your Profile?"
+                content="Are you really want to delete your profile?"
+                onAgree={handleAgree}
+                onDisagree={handleDisagree}
+            />
             <Footer/>
         </>
     );
