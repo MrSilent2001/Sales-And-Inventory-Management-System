@@ -77,7 +77,7 @@ function OrderDetails() {
     const fetchOrderById = async (orderId) => {
         if (!orderId) {
             console.log('Order ID is empty. Fetch operation aborted.');
-            handleCancel();
+            makeFieldsEmpty()
             return;
         }
 
@@ -91,7 +91,8 @@ function OrderDetails() {
             if (!response.data || Object.keys(response.data).length === 0) {
                 // throw new Error('Order ID does not exist.');
                 IDNotExistErrorHandleClickSuccess();
-                handleCancel();
+                makeFieldsEmpty();
+                return;;
 
             }
 
@@ -111,6 +112,14 @@ function OrderDetails() {
 
     const handleCancel = async () => {
         setOrderId('');
+        setReceiverName('');
+        setReceiverAddress('');
+        setReceiverContact('');
+        setOrderItems('');
+        setOrderPrice('');
+    };
+
+    const makeFieldsEmpty = async () => {
         setReceiverName('');
         setReceiverAddress('');
         setReceiverContact('');
