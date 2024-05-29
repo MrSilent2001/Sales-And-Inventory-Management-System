@@ -5,7 +5,7 @@ import CustomerDashboard from "../pages/admin/Customer Dashboard/customerDashboa
 import CustomerOrderHistory from "../pages/Customer/Order History/customerOrderHistory";
 import View from "../pages/Customer/View/view";
 import ApprovedRefundsTable from "../pages/admin/Refunds/Customer/Approved Refunds/ApprovedRefundsTable";
-
+import InventoryGeneratedRequest from "../pages/admin/Refunds/Inventory/generatedRequests/InventoryGeneratedRequest";
 import SalesApprovedRefundsTable from "../pages/admin/Refunds/Customer/Sales_Approved Refunds/SalesApprovedRefundsTable";
 import SalesRefundDenialForm from "../pages/admin/Refunds/Customer/Refund Denial Form/SalesRefundDenialForm";
 import SalesViewRequest from "../pages/admin/Refunds/Customer/Generated Refund Request/SalesViewRequest";
@@ -105,7 +105,7 @@ export function PageRouting() {
                     <Route path="/viewInventory" element={<ViewInventory/>}/>
                     <Route path="/viewSupplier" element={<ViewSupplier/>}/>
                     <Route path="/purchasedOrder" element={<PurchaseOrderDashboard/>}/>
-
+                    <Route path="/InventoryGeneratedRequest" element={<InventoryGeneratedRequest/>}/>
                     <Route path="/InventoryRefundRequestsTable" element={<InventoryRefundRequestsTable/>}/>
                     <Route path="/SalesApprovedRefundsTable" element={<SalesApprovedRefundsTable/>}/>
 
