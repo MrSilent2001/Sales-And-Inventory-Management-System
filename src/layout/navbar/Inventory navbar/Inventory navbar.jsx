@@ -71,7 +71,7 @@ function InventoryNavbar(){
                 </NavLink>
 
                 <NavLink
-                    to="/"
+                    to="/admin"
                     name="logout"
                     className={`navLink ${selectedNavLink === "logout" ? "selected" : ""}`}
                     onClick={handleNavLinkClick}

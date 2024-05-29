@@ -5,7 +5,7 @@ import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navb
 import Footer from "../../../layout/footer/footer";
 import CustomizedButton from "../../../components/Button/button";
 import BasicTextField from "../../../components/Form Inputs/textfield";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import FileUpload from "../../../components/Form Inputs/fileUpload";
 
@@ -46,31 +46,14 @@ function UpdateCustomers() {
     const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
-        const fetchCustomer = async () => {
-            try {
-                const response = await axios.get(`http://localhost:9000/customer/findCustomer/${id}` , {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                setCustomer(prevCustomer => ({
-                    ...prevCustomer,
-                    ...response.data
-                }));
-            } catch (error) {
-                console.error('Error fetching users:', error);
-            }
-        };
-        fetchCustomer();
-    }, [id]);
-
-    useEffect(() => {
-        setFormData({
-            customerName: customer.customerName || '',
-            customerAddress: customer.customerAddress || '',
-            customerContact: customer.customerContact || '',
-            customerEmail: customer.customerEmail || ''
-        });
+        if (customer) {
+            setFormData({
+                customerName: customer.customerName || '',
+                customerAddress: customer.customerAddress || '',
+                customerContact: customer.customerContact || '',
+                customerEmail: customer.customerEmail || ''
+            });
+        }
     }, [customer]);
 
     const handleSubmit = async (e) => {
@@ -82,7 +65,7 @@ function UpdateCustomers() {
                 customerContact: formData.customerContact,
                 customerEmail: formData.customerEmail,
                 profilePicture: formData.profilePicture
-            } , {
+            }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -151,7 +134,7 @@ function UpdateCustomers() {
                             </div>
                             <div className="UpdateCustomerTextInput">
                                 <BasicTextField
-                                    name={"contact"}
+                                    name="contact"
                                     style={{ width: '20em' }}
                                     value={formData.customerContact}
                                     onChange={(e) => handleChange("customerContact", e.target.value)}

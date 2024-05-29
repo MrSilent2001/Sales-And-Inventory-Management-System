@@ -4,7 +4,7 @@ import Avatar from '@mui/material/Avatar';
 import Footer from "../../../layout/footer/footer";
 import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navbar";
 import CustomizedButton from "../../../components/Button/button";
-import {useNavigate} from "react-router-dom"; // Update: import useNavigate
+import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import CustomizedAlert from "../../../components/Alert/alert";
@@ -57,7 +57,7 @@ function SupplierProfile() {
                             <Avatar src="/broken-image.jpg"
                                     sx={{width: 230, height: 230, border: 2, borderRadius: 2, marginTop: '-0.8em'}}
                             />
-                            <h3>{supplier.supplierName}</h3>
+                            <h3>{supplier.username}</h3>
                             <h4 style={{textAlign:'left'}}>ID:{localStorage.getItem('id')}</h4>
                         </div>
                     </div>
@@ -69,7 +69,7 @@ function SupplierProfile() {
                                     <h5>Address:</h5>
                                 </div>
                                 <div className="SupplierProfileInput">
-                                    <span>{supplier.supplierAddress}</span>
+                                    <span>{supplier.address}</span>
                                 </div>
                             </div>
 
@@ -78,7 +78,7 @@ function SupplierProfile() {
                                     <h5>Email:</h5>
                                 </div>
                                 <div className="SupplierProfileInput">
-                                    <span>{supplier.supplierEmail}</span>
+                                    <span>{supplier.email}</span>
                                 </div>
                             </div>
 
@@ -87,7 +87,7 @@ function SupplierProfile() {
                                     <h5>Contact No:</h5>
                                 </div>
                                 <div className="SupplierProfileInput">
-                                    <span>{supplier.supplierContact}</span>
+                                    <span>{supplier.contactNo}</span>
                                 </div>
                             </div>
 

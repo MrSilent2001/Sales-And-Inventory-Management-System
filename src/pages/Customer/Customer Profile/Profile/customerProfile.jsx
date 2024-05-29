@@ -1,3 +1,5 @@
+// CustomerProfile.js
+
 import './customerProfile.css';
 import * as React from "react";
 import Avatar from '@mui/material/Avatar';
@@ -41,7 +43,7 @@ function CustomerProfile() {
             }
         };
         fetchCustomer();
-    }, [token]);
+    }, [token, id]);
 
     const handleDelete = async () => {
         try {
@@ -137,7 +139,7 @@ function CustomerProfile() {
                                 </div>
                             </div>
                             <div className='buttonStack'>
-                                <Link to="/updateProfile">
+                                <Link to="/updateProfile" state={{ customer }}>
                                     <CustomizedButton
                                         hoverBackgroundColor="#2d3ed2"
                                         style={{

@@ -12,9 +12,9 @@ import PageLoader from "../../../components/Page Loader/pageLoader";
 
 const columns = [
     {id: 'id', label: 'Customer Id', minWidth: 100, align: 'center'},
-    {id: 'name', label: 'Name', minWidth: 150, align: 'center'},
+    {id: 'username', label: 'Name', minWidth: 150, align: 'center'},
     {id: 'email', label: 'Email', minWidth: 120, align: 'center'},
-    {id: 'contact', label: 'Contact', minWidth: 120, align: 'center'},
+    {id: 'contactNo', label: 'Contact', minWidth: 120, align: 'center'},
     {id: 'address', label: 'Address', minWidth: 200, align: 'center'},
     {id: 'lastLogin', label: 'Last Login', minWidth: 150, align: 'center'},
     {id: 'actions', label: '', minWidth: 170, align: 'center'},
@@ -43,12 +43,34 @@ function CustomerDashboard() {
         setOpenError(false);
     };
 
-
     const handleSendWarning = (id) => {
-        console.log("Pleased Login to the system");
+        console.log("Please Login to the system");
     }
 
     const token = localStorage.getItem('accessToken');
+
+    useEffect(() => {
+        const fetchCustomers = async () => {
+            setIsLoading(true);
+            try {
+                const response = await axios.get('http://localhost:9000/customer/getAllCustomers', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setCustomer(response.data);
+                console.log(customer)
+            } catch (error) {
+                handleClickError();
+                console.error('Error fetching users:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchCustomers();
+    }, [token]);
+
+
     const handleRemove = async(id) => {
         try {
             await axios.delete(`http://localhost:9000/customer/delete/${id}`, {
@@ -57,7 +79,7 @@ function CustomerDashboard() {
                 },
             });
 
-            // Fetching the updated list of discounts after deletion
+            // Fetching the updated list of customers after deletion
             const response = await axios.get('http://localhost:9000/customer/getAllCustomers', {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -67,37 +89,18 @@ function CustomerDashboard() {
             handleClickSuccess();
 
         } catch (error) {
-            console.error('Error canceling discount:', error);
+            console.error('Error deleting customer:', error);
+            handleClickError();
         }
     }
 
-    useEffect(() => {
-        const fetchCustomers = async () => {
-            setIsLoading(true);
-            try {
-                const response = await axios.get('http://localhost:9000/customer/getAllCustomers',  {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                setCustomer(response.data);
-
-            } catch (error) {
-                handleClickError();
-                console.error('Error fetching users:', error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-        fetchCustomers();
-    }, []);
 
     let rows = customer;
 
     const createActions = (id) => ({
         sendWarningButton:
             <CustomizedButton
-                onClick={handleSendWarning}
+                onClick={() => handleSendWarning(id)}
                 hoverBackgroundColor="#2d3ed2"
                 style={{
                     color: '#ffffff',
@@ -116,7 +119,7 @@ function CustomerDashboard() {
             </CustomizedButton>,
         removeButton:
             <CustomizedButton
-                onClick={() => handleRemove}
+                onClick={() => handleRemove(id)}
                 hoverBackgroundColor="#f11717"
                 style={{
                     color: '#ffffff',
@@ -137,13 +140,15 @@ function CustomerDashboard() {
     rows = rows.map(row => ({...row, actions: createActions(row.id)}));
 
     const searchCustomers = async (query) => {
+        setIsLoading(true);
         try {
             const response = await axios.get(`http://localhost:9000/customer/search?keyword=${query}`);
             setCustomer(response.data);
-            setIsLoading(false);
         } catch (error) {
             handleClickError();
             console.error('Error fetching customers:', error);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -185,7 +190,7 @@ function CustomerDashboard() {
                 open={openSuccess}
                 onClose={handleCloseSuccess}
                 severity="success"
-                message="Discount Canceled Successfully!"
+                message="Customer Removed Successfully!"
             />
 
             <CustomizedAlert

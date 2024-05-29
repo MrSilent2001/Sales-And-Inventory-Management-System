@@ -32,7 +32,7 @@ function SalesNavbar(){
                 <NavLink to="/viewRefundRequests">Refunds</NavLink>
                 <NavLink to="/discountdashboard">Discounts</NavLink>
                 <NavLink
-                    to="/"
+                    to="/admin"
                     name="logout"
                     className={`navLink ${selectedNavLink === "logout" ? "selected" : ""}`}
                     onClick={handleNavLinkClick}
