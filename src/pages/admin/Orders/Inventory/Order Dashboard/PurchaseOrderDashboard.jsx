@@ -83,11 +83,11 @@ const PurchaseOrderDashboard = () => {
     
    const columns=[
     
-    { id: 'supplier', label: 'Supplier ID', minWidth: 70,align: 'center'  },
-    { id: 'Address', label: 'Address', minWidth: 150,align: 'center'  },
-    { id: 'mail', label: 'Email', minWidth: 120,align: 'center'  },
-    { id: 'contact_number', label: 'Contact', minWidth: 100,align: 'center'  },
-    { id: 'actions', label:'', minWidth: 200,align: 'center'  }
+    { columnId: 'supplier', label: 'Supplier ID', minWidth: 70,align: 'center'  },
+    { columnId: 'Address', label: 'Address', minWidth: 150,align: 'center'  },
+    { columnId: 'mail', label: 'Email', minWidth: 120,align: 'center'  },
+    { columnId: 'contact_number', label: 'Contact', minWidth: 100,align: 'center'  },
+    { columnId: 'actions', label:'', minWidth: 200,align: 'center'  }
 ];
 
   
