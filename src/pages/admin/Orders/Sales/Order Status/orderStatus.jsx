@@ -96,12 +96,12 @@ function OrderStatus() {
     const [statuses, setStatuses] = useState(orderStatusRows.map(() => ""));
 
     // Handler to update status for a specific row
-    const handleChange = async (event, orderId, index) => {
+    const handleChange = async (event, orderId, index, orderCancelReason = '') => {
         const newStatuses = [...statuses];
         newStatuses[index] = event.target.value;
         setStatuses(newStatuses);
         try {
-            await axios.put(`http://localhost:9000/order/update/${orderId}`, { orderStatus: event.target.value } ,  {
+            await axios.put(`http://localhost:9000/order/update/${orderId}`, { orderStatus: event.target.value, orderCancelReason} ,  {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },}

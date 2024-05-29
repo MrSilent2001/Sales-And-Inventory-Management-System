@@ -14,6 +14,8 @@ function OrderDetails() {
     const [openSuccess, setOpenSuccess] = useState(false);
     //data fetching error Alert Variables
     const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
+    //IDNotExist fetching error Alert Variables
+    const [IDNotExistErrorOpenSuccess, setIDNotExistErrorOpenSuccess] = useState(false);
     //data Update error Alert Variables
     const [updateErrorOpenSuccess, setUpdateErrorOpenSuccess] = useState(false);
 
@@ -32,6 +34,15 @@ function OrderDetails() {
 
     const dataErrorHandleClickSuccess = () => {
         setDataErrorOpenSuccess(true);
+    };
+
+    //Handle IDNotExist Error Alert Variable
+    const IDNotExistErrorHandleCloseSuccess = () => {
+        setIDNotExistErrorOpenSuccess(false);
+    };
+
+    const IDNotExistErrorHandleClickSuccess = () => {
+        setIDNotExistErrorOpenSuccess(true);
     };
 
     //Handle Update Data Error Alert Variable
@@ -66,6 +77,7 @@ function OrderDetails() {
     const fetchOrderById = async (orderId) => {
         if (!orderId) {
             console.log('Order ID is empty. Fetch operation aborted.');
+            handleCancel();
             return;
         }
 
@@ -75,6 +87,15 @@ function OrderDetails() {
                     Authorization: `Bearer ${token}`,
                 },
             });
+
+            if (!response.data || Object.keys(response.data).length === 0) {
+                // throw new Error('Order ID does not exist.');
+                IDNotExistErrorHandleClickSuccess();
+                handleCancel();
+
+            }
+
+            console.log(response.data);
             setReceiverName(response.data.orderReceiverName);
             setReceiverAddress(response.data.orderReceiverAddress);
             setReceiverContact(response.data.orderReceiverContact);
@@ -85,6 +106,7 @@ function OrderDetails() {
             dataErrorHandleClickSuccess();
         }
     };
+
 
 
     const handleCancel = async () => {
@@ -277,6 +299,13 @@ function OrderDetails() {
                 onClose={dataErrorHandleCloseSuccess}
                 severity="error"
                 message="Error Fetching Data!"
+            />
+
+            <CustomizedAlert
+                open={IDNotExistErrorOpenSuccess}
+                onClose={IDNotExistErrorHandleCloseSuccess}
+                severity="error"
+                message="Order ID does not exist.!"
             />
 
             <CustomizedAlert

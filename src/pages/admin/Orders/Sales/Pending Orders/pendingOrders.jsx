@@ -77,9 +77,9 @@ function PendingOrders() {
         fetchOrders();
     }, []);
 
-    const handleOrderStatus = async (orderId, orderStatus) => {
+    const handleOrderStatus = async (orderId, orderStatus, orderCancelReason = '') => {
         try {
-            await axios.put(`http://localhost:9000/order/update/${orderId}`, { orderStatus } , {
+            await axios.put(`http://localhost:9000/order/update/${orderId}`, { orderStatus, orderCancelReason } , {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
