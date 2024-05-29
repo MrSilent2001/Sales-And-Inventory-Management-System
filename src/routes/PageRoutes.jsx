@@ -4,7 +4,7 @@ import Signup from "../pages/login & SignUp/SignUp/signup";
 import CustomerDashboard from "../pages/admin/Customer Dashboard/customerDashboard";
 import CustomerOrderHistory from "../pages/Customer/Order History/customerOrderHistory";
 import View from "../pages/Customer/View/view";
-import ApprovedRefundsTable from "../pages/admin/Refunds/Customer/Approved Refunds/ApprovedRefundsTable";
+import ApprovedRefundsTable from "../pages/admin/Refunds/Inventory/Approved Refunds/ApprovedRefundsTable";
 import InventoryGeneratedRequest from "../pages/admin/Refunds/Inventory/generatedRequests/InventoryGeneratedRequest";
 import SalesApprovedRefundsTable from "../pages/admin/Refunds/Customer/Sales_Approved Refunds/SalesApprovedRefundsTable";
 import SalesRefundDenialForm from "../pages/admin/Refunds/Customer/Refund Denial Form/SalesRefundDenialForm";
