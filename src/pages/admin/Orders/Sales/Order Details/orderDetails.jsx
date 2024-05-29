@@ -195,6 +195,7 @@ function OrderDetails() {
                                     <label className='label'>Items</label>
                                     <BasicTextField
                                         disabled={!orderId}
+                                        readOnly={true}
                                         value={orderItems}
                                         onChange={(e) => setOrderItems(e.target.value)}
                                     />
@@ -204,6 +205,7 @@ function OrderDetails() {
                                     <label className='label'>Amount</label>
                                     <BasicTextField
                                         disabled={!orderId}
+                                        readOnly={true}
                                         value={orderPrice}
                                         onChange={(e) => setOrderPrice(e.target.value)}
                                     />

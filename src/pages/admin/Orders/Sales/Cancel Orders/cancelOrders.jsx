@@ -164,6 +164,7 @@ function CancelOrder() {
                                     <BasicTextField
                                         value={order.orderReceiverName}
                                         disabled={!orderId}
+                                        readOnly={true}
                                     />
 
                                 </div>
@@ -175,6 +176,7 @@ function CancelOrder() {
                                     <BasicTextField
                                         value={order.orderItems}
                                         disabled={!orderId}
+                                        readOnly={true}
                                     />
 
                                 </div>
@@ -186,6 +188,7 @@ function CancelOrder() {
                                     <BasicTextField
                                         value={order.orderPrice}
                                         disabled={!orderId}
+                                        readOnly={true}
                                     />
 
                                 </div>
