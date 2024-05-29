@@ -1,251 +1,74 @@
+import React from 'react';
 import './generatedRequest.css';
-import * as React from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import {styled} from "@mui/material/styles";
-import Button from "@mui/material/Button";
+import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
+import Footer from "../../../../../layout/footer/footer";
 import {Link} from "react-router-dom";
-import axios from 'axios';
-import { useState } from 'react';
+import CustomizedButton from "../../../../../components/Button/button";
 
-// Mock data for suppliers and items, replace with your actual data
-const suppliers = [
-    {code: 'S0001', name: 'Supplier 1'},
-    {code: 'S0002', name: 'Supplier 2'},
-    // ... more suppliers
-];
-
-const items = [
-    {code: 'I0001', name: 'Item 1'},
-    {code: 'I0002', name: 'Item 2'},
-    {code: 'I0003', name: 'Item 3'},
-    // ... more items
-];
-
-function Dropdown({label, value, onChange, options}) {
+function InventoryGeneratedRequest() {
     return (
-        <Box sx={{minWidth: 120}}>
-            <FormControl fullWidth>
-                <InputLabel id={`select-${label}-label`}>{label}</InputLabel>
-                <Select
-                    labelId={`select-${label}-label`}
-                    id={`select-${label}`}
-                    value={value}
-                    label={label}
-                    onChange={onChange}
-                    sx={{
-                        height: 40,
-                        width: '27em',
-                        fontSize: 10,
-                        backgroundColor: '#e9eeff',
-                        marginRight: '8px',
-                    }}
-                >
-                    {options.map((option) => (
-                        <MenuItem key={option.code} value={option.code}>{option.name}</MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
-        </Box>
-    );
-}
+        <>
+            <InventoryNavbar/>
+            <div className='generateRequestsOuter'>
+                <div className="generated-request-inner">
+                    <h2>Generated Request</h2>
+                    <div className='request-container' style={{display: "flex", width: "50%", height: "40vh"}}>
+                        <div className='="inner1' style={{
+                            width: "30%",
+                            height: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "space-around"
+                        }}>
+                            <h4>Supplier</h4>
+                            <h4>Item</h4>
+                            <h4>Quantity</h4>
+                            <h4>Reason</h4>
+                            <h4>Total Price</h4>
 
-function BasicTextFields({id, variant, size, type}) {
-    return (
-        <Box
-            component="form"
-            sx={{
-                '& > :not(style)': {
-                    m: 1,
-                    width: '17em',
-                    "& .MuiInputBase-root":{
-                        height: '2.5em',
-                        backgroundColor: '#e9eeff'
-                    },
-                    "& .MuiInputLabel-root": {
-                        fontSize: '0.5em',
-                        textAlign: 'center',
-                    },
-                },
-            }}
-            noValidate
-            autoComplete="off"
-        >
-            <TextField id={id} variant={variant} size={size} type={type} margin='normal'/>
-        </Box>
-    );
-}
-
-const CancelButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText('#D41400'),
-    backgroundColor: '#D41400',
-    '&:hover': {
-        backgroundColor: '#e03a26' 
-    },
-    '&.MuiButton-root': {
-        width: '11.625em',
-        height: '2.75em'
-    },
-    fontSize: '0.625em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em'
-}));
-
-const CreateRequestButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText('#242F9B'),
-    backgroundColor: '#242F9B',
-    '&:hover': {
-        backgroundColor: '#2d3ed2' // You can adjust the darken value as needed
-    },
-    '&.MuiButton-root': {
-        width: '11.625em',
-        height: '2.75em'
-    },
-    fontSize: '0.625em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em'
-}));
-
-const CenteredModal = styled('div')({
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh', // Make the container take the full height of the viewport
-});
-
-function InventoryRefundRequest(props) {
-    const [supplier, setSupplier] = useState('');
-    const [item, setItem] = useState('');
-    const [quantity, setQuantity] = useState('');
-    const [reason, setReason] = useState('');
-    const [price, setPrice] = useState('');
-
-    const handleSubmit = async () => {
-        const refundRequestData = {
-            supplier,
-            item,
-            quantity,
-            reason,
-            price,
-        };
-
-
-          
-        try {
-            await axios.post('http://localhost:9000/refund/inventoryRefund/create', refundRequestData);
-            console.log('Refund request submitted successfully');
-            
-        } catch (error) {
-            console.error('Error submitting refund request:', error);
-        }
-    };
-
-    return (
-            <CenteredModal>
-                <div className="refundRequestOuter">
-                    <div className="refundRequestModel">
-                        <h2>Refund Request</h2>
-                        <div className="refundRequestForm">
-                            <div className="refundRequestformField">
-                                <div className="refundRequestidField">
-                                    <h5>Supplier:</h5>
-                                </div>
-                                <div className="refundRequestidInput">
-                                    <Dropdown
-                                        label="Supplier"
-                                        value={supplier}
-                                        onChange={(e) => setSupplier(e.target.value)}
-                                        options={suppliers}
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="refundRequestformField">
-                                <div className="refundRequestidField">
-                                    <h5>Item:</h5>
-                                </div>
-                                <div className="refundRequestidInput">
-                                    <Dropdown
-                                        label="Item"
-                                        value={item}
-                                        onChange={(e) => setItem(e.target.value)}
-                                        options={items}
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="refundRequestformField">
-                                <div className="addSupplieridField">
-                                    <h5>Quantity:</h5>
-                                </div>
-                                <div className="refundRequestidInput">
-                                    <BasicTextFields 
-                                       id="quantity"
-                                       variant="outlined"
-                                       size="small"
-                                       type="number"
-                                       value={quantity}
-                                       onChange={(e) => setQuantity(e.target.value)}
-                                       />
-                                </div>
-                            </div>
-
-                            <div className="refundRequestformField">
-                                <div className="refundRequestidField">
-                                    <h5>Reason:</h5>
-                                </div>
-                                <div className="refundRequestidInput">
-                                    <Dropdown
-                                        label="Reason"
-                                        value={reason}
-                                        onChange={(e) => setReason(e.target.value)}
-                                        options={[
-                                            {code: 'defected', name: 'Defected Item'},
-                                            {code: 'not-as-described', name: 'Not as Described'},
-                                            {code: 'expired', name: 'Expired'}
-                                        ]}
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="refundRequestformField">
-                                <div className="refundRequestidField">
-                                    <h5>Total Price:</h5>
-                                </div>
-                                <div className="refundRequestidInput">
-                                    <BasicTextFields 
-                                      id="total-price"
-                                      variant="outlined"
-                                      size="small"
-                                      type="number"
-                                      value={price}
-                                      onChange={(e) => setPrice(e.target.value)}
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="refundRequestformFieldButtons">
-                                <div className="addSupplierButton">
-                                    <Link to="/InventoryGeneratedRequest">
-                                        <CreateRequestButton onClick={handleSubmit}>Create Request</CreateRequestButton>
-                                    </Link>
-                                </div>
-
-                                <div className="refundRequestcancelButton">
-                                    <CancelButton onClick={() => props.onClose(false)}>Cancel</CancelButton>
-                                </div>
-                            </div>
+                        </div>
+                        <div className="inner2" style={{
+                            width: "70%",
+                            height: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "space-around"
+                        }}>
+                            <span className="value">Silva Construction Suppliers (PVT) LTD.</span>
+                            <span className="value">1001</span>
+                            <span className="value">250</span>
+                            <span className="value">Manufacturing Defects of the items and cannot be repaired</span>
+                            <span className="value">Rs.450,000.00</span>
                         </div>
                     </div>
+
+                    <Link to="/InventoryRefundRequestsTable">
+                        <CustomizedButton
+                            hoverBackgroundColor="#2d3ed2"
+                            style={{
+                                color: '#ffffff',
+                                backgroundColor: '#242F9B',
+                                border: '1px solid #242F9B',
+                                width: '8em',
+                                height: '2.5em',
+                                fontSize: '0.95em',
+                                fontFamily: 'inter',
+                                padding: '0.5em 0.625em',
+                                borderRadius: '0.35em',
+                                fontWeight: '550',
+                                marginTop: '0.625em',
+                                textTransform: 'none',
+                                textAlign: 'center',
+                            }}>
+                            Go Back
+                        </CustomizedButton>
+                    </Link>
                 </div>
 
-            </CenteredModal>
+            </div>
+            <Footer/>
+        </>
     );
 }
 
-export default InventoryRefundRequest;
-
+export default InventoryGeneratedRequest;
