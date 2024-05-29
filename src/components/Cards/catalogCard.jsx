@@ -7,7 +7,10 @@ import { CardActionArea, CardActions } from '@mui/material';
 import CustomizedButton from "../Button/button";
 
 export default function MultiActionAreaCard({ item, handleClick, handleBodyClick, handleImageClick }) {
-    const { productName, productPrice, productImage } = item;
+    const { productName, productSellingPrice, productImage, discountRate } = item;
+
+    // Calculate the final price after discount if discountRate is not null
+    const finalPrice = discountRate ? productSellingPrice * (1 - discountRate / 100) : productSellingPrice;
 
     return (
         <Card sx={{ maxWidth: 300, width: 300 }}>
@@ -26,8 +29,13 @@ export default function MultiActionAreaCard({ item, handleClick, handleBodyClick
                     <Typography variant="body2" color="text.primary">
                         {productName}
                     </Typography>
+                    {discountRate && (
+                        <Typography variant="body2" sx={{ textDecoration: 'line-through', color: 'gray' }}>
+                            Rs.{productSellingPrice.toFixed(2)}
+                        </Typography>
+                    )}
                     <Typography variant="body2" color="text.primary" sx={{ fontWeight: 'bold' }}>
-                        Rs.{productPrice}
+                        Rs.{finalPrice.toFixed(2)}
                     </Typography>
                 </CardContent>
             </CardActionArea>

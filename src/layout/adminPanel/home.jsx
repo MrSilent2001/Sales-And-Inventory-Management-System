@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './adminPanel.css';
 import
 { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill}
@@ -24,10 +24,15 @@ function Home() {
         }
     ];
 
+    const token = localStorage.getItem('accessToken');
 
     const Items = async() =>{
         try {
-            const response = await axios.get('http://localhost:9000/');
+            const response = await axios.get('http://localhost:9000/', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setDailySale(response.data);
         } catch (error) {
             console.error('Error fetching Payment data:', error);
@@ -36,7 +41,11 @@ function Home() {
 
     const sale = async() =>{
         try {
-            const response = await axios.get('http://localhost:9000/');
+            const response = await axios.get('http://localhost:9000/', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setMonthlySale(response.data);
         } catch (error) {
             console.error('Error fetching Payment data:', error);
@@ -45,7 +54,11 @@ function Home() {
 
     const stock = async() =>{
         try {
-            const response = await axios.get('http://localhost:9000/');
+            const response = await axios.get('http://localhost:9000/', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setStockLevel(response.data);
         } catch (error) {
             console.error('Error fetching Payment data:', error);
@@ -54,7 +67,11 @@ function Home() {
 
     const revenue = async() =>{
         try {
-            const response = await axios.get('http://localhost:9000/');
+            const response = await axios.get('http://localhost:9000/', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setMonthlyRevenue(response.data);
         } catch (error) {
             console.error('Error fetching Payment data:', error);
@@ -63,7 +80,12 @@ function Home() {
 
     const customers = async() =>{
         try {
-            const response = await axios.get('http://localhost:9000/customer/activeCustomers');
+            const response = await axios.get('http://localhost:9000/customer/activeCustomers',{
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            console.log(response);
             setNoOfCustomers(response.data);
         } catch (error) {
             console.error('Error fetching Payment data:', error);
@@ -72,7 +94,11 @@ function Home() {
 
     const refunds = async() =>{
         try {
-            const response = await axios.get('http://localhost:9000/refund/customerRefundCount');
+            const response = await axios.get('http://localhost:9000/refund/customerRefundCount', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setNoOfRefunds(response.data);
         } catch (error) {
             console.error('Error fetching Payment data:', error);
@@ -81,7 +107,11 @@ function Home() {
 
     const categories = async() =>{
         try {
-            const response = await axios.get('http://localhost:9000/');
+            const response = await axios.get('http://localhost:9000/', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setNoOfCategories(response.data);
         } catch (error) {
             console.error('Error fetching Payment data:', error);
@@ -90,12 +120,27 @@ function Home() {
 
     const products = async() =>{
         try {
-            const response = await axios.get('http://localhost:9000/');
+            const response = await axios.get('http://localhost:9000/', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setNoOfProducts(response.data);
         } catch (error) {
             console.error('Error fetching Payment data:', error);
         }
     }
+
+    useEffect(() => {
+        customers();
+        refunds();
+        categories();
+        products();
+        Items();
+        sale();
+        stock();
+        revenue();
+    }, []);
 
     return (
         <main className='main-container'>
@@ -104,28 +149,28 @@ function Home() {
             </div>
 
             <div className='main-cards'>
-                <div className='card'>
+                <div className='admin-panel-card'>
                     <div className='card-inner'>
                         <h3>PRODUCTS</h3>
                         <BsFillArchiveFill className='card_icon'/>
                     </div>
                     <h1>{no0fProducts}</h1>
                 </div>
-                <div className='card'>
+                <div className='admin-panel-card'>
                     <div className='card-inner'>
                         <h3>CATEGORIES</h3>
                         <BsFillGrid3X3GapFill className='card_icon'/>
                     </div>
                     <h1>{no0fCategories}</h1>
                 </div>
-                <div className='card'>
+                <div className='admin-panel-card'>
                     <div className='card-inner'>
                         <h3>ACTIVE CUSTOMERS</h3>
                         <BsPeopleFill className='card_icon'/>
                     </div>
                     <h1>{no0fCustomers}</h1>
                 </div>
-                <div className='card'>
+                <div className='admin-panel-card'>
                     <div className='card-inner'>
                         <h3>REFUND REQUEST</h3>
                         <BsFillBellFill className='card_icon'/>

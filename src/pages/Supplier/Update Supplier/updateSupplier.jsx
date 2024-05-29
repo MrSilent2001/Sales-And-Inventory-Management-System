@@ -14,10 +14,10 @@ function UpdateSupplier(props) {
     const [supplier, setSupplier] = useState({});
     const [navigate, setNavigate] = useState(false);
     const [formData, setFormData] = useState({
-        supplierName: '',
-        supplierAddress: '',
-        supplierContact: '',
-        supplierEmail: '',
+        username: '',
+        address: '',
+        contactNo: '',
+        email: '',
         paymentMethod: '',
         paymentDetails: ''
     });
@@ -41,18 +41,13 @@ function UpdateSupplier(props) {
         }));
     };
 
-
-    if (navigate) {
-        return <Navigate to="/supplierProfile" />;
-    }
-
     const id = parseInt(localStorage.getItem('id'));
     const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
         const fetchSupplier = async () => {
             try {
-                const response = await axios.get(`http://localhost:9000/supplier/getSupplier/${id}` , {
+                const response = await axios.get(`http://localhost:9000/supplier/getSupplier/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -68,16 +63,12 @@ function UpdateSupplier(props) {
         fetchSupplier();
     }, [id]);
 
-    const handleNavigate = () => {
-        setNavigate(true);
-    };
-
     useEffect(() => {
         setFormData({
-            supplierName: supplier.supplierName || '',
-            supplierAddress: supplier.supplierAddress || '',
-            supplierContact: supplier.supplierContact || '',
-            supplierEmail: supplier.supplierEmail || '',
+            username: supplier.username || '',
+            address: supplier.address || '',
+            contactNo: supplier.contactNo || '',
+            email: supplier.email || '',
             paymentMethod: supplier.paymentMethod || '',
             paymentDetails: supplier.paymentDetails || ''
         });
@@ -87,14 +78,14 @@ function UpdateSupplier(props) {
         e.preventDefault();
         try {
             await axios.put(`http://localhost:9000/supplier/update/${id}`, {
-                supplierName: formData.supplierName,
-                supplierEmail: formData.supplierEmail,
-                supplierAddress: formData.supplierAddress,
-                supplierContact: formData.supplierContact,
+                username: formData.username,
+                email: formData.email,
+                address: formData.address,
+                contactNo: formData.contactNo,
                 paymentMethod: formData.paymentMethod,
                 paymentDetails: formData.paymentDetails,
                 profilePicture: formData.profilePicture
-            } , {
+            }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -102,7 +93,7 @@ function UpdateSupplier(props) {
 
             console.log('Supplier added successfully');
             handleClickSuccess();
-            handleNavigate();
+            setNavigate(true);
 
         } catch (error) {
             console.error('Error adding user:', error);
@@ -138,8 +129,8 @@ function UpdateSupplier(props) {
                                     <BasicTextField
                                         name="name"
                                         style={{ width: '20em' }}
-                                        value={formData.supplierName}
-                                        onChange={(e) => handleChange("supplierName", e.target.value)}
+                                        value={formData.username}
+                                        onChange={(e) => handleChange("username", e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -151,8 +142,8 @@ function UpdateSupplier(props) {
                                     <BasicTextField
                                         name="address"
                                         style={{ width: '20em' }}
-                                        value={formData.supplierAddress}
-                                        onChange={(e) => handleChange("supplierAddress", e.target.value)}
+                                        value={formData.address}
+                                        onChange={(e) => handleChange("address", e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -164,8 +155,8 @@ function UpdateSupplier(props) {
                                     <BasicTextField
                                         name={"contact"}
                                         style={{ width: '20em' }}
-                                        value={formData.supplierContact}
-                                        onChange={(e) => handleChange("supplierContact", e.target.value)}
+                                        value={formData.contactNo}
+                                        onChange={(e) => handleChange("contactNo", e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -177,8 +168,8 @@ function UpdateSupplier(props) {
                                     <BasicTextField
                                         name="email"
                                         style={{ width: '20em' }}
-                                        value={formData.supplierEmail}
-                                        onChange={(e) => handleChange("supplierEmail", e.target.value)}
+                                        value={formData.email}
+                                        onChange={(e) => handleChange("email", e.target.value)}
                                     />
                                 </div>
                             </div>

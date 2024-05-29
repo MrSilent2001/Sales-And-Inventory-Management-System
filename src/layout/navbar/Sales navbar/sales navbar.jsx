@@ -9,9 +9,7 @@ function SalesNavbar(){
     const [navigate, setNavigate] = useState(false);
     const handleNavLinkClick = (event) => {
         setSelectedNavLink(event.target.name);
-        localStorage.setItem('accessToken', '');
-        localStorage.setItem('role', '');
-        localStorage.setItem('id', '');
+        localStorage.clear();
     };
 
     const handleClick = () =>{
@@ -34,7 +32,7 @@ function SalesNavbar(){
                 <NavLink to="/viewRefundRequests">Refunds</NavLink>
                 <NavLink to="/discountdashboard">Discounts</NavLink>
                 <NavLink
-                    to="/"
+                    to="/admin"
                     name="logout"
                     className={`navLink ${selectedNavLink === "logout" ? "selected" : ""}`}
                     onClick={handleNavLinkClick}

@@ -10,10 +10,11 @@ function Header({OpenSidebar}) {
     const [navigate, setNavigate] = useState(false);
     const handleClick = () =>{
         setNavigate(true);
+        localStorage.clear();
     }
 
     if(navigate){
-        return <Navigate to="/"/>
+        return <Navigate to="/admin"/>
     }
     return (
         <header className='header'>

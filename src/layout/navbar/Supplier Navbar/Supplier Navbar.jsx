@@ -8,9 +8,7 @@ function SupplierNavbar(){
     const [selectedNavLink, setSelectedNavLink] = useState(null);
     const handleNavLinkClick = (event) => {
         setSelectedNavLink(event.target.name);
-        localStorage.setItem('accessToken', '');
-        localStorage.setItem('role', '');
-        localStorage.setItem('id', '');
+        localStorage.clear();
     };
     return(
         <div className="navbar">

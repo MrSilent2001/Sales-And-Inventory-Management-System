@@ -7,6 +7,7 @@ import CustomizedTable from "../../../../../components/Table/Customized Table/cu
 import axios from "axios";
 import SalesOrderSidebar from "../../../../../layout/sidebar/salesOrderSidebar";
 import CustomizedAlert from "../../../../../components/Alert/alert";
+import sendOrderStatusEmail from "../_Component/orderStatusChangedEmailSend";
 
 function PendingOrders() {
     const [activeButton, setActiveButton] = useState(null);
@@ -14,6 +15,11 @@ function PendingOrders() {
 
     const [openAccept, setOpenAccept] = useState(false);
     const [openReject, setOpenReject] = useState(false);
+    //data fetching error Alert Variables
+    const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
+    //data Update error Alert Variables
+    const [updateErrorOpenSuccess, setUpdateErrorOpenSuccess] = useState(false);
+
 
     const handleClickAccept = () => {
         setOpenAccept(true);
@@ -31,6 +37,25 @@ function PendingOrders() {
         setOpenReject(false);
     };
 
+    //Handle Data Error Alert Variable
+    const dataErrorHandleCloseSuccess = () => {
+        setDataErrorOpenSuccess(false);
+    };
+
+    const dataErrorHandleClickSuccess = () => {
+        setDataErrorOpenSuccess(true);
+    };
+
+    //Handle Update Data Error Alert Variable
+    const updateErrorHandleCloseSuccess = () => {
+        setUpdateErrorOpenSuccess(false);
+    };
+
+    const updateErrorHandleClickSuccess = () => {
+        setUpdateErrorOpenSuccess(true);
+    };
+
+
     const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
@@ -44,20 +69,24 @@ function PendingOrders() {
                 setRows(response.data);
                 console.log(rows);
             } catch (error) {
-                console.error('Error fetching users:', error);
+                console.error('Error fetching orders:', error);
+                dataErrorHandleClickSuccess();
             }
         };
 
         fetchOrders();
     }, []);
 
-    const handleOrderStatus = async (orderId, orderStatus) => {
+    const handleOrderStatus = async (orderId, orderStatus, orderCancelReason = '') => {
         try {
-            await axios.put(`http://localhost:9000/order/update/${orderId}`, { orderStatus } , {
+            await axios.put(`http://localhost:9000/order/update/${orderId}`, { orderStatus, orderCancelReason } , {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
+
+            sendOrderStatusEmail(orderId, token);
+
             const updatedRows = rows.map(row => {
                 if (row.orderId === orderId) {
                     return { ...row, orderStatus };
@@ -74,6 +103,7 @@ function PendingOrders() {
             }
         } catch (error) {
             console.error('Error updating order status:', error);
+            updateErrorHandleClickSuccess();
         }
     };
 
@@ -233,6 +263,20 @@ function PendingOrders() {
                 onClose={handleCloseReject}
                 severity="error"
                 message="Order Rejected!"
+            />
+
+            <CustomizedAlert
+                open={dataErrorOpenSuccess}
+                onClose={dataErrorHandleCloseSuccess}
+                severity="error"
+                message="Error Fetching Data!"
+            />
+
+            <CustomizedAlert
+                open={updateErrorOpenSuccess}
+                onClose={updateErrorHandleCloseSuccess}
+                severity="error"
+                message="Error Occurs!"
             />
 
             <Footer/>

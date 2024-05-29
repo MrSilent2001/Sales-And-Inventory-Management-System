@@ -1,3 +1,5 @@
+// CustomerProfile.js
+
 import './customerProfile.css';
 import * as React from "react";
 import Avatar from '@mui/material/Avatar';
@@ -7,11 +9,16 @@ import { Link, useNavigate } from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import DialogBox from "../../../../components/Dialog Box/DialogBox";
 
 function CustomerProfile() {
     const [customer, setCustomer] = useState({});
     const [openError, setOpenError] = useState(false);
+    const [openDialog, setOpenDialog] = useState(false);
     const navigate = useNavigate();
+
+    const token = localStorage.getItem('accessToken');
+    const id = localStorage.getItem('id');
 
     const handleClickError = () => {
         setOpenError(true);
@@ -21,8 +28,32 @@ function CustomerProfile() {
         setOpenError(false);
     };
 
-    const token = localStorage.getItem('accessToken');
-    const id = parseInt(localStorage.getItem('id'));
+    const handleDialogOpen = () => {
+        setOpenDialog(true);
+    };
+
+    const handleDialogClose = () => {
+        setOpenDialog(false);
+    };
+
+    const handleAgree = async() => {
+        try {
+            await axios.delete(`http://localhost:9000/customer/delete/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });
+            handleDialogClose();
+            navigate('/');
+        } catch (error) {
+            handleClickError();
+            console.error('Error deleting customer:', error);
+        }
+    };
+
+    const handleDisagree = () => {
+        handleDialogClose();
+    };
 
     useEffect(() => {
         const fetchCustomer = async () => {
@@ -41,20 +72,10 @@ function CustomerProfile() {
             }
         };
         fetchCustomer();
-    }, [id, token]);
+    }, [token, id]);
 
-    const handleDelete = async () => {
-        try {
-            await axios.delete(`http://localhost:9000/customer/delete/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                }
-            });
-            navigate('/');
-        } catch (error) {
-            handleClickError();
-            console.error('Error deleting customer:', error);
-        }
+    const handleDelete = () => {
+        handleDialogOpen();
     };
 
     return (
@@ -88,7 +109,7 @@ function CustomerProfile() {
                                         <h4>Address</h4>
                                     </div>
                                     <div className="inputData">
-                                        <h5>{customer.customerAddress}</h5>
+                                        <h5>{customer.address}</h5>
                                     </div>
                                 </div>
 
@@ -97,7 +118,7 @@ function CustomerProfile() {
                                         <h4>E-mail</h4>
                                     </div>
                                     <div className="inputData">
-                                        <h5>{customer.customerEmail}</h5>
+                                        <h5>{customer.email}</h5>
                                     </div>
                                 </div>
 
@@ -106,13 +127,13 @@ function CustomerProfile() {
                                         <h4>Contact</h4>
                                     </div>
                                     <div className="inputData">
-                                        <h5>{customer.customerContact}</h5>
+                                        <h5>{customer.contactNo}</h5>
                                     </div>
                                 </div>
 
                                 <div className="formField">
                                     <div className="textField">
-                                        <h4>Previous Orders</h4>
+                                        <h4>My Orders</h4>
                                     </div>
                                     <div className="inputData">
                                         <CustomizedButton
@@ -137,7 +158,7 @@ function CustomerProfile() {
                                 </div>
                             </div>
                             <div className='buttonStack'>
-                                <Link to="/updateProfile">
+                                <Link to="/updateProfile" state={{ customer }}>
                                     <CustomizedButton
                                         hoverBackgroundColor="#2d3ed2"
                                         style={{
@@ -174,13 +195,17 @@ function CustomerProfile() {
                                 </CustomizedButton>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
+            <DialogBox
+                open={openDialog}
+                onClose={handleDialogClose}
+                title="Delete your Profile?"
+                content="Are you really want to delete your profile?"
+                onAgree={handleAgree}
+                onDisagree={handleDisagree}
+            />
             <Footer/>
         </>
     );

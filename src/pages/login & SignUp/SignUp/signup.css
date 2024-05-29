@@ -1,91 +1,67 @@
-.S-MainContainer{
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-    position: relative;
-}
-
-.S-LeftContainer {
+.adminLoginContainer {
     display: flex;
     flex-direction: column;
-    width: 50%;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: white;
-    background-size:cover ;
 }
 
-.S-RightContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    background-color: #646FD4;
-}
-
-.Signup{
-    margin-bottom: 1.75em;
-}
-
-.SignupForm {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    background-color: #DBDFFD;
-}
-
-.SignupInnerContainer {
-    display: flex;
-    flex-direction: column;
-}
-
-.row {
-    margin-bottom: 1.7em;
-}
-
-.signupInput {
-    width: 60%;
-}
-
-
-.btn-row {
+.tabPanel {
     display: flex;
     justify-content: center;
+    margin-bottom: 1em;
 }
 
-.btn{
-    width: 30em;
-    margin: 0.5em;
+.nav-link {
+    margin: 0 0.5em;
 }
 
-.btn:hover {
-    background-color: #45a049;
-}
-
-.mainSignTitle{
-    font-weight: 2em;
-    font-size: 3.5em;
+.bodyContainer {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    color: rgb(6, 6, 63);
-    margin-top: 1em;
 }
 
-.SystemImage{
-
-display: flex;
-flex-direction: column;
-align-items: center;
-width: 35em;
-margin-bottom: 3em;
+.tab-pane {
+    width: 100%;
 }
 
-.displayError{
-font-size: smaller;
-font-weight:1em;
-margin-top:0;
-margin-bottom: 0;
-text-align:right;
+.form-outline {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.form-outline label {
+    width: 120px;
+    text-align: right;
+    margin-right: 1em;
+}
+
+.form-outline input {
+    flex: 1;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.875em;
+}
+
+.form-outline label {
+    width: 100px;
+    text-align: left;
+    margin-right: 1em;
+}
+
+.form-outline input {
+    flex: 1;
+    width: calc(100% - 120px);
 }
 

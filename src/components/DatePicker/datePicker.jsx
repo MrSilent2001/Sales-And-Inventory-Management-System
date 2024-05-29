@@ -16,7 +16,7 @@ function CustomDatePicker(props) {
                 className={className}
                 slotProps={slotProps}
                 required={required}
-                style={style}
+                sx={{ style }}
                 onChange={onChange}
                 disablePastDate={true}
                 shouldDisableDate={disablePastDates}

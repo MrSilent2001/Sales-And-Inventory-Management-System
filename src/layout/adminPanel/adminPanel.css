@@ -46,13 +46,14 @@
 }
 
 .sidebar-list {
-    padding: 0;
+    padding: 5em 0 0 0;
     list-style-type: none;
 }
 
 .sidebar-list-item {
-    padding: 20px 20px 20px 20px;
+    padding: 20px 20px 20px 4em;
     font-size: 18px;
+    text-align: left;
 }
 
 .sidebar-list-item:hover {
@@ -100,7 +101,7 @@
     margin: 15px 0;
 }
 
-.card {
+.admin-panel-card {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -108,19 +109,19 @@
     border-radius: 5px;
 }
 
-.card:first-child {
+.admin-panel-card:first-child {
     background-color: #2962ff;
 }
 
-.card:nth-child(2) {
+.admin-panel-card:nth-child(2) {
     background-color: #ff6d00;
 }
 
-.card:nth-child(3) {
+.admin-panel-card:nth-child(3) {
     background-color: #2e7d32;
 }
 
-.card:nth-child(4) {
+.admin-panel-card:nth-child(4) {
     background-color: #d50000;
 }
 

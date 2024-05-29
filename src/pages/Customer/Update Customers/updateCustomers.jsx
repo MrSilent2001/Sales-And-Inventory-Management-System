@@ -5,7 +5,7 @@ import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navb
 import Footer from "../../../layout/footer/footer";
 import CustomizedButton from "../../../components/Button/button";
 import BasicTextField from "../../../components/Form Inputs/textfield";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import FileUpload from "../../../components/Form Inputs/fileUpload";
 
@@ -13,10 +13,10 @@ function UpdateCustomers() {
     const [customer, setCustomer] = useState({});
     const [navigate, setNavigate] = useState(false);
     const [formData, setFormData] = useState({
-        customerName: '',
-        customerAddress: '',
-        customerContact: '',
-        customerEmail: '',
+        username: '',
+        address: '',
+        contactNo: '',
+        email: '',
     });
 
     const [openSuccess, setOpenSuccess] = useState(false);
@@ -48,7 +48,7 @@ function UpdateCustomers() {
     useEffect(() => {
         const fetchCustomer = async () => {
             try {
-                const response = await axios.get(`http://localhost:9000/customer/findCustomer/${id}` , {
+                const response = await axios.get(`http://localhost:9000/customer/findCustomer/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -65,24 +65,26 @@ function UpdateCustomers() {
     }, [id]);
 
     useEffect(() => {
-        setFormData({
-            customerName: customer.customerName || '',
-            customerAddress: customer.customerAddress || '',
-            customerContact: customer.customerContact || '',
-            customerEmail: customer.customerEmail || ''
-        });
+        if (customer) {
+            setFormData({
+                username: customer.username || '',
+                address: customer.address || '',
+                contactNo: customer.contactNo || '',
+                email: customer.email || ''
+            });
+        }
     }, [customer]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             await axios.put(`http://localhost:9000/customer/update/${id}`, {
-                customerName: formData.customerName,
-                customerAddress: formData.customerAddress,
-                customerContact: formData.customerContact,
-                customerEmail: formData.customerEmail,
+                username: formData.username,
+                address: formData.address,
+                contactNo: formData.contactNo,
+                email: formData.email,
                 profilePicture: formData.profilePicture
-            } , {
+            }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -97,6 +99,10 @@ function UpdateCustomers() {
             handleClickError();
         }
     };
+
+    if (navigate) {
+        return <Navigate to="/customerProfile" />;
+    }
 
     return (
         <>
@@ -125,8 +131,8 @@ function UpdateCustomers() {
                                 <BasicTextField
                                     name="name"
                                     style={{ width: '20em' }}
-                                    value={formData.customerName}
-                                    onChange={(e) => handleChange("customerName", e.target.value)}
+                                    value={formData.username}
+                                    onChange={(e) => handleChange("username", e.target.value)}
                                 />
                             </div>
                         </div>
@@ -139,8 +145,8 @@ function UpdateCustomers() {
                                 <BasicTextField
                                     name="address"
                                     style={{ width: '20em' }}
-                                    value={formData.customerAddress}
-                                    onChange={(e) => handleChange("customerAddress", e.target.value)}
+                                    value={formData.address}
+                                    onChange={(e) => handleChange("address", e.target.value)}
                                 />
                             </div>
                         </div>
@@ -151,10 +157,10 @@ function UpdateCustomers() {
                             </div>
                             <div className="UpdateCustomerTextInput">
                                 <BasicTextField
-                                    name={"contact"}
+                                    name="contact"
                                     style={{ width: '20em' }}
-                                    value={formData.customerContact}
-                                    onChange={(e) => handleChange("customerContact", e.target.value)}
+                                    value={formData.contactNo}
+                                    onChange={(e) => handleChange("contactNo", e.target.value)}
                                 />
                             </div>
                         </div>
@@ -167,8 +173,8 @@ function UpdateCustomers() {
                                 <BasicTextField
                                     name="email"
                                     style={{ width: '20em' }}
-                                    value={formData.customerEmail}
-                                    onChange={(e) => handleChange("customerEmail", e.target.value)}
+                                    value={formData.email}
+                                    onChange={(e) => handleChange("email", e.target.value)}
                                 />
                             </div>
                         </div>
@@ -193,10 +199,7 @@ function UpdateCustomers() {
                                 </CustomizedButton>
                             </div>
                         </div>
-
                     </div>
-
-                    {navigate && <Navigate to="/customerProfile" />}
 
                 </div>
 

@@ -1,116 +1,213 @@
 import React, { useState } from 'react';
-import "./login.css";
-import TextField from "@mui/material/TextField";
-import { Link, useNavigate } from "react-router-dom";
-import CustomizedButton from "../../../components/Button/button";
+import './login.css';
+import BasicTextField from "../../../components/Form Inputs/textfield";
 import PasswordField from "../../../components/Form Inputs/passwordField";
+import CustomizedButton from "../../../components/Button/button";
 import FormControl from "@mui/material/FormControl";
 import { useAuth } from '../../../context/AuthContext';
+import { useNavigate, Link } from 'react-router-dom';
+import axios from "axios";
 
-const Login = () => {
-    const navigate = useNavigate();
-    const { login } = useAuth();
-
-    const [showPassword, setShowPassword] = useState(false);
-    const [formData, setFormData] = useState({
+function Login() {
+    const { customerLogin, supplierLogin  } = useAuth();
+    const [activeTab, setActiveTab] = useState('customer');
+    const [showPassword, setShowPassword] = useState(true);
+    const [customerData, setCustomerFormData] = useState({
         username: '',
         password: ''
     });
 
+    const [supplierData, setSupplierFormData] = useState({
+        username: '',
+        password: ''
+    });
+
+    const navigate = useNavigate();
+
     const handleClickShowPassword = () => {
-        setShowPassword(!showPassword);
+        setShowPassword(false);
     };
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
 
-    const handleChange = (name, value) => {
-        setFormData(prevState => ({
+    const handleChangeCustomer = (name, value) => {
+        setCustomerFormData(prevState => ({
             ...prevState,
             [name]: value
         }));
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const { id, role } = await login(formData.username, formData.password);
+    const handleChangeSupplier = (name, value) => {
+        setSupplierFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
 
-            // Navigate based on user role
-            if (role === "admin") {
-                navigate("/adminDashboard");
-            } else if (role === "customer") {
-                navigate("/customerHome");
-            } else if (role === "supplier") {
-                navigate("/supplierDashboard");
-            }
+    const handleSubmitCustomer = async (e) => {
+        e.preventDefault();
+        console.log(customerData);
+        try {
+            const response = await customerLogin(customerData.username, customerData.password);
+            navigate("/customerHome");
+        } catch (error) {
+            console.error('Login error:', error);
+        }
+    };
+
+    const handleSubmitSupplier = async (e) => {
+        e.preventDefault();
+        console.log(supplierData);
+
+        try {
+            const response = await supplierLogin(supplierData.username, supplierData.password);
+            navigate("/supplierDashboard");
         } catch (error) {
             console.error('Login error:', error);
         }
     };
 
     return (
-        <div className='MainContainer'>
-            <div className='LeftContainer'>
-                <h2 className='mainTitle'>TRADEASY</h2>
-                <img src="https://miro.medium.com/v2/resize:fit:740/1*PZK0jq9cUFpgRLZcs_aqwg.jpeg" alt="System" className='image' />
+        <div className="adminLoginContainer">
+            <div className="tabPanel">
+                <div>
+                    <CustomizedButton
+                        className={`nav-link ${activeTab === 'customer' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('customer')}
+                        style={{
+                            width: '7.5em',
+                            padding: '1.25em 1em',
+                            marginRight: '1em',
+                            backgroundColor: activeTab === 'customer' ? '#007bff' : 'transparent',
+                            color: activeTab === 'customer' ? '#ffffff' : '#007bff',
+                            border: '1px solid #007bff'
+                        }}
+                    >
+                        Customer
+                    </CustomizedButton>
+                </div>
+                <div>
+                    <CustomizedButton
+                        className={`nav-link ${activeTab === 'supplier' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('supplier')}
+                        style={{
+                            width: '7.5em',
+                            padding: '1.25em 1em',
+                            marginLeft: '1em',
+                            backgroundColor: activeTab === 'supplier' ? '#007bff' : 'transparent',
+                            color: activeTab === 'supplier' ? '#007bff' : '#ffffff',
+                            border: '1px solid #007bff'
+                        }}
+                    >
+                        Supplier
+                    </CustomizedButton>
+                </div>
             </div>
-            <div className='RightContainer'>
-                <div className="loginForm">
-                    <h2 id="login">Login</h2>
-                    <form onSubmit={handleSubmit}>
+
+            <div className="bodyContainer">
+                <div className={`tab-pane ${activeTab === 'customer' ? 'active' : ''}`} id="pills-login">
+                    <form onSubmit={handleSubmitCustomer}>
                         <FormControl fullWidth>
-                            <div className="loginInnerContainer">
-                                <div className="row">
-                                    <label> Username: </label>
-                                    <TextField
-                                        className="loginInput"
-                                        size="small"
-                                        id="outlined-required"
-                                        label="Username"
-                                        style={{ width: '14em', marginLeft: '2em', marginBottom: '1em' }}
-                                        onChange={(e) => handleChange("username", e.target.value)}
-                                        required
-                                    />
-                                </div>
-                                <div className="row">
-                                    <label>Password: </label>
-                                    <PasswordField
-                                        placeholder="Password"
-                                        style={{ width: '14em', marginLeft: '2em', marginBottom: '1em' }}
-                                        onChange={(e) => handleChange("password", e.target.value)}
-                                        showPassword={showPassword}
-                                        handleClickShowPassword={handleClickShowPassword}
-                                        handleMouseDownPassword={handleMouseDownPassword}
-                                    />
-                                </div>
-                                <div className="btn-row">
-                                    <CustomizedButton
-                                        type="submit"
-                                        hoverBackgroundColor="#2d3ed2"
-                                        style={{
-                                            color: '#ffffff',
-                                            backgroundColor: '#242F9B',
-                                            width: '11.5em',
-                                            height: '2.75em',
-                                            fontSize: '0.95em',
-                                            fontFamily: 'inter',
-                                            padding: '0.5em 0.625em',
-                                            borderRadius: '0.625em',
-                                            fontWeight: '550',
-                                            border: 'none',
-                                            marginTop: '0.625em'
-                                        }}>
-                                        Login
-                                    </CustomizedButton>
-                                </div>
-                                <div>
-                                    <p>Don't you have an Account?
-                                        <Link to="/signup">Sign Up</Link>
-                                    </p>
-                                    <a href="/">Forgot Password?</a>
-                                </div>
+                            <div className="form-outline">
+                                <label> Username: </label>
+                                <BasicTextField
+                                    size="small"
+                                    type="text"
+                                    id="outlined-required"
+                                    style={{width: '17.25em', height: '2em'}}
+                                    onChange={(e) => handleChangeCustomer("username", e.target.value)}
+                                    required
+                                />
+                            </div>
+
+                            <div className="form-outline mb-4">
+                                <label> Password: </label>
+                                <PasswordField
+                                    size="small"
+                                    id="outlined-adornment-password"
+                                    style={{width: '17.25em', marginLeft: '0.2em', height: '2em'}}
+                                    onChange={(e) => handleChangeCustomer("password", e.target.value)}
+                                    showPassword={showPassword}
+                                    handleClickShowPassword={handleClickShowPassword}
+                                    handleMouseDownPassword={handleMouseDownPassword}
+                                    required
+                                />
+                            </div>
+
+                            <CustomizedButton
+                                type="submit"
+                                style={{
+                                    color: '#ffffff',
+                                    backgroundColor: '#242F9B',
+                                    width: '11.5em',
+                                    height: '2.75em',
+                                    fontSize: '0.95em',
+                                    padding: '0.5em 0.625em',
+                                    borderRadius: '0.625em',
+                                    fontWeight: '550',
+                                    border: 'none',
+                                    marginTop: '0.625em',
+                                    hoverBackgroundColor: '#2d3ed2'
+                                }}>
+                                Login
+                            </CustomizedButton>
+                            <div>
+                                <p>Don't Have an Account? <Link to="/signup">SignUp Now</Link></p>
+                            </div>
+                        </FormControl>
+                    </form>
+                </div>
+
+                <div className={`tab-pane ${activeTab === 'supplier' ? 'active' : ''}`} id="pills-register">
+                    <form onSubmit={handleSubmitSupplier}>
+                        <FormControl fullWidth>
+                            <div className="form-outline">
+                                <label> Username: </label>
+                                <BasicTextField
+                                    size="small"
+                                    type="text"
+                                    style={{width: '17.25em', height: '2em'}}
+                                    id="outlined-required"
+                                    onChange={(e) => handleChangeSupplier("username", e.target.value)}
+                                    required
+                                />
+                            </div>
+
+                            <div className="form-outline">
+                                <label> Password: </label>
+                                <PasswordField
+                                    size="small"
+                                    id="outlined-adornment-password"
+                                    style={{width: '17.25em', marginLeft: '0.2em', height: '2em'}}
+                                    onChange={(e) => handleChangeSupplier("password", e.target.value)}
+                                    showPassword={showPassword}
+                                    handleClickShowPassword={handleClickShowPassword}
+                                    handleMouseDownPassword={handleMouseDownPassword}
+                                    required
+                                />
+                            </div>
+
+                            <CustomizedButton
+                                type="submit"
+                                style={{
+                                    color: '#ffffff',
+                                    backgroundColor: '#242F9B',
+                                    width: '11.5em',
+                                    height: '2.75em',
+                                    fontSize: '0.95em',
+                                    padding: '0.5em 0.625em',
+                                    borderRadius: '0.625em',
+                                    fontWeight: '550',
+                                    border: 'none',
+                                    marginTop: '0.625em',
+                                    hoverBackgroundColor: '#2d3ed2'
+                                }}>
+                                Login
+                            </CustomizedButton>
+                            <div>
+                                <p>Don't Have an Account? <Link to="/signup">SignUp Now</Link></p>
                             </div>
                         </FormControl>
                     </form>

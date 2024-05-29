@@ -7,6 +7,7 @@ import ComboBox from "../../../../../components/Form Inputs/comboBox";
 import axios from "axios";
 import SalesOrderSidebar from "../../../../../layout/sidebar/salesOrderSidebar";
 import CustomizedAlert from "../../../../../components/Alert/alert";
+import sendOrderStatusEmail from "../_Component/orderStatusChangedEmailSend";
 
 let columns = [
     {columnId: 'id', label: 'Id', minWidth: 170, align: 'center'},
@@ -32,6 +33,11 @@ function OrderStatus() {
     const [activeButton, setActiveButton] = useState(null);
 
     const [openSuccess, setOpenSuccess] = useState(false);
+    //data fetching error Alert Variables
+    const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
+    //data Update error Alert Variables
+    const [updateErrorOpenSuccess, setUpdateErrorOpenSuccess] = useState(false);
+
 
     const handleClickSuccess = () => {
         setOpenSuccess(true);
@@ -40,6 +46,25 @@ function OrderStatus() {
     const handleCloseSuccess = () => {
         setOpenSuccess(false);
     };
+
+    //Handle Data Error Alert Variable
+    const dataErrorHandleCloseSuccess = () => {
+        setDataErrorOpenSuccess(false);
+    };
+
+    const dataErrorHandleClickSuccess = () => {
+        setDataErrorOpenSuccess(true);
+    };
+
+    //Handle Update Data Error Alert Variable
+    const updateErrorHandleCloseSuccess = () => {
+        setUpdateErrorOpenSuccess(false);
+    };
+
+    const updateErrorHandleClickSuccess = () => {
+        setUpdateErrorOpenSuccess(true);
+    };
+
 
     const handleButtonClick = (buttonText) => {
         setActiveButton(buttonText);
@@ -59,7 +84,8 @@ function OrderStatus() {
                 setOrderStatusRows(response.data);
 
             } catch (error) {
-                console.error('Error fetching users:', error);
+                console.error('Error fetching orders:', error);
+                dataErrorHandleClickSuccess();
             }
         };
 
@@ -70,19 +96,21 @@ function OrderStatus() {
     const [statuses, setStatuses] = useState(orderStatusRows.map(() => ""));
 
     // Handler to update status for a specific row
-    const handleChange = async (event, orderId, index) => {
+    const handleChange = async (event, orderId, index, orderCancelReason = '') => {
         const newStatuses = [...statuses];
         newStatuses[index] = event.target.value;
         setStatuses(newStatuses);
         try {
-            await axios.put(`http://localhost:9000/order/update/${orderId}`, { orderStatus: event.target.value } ,  {
+            await axios.put(`http://localhost:9000/order/update/${orderId}`, { orderStatus: event.target.value, orderCancelReason} ,  {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },}
             );
             handleClickSuccess();
+            sendOrderStatusEmail(orderId, token);
         } catch (error) {
             console.error('Error updating order status:', error);
+            updateErrorHandleClickSuccess();
         }
     };
 
@@ -142,6 +170,20 @@ function OrderStatus() {
                 onClose={handleCloseSuccess}
                 severity="success"
                 message="Order Status Updated!"
+            />
+
+            <CustomizedAlert
+                open={dataErrorOpenSuccess}
+                onClose={dataErrorHandleCloseSuccess}
+                severity="error"
+                message="Error Fetching Data!"
+            />
+
+            <CustomizedAlert
+                open={updateErrorOpenSuccess}
+                onClose={updateErrorHandleCloseSuccess}
+                severity="error"
+                message="Failed to Update Order Status!"
             />
             <Footer/>
         </>

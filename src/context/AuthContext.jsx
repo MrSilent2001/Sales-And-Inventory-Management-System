@@ -6,18 +6,21 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [authState, setAuthState] = useState({ token: null, user: null });
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
         if (token) {
+            setAuthState({ ...authState, token });
             setIsAuthenticated(true);
         }
+        setLoading(false);
     }, []);
 
-    const login = async (username, password) => {
-        const response = await axios.post('http://localhost:9000/auth/login', { username, password });
-        const { access_token, id, role } = response.data;
-        setAuthState({ token: access_token, id, role });
+    const customerLogin = async (username, password) => {
+        const response = await axios.post('http://localhost:9000/auth/customer/login', { username, password});
+        const { access_token, id, role} = response.data;
+        setAuthState({ token: access_token, id, role});
         setIsAuthenticated(true);
 
         // Store tokens in localStorage
@@ -25,7 +28,35 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('role', role);
         localStorage.setItem('id', id);
 
-        return { id, role };
+        return { id, role, access_token };
+    };
+
+    const supplierLogin = async (username, password) => {
+        const response = await axios.post('http://localhost:9000/auth/supplier/login', { username, password});
+        const { access_token, id, role} = response.data;
+        setAuthState({ token: access_token, id, role});
+        setIsAuthenticated(true);
+
+        // Store tokens in localStorage
+        localStorage.setItem('accessToken', access_token);
+        localStorage.setItem('role', role);
+        localStorage.setItem('id', id);
+
+        return { id, role, access_token };
+    };
+
+    const adminLogin = async (username, password) => {
+        const response = await axios.post('http://localhost:9000/auth/admin/login', { username, password });
+        const { access_token, id, role} = response.data;
+        setAuthState({ token: access_token, id, role});
+        setIsAuthenticated(true);
+
+        // Store tokens in localStorage
+        localStorage.setItem('accessToken', access_token);
+        localStorage.setItem('role', role);
+        localStorage.setItem('id', id);
+
+        return { id, role, access_token };
     };
 
     const logout = () => {
@@ -35,7 +66,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ authState, isAuthenticated, login, logout }}>
+        <AuthContext.Provider value={{ authState, isAuthenticated, loading, adminLogin, customerLogin, supplierLogin, logout }}>
             {children}
         </AuthContext.Provider>
     );

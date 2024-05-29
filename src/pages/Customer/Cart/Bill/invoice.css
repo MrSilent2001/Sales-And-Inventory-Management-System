@@ -1,0 +1,137 @@
+.sales-receipt {
+    width: 210mm;
+    height: 297mm;
+    padding: 20mm;
+    margin: 20cm;
+    background-color: #fafafa;
+    font-family: Poppins;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sales-receipt-sys-logo {
+    width: 50px;
+    height: auto;
+}
+
+.sales-receipt-header {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sales-receipt-store-details {
+    margin-top: 10px;
+}
+
+.payemnt-receipt-Txt {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.branchAddress,
+.branchPhone,
+.branchEmail {
+    font-size: 14px;
+}
+
+.receipt-details-table {
+    width: 100%;
+    font-size: 14px;
+    margin: 0 auto;
+    margin-top: 10mm;
+}
+
+.receipt-details-table .receipt-details-label {
+    font-weight: 500;
+}
+
+.receipt-details-table .receipt-details-value {
+    text-align: right;
+}
+
+.items table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10mm 0;
+}
+
+.items th,
+.items td {
+    padding: 5px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.items thead th {
+    background-color: #ececec;
+}
+
+hr.invoice-line-top {
+    border-top: 2px solid black;
+}
+
+hr.invoice-line {
+    border-top: 1px dashed black;
+}
+
+.billMiddle {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10mm;
+}
+
+.inquaryQR {
+    font-size: 12px;
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.qrImg {
+    width: 50px;
+    height: 50px;
+    margin-top: 5px;
+}
+
+.total-table td {
+    padding: 5px;
+}
+
+.total-table {
+    width: 100%;
+    font-size: 14px;
+    margin-right: 20mm;
+}
+
+.footer {
+    margin-top: 10mm;
+    text-align: center;
+}
+
+.footer p {
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.footer .special-note {
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+@media print {
+    .sales-receipt {
+        width: 100%;
+        height: auto;
+        padding: 0;
+        margin: 0;
+        box-shadow: none;
+    }
+
+    .sales-receipt-sys-logo {
+        width: 50px;
+    }
+}

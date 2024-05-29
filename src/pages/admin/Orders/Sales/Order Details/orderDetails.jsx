@@ -12,6 +12,12 @@ function OrderDetails() {
     const [activeButton, setActiveButton] = useState(null);
     const [orderId, setOrderId] = useState('');
     const [openSuccess, setOpenSuccess] = useState(false);
+    //data fetching error Alert Variables
+    const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
+    //IDNotExist fetching error Alert Variables
+    const [IDNotExistErrorOpenSuccess, setIDNotExistErrorOpenSuccess] = useState(false);
+    //data Update error Alert Variables
+    const [updateErrorOpenSuccess, setUpdateErrorOpenSuccess] = useState(false);
 
     const handleClickSuccess = () => {
         setOpenSuccess(true);
@@ -20,6 +26,34 @@ function OrderDetails() {
     const handleCloseSuccess = () => {
         setOpenSuccess(false);
     };
+
+    //Handle Data Error Alert Variable
+    const dataErrorHandleCloseSuccess = () => {
+        setDataErrorOpenSuccess(false);
+    };
+
+    const dataErrorHandleClickSuccess = () => {
+        setDataErrorOpenSuccess(true);
+    };
+
+    //Handle IDNotExist Error Alert Variable
+    const IDNotExistErrorHandleCloseSuccess = () => {
+        setIDNotExistErrorOpenSuccess(false);
+    };
+
+    const IDNotExistErrorHandleClickSuccess = () => {
+        setIDNotExistErrorOpenSuccess(true);
+    };
+
+    //Handle Update Data Error Alert Variable
+    const updateErrorHandleCloseSuccess = () => {
+        setUpdateErrorOpenSuccess(false);
+    };
+
+    const updateErrorHandleClickSuccess = () => {
+        setUpdateErrorOpenSuccess(true);
+    };
+
 
     const [order, setOrder] = useState({
         orderId: '',
@@ -41,12 +75,28 @@ function OrderDetails() {
 
     const token = localStorage.getItem('accessToken');
     const fetchOrderById = async (orderId) => {
+        if (!orderId) {
+            console.log('Order ID is empty. Fetch operation aborted.');
+            makeFieldsEmpty()
+            return;
+        }
+
         try {
-            const response = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`,  {
+            const response = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
+
+            if (!response.data || Object.keys(response.data).length === 0) {
+                // throw new Error('Order ID does not exist.');
+                IDNotExistErrorHandleClickSuccess();
+                makeFieldsEmpty();
+                return;;
+
+            }
+
+            console.log(response.data);
             setReceiverName(response.data.orderReceiverName);
             setReceiverAddress(response.data.orderReceiverAddress);
             setReceiverContact(response.data.orderReceiverContact);
@@ -54,11 +104,22 @@ function OrderDetails() {
             setOrderPrice(response.data.orderPrice);
         } catch (error) {
             console.error('Error fetching order:', error);
+            dataErrorHandleClickSuccess();
         }
     };
 
+
+
     const handleCancel = async () => {
         setOrderId('');
+        setReceiverName('');
+        setReceiverAddress('');
+        setReceiverContact('');
+        setOrderItems('');
+        setOrderPrice('');
+    };
+
+    const makeFieldsEmpty = async () => {
         setReceiverName('');
         setReceiverAddress('');
         setReceiverContact('');
@@ -85,11 +146,13 @@ function OrderDetails() {
                 // Optionally, you can fetch the order again to update the state
                 fetchOrderById(orderId);
             } else {
-                alert("Failed to update order details");
+                // alert("Failed to update order details");
+                updateErrorHandleClickSuccess();
             }
         } catch (error) {
             console.error('Error updating order:', error);
-            alert("Failed to update order details");
+            // alert("Failed to update order details");
+            updateErrorHandleClickSuccess();
         }
     };
 
@@ -163,6 +226,7 @@ function OrderDetails() {
                                     <label className='label'>Items</label>
                                     <BasicTextField
                                         disabled={!orderId}
+                                        readOnly={true}
                                         value={orderItems}
                                         onChange={(e) => setOrderItems(e.target.value)}
                                     />
@@ -172,6 +236,7 @@ function OrderDetails() {
                                     <label className='label'>Amount</label>
                                     <BasicTextField
                                         disabled={!orderId}
+                                        readOnly={true}
                                         value={orderPrice}
                                         onChange={(e) => setOrderPrice(e.target.value)}
                                     />
@@ -237,7 +302,28 @@ function OrderDetails() {
                 severity="success"
                 message="Order Details Updated Succefully!"
             />
-            <Footer/>
+
+            <CustomizedAlert
+                open={dataErrorOpenSuccess}
+                onClose={dataErrorHandleCloseSuccess}
+                severity="error"
+                message="Error Fetching Data!"
+            />
+
+            <CustomizedAlert
+                open={IDNotExistErrorOpenSuccess}
+                onClose={IDNotExistErrorHandleCloseSuccess}
+                severity="error"
+                message="Order ID does not exist.!"
+            />
+
+            <CustomizedAlert
+                open={updateErrorOpenSuccess}
+                onClose={updateErrorHandleCloseSuccess}
+                severity="error"
+                message="Failed to update order details!"
+            />
+
             <Footer/>
         </>
     );

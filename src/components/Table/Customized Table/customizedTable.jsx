@@ -54,7 +54,7 @@ function CustomizedTable({columns, rows, style}) {
                                 key={row.id}
                                 style={{
                                     cursor: 'pointer',
-                                    backgroundColor:  'inherit'
+                                    backgroundColor: 'inherit'
                                 }}
                             >
                                 {columns.map((column) => {

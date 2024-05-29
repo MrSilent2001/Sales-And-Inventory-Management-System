@@ -9,12 +9,23 @@ import axios from "axios";
 import BasicTextField from "../../../../../components/Form Inputs/textfield";
 import SalesOrderSidebar from "../../../../../layout/sidebar/salesOrderSidebar";
 import CustomizedAlert from "../../../../../components/Alert/alert";
+import sendOrderStatusEmail from "../_Component/orderStatusChangedEmailSend";
 
 function CancelOrder() {
     const [activeButton, setActiveButton] = useState(null);
 
+    //Successful Alert Variables
     const [openSuccess, setOpenSuccess] = useState(false);
+    //data fetching error Alert Variables
+    const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
+    //IDNotExist fetching error Alert Variables
+    const [IDNotExistErrorOpenSuccess, setIDNotExistErrorOpenSuccess] = useState(false);
+    //Already Cancelled error Alert Variables
+    const [orderAlreadyCancelledOpenSuccess, setOrderAlreadyCancelledOpenSuccess] = useState(false);
+    //data Update error Alert Variables
+    const [updateErrorOpenSuccess, setUpdateErrorOpenSuccess] = useState(false);
 
+    //Handle Submit Successful Alert Variables
     const handleClickSuccess = () => {
         setOpenSuccess(true);
     };
@@ -22,6 +33,43 @@ function CancelOrder() {
     const handleCloseSuccess = () => {
         setOpenSuccess(false);
     };
+
+    //Handle Data Error Alert Variable
+    const dataErrorHandleCloseSuccess = () => {
+        setDataErrorOpenSuccess(false);
+    };
+
+    const dataErrorHandleClickSuccess = () => {
+        setDataErrorOpenSuccess(true);
+    };
+
+    //Handle IDNotExist Error Alert Variable
+    const IDNotExistErrorHandleCloseSuccess = () => {
+        setIDNotExistErrorOpenSuccess(false);
+    };
+
+    const IDNotExistErrorHandleClickSuccess = () => {
+        setIDNotExistErrorOpenSuccess(true);
+    };
+
+    //Handle Order Already Cancelled Error Alert Variable
+    const orderAlreadyCancelledHandleCloseSuccess = () => {
+        setOrderAlreadyCancelledOpenSuccess(false);
+    };
+
+    const orderAlreadyCancelledHandleClickSuccess = () => {
+        setOrderAlreadyCancelledOpenSuccess(true);
+    };
+
+    //Handle Update Data Error Alert Variable
+    const updateErrorHandleCloseSuccess = () => {
+        setUpdateErrorOpenSuccess(false);
+    };
+
+    const updateErrorHandleClickSuccess = () => {
+        setUpdateErrorOpenSuccess(true);
+    };
+
 
     const handleButtonClick = (buttonText) => {
         setActiveButton(buttonText);
@@ -39,18 +87,46 @@ function CancelOrder() {
 
     const token = localStorage.getItem('accessToken');
     const fetchOrderById = async (orderId) => {
+        if (!orderId) {
+            console.log('Order ID is empty. Fetch operation aborted.');
+            makeEmptyFields();
+            return;
+        }
+
         try {
             const response = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`,  {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
+
+            if (!response.data || Object.keys(response.data).length === 0) {
+                // throw new Error('Order ID does not exist.');
+                makeEmptyFields();
+                IDNotExistErrorHandleClickSuccess();
+                return;
+
+            }
+
+            if (response.data.orderStatus === 'Cancelled') {
+                // console.error('Order is already cancelled.');
+                // makeEmptyFields();
+
+                orderAlreadyCancelledHandleClickSuccess();
+                // return;
+            }
+
+
             setOrder(response.data);
             setOrderCancelReason(response.data.orderCancelReason);
         } catch (error) {
             console.error('Error fetching order:', error);
+            makeEmptyFields();
+            dataErrorHandleClickSuccess();
         }
     };
+
+
 
     const handleCancelOrder = async () => {
         try {
@@ -63,18 +139,36 @@ function CancelOrder() {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            handleClickSuccess();
+            setOrderId('');
+
+            sendOrderStatusEmail(orderId, token, orderCancelReason);
             if (response.status === 200) {
-                handleClickSuccess();
                 // Optionally, you can fetch the order again to update the state
-                fetchOrderById(orderId);
+                // fetchOrderById(orderId);
             } else {
-                alert("Failed to update order details");
+                // alert("Failed to update order details");
+                updateErrorHandleClickSuccess();
             }
         } catch (error) {
             console.error('Error updating order:', error);
-            alert("Failed to update order details");
+            // alert("Failed to update order details");
+            updateErrorHandleClickSuccess();
         }
     };
+
+    const makeEmptyFields = async () => {
+        setOrder({
+            orderId: '',
+            orderReceiverName: '',
+            orderItems: '',
+            orderPrice: '',
+            orderCancelReason: ''
+        });
+
+        setOrderCancelReason('');
+    };
+
 
     const handleCancel = async () => {
         setOrderId('');
@@ -129,6 +223,7 @@ function CancelOrder() {
                                     <BasicTextField
                                         value={order.orderReceiverName}
                                         disabled={!orderId}
+                                        readOnly={true}
                                     />
 
                                 </div>
@@ -140,6 +235,7 @@ function CancelOrder() {
                                     <BasicTextField
                                         value={order.orderItems}
                                         disabled={!orderId}
+                                        readOnly={true}
                                     />
 
                                 </div>
@@ -151,6 +247,7 @@ function CancelOrder() {
                                     <BasicTextField
                                         value={order.orderPrice}
                                         disabled={!orderId}
+                                        readOnly={true}
                                     />
 
                                 </div>
@@ -229,7 +326,35 @@ function CancelOrder() {
                 severity="success"
                 message="Order Cancelled Sucessfully!"
             />
-            <Footer/>
+
+            <CustomizedAlert
+                open={dataErrorOpenSuccess}
+                onClose={dataErrorHandleCloseSuccess}
+                severity="error"
+                message="Error Fetching Data!"
+            />
+
+            <CustomizedAlert
+                open={IDNotExistErrorOpenSuccess}
+                onClose={IDNotExistErrorHandleCloseSuccess}
+                severity="error"
+                message="Order ID does not exist.!"
+            />
+
+            <CustomizedAlert
+                open={updateErrorOpenSuccess}
+                onClose={updateErrorHandleCloseSuccess}
+                severity="error"
+                message="Order Cacellation Failed!"
+            />
+
+            <CustomizedAlert
+                open={orderAlreadyCancelledOpenSuccess}
+                onClose={orderAlreadyCancelledHandleCloseSuccess}
+                severity="warning"
+                message="This Order is Alredy Cancelled!"
+            />
+
             <Footer/>
         </>
     );

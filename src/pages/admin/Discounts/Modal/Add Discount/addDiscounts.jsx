@@ -1,16 +1,15 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import "./addDiscounts.css";
 import BasicTextField from "../../../../../components/Form Inputs/textfield";
 import CustomizedButton from "../../../../../components/Button/button";
 import CenteredModal from "../../../../../components/Modal/modal";
 import axios from "axios";
 import CustomizedAlert from "../../../../../components/Alert/alert";
-import FormControl from "@mui/material/FormControl";
 import CustomDatePicker from "../../../../../components/DatePicker/datePicker";
 import dayjs from "dayjs";
+import ComboBox from "../../../../../components/Form Inputs/comboBox";
 
 const AddDiscount = forwardRef((props, ref) => {
-
     const [formData, setFormData] = useState({
         productId: '',
         productName: '',
@@ -20,15 +19,28 @@ const AddDiscount = forwardRef((props, ref) => {
         endDate: ''
     });
 
-    const [errors, setErrors] = useState();
+    const [errors, setErrors] = useState({});
+    const [productIds, setProductIds] = useState([]);
+    const [products, setProducts] = useState({});
 
     const handleChange = (name, value) => {
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
+        console.log(`handleChange called with name: ${name}, value: ${value}`);
+        if (name === "productId") {
+            const selectedProduct = products[value];
+            console.log('Selected product:', selectedProduct);
+            setFormData(prevState => ({
+                ...prevState,
+                productId: value,
+                productName: selectedProduct ? selectedProduct.productName : '',
+                sellingPrice: selectedProduct ? selectedProduct.sellingPrice : ''
+            }));
+        } else {
+            setFormData(prevState => ({
+                ...prevState,
+                [name]: value
+            }));
+        }
     };
-
 
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
@@ -50,6 +62,39 @@ const AddDiscount = forwardRef((props, ref) => {
     };
 
     const token = localStorage.getItem('accessToken');
+
+    useEffect(() => {
+        const fetchProductDetails = async () => {
+            try {
+                const response = await axios.get('http://localhost:9000/product/getAllProducts', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const productDetails = response.data;
+                console.log('Fetched product details:', productDetails);
+
+                const productIds = productDetails.map(product => ({ label: product.id.toString(), value: product.id }));
+                setProductIds(productIds);
+
+                // Store products details in state
+                const productsMap = productDetails.reduce((acc, product) => {
+                    acc[product.id] = {
+                        productName: product.productName,
+                        sellingPrice: product.productSellingPrice
+
+                    };
+                    return acc;
+                }, {});
+                setProducts(productsMap);
+                console.log('Products map:', productsMap);
+
+            } catch (error) {
+                console.error('Error fetching product details:', error);
+            }
+        };
+        fetchProductDetails();
+    }, [token]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -76,7 +121,7 @@ const AddDiscount = forwardRef((props, ref) => {
         }
 
         setErrors(validationErrors);
-        if(Object.keys(validationErrors).length === 0){
+        if (Object.keys(validationErrors).length === 0) {
             try {
                 await axios.post('http://localhost:9000/discounts/create', {
                     productId: formData.productId,
@@ -85,13 +130,16 @@ const AddDiscount = forwardRef((props, ref) => {
                     discountRate: formData.discountRate,
                     startDate: formData.startDate,
                     endDate: formData.endDate
-                });
-
-                const response = await axios.get('http://localhost:9000/discounts/getAll',  {
+                }, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
+                });
 
+                const response = await axios.get('http://localhost:9000/discounts/getAll', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
                 const updatedDiscounts = response.data;
 
@@ -102,16 +150,14 @@ const AddDiscount = forwardRef((props, ref) => {
                 console.error('Error applying discount:', error);
                 handleClickError();
             }
-        }else{
-            console.log("error");
+        } else {
+            console.log("Validation errors:", validationErrors);
         }
-
-
     };
 
     return (
         <CenteredModal>
-            <FormControl onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <div className="addDiscountsOuter">
                     <div className="addDiscountsModel">
                         <h2>Add Discounts</h2>
@@ -121,17 +167,17 @@ const AddDiscount = forwardRef((props, ref) => {
                                     <h5>Product Id:</h5>
                                 </div>
                                 <div className="addDiscountsInput">
-                                    <BasicTextField
-                                        id="outlined-required"
-                                        name="productId"
-                                        size="small"
-                                        type="text"
+                                    <ComboBox
+                                        value={formData.productId}
                                         onChange={(e) => handleChange("productId", e.target.value)}
+                                        options={productIds}
+                                        style={{ width: '17.25em', height: '2em', marginRight: '0.5em' }}
+                                        label="Category"
+                                        size="small"
                                     />
                                 </div>
                             </div>
-                            {errors.productId && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em'}}>{errors.productName}</span>}
-
+                            {errors.productId && <span style={{ color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em' }}>{errors.productId}</span>}
 
                             <div className="addDiscountsFormField">
                                 <div className="addDiscountsLabelField">
@@ -139,15 +185,15 @@ const AddDiscount = forwardRef((props, ref) => {
                                 </div>
                                 <div className="addDiscountsInput">
                                     <BasicTextField
+                                        disabled={true}
                                         name="productName"
                                         size="small"
                                         type="text"
-                                        onChange={(e) => handleChange("productName", e.target.value)}
+                                        value={formData.productName}
                                     />
                                 </div>
                             </div>
-                            {errors.productName && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em'}}>{errors.productName}</span>}
-
+                            {errors.productName && <span style={{ color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em' }}>{errors.productName}</span>}
 
                             <div className="addDiscountsFormField">
                                 <div className="addDiscountsLabelField">
@@ -155,16 +201,16 @@ const AddDiscount = forwardRef((props, ref) => {
                                 </div>
                                 <div className="addDiscountsInput">
                                     <BasicTextField
+                                        disabled={true}
                                         id="outlined-required"
                                         name="sellingPrice"
                                         size="small"
                                         type="number"
-                                        onChange={(e) => handleChange("sellingPrice", e.target.value)}
+                                        value={formData.sellingPrice}
                                     />
                                 </div>
                             </div>
-                            {errors.sellingPrice && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.sellingPrice}</span>}
-
+                            {errors.sellingPrice && <span style={{ color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em' }}>{errors.sellingPrice}</span>}
 
                             <div className="addDiscountsFormField">
                                 <div className="addDiscountsLabelField">
@@ -180,7 +226,7 @@ const AddDiscount = forwardRef((props, ref) => {
                                     />
                                 </div>
                             </div>
-                            {errors.discountRate && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.discountRate}</span>}
+                            {errors.discountRate && <span style={{ color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em' }}>{errors.discountRate}</span>}
 
                             <div className="addDiscountsFormField">
                                 <div className="addDiscountsLabelField">
@@ -190,16 +236,17 @@ const AddDiscount = forwardRef((props, ref) => {
                                     <CustomDatePicker
                                         name="startDate"
                                         slotProps={{ textField: { size: 'small' } }}
+                                        sx={{ width: '17.5em', height: '0.75em', marginRight: '0.5em', marginTop: '-0.5em' }}
                                         required
                                         onChange={(date) => {
                                             const formattedDate = dayjs(date).format('YYYY-MM-DD');
-                                            console.log(formattedDate);
-                                            handleChange("startDate",formattedDate);
+                                            console.log('Selected start date:', formattedDate);
+                                            handleChange("startDate", formattedDate);
                                         }}
                                     />
                                 </div>
                             </div>
-                            {errors.startDate && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.discountRate}</span>}
+                            {errors.startDate && <span style={{ color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em' }}>{errors.startDate}</span>}
 
                             <div className="addDiscountsFormField">
                                 <div className="addDiscountsLabelField">
@@ -208,23 +255,23 @@ const AddDiscount = forwardRef((props, ref) => {
                                 <div className="addDiscountsInput">
                                     <CustomDatePicker
                                         name="endDate"
-                                        slotProps={{ textField: { size: 'small' }}}
+                                        slotProps={{ textField: { size: 'small' } }}
+                                        sx={{ width: '17.5em', height: '0.75em', marginRight: '0.5em' }}
                                         required
                                         onChange={(date) => {
                                             const formattedDate = dayjs(date).format('YYYY-MM-DD');
-                                            console.log(formattedDate);
-                                            handleChange("endDate",formattedDate);
+                                            console.log('Selected end date:', formattedDate);
+                                            handleChange("endDate", formattedDate);
                                         }}
                                     />
                                 </div>
                             </div>
-                            {errors.endDate && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.discountRate}</span>}
-
+                            {errors.endDate && <span style={{ color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em' }}>{errors.endDate}</span>}
 
                             <div className="addDiscountsFormFieldButtons">
                                 <div className="addDiscountsButton">
                                     <CustomizedButton
-                                        onClick={handleSubmit}
+                                        type="submit"
                                         hoverBackgroundColor="#2d3ed2"
                                         style={{
                                             backgroundColor: '#242F9B',
@@ -234,7 +281,7 @@ const AddDiscount = forwardRef((props, ref) => {
                                             fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
-                                            margin:'0.625em 1.5em 0 2.5em',
+                                            margin: '0.625em 1.5em 0 2.5em',
                                         }}>
                                         Apply
                                     </CustomizedButton>
@@ -252,7 +299,7 @@ const AddDiscount = forwardRef((props, ref) => {
                                             fontFamily: 'inter',
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
-                                            margin:'0.625em 0 0 2.5em'
+                                            margin: '0.625em 0 0 2.5em'
                                         }}>
                                         Cancel
                                     </CustomizedButton>
@@ -261,7 +308,7 @@ const AddDiscount = forwardRef((props, ref) => {
                         </div>
                     </div>
                 </div>
-            </FormControl>
+            </form>
             <CustomizedAlert
                 open={openSuccess}
                 onClose={handleCloseSuccess}

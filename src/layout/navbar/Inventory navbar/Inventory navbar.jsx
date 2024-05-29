@@ -9,9 +9,7 @@ function InventoryNavbar(){
     const [navigate, setNavigate] = useState(false);
     const handleNavLinkClick = (event) => {
         setSelectedNavLink(event.target.name);
-        localStorage.setItem('accessToken', '');
-        localStorage.setItem('role', '');
-        localStorage.setItem('id', '');
+        localStorage.clear();
     };
 
     const handleClick = () =>{
@@ -73,7 +71,7 @@ function InventoryNavbar(){
                 </NavLink>
 
                 <NavLink
-                    to="/logout"
+                    to="/admin"
                     name="logout"
                     className={`navLink ${selectedNavLink === "logout" ? "selected" : ""}`}
                     onClick={handleNavLinkClick}

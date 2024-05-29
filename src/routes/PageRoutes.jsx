@@ -34,9 +34,10 @@ import ViewInventory from "../pages/admin/View Inventory/viewInventory";
 import ViewSupplier from "../pages/admin/Supplier Dashboard/viewSupplier";
 import PurchaseOrderDashboard from "../pages/admin/Orders/Inventory/Order Dashboard/PurchaseOrderDashboard";
 import InventoryPayments from "../pages/admin/Payment Dashboard/Inventory/inventoryPayments";
-// import ProductDetail from "../pages/Customer/Product Detail/productDetail";
+import ProductDetail from "../pages/Customer/Product Detail/productDetail";
 import AdminDashboard from "../pages/admin/Admin Dashboard/AdminDashboard";
 import UpdateCustomers from "../pages/Customer/Update Customers/updateCustomers";
+import AdminLogin from "../pages/login & SignUp/login/adminLogin";
 import ProtectedRoute from "./protectedRoutes";
 
 export function PageRouting() {
@@ -52,6 +53,12 @@ export function PageRouting() {
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/signup" element={<Signup/>}/>
 
+                <Route path="/admin" element={<AdminLogin/>}/>
+
+                {/*Payment Gateway*/}
+                <Route path="/success" element={<Success/>}/>
+                <Route path="/cancel" element={<Cancel/>}/>
+
 {/*===================================================Protected Routes==============================================================*/}
                 <Route element={<ProtectedRoute />}>
 
@@ -64,13 +71,9 @@ export function PageRouting() {
 
                     {/*Customer view routes*/}
                     <Route path="/customerHome" element={<CustomerHome/>}/>
-                    {/*<Route path="/product/:productId" element={<ProductDetail />} />*/}
+                    <Route path="/product/:productId" element={<ProductDetail />} />
                     <Route path="/products" element={<ProductCatalog/>}/>
                     <Route path="/cart" element={<Cart/>}/>
-
-                    {/*Payment Gateway*/}
-                    <Route path="/success" element={<Success/>}/>
-                    <Route path="/cancel" element={<Cancel/>}/>
 
                     <Route path="/customerProfile" element={<CustomerProfile/>}/>
                     <Route path="/previousOrders" element={<CustomerOrderHistory/>}/>
