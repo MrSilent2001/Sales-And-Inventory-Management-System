@@ -1,11 +1,10 @@
-import React, {forwardRef, useEffect, useState} from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import "./addDiscounts.css";
 import BasicTextField from "../../../../../components/Form Inputs/textfield";
 import CustomizedButton from "../../../../../components/Button/button";
 import CenteredModal from "../../../../../components/Modal/modal";
 import axios from "axios";
 import CustomizedAlert from "../../../../../components/Alert/alert";
-import FormControl from "@mui/material/FormControl";
 import CustomDatePicker from "../../../../../components/DatePicker/datePicker";
 import dayjs from "dayjs";
 import ComboBox from "../../../../../components/Form Inputs/comboBox";
@@ -22,12 +21,25 @@ const AddDiscount = forwardRef((props, ref) => {
 
     const [errors, setErrors] = useState({});
     const [productIds, setProductIds] = useState([]);
+    const [products, setProducts] = useState({});
 
     const handleChange = (name, value) => {
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
+        console.log(`handleChange called with name: ${name}, value: ${value}`);
+        if (name === "productId") {
+            const selectedProduct = products[value];
+            console.log('Selected product:', selectedProduct);
+            setFormData(prevState => ({
+                ...prevState,
+                productId: value,
+                productName: selectedProduct ? selectedProduct.productName : '',
+                sellingPrice: selectedProduct ? selectedProduct.sellingPrice : ''
+            }));
+        } else {
+            setFormData(prevState => ({
+                ...prevState,
+                [name]: value
+            }));
+        }
     };
 
     const [openSuccess, setOpenSuccess] = useState(false);
@@ -52,23 +64,37 @@ const AddDiscount = forwardRef((props, ref) => {
     const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
-        const fetchProductIds = async () => {
+        const fetchProductDetails = async () => {
             try {
-                const response = await axios.get('http://localhost:9000/product/getAllProductIds', {
+                const response = await axios.get('http://localhost:9000/product/getAllProducts', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
+                const productDetails = response.data;
+                console.log('Fetched product details:', productDetails);
 
-                setProductIds(response.data);
+                const productIds = productDetails.map(product => ({ label: product.id.toString(), value: product.id }));
+                setProductIds(productIds);
+
+                // Store products details in state
+                const productsMap = productDetails.reduce((acc, product) => {
+                    acc[product.id] = {
+                        productName: product.productName,
+                        sellingPrice: product.productSellingPrice
+
+                    };
+                    return acc;
+                }, {});
+                setProducts(productsMap);
+                console.log('Products map:', productsMap);
+
             } catch (error) {
-                console.error('Error fetching product IDs:', error);
+                console.error('Error fetching product details:', error);
             }
         };
-
-        fetchProductIds();
+        fetchProductDetails();
     }, [token]);
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -104,6 +130,10 @@ const AddDiscount = forwardRef((props, ref) => {
                     discountRate: formData.discountRate,
                     startDate: formData.startDate,
                     endDate: formData.endDate
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
 
                 const response = await axios.get('http://localhost:9000/discounts/getAll', {
@@ -121,7 +151,7 @@ const AddDiscount = forwardRef((props, ref) => {
                 handleClickError();
             }
         } else {
-            console.log("error");
+            console.log("Validation errors:", validationErrors);
         }
     };
 
@@ -139,9 +169,9 @@ const AddDiscount = forwardRef((props, ref) => {
                                 <div className="addDiscountsInput">
                                     <ComboBox
                                         value={formData.productId}
-                                        onChange={(event, newValue) => handleChange("productId", newValue)}
-                                        options={productIds.map(product => ({ label: product.id, value: product.id }))}
-                                        style={{width: '17.25em', height: '2em', marginRight: '0.5em'}}
+                                        onChange={(e) => handleChange("productId", e.target.value)}
+                                        options={productIds}
+                                        style={{ width: '17.25em', height: '2em', marginRight: '0.5em' }}
                                         label="Category"
                                         size="small"
                                     />
@@ -155,10 +185,11 @@ const AddDiscount = forwardRef((props, ref) => {
                                 </div>
                                 <div className="addDiscountsInput">
                                     <BasicTextField
+                                        disabled={true}
                                         name="productName"
                                         size="small"
                                         type="text"
-                                        onChange={(e) => handleChange("productName", e.target.value)}
+                                        value={formData.productName}
                                     />
                                 </div>
                             </div>
@@ -170,11 +201,12 @@ const AddDiscount = forwardRef((props, ref) => {
                                 </div>
                                 <div className="addDiscountsInput">
                                     <BasicTextField
+                                        disabled={true}
                                         id="outlined-required"
                                         name="sellingPrice"
                                         size="small"
                                         type="number"
-                                        onChange={(e) => handleChange("sellingPrice", e.target.value)}
+                                        value={formData.sellingPrice}
                                     />
                                 </div>
                             </div>
@@ -207,7 +239,7 @@ const AddDiscount = forwardRef((props, ref) => {
                                         required
                                         onChange={(date) => {
                                             const formattedDate = dayjs(date).format('YYYY-MM-DD');
-                                            console.log(formattedDate);
+                                            console.log('Selected start date:', formattedDate);
                                             handleChange("startDate", formattedDate);
                                         }}
                                     />
@@ -226,7 +258,7 @@ const AddDiscount = forwardRef((props, ref) => {
                                         required
                                         onChange={(date) => {
                                             const formattedDate = dayjs(date).format('YYYY-MM-DD');
-                                            console.log(formattedDate);
+                                            console.log('Selected end date:', formattedDate);
                                             handleChange("endDate", formattedDate);
                                         }}
                                     />

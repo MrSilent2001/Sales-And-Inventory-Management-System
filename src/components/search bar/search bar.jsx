@@ -2,6 +2,7 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import React, { useState } from "react";
 import { GoSearch } from "react-icons/go";
+import PropTypes from 'prop-types';
 
 function SearchBar({
                        label = "Search Here",
@@ -9,8 +10,8 @@ function SearchBar({
                        height = '1.95em',
                        hoverCursor = 'pointer',
                        defaultCursor = 'default',
-                       onKeyPress,
-                       onChange
+                       onKeyPress = () => {},
+                       onChange = () => {}
                    }) {
 
     const [isHovered, setIsHovered] = useState(false);
@@ -42,9 +43,9 @@ function SearchBar({
             sx={{
                 '& > :not(style)': {
                     m: 2,
-                    width: {width},
+                    width: { width },
                     "& .MuiInputBase-root": {
-                        height: '1.95em',
+                        height: height,
                         borderRadius: '1.5em',
                         backgroundColor: 'white',
                         position: 'relative',
@@ -86,7 +87,17 @@ function SearchBar({
                 }}
             />
         </Box>
-    )
+    );
 }
+
+SearchBar.propTypes = {
+    label: PropTypes.string,
+    width: PropTypes.string,
+    height: PropTypes.string,
+    hoverCursor: PropTypes.string,
+    defaultCursor: PropTypes.string,
+    onKeyPress: PropTypes.func,
+    onChange: PropTypes.func,
+};
 
 export default SearchBar;
