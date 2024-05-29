@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Box,
     Card,
@@ -27,15 +27,23 @@ const PurchaseOrderDashboard = () => {
     const [completedOrders, setCompletedOrders] = useState(0);
     const [selectedOrder, setSelectedOrder] = useState(null);
 
+    const fetchItems = async (query) => {
+        try {
+            const response = await axios.get(`http://localhost:9000/purchaseOrder/search?keyword=${query}`);
+            setPurchasedOrders(response.data);
+        } catch (error) {
+            console.error('Error fetching Items:', error);
+        }
+    };
 
     useEffect(() => {
-        const fetchpurchasedOrders = async () => {
+        const fetchPurchasedOrders = async () => {
             try {
                 const response = await axios.get('http://localhost:9000/purchaseOrder/getAll');
                 setPurchasedOrders(response.data);
                 console.log(response.data);
             } catch (error) {
-                console.error('Error fetching refund requests:', error);
+                console.error('Error fetching purchase orders:', error);
             }
         };
 
@@ -62,7 +70,7 @@ const PurchaseOrderDashboard = () => {
             }
         };
 
-        fetchpurchasedOrders();
+        fetchPurchasedOrders();
         fetchCurrentMonthName();
         fetchOrderCounts();
     }, []);
@@ -80,31 +88,26 @@ const PurchaseOrderDashboard = () => {
         setSelectedOrder(order);
         setViewOrderVisible(true);
     };
-    
-   const columns=[
-    
-    { columnId: 'supplier', label: 'Supplier ID', minWidth: 70,align: 'center'  },
-    { columnId: 'Address', label: 'Address', minWidth: 150,align: 'center'  },
-    { columnId: 'mail', label: 'Email', minWidth: 120,align: 'center'  },
-    { columnId: 'contact_number', label: 'Contact', minWidth: 100,align: 'center'  },
-    { columnId: 'actions', label:'', minWidth: 200,align: 'center'  }
-];
 
-  
+    const columns = [
+        { columnId: 'supplier', label: 'Supplier ID', minWidth: 70, align: 'center' },
+        { columnId: 'Address', label: 'Address', minWidth: 150, align: 'center' },
+        { columnId: 'mail', label: 'Email', minWidth: 120, align: 'center' },
+        { columnId: 'contact_number', label: 'Contact', minWidth: 100, align: 'center' },
+        { columnId: 'actions', label: '', minWidth: 200, align: 'center' }
+    ];
 
+    const mappedData = purchasedOrders.map(row => ({
+        id: row.id,
+        supplier: row.supplier,
+        Address: row.Address,
+        mail: row.mail,
+        contact_number: row.contact_number,
 
-        const mappedData = purchasedOrders.map(row => ({
-            id: row.id,
-            supplier: row.supplier,
-            Address: row.Address,
-            mail: row.mail,
-            contact_number: row.contact_number,
-        
-        
         actions: (
             <div style={{ display: 'flex' }}>
                 <CustomizedButton
-                    onClick={() => handleViewOrder(row.id)}
+                    onClick={() => handleViewOrder(row)}
                     hoverBackgroundColor="#242F9B"
                     style={{
                         color: 'white',
@@ -118,7 +121,7 @@ const PurchaseOrderDashboard = () => {
                         fontWeight: '550',
                         marginTop: '0.625em',
                         marginRight: '2.5em',
-                        marginLeft:'2.5em',
+                        marginLeft: '2.5em',
                         textTransform: 'none',
                         textAlign: 'center',
                     }}>
@@ -149,14 +152,12 @@ const PurchaseOrderDashboard = () => {
         )
     }));
 
-
     return (
         <>
             <InventoryNavbar />
             <Box sx={{ display: 'flex', height: '47rem' }}>
                 {/* Sidebar */}
                 <Box sx={{ width: '15%', height: 'auto', bgcolor: '#646FD4', color: 'white', p: 2 }}>
-                   
                     <Card sx={{ mb: 2, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
                         <CardContent>
                             <Typography variant="subtitle1" sx={{ color: '#E74646', fontWeight: 'bold', mr: 6 }}>{currentMonth}</Typography>
@@ -179,40 +180,34 @@ const PurchaseOrderDashboard = () => {
                         </CardContent>
                     </Card>
 
-
                     <Modal open={placeOrderVisible}>
-                        <PlaceOrder onClose={(value) => { setPlaceOrderVisible(false) }} />
+                        <PlaceOrder onClose={() => setPlaceOrderVisible(false)} />
                     </Modal>
-
                 </Box>
 
                 {/* Main Content */}
-                <Container maxWidth={false} sx={{ bgcolor: '#DBDFFD', height:'auto' }}>
-                   <Box sx={{ display: 'flex', justifyContent: 'flex-start', paddingTop:7,paddingBottom:7}}>
-                     <SearchBar />
+                <Container maxWidth={false} sx={{ bgcolor: '#DBDFFD', height: 'auto' }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-start', paddingTop: 7, paddingBottom: 7 }}>
+                        <SearchBar
+                            label="Search Orders"
+                            onKeyPress={fetchItems}
+                        />
                     </Box>
-                    <div style={{ overflow: 'auto', maxHeight: '50vh' }}> 
-                    <CustomizedTable
-                      style={{ width: '100%', overflowY: 'auto' }} 
-                      columns={columns}
-                      rows={mappedData}
-                    />
+                    <div style={{ overflow: 'auto', maxHeight: '50vh' }}>
+                        <CustomizedTable
+                            style={{ width: '100%', overflowY: 'auto' }}
+                            columns={columns}
+                            rows={mappedData}
+                        />
                     </div>
-
-
-                    {/*<Modal open={viewOrderVisible}>*/}
-                    {/*   <ViewOrder order={selectedOrder} onClose={(value) => { setViewOrderVisible(false) }} />*/}
-                    {/*</Modal>*/}
 
                     <Modal open={viewOrderVisible}>
                         <ViewOrder order={selectedOrder} onClose={() => setViewOrderVisible(false)} />
                     </Modal>
-
                 </Container>
             </Box>
             <Footer />
         </>
-
     );
 };
 
