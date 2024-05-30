@@ -8,9 +8,11 @@ const Redirect = () => {
     const cart = JSON.parse(localStorage.getItem('cart'));
     const customerId = localStorage.getItem('id');
     const [purchasedItems, setPurchasedItems] = useState([]);
-    const [navigate, setNavigate] = useState(false);
+    let [navigate, setNavigate] = useState(1);
     const [updatedQuantities, setUpdatedQuantities] = useState({});
     const navigateTo = useNavigate();
+
+    const productsPurchased = cart.map(item => item.productName);
 
     useEffect(() => {
         const fetchSession = async () => {
@@ -48,6 +50,20 @@ const Redirect = () => {
                     contactNo: customer.contactNo,
                     totalAmount: session.amount_total / 100
                 }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                // add order to the database
+                await axios.post("http://localhost:9000/order/create", {
+                    orderReceiverName: customer.username,
+                    orderReceiverAddress: customer.address,
+                    orderReceiverContact: customer.contactNo,
+                    orderItems: productsPurchased,
+                    orderPrice: session.amount_total / 100,
+                    orderCustomerId: customer.id,
+                },{
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -101,17 +117,15 @@ const Redirect = () => {
             }
         };
 
-        processPayment();
-    }, [sessionId, cart, token, customerId]);
-
-    useEffect(() => {
-        if (navigate) {
-            navigateTo('/success');
+        if (navigate === 1) {
+            processPayment();
+            navigate++;
+            navigateTo("/success");
         }
-    }, [navigate, navigateTo]);
+    }, []);
 
     return (
-        <></>
+        <>Redirecting...</>
     );
 };
 

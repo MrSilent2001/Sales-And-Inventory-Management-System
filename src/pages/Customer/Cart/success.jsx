@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import SalesReceipt from '../../Customer/Cart/Bill/invoice';
 import { useReactToPrint } from 'react-to-print';
-import {Navigate} from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const Success = () => {
     const sessionId = localStorage.getItem('sessionId');
@@ -39,18 +39,17 @@ const Success = () => {
         content: () => componentRef.current,
     });
 
-    const handleRedirect = ()=>{
+    const handleRedirect = () => {
         localStorage.setItem("cart", JSON.stringify([]));
-
         setNavigate(true);
     }
 
-    if(navigate){
-        return <Navigate to="/products"/>
+    if (navigate) {
+        return <Navigate to="/products" />
     }
 
     return (
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             <h1>Success</h1>
             <h2>Thank you for your purchase!</h2>
 
@@ -68,6 +67,7 @@ const Success = () => {
                         border: 'none',
                         marginTop: '0.25em',
                         marginBottom: '2em',
+                        marginRight: '1em',
                     }}
                     onClick={handleRedirect}
                 >
@@ -79,7 +79,7 @@ const Success = () => {
                     hoverBackgroundColor="#0aaf0b"
                     style={{
                         color: '#ffffff',
-                        backgroundColor: '#057007',
+                        backgroundColor: '#007bff',
                         width: '7.5em',
                         height: '2.25em',
                         fontSize: '0.85em',
