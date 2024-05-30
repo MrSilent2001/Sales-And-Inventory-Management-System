@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea, CardActions } from '@mui/material';
+import { CardActionArea, CardActions, Box } from '@mui/material';
 import CustomizedButton from "../Button/button";
 
 export default function MultiActionAreaCard({ item, handleClick, handleBodyClick, handleImageClick }) {
@@ -15,10 +15,11 @@ export default function MultiActionAreaCard({ item, handleClick, handleBodyClick
     return (
         <Card sx={{ maxWidth: 300, width: 300 }}>
             <CardActionArea
-                onClick={() => {
-                    if (productQuantity > 0) handleBodyClick(item);
-                }}
-                disabled={productQuantity === 0}
+                // onClick={() => {
+                //     if (productQuantity > 0) handleBodyClick(item);
+                // }}
+                onClick={() => handleBodyClick(item)}
+                // disabled={productQuantity === 0}
                 // sx={{ opacity: productQuantity === 0 ? 0.5 : 1 }}
             >
                 <CardMedia
@@ -34,14 +35,28 @@ export default function MultiActionAreaCard({ item, handleClick, handleBodyClick
                     }}
                     sx={{ pointerEvents: productQuantity === 0 ? 'none' : 'auto' }}
                 />
-                <CardContent>
+                <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <Typography variant="body2" color="text.primary">
                         {productName}
                     </Typography>
                     {discountRate && (
-                        <Typography variant="body2" sx={{ textDecoration: 'line-through', color: 'gray' }}>
-                            Rs.{productSellingPrice.toFixed(2)}
-                        </Typography>
+                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <Typography variant="body2" sx={{ textDecoration: 'line-through', color: 'gray' }}>
+                                Rs.{productSellingPrice.toFixed(2)}
+                            </Typography>
+                            <Box
+                                sx={{
+                                    backgroundColor: '#4CAF50',
+                                    color: '#FFFFFF',
+                                    padding: '0.2em 0.5em',
+                                    marginLeft: '0.5em',
+                                    borderRadius: '0.2em',
+                                    fontWeight: 'bold',
+                                }}
+                            >
+                                {`${discountRate}% OFF`}
+                            </Box>
+                        </Box>
                     )}
                     <Typography variant="body2" color="text.primary" sx={{ fontWeight: 'bold' }}>
                         Rs.{finalPrice.toFixed(2)}
