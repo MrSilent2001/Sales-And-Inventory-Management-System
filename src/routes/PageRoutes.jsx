@@ -4,8 +4,8 @@ import Signup from "../pages/login & SignUp/SignUp/signup";
 import CustomerDashboard from "../pages/admin/Customer Dashboard/customerDashboard";
 import CustomerOrderHistory from "../pages/Customer/Order History/customerOrderHistory";
 import View from "../pages/Customer/View/view";
-import ApprovedRefundsTable from "../pages/admin/Refunds/Customer/Approved Refunds/ApprovedRefundsTable";
-import RefundsManager from "../pages/admin/Refunds/Inventory/RefundRequestsTable/RefundsManager";
+import ApprovedRefundsTable from "../pages/admin/Refunds/Inventory/Approved Refunds/ApprovedRefundsTable";
+import InventoryGeneratedRequest from "../pages/admin/Refunds/Inventory/generatedRequests/InventoryGeneratedRequest";
 import SalesApprovedRefundsTable from "../pages/admin/Refunds/Customer/Sales_Approved Refunds/SalesApprovedRefundsTable";
 import SalesRefundDenialForm from "../pages/admin/Refunds/Customer/Refund Denial Form/SalesRefundDenialForm";
 import SalesViewRequest from "../pages/admin/Refunds/Customer/Generated Refund Request/SalesViewRequest";
@@ -39,6 +39,7 @@ import AdminDashboard from "../pages/admin/Admin Dashboard/AdminDashboard";
 import UpdateCustomers from "../pages/Customer/Update Customers/updateCustomers";
 import AdminLogin from "../pages/login & SignUp/login/adminLogin";
 import ProtectedRoute from "./protectedRoutes";
+import Redirect from "../pages/Customer/Cart/redirect";
 
 export function PageRouting() {
     return (
@@ -57,6 +58,7 @@ export function PageRouting() {
 
                 {/*Payment Gateway*/}
                 <Route path="/success" element={<Success/>}/>
+                <Route path="/redirect" element={<Redirect/>}/>
                 <Route path="/cancel" element={<Cancel/>}/>
 
 {/*===================================================Protected Routes==============================================================*/}
@@ -108,7 +110,7 @@ export function PageRouting() {
                     <Route path="/viewInventory" element={<ViewInventory/>}/>
                     <Route path="/viewSupplier" element={<ViewSupplier/>}/>
                     <Route path="/purchasedOrder" element={<PurchaseOrderDashboard/>}/>
-
+                    <Route path="/InventoryGeneratedRequest" element={<InventoryGeneratedRequest/>}/>
                     <Route path="/InventoryRefundRequestsTable" element={<InventoryRefundRequestsTable/>}/>
                     <Route path="/SalesApprovedRefundsTable" element={<SalesApprovedRefundsTable/>}/>
 
@@ -118,7 +120,6 @@ export function PageRouting() {
                     <Route path="/AdminOrderHistory" element={<AdminOrderHistory/>}/>
                     <Route path="/view" element={<View/>}/>
 
-                    <Route path="/RefundsManager" element={<RefundsManager/>}/>
 
                     <Route path="/SalesRefundDenialForm" element={<SalesRefundDenialForm/>}/>
                     <Route path="/SalesViewRequest" element={<SalesViewRequest/>}/>

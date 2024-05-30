@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     width: 30.5em;
-    height: 35.75em;
+    max-height: 35.75em;
     padding: 0.25em 0 0 0;
     background-color: #DBDFFD;
     border-radius: 0.5em;
@@ -18,6 +18,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-height: 35.75em;
+    overflow-y: auto;
 }
 
 .addDiscountsFormField{
