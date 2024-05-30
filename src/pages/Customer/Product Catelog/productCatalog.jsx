@@ -138,15 +138,18 @@ function ProductCatalog() {
     };
 
     // Filter products based on category and search query
-    const filteredProducts = productsWithOffers.filter(product => {
-        const matchesCategory = Object.entries(checkedItems).every(([category, checked]) =>
-            !checked || product.productCategory.includes(category)
-        );
+    const filteredProducts = productsWithOffers
+        .filter(product => {
+            const matchesCategory = Object.entries(checkedItems).every(([category, checked]) =>
+                !checked || product.productCategory.includes(category)
+            );
 
-        const matchesSearchQuery = product.productName.toLowerCase().includes(searchQuery.toLowerCase());
+            const matchesSearchQuery = product.productName.toLowerCase().includes(searchQuery.toLowerCase());
 
-        return matchesCategory && matchesSearchQuery;
-    });
+            return matchesCategory && matchesSearchQuery;
+        })
+        .sort((a, b) => a.id - b.id); // Sort by id in ascending order
+
 
     //Handle add to cart Alert Variable
     const addToCartHandleCloseSuccess = () => {
