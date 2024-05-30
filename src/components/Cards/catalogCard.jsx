@@ -13,7 +13,7 @@ export default function MultiActionAreaCard({ item, handleClick, handleBodyClick
     const finalPrice = discountRate ? productSellingPrice * (1 - discountRate / 100) : productSellingPrice;
 
     return (
-        <Card sx={{ maxWidth: 300, width: 300 }}>
+        <Card sx={{ maxWidth: 300, width: 300, minHeight: 400 }}>
             <CardActionArea
                 // onClick={() => {
                 //     if (productQuantity > 0) handleBodyClick(item);
@@ -35,7 +35,7 @@ export default function MultiActionAreaCard({ item, handleClick, handleBodyClick
                     }}
                     sx={{ pointerEvents: productQuantity === 0 ? 'none' : 'auto' }}
                 />
-                <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: '4.5em' }}>
                     <Typography variant="body2" color="text.primary">
                         {productName}
                     </Typography>
@@ -86,6 +86,7 @@ export default function MultiActionAreaCard({ item, handleClick, handleBodyClick
                             borderRadius: '0.35em',
                             fontWeight: '550',
                             margin: 'auto',
+                            // marginBottom: '1em',
                             textTransform: 'none',
                             textAlign: 'center',
                         }}
