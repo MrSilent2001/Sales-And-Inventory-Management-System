@@ -39,6 +39,7 @@ import AdminDashboard from "../pages/admin/Admin Dashboard/AdminDashboard";
 import UpdateCustomers from "../pages/Customer/Update Customers/updateCustomers";
 import AdminLogin from "../pages/login & SignUp/login/adminLogin";
 import ProtectedRoute from "./protectedRoutes";
+import Redirect from "../pages/Customer/Cart/redirect";
 
 export function PageRouting() {
     return (
@@ -57,6 +58,7 @@ export function PageRouting() {
 
                 {/*Payment Gateway*/}
                 <Route path="/success" element={<Success/>}/>
+                <Route path="/redirect" element={<Redirect/>}/>
                 <Route path="/cancel" element={<Cancel/>}/>
 
 {/*===================================================Protected Routes==============================================================*/}

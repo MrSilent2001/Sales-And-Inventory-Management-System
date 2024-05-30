@@ -39,18 +39,18 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
                 </li>
 
                 <li className='sidebar-list-item'>
-                    <a href="">
+                    <a href="/viewInventory">
                         <BsPeopleFill className='icon'/> Profile
                     </a>
                 </li>
 
                 <li className='sidebar-list-item'>
-                    <a href="">
+                    <a href="/viewInventory">
                         <BsMenuButtonWideFill className='icon'/> Reviews
                     </a>
                 </li>
                 <li className='sidebar-list-item'>
-                    <a href="">
+                    <a href="/viewInventory">
                         <BsFillGearFill className='icon'/> Setting
                     </a>
                 </li>

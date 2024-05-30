@@ -171,13 +171,17 @@ const AddDiscount = forwardRef((props, ref) => {
                                         value={formData.productId}
                                         onChange={(e) => handleChange("productId", e.target.value)}
                                         options={productIds}
-                                        style={{ width: '17.25em', height: '2em', marginRight: '0.5em' }}
+                                        style={{width: '17.25em', height: '2em', marginRight: '0.5em'}}
                                         label="Category"
                                         size="small"
                                     />
                                 </div>
                             </div>
-                            {errors.productId && <span style={{ color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em' }}>{errors.productId}</span>}
+                            {errors.productId && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.productId}</span>}
 
                             <div className="addDiscountsFormField">
                                 <div className="addDiscountsLabelField">
@@ -193,7 +197,11 @@ const AddDiscount = forwardRef((props, ref) => {
                                     />
                                 </div>
                             </div>
-                            {errors.productName && <span style={{ color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em' }}>{errors.productName}</span>}
+                            {errors.productName && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.productName}</span>}
 
                             <div className="addDiscountsFormField">
                                 <div className="addDiscountsLabelField">
@@ -210,7 +218,11 @@ const AddDiscount = forwardRef((props, ref) => {
                                     />
                                 </div>
                             </div>
-                            {errors.sellingPrice && <span style={{ color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em' }}>{errors.sellingPrice}</span>}
+                            {errors.sellingPrice && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.sellingPrice}</span>}
 
                             <div className="addDiscountsFormField">
                                 <div className="addDiscountsLabelField">
@@ -226,7 +238,11 @@ const AddDiscount = forwardRef((props, ref) => {
                                     />
                                 </div>
                             </div>
-                            {errors.discountRate && <span style={{ color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em' }}>{errors.discountRate}</span>}
+                            {errors.discountRate && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.discountRate}</span>}
 
                             <div className="addDiscountsFormField">
                                 <div className="addDiscountsLabelField">
@@ -235,8 +251,13 @@ const AddDiscount = forwardRef((props, ref) => {
                                 <div className="addDiscountsInput">
                                     <CustomDatePicker
                                         name="startDate"
-                                        slotProps={{ textField: { size: 'small' } }}
-                                        sx={{ width: '17.5em', height: '0.75em', marginRight: '0.5em', marginTop: '-0.5em' }}
+                                        slotProps={{textField: {size: 'small'}}}
+                                        sx={{
+                                            width: '17.5em',
+                                            height: '0.75em',
+                                            marginRight: '0.5em',
+                                            marginTop: '-0.5em'
+                                        }}
                                         required
                                         onChange={(date) => {
                                             const formattedDate = dayjs(date).format('YYYY-MM-DD');
@@ -246,7 +267,11 @@ const AddDiscount = forwardRef((props, ref) => {
                                     />
                                 </div>
                             </div>
-                            {errors.startDate && <span style={{ color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em' }}>{errors.startDate}</span>}
+                            {errors.startDate && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.startDate}</span>}
 
                             <div className="addDiscountsFormField">
                                 <div className="addDiscountsLabelField">
@@ -255,8 +280,8 @@ const AddDiscount = forwardRef((props, ref) => {
                                 <div className="addDiscountsInput">
                                     <CustomDatePicker
                                         name="endDate"
-                                        slotProps={{ textField: { size: 'small' } }}
-                                        sx={{ width: '17.5em', height: '0.75em', marginRight: '0.5em' }}
+                                        slotProps={{textField: {size: 'small'}}}
+                                        sx={{width: '17.5em', height: '0.75em', marginRight: '0.5em'}}
                                         required
                                         onChange={(date) => {
                                             const formattedDate = dayjs(date).format('YYYY-MM-DD');
@@ -266,44 +291,47 @@ const AddDiscount = forwardRef((props, ref) => {
                                     />
                                 </div>
                             </div>
-                            {errors.endDate && <span style={{ color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em' }}>{errors.endDate}</span>}
+                            {errors.endDate && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.endDate}</span>}
+                        </div>
+                        <div className="addDiscountsFormFieldButtons">
+                            <div className="addDiscountsButton">
+                                <CustomizedButton
+                                    type="submit"
+                                    hoverBackgroundColor="#2d3ed2"
+                                    style={{
+                                        backgroundColor: '#242F9B',
+                                        border: '1px solid #242F9B',
+                                        width: '8em',
+                                        height: '2.5em',
+                                        fontSize: '0.8em',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        margin: '0.625em 1.5em 0 2.5em',
+                                    }}>
+                                    Apply
+                                </CustomizedButton>
+                            </div>
 
-                            <div className="addDiscountsFormFieldButtons">
-                                <div className="addDiscountsButton">
-                                    <CustomizedButton
-                                        type="submit"
-                                        hoverBackgroundColor="#2d3ed2"
-                                        style={{
-                                            backgroundColor: '#242F9B',
-                                            border: '1px solid #242F9B',
-                                            width: '8em',
-                                            height: '2.5em',
-                                            fontSize: '0.8em',
-                                            padding: '0.5em 0.625em',
-                                            borderRadius: '0.35em',
-                                            margin: '0.625em 1.5em 0 2.5em',
-                                        }}>
-                                        Apply
-                                    </CustomizedButton>
-                                </div>
-
-                                <div className="addDiscountscancelButton">
-                                    <CustomizedButton
-                                        onClick={() => props.onClose(false)}
-                                        hoverBackgroundColor="#f11717"
-                                        style={{
-                                            backgroundColor: '#960505',
-                                            width: '9.5em',
-                                            height: '2.5em',
-                                            fontSize: '0.8em',
-                                            fontFamily: 'inter',
-                                            padding: '0.5em 0.625em',
-                                            borderRadius: '0.35em',
-                                            margin: '0.625em 0 0 2.5em'
-                                        }}>
-                                        Cancel
-                                    </CustomizedButton>
-                                </div>
+                            <div className="addDiscountscancelButton">
+                                <CustomizedButton
+                                    onClick={() => props.onClose(false)}
+                                    hoverBackgroundColor="#f11717"
+                                    style={{
+                                        backgroundColor: '#960505',
+                                        width: '9.5em',
+                                        height: '2.5em',
+                                        fontSize: '0.8em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        margin: '0.625em 0 0 2.5em'
+                                    }}>
+                                    Cancel
+                                </CustomizedButton>
                             </div>
                         </div>
                     </div>

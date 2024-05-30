@@ -8,10 +8,11 @@ import BackArrow from "../../../../../components/Icons/backArrow";
 import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 import {useState, useEffect} from "react";
 import axios from "axios";
+import PageLoader from "../../../../../components/Page Loader/pageLoader";
 
 const ApprovedRefundsTable = ({ onBack }) => {
   const [rows, setRows] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
   // Column details from InventoryRefundRequestsTable.js
@@ -23,13 +24,20 @@ const ApprovedRefundsTable = ({ onBack }) => {
     { columnId: 'status', label: 'Status', minWidth: 200, align: 'center' }
   ];
 
+  const token = localStorage.getItem('accessToken');
+
   useEffect(() => {
     const fetchApprovedRefunds = async () => {
+      setIsLoading(true);
       setLoading(true);
       try {
-        const response = await axios.get('http://localhost:9000/refund/approvedRefunds/getAll');
+        const response = await axios.get('http://localhost:9000/refund/approvedRefunds/getAll', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setRows(response.data);
-        setLoading(false);
+        setIsLoading(false);
       } catch (err) {
         console.error('Failed to fetch approved refunds:', err);
         setError('Failed to load data');
@@ -54,7 +62,7 @@ const ApprovedRefundsTable = ({ onBack }) => {
       <Container className='inner_container' maxWidth="90%">
         <Box sx={{ pt: 4, display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', alignItems: 'flex-start', padding: '0.65em 0 0.65em 0', marginTop: '2em 0' }}>
-            <Link to="/InventoryRefundRequestsTable">
+            <Link to="/viewRefundRequests">
               <BackArrow onClick={onBack} style={{ marginTop: '-0.1em' }} />
             </Link>
             <span style={{ fontWeight: "bold", }}>Refund Request</span>
@@ -62,10 +70,11 @@ const ApprovedRefundsTable = ({ onBack }) => {
           {error && <p>{error}</p>}
           {loading ? <p>Loading...</p> : (
             <Paper elevation={4}>
-              <CustomizedTable
-                columns={columns}
-                rows={mappedData}
-              />
+              {isLoading ? (
+                  <PageLoader />
+              ) : (
+                  <CustomizedTable columns={columns} rows={rows} style={{ width: '85%' }} />
+              )}
             </Paper>
           )}
         </Box>

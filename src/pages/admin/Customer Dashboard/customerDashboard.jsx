@@ -9,20 +9,23 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import CustomizedAlert from "../../../components/Alert/alert";
 import PageLoader from "../../../components/Page Loader/pageLoader";
+import DialogBox from "../../../components/Dialog Box/DialogBox";
 
 const columns = [
-    { columnId: 'id', label: 'Customer Id', minWidth: 100, align: 'center' },
-    { columnId: 'username', label: 'Name', minWidth: 150, align: 'center' },
-    { columnId: 'email', label: 'Email', minWidth: 120, align: 'center' },
-    { columnId: 'contactNo', label: 'Contact', minWidth: 120, align: 'center' },
-    { columnId: 'address', label: 'Address', minWidth: 200, align: 'center' },
+    { columnId: 'id', label: 'Customer Id', minWidth: 75, align: 'center' },
+    { columnId: 'username', label: 'Name', minWidth: 100, align: 'center' },
+    { columnId: 'email', label: 'Email', minWidth: 100, align: 'center' },
+    { columnId: 'contactNo', label: 'Contact', minWidth: 100, align: 'center' },
+    { columnId: 'address', label: 'Address', minWidth: 170, align: 'center' },
+    { columnId: 'lastLogin', label: 'Last Login', minWidth: 170, align: 'center' },
     { columnId: 'actions', label: '', minWidth: 170, align: 'center' },
 ];
 
 function CustomerDashboard() {
     const [customer, setCustomer] = useState([]);
+    const [selectedCustomerId, setSelectedCustomerId] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-
+    const [openDialog, setOpenDialog] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
 
@@ -44,8 +47,37 @@ function CustomerDashboard() {
         setOpenError(false);
     };
 
-    const handleSendWarning = (id) => {
-        console.log("Please Login to the system");
+    const handleDialogClose = () => {
+        setOpenDialog(false);
+    };
+
+    const handleSendWarning = async(id) => {
+        console.log("Please Login to the system", id);
+        try {
+            const customer = await axios.get(`http://localhost:9000/customer/findCustomer/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            // Fetching the updated list of customers after deletion
+            const response = await axios.post('http://localhost:9000/email/send/customerWarning',{
+                receiverName: customer.data.username,
+                emailSubject: "Account Termination Warning!",
+                emailBody: "It is monitored that you have not been logged into your account for a while. Please signed-in or otherwise the account will be terminated without any prior notice.",
+                receiverEmail: customer.data.email
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            console.log(response.data);
+            handleClickSuccess();
+
+        } catch (error) {
+            console.error('Error deleting customer:', error);
+            handleClickError();
+        }
     }
 
     useEffect(() => {
@@ -69,10 +101,33 @@ function CustomerDashboard() {
         fetchCustomers();
     }, [token]);
 
-
     const handleRemove = async (id) => {
+        setSelectedCustomerId(id);
+        setOpenDialog(true);
+    }
+
+    const handleAgree = async() => {
         try {
-            await axios.delete(`http://localhost:9000/customer/delete/${id}`, {
+            const customer = await axios.get(`http://localhost:9000/customer/findCustomer/${selectedCustomerId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            // Fetching the updated list of customers after deletion
+            const email = await axios.post('http://localhost:9000/email/send/customerTermination',{
+                receiverName: customer.data.username,
+                emailSubject: "Account Termination!",
+                emailBody: "Your account has been terminated by Tradeasy!",
+                receiverEmail: customer.data.email
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            console.log(email.data);
+
+            await axios.delete(`http://localhost:9000/customer/delete/${selectedCustomerId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -90,57 +145,78 @@ function CustomerDashboard() {
         } catch (error) {
             console.error('Error deleting customer:', error);
             handleClickError();
+        }finally {
+            handleDialogClose();
         }
+    };
+
+    const handleDisagree = () => {
+        handleDialogClose();
+    };
+
+    const isDateMoreThanMonthsAgo = (date, months) => {
+        const givenDate = new Date(date);
+        const currentDate = new Date();
+        const monthsAgo = new Date(currentDate.setMonth(currentDate.getMonth() - months));
+        return givenDate < monthsAgo;
     }
 
+    const isDateMoreThanYearsAgo = (date, years) => {
+        const givenDate = new Date(date);
+        const currentDate = new Date();
+        const yearsAgo = new Date(currentDate.setFullYear(currentDate.getFullYear() - years));
+        return givenDate < yearsAgo;
+    }
 
     let rows = customer;
 
-    const createActions = (id) => ([
-        <div style={{display: "flex", justifyContent: "space-between"}}>
-            <CustomizedButton
-                key={`sendWarning-${id}`}
-                onClick={() => handleSendWarning(id)}
-                hoverBackgroundColor="#2d3ed2"
-                style={{
-                    color: '#ffffff',
-                    backgroundColor: '#242F9B',
-                    border: '1px solid #242F9B',
-                    width: '11em',
-                    height: '2.5em',
-                    fontSize: '0.95em',
-                    padding: '0.5em 0.625em',
-                    borderRadius: '0.35em',
-                    fontWeight: '550',
-                    marginTop: '0.625em',
-                    marginRight: '1.5em',
-                }}>
-                Send Warning
-            </CustomizedButton>,
-            <CustomizedButton
-                key={`remove-${id}`}
-                onClick={() => handleRemove(id)}
-                hoverBackgroundColor="#f11717"
-                style={{
-                    color: '#ffffff',
-                    backgroundColor: '#960505',
-                    width: '11em',
-                    height: '2.5em',
-                    fontSize: '0.95em',
-                    padding: '0.5em 0.625em',
-                    borderRadius: '0.35em',
-                    fontWeight: '550',
-                    marginTop: '0.625em',
-                    marginRight: '1.5em',
-                }}>
-                Remove
-            </CustomizedButton>
-        </div>
-    ]);
+    const createActions = (id, lastLogin) => {
+        const enableWarning = isDateMoreThanMonthsAgo(lastLogin, 6);
+        const enableRemove = isDateMoreThanYearsAgo(lastLogin, 1);
+
+        const buttonStyle = (enabled, defaultColor, hoverColor) => ({
+            color: enabled ? '#ffffff' : '#a9a9a9',
+            backgroundColor: enabled ? defaultColor : '#d3d3d3',
+            border: enabled ? `1px solid ${defaultColor}` : '1px solid #d3d3d3',
+            width: '9em',
+            height: '2.5em',
+            fontSize: '0.95em',
+            padding: '0.5em 0.625em',
+            borderRadius: '0.35em',
+            fontWeight: '550',
+            marginTop: '0.625em',
+            marginRight: '1.5em',
+            cursor: enabled ? 'pointer' : 'not-allowed',
+        });
+
+        return (
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <CustomizedButton
+                    key={`sendWarning-${id}`}
+                    onClick={() => handleSendWarning(id)}
+                    hoverBackgroundColor="#2d3ed2"
+                    disabled={!enableWarning}
+                    style={buttonStyle(enableWarning, '#242F9B', '#2d3ed2')}
+                >
+                    Send Warning
+                </CustomizedButton>
+
+                <CustomizedButton
+                    key={`remove-${id}`}
+                    onClick={() => handleRemove(id)}
+                    hoverBackgroundColor="#f11717"
+                    disabled={!enableRemove}
+                    style={buttonStyle(enableRemove, '#960505', '#f11717')}
+                >
+                    Remove
+                </CustomizedButton>
+            </div>
+        );
+    };
 
     rows = rows.map(row => ({
         ...row,
-        actions: createActions(row.id)
+        actions: createActions(row.id, row.lastLogin)
     }));
 
     const searchCustomers = async (query) => {
@@ -194,7 +270,7 @@ function CustomerDashboard() {
                 open={openSuccess}
                 onClose={handleCloseSuccess}
                 severity="success"
-                message="Customer Removed Successfully!"
+                message="Warning sent Successfully!"
             />
 
             <CustomizedAlert
@@ -203,8 +279,16 @@ function CustomerDashboard() {
                 severity="error"
                 message="Something Went Wrong!"
             />
-        </>
 
+            <DialogBox
+                open={openDialog}
+                onClose={handleDialogClose}
+                title="Customer Account Termination"
+                content="Are you really want to terminate this customer?"
+                onAgree={handleAgree}
+                onDisagree={handleDisagree}
+            />
+        </>
     );
 }
 
