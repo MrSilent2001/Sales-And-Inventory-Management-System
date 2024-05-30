@@ -202,7 +202,7 @@ function ProductDetail(){
                                 <MobileGallery images={product.productImage}/>
                             )}
 
-                            {product && product.productQuantity && (
+                            {product && (
                                 <Description
                                     onQuant={quant}
                                     onAdd={addQuant}

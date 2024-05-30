@@ -22,15 +22,22 @@ const Description = ({ onQuant, onAdd, onRemove, onAddToCart, title, description
             </div>
             <div className="buttons">
                 <QuantityButton onQuant={onQuant} onRemove={onRemove} onAdd={onAdd} productQuantity={quantity}/>
-                <button
-                    className="add-to-cart"
-                    onClick={() => {
-                        onAddToCart(onQuant);
-                    }}
-                >
-                    <CartIcon/>
-                    add to cart
-                </button>
+                {quantity === 0 ? (
+                    <button className="add-to-cart" disabled={true} style={{ backgroundColor: 'red' }}>Out of stock</button>
+                ) : (
+                    <>
+
+                        <button
+                            className="add-to-cart"
+                            onClick={() => {
+                                onAddToCart(onQuant);
+                            }}
+                        >
+                            <CartIcon/>
+                            add to cart
+                        </button>
+                    </>
+                )}
             </div>
         </section>
     );
