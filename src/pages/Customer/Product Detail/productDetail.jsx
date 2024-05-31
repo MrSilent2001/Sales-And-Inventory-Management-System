@@ -24,6 +24,7 @@ function ProductDetail(){
     const [quant, setQuant] = useState(0);
     const [orderedQuant, setOrderedQuant] = useState(0);
     const [cart, setCart] = useState([]);
+    const [availableQuantity, setAvailableQuantity] = useState(0);
 
     //add to cart Alert Variables
     const [addToCartOpenSuccess, setAddToCartOpenSuccess] = useState(false);
@@ -36,6 +37,9 @@ function ProductDetail(){
 
     //data fetching error Alert Variables
     const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
+
+    //quantity error Alert Variables
+    const [quantityErrorOpenSuccess, setQuantityErrorOpenSuccess] = useState(false);
 
     //handle add to cart increments, decrements and reset
     const addQuant = () => {
@@ -53,23 +57,35 @@ function ProductDetail(){
 
     const handleAddToCart = (count) => {
         const existingItemIndex = cart.findIndex(cartItem => cartItem.id === product.id);
+        const updatedCart = [...cart];
 
         // If item already exists in cart, increase its quantity
         if (existingItemIndex !== -1) {
-            const updatedCart = [...cart];
-            updatedCart[existingItemIndex].amount += count;
-            setCart(updatedCart);
-            localStorage.setItem("cart", JSON.stringify(updatedCart));
-            resetQuant;
-            addToCartHandleClickSuccess();
-        }
-        // If item is not in cart, add it with quantity 1
-        else {
-            setCart([...cart, { ...product, amount: count }]);
-            localStorage.setItem("cart", JSON.stringify([...cart, { ...product, amount: count }]));
-            addToCartHandleClickSuccess();
+            // Check if adding the given count will exceed product quantity
+            if (updatedCart[existingItemIndex].amount + count <= product.productQuantity) {
+                updatedCart[existingItemIndex].amount += count;
+                setCart(updatedCart);
+                localStorage.setItem("cart", JSON.stringify(updatedCart));
+                resetQuant;
+                setAvailableQuantity(product.productQuantity - updatedCart[existingItemIndex].amount);
+                addToCartHandleClickSuccess();
+            } else {
+                quantityErrorHandleClickSuccess();
+            }
+        } else {
+            // If item is not in cart, check if adding it with the given count will exceed product quantity
+            if (product.productQuantity >= count) {
+                setCart([...updatedCart, { ...product, amount: count }]);
+                localStorage.setItem("cart", JSON.stringify([...updatedCart, { ...product, amount: count }]));
+                setAvailableQuantity(product.productQuantity - count);
+                resetQuant;
+                addToCartHandleClickSuccess();
+            } else {
+                quantityErrorHandleClickSuccess();
+            }
         }
     };
+
 
     //related product cart handle clicks
     const handleBodyClick = (item) => {
@@ -114,6 +130,31 @@ function ProductDetail(){
 
     const dataErrorHandleClickSuccess = () => {
         setDataErrorOpenSuccess(true);
+    };
+
+    //Handle Quantity Error Alert Variable
+    const quantityErrorHandleCloseSuccess = () => {
+        setQuantityErrorOpenSuccess(false);
+    };
+
+    const quantityErrorHandleClickSuccess = () => {
+        setQuantityErrorOpenSuccess(true);
+    };
+
+    const fetchCartAndSetAvailableQuantity = (product) => {
+        const storedCart = JSON.parse(localStorage.getItem("cart"));
+        if (storedCart) {
+            setCart(storedCart);
+            const existingItem = storedCart.find(cartItem => cartItem.id === product.id);
+            if (existingItem) {
+                setAvailableQuantity(product.productQuantity - existingItem.amount);
+            } else {
+                setAvailableQuantity(product.productQuantity);
+            }
+        } else {
+            setCart([]); // Set to an empty array if no cart is found in local storage
+            setAvailableQuantity(product.productQuantity);
+        }
     };
 
     useEffect(() => {
@@ -167,6 +208,12 @@ function ProductDetail(){
 
                 console.log("review", filteredReviews);
 
+                // Call fetchCartAndSetAvailableQuantity after setting the product
+                if (singleProductWithOffer) {
+                    fetchCartAndSetAvailableQuantity(singleProductWithOffer);
+                }
+
+
             } catch (error) {
                 console.error('Error fetching products with offers:', error);
                 dataErrorHandleClickSuccess();
@@ -176,14 +223,14 @@ function ProductDetail(){
         fetchProductsWithOffers();
     }, [productId, token]);
 
-    useEffect(() => {
-        const storedCart = JSON.parse(localStorage.getItem("cart"));
-        if (storedCart) {
-            setCart(storedCart);
-        } else {
-            setCart([]); // Set to an empty array if no cart is found in local storage
-        }
-    }, []);
+    // useEffect(() => {
+    //     const storedCart = JSON.parse(localStorage.getItem("cart"));
+    //     if (storedCart) {
+    //         setCart(storedCart);
+    //     } else {
+    //         setCart([]); // Set to an empty array if no cart is found in local storage
+    //     }
+    // }, []);
 
 
     return(
@@ -202,7 +249,7 @@ function ProductDetail(){
                                 <MobileGallery images={product.productImage}/>
                             )}
 
-                            {product && product.productQuantity && (
+                            {product && (
                                 <Description
                                     onQuant={quant}
                                     onAdd={addQuant}
@@ -214,6 +261,8 @@ function ProductDetail(){
                                     title={product.productName}
                                     category={product.productCategory}
                                     offer={product.discountRate}
+                                    availableQuantity={availableQuantity}
+                                    quantityError={setQuantityErrorOpenSuccess}
                                 />
                             )}
                         </section>
@@ -282,6 +331,13 @@ function ProductDetail(){
                     onClose={dataErrorHandleCloseSuccess}
                     severity="error"
                     message="Error Fetching Data!"
+                />
+
+                <CustomizedAlert
+                    open={quantityErrorOpenSuccess}
+                    onClose={quantityErrorHandleCloseSuccess}
+                    severity="warning"
+                    message="Can't add more item due to the stock avaliability!"
                 />
 
                 <Footer/>
