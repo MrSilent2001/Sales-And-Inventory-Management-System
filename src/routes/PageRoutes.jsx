@@ -40,6 +40,7 @@ import UpdateCustomers from "../pages/Customer/Update Customers/updateCustomers"
 import AdminLogin from "../pages/login & SignUp/login/adminLogin";
 import ProtectedRoute from "./protectedRoutes";
 import Redirect from "../pages/Customer/Cart/redirect";
+import SupplierHome from "../pages/Supplier/Home/SupplierHomePage";
 
 export function PageRouting() {
     return (
@@ -65,6 +66,7 @@ export function PageRouting() {
                 <Route element={<ProtectedRoute />}>
 
                     {/*Supplier view routes*/}
+                    <Route path="/supplierHome" element={<SupplierHome/>}/>
                     <Route path="/supplierDashboard" element={<InventoryDashboard/>}/>
                     <Route path="/supplierProfile" element={<SupplierProfile/>}/>
                     <Route path="/updateSupplier" element={<UpdateSupplier/>}/>

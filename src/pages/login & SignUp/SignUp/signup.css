@@ -8,17 +8,25 @@
 
 .tabPanel {
     display: flex;
+    padding: 20px;
+    border-radius: 10px;
     justify-content: center;
     margin-bottom: 1em;
 }
+
+#pills {
+    max-height: 40em;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #a7e1f6;
+ }
 
 .nav-link {
     margin: 0 0.5em;
 }
 
-.bodyContainer {
-    width: 100%;
-    max-width: 600px;
+.bodyContainer-signup {
     display: flex;
     flex-direction: column;
     align-items: center;

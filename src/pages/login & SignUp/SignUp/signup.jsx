@@ -134,25 +134,30 @@ function SignUp() {
                             width: '7.5em',
                             padding: '1.25em 1em',
                             marginRight: '1em',
-                            backgroundColor: activeTab === 'customer' ? '#007bff' : 'transparent',
+                            backgroundColor: activeTab === 'customer' ? '#007bff' : '#ffffff',
                             color: activeTab === 'customer' ? '#ffffff' : '#007bff',
-                            border: '1px solid #007bff'
+                            border: '1px solid #007bff',
+                            borderRadius: '0.25em'
                         }}
                     >
                         Customer
                     </CustomizedButton>
+
+
                 </div>
+
                 <div>
                     <CustomizedButton
-                        className={`nav-link ${activeTab === 'supplier' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('supplier')}
+                        className={`nav-link ${activeTab === 'customer' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('customer')}
                         style={{
                             width: '7.5em',
                             padding: '1.25em 1em',
-                            marginLeft: '1em',
-                            backgroundColor: activeTab === 'supplier' ? '#007bff' : 'transparent',
-                            color: activeTab === 'supplier' ? '#007bff' : '#ffffff',
-                            border: '1px solid #007bff'
+                            marginRight: '1em',
+                            backgroundColor: activeTab === 'customer' ? '#007bff' : '#ffffff',
+                            color: activeTab === 'customer' ? '#ffffff' : '#007bff',
+                            border: '1px solid #007bff',
+                            borderRadius: '0.25em'
                         }}
                     >
                         Supplier
@@ -160,8 +165,8 @@ function SignUp() {
                 </div>
             </div>
 
-            <div className="bodyContainer">
-                <div className={`tab-pane ${activeTab === 'customer' ? 'active' : ''}`} id="pills-login">
+            <div className="bodyContainer-signup">
+                <div className={`tab-pane ${activeTab === 'customer' ? 'active' : ''}`} id="pills">
                     <form onSubmit={handleSubmitCustomer}>
                         <FormControl fullWidth>
                             <div className="form-outline">
@@ -268,7 +273,7 @@ function SignUp() {
                     </form>
                 </div>
 
-                <div className={`tab-pane ${activeTab === 'supplier' ? 'active' : ''}`} id="pills-register">
+                <div className={`tab-pane ${activeTab === 'supplier' ? 'active' : ''}`} id="pills">
                     <form onSubmit={handleSubmitSupplier}>
                         <FormControl fullWidth>
                             <div className="form-outline">

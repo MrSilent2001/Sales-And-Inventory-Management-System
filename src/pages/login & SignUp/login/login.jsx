@@ -6,10 +6,9 @@ import CustomizedButton from "../../../components/Button/button";
 import FormControl from "@mui/material/FormControl";
 import { useAuth } from '../../../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from "axios";
 
 function Login() {
-    const { customerLogin, supplierLogin  } = useAuth();
+    const { customerLogin, supplierLogin } = useAuth();
     const [activeTab, setActiveTab] = useState('customer');
     const [showPassword, setShowPassword] = useState(true);
     const [customerData, setCustomerFormData] = useState({
@@ -25,7 +24,7 @@ function Login() {
     const navigate = useNavigate();
 
     const handleClickShowPassword = () => {
-        setShowPassword(false);
+        setShowPassword(!showPassword);
     };
 
     const handleMouseDownPassword = (event) => {
@@ -63,7 +62,7 @@ function Login() {
 
         try {
             const response = await supplierLogin(supplierData.username, supplierData.password);
-            navigate("/supplierDashboard");
+            navigate("/supplierHome");
         } catch (error) {
             console.error('Login error:', error);
         }
@@ -72,41 +71,39 @@ function Login() {
     return (
         <div className="adminLoginContainer">
             <div className="tabPanel">
-                <div>
-                    <CustomizedButton
-                        className={`nav-link ${activeTab === 'customer' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('customer')}
-                        style={{
-                            width: '7.5em',
-                            padding: '1.25em 1em',
-                            marginRight: '1em',
-                            backgroundColor: activeTab === 'customer' ? '#007bff' : 'transparent',
-                            color: activeTab === 'customer' ? '#ffffff' : '#007bff',
-                            border: '1px solid #007bff'
-                        }}
-                    >
-                        Customer
-                    </CustomizedButton>
-                </div>
-                <div>
-                    <CustomizedButton
-                        className={`nav-link ${activeTab === 'supplier' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('supplier')}
-                        style={{
-                            width: '7.5em',
-                            padding: '1.25em 1em',
-                            marginLeft: '1em',
-                            backgroundColor: activeTab === 'supplier' ? '#007bff' : 'transparent',
-                            color: activeTab === 'supplier' ? '#007bff' : '#ffffff',
-                            border: '1px solid #007bff'
-                        }}
-                    >
-                        Supplier
-                    </CustomizedButton>
-                </div>
+                <CustomizedButton
+                    className={`nav-link ${activeTab === 'customer' ? 'active' : ''}`}
+                    onClick={() => setActiveTab('customer')}
+                    style={{
+                        width: '7.5em',
+                        padding: '1.25em 1em',
+                        marginRight: '1em',
+                        backgroundColor: activeTab === 'customer' ? '#007bff' : '#ffffff',
+                        color: activeTab === 'customer' ? '#ffffff' : '#007bff',
+                        border: '1px solid #007bff',
+                        borderRadius: '0.25em'
+                    }}
+                >
+                    Customer
+                </CustomizedButton>
+                <CustomizedButton
+                    className={`nav-link ${activeTab === 'supplier' ? 'active' : ''}`}
+                    onClick={() => setActiveTab('supplier')}
+                    style={{
+                        width: '7.5em',
+                        padding: '1.25em 1em',
+                        marginRight: '1em',
+                        backgroundColor: activeTab === 'supplier' ? '#007bff' : '#ffffff',
+                        color: activeTab === 'supplier' ? '#ffffff' : '#007bff',
+                        border: '1px solid #007bff',
+                        borderRadius: '0.25em'
+                    }}
+                >
+                    Supplier
+                </CustomizedButton>
             </div>
 
-            <div className="bodyContainer">
+            <div className="bodyContainer-admin">
                 <div className={`tab-pane ${activeTab === 'customer' ? 'active' : ''}`} id="pills-login">
                     <form onSubmit={handleSubmitCustomer}>
                         <FormControl fullWidth>
@@ -116,7 +113,7 @@ function Login() {
                                     size="small"
                                     type="text"
                                     id="outlined-required"
-                                    style={{width: '17.25em', height: '2em'}}
+                                    style={{ width: '17.25em', height: '2em' }}
                                     onChange={(e) => handleChangeCustomer("username", e.target.value)}
                                     required
                                 />
@@ -127,7 +124,7 @@ function Login() {
                                 <PasswordField
                                     size="small"
                                     id="outlined-adornment-password"
-                                    style={{width: '17.25em', marginLeft: '0.2em', height: '2em'}}
+                                    style={{ width: '17.25em', marginLeft: '0.2em', height: '2em' }}
                                     onChange={(e) => handleChangeCustomer("password", e.target.value)}
                                     showPassword={showPassword}
                                     handleClickShowPassword={handleClickShowPassword}
@@ -168,7 +165,7 @@ function Login() {
                                 <BasicTextField
                                     size="small"
                                     type="text"
-                                    style={{width: '17.25em', height: '2em'}}
+                                    style={{ width: '17.25em', height: '2em' }}
                                     id="outlined-required"
                                     onChange={(e) => handleChangeSupplier("username", e.target.value)}
                                     required
@@ -180,7 +177,7 @@ function Login() {
                                 <PasswordField
                                     size="small"
                                     id="outlined-adornment-password"
-                                    style={{width: '17.25em', marginLeft: '0.2em', height: '2em'}}
+                                    style={{ width: '17.25em', marginLeft: '0.2em', height: '2em' }}
                                     onChange={(e) => handleChangeSupplier("password", e.target.value)}
                                     showPassword={showPassword}
                                     handleClickShowPassword={handleClickShowPassword}
