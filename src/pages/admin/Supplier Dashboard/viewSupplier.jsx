@@ -14,55 +14,59 @@ import CustomizedTable from "../../../components/Table/Customized Table/customiz
 import axios from "axios";
 import CustomizedAlert from "../../../components/Alert/alert";
 import PageLoader from "../../../components/Page Loader/pageLoader";
+import DialogBox from "../../../components/Dialog Box/DialogBox";
 
-function FilterItems() {
-    const [category, setCategory] = useState('');
-
-    const handleSelect = (event) => {
-        setCategory(event.target.value);
-    };
-
-    const options = [
-        { value: 'All', label: 'All' },
-        { value: 'Metal', label: 'Metal' },
-        { value: 'Wood', label: 'Wood' }
-    ];
-
-    return (
-        <Box sx={{ minWidth: 80 }}>
-            <FormControl fullWidth>
-                <InputLabel
-                    id="demo-simple-select-label"
-                    sx={{
-                        fontSize: '10px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'rgba(255,255,255,0.7)'
-                    }}
-                >
-                    Select
-                </InputLabel>
-                <ComboBox
-                    value={category}
-                    onChange={(event) => handleSelect(event)}
-                    style={{ width: '10em', marginRight: '0.5em', border: '1px solid white' }}
-                    options={options}
-                    label="Category"
-                    size="small"
-                />
-            </FormControl>
-        </Box>
-    );
-}
+// function FilterItems() {
+//     const [category, setCategory] = useState('');
+//
+//     const handleSelect = (event) => {
+//         setCategory(event.target.value);
+//     };
+//
+//     const options = [
+//         { value: 'All', label: 'All' },
+//         { value: 'Metal', label: 'Metal' },
+//         { value: 'Wood', label: 'Wood' }
+//     ];
+//
+//     return (
+//         <Box sx={{ minWidth: 80 }}>
+//             <FormControl fullWidth>
+//                 <InputLabel
+//                     id="demo-simple-select-label"
+//                     sx={{
+//                         fontSize: '10px',
+//                         display: 'flex',
+//                         alignItems: 'center',
+//                         justifyContent: 'center',
+//                         color: 'rgba(255,255,255,0.7)'
+//                     }}
+//                 >
+//                     Select
+//                 </InputLabel>
+//                 <ComboBox
+//                     value={category}
+//                     onChange={(event) => handleSelect(event)}
+//                     style={{ width: '10em', marginRight: '0.5em', border: '1px solid white' }}
+//                     options={options}
+//                     label="Category"
+//                     size="small"
+//                 />
+//             </FormControl>
+//         </Box>
+//     );
+// }
 
 function ViewSupplier() {
     const [visible, setVisible] = useState(false);
     const [suppliers, setSuppliers] = useState([]);
+    const [selectedSupplierId, setSelectedSupplierId] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-
+    const [openDialog, setOpenDialog] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
+
+    const token = localStorage.getItem('accessToken');
 
     const handleClickSuccess = () => {
         setOpenSuccess(true);
@@ -79,8 +83,10 @@ function ViewSupplier() {
     const handleCloseError = () => {
         setOpenError(false);
     };
+    const handleDialogClose = () => {
+        setOpenDialog(false);
+    };
 
-    const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
         const fetchSuppliers = async () => {
@@ -109,19 +115,38 @@ function ViewSupplier() {
         fetchSuppliers();
     }, []);
 
-    const handleButtonClick = async (id) => {
+    const handleRemove = async (id) => {
+        setSelectedSupplierId(id);
+        setOpenDialog(true);
+    }
+
+    const handleAgree = async() => {
         try {
-            if (!token) {
-                console.error('No access token found');
-                return;
-            }
-            await axios.delete(`http://localhost:9000/supplier/delete/${id}`, {
+            const customer = await axios.get(`http://localhost:9000/supplier/getSupplier/${selectedSupplierId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
 
-            // Fetching the updated list of discounts after deletion
+            const email = axios.post('http://localhost:9000/email/send/supplierTermination',{
+                receiverName: customer.data.username,
+                emailSubject: "Account Termination!",
+                emailBody: "Your account has been terminated by Tradeasy!",
+                receiverEmail: customer.data.email
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            console.log(email.data);
+
+            await axios.delete(`http://localhost:9000/supplier/delete/${selectedSupplierId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            // Fetching the updated list of customers after deletion
             const response = await axios.get('http://localhost:9000/supplier/getAllSuppliers', {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -131,14 +156,17 @@ function ViewSupplier() {
             handleClickSuccess();
 
         } catch (error) {
-            if (error.response && error.response.status === 401) {
-                console.error('Unauthorized access - perhaps the token is invalid or expired');
-            } else {
-                console.error('Error canceling discount:', error);
-            }
+            console.error('Error deleting supplier:', error);
             handleClickError();
+        }finally {
+            handleDialogClose();
         }
     };
+
+    const handleDisagree = () => {
+        handleDialogClose();
+    };
+
 
     // Fetch supplier function with query parameter
     const fetchSuppliersWithQuery = async (query) => {
@@ -165,11 +193,11 @@ function ViewSupplier() {
 
     const columns = [
         { columnId: 'id', label: 'Supplier Id', minWidth: 100, align: 'center' },
-        { columnId: 'supplierName', label: 'Supplier Name', minWidth: 150, align: 'center' },
-        { columnId: 'supplierEmail', label: 'E-mail', minWidth: 120, align: 'center' },
+        { columnId: 'username', label: 'Supplier Name', minWidth: 150, align: 'center' },
+        { columnId: 'email', label: 'E-mail', minWidth: 120, align: 'center' },
         { columnId: 'nic', label: 'NIC', minWidth: 100, align: 'center' },
-        { columnId: 'supplierAddress', label: 'Address', minWidth: 170, align: 'center' },
-        { columnId: 'supplierContact', label: 'Contact No.', minWidth: 100, align: 'center' },
+        // { columnId: 'Address', label: 'Address', minWidth: 170, align: 'center' },
+        { columnId: 'contactNo', label: 'Contact No.', minWidth: 100, align: 'center' },
         { columnId: 'actions', label: '', minWidth: 100, align: 'center' },
     ];
 
@@ -181,7 +209,7 @@ function ViewSupplier() {
     function createViewButton(rowId) {
         return (
             <CustomizedButton
-                onClick={() => handleButtonClick(rowId)}
+                onClick={() => handleRemove(rowId)}
                 hoverBackgroundColor="#f11717"
                 style={{
                     backgroundColor: '#960505',
@@ -207,36 +235,36 @@ function ViewSupplier() {
             <InventoryNavbar />
 
             <div className="viewSupplierOuter">
-                <div className="viewSupplierFilter">
-                    <div className="filterHeader">
-                        <h2>Filter Items</h2>
-                        <div className="supplierCategoryFilter">
-                            <div className="itemCategoryTopic">
-                                <h5>Category</h5>
-                            </div>
-                            <FilterItems />
-                        </div>
-                        <div className="applyButton">
-                            <CustomizedButton
-                                hoverBackgroundColor="#f11717"
-                                style={{
-                                    backgroundColor: '#960505',
-                                    width: '11em',
-                                    height: '2.5em',
-                                    fontSize: '0.95em',
-                                    padding: '0.5em 0.625em',
-                                    borderRadius: '0.35em',
-                                    fontWeight: '550',
-                                    marginTop: '0.625em',
-                                    marginRight: '1.5em',
-                                    marginLeft: '1.5em'
-                                }}
-                            >
-                                Apply
-                            </CustomizedButton>
-                        </div>
-                    </div>
-                </div>
+                {/*<div className="viewSupplierFilter">*/}
+                {/*    <div className="filterHeader">*/}
+                {/*        <h2>Filter Items</h2>*/}
+                {/*        <div className="supplierCategoryFilter">*/}
+                {/*            <div className="itemCategoryTopic">*/}
+                {/*                <h5>Category</h5>*/}
+                {/*            </div>*/}
+                {/*            <FilterItems />*/}
+                {/*        </div>*/}
+                {/*        <div className="applyButton">*/}
+                {/*            <CustomizedButton*/}
+                {/*                hoverBackgroundColor="#f11717"*/}
+                {/*                style={{*/}
+                {/*                    backgroundColor: '#960505',*/}
+                {/*                    width: '11em',*/}
+                {/*                    height: '2.5em',*/}
+                {/*                    fontSize: '0.95em',*/}
+                {/*                    padding: '0.5em 0.625em',*/}
+                {/*                    borderRadius: '0.35em',*/}
+                {/*                    fontWeight: '550',*/}
+                {/*                    marginTop: '0.625em',*/}
+                {/*                    marginRight: '1.5em',*/}
+                {/*                    marginLeft: '1.5em'*/}
+                {/*                }}*/}
+                {/*            >*/}
+                {/*                Apply*/}
+                {/*            </CustomizedButton>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
                 <div className="viewSupplierInner">
 
                     <div className="supplierSearchAndButtons">
@@ -301,6 +329,15 @@ function ViewSupplier() {
                 onClose={handleCloseError}
                 severity="error"
                 message="Something went wrong!"
+            />
+
+            <DialogBox
+                open={openDialog}
+                onClose={handleDialogClose}
+                title="Supplier Account Termination"
+                content="Are you really want to terminate this Supplier?"
+                onAgree={handleAgree}
+                onDisagree={handleDisagree}
             />
 
             <Footer />

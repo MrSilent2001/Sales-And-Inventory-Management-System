@@ -5,7 +5,7 @@ import
     BsListCheck, BsMenuButtonWideFill, BsFillGearFill}
     from 'react-icons/bs'
 
-function Sidebar({openSidebarToggle, OpenSidebar}) {
+function Sidebar({openSidebarToggle, OpenSidebar, openProfileModal }) {
     return (
         <aside id="sidebar" className={openSidebarToggle ? "sidebar-responsive": ""}>
             <div className='sidebar-title'>
@@ -39,7 +39,7 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
                 </li>
 
                 <li className='sidebar-list-item'>
-                    <a href="/viewInventory">
+                    <a href="" onClick={(e) => { e.preventDefault(); openProfileModal();}}>
                         <BsPeopleFill className='icon'/> Profile
                     </a>
                 </li>

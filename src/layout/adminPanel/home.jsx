@@ -107,7 +107,7 @@ function Home() {
 
     const categories = async() =>{
         try {
-            const response = await axios.get('http://localhost:9000/', {
+            const response = await axios.get('http://localhost:9000/product/getProductsCategoryCount', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -120,7 +120,7 @@ function Home() {
 
     const products = async() =>{
         try {
-            const response = await axios.get('http://localhost:9000/', {
+            const response = await axios.get('http://localhost:9000/product/getProductsCount', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

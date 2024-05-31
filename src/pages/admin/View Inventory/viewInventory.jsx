@@ -23,8 +23,8 @@ function ViewInventory(){
     const [allInventoryItems, setAllInventoryItems] = useState([]);
 
     const [category, setCategory] = React.useState('');
-
     const [stock, setStock] = React.useState(true);
+    const token = localStorage.getItem('accessToken');
 
     const handleSelect = (event) => {
         setCategory(event.target.value);
@@ -69,7 +69,11 @@ function ViewInventory(){
                 `http://localhost:9000/inventory/getByCategory?productCategory=${encodeURIComponent(category)}`
                 : 'http://localhost:9000/inventory/getAll';
 
-        axios.get(url).then(res=> {
+        axios.get(url, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then(res=> {
             setAllInventoryItems(res.data);
             console.log(res.data);
         }).catch(err => {
