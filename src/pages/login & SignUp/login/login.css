@@ -9,13 +9,19 @@
 .nav-pills {
     display: flex;
     justify-content: center;
-    margin-bottom: 30px;
+    margin-bottom: 1.5em;
     list-style: none;
-    padding: 0;
+    padding: 1em;
 }
 
-#pills-login{
+#loginFormFields{
     max-height: 30em;
+}
+
+.form-outline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .nav-item {

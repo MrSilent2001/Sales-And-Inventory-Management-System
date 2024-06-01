@@ -118,73 +118,75 @@ function AdminLogin() {
 
             <div className="bodyContainer">
                 <div className={`tab-pane ${activeTab === 'login' ? 'active' : ''}`} id="pills-login">
-                    <Formik
-                        initialValues={{username: '', password: ''}}
-                        validationSchema={LoginSchema}
-                        onSubmit={handleSubmitLogin}
-                    >
-                        {({isSubmitting}) => (
-                            <Form>
-                                <FormControl fullWidth>
-                                    <div className="form-outline">
-                                        <label>Username:</label>
-                                        <Field
-                                            name="username"
-                                            as={BasicTextField}
-                                            size="small"
-                                            type="text"
-                                            className="loginInput"
-                                        />
+                    <div className="adminForm">
+                        <Formik
+                            initialValues={{username: '', password: ''}}
+                            validationSchema={LoginSchema}
+                            onSubmit={handleSubmitLogin}
+                        >
+                            {({isSubmitting}) => (
+                                <Form>
+                                    <FormControl fullWidth>
+                                        <div className="form-outline">
+                                            <label>Username:</label>
+                                            <Field
+                                                name="username"
+                                                as={BasicTextField}
+                                                size="small"
+                                                type="text"
+                                                className="loginInput"
+                                            />
+                                        </div>
                                         <ErrorMessage name="username" component="div" className="error-message"/>
-                                    </div>
 
-                                    <div className="form-outline">
-                                        <label>Password:</label>
-                                        <Field
-                                            name="password"
-                                            style={{width: '17.25em', marginLeft: '0.2em', height: '2em'}}
-                                            as={PasswordField}
-                                            size="small"
-                                            showPassword={showPassword}
-                                            handleClickShowPassword={handleClickShowPassword}
-                                            handleMouseDownPassword={handleMouseDownPassword}
-                                        />
+                                        <div className="form-outline">
+                                            <label>Password:</label>
+                                            <Field
+                                                name="password"
+                                                style={{width: '17.25em', marginLeft: '-1.75em', height: '2em'}}
+                                                as={PasswordField}
+                                                size="small"
+                                                showPassword={showPassword}
+                                                handleClickShowPassword={handleClickShowPassword}
+                                                handleMouseDownPassword={handleMouseDownPassword}
+                                            />
+                                        </div>
                                         <ErrorMessage name="password" component="div" className="error-message"/>
-                                    </div>
 
-                                    <div className="buttonContainer">
-                                        <CustomizedButton
-                                            style={{
-                                                color: '#ffffff',
-                                                backgroundColor: '#242F9B',
-                                                width: '11.5em',
-                                                height: '2.75em',
-                                                fontSize: '0.95em',
-                                                padding: '0.5em 0.625em',
-                                                borderRadius: '0.625em',
-                                                fontWeight: '550',
-                                                border: 'none',
-                                                marginTop: '0.625em',
-                                                hoverBackgroundColor: '#2d3ed2'
-                                            }}
-                                            type="submit"
-                                            disabled={isSubmitting}
-                                        >
-                                            Login
-                                        </CustomizedButton>
-                                    </div>
+                                        <div className="buttonContainer">
+                                            <CustomizedButton
+                                                style={{
+                                                    color: '#ffffff',
+                                                    backgroundColor: '#242F9B',
+                                                    width: '11.5em',
+                                                    height: '2.75em',
+                                                    fontSize: '0.95em',
+                                                    padding: '0.5em 0.625em',
+                                                    borderRadius: '0.625em',
+                                                    fontWeight: '550',
+                                                    border: 'none',
+                                                    marginTop: '0.625em',
+                                                    hoverBackgroundColor: '#2d3ed2'
+                                                }}
+                                                type="submit"
+                                                disabled={isSubmitting}
+                                            >
+                                                Login
+                                            </CustomizedButton>
+                                        </div>
 
-                                    <div className="text-center">
-                                        <p>Not a member? <a href="#!" onClick={() => setActiveTab('signup')}>Sign-Up</a>
-                                        </p>
-                                    </div>
-                                    <div className="text-center">
-                                        <a href="#!">Forgot password?</a>
-                                    </div>
-                                </FormControl>
-                            </Form>
-                        )}
-                    </Formik>
+                                        <div className="text-center">
+                                            <p>Not a member? <a href="" onClick={() => setActiveTab('signup')}>Sign-Up</a>
+                                            </p>
+                                        </div>
+                                        <div className="text-center">
+                                            <a href="">Forgot password?</a>
+                                        </div>
+                                    </FormControl>
+                                </Form>
+                            )}
+                        </Formik>
+                    </div>
                 </div>
 
                 <div className={`tab-pane ${activeTab === 'signup' ? 'active' : ''}`} id="pills-register">
@@ -204,8 +206,8 @@ function AdminLogin() {
                                             size="small"
                                             type="text"
                                         />
-                                        <ErrorMessage name="username" component="div" className="error-message"/>
                                     </div>
+                                    <ErrorMessage name="username" component="div" className="error-message"/>
 
                                     <div className="form-outline">
                                         <label>Email:</label>
@@ -215,8 +217,8 @@ function AdminLogin() {
                                             size="small"
                                             type="email"
                                         />
-                                        <ErrorMessage name="email" component="div" className="error-message"/>
                                     </div>
+                                    <ErrorMessage name="email" component="div" className="error-message"/>
 
                                     <div className="form-outline">
                                         <label>Contact No:</label>
@@ -226,36 +228,36 @@ function AdminLogin() {
                                             size="small"
                                             type="text"
                                         />
-                                        <ErrorMessage name="contactNo" component="div" className="error-message"/>
                                     </div>
+                                    <ErrorMessage name="contactNo" component="div" className="error-message"/>
 
                                     <div className="form-outline">
                                         <label>Password:</label>
                                         <Field
                                             name="password"
-                                            style={{width: '17.25em', marginLeft: '0.2em', height: '2em'}}
+                                            style={{width: '17.25em', marginLeft: '-1.75em', height: '2em'}}
                                             as={PasswordField}
                                             size="small"
                                             showPassword={showPassword}
                                             handleClickShowPassword={handleClickShowPassword}
                                             handleMouseDownPassword={handleMouseDownPassword}
                                         />
-                                        <ErrorMessage name="password" component="div" className="error-message"/>
                                     </div>
+                                    <ErrorMessage name="password" component="div" className="error-message"/>
 
                                     <div className="form-outline">
                                         <label>Confirm Password:</label>
                                         <Field
                                             name="confirmPassword"
-                                            style={{width: '17.25em', marginLeft: '0.2em', height: '2em'}}
+                                            style={{width: '17.25em', marginLeft: '-1.75em', height: '2em'}}
                                             as={PasswordField}
                                             size="small"
                                             showPassword={showPassword}
                                             handleClickShowPassword={handleClickShowPassword}
                                             handleMouseDownPassword={handleMouseDownPassword}
                                         />
-                                        <ErrorMessage name="confirmPassword" component="div" className="error-message"/>
                                     </div>
+                                    <ErrorMessage name="confirmPassword" component="div" className="error-message"/>
 
                                     <div className="buttonContainer">
                                         <CustomizedButton
@@ -280,7 +282,7 @@ function AdminLogin() {
                                     </div>
 
                                     <div className="text-center">
-                                        <p>Already Have an Account? <a href="#!"
+                                        <p>Already Have an Account? <a href=""
                                                                        onClick={() => setActiveTab('login')}>Login</a>
                                         </p>
                                     </div>

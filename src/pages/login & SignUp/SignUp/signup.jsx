@@ -169,83 +169,85 @@ function SignUp() {
                 <div className={`tab-pane ${activeTab === 'customer' ? 'active' : ''}`} id="pills">
                     <form onSubmit={handleSubmitCustomer}>
                         <FormControl fullWidth>
-                            <div className="form-outline">
-                                <label> Username: </label>
-                                <BasicTextField
-                                    size="small"
-                                    type="text"
-                                    id="outlined-required"
-                                    onChange={(e) => handleChangeCustomer("username", e.target.value)}
-                                    required
-                                />
-                            </div>
-                            {errors.username && <div className="error-message">{errors.username}</div>}
+                            <div className="formFields">
+                                <div className="form-outline">
+                                    <label> Username: </label>
+                                    <BasicTextField
+                                        size="small"
+                                        type="text"
+                                        id="outlined-required"
+                                        onChange={(e) => handleChangeCustomer("username", e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                {errors.username && <div className="error-message">{errors.username}</div>}
 
-                            <div className="form-outline">
-                                <label> Email: </label>
-                                <BasicTextField
-                                    size="small"
-                                    id="outlined-required"
-                                    type="email"
-                                    onChange={(e) => handleChangeCustomer("email", e.target.value)}
-                                    required
-                                />
-                            </div>
-                            {errors.email && <div className="error-message">{errors.email}</div>}
+                                <div className="form-outline">
+                                    <label> Email: </label>
+                                    <BasicTextField
+                                        size="small"
+                                        id="outlined-required"
+                                        type="email"
+                                        onChange={(e) => handleChangeCustomer("email", e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                {errors.email && <div className="error-message">{errors.email}</div>}
 
-                            <div className="form-outline">
-                                <label> Contact No: </label>
-                                <BasicTextField
-                                    size="small"
-                                    id="outlined-required"
-                                    type="text"
-                                    onChange={(e) => handleChangeCustomer("contactNo", e.target.value)}
-                                    required
-                                />
-                            </div>
-                            {errors.contactNo && <div className="error-message">{errors.contactNo}</div>}
+                                <div className="form-outline">
+                                    <label> Contact No: </label>
+                                    <BasicTextField
+                                        size="small"
+                                        id="outlined-required"
+                                        type="text"
+                                        onChange={(e) => handleChangeCustomer("contactNo", e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                {errors.contactNo && <div className="error-message">{errors.contactNo}</div>}
 
-                            <div className="form-outline">
-                                <label> Address: </label>
-                                <BasicTextField
-                                    size="small"
-                                    id="outlined-required"
-                                    type="text"
-                                    onChange={(e) => handleChangeCustomer("address", e.target.value)}
-                                    required
-                                />
-                            </div>
-                            {errors.address && <div className="error-message">{errors.address}</div>}
+                                <div className="form-outline">
+                                    <label> Address: </label>
+                                    <BasicTextField
+                                        size="small"
+                                        id="outlined-required"
+                                        type="text"
+                                        onChange={(e) => handleChangeCustomer("address", e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                {errors.address && <div className="error-message">{errors.address}</div>}
 
-                            <div className="form-outline">
-                                <label> Password: </label>
-                                <PasswordField
-                                    style={{width: '17.25em', marginLeft: '0.2em', height: '2em'}}
-                                    size="small"
-                                    id="outlined-adornment-password"
-                                    onChange={(e) => handleChangeCustomer("password", e.target.value)}
-                                    showPassword={showPassword}
-                                    handleClickShowPassword={handleClickShowPassword}
-                                    handleMouseDownPassword={handleMouseDownPassword}
-                                    required
-                                />
-                            </div>
-                            {errors.password && <div className="error-message">{errors.password}</div>}
+                                <div className="form-outline">
+                                    <label> Password: </label>
+                                    <PasswordField
+                                        style={{width: '17.25em', marginLeft: '-1.75em', height: '2em'}}
+                                        size="small"
+                                        id="outlined-adornment-password"
+                                        onChange={(e) => handleChangeCustomer("password", e.target.value)}
+                                        showPassword={showPassword}
+                                        handleClickShowPassword={handleClickShowPassword}
+                                        handleMouseDownPassword={handleMouseDownPassword}
+                                        required
+                                    />
+                                </div>
+                                {errors.password && <div className="error-message">{errors.password}</div>}
 
-                            <div className="form-outline">
-                                <label> Confirm Password: </label>
-                                <PasswordField
-                                    style={{width: '17.25em', marginLeft: '0.2em', height: '2em'}}
-                                    size="small"
-                                    id="outlined-adornment-confirm-password"
-                                    onChange={(e) => handleChangeCustomer("confirmPassword", e.target.value)}
-                                    showPassword={showPassword}
-                                    handleClickShowPassword={handleClickShowPassword}
-                                    handleMouseDownPassword={handleMouseDownPassword}
-                                    required
-                                />
+                                <div className="form-outline">
+                                    <label> Confirm Password: </label>
+                                    <PasswordField
+                                        style={{width: '17.25em', marginLeft: '-1.75em', height: '2em'}}
+                                        size="small"
+                                        id="outlined-adornment-confirm-password"
+                                        onChange={(e) => handleChangeCustomer("confirmPassword", e.target.value)}
+                                        showPassword={showPassword}
+                                        handleClickShowPassword={handleClickShowPassword}
+                                        handleMouseDownPassword={handleMouseDownPassword}
+                                        required
+                                    />
+                                </div>
+                                {errors.confirmPassword && <div className="error-message">{errors.confirmPassword}</div>}
                             </div>
-                            {errors.confirmPassword && <div className="error-message">{errors.confirmPassword}</div>}
 
                             <div className="buttonContainer">
                                 <CustomizedButton

@@ -113,7 +113,7 @@ function Login() {
                                     size="small"
                                     type="text"
                                     id="outlined-required"
-                                    style={{ width: '17.25em', height: '2em' }}
+                                    style={{ width: '17.25em', marginLeft: '-1.75em', height: '2em' }}
                                     onChange={(e) => handleChangeCustomer("username", e.target.value)}
                                     required
                                 />
@@ -124,7 +124,7 @@ function Login() {
                                 <PasswordField
                                     size="small"
                                     id="outlined-adornment-password"
-                                    style={{ width: '17.25em', marginLeft: '0.2em', height: '2em' }}
+                                    style={{ width: '17.25em', marginLeft: '-1.75em', height: '2em' }}
                                     onChange={(e) => handleChangeCustomer("password", e.target.value)}
                                     showPassword={showPassword}
                                     handleClickShowPassword={handleClickShowPassword}
@@ -160,30 +160,32 @@ function Login() {
                 <div className={`tab-pane ${activeTab === 'supplier' ? 'active' : ''}`} id="pills-register">
                     <form onSubmit={handleSubmitSupplier}>
                         <FormControl fullWidth>
-                            <div className="form-outline">
-                                <label> Username: </label>
-                                <BasicTextField
-                                    size="small"
-                                    type="text"
-                                    style={{ width: '17.25em', height: '2em' }}
-                                    id="outlined-required"
-                                    onChange={(e) => handleChangeSupplier("username", e.target.value)}
-                                    required
-                                />
-                            </div>
+                            <div className="loginFormFields">
+                                <div className="form-outline">
+                                    <label> Username: </label>
+                                    <BasicTextField
+                                        size="small"
+                                        type="text"
+                                        style={{width: '17.25em', height: '2em'}}
+                                        id="outlined-required"
+                                        onChange={(e) => handleChangeSupplier("username", e.target.value)}
+                                        required
+                                    />
+                                </div>
 
-                            <div className="form-outline">
-                                <label> Password: </label>
-                                <PasswordField
-                                    size="small"
-                                    id="outlined-adornment-password"
-                                    style={{ width: '17.25em', marginLeft: '0.2em', height: '2em' }}
-                                    onChange={(e) => handleChangeSupplier("password", e.target.value)}
-                                    showPassword={showPassword}
-                                    handleClickShowPassword={handleClickShowPassword}
-                                    handleMouseDownPassword={handleMouseDownPassword}
-                                    required
-                                />
+                                <div className="form-outline">
+                                    <label> Password: </label>
+                                    <PasswordField
+                                        size="small"
+                                        id="outlined-adornment-password"
+                                        style={{width: '17.25em', marginLeft: '-1.75em', height: '2em'}}
+                                        onChange={(e) => handleChangeSupplier("password", e.target.value)}
+                                        showPassword={showPassword}
+                                        handleClickShowPassword={handleClickShowPassword}
+                                        handleMouseDownPassword={handleMouseDownPassword}
+                                        required
+                                    />
+                                </div>
                             </div>
 
                             <CustomizedButton
