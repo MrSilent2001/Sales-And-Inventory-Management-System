@@ -41,6 +41,7 @@ import AdminLogin from "../pages/login & SignUp/login/adminLogin";
 import ProtectedRoute from "./protectedRoutes";
 import Redirect from "../pages/Customer/Cart/redirect";
 import SupplierHome from "../pages/Supplier/Home/SupplierHomePage";
+import SalesReceipt from "../pages/Customer/Cart/Bill/invoice";
 
 export function PageRouting() {
     return (
@@ -61,6 +62,7 @@ export function PageRouting() {
                 <Route path="/success" element={<Success/>}/>
                 <Route path="/redirect" element={<Redirect/>}/>
                 <Route path="/cancel" element={<Cancel/>}/>
+                <Route path="/bill" element={<SalesReceipt/>}/>
 
 {/*===================================================Protected Routes==============================================================*/}
                 <Route element={<ProtectedRoute />}>
