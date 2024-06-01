@@ -42,6 +42,7 @@ import ProtectedRoute from "./protectedRoutes";
 import Redirect from "../pages/Customer/Cart/redirect";
 import SupplierHome from "../pages/Supplier/Home/SupplierHomePage";
 import SalesReceipt from "../pages/Customer/Cart/Bill/invoice";
+import CustomizedTable2 from "../components/Table/customizedTable2";
 
 export function PageRouting() {
     return (
@@ -49,6 +50,7 @@ export function PageRouting() {
             <Routes>
 
                 <Route path="/" element={<Login/>}/>
+                <Route path="/test" element={<CustomizedTable2/>}/>
 
 
 {/*===================================================Public Routes=================================================================*/}
