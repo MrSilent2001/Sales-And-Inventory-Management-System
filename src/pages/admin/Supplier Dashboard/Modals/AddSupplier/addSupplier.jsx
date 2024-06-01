@@ -25,7 +25,6 @@ const AddSupplier = forwardRef((props, ref) => {
             ...prevState,
             [name]: value
         }));
-        console.log(formData);
     };
 
     const [openSuccess, setOpenSuccess] = useState(false);
@@ -85,9 +84,7 @@ const AddSupplier = forwardRef((props, ref) => {
                     contactNo: formData.contactNo,
                     nic: formData.nic,
                     role: 'supplier',
-                    password: '',
-                    paymentMethod: '',
-                    paymentDetails: '',
+                    password: 'supplier@123',
                     profilePicture: 'https://th.bing.com/th/id/OIP.IQqAakFVSW2T6n9Kibpe2AAAAA?rs=1&pid=ImgDetMain'
                 });
 

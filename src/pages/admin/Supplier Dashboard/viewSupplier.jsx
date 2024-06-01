@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Box } from '@mui/material';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
 import "./viewSupplier.css";
 import { Modal } from "@mui/material";
 import AddSupplier from "./Modals/AddSupplier/addSupplier";
@@ -9,53 +6,11 @@ import InventoryNavbar from "../../../layout/navbar/Inventory navbar/Inventory n
 import Footer from "../../../layout/footer/footer";
 import CustomizedButton from "../../../components/Button/button";
 import SearchBar from "../../../components/search bar/search bar";
-import ComboBox from "../../../components/Form Inputs/comboBox";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 import axios from "axios";
 import CustomizedAlert from "../../../components/Alert/alert";
 import PageLoader from "../../../components/Page Loader/pageLoader";
 import DialogBox from "../../../components/Dialog Box/DialogBox";
-
-// function FilterItems() {
-//     const [category, setCategory] = useState('');
-//
-//     const handleSelect = (event) => {
-//         setCategory(event.target.value);
-//     };
-//
-//     const options = [
-//         { value: 'All', label: 'All' },
-//         { value: 'Metal', label: 'Metal' },
-//         { value: 'Wood', label: 'Wood' }
-//     ];
-//
-//     return (
-//         <Box sx={{ minWidth: 80 }}>
-//             <FormControl fullWidth>
-//                 <InputLabel
-//                     id="demo-simple-select-label"
-//                     sx={{
-//                         fontSize: '10px',
-//                         display: 'flex',
-//                         alignItems: 'center',
-//                         justifyContent: 'center',
-//                         color: 'rgba(255,255,255,0.7)'
-//                     }}
-//                 >
-//                     Select
-//                 </InputLabel>
-//                 <ComboBox
-//                     value={category}
-//                     onChange={(event) => handleSelect(event)}
-//                     style={{ width: '10em', marginRight: '0.5em', border: '1px solid white' }}
-//                     options={options}
-//                     label="Category"
-//                     size="small"
-//                 />
-//             </FormControl>
-//         </Box>
-//     );
-// }
 
 function ViewSupplier() {
     const [visible, setVisible] = useState(false);
@@ -235,36 +190,6 @@ function ViewSupplier() {
             <InventoryNavbar />
 
             <div className="viewSupplierOuter">
-                {/*<div className="viewSupplierFilter">*/}
-                {/*    <div className="filterHeader">*/}
-                {/*        <h2>Filter Items</h2>*/}
-                {/*        <div className="supplierCategoryFilter">*/}
-                {/*            <div className="itemCategoryTopic">*/}
-                {/*                <h5>Category</h5>*/}
-                {/*            </div>*/}
-                {/*            <FilterItems />*/}
-                {/*        </div>*/}
-                {/*        <div className="applyButton">*/}
-                {/*            <CustomizedButton*/}
-                {/*                hoverBackgroundColor="#f11717"*/}
-                {/*                style={{*/}
-                {/*                    backgroundColor: '#960505',*/}
-                {/*                    width: '11em',*/}
-                {/*                    height: '2.5em',*/}
-                {/*                    fontSize: '0.95em',*/}
-                {/*                    padding: '0.5em 0.625em',*/}
-                {/*                    borderRadius: '0.35em',*/}
-                {/*                    fontWeight: '550',*/}
-                {/*                    marginTop: '0.625em',*/}
-                {/*                    marginRight: '1.5em',*/}
-                {/*                    marginLeft: '1.5em'*/}
-                {/*                }}*/}
-                {/*            >*/}
-                {/*                Apply*/}
-                {/*            </CustomizedButton>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
                 <div className="viewSupplierInner">
 
                     <div className="supplierSearchAndButtons">
@@ -301,7 +226,7 @@ function ViewSupplier() {
                             <CustomizedTable
                                 columns={columns}
                                 rows={mappedData}
-                                style={{ width: '90%' }}
+                                style={{ width: '85%', marginLeft: '5em', marginRight: 'auto' }}
                             />
                         )}
                     </div>

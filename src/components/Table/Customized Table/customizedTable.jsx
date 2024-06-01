@@ -10,7 +10,6 @@ function CustomizedTable({ columns, rows, style }) {
     const [rowsPerPage, setRowsPerPage] = useState(7);
     const [sortBy, setSortBy] = useState('');
     const [sortDirection, setSortDirection] = useState('asc');
-    const [selectedRows, setSelectedRows] = useState([]);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -39,37 +38,6 @@ function CustomizedTable({ columns, rows, style }) {
             return aValue < bValue ? 1 : -1;
         }
     });
-
-    const handleRowClick = (event, row) => {
-        const selectedIndex = selectedRows.indexOf(row);
-        let newSelected = [];
-
-        if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selectedRows, row);
-        } else if (selectedIndex === 0) {
-            newSelected = newSelected.concat(selectedRows.slice(1));
-        } else if (selectedIndex === selectedRows.length - 1) {
-            newSelected = newSelected.concat(selectedRows.slice(0, -1));
-        } else if (selectedIndex > 0) {
-            newSelected = newSelected.concat(
-                selectedRows.slice(0, selectedIndex),
-                selectedRows.slice(selectedIndex + 1),
-            );
-        }
-
-        setSelectedRows(newSelected);
-    };
-
-    const isSelected = (row) => selectedRows.indexOf(row) !== -1;
-
-    const handleClickAllRows = (event) => {
-        if (event.target.checked) {
-            const newSelectedRows = rows.filter(row => !isSelected(row));
-            setSelectedRows([...selectedRows, ...newSelectedRows]);
-        } else {
-            setSelectedRows([]);
-        }
-    };
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
@@ -131,21 +99,14 @@ function CustomizedTable({ columns, rows, style }) {
                                         <span>{sortDirection === 'asc' ? ' ▲' : ' ▼'}</span>
                                     )}
 
-                                    <Checkbox
-                                        indeterminate={selectedRows.length > 0 && selectedRows.length < rows.length}
-                                        checked={selectedRows.length === rows.length}
-                                        onChange={handleClickAllRows}
-                                    />
                                 </StyledTableCell>
                             ))}
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {paginatedRows.map((row) => (
-                            <StyledTableRow key={row.id} style={{ cursor: 'pointer' }} selected={isSelected(row)} onClick={(event) => handleRowClick(event, row)}>
-                                <StyledTableCell>
-                                    <Checkbox checked={isSelected(row)}/>
-                                </StyledTableCell>
+                            <StyledTableRow key={row.id} style={{ cursor: 'pointer' }} >
+
                                 {columns.map((column) => {
                                     const value = row[column.columnId];
                                     return (
