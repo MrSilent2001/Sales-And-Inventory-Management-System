@@ -94,9 +94,11 @@ const Success = () => {
             const imgWidth = canvas.width;
             const imgHeight = canvas.height;
             console.log(imgWidth, imgHeight);
-            const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+            console.log(pdfWidth, pdfHeight);
+            const ratio = Math.min(pdfWidth / (imgWidth+1), pdfHeight / (imgHeight+1));
             const imgX = (pdfWidth - imgWidth * ratio) / 2;
             const imgY = 10;
+            console.log(imgX, imgY,ratio)
             pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
             pdf.save('invoice.pdf');
 
