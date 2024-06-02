@@ -181,6 +181,28 @@ function ViewSupplier() {
         );
     };
 
+    const createAddSupplierButton = () => {
+        const buttonStyle = {
+            backgroundColor: '#242F9B',
+            border: '1px solid #242F9B',
+            width: '9.5em',
+            height: '2.5em',
+            fontSize: '0.75em',
+            padding: '0.5em 0.625em',
+            borderRadius: '0.35em',
+            fontWeight: '550',
+        };
+
+        return (
+            <CustomizedButton
+                onClick={() => setVisible(true)}
+                hoverBackgroundColor="#2d3ed2"
+                style={buttonStyle}
+            >
+                Add Supplier
+            </CustomizedButton>
+        );
+    };
 
     const handleSupplierAdded = (updatedSuppliers) => {
         setSuppliers(updatedSuppliers);
@@ -195,42 +217,12 @@ function ViewSupplier() {
 
                     <div className="supplierSearchAndButtons">
                         <div className="viewSupplierSearch">
-                            {/*<SearchBar*/}
-                            {/*    label="Search Supplier"*/}
-                            {/*    onKeyPress={fetchSuppliersWithQuery}*/}
-                            {/*/>*/}
                             <h3>Suppliers</h3>
-                        </div>
-                        <div className="viewSupplierButtons">
-                            <CustomizedButton
-                                onClick={() => setVisible(true)}
-                                hoverBackgroundColor="#2d3ed2"
-                                style={{
-                                    backgroundColor: '#242F9B',
-                                    border: '1px solid #242F9B',
-                                    width: '9.5em',
-                                    height: '2.5em',
-                                    fontSize: '0.75em',
-                                    padding: '0.5em 0.625em',
-                                    borderRadius: '0.35em',
-                                    fontWeight: '550',
-                                }}
-                            >
-                                Add Supplier
-                            </CustomizedButton>
                         </div>
                     </div>
 
                     <div className="itemTable" style={{paddingBottom: '3em'}}>
-                        {/*{isLoading ? (*/}
-                        {/*    <PageLoader />*/}
-                        {/*) : (*/}
-                        {/*    <CustomizedTable*/}
-                        {/*        columns={columns}*/}
-                        {/*        rows={mappedData}*/}
-                        {/*        style={{ width: '85%', marginLeft: '5em', marginRight: 'auto' }}*/}
-                        {/*    />*/}
-                        {/*)}*/}
+
                         {isLoading ? (
                             <PageLoader />
                         ) : (
@@ -239,6 +231,7 @@ function ViewSupplier() {
                                 columns={columns}
                                 data={suppliers}
                                 createActions={createActions}
+                                renderToolbarItems={createAddSupplierButton}
                                 includeProfile={true}
                             />
                         )}

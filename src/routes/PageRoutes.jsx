@@ -42,7 +42,7 @@ import ProtectedRoute from "./protectedRoutes";
 import Redirect from "../pages/Customer/Cart/redirect";
 import SupplierHome from "../pages/Supplier/Home/SupplierHomePage";
 import SalesReceipt from "../pages/Customer/Cart/Bill/invoice";
-import CustomizedTable2 from "../components/Table/customizedTable2";
+import CustomizedTable2 from "../pages/admin/View Inventory/test";
 
 export function PageRouting() {
     return (

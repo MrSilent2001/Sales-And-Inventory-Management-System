@@ -103,6 +103,29 @@ function DiscountDashboard() {
         );
     };
 
+    const createAddDiscountButton = () => {
+        const buttonStyle = {
+            backgroundColor: '#242F9B',
+            border: '1px solid #242F9B',
+            width: '9.5em',
+            height: '2.5em',
+            fontSize: '0.75em',
+            padding: '0.5em 0.625em',
+            borderRadius: '0.35em',
+            fontWeight: '550',
+        };
+
+        return (
+            <CustomizedButton
+                onClick={() => setVisible(true)}
+                hoverBackgroundColor="#2d3ed2"
+                style={buttonStyle}
+            >
+                Add Discount
+            </CustomizedButton>
+        );
+    };
+
 
     const handleDiscountAdded = (updatedDiscounts) => setDiscount(updatedDiscounts);
 
@@ -134,30 +157,9 @@ function DiscountDashboard() {
             <div className="discountDashboardOuter">
                 <div className="discountDashboardInner">
                     <div className="searchContainer">
-                        {/*<SearchBar label="Search Products" onKeyPress={fetchDiscounts} />*/}
                         <h3>Discounts</h3>
-                        <CustomizedButton
-                            onClick={() => setVisible(true)}
-                            hoverBackgroundColor="#2d3ed2"
-                            style={{
-                                backgroundColor: '#242F9B',
-                                border: '1px solid #242F9B',
-                                width: '9.5em',
-                                height: '2.5em',
-                                fontSize: '0.75em',
-                                padding: '0.5em 0.625em',
-                                borderRadius: '0.35em',
-                                fontWeight: '550',
-                            }}>
-                            Add Discount
-                        </CustomizedButton>
                     </div>
                     <div className="discount-dashboard">
-                        {/*{isLoading ? (*/}
-                        {/*    <PageLoader />*/}
-                        {/*) : (*/}
-                        {/*    <CustomizedTable columns={columns} rows={rows} style={{ width: '85%' }} />*/}
-                        {/*)}*/}
                         {isLoading ? (
                             <PageLoader />
                         ) : (
@@ -166,6 +168,7 @@ function DiscountDashboard() {
                                 columns={columns}
                                 data={discount}
                                 createActions={createCancelButton}
+                                renderToolbarItems={createAddDiscountButton}
                                 includeProfile={false}
                             />
                         )}

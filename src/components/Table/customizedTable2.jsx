@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
     MaterialReactTable,
     useMaterialReactTable,
@@ -17,36 +17,50 @@ const DynamicTable = ({
                           rowsPerPageOptions = [5, 10, 15],
                           createActions = null,
                           includeProfile = false,
+                          renderToolbarItems = null
                       }) => {
+
+    const [globalFilter, setGlobalFilter] = useState('');
 
     const transformedColumns = useMemo(() => {
         const baseColumns = [
             {
                 accessorKey: 'id',
                 header: 'Id',
+                enableClickToCopy: true,
                 size: 20,
-                Cell: ({ cell }) => <Box textAlign="center">{cell.getValue()}</Box>,
+                Cell: ({ renderedCellValue }) => <Box textAlign="center">{renderedCellValue}</Box>,
             },
             ...columns.filter(col => col.accessorKey !== 'id').map(col => ({
                 accessorKey: col.accessorKey,
                 header: col.header,
                 size: col.size,
-                Cell: ({ cell }) => <Box textAlign="center">{cell.getValue()}</Box>,
+                enableClickToCopy: true,
+                Cell: ({ renderedCellValue }) => {
+                    const value = renderedCellValue;
+                    const isMatch = globalFilter && value.toString().toLowerCase().includes(globalFilter.toLowerCase());
+                    return (
+                        <Box textAlign="left" sx={isMatch ? { backgroundColor: 'yellow' } : {}}>
+                            {value}
+                        </Box>
+                    );
+                },
             }))
         ];
 
         if (includeProfile) {
             baseColumns.splice(1, 0, {
-                accessorKey: 'profile',
-                header: 'Profile',
-                Cell: ({ cell }) => (
-                    <Box display="flex" alignItems="center" justifyContent="center">
+                accessorKey: 'username',
+                header: 'Name',
+                enableClickToCopy: true,
+                Cell: ({ row }) => (
+                    <Box display="flex" alignItems="center">
                         <img
-                            src={cell.row.original.profilePicture}
+                            src={row.original.profilePicture}
                             alt="Profile"
                             style={{ width: 40, height: 40, borderRadius: '50%', marginRight: 8 }}
                         />
-                        <span>{cell.row.original.username}</span>
+                        <span>{row.original.username}</span>
                     </Box>
                 ),
                 size: 100,
@@ -54,7 +68,7 @@ const DynamicTable = ({
         }
 
         return baseColumns;
-    }, [columns, includeProfile]);
+    }, [columns, includeProfile, globalFilter]);
 
     const table = useMaterialReactTable({
         columns: transformedColumns,
@@ -89,23 +103,41 @@ const DynamicTable = ({
             shape: 'rounded',
             variant: 'outlined',
         },
+        muiTableHeadCellProps: {
+            sx: {
+                textAlign: 'center',
+                cursor: 'pointer',
+            },
+        },
         renderTopToolbar: ({ table }) => (
-            <Box
-                sx={(theme) => ({
-                    backgroundColor: lighten(theme.palette.background.default, 0.05),
-                    display: 'flex',
-                    gap: '0.5rem',
-                    p: '8px',
-                    justifyContent: 'space-between',
-                })}
-            >
-                <Box sx={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                    <MRT_GlobalFilterTextField table={table} />
-                    <MRT_ToggleFiltersButton table={table} />
+            (enableFilters || initialShowGlobalFilter || renderToolbarItems) && (
+                <Box
+                    sx={(theme) => ({
+                        backgroundColor: lighten(theme.palette.background.default, 0.05),
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        p: '8px 20px',
+                    })}
+                >
+                    <Box sx={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                        {initialShowGlobalFilter && <MRT_GlobalFilterTextField table={table} />}
+                        {enableFilters && <MRT_ToggleFiltersButton table={table} />}
+                    </Box>
+                    {renderToolbarItems && renderToolbarItems(table)}
                 </Box>
-            </Box>
+            )
         ),
         renderRowActions: createActions ? ({ row }) => createActions(row.original.id, row.original.lastLogin) : undefined,
+        muiTableBodyRowProps: {
+            sx: {
+                '& .MuiCheckbox-root': {
+                    margin: 'auto',
+                    cursor: 'pointer',
+                },
+                cursor: 'pointer',
+            },
+        },
     });
 
     return (

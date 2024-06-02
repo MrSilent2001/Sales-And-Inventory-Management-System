@@ -47,6 +47,53 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
         status: row.status
     }));
 
+    const createButtons = () => {
+        const buttonStyle1 = {
+            backgroundColor: '#242F9B',
+            border: '1px solid #242F9B',
+            width: '11em',
+            height: '2.5em',
+            fontSize: '0.75em',
+            padding: '0.5em 0.625em',
+            borderRadius: '0.35em',
+            marginRight: '-45em',
+            fontWeight: '550'
+        };
+
+        const buttonStyle2 = {
+            backgroundColor: '#960505',
+            border: '1px solid #960505',
+            width: '11em',
+            height: '2.5em',
+            fontSize: '0.75em',
+            padding: '0.5em 0.625em',
+            borderRadius: '0.35em',
+            fontWeight: '550'
+        };
+
+        return (
+            <>
+                <CustomizedButton
+                    onClick={() => setVisible(true)}
+                    hoverBackgroundColor="#2d3ed2"
+                    style={buttonStyle1}
+                >
+                    Refund Requests
+                </CustomizedButton>
+
+                <Link to="/ApprovedRefundsTable">
+                <CustomizedButton
+                    onClick={onViewApproved}
+                    hoverBackgroundColor="#f11717"
+                    style={buttonStyle2}
+                >
+                    Approved Refunds
+                </CustomizedButton>
+                </Link>
+            </>
+        );
+    };
+
 
     return (
         <>
@@ -75,51 +122,6 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
                         <Typography variant="h6" sx={{fontWeight: 'bold'}}>
                             Refund Request
                         </Typography>
-                        <div style={{display:'flex'}}>
-                            <CustomizedButton
-                                onClick={()=>setVisible(true)}
-                                hoverBackgroundColor="#2d3ed2"
-                                style={{
-                                    color: '#ffffff',
-                                    backgroundColor: '#242F9B',
-                                    border: '1px solid #242F9B',
-                                    width: '11em',
-                                    height: '2.5em',
-                                    fontSize: '0.95em',
-                                    fontFamily: 'inter',
-                                    padding: '0.5em 0.625em',
-                                    borderRadius: '0.35em',
-                                    fontWeight: '550',
-                                    marginTop: '0.625em',
-                                    marginRight: '1.5em',
-                                    textTransform: 'none',
-                                    textAlign: 'center',
-                                }}>
-                                Refund Requests
-                            </CustomizedButton>
-
-                            <Link to="/ApprovedRefundsTable">          
-                            <CustomizedButton
-                                onClick={onViewApproved}
-                                hoverBackgroundColor="#f11717"
-                                style={{
-                                    color: '#ffffff',
-                                    backgroundColor: '#960505',
-                                    width: '11em',
-                                    height: '2.5em',
-                                    fontSize: '0.95em',
-                                    fontFamily: 'inter',
-                                    padding: '0.5em 0.625em',
-                                    borderRadius: '0.35em',
-                                    fontWeight: '550',
-                                    marginTop: '0.625em',
-                                    textTransform: 'none',
-                                    textAlign: 'center',
-                                }}>
-                                Approved Refunds
-                            </CustomizedButton>
-                            </Link>
-                        </div>
                     </Box>
                     <br/>
                     <br/>
@@ -130,6 +132,7 @@ const InventoryRefundRequestsTable = ({onViewApproved}) => {
                         <DynamicTable
                             columns={columns}
                             data={refundRequests}
+                            renderToolbarItems={createButtons}
                             includeProfile={false}
                         />
                     )}

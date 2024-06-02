@@ -1,7 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import {LocalizationProvider} from "@mui/x-date-pickers";
 
 const AuthContext = createContext();
 
@@ -87,11 +85,9 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
         <AuthContext.Provider value={{ authState, isAuthenticated, loading, adminLogin, customerLogin, supplierLogin, logout }}>
             {children}
         </AuthContext.Provider>
-        </LocalizationProvider>
     );
 };
 

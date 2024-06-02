@@ -67,31 +67,36 @@ function InventoryPayments() {
         setPayments(updatedPayments);
     };
 
+    const createAddPaymentButton = () => {
+        const buttonStyle = {
+            backgroundColor: '#242F9B',
+            border: '1px solid #242F9B',
+            width: '9.5em',
+            height: '2.5em',
+            fontSize: '0.75em',
+            padding: '0.5em 0.625em',
+            borderRadius: '0.35em',
+            fontWeight: '550'
+        };
+
+        return (
+            <CustomizedButton
+                onClick={() => setVisible(true)}
+                hoverBackgroundColor="#2d3ed2"
+                style={buttonStyle}
+            >
+                Add Payment
+            </CustomizedButton>
+        );
+    };
+
     return (
         <>
             <InventoryNavbar />
             <div className="invPaymentDashboardOuter">
                 <div className="invPaymentDashboardInner">
                     <div className="invSearchContainer">
-                        <SearchBar
-                            label="Search Products"
-                            onKeyPress={fetchSearchedPayments}
-                        />
-                        <CustomizedButton
-                            onClick={() => setVisible(true)}
-                            hoverBackgroundColor="#2d3ed2"
-                            style={{
-                                backgroundColor: '#242F9B',
-                                border: '1px solid #242F9B',
-                                width: '9.5em',
-                                height: '2.5em',
-                                fontSize: '0.75em',
-                                padding: '0.5em 0.625em',
-                                borderRadius: '0.35em',
-                                fontWeight: '550'
-                            }}>
-                            Add Payment
-                        </CustomizedButton>
+                       <h3>Inventory Payments</h3>
                     </div>
                     <div className="invPaymentDashboard" >
                         {isLoading ? (
@@ -101,6 +106,7 @@ function InventoryPayments() {
                             <DynamicTable
                                 columns={columns}
                                 data={payments}
+                                renderToolbarItems={createAddPaymentButton}
                                 includeProfile={false}
                             />
                         )}
