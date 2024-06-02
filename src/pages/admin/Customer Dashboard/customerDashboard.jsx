@@ -5,21 +5,12 @@ import Footer from "../../../layout/footer/footer";
 import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
 import CustomizedButton from "../../../components/Button/button";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
-import { useEffect, useState } from "react";
+import {useEffect, useMemo, useState} from "react";
 import axios from "axios";
 import CustomizedAlert from "../../../components/Alert/alert";
 import PageLoader from "../../../components/Page Loader/pageLoader";
 import DialogBox from "../../../components/Dialog Box/DialogBox";
-
-const columns = [
-    { columnId: 'id', label: 'Customer Id', minWidth: 75, align: 'center' },
-    { columnId: 'username', label: 'Name', minWidth: 100, align: 'center' },
-    { columnId: 'email', label: 'Email', minWidth: 100, align: 'center' },
-    { columnId: 'contactNo', label: 'Contact', minWidth: 100, align: 'center' },
-    { columnId: 'address', label: 'Address', minWidth: 170, align: 'center' },
-    { columnId: 'lastLogin', label: 'Last Login', minWidth: 170, align: 'center' },
-    { columnId: 'actions', label: '', minWidth: 170, align: 'center' },
-];
+import DynamicTable from "../../../components/Table/customizedTable2";
 
 function CustomerDashboard() {
     const [customer, setCustomer] = useState([]);
@@ -28,6 +19,14 @@ function CustomerDashboard() {
     const [openDialog, setOpenDialog] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
+
+    const columns = useMemo(() => [
+        { accessorKey: 'username', header: 'Name', size: 75 },
+        { accessorKey: 'email', header: 'Email', size: 75  },
+        { accessorKey: 'contactNo', header: 'Contact', size: 75  },
+        { accessorKey: 'address', header: 'Address', size: 75  },
+        { accessorKey: 'lastLogin', header: 'Last Login', size: 75  }
+    ], []);
 
     const token = localStorage.getItem('accessToken');
 
@@ -178,9 +177,9 @@ function CustomerDashboard() {
             color: enabled ? '#ffffff' : '#a9a9a9',
             backgroundColor: enabled ? defaultColor : '#d3d3d3',
             border: enabled ? `1px solid ${defaultColor}` : '1px solid #d3d3d3',
-            width: '9em',
+            width: '8.5em',
             height: '2.5em',
-            fontSize: '0.95em',
+            fontSize: '0.75em',
             padding: '0.5em 0.625em',
             borderRadius: '0.35em',
             fontWeight: '550',
@@ -252,14 +251,25 @@ function CustomerDashboard() {
                     </div>
 
                     <div className="CustomerManagement">
+                        {/*{isLoading ? (*/}
+                        {/*    <PageLoader />*/}
+                        {/*) : (*/}
+                        {/*    <CustomizedTable*/}
+                        {/*        columns={columns}*/}
+                        {/*        rows={rows}*/}
+                        {/*        style={{ width: '85%' }}*/}
+                        {/*    />*/}
+                        {/*)}*/}
                         {isLoading ? (
                             <PageLoader />
                         ) : (
-                            <CustomizedTable
-                                columns={columns}
-                                rows={rows}
-                                style={{ width: '85%' }}
-                            />
+
+                        <DynamicTable
+                            columns={columns}
+                            data={customer}
+                            createActions={createActions}
+                            includeProfile={true}
+                        />
                         )}
                     </div>
                 </div>

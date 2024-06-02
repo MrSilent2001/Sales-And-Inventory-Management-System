@@ -12,7 +12,7 @@ const Success = () => {
     const token = localStorage.getItem('accessToken');
     const id = localStorage.getItem('id');
     const [navigate, setNavigate] = useState(false);
-    // const [paymentDetails, setPaymentDetails] = useState({});
+    const [customer, setCustomer] = useState({});
 
     const pdfRef = useRef();
 
@@ -30,19 +30,14 @@ const Success = () => {
                 setPurchasedItems(items);
                 console.log(items);
 
-                // const customer = await axios.get(`http://localhost:9000/customer/findCustomer/${id}`,{
-                //     headers: {
-                //         Authorization: `Bearer ${token}`,
-                //     },
-                // });
-                //
-                // setPaymentDetails({
-                //     amount: session.amount_total/100,
-                //     paymentId: session.payment_method_configuration_details.id,
-                //     email: 'dmcoder01@gmail.com'
-                //     // email: customer.data.email
-                // })
-                // console.log(paymentDetails)
+                const customer = await axios.get(`http://localhost:9000/customer/findCustomer/${id}`,{
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                setCustomer(customer.data);
+
             } catch (error) {
                 console.error('Error fetching session:', error);
             }
@@ -83,40 +78,88 @@ const Success = () => {
         return <Navigate to="/products"/>
     }
 
-    const downloadPDF = () => {
-        const input = pdfRef.current;
-        console.log(input);
-        html2canvas(input).then((canvas) => {
-            const imgData = canvas.toDataURL("image/png");
-            const pdf = new jsPDF('p', 'mm', 'a4');
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = pdf.internal.pageSize.getHeight();
-            const imgWidth = canvas.width;
-            const imgHeight = canvas.height;
-            console.log(imgWidth, imgHeight);
-            console.log(pdfWidth, pdfHeight);
-            const ratio = Math.min(pdfWidth / (imgWidth+1), pdfHeight / (imgHeight+1));
-            const imgX = (pdfWidth - imgWidth * ratio) / 2;
-            const imgY = 10;
-            console.log(imgX, imgY,ratio)
-            pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
-            pdf.save('invoice.pdf');
+    // const downloadPDF = () => {
+    //     const input = pdfRef.current;
+    //     console.log(input);
+    //     html2canvas(input).then((canvas) => {
+    //         const imgData = canvas.toDataURL("image/png");
+    //         const pdf = new jsPDF('p', 'mm', 'a4');
+    //         const pdfWidth = pdf.internal.pageSize.getWidth();
+    //         const pdfHeight = pdf.internal.pageSize.getHeight();
+    //         const imgWidth = canvas.width;
+    //         const imgHeight = canvas.height;
+    //         const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+    //         const imgX = (pdfWidth - imgWidth * ratio) / 2;
+    //         const imgY = 10;
+    //         pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+    //         pdf.save('invoice.pdf');
+    //         const receipt = pdf.output('blob');
+    //         console.log(receipt)
+    //
+    //         return receipt;
+    //     });
+    // }
 
+    const downloadPDF = () => {
+        return new Promise((resolve, reject) => {
+            const input = pdfRef.current;
+            console.log(input);
+            html2canvas(input).then((canvas) => {
+                const imgData = canvas.toDataURL("image/png");
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                const imgWidth = canvas.width;
+                const imgHeight = canvas.height;
+                const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+                const imgX = (pdfWidth - imgWidth * ratio) / 2;
+                const imgY = 10;
+                pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+                pdf.save('invoice.pdf');
+                const receipt = pdf.output('blob');
+                console.log(receipt)
+                resolve(receipt);
+            }).catch(error => {
+                reject(error);
+            });
         });
     }
 
-    // const sendReceipt = async () => {
-    //     try {
-    //         const response = await axios.post('http://localhost:9000/payment/customerPayment/receipt', paymentDetails, {
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //             },
-    //         });
-    //         console.log('Payment response:', response.data);
-    //     } catch (error) {
-    //         console.error('Payment error:', error.message);
-    //     }
-    // }
+    console.log(customer.email)
+    console.log(customer.username)
+
+
+    const sendReceipt = async () => {
+        try {
+            const pdf = await downloadPDF();
+            const formData = new FormData();
+            formData.append('pdfFilePath', pdf, 'invoice.pdf');
+            formData.append('receiverName', customer.username);
+            formData.append('emailSubject', "Payment Receipt!");
+            formData.append('emailBody', "Thank you for dealing with Tradeasy Pvt. Ltd!");
+            formData.append('receiverEmail', customer.email);
+
+            const formDataObject = {};
+            formData.forEach((value, key) => {
+                formDataObject[key] = value;
+            });
+
+            console.log(formDataObject);
+
+            const response = await axios.post('http://localhost:9000/email/send/customerInvoice', {
+                formDataObject
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            console.log('Payment response:', response.data);
+        } catch (error) {
+            console.error('Payment error:', error.message);
+        }
+    }
+
 
     return (
         <div style={{
@@ -151,7 +194,7 @@ const Success = () => {
                 </CustomizedButton>
 
                 <CustomizedButton
-                    onClick={downloadPDF}
+                    onClick={sendReceipt}
                     hoverBackgroundColor="#0aaf0b"
                     style={{
                         color: '#ffffff',
@@ -170,7 +213,10 @@ const Success = () => {
                 </CustomizedButton>
             </div>
 
-            <div style={{display: 'none'}}>
+            <div style={{
+                position: 'absolute',
+                left: '-9999px'
+            }}>
                 <SalesReceipt ref={pdfRef} purchasedItems={purchasedItems}/>
             </div>
         </div>

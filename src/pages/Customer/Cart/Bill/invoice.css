@@ -107,17 +107,17 @@ hr.invoice-line {
     margin-right: 20mm;
 }
 
-.footer {
+.invoice-footer {
     margin-top: 10mm;
     text-align: center;
 }
 
-.footer p {
+.invoice-footer p {
     font-size: 12px;
     margin-bottom: 10px;
 }
 
-.footer .special-note {
+.invoice-footer .special-note {
     margin-top: 8px;
     font-size: 12px;
 }

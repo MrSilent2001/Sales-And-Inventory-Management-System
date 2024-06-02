@@ -73,19 +73,31 @@ const AddSupplier = forwardRef((props, ref) => {
         if (Object.keys(validationErrors).length === 0) {
             try {
 
-                await axios.post('http://localhost:9000/supplier/create',{
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }, {
+                await axios.post('http://localhost:9000/supplier/create', {
                     username: formData.username,
                     email: formData.email,
                     address: formData.address,
                     contactNo: formData.contactNo,
                     nic: formData.nic,
                     role: 'supplier',
-                    password: 'supplier@123',
+                    password: formData.username,
                     profilePicture: 'https://th.bing.com/th/id/OIP.IQqAakFVSW2T6n9Kibpe2AAAAA?rs=1&pid=ImgDetMain'
+                },{
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                //Send Credentials to the supplier
+                const credentials = axios.post('http://localhost:9000/email/send/supplierCredentials',{
+                    receiverName: formData.username,
+                    emailSubject: "Tradeasy Account Credentials!",
+                    emailBody: `Thank you for joining with Tradeasy Pvt. Ltd. The credentials for your account are sent below.Please do not disclose these information with anyone else. Username: ${formData.username} and password: ${formData.username}`,
+                    receiverEmail: formData.email
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
 
                 // Fetch the updated list of suppliers

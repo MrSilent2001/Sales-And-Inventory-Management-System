@@ -135,7 +135,7 @@ const SalesReceipt = React.forwardRef(({ purchasedItems }, ref) => {
                 </div>
             </div>
             <hr className="invoice-line-top" />
-            <div className="footer">
+            <div className="invoice-footer">
                 <h5> Thank you, Come again!</h5>
                 <p>
                     © <span style={{ fontFamily: 'Princess Sofia, cursive' }}> Tradeasy -</span>Powered By 99X Pvt Ltd.
