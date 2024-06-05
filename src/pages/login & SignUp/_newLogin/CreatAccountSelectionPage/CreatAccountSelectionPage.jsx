@@ -4,7 +4,7 @@ import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import TreadeasyLogo from '../../../../assets/images/logo.png';
-import LoginAppBar from "../LoginAppbar/LoginAppBar";
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme({
     palette: {
@@ -48,6 +48,7 @@ const StyledCard = styled(Card)(({ theme, selected }) => ({
 }));
 
 const CreatAccountSelectionPage = () => {
+    const navigate = useNavigate();
     const [selectedCard, setSelectedCard] = useState(null);
 
     const handleCardClick = (card) => {
@@ -56,7 +57,7 @@ const CreatAccountSelectionPage = () => {
 
     const handleCreateAccount = () => {
         if (selectedCard === 'supplier') {
-            alert('Redirect to supplier');
+            navigate('/supplierloginsignup/signup');
         } else if (selectedCard === 'customer') {
             alert('Redirect to customer');
         }
@@ -80,8 +81,8 @@ const CreatAccountSelectionPage = () => {
                         <Grid container spacing={3} justifyContent="center">
                             <Grid item xs={12}>
                                 <StyledCard
-                                    onClick={() => handleCardClick('hire')}
-                                    selected={selectedCard === 'hire'}
+                                    onClick={() => handleCardClick('supplier')}
+                                    selected={selectedCard === 'supplier'}
                                 >
                                     <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
                                         <LocalShippingIcon sx={{ fontSize: 40, marginRight: 2, color: selectedCard === 'supplier' ? 'primary.main' : 'text.secondary' }} />
@@ -98,8 +99,8 @@ const CreatAccountSelectionPage = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <StyledCard
-                                    onClick={() => handleCardClick('practice')}
-                                    selected={selectedCard === 'practice'}
+                                    onClick={() => handleCardClick('customer')}
+                                    selected={selectedCard === 'customer'}
                                 >
                                     <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
                                         <ShoppingCartIcon sx={{ fontSize: 40, marginRight: 2, color: selectedCard === 'customer' ? 'primary.main' : 'text.secondary' }} />

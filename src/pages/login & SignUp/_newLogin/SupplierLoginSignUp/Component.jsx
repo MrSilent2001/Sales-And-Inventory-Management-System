@@ -25,13 +25,13 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  //border-radius: 10px;
+  //box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   position: relative;
   overflow: hidden;
-  width: 678px;
+  width: 100%;
   max-width: 100%;
-  min-height: 400px;
+  min-height: 100%;
 `;
 
 export const SignUpContainer = styled.div`
@@ -85,7 +85,7 @@ export const Input = styled.input`
   border: none;
   padding: 12px 15px;
   margin: 8px 0;
-  width: 100%;
+  width: 400px;
 `;
 
 export const Button = styled.button`

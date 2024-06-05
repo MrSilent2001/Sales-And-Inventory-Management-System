@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Container, Grid, Button, Typography, Box, CssBaseline } from '@mui/material';
 import LoginAppBar from "../LoginAppbar/LoginAppBar";
+import {Link} from "react-router-dom";
 
 // Create a custom theme
 const theme = createTheme({
@@ -64,11 +65,11 @@ const LoginSelectionPage = () => {
                             <Typography variant="body1" paragraph>
                                 Welcome, suppliers! Start selling your products on our platform and reach millions of customers worldwide.
                             </Typography>
-                            <Button variant="contained" color="secondary" size="large" style={{ marginBottom: '16px' }}>
+                            <Button variant="contained" color="secondary" size="large" component={Link} to="/supplierloginsignup/login" style={{ marginBottom: '16px' }}>
                                 Login
                             </Button>
                             <Typography variant="body2">
-                                Don't have an account? <a href="/Sign-Up" style={{ color: '#ffffff', textDecoration: 'underline' }}>Sign Up</a>.
+                                Don't have an account? <a href="/supplierloginsignup/signup" style={{ color: '#ffffff', textDecoration: 'underline' }}>Sign Up</a>.
                             </Typography>
                         </Box>
                     </Grid>

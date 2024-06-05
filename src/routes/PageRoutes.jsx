@@ -57,7 +57,8 @@ export function PageRouting() {
                 <Route path="/" element={<GetStartedPage/>}/>
                 <Route path="/create" element={<CreatAccountSelectionPage/>}/>
                 <Route path="/loginSelect" element={<LoginSelectionPage/>}/>
-                <Route path="/supplierLogin" element={<SupplierLoginSignUp/>}/>
+                <Route path="/supplierloginsignup/:mode" element={<SupplierLoginSignUp />} />
+                <Route path="/supplierloginsignup" element={<SupplierLoginSignUp />} />
                 <Route path="/test" element={<CustomizedTable2/>}/>
 
 

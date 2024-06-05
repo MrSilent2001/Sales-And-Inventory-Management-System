@@ -2,10 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom";
 import * as Components from "./Component";
 import "./styles.css";
-import LoginAppBar from "../LoginAppbar/LoginAppBar"; // Import CSS file for styling
+import LoginAppBar from "../LoginAppbar/LoginAppBar";
+import {useParams} from "react-router-dom"; // Import CSS file for styling
 
 export function SupplierLoginSignUp() {
-    const [signIn, toggle] = React.useState(true);
+    const { mode } = useParams();  // This will capture the 'mode' parameter from the URL
+    const defaultSignIn = mode === 'signup' ? false : true; // Default to true if mode is not 'signup'
+    const [signIn, toggle] = React.useState(defaultSignIn);
+
+    React.useEffect(() => {
+        // This effect updates the signIn state if the URL parameter changes
+        toggle(defaultSignIn);
+    }, [mode, defaultSignIn]);
+
+
     return (
         <>
         <LoginAppBar/>
