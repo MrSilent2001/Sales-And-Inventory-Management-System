@@ -24,7 +24,7 @@ export function SupplierLoginSignUp() {
             <Components.Container>
                 <Components.SignUpContainer signingIn={signIn}>
                     <Components.Form>
-                        <Components.Title>Create Account</Components.Title>
+                        <Components.Title>Create Supplier Account</Components.Title>
                         <Components.Input type="text" placeholder="Name" />
                         <Components.Input type="email" placeholder="Email" />
                         <Components.Input type="password" placeholder="Password" />
@@ -33,7 +33,7 @@ export function SupplierLoginSignUp() {
                 </Components.SignUpContainer>
                 <Components.SignInContainer signingIn={signIn}>
                     <Components.Form>
-                        <Components.Title>Sign in</Components.Title>
+                        <Components.Title>Sign in as Supplier</Components.Title>
                         <Components.Input type="email" placeholder="Email" />
                         <Components.Input type="password" placeholder="Password" />
                         <Components.Anchor href="#">Forgot your password?</Components.Anchor>
@@ -43,18 +43,18 @@ export function SupplierLoginSignUp() {
                 <Components.OverlayContainer signingIn={signIn}>
                     <Components.Overlay signingIn={signIn}>
                         <Components.LeftOverlayPanel signingIn={signIn}>
-                            <Components.Title>Welcome Back!</Components.Title>
+                            <Components.Title>Already have an account?</Components.Title>
                             <Components.Paragraph>
-                                To keep connected with us please login with your personal info
+                                then click signup Sign In button to Login
                             </Components.Paragraph>
                             <Components.GhostButton onClick={() => toggle(true)}>
                                 Sign In
                             </Components.GhostButton>
                         </Components.LeftOverlayPanel>
                         <Components.RightOverlayPanel signingIn={signIn}>
-                            <Components.Title>Hello, Friend!</Components.Title>
+                            <Components.Title>Don't have an account?</Components.Title>
                             <Components.Paragraph>
-                                Enter your personal details and start journey with us
+                                Then click Sign Up button to Sign Up
                             </Components.Paragraph>
                             <Components.GhostButton onClick={() => toggle(false)}>
                                 Sign Up
