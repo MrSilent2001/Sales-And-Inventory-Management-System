@@ -71,7 +71,7 @@ function InventoryNavbar(){
                     className={`navLink ${selectedNavLink === "logout" ? "selected" : ""}`}
                     onClick={handleNavLinkClick}
                 >
-                    <MdLogout style={{width:'18px', height:'18px'}}/>
+                    <MdLogout style={{width:'18px', height:'14px'}}/>
                 </NavLink>
             </div>
         </div>

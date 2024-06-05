@@ -128,7 +128,6 @@ const Success = () => {
     console.log(customer.email)
     console.log(customer.username)
 
-
     const sendReceipt = async () => {
         try {
             const pdf = await downloadPDF();
@@ -139,16 +138,7 @@ const Success = () => {
             formData.append('emailBody', "Thank you for dealing with Tradeasy Pvt. Ltd!");
             formData.append('receiverEmail', customer.email);
 
-            const formDataObject = {};
-            formData.forEach((value, key) => {
-                formDataObject[key] = value;
-            });
-
-            console.log(formDataObject);
-
-            const response = await axios.post('http://localhost:9000/email/send/customerInvoice', {
-                formDataObject
-            }, {
+            const response = await axios.post('http://localhost:9000/email/send/customerInvoice', formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data',

@@ -3,12 +3,10 @@ import "./discountDashboard.css";
 import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../layout/footer/footer";
 import CustomizedButton from "../../../components/Button/button";
-import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 import axios from "axios";
 import AddDiscount from "./Modal/Add Discount/addDiscounts";
 import { Modal } from "@mui/material";
 import CustomizedAlert from "../../../components/Alert/alert";
-import SearchBar from "../../../components/search bar/search bar";
 import PageLoader from "../../../components/Page Loader/pageLoader";
 import DynamicTable from "../../../components/Table/customizedTable2";
 
