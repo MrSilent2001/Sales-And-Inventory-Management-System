@@ -3,9 +3,7 @@ import { Modal } from "@mui/material";
 import InventoryNavbar from "../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../layout/footer/footer";
 import AddPayment from "./Modal/AddPayment/addPayment";
-import CustomizedTable from "../../../../components/Table/Customized Table/customizedTable";
 import axios from "axios";
-import SearchBar from "../../../../components/search bar/search bar";
 import CustomizedButton from "../../../../components/Button/button";
 import "./inventoryPayments.css";
 import PageLoader from "../../../../components/Page Loader/pageLoader";
@@ -95,7 +93,7 @@ function InventoryPayments() {
             <InventoryNavbar />
             <div className="invPaymentDashboardOuter">
                 <div className="invPaymentDashboardInner">
-                    <div className="invSearchContainer">
+                    <div className="invTitleContainer">
                        <h3>Inventory Payments</h3>
                     </div>
                     <div className="invPaymentDashboard" >

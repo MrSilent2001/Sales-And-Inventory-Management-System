@@ -124,6 +124,7 @@ export function PageRouting() {
 
                     <Route path="/orderHistory/:id" element={<AdminOrderHistory/>}/>
                     <Route path="/profile/:id" element={<View/>}/>
+                    <Route path="/inventoryPayments" element={<InventoryPayments/>}/>
 
 
                     <Route path="/SalesRefundDenialForm" element={<SalesRefundDenialForm/>}/>

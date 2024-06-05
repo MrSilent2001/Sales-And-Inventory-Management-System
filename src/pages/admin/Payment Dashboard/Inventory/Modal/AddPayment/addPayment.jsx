@@ -134,100 +134,108 @@ function AddPayment(props){
                 <div className="addPaymentModel">
                     <h2>Add Payment</h2>
                     <div className="addPaymentForm">
-                        <div className="addPaymentformField">
-                            <div className="addPaymentidField">
-                                <h5>Supplier Id:</h5>
-                            </div>
-                            <div className="addPaymentidInput">
-                                <BasicTextField
-                                    name="supplierId"
-                                    type="text"
-                                    size='small'
-                                    onChange={(e) => handleChange("supplierId", e.target.value)}
-                                />
-                            </div>
-                        </div>
-                        {errors.supplierId && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.supplierId}</span>}
-
-                        <div className="addPaymentformField">
-                            <div className="addPaymentidField">
-                                <h5>Supplier Name:</h5>
-                            </div>
-                            <div className="addPaymentidInput">
-                                <BasicTextField
-                                    name="supplierName"
-                                    type="text"
-                                    size='small'
-                                    onChange={(e) => handleChange("supplierName", e.target.value)}
-                                />
-                            </div>
-                        </div>
-                        {errors.supplierName && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.supplierName}</span>}
-
-                        <div className="addPaymentformField">
-                            <div className="addPaymentidField">
-                                <h5>Date:</h5>
-                            </div>
-                            <div className="addPaymentidInput">
-                                <div className="addSupplierItemInput">
-                                    <CustomDatePicker
-                                        name="date"
-                                        slotProps={{ textField: { size: 'small', width: '17.5em' } }}
-                                        required
-                                        onChange={(date) => {
-                                            const formattedDate = dayjs(date).format('YYYY-MM-DD');
-                                            console.log(formattedDate);
-                                            handleChange("date",formattedDate);
-                                        }}
+                        <div className="form-fields">
+                            <div className="addPaymentformField">
+                                <div className="addPaymentidField">
+                                    <h5>Supplier Id:</h5>
+                                </div>
+                                <div className="addPaymentidInput">
+                                    <BasicTextField
+                                        name="supplierId"
+                                        type="text"
+                                        size='small'
+                                        onChange={(e) => handleChange("supplierId", e.target.value)}
                                     />
                                 </div>
                             </div>
-                        </div>
-                        {errors.date && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.date}</span>}
+                            {errors.supplierId && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.supplierId}</span>}
 
-                        <div className="addPaymentformField">
-                            <div className="addPaymentidField">
-                                <h5>Purchased Item/s:</h5>
+                            <div className="addPaymentformField">
+                                <div className="addPaymentidField">
+                                    <h5>Supplier Name:</h5>
+                                </div>
+                                <div className="addPaymentidInput">
+                                    <BasicTextField
+                                        name="supplierName"
+                                        type="text"
+                                        size='small'
+                                        onChange={(e) => handleChange("supplierName", e.target.value)}
+                                    />
+                                </div>
                             </div>
-                            <div className="addPaymentidInput">
-                                <BasicTextField
-                                    name="itemsPurchased"
-                                    type="text"
-                                    size='small'
-                                    onChange={(e) => handleChange("itemsPurchased", e.target.value)}
-                                />
-                            </div>
-                        </div>
-                        {errors.itemsPurchased && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.itemsPurchased}</span>}
+                            {errors.supplierName && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.supplierName}</span>}
 
-                        <div className="addPaymentformField">
-                            <div className="addPaymentidField">
-                                <h5>Total Price:</h5>
+                            <div className="addPaymentformField">
+                                <div className="addPaymentidField">
+                                    <h5>Date:</h5>
+                                </div>
+                                <div className="addPaymentidInput">
+                                    <div className="addSupplierItemInput">
+                                        <CustomDatePicker
+                                            name="date"
+                                            slotProps={{textField: {size: 'small'}}}
+                                            sx={{
+                                                width: '17.5em',
+                                                height: '0.75em',
+                                                marginRight: '0.5em',
+                                                marginTop: '-0.5em'
+                                            }}
+                                            required
+                                            onChange={(date) => {
+                                                const formattedDate = dayjs(date).format('YYYY-MM-DD');
+                                                console.log('Selected start date:', formattedDate);
+                                                handleChange("date", formattedDate);
+                                            }}
+                                        />
+                                    </div>
+                                </div>
                             </div>
-                            <div className="addPaymentidInput">
-                                <BasicTextField
-                                    name="billAmount"
-                                    type="text"
-                                    size='small'
-                                    onChange={(e) => handleChange("billAmount", e.target.value)}
-                                />
-                            </div>
-                        </div>
-                        {errors.billAmount && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.billAmount}</span>}
+                            {errors.date && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.date}</span>}
 
-                        <div className="addPaymentformField">
-                            <div className="addPaymentidField">
-                                <h5>Payment Receipt:</h5>
+                            <div className="addPaymentformField">
+                                <div className="addPaymentidField">
+                                    <h5>Purchased Item/s:</h5>
+                                </div>
+                                <div className="addPaymentidInput">
+                                    <BasicTextField
+                                        name="itemsPurchased"
+                                        type="text"
+                                        size='small'
+                                        onChange={(e) => handleChange("itemsPurchased", e.target.value)}
+                                    />
+                                </div>
                             </div>
-                            <div className="addPaymentidInput">
-                                <FileUpload
-                                    style={{display: 'flex', justifyContent: 'center', width: '100%', float: 'left'}}
-                                    onChange={handleFileUpload}
-                                />
-                            </div>
-                        </div>
-                        {/*{errors.billAmount && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.billAmount}</span>}*/}
+                            {errors.itemsPurchased && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.itemsPurchased}</span>}
 
+                            <div className="addPaymentformField">
+                                <div className="addPaymentidField">
+                                    <h5>Total Price:</h5>
+                                </div>
+                                <div className="addPaymentidInput">
+                                    <BasicTextField
+                                        name="billAmount"
+                                        type="text"
+                                        size='small'
+                                        onChange={(e) => handleChange("billAmount", e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                            {errors.billAmount && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.billAmount}</span>}
+
+                            <div className="addPaymentformField">
+                                <div className="addPaymentidField">
+                                    <h5>Payment Receipt:</h5>
+                                </div>
+                                <div className="addPaymentidInput">
+                                    <FileUpload
+                                        style={{display: 'flex', justifyContent: 'center', width: '100%', float: 'left'}}
+                                        onChange={handleFileUpload}
+                                    />
+                                </div>
+                            </div>
+                            {/*{errors.billAmount && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.billAmount}</span>}*/}
+
+                        </div>
 
                         <div className="addPaymentformFieldButtons">
                             <div className="addPaymentButton">
