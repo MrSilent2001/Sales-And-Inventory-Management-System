@@ -1,16 +1,15 @@
 import "./customerDashboard.css";
 import * as React from 'react';
-import Searchbar from "../../../components/search bar/search bar";
 import Footer from "../../../layout/footer/footer";
 import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
 import CustomizedButton from "../../../components/Button/button";
-import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 import {useEffect, useMemo, useState} from "react";
 import axios from "axios";
 import CustomizedAlert from "../../../components/Alert/alert";
 import PageLoader from "../../../components/Page Loader/pageLoader";
 import DialogBox from "../../../components/Dialog Box/DialogBox";
 import DynamicTable from "../../../components/Table/customizedTable2";
+import {useNavigate} from "react-router-dom";
 
 function CustomerDashboard() {
     const [customer, setCustomer] = useState([]);
@@ -19,6 +18,7 @@ function CustomerDashboard() {
     const [openDialog, setOpenDialog] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
+    const navigate = useNavigate();
 
     const columns = useMemo(() => [
         { accessorKey: 'username', header: 'Name', size: 75 },
@@ -218,17 +218,9 @@ function CustomerDashboard() {
         actions: createActions(row.id, row.lastLogin)
     }));
 
-    const searchCustomers = async (query) => {
-        setIsLoading(true);
-        try {
-            const response = await axios.get(`http://localhost:9000/customer/search?keyword=${query}`);
-            setCustomer(response.data);
-        } catch (error) {
-            handleClickError();
-            console.error('Error fetching customers:', error);
-        } finally {
-            setIsLoading(false);
-        }
+
+    const handleRowClick = (customer) => {
+        navigate(`/profile/${customer.id}`);
     };
 
     return (
@@ -241,25 +233,9 @@ function CustomerDashboard() {
 
                         <h2 className="customerManagement-title">Customers</h2>
 
-                        <div className="CustomerManagementBtnWithSearchbar">
-                            <Searchbar
-                                label="Search Customers"
-                                onKeyPress={searchCustomers}
-                            />
-                        </div>
-
                     </div>
 
                     <div className="CustomerManagement">
-                        {/*{isLoading ? (*/}
-                        {/*    <PageLoader />*/}
-                        {/*) : (*/}
-                        {/*    <CustomizedTable*/}
-                        {/*        columns={columns}*/}
-                        {/*        rows={rows}*/}
-                        {/*        style={{ width: '85%' }}*/}
-                        {/*    />*/}
-                        {/*)}*/}
                         {isLoading ? (
                             <PageLoader />
                         ) : (
@@ -269,6 +245,7 @@ function CustomerDashboard() {
                             data={customer}
                             createActions={createActions}
                             includeProfile={true}
+                            onRowClick={handleRowClick}
                         />
                         )}
                     </div>

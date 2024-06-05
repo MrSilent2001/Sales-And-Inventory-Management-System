@@ -3,7 +3,7 @@ import {Route, Routes} from "react-router-dom";
 import Signup from "../pages/login & SignUp/SignUp/signup";
 import CustomerDashboard from "../pages/admin/Customer Dashboard/customerDashboard";
 import CustomerOrderHistory from "../pages/Customer/Order History/customerOrderHistory";
-import View from "../pages/Customer/View/view";
+import View from "../pages/admin/Customer Dashboard/view";
 import ApprovedRefundsTable from "../pages/admin/Refunds/Inventory/Approved Refunds/ApprovedRefundsTable";
 import InventoryGeneratedRequest from "../pages/admin/Refunds/Inventory/generatedRequests/InventoryGeneratedRequest";
 import SalesApprovedRefundsTable from "../pages/admin/Refunds/Customer/Sales_Approved Refunds/SalesApprovedRefundsTable";
@@ -120,11 +120,10 @@ export function PageRouting() {
                     <Route path="/InventoryRefundRequestsTable" element={<InventoryRefundRequestsTable/>}/>
                     <Route path="/SalesApprovedRefundsTable" element={<SalesApprovedRefundsTable/>}/>
 
-                    <Route path="/inventoryPayments" element={<InventoryPayments/>}/>
 
 
-                    <Route path="/AdminOrderHistory" element={<AdminOrderHistory/>}/>
-                    <Route path="/view" element={<View/>}/>
+                    <Route path="/orderHistory/:id" element={<AdminOrderHistory/>}/>
+                    <Route path="/profile/:id" element={<View/>}/>
 
 
                     <Route path="/SalesRefundDenialForm" element={<SalesRefundDenialForm/>}/>

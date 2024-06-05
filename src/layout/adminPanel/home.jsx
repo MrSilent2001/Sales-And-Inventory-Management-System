@@ -7,6 +7,7 @@ import
 { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line }
     from 'recharts';
 import axios from "axios";
+import { parseISO, format } from 'date-fns';
 
 function Home() {
     const [no0fCustomers, setNoOfCustomers] = useState(0);
@@ -54,12 +55,17 @@ function Home() {
 
     const stock = async() =>{
         try {
-            const response = await axios.get('http://localhost:9000/', {
+            const response = await axios.get('http://localhost:9000/product/getAllProducts', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            setStockLevel(response.data);
+
+            const formattedData = response.data.map(item => ({
+                name: item.productName,
+                qty: item.productQuantity
+            }));
+            setStockLevel(formattedData);
         } catch (error) {
             console.error('Error fetching Payment data:', error);
         }
@@ -67,12 +73,36 @@ function Home() {
 
     const revenue = async() =>{
         try {
-            const response = await axios.get('http://localhost:9000/', {
+            const response = await axios.get('http://localhost:9000/payment/customerPayment/getAllCustomerPayments', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            setMonthlyRevenue(response.data);
+            const rawData = response.data;
+
+            const aggregatedData = rawData.reduce((acc, item) => {
+                const date = parseISO(item.date);
+                const month = format(date, 'yyyy-MM');
+
+                if (!acc[month]) {
+                    acc[month] = 0;
+                }
+
+                acc[month] += parseFloat(item.totalAmount);
+
+                return acc;
+            }, {});
+
+            const formattedData = Object.keys(aggregatedData).map((month) => {
+                const date = new Date(`${month}-01`);
+                const formattedMonth = format(date, 'MMM yyyy');
+                return {
+                    month: formattedMonth,
+                    totalAmount: aggregatedData[month],
+                };
+            });
+
+            setMonthlyRevenue(formattedData);
         } catch (error) {
             console.error('Error fetching Payment data:', error);
         }
@@ -227,8 +257,6 @@ function Home() {
                 <ResponsiveContainer width="100%" height="100%">
                     {/*Stock level of Items*/}
                     <BarChart
-                        width={500}
-                        height={300}
                         data={stockLevel}
                         margin={{
                             top: 5,
@@ -242,7 +270,7 @@ function Home() {
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Bar dataKey="Item" fill="#82ca9d" />
+                        <Bar dataKey="qty" fill="#8884d8" />
                     </BarChart>
                 </ResponsiveContainer>
 
@@ -260,11 +288,11 @@ function Home() {
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
+                        <XAxis dataKey="month" />
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Line type="monotone" dataKey="Month" stroke="#82ca9d" />
+                        <Line type="monotone" dataKey="totalAmount" stroke="#82ca9d" />
                     </LineChart>
                 </ResponsiveContainer>
             </div>

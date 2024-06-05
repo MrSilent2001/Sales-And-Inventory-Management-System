@@ -86,11 +86,7 @@ function PaymentDashboard() {
                 <div className="paymentDashboardInner">
                     <div className="payment-title">
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-                            <h2>Payments</h2>
-                            {/*<SearchBar*/}
-                            {/*    label="Search Payments"*/}
-                            {/*    onKeyPress={fetchSearchedPayments}*/}
-                            {/*/>*/}
+                            <h3>Payments</h3>
                         </div>
                     </div>
                     <div className="paymentDashboard" >

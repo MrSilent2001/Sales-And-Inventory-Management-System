@@ -22,6 +22,7 @@
     "azure-blob-storage": "^4.2.5",
     "bootstrap": "^5.3.3",
     "cors": "^2.8.5",
+    "date-fns": "^3.6.0",
     "dayjs": "^1.11.11",
     "faker": "^6.6.6",
     "formik": "^2.4.6",

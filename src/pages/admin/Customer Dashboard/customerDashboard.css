@@ -18,10 +18,8 @@
 }
 
 .customerManagement-title{
-    margin: 0;
     font-family: Inter;
     font-size: 1.3em;
-    padding: 1.5em 0;
     margin-left: -3em;
 }
 
@@ -36,7 +34,7 @@
 }
 
 .customerManagementTitleWithButton{
-    margin: 1.5em 0 1.5em 11.5em;
+    margin: 0 0 1em 11.5em;
     width: 75%;
     height: 3em;
     display: flex;

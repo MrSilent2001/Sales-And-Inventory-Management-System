@@ -6,6 +6,7 @@ import {
     MRT_ToggleFiltersButton,
 } from 'material-react-table';
 import { Box, lighten } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const DynamicTable = ({
                           columns,
@@ -17,10 +18,12 @@ const DynamicTable = ({
                           rowsPerPageOptions = [5, 10, 15],
                           createActions = null,
                           includeProfile = false,
-                          renderToolbarItems = null
+                          renderToolbarItems = null,
+                          onRowClick
                       }) => {
 
     const [globalFilter, setGlobalFilter] = useState('');
+    const navigate = useNavigate(); // Initialize useNavigate
 
     const transformedColumns = useMemo(() => {
         const baseColumns = [
@@ -129,7 +132,12 @@ const DynamicTable = ({
             )
         ),
         renderRowActions: createActions ? ({ row }) => createActions(row.original.id, row.original.lastLogin) : undefined,
-        muiTableBodyRowProps: {
+        muiTableBodyRowProps: ({ row }) => ({
+            onClick: () => {
+                if (onRowClick) {
+                    onRowClick(row.original);
+                }
+            },
             sx: {
                 '& .MuiCheckbox-root': {
                     margin: 'auto',
@@ -137,7 +145,7 @@ const DynamicTable = ({
                 },
                 cursor: 'pointer',
             },
-        },
+        }),
     });
 
     return (
