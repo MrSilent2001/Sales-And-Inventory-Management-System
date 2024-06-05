@@ -1,7 +1,8 @@
 import React from 'react';
-import { CssBaseline, Container, Box, Button, Typography, AppBar, Toolbar, Link } from '@mui/material';
+import { CssBaseline, Container, Box, Button, Typography } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import TreadeasyLogo from '../../../../assets/images/logo.png'; // Import your logo image
+import LoginAppBar from "../LoginAppbar/LoginAppBar";
+import { Link } from 'react-router-dom';
 
 const theme = createTheme({
     palette: {
@@ -60,24 +61,8 @@ function LandingPage() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <AppBar position="static" color="transparent" elevation={0}>
-                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <img src={TreadeasyLogo} alt="Treadeasy Logo" style={{ height: '50px', marginRight: '10px' }} />
-                        <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', color: '#000' }}>
-                            Treadeasy
-                        </Typography>
-                    </Box>
-                    <Box>
-                        <Button variant="outlined" color="primary" sx={{ mx: 1 }}>
-                            Sign Up
-                        </Button>
-                        <Button variant="contained" color="primary">
-                            Sign In
-                        </Button>
-                    </Box>
-                </Toolbar>
-            </AppBar>
+            <LoginAppBar/>
+
             <Container>
                 <Box
                     sx={{
@@ -97,10 +82,10 @@ function LandingPage() {
                         Discover the best products at unbeatable prices. Shop now and experience seamless online shopping like never before.
                     </Typography>
                     <Box sx={{ mt: 2 }}>
-                        <Button variant="contained" color="primary" sx={{ mx: 1 }}>
+                        <Button variant="contained" color="primary" sx={{ mx: 1 }} component={Link} to="/loginSelect">
                             Login
                         </Button>
-                        <Button variant="outlined" color="primary" sx={{ mx: 1 }}>
+                        <Button variant="outlined" color="primary" sx={{ mx: 1 }} component={Link} to="/create">
                             Sign Up
                         </Button>
                     </Box>

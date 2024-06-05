@@ -43,13 +43,21 @@ import Redirect from "../pages/Customer/Cart/redirect";
 import SupplierHome from "../pages/Supplier/Home/SupplierHomePage";
 import SalesReceipt from "../pages/Customer/Cart/Bill/invoice";
 import CustomizedTable2 from "../pages/admin/View Inventory/test";
+import GetStartedPage from "../pages/login & SignUp/_newLogin/LandingPage/landingPage";
+import CreatAccountSelectionPage from "../pages/login & SignUp/_newLogin/CreatAccountSelectionPage/CreatAccountSelectionPage";
+import LoginSelectionPage from "../pages/login & SignUp/_newLogin/LoginSelectionPage/LoginSelectionPage";
+import {SupplierLoginSignUp} from "../pages/login & SignUp/_newLogin/SupplierLoginSignUp/SupplierLoginSignUp";
 
 export function PageRouting() {
     return (
         <div className="App">
             <Routes>
 
-                <Route path="/" element={<Login/>}/>
+                {/*<Route path="/" element={<Login/>}/>*/}
+                <Route path="/" element={<GetStartedPage/>}/>
+                <Route path="/create" element={<CreatAccountSelectionPage/>}/>
+                <Route path="/loginSelect" element={<LoginSelectionPage/>}/>
+                <Route path="/supplierLogin" element={<SupplierLoginSignUp/>}/>
                 <Route path="/test" element={<CustomizedTable2/>}/>
 
 

@@ -4,17 +4,18 @@ import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import TreadeasyLogo from '../../../../assets/images/logo.png';
+import LoginAppBar from "../LoginAppbar/LoginAppBar";
 
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#133680', // Cyan color for a modern look
+            main: '#133680',
         },
         secondary: {
-            main: '#406dff', // Pink accent color
+            main: '#406dff'
         },
         background: {
-            default: '#fff', // Light grey background
+            default: '#fff',
         },
     },
     typography: {
@@ -39,9 +40,10 @@ const StyledCard = styled(Card)(({ theme, selected }) => ({
     boxShadow: selected ? '0 8px 16px rgba(0, 188, 212, 0.4)' : '0 4px 8px rgba(0, 0, 0, 0.1)',
     transition: 'all 0.3s',
     backgroundColor: selected ? '#e0f7fa' : '#fff',
+    // backgroundColor: '#fff',
     '&:hover': {
-        boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15)',
-        transform: 'translateY(-5px)',
+        boxShadow: '8px rgba(0, 0, 0, 0.15)',
+        // transform: 'translateY(-5px)',
     },
 }));
 
@@ -62,6 +64,7 @@ const CreatAccountSelectionPage = () => {
 
     return (
         <ThemeProvider theme={theme}>
+            {/*<LoginAppBar/>*/}
             <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: 'background.default' }}>
                 <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', px: 2 }}>
                     <Container maxWidth="sm" sx={{ backgroundColor: '#fff', borderRadius: 4, py: 5 }}>
