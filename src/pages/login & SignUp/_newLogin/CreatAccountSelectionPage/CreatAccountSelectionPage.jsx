@@ -1,0 +1,138 @@
+import React, { useState } from 'react';
+import { Container, Card, CardContent, Typography, Button, Grid, Box} from '@mui/material';
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import TradeasyLogo from '../../../../assets/images/logo.png';
+import { useNavigate } from 'react-router-dom';
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#133680',
+        },
+        secondary: {
+            main: '#406dff'
+        },
+        background: {
+            default: '#fff',
+        },
+    },
+    typography: {
+        h4: {
+            fontWeight: 700,
+            color: '#333',
+            letterSpacing: '0.05em',
+        },
+        h6: {
+            fontWeight: 600,
+            color: '#555',
+        },
+        body2: {
+            color: '#757575',
+        },
+    },
+});
+
+const StyledCard = styled(Card)(({ theme, selected }) => ({
+    cursor: 'pointer',
+    border: selected ? `2px solid ${theme.palette.primary.main}` : '1px solid #e0e0e0',
+    boxShadow: selected ? '0 8px 16px rgba(0, 188, 212, 0.4)' : '0 4px 8px rgba(0, 0, 0, 0.1)',
+    transition: 'all 0.3s',
+    backgroundColor: selected ? '#e0f7fa' : '#fff',
+    // backgroundColor: '#fff',
+    '&:hover': {
+        boxShadow: '8px rgba(0, 0, 0, 0.15)',
+        // transform: 'translateY(-5px)',
+    },
+}));
+
+const CreatAccountSelectionPage = () => {
+    const navigate = useNavigate();
+    const [selectedCard, setSelectedCard] = useState(null);
+
+    const handleCardClick = (card) => {
+        setSelectedCard(card);
+    };
+
+    const handleCreateAccount = () => {
+        if (selectedCard === 'supplier') {
+            navigate('/supplierLoginSignup/signup');
+        } else if (selectedCard === 'customer') {
+            navigate('/customerLoginSignup/signup');
+        }
+    };
+
+    return (
+        <ThemeProvider theme={theme}>
+            {/*<LoginAppBar/>*/}
+            <Box sx={{ display: 'flex', minHeight: '100vh', bgColor: 'background.default' }}>
+                <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', px: 2 }}>
+                    <Container maxWidth="sm" sx={{ backgroundColor: '#fff', borderRadius: 4, py: 5 }}>
+                        <Box textAlign="center" mb={5}>
+                            <img src={TradeasyLogo} alt="Logo" style={{ marginBottom: 20, height: 100 }} />
+                            <Typography variant="h4" component="h1" gutterBottom>
+                                How do you want to use Tradeasy?
+                            </Typography>
+                            <Typography variant="body2" gutterBottom>
+                                We’ll personalize your setup experience accordingly.
+                            </Typography>
+                        </Box>
+                        <Grid container spacing={3} justifyContent="center">
+                            <Grid item xs={12}>
+                                <StyledCard
+                                    onClick={() => handleCardClick('supplier')}
+                                    selected={selectedCard === 'supplier'}
+                                >
+                                    <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
+                                        <LocalShippingIcon sx={{ fontSize: 40, marginRight: 2, color: selectedCard === 'supplier' ? 'primary.main' : 'text.secondary' }} />
+                                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left', width:'100%'}}>
+                                            <Typography variant="h6" component="h2">
+                                                I’m here as a Supplier
+                                            </Typography>
+                                            <Typography variant="body2">
+                                                Selling parts and material
+                                            </Typography>
+                                        </Box>
+                                    </CardContent>
+                                </StyledCard>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <StyledCard
+                                    onClick={() => handleCardClick('customer')}
+                                    selected={selectedCard === 'customer'}
+                                >
+                                    <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
+                                        <ShoppingCartIcon sx={{ fontSize: 40, marginRight: 2, color: selectedCard === 'customer' ? 'primary.main' : 'text.secondary' }} />
+                                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left', width:'100%'}}>
+                                            <Typography variant="h6" component="h2">
+                                                I’m here as Customer
+                                            </Typography>
+                                            <Typography variant="body2">
+                                                To buy items
+                                            </Typography>
+                                        </Box>
+                                    </CardContent>
+                                </StyledCard>
+                            </Grid>
+                        </Grid>
+                        <Box textAlign="center" mt={5}>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleCreateAccount}
+                                disabled={!selectedCard}
+                                sx={{ borderRadius: '10px', px: 4, py: 1.5, fontSize: '0.9rem', fontWeight:'bold' }}
+                            >
+                                Create account
+                            </Button>
+                        </Box>
+                    </Container>
+                </Box>
+                <Box sx={{ width: '30%', bgcolor: 'black', display: { xs: 'none', md: 'block' } }}></Box>
+            </Box>
+        </ThemeProvider>
+    );
+};
+
+export default CreatAccountSelectionPage;

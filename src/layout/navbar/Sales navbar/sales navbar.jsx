@@ -37,7 +37,7 @@ function SalesNavbar(){
                     className={`navLink ${selectedNavLink === "logout" ? "selected" : ""}`}
                     onClick={handleNavLinkClick}
                 >
-                    <MdLogout style={{width:'18px', height:'18px'}}/>
+                    <MdLogout style={{width:'18px', height:'16px'}}/>
                 </NavLink>
             </div>
         </div>

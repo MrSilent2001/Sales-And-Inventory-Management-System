@@ -43,22 +43,40 @@ import Redirect from "../pages/Customer/Cart/redirect";
 import SupplierHome from "../pages/Supplier/Home/SupplierHomePage";
 import SalesReceipt from "../pages/Customer/Cart/Bill/invoice";
 import CustomizedTable2 from "../pages/admin/View Inventory/test";
+import GetStartedPage from "../pages/login & SignUp/_newLogin/LandingPage/landingPage";
+import AdminLandingPage from "../pages/login & SignUp/_newLogin/LandingPage/adminLandingPage";
+import CreatAccountSelectionPage from "../pages/login & SignUp/_newLogin/CreatAccountSelectionPage/CreatAccountSelectionPage";
+import LoginSelectionPage from "../pages/login & SignUp/_newLogin/LoginSelectionPage/LoginSelectionPage";
+import {SupplierLoginSignUp} from "../pages/login & SignUp/_newLogin/SupplierLoginSignUp/SupplierLoginSignUp";
+import {CustomerLoginSignUp} from "../pages/login & SignUp/_newLogin/CustomerLoginSignUp/CustomerLoginSignUp";
+import {AdminLoginSignUp} from "../pages/login & SignUp/_newLogin/AdminLoginSignUp/AdminLoginSignUp";
 
 export function PageRouting() {
     return (
         <div className="App">
             <Routes>
 
-                <Route path="/" element={<Login/>}/>
+                {/*<Route path="/" element={<Login/>}/>*/}
+                <Route path="/" element={<GetStartedPage/>}/>
+                <Route path="/admin" element={<AdminLandingPage/>}/>
+                <Route path="/create" element={<CreatAccountSelectionPage/>}/>
+                <Route path="/loginSelect" element={<LoginSelectionPage/>}/>
+                <Route path="/supplierLoginSignup/:mode" element={<SupplierLoginSignUp />} /> {/*here mode can be login or signup ex: supplierloginsignup/login*/}
+                <Route path="/supplierLoginSignup" element={<SupplierLoginSignUp />} />
+                <Route path="/customerLoginSignup/:mode" element={<CustomerLoginSignUp />} />
+                <Route path="/customerLoginSignup" element={<CustomerLoginSignUp />} />
+                <Route path="/adminLoginSignup/:mode" element={<AdminLoginSignUp />} />
+                <Route path="/adminLoginSignup" element={<AdminLoginSignUp />} />
+
                 <Route path="/test" element={<CustomizedTable2/>}/>
 
 
 {/*===================================================Public Routes=================================================================*/}
 
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/signup" element={<Signup/>}/>
+                {/*<Route path="/login" element={<Login/>}/>*/}
+                {/*<Route path="/signup" element={<Signup/>}/>*/}
 
-                <Route path="/admin" element={<AdminLogin/>}/>
+                {/*<Route path="/admin" element={<AdminLogin/>}/>*/}
 
                 {/*Payment Gateway*/}
                 <Route path="/success" element={<Success/>}/>
