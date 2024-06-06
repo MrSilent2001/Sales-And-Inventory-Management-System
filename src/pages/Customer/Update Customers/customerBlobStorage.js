@@ -7,7 +7,7 @@ export async function uploadFileToBlob(file) {
 
     try {
         const blobServiceClient = new BlobServiceClient(blobSasUrl);
-        const containerClient = blobServiceClient.getContainerClient('products'); // Ensure your container name is correct
+        const containerClient = blobServiceClient.getContainerClient('customers'); // Ensure your container name is correct
         const blobName = new Date().getTime() + '-' + file.name;
         const blockBlobClient = containerClient.getBlockBlobClient(blobName);
 
