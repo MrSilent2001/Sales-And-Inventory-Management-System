@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo, useState} from 'react';
 import {Box, Container, Paper, Typography} from '@mui/material';
 import Footer from "../../../../../layout/footer/footer";
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
@@ -6,19 +6,29 @@ import {Link} from "react-router-dom";
 import CustomizedButton from "../../../../../components/Button/button";
 import viewRefunds from "../../../../../context/data.json";
 import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
+import PageLoader from "../../../../../components/Page Loader/pageLoader";
+import DynamicTable from "../../../../../components/Table/customizedTable2";
 
 
 const SalesRefundRequestsTable = ({onViewApproved}) => {
+    const [isLoading, setIsLoading] = useState(false);
     const handleStatusButtonClick = requestId => {
         console.log('Button for request ID', requestId, 'was clicked');
     };
 
-    const columns=[
-        { id: 'name', label: 'Name', minWidth: 70,align: 'center'  },
-        { id: 'requestId', label: 'Request Id', minWidth: 150,align: 'center'  },
-        { id: 'orderId', label: 'Order Id', minWidth: 120,align: 'center'  },
-        { id: 'actions', label:'', minWidth: 200,align: 'center'  }
-    ];
+    // const columns=[
+    //     { id: 'name', label: 'Name', minWidth: 70,align: 'center'  },
+    //     { id: 'requestId', label: 'Request Id', minWidth: 150,align: 'center'  },
+    //     { id: 'orderId', label: 'Order Id', minWidth: 120,align: 'center'  },
+    //     { id: 'actions', label:'', minWidth: 200,align: 'center'  }
+    // ];
+
+    const columns = useMemo(() => [
+        { accessorKey: 'name', header: 'Name', size: 70, align: 'center' },
+        { accessorKey: 'requestId', header: 'Request Id', size: 100, align: 'center' },
+        { accessorKey: 'orderId', header: 'Order Id', size: 100, align: 'center' }
+    ], []);
+
 
     const rows = viewRefunds.viewRefunds || [];
 
@@ -96,12 +106,16 @@ const SalesRefundRequestsTable = ({onViewApproved}) => {
 
                         </Box>
                     </Box>
-                    <Paper>
-                        <CustomizedTable
-                            columns={columns}
-                            rows={mappedData}
-                        />
-                    </Paper>
+                        {isLoading ? (
+                            <PageLoader />
+                        ) : (
+
+                            <DynamicTable
+                                columns={columns}
+                                data={viewRefunds}
+                                includeProfile={false}
+                            />
+                        )}
                 </Box>
             </Container>
             <Footer/>

@@ -1,9 +1,7 @@
-import Login from "../pages/login & SignUp/login/login";
 import {Route, Routes} from "react-router-dom";
-import Signup from "../pages/login & SignUp/SignUp/signup";
 import CustomerDashboard from "../pages/admin/Customer Dashboard/customerDashboard";
 import CustomerOrderHistory from "../pages/Customer/Order History/customerOrderHistory";
-import View from "../pages/Customer/View/view";
+import View from "../pages/admin/Customer Dashboard/view";
 import ApprovedRefundsTable from "../pages/admin/Refunds/Inventory/Approved Refunds/ApprovedRefundsTable";
 import InventoryGeneratedRequest from "../pages/admin/Refunds/Inventory/generatedRequests/InventoryGeneratedRequest";
 import SalesApprovedRefundsTable from "../pages/admin/Refunds/Customer/Sales_Approved Refunds/SalesApprovedRefundsTable";
@@ -37,34 +35,50 @@ import InventoryPayments from "../pages/admin/Payment Dashboard/Inventory/invent
 import ProductDetail from "../pages/Customer/Product Detail/productDetail";
 import AdminDashboard from "../pages/admin/Admin Dashboard/AdminDashboard";
 import UpdateCustomers from "../pages/Customer/Update Customers/updateCustomers";
-import AdminLogin from "../pages/login & SignUp/login/adminLogin";
 import ProtectedRoute from "./protectedRoutes";
 import Redirect from "../pages/Customer/Cart/redirect";
+import SupplierHome from "../pages/Supplier/Home/SupplierHomePage";
+import SalesReceipt from "../pages/Customer/Cart/Bill/invoice";
+import CustomizedTable2 from "../pages/admin/View Inventory/test";
+import GetStartedPage from "../pages/login & SignUp/_newLogin/LandingPage/landingPage";
+import AdminLandingPage from "../pages/login & SignUp/_newLogin/LandingPage/adminLandingPage";
+import CreatAccountSelectionPage from "../pages/login & SignUp/_newLogin/CreatAccountSelectionPage/CreatAccountSelectionPage";
+import LoginSelectionPage from "../pages/login & SignUp/_newLogin/LoginSelectionPage/LoginSelectionPage";
+import {SupplierLoginSignUp} from "../pages/login & SignUp/_newLogin/SupplierLoginSignUp/SupplierLoginSignUp";
+import {CustomerLoginSignUp} from "../pages/login & SignUp/_newLogin/CustomerLoginSignUp/CustomerLoginSignUp";
+import {AdminLoginSignUp} from "../pages/login & SignUp/_newLogin/AdminLoginSignUp/AdminLoginSignUp";
 
 export function PageRouting() {
     return (
         <div className="App">
             <Routes>
 
-                <Route path="/" element={<Login/>}/>
-
-
 {/*===================================================Public Routes=================================================================*/}
 
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/signup" element={<Signup/>}/>
+                <Route path="/" element={<GetStartedPage/>}/>
+                <Route path="/admin" element={<AdminLandingPage/>}/>
+                <Route path="/create" element={<CreatAccountSelectionPage/>}/>
+                <Route path="/loginSelect" element={<LoginSelectionPage/>}/>
+                <Route path="/supplierLoginSignup/:mode" element={<SupplierLoginSignUp />} /> {/*here mode can be login or signup ex: supplierloginsignup/login*/}
+                <Route path="/supplierLoginSignup" element={<SupplierLoginSignUp />} />
+                <Route path="/customerLoginSignup/:mode" element={<CustomerLoginSignUp />} />
+                <Route path="/customerLoginSignup" element={<CustomerLoginSignUp />} />
+                <Route path="/adminLoginSignup/:mode" element={<AdminLoginSignUp />} />
+                <Route path="/adminLoginSignup" element={<AdminLoginSignUp />} />
 
-                <Route path="/admin" element={<AdminLogin/>}/>
+                <Route path="/test" element={<CustomizedTable2/>}/>
 
                 {/*Payment Gateway*/}
                 <Route path="/success" element={<Success/>}/>
                 <Route path="/redirect" element={<Redirect/>}/>
                 <Route path="/cancel" element={<Cancel/>}/>
+                <Route path="/bill" element={<SalesReceipt/>}/>
 
 {/*===================================================Protected Routes==============================================================*/}
                 <Route element={<ProtectedRoute />}>
 
                     {/*Supplier view routes*/}
+                    <Route path="/supplierHome" element={<SupplierHome/>}/>
                     <Route path="/supplierDashboard" element={<InventoryDashboard/>}/>
                     <Route path="/supplierProfile" element={<SupplierProfile/>}/>
                     <Route path="/updateSupplier" element={<UpdateSupplier/>}/>
@@ -114,11 +128,11 @@ export function PageRouting() {
                     <Route path="/InventoryRefundRequestsTable" element={<InventoryRefundRequestsTable/>}/>
                     <Route path="/SalesApprovedRefundsTable" element={<SalesApprovedRefundsTable/>}/>
 
+
+
+                    <Route path="/orderHistory/:id" element={<AdminOrderHistory/>}/>
+                    <Route path="/profile/:id" element={<View/>}/>
                     <Route path="/inventoryPayments" element={<InventoryPayments/>}/>
-
-
-                    <Route path="/AdminOrderHistory" element={<AdminOrderHistory/>}/>
-                    <Route path="/view" element={<View/>}/>
 
 
                     <Route path="/SalesRefundDenialForm" element={<SalesRefundDenialForm/>}/>

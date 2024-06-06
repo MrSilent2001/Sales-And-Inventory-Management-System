@@ -1,16 +1,20 @@
 import CustomizedButton from "../../../components/Button/button";
-import React, { useEffect, useState, useRef } from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import axios from 'axios';
 import SalesReceipt from '../../Customer/Cart/Bill/invoice';
-import { useReactToPrint } from 'react-to-print';
-import { Navigate } from "react-router-dom";
+import {Navigate} from "react-router-dom";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const Success = () => {
     const sessionId = localStorage.getItem('sessionId');
     const [purchasedItems, setPurchasedItems] = useState([]);
     const token = localStorage.getItem('accessToken');
+    const id = localStorage.getItem('id');
     const [navigate, setNavigate] = useState(false);
-    const componentRef = useRef();
+    const [customer, setCustomer] = useState({});
+
+    const pdfRef = useRef();
 
     useEffect(() => {
         const fetchSession = async () => {
@@ -25,6 +29,15 @@ const Success = () => {
                 const items = JSON.parse(session.metadata.items);
                 setPurchasedItems(items);
                 console.log(items);
+
+                const customer = await axios.get(`http://localhost:9000/customer/findCustomer/${id}`,{
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                setCustomer(customer.data);
+
             } catch (error) {
                 console.error('Error fetching session:', error);
             }
@@ -35,9 +48,26 @@ const Success = () => {
         }
     }, [sessionId]);
 
-    const handlePrint = useReactToPrint({
-        content: () => componentRef.current,
-    });
+
+    // const invoiceDownload = async () => {
+    //     try {
+    //         // Fetching the updated list of customers after deletion
+    //         const response = await axios.post('http://localhost:9000/email/send/customerInvoice', {
+    //             receiverName: '',
+    //             emailSubject: "Account Termination Warning!",
+    //             emailBody: "It is monitored that you have not been logged into your account for a while. Please signed-in or otherwise the account will be terminated without any prior notice.",
+    //             receiverEmail: ''
+    //         }, {
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`,
+    //             },
+    //         });
+    //         console.log(response.data);
+    //
+    //     } catch (error) {
+    //         console.error('Error deleting customer:', error);
+    //     }
+    // }
 
     const handleRedirect = () => {
         localStorage.setItem("cart", JSON.stringify([]));
@@ -45,15 +75,94 @@ const Success = () => {
     }
 
     if (navigate) {
-        return <Navigate to="/products" />
+        return <Navigate to="/products"/>
     }
 
+    // const downloadPDF = () => {
+    //     const input = pdfRef.current;
+    //     console.log(input);
+    //     html2canvas(input).then((canvas) => {
+    //         const imgData = canvas.toDataURL("image/png");
+    //         const pdf = new jsPDF('p', 'mm', 'a4');
+    //         const pdfWidth = pdf.internal.pageSize.getWidth();
+    //         const pdfHeight = pdf.internal.pageSize.getHeight();
+    //         const imgWidth = canvas.width;
+    //         const imgHeight = canvas.height;
+    //         const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+    //         const imgX = (pdfWidth - imgWidth * ratio) / 2;
+    //         const imgY = 10;
+    //         pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+    //         pdf.save('invoice.pdf');
+    //         const receipt = pdf.output('blob');
+    //         console.log(receipt)
+    //
+    //         return receipt;
+    //     });
+    // }
+
+    const downloadPDF = () => {
+        return new Promise((resolve, reject) => {
+            const input = pdfRef.current;
+            console.log(input);
+            html2canvas(input).then((canvas) => {
+                const imgData = canvas.toDataURL("image/png");
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                const imgWidth = canvas.width;
+                const imgHeight = canvas.height;
+                const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+                const imgX = (pdfWidth - imgWidth * ratio) / 2;
+                const imgY = 10;
+                pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+                pdf.save('invoice.pdf');
+                const receipt = pdf.output('blob');
+                console.log(receipt)
+                resolve(receipt);
+            }).catch(error => {
+                reject(error);
+            });
+        });
+    }
+
+    console.log(customer.email)
+    console.log(customer.username)
+
+    const sendReceipt = async () => {
+        try {
+            const pdf = await downloadPDF();
+            const formData = new FormData();
+            formData.append('pdfFilePath', pdf, 'invoice.pdf');
+            formData.append('receiverName', customer.username);
+            formData.append('emailSubject', "Payment Receipt!");
+            formData.append('emailBody', "Thank you for dealing with Tradeasy Pvt. Ltd!");
+            formData.append('receiverEmail', customer.email);
+
+            const response = await axios.post('http://localhost:9000/email/send/customerInvoice', formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            console.log('Payment response:', response.data);
+        } catch (error) {
+            console.error('Payment error:', error.message);
+        }
+    }
+
+
     return (
-        <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+        <div style={{
+            height: '100vh',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center'
+        }}>
             <h1>Success</h1>
             <h2>Thank you for your purchase!</h2>
 
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                 <CustomizedButton
                     hoverBackgroundColor="#0aaf0b"
                     style={{
@@ -75,7 +184,7 @@ const Success = () => {
                 </CustomizedButton>
 
                 <CustomizedButton
-                    onClick={handlePrint}
+                    onClick={sendReceipt}
                     hoverBackgroundColor="#0aaf0b"
                     style={{
                         color: '#ffffff',
@@ -93,8 +202,12 @@ const Success = () => {
                     Download
                 </CustomizedButton>
             </div>
-            <div style={{ display: 'none' }}>
-                <SalesReceipt ref={componentRef} purchasedItems={purchasedItems} />
+
+            <div style={{
+                position: 'absolute',
+                left: '-9999px'
+            }}>
+                <SalesReceipt ref={pdfRef} purchasedItems={purchasedItems}/>
             </div>
         </div>
     );

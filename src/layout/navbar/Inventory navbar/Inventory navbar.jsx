@@ -23,14 +23,13 @@ function InventoryNavbar(){
     return(
         <div className="navbar">
             <div className="logo">
-                <img src={logo} alt="Logo" style={{width:"30px", margin:"10px"}} onClick={handleClick} />
+                <img src={logo} alt="Logo" style={{width:"30px", margin:"10px"}} onClick={handleClick}/>
             </div>
             <div className="navigation">
                 <NavLink
                     to="/viewInventory"
                     name="viewInventory"
                     className={`navLink ${selectedNavLink === "viewInventory" ? "selected" : ""}`}
-                    onClick={handleNavLinkClick}
                 >
                     Inventory
                 </NavLink>
@@ -38,7 +37,6 @@ function InventoryNavbar(){
                     to="/viewSupplier"
                     name="viewSupplier"
                     className={`navLink ${selectedNavLink === "viewSupplier" ? "selected" : ""}`}
-                    onClick={handleNavLinkClick}
                 >
                     Supplier
                 </NavLink>
@@ -47,7 +45,6 @@ function InventoryNavbar(){
                     to="/purchasedOrder"
                     name="purchasedOrder"
                     className={`navLink ${selectedNavLink === "purchasedOrder" ? "selected" : ""}`}
-                    onClick={handleNavLinkClick}
                 >
                     Orders
                 </NavLink>
@@ -56,7 +53,6 @@ function InventoryNavbar(){
                     to="/InventoryRefundRequestsTable"
                     name="InventoryRefundRequestsTable"
                     className={`navLink ${selectedNavLink === "InventoryRefundRequestsTable" ? "selected" : ""}`}
-                    onClick={handleNavLinkClick}
                 >
                     Refunds
                 </NavLink>
@@ -65,7 +61,6 @@ function InventoryNavbar(){
                     to="/inventoryPayments"
                     name="inventoryPayments"
                     className={`navLink ${selectedNavLink === "inventoryPayments" ? "selected" : ""}`}
-                    onClick={handleNavLinkClick}
                 >
                     Payment
                 </NavLink>
@@ -76,7 +71,7 @@ function InventoryNavbar(){
                     className={`navLink ${selectedNavLink === "logout" ? "selected" : ""}`}
                     onClick={handleNavLinkClick}
                 >
-                    <MdLogout style={{width:'18px', height:'18px'}}/>
+                    <MdLogout style={{width:'18px', height:'14px'}}/>
                 </NavLink>
             </div>
         </div>

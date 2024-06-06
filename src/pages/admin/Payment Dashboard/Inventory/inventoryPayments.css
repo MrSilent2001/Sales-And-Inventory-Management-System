@@ -1,5 +1,6 @@
 .invPaymentDashboardOuter{
     width: 100%;
+    height: 40em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,15 +13,9 @@
     margin-top: 1.5em;
 }
 
-.invSearchContainer{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 1em;
+.invTitleContainer{
+    text-align: left;
+    margin-left: 5em;
 }
-.invPaymentDashboard{
-    width: 100%;
-    height: 35em;
-}
+
 

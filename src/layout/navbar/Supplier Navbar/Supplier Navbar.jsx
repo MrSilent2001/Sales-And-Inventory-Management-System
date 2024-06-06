@@ -16,6 +16,9 @@ function SupplierNavbar(){
                 <img src={logo} alt="Logo" style={{width:"30px", margin:"10px"}} />
             </div>
             <div className="navigation">
+                <NavLink to="/supplierHome">Home</NavLink>
+                <NavLink to="/supplierOrders">Orders</NavLink>
+                <NavLink to="/supplierRefund">Refund</NavLink>
                 <NavLink to="/supplierDashboard">Inventory</NavLink>
                 <NavLink to="/supplierProfile">Profile</NavLink>
                 <NavLink
@@ -24,7 +27,7 @@ function SupplierNavbar(){
                     className={`navLink ${selectedNavLink === "logout" ? "selected" : ""}`}
                     onClick={handleNavLinkClick}
                 >
-                    <MdLogout style={{width:'18px', height:'18px'}}/>
+                    <MdLogout style={{width:'18px', height:'16px'}}/>
                 </NavLink>
             </div>
         </div>

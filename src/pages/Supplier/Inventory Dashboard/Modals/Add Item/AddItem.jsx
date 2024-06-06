@@ -11,6 +11,7 @@ import dayjs from "dayjs";
 import CustomDatePicker from "../../../../../components/DatePicker/datePicker";
 import CustomizedAlert from "../../../../../components/Alert/alert";
 import FileUpload from "../../../../../components/Form Inputs/fileUpload";
+import { uploadFileToBlob } from '../../productBlobStorage';
 
 function AddSupplierInventoryItem(props) {
 
@@ -23,12 +24,11 @@ function AddSupplierInventoryItem(props) {
         manufacturedDate: '',
         color: '',
         quantity: '',
-        price: '',
-        image: ''
-
+        price: ''
     });
 
     const [errors, setErrors] = useState({});
+    const [productImages, setProductImages] = useState(null);
     const token = localStorage.getItem('accessToken');
 
     const handleChange = (name, value) => {
@@ -57,6 +57,14 @@ function AddSupplierInventoryItem(props) {
     const handleCloseError = () => {
         setOpenError(false);
     };
+
+    const handleFileChange = (file) => {
+        setProductImages(file);
+        setFormData(prevState => ({
+            ...prevState,
+            image: file
+        }));
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -90,13 +98,18 @@ function AddSupplierInventoryItem(props) {
         if (!formData.price) {
             validationErrors.price = " *This Field is required";
         }
-        // if (!formData.image) {
-        //     validationErrors.image = " *This Field is required";
-        // }
+        if (!formData.image) {
+            validationErrors.image = " *This Field is required";
+        }
 
         setErrors(validationErrors);
         if(Object.keys(validationErrors).length === 0){
             try {
+                let imageUrl = '';
+                if(productImages){
+                    imageUrl = await uploadFileToBlob(productImages);
+
+                }
                 await axios.post('http://localhost:9000/inventory/add', {
                     sellerId: formData.supplierId,
                     productName: formData.itemName,
@@ -107,7 +120,11 @@ function AddSupplierInventoryItem(props) {
                     productColour: formData.color,
                     productQuantity: formData.quantity,
                     productUnitPrice: formData.price,
-                    // productImage: formData.image
+                    productImage: [imageUrl]
+                },{
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
                 });
 
                 const response = await axios.get('http://localhost:9000/inventory/getAll' , {
@@ -310,7 +327,10 @@ function AddSupplierInventoryItem(props) {
                                 <div className="addSupplierItemidField">
                                     <h5>Item Image:</h5>
                                 </div>
-                                    <FileUpload/>
+                                <FileUpload
+                                    style={{ margin: '0 0' }}
+                                    onChange={handleFileChange}
+                                />
                             </div>
                             {errors.image && <span style={{ color: 'red', fontSize: '0.8em', padding:'0 0 0.5em 0.5em' }}>{errors.image}</span>}
 

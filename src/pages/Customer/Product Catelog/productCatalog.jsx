@@ -19,6 +19,9 @@ function ProductCatalog() {
     //data fetching error Alert Variables
     const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
 
+    //quantity error Alert Variables
+    const [quantityErrorOpenSuccess, setQuantityErrorOpenSuccess] = useState(false);
+
     const [cart, setCart] = useState([]);
     const [checkedItems, setCheckedItems] = useState({
         "Building Material": false,
@@ -95,20 +98,31 @@ function ProductCatalog() {
     // Handle adding items to the cart
     const handleAddToCart = (item) => {
         const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
+        const updatedCart = [...cart];
 
         if (existingItemIndex !== -1) {
-            const updatedCart = [...cart];
-            updatedCart[existingItemIndex].amount += 1;
-            setCart(updatedCart);
-            localStorage.setItem("cart", JSON.stringify(updatedCart));
-            addToCartHandleClickSuccess();
+            // If item already exists in cart, check if adding 1 will exceed product quantity
+            if (updatedCart[existingItemIndex].amount + 1 <= item.productQuantity) {
+                updatedCart[existingItemIndex].amount += 1;
+                setCart(updatedCart);
+                localStorage.setItem("cart", JSON.stringify(updatedCart));
+                addToCartHandleClickSuccess();
+            } else {
+                quantityErrorHandleClickSuccess();
+            }
         } else {
-            const newCart = [...cart, { ...item, amount: 1 }];
-            setCart(newCart);
-            localStorage.setItem("cart", JSON.stringify(newCart));
-            addToCartHandleClickSuccess();
+            // If item is not in cart, check if adding 1 will exceed product quantity
+            if (item.productQuantity >= 1) {
+                const newCart = [...updatedCart, { ...item, amount: 1 }];
+                setCart(newCart);
+                localStorage.setItem("cart", JSON.stringify(newCart));
+                addToCartHandleClickSuccess();
+            } else {
+                quantityErrorHandleClickSuccess();
+            }
         }
     };
+
 
     // Navigate to product detail page
     const handleBodyClick = (item) => {
@@ -138,15 +152,18 @@ function ProductCatalog() {
     };
 
     // Filter products based on category and search query
-    const filteredProducts = productsWithOffers.filter(product => {
-        const matchesCategory = Object.entries(checkedItems).every(([category, checked]) =>
-            !checked || product.productCategory.includes(category)
-        );
+    const filteredProducts = productsWithOffers
+        .filter(product => {
+            const matchesCategory = Object.entries(checkedItems).every(([category, checked]) =>
+                !checked || product.productCategory.includes(category)
+            );
 
-        const matchesSearchQuery = product.productName.toLowerCase().includes(searchQuery.toLowerCase());
+            const matchesSearchQuery = product.productName.toLowerCase().includes(searchQuery.toLowerCase());
 
-        return matchesCategory && matchesSearchQuery;
-    });
+            return matchesCategory && matchesSearchQuery;
+        })
+        .sort((a, b) => a.id - b.id); // Sort by id in ascending order
+
 
     //Handle add to cart Alert Variable
     const addToCartHandleCloseSuccess = () => {
@@ -164,6 +181,15 @@ function ProductCatalog() {
 
     const dataErrorHandleClickSuccess = () => {
         setDataErrorOpenSuccess(true);
+    };
+
+    //Handle Quantity Error Alert Variable
+    const quantityErrorHandleCloseSuccess = () => {
+        setQuantityErrorOpenSuccess(false);
+    };
+
+    const quantityErrorHandleClickSuccess = () => {
+        setQuantityErrorOpenSuccess(true);
     };
 
     return (
@@ -240,6 +266,13 @@ function ProductCatalog() {
                     onClose={dataErrorHandleCloseSuccess}
                     severity="error"
                     message="Error Fetching Data!"
+                />
+
+                <CustomizedAlert
+                    open={quantityErrorOpenSuccess}
+                    onClose={quantityErrorHandleCloseSuccess}
+                    severity="warning"
+                    message="Can't add more item due to the stock avaliability!"
                 />
 
 

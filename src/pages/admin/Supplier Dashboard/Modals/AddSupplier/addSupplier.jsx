@@ -10,10 +10,10 @@ import CustomizedAlert from "../../../../../components/Alert/alert";
 const AddSupplier = forwardRef((props, ref) => {
 
     const [formData, setFormData] = useState({
-        supplierName: '',
+        username: '',
         address: '',
         email: '',
-        contact: '',
+        contactNo: '',
         nic: '',
     });
 
@@ -25,7 +25,6 @@ const AddSupplier = forwardRef((props, ref) => {
             ...prevState,
             [name]: value
         }));
-        console.log(formData);
     };
 
     const [openSuccess, setOpenSuccess] = useState(false);
@@ -54,8 +53,8 @@ const AddSupplier = forwardRef((props, ref) => {
 
         const validationErrors = {};
 
-        if (!formData.supplierName) {
-            validationErrors.supplierName = " *This Field is required";
+        if (!formData.username) {
+            validationErrors.username = " *This Field is required";
         }
         if (!formData.address) {
             validationErrors.address = " *This Field is required";
@@ -63,8 +62,8 @@ const AddSupplier = forwardRef((props, ref) => {
         if (!formData.email) {
             validationErrors.email = " *This Field is required";
         }
-        if (!formData.contact) {
-            validationErrors.contact = " *This Field is required";
+        if (!formData.contactNo) {
+            validationErrors.contactNo = " *This Field is required";
         }
         if (!formData.nic) {
             validationErrors.nic = " *This Field is required";
@@ -75,15 +74,30 @@ const AddSupplier = forwardRef((props, ref) => {
             try {
 
                 await axios.post('http://localhost:9000/supplier/create', {
-                    supplierName: formData.supplierName,
-                    supplierEmail: formData.email,
-                    supplierAddress: formData.address,
-                    supplierContact: formData.contact,
+                    username: formData.username,
+                    email: formData.email,
+                    address: formData.address,
+                    contactNo: formData.contactNo,
                     nic: formData.nic,
-                    supplierPassword: '',
-                    paymentMethod: '',
-                    paymentDetails: '',
+                    role: 'supplier',
+                    password: formData.username,
                     profilePicture: 'https://th.bing.com/th/id/OIP.IQqAakFVSW2T6n9Kibpe2AAAAA?rs=1&pid=ImgDetMain'
+                },{
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                //Send Credentials to the supplier
+                const credentials = axios.post('http://localhost:9000/email/send/supplierCredentials',{
+                    receiverName: formData.username,
+                    emailSubject: "Tradeasy Account Credentials!",
+                    emailBody: `Thank you for joining with Tradeasy Pvt. Ltd. The credentials for your account are sent below.Please do not disclose these information with anyone else. Username: ${formData.username} and password: ${formData.username}`,
+                    receiverEmail: formData.email
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
 
                 // Fetch the updated list of suppliers
@@ -126,15 +140,15 @@ const AddSupplier = forwardRef((props, ref) => {
                                     <BasicTextField
                                         id="outlined-required"
                                         size="small"
-                                        onChange={(e) => handleChange("supplierName", e.target.value)}
+                                        onChange={(e) => handleChange("username", e.target.value)}
                                     />
                                 </div>
                             </div>
-                            {errors.supplierName && <span style={{
+                            {errors.username && <span style={{
                                 color: 'red',
                                 fontSize: '0.8em',
                                 padding: '0 0 0.5em 0.5em'
-                            }}>{errors.supplierName}</span>}
+                            }}>{errors.username}</span>}
 
 
                             <div className="addSupplierformField">
@@ -186,16 +200,16 @@ const AddSupplier = forwardRef((props, ref) => {
                                     <BasicTextField
                                         id="outlined-required"
                                         size="small"
-                                        onChange={(e) => handleChange("contact", e.target.value)}
+                                        onChange={(e) => handleChange("contactNo", e.target.value)}
 
                                     />
                                 </div>
                             </div>
-                            {errors.contact && <span style={{
+                            {errors.contactNo && <span style={{
                                 color: 'red',
                                 fontSize: '0.8em',
                                 padding: '0 0 0.5em 0.5em'
-                            }}>{errors.contact}</span>}
+                            }}>{errors.contactNo}</span>}
 
 
                             <div className="addSupplierformField">

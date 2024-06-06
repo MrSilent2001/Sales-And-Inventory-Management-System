@@ -1,44 +1,9 @@
 .viewSupplierOuter{
-    display: flex;
     background-color: rgba(219, 223, 253, 0.8);
-    width: auto;
-}
-
-.viewSupplierFilter{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 15.75em;
-    height: 40em;
-    background-color: #646FD4;
-    margin: 0 0 0 -0.3em;
-}
-
-.supplierCategoryFilter{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.applyButton{
-    margin: 3em 0 0 0;
-}
-
-.filterHeader h2{
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: underline;
-    font-family: inter;
-}
-
-.supplierCategoryTopic h5{
-    color: rgba(255, 255, 255, 0.8);
-    font-family: inter;
 }
 
 .viewSupplierInner{
-    width: 81.25em;
-    height: 38.5em ;
-    background-color: rgba(219, 223, 253, 0.8);
+    height: 40em;
     padding: 1.5em 0 0 0;
 }
 
@@ -52,30 +17,14 @@
 .viewSupplierSearch{
     display: flex;
     align-items: center;
-    padding: 0 0 0 2em;
+    padding: 0 0 0 10em;
 }
 
 .viewSupplierButtons{
     display: flex;
     align-items: center;
-    width: 10em;
-    justify-content: space-between;
-    padding: 0 1.95em 0 0;
-}
-
-.itemTable{
-    padding: 2em 0 0 2.5em;
-}
-
-table {
-    position: relative;
-}
-
-thead {
-    position: sticky;
-    top: 0;
-    background-color: #f1f1f1;
-    z-index: 1;
+    justify-content: right;
+    margin-left: 62.5em;
 }
 
 ::-webkit-scrollbar {

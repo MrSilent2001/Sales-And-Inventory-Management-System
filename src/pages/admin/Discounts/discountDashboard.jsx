@@ -1,33 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import "./discountDashboard.css";
 import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../layout/footer/footer";
 import CustomizedButton from "../../../components/Button/button";
-import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 import axios from "axios";
 import AddDiscount from "./Modal/Add Discount/addDiscounts";
 import { Modal } from "@mui/material";
 import CustomizedAlert from "../../../components/Alert/alert";
-import SearchBar from "../../../components/search bar/search bar";
 import PageLoader from "../../../components/Page Loader/pageLoader";
+import DynamicTable from "../../../components/Table/customizedTable2";
 
-const columns = [
-    { columnId: 'productId', label: 'Product Id', minWidth: 120, align: 'center' },
-    { columnId: 'productName', label: 'Product Name', minWidth: 200, align: 'center' },
-    { columnId: 'sellingPrice', label: 'Selling Price(\u20A8.)', minWidth: 120, align: 'center' },
-    { columnId: 'discountRate', label: 'Discount(%)', minWidth: 120, align: 'center' },
-    { columnId: 'startDate', label: 'Start Date', minWidth: 120, align: 'center' },
-    { columnId: 'endDate', label: 'End Date', minWidth: 120, align: 'center' },
-    { columnId: 'actions', label: '', minWidth: 170, align: 'center' },
-];
 
 function DiscountDashboard() {
     const [visible, setVisible] = useState(false);
     const [discount, setDiscount] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
+
+    const columns = useMemo(() => [
+        { accessorKey: 'productId', header: 'Product Id', size: 20, align: 'center' },
+        { accessorKey: 'productName', header: 'Product Name', size: 120, align: 'center' },
+        { accessorKey: 'sellingPrice', header: 'Selling Price(₹)', size: 50, align: 'center' },
+        { accessorKey: 'discountRate', header: 'Discount(%)', size: 20, align: 'center' },
+        { accessorKey: 'startDate', header: 'Start Date', size: 75, align: 'center' },
+        { accessorKey: 'endDate', header: 'End Date', size: 75, align: 'center' }
+    ], []);
+
 
     const handleClickSuccess = () => setOpenSuccess(true);
     const handleClickError = () => setOpenError(true);
@@ -76,25 +75,55 @@ function DiscountDashboard() {
         }
     };
 
-    const createCancelButton = (id) => (
-        <CustomizedButton
-            onClick={() => handleButtonClick(id)}
-            hoverBackgroundColor="#f11717"
-            style={{
-                color: '#ffffff',
-                backgroundColor: '#960505',
-                width: '8.5em',
-                height: '2.5em',
-                fontSize: '0.8em',
-                padding: '0.5em 0.625em',
-                borderRadius: '0.625em',
-                fontWeight: '550',
-                border: 'none',
-                marginTop: '0.625em',
-            }}>
-            Cancel
-        </CustomizedButton>
-    );
+    const createCancelButton = (id) => {
+        const buttonStyle = {
+            color: '#ffffff',
+            backgroundColor: '#960505',
+            width: '7.5em',
+            height: '2.5em',
+            fontSize: '0.75em',
+            padding: '0.5em 0.625em',
+            borderRadius: '0.625em',
+            fontWeight: '550',
+            border: 'none',
+            marginTop: '0.625em',
+            cursor: 'pointer',
+        };
+
+        return (
+            <CustomizedButton
+                onClick={() => handleButtonClick(id)}
+                hoverBackgroundColor="#f11717"
+                style={buttonStyle}
+            >
+                Cancel
+            </CustomizedButton>
+        );
+    };
+
+    const createAddDiscountButton = () => {
+        const buttonStyle = {
+            backgroundColor: '#242F9B',
+            border: '1px solid #242F9B',
+            width: '9.5em',
+            height: '2.5em',
+            fontSize: '0.75em',
+            padding: '0.5em 0.625em',
+            borderRadius: '0.35em',
+            fontWeight: '550',
+        };
+
+        return (
+            <CustomizedButton
+                onClick={() => setVisible(true)}
+                hoverBackgroundColor="#2d3ed2"
+                style={buttonStyle}
+            >
+                Add Discount
+            </CustomizedButton>
+        );
+    };
+
 
     const handleDiscountAdded = (updatedDiscounts) => setDiscount(updatedDiscounts);
 
@@ -126,28 +155,20 @@ function DiscountDashboard() {
             <div className="discountDashboardOuter">
                 <div className="discountDashboardInner">
                     <div className="searchContainer">
-                        <SearchBar label="Search Products" onKeyPress={fetchDiscounts} />
-                        <CustomizedButton
-                            onClick={() => setVisible(true)}
-                            hoverBackgroundColor="#2d3ed2"
-                            style={{
-                                backgroundColor: '#242F9B',
-                                border: '1px solid #242F9B',
-                                width: '9.5em',
-                                height: '2.5em',
-                                fontSize: '0.75em',
-                                padding: '0.5em 0.625em',
-                                borderRadius: '0.35em',
-                                fontWeight: '550',
-                            }}>
-                            Add Discount
-                        </CustomizedButton>
+                        <h3>Discounts</h3>
                     </div>
                     <div className="discount-dashboard">
                         {isLoading ? (
                             <PageLoader />
                         ) : (
-                            <CustomizedTable columns={columns} rows={rows} style={{ width: '85%' }} />
+
+                            <DynamicTable
+                                columns={columns}
+                                data={discount}
+                                createActions={createCancelButton}
+                                renderToolbarItems={createAddDiscountButton}
+                                includeProfile={false}
+                            />
                         )}
                     </div>
                 </div>

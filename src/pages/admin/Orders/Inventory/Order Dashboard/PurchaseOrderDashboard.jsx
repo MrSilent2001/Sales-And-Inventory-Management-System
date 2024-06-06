@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import {
     Box,
     Card,
@@ -15,9 +15,11 @@ import ViewOrder from "../../../Orders/Inventory/Modals/View Order/viewOrder";
 import CustomizedButton from "../../../../../components/Button/button";
 import SearchBar from "../../../../../components/search bar/search bar";
 import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
+import PageLoader from "../../../../../components/Page Loader/pageLoader";
+import DynamicTable from "../../../../../components/Table/customizedTable2";
 
 const PurchaseOrderDashboard = () => {
-
+    const [isLoading, setIsLoading] = useState(false);
     const [placeOrderVisible, setPlaceOrderVisible] = useState(false);
     const [viewOrderVisible, setViewOrderVisible] = useState(false);
     const [currentMonth, setCurrentMonth] = useState('');
@@ -27,9 +29,23 @@ const PurchaseOrderDashboard = () => {
     const [completedOrders, setCompletedOrders] = useState(0);
     const [selectedOrder, setSelectedOrder] = useState(null);
 
+    const columns = useMemo(() => [
+        { accessorKey: 'supplier', header: 'Supplier ID', size: 70, align: 'center' },
+        { accessorKey: 'Address', header: 'Address', size: 150, align: 'center' },
+        { accessorKey: 'mail', header: 'Email', size: 120, align: 'center' },
+        { accessorKey: 'contact_number', header: 'Contact', size: 100, align: 'center' }
+    ], []);
+
+
+    const token = localStorage.getItem('accessToken');
+
     const fetchItems = async (query) => {
         try {
-            const response = await axios.get(`http://localhost:9000/purchaseOrder/search?keyword=${query}`);
+            const response = await axios.get(`http://localhost:9000/purchaseOrder/search?keyword=${query}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setPurchasedOrders(response.data);
         } catch (error) {
             console.error('Error fetching Items:', error);
@@ -39,7 +55,11 @@ const PurchaseOrderDashboard = () => {
     useEffect(() => {
         const fetchPurchasedOrders = async () => {
             try {
-                const response = await axios.get('http://localhost:9000/purchaseOrder/getAll');
+                const response = await axios.get('http://localhost:9000/purchaseOrder/getAll', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 setPurchasedOrders(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -49,7 +69,11 @@ const PurchaseOrderDashboard = () => {
 
         const fetchCurrentMonthName = async () => {
             try {
-                const response = await axios.get('http://localhost:9000/purchaseOrder/getCurrentMonthName');
+                const response = await axios.get('http://localhost:9000/purchaseOrder/getCurrentMonthName', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 setCurrentMonth(response.data);
             } catch (error) {
                 console.error('Error fetching current month name:', error);
@@ -58,9 +82,21 @@ const PurchaseOrderDashboard = () => {
 
         const fetchOrderCounts = async () => {
             try {
-                const totalResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/total');
-                const inProgressResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/pending');
-                const completedResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/completed');
+                const totalResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/total', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const inProgressResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/pending', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const completedResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/completed', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
 
                 setTotalOrders(totalResponse.data);
                 setInProgressOrders(inProgressResponse.data);
@@ -77,7 +113,11 @@ const PurchaseOrderDashboard = () => {
 
     const handleCancelOrder = async (orderId) => {
         try {
-            await axios.delete(`http://localhost:9000/purchaseOrder/delete/${orderId}`);
+            await axios.delete(`http://localhost:9000/purchaseOrder/delete/${orderId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setPurchasedOrders(prevOrders => prevOrders.filter(order => order.id !== orderId));
         } catch (error) {
             console.error('Error deleting order:', error);
@@ -89,13 +129,43 @@ const PurchaseOrderDashboard = () => {
         setViewOrderVisible(true);
     };
 
-    const columns = [
-        { columnId: 'supplier', label: 'Supplier ID', minWidth: 70, align: 'center' },
-        { columnId: 'Address', label: 'Address', minWidth: 150, align: 'center' },
-        { columnId: 'mail', label: 'Email', minWidth: 120, align: 'center' },
-        { columnId: 'contact_number', label: 'Contact', minWidth: 100, align: 'center' },
-        { columnId: 'actions', label: '', minWidth: 200, align: 'center' }
-    ];
+    const createActions = (row) => {
+        const buttonStyle = (backgroundColor) => ({
+            color: 'white',
+            backgroundColor,
+            width: '7em',
+            height: '2.75em',
+            fontSize: '0.75em',
+            fontFamily: 'inter',
+            padding: '0.5em 0.625em',
+            borderRadius: '0.35em',
+            fontWeight: '550',
+            marginTop: '0.625em',
+            textTransform: 'none',
+            textAlign: 'center',
+        });
+
+        return (
+            <div style={{ display: 'flex' }}>
+                <CustomizedButton
+                    onClick={() => handleViewOrder(row)}
+                    hoverBackgroundColor="#242F9B"
+                    style={{ ...buttonStyle('#242F9B'), marginRight: '2.5em', marginLeft: '2.5em' }}
+                >
+                    View
+                </CustomizedButton>
+
+                <CustomizedButton
+                    onClick={() => handleCancelOrder(row.id)}
+                    hoverBackgroundColor="#960505"
+                    style={{ ...buttonStyle('#960505'), marginRight: '1.5em' }}
+                >
+                    Cancel
+                </CustomizedButton>
+            </div>
+        );
+    };
+
 
     const mappedData = purchasedOrders.map(row => ({
         id: row.id,
@@ -103,53 +173,7 @@ const PurchaseOrderDashboard = () => {
         Address: row.Address,
         mail: row.mail,
         contact_number: row.contact_number,
-
-        actions: (
-            <div style={{ display: 'flex' }}>
-                <CustomizedButton
-                    onClick={() => handleViewOrder(row)}
-                    hoverBackgroundColor="#242F9B"
-                    style={{
-                        color: 'white',
-                        backgroundColor: '#242F9B',
-                        width: '7.5em',
-                        height: '2.75em',
-                        fontSize: '0.95em',
-                        fontFamily: 'inter',
-                        padding: '0.5em 0.625em',
-                        borderRadius: '0.35em',
-                        fontWeight: '550',
-                        marginTop: '0.625em',
-                        marginRight: '2.5em',
-                        marginLeft: '2.5em',
-                        textTransform: 'none',
-                        textAlign: 'center',
-                    }}>
-                    View
-                </CustomizedButton>
-
-                <CustomizedButton
-                    onClick={() => handleCancelOrder(row.id)}
-                    hoverBackgroundColor="#960505"
-                    style={{
-                        color: 'white',
-                        backgroundColor: '#960505',
-                        width: '7.5em',
-                        height: '2.75em',
-                        fontSize: '0.95em',
-                        fontFamily: 'inter',
-                        padding: '0.5em 0.625em',
-                        borderRadius: '0.35em',
-                        fontWeight: '550',
-                        marginTop: '0.625em',
-                        marginRight: '1.5em',
-                        textTransform: 'none',
-                        textAlign: 'center',
-                    }}>
-                    Cancel
-                </CustomizedButton>
-            </div>
-        )
+        actions: createActions
     }));
 
     return (
@@ -188,17 +212,23 @@ const PurchaseOrderDashboard = () => {
                 {/* Main Content */}
                 <Container maxWidth={false} sx={{ bgcolor: '#DBDFFD', height: 'auto' }}>
                     <Box sx={{ display: 'flex', justifyContent: 'flex-start', paddingTop: 7, paddingBottom: 7 }}>
-                        <SearchBar
-                            label="Search Orders"
-                            onKeyPress={fetchItems}
-                        />
+                        {/*<SearchBar*/}
+                        {/*    label="Search Orders"*/}
+                        {/*    onKeyPress={fetchItems}*/}
+                        {/*/>*/}
                     </Box>
-                    <div style={{ overflow: 'auto', maxHeight: '50vh' }}>
-                        <CustomizedTable
-                            style={{ width: '100%', overflowY: 'auto' }}
-                            columns={columns}
-                            rows={mappedData}
-                        />
+                    <div >
+                        {isLoading ? (
+                            <PageLoader />
+                        ) : (
+
+                            <DynamicTable
+                                columns={columns}
+                                data={mappedData}
+                                createActions={createActions}
+                                includeProfile={false}
+                            />
+                        )}
                     </div>
 
                     <Modal open={viewOrderVisible}>

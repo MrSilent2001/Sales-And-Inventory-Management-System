@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import Footer from "../../../layout/footer/footer";
 import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 import axios from "axios";
@@ -6,21 +6,29 @@ import "./paymentDashboard.css";
 import SearchBar from "../../../components/search bar/search bar";
 import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
 import PageLoader from "../../../components/Page Loader/pageLoader";
+import DynamicTable from "../../../components/Table/customizedTable2";
 
-const columns = [
-    { columnId: 'id', label: 'Id', minWidth: 100, align: 'center' },
-    { columnId: 'customerName', label: 'Customer Name', minWidth: 100, align: 'center' },
-    { columnId: 'contactNo', label: 'Contact No.', minWidth: 170, align: 'center' },
-    { columnId: 'customerEmail', label: 'E-mail', minWidth: 170, align: 'center' },
-    { columnId: 'totalAmount', label: 'Total Amount', minWidth: 170, align: 'center'}
-];
+// const columns = [
+//     { columnId: 'id', label: 'Id', minWidth: 100, align: 'center' },
+//     { columnId: 'customerName', label: 'Customer Name', minWidth: 100, align: 'center' },
+//     { columnId: 'contactNo', label: 'Contact No.', minWidth: 170, align: 'center' },
+//     { columnId: 'customerEmail', label: 'E-mail', minWidth: 170, align: 'center' },
+//     { columnId: 'totalAmount', label: 'Total Amount', minWidth: 170, align: 'center'}
+// ];
 
 function PaymentDashboard() {
     const [visible, setVisible] = useState(false);
     const [payments, setPayments] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-
     const [openError, setOpenError] = useState(false);
+
+    const columns = useMemo(() => [
+        { accessorKey: 'id', header: 'Id', size: 75 },
+        { accessorKey: 'customerName', header: 'Customer Name', size: 75  },
+        { accessorKey: 'contactNo', header: 'Contact', size: 75  },
+        { accessorKey: 'customerEmail', header: 'E-mail', size: 75  },
+        { accessorKey: 'totalAmount', header: 'Total Amount', size: 75  }
+    ], []);
 
     const handleClickError = () => {
         setOpenError(true);
@@ -78,21 +86,18 @@ function PaymentDashboard() {
                 <div className="paymentDashboardInner">
                     <div className="payment-title">
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-                            <h2>Payments</h2>
-                            <SearchBar
-                                label="Search Payments"
-                                onKeyPress={fetchSearchedPayments}
-                            />
+                            <h3>Payments</h3>
                         </div>
                     </div>
                     <div className="paymentDashboard" >
                         {isLoading ? (
                             <PageLoader />
                         ) : (
-                            <CustomizedTable
+
+                            <DynamicTable
                                 columns={columns}
-                                rows={rows}
-                                style={{ width: '100%' }}
+                                data={payments}
+                                includeProfile={true}
                             />
                         )}
                     </div>
