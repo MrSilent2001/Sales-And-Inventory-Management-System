@@ -8,6 +8,7 @@ import BasicTextField from "../../../components/Form Inputs/textfield";
 import { Navigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import FileUpload from "../../../components/Form Inputs/fileUpload";
+import {uploadFileToBlob} from "../../Supplier/Inventory Dashboard/productBlobStorage";
 
 function UpdateCustomers() {
     const [customer, setCustomer] = useState({});
@@ -17,10 +18,12 @@ function UpdateCustomers() {
         address: '',
         contactNo: '',
         email: '',
+        profilePicture: ''
     });
 
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
+    const [customerImage, setCustomerImage] = useState(null);
 
     const handleClickSuccess = () => {
         console.log("Success message should be displayed.");
@@ -41,6 +44,14 @@ function UpdateCustomers() {
     const handleNavigate = () => {
         setNavigate(true);
     };
+
+    const handleFileChange = (file) => {
+        setCustomerImage(file);
+        setFormData(prevState => ({
+            ...prevState,
+            profilePicture: file
+        }));
+    }
 
     const id = parseInt(localStorage.getItem('id'));
     const token = localStorage.getItem('accessToken');
@@ -70,7 +81,8 @@ function UpdateCustomers() {
                 username: customer.username || '',
                 address: customer.address || '',
                 contactNo: customer.contactNo || '',
-                email: customer.email || ''
+                email: customer.email || '',
+                profilePicture: customer.profilePicture
             });
         }
     }, [customer]);
@@ -78,6 +90,10 @@ function UpdateCustomers() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            let imageUrl = '';
+            if(customerImage){
+                imageUrl = await uploadFileToBlob(customerImage);
+            }
             await axios.put(`http://localhost:9000/customer/update/${id}`, {
                 username: formData.username,
                 address: formData.address,
@@ -115,7 +131,10 @@ function UpdateCustomers() {
                             <Avatar src={formData.profilePicture || "/broken-image.jpg"}
                                     sx={{ width: 230, height: 230, border: 2, borderRadius: 2, marginTop: '-0.8em' }} />
                             <div className='uploadButton'>
-                                <FileUpload style={{ width: "15em", top: "2em" }} />
+                                <FileUpload
+                                    style={{ width: "15em", top: "2em" }}
+                                    onChange={handleFileChange}
+                                />
                             </div>
                         </div>
 

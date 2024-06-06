@@ -26,7 +26,7 @@ function UpdateSupplier(props) {
 
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
-    const [supplierImages, setSupplierImages] = useState(null);
+    const [supplierImage, setSupplierImage] = useState(null);
 
     const handleClickSuccess = () => {
         console.log("Success message should be displayed.");
@@ -45,7 +45,7 @@ function UpdateSupplier(props) {
     };
 
     const handleFileChange = (file) => {
-        setSupplierImages(file);
+        setSupplierImage(file);
         setFormData(prevState => ({
             ...prevState,
             profilePicture: file
@@ -91,8 +91,8 @@ function UpdateSupplier(props) {
         e.preventDefault();
         try {
             let imageUrl = '';
-            if(supplierImages){
-                imageUrl = await uploadFileToBlob(supplierImages);
+            if(supplierImage){
+                imageUrl = await uploadFileToBlob(supplierImage);
 
             }
             await axios.put(`http://localhost:9000/supplier/update/${id}`, {

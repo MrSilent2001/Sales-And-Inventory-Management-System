@@ -88,7 +88,9 @@ function CustomerProfile() {
                     <div className="customer-profile">
 
                         <div className="avatar">
-                            <Avatar src="/broken-image.jpg" sx={{ width: 230, height: 230, border: 2, borderRadius: 3 }} />
+                            <Avatar src={customer.profilePicture}
+                                    sx={{ width: 230, height: 230, border: 2, borderRadius: 3 }}
+                            />
                             <h2 className='profileName'>{customer.customerName}</h2>
                         </div>
 
