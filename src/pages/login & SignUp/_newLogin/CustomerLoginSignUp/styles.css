@@ -1,4 +1,4 @@
-.supplier-login-signup-page-container {
+.customer-login-signup-page-container {
     background: #ffffff;
     display: flex;
     justify-content: center;
@@ -7,10 +7,4 @@
     font-family: "Montserrat", sans-serif;
     height: 100vh;
     margin: -20px 0 50px;
-}
-
-.error-message {
-    color: red;
-    font-size: 0.875em;
-    margin-top: 0.25em;
 }

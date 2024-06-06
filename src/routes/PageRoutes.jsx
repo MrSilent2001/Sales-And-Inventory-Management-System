@@ -47,6 +47,7 @@ import GetStartedPage from "../pages/login & SignUp/_newLogin/LandingPage/landin
 import CreatAccountSelectionPage from "../pages/login & SignUp/_newLogin/CreatAccountSelectionPage/CreatAccountSelectionPage";
 import LoginSelectionPage from "../pages/login & SignUp/_newLogin/LoginSelectionPage/LoginSelectionPage";
 import {SupplierLoginSignUp} from "../pages/login & SignUp/_newLogin/SupplierLoginSignUp/SupplierLoginSignUp";
+import {CustomerLoginSignUp} from "../pages/login & SignUp/_newLogin/CustomerLoginSignUp/CustomerLoginSignUp";
 
 export function PageRouting() {
     return (
@@ -57,8 +58,11 @@ export function PageRouting() {
                 <Route path="/" element={<GetStartedPage/>}/>
                 <Route path="/create" element={<CreatAccountSelectionPage/>}/>
                 <Route path="/loginSelect" element={<LoginSelectionPage/>}/>
-                <Route path="/supplierloginsignup/:mode" element={<SupplierLoginSignUp />} /> {/*here mode can be login or signup ex: supplierloginsignup/login*/}
-                <Route path="/supplierloginsignup" element={<SupplierLoginSignUp />} />
+                <Route path="/supplierLoginSignup/:mode" element={<SupplierLoginSignUp />} /> {/*here mode can be login or signup ex: supplierloginsignup/login*/}
+                <Route path="/supplierLoginSignup" element={<SupplierLoginSignUp />} />
+                <Route path="/customerLoginSignup/:mode" element={<CustomerLoginSignUp />} />
+                <Route path="/customerLoginSignup" element={<CustomerLoginSignUp />} />
+
                 <Route path="/test" element={<CustomizedTable2/>}/>
 
 

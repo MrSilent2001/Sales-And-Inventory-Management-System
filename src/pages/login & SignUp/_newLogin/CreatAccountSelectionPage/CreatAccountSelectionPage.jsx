@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Container, Card, CardContent, Typography, Button, Grid, Box, Paper } from '@mui/material';
+import { Container, Card, CardContent, Typography, Button, Grid, Box} from '@mui/material';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import TreadeasyLogo from '../../../../assets/images/logo.png';
+import TradeasyLogo from '../../../../assets/images/logo.png';
 import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme({
@@ -57,22 +57,22 @@ const CreatAccountSelectionPage = () => {
 
     const handleCreateAccount = () => {
         if (selectedCard === 'supplier') {
-            navigate('/supplierloginsignup/signup');
+            navigate('/supplierLoginSignup/signup');
         } else if (selectedCard === 'customer') {
-            alert('Redirect to customer');
+            navigate('/customerLoginSignup/signup');
         }
     };
 
     return (
         <ThemeProvider theme={theme}>
             {/*<LoginAppBar/>*/}
-            <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: 'background.default' }}>
+            <Box sx={{ display: 'flex', minHeight: '100vh', bgColor: 'background.default' }}>
                 <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', px: 2 }}>
                     <Container maxWidth="sm" sx={{ backgroundColor: '#fff', borderRadius: 4, py: 5 }}>
                         <Box textAlign="center" mb={5}>
-                            <img src={TreadeasyLogo} alt="Logo" style={{ marginBottom: 20, height: 100 }} />
+                            <img src={TradeasyLogo} alt="Logo" style={{ marginBottom: 20, height: 100 }} />
                             <Typography variant="h4" component="h1" gutterBottom>
-                                How do you want to use Treadeasy?
+                                How do you want to use Tradeasy?
                             </Typography>
                             <Typography variant="body2" gutterBottom>
                                 We’ll personalize your setup experience accordingly.
