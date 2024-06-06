@@ -65,11 +65,11 @@ const LoginSelectionPage = () => {
                             <Typography variant="body1" paragraph>
                                 Welcome, suppliers! Start selling your products on our platform and reach millions of customers worldwide.
                             </Typography>
-                            <Button variant="contained" color="secondary" size="large" component={Link} to="/supplierloginsignup/login" style={{ marginBottom: '16px' }}>
+                            <Button variant="contained" color="secondary" size="large" component={Link} to="/supplierLoginSignup/login" style={{ marginBottom: '16px' }}>
                                 Login
                             </Button>
                             <Typography variant="body2">
-                                Don't have an account? <a href="/supplierloginsignup/signup" style={{ color: '#ffffff', textDecoration: 'underline' }}>Sign Up</a>.
+                                Don't have an account? <a href="/supplierLoginSignup/signup" style={{ color: '#ffffff', textDecoration: 'underline' }}>Sign Up</a>.
                             </Typography>
                         </Box>
                     </Grid>
@@ -81,11 +81,11 @@ const LoginSelectionPage = () => {
                             <Typography variant="body1" paragraph>
                                 Welcome, customers! Explore our vast selection of products, enjoy exclusive deals, and shop with confidence..
                             </Typography>
-                            <Button variant="outlined" color="primary" size="large" style={{ marginBottom: '16px' }}>
+                            <Button variant="outlined" color="primary" size="large" component={Link} to="/customerLoginSignup/login" style={{ marginBottom: '16px' }}>
                                 Login
                             </Button>
                             <Typography variant="body2">
-                                Don't have an account? <a href="/sign-up" style={{ color: '#00796b', textDecoration: 'underline' }}>Sign up</a>.
+                                Don't have an account? <a href="/customerLoginSignup/signup" style={{ color: '#00796b', textDecoration: 'underline' }}>Sign up</a>.
                             </Typography>
                         </Box>
                     </Grid>

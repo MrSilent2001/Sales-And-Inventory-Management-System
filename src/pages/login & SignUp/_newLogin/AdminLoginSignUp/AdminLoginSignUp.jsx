@@ -25,7 +25,7 @@ const signUpSchema = Yup.object().shape({
 });
 
 export function CustomerLoginSignUp() {
-    const { customerLogin } = useAuth();
+    const { adminLogin } = useAuth();
     const { mode } = useParams();  // This will capture the 'mode' parameter from the URL
     const defaultSignIn = mode === 'signup' ? false : true; // Default to true if mode is not 'signup'
     const [signIn, toggle] = React.useState(defaultSignIn);
@@ -55,7 +55,6 @@ export function CustomerLoginSignUp() {
             username: '',
             email: '',
             contactNo: '',
-            address: '',
             password: '',
             confirmPassword: ''
         },
@@ -67,8 +66,7 @@ export function CustomerLoginSignUp() {
                     password: values.password,
                     email: values.email,
                     contactNo: values.contactNo,
-                    address: values.address,
-                    role: 'customer'
+                    role: 'admin'
                 });
                 resetForm();
             } catch (error) {
@@ -90,7 +88,7 @@ export function CustomerLoginSignUp() {
             <Components.Container>
                 <Components.SignUpContainer signingIn={signIn}>
                     <Components.Form onSubmit={signUpFormik.handleSubmit}>
-                        <Components.Title>Create Supplier Account</Components.Title>
+                        <Components.Title>Create Admin Account</Components.Title>
                         <Components.Input
                             type="text"
                             placeholder="Username"
@@ -116,14 +114,6 @@ export function CustomerLoginSignUp() {
                             <div className="error-message">{signUpFormik.errors.contactNo}</div>
                         ) : null}
                         <Components.Input
-                            type="text"
-                            placeholder="Address"
-                            {...signUpFormik.getFieldProps("address")}
-                        />
-                        {signUpFormik.touched.address && signUpFormik.errors.address ? (
-                            <div className="error-message">{signUpFormik.errors.address}</div>
-                        ) : null}
-                        <Components.Input
                             type="password"
                             placeholder="Password"
                             {...signUpFormik.getFieldProps("password")}
@@ -146,7 +136,7 @@ export function CustomerLoginSignUp() {
                 </Components.SignUpContainer>
                 <Components.SignInContainer signingIn={signIn}>
                     <Components.Form onSubmit={loginFormik.handleSubmit}>
-                        <Components.Title>Sign in as Supplier</Components.Title>
+                        <Components.Title>Sign in as Admin</Components.Title>
                         <Components.Input
                             type="text"
                             placeholder="Username"

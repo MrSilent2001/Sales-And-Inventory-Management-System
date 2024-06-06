@@ -1,6 +1,6 @@
 import React from "react";
-import * as Components from "./Component";
-import "./styles.css";
+import * as Components from "../Component";
+import "../styles.css";
 import LoginAppBar from "../LoginAppbar/LoginAppBar";
 import {useNavigate, useParams} from "react-router-dom";
 import {useAuth} from "../../../../context/AuthContext";
