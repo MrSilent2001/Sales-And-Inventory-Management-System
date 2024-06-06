@@ -9,6 +9,7 @@ import FileUpload from "../../../components/Form Inputs/fileUpload";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import {uploadFileToBlob} from "../Inventory Dashboard/productBlobStorage";
 
 function UpdateSupplier(props) {
     const [supplier, setSupplier] = useState({});
@@ -19,11 +20,13 @@ function UpdateSupplier(props) {
         contactNo: '',
         email: '',
         paymentMethod: '',
-        paymentDetails: ''
+        paymentDetails: '',
+        profilePicture: ''
     });
 
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
+    const [supplierImages, setSupplierImages] = useState(null);
 
     const handleClickSuccess = () => {
         console.log("Success message should be displayed.");
@@ -41,6 +44,14 @@ function UpdateSupplier(props) {
         }));
     };
 
+    const handleFileChange = (file) => {
+        setSupplierImages(file);
+        setFormData(prevState => ({
+            ...prevState,
+            profilePicture: file
+        }));
+    }
+
     const id = parseInt(localStorage.getItem('id'));
     const token = localStorage.getItem('accessToken');
 
@@ -56,6 +67,7 @@ function UpdateSupplier(props) {
                     ...prevSupplier,
                     ...response.data
                 }));
+                console.log(supplier);
             } catch (error) {
                 console.error('Error fetching users:', error);
             }
@@ -70,13 +82,19 @@ function UpdateSupplier(props) {
             contactNo: supplier.contactNo || '',
             email: supplier.email || '',
             paymentMethod: supplier.paymentMethod || '',
-            paymentDetails: supplier.paymentDetails || ''
+            paymentDetails: supplier.paymentDetails || '',
+            profilePicture: supplier.profilePicture
         });
     }, [supplier]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            let imageUrl = '';
+            if(supplierImages){
+                imageUrl = await uploadFileToBlob(supplierImages);
+
+            }
             await axios.put(`http://localhost:9000/supplier/update/${id}`, {
                 username: formData.username,
                 email: formData.email,
@@ -84,7 +102,7 @@ function UpdateSupplier(props) {
                 contactNo: formData.contactNo,
                 paymentMethod: formData.paymentMethod,
                 paymentDetails: formData.paymentDetails,
-                profilePicture: formData.profilePicture
+                profilePicture: imageUrl
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -115,7 +133,10 @@ function UpdateSupplier(props) {
                             <Avatar src={formData.profilePicture || "/broken-image.jpg"}
                                     sx={{ width: 230, height: 230, border: 2, borderRadius: 2, marginTop: '-0.8em' }} />
                             <div className='uploadButton'>
-                                <FileUpload style={{ width: "15em", top: "2em" }} />
+                                <FileUpload
+                                    style={{ width: "15em", top: "2em" }}
+                                    onChange={handleFileChange}
+                                />
                             </div>
                         </div>
                     </div>

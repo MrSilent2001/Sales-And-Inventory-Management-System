@@ -87,7 +87,7 @@ function SupplierProfile() {
                 <div className="SupplierProfileInner">
                     <div className="SupplierProfile">
                         <div className="profileAvatar">
-                            <Avatar src="/broken-image.jpg"
+                            <Avatar src={supplier.profilePicture}
                                     sx={{width: 230, height: 230, border: 2, borderRadius: 2, marginTop: '-0.8em'}}
                             />
                             <h3>{supplier.username}</h3>
