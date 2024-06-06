@@ -1,6 +1,4 @@
-import Login from "../pages/login & SignUp/login/login";
 import {Route, Routes} from "react-router-dom";
-import Signup from "../pages/login & SignUp/SignUp/signup";
 import CustomerDashboard from "../pages/admin/Customer Dashboard/customerDashboard";
 import CustomerOrderHistory from "../pages/Customer/Order History/customerOrderHistory";
 import View from "../pages/admin/Customer Dashboard/view";
@@ -37,7 +35,6 @@ import InventoryPayments from "../pages/admin/Payment Dashboard/Inventory/invent
 import ProductDetail from "../pages/Customer/Product Detail/productDetail";
 import AdminDashboard from "../pages/admin/Admin Dashboard/AdminDashboard";
 import UpdateCustomers from "../pages/Customer/Update Customers/updateCustomers";
-import AdminLogin from "../pages/login & SignUp/login/adminLogin";
 import ProtectedRoute from "./protectedRoutes";
 import Redirect from "../pages/Customer/Cart/redirect";
 import SupplierHome from "../pages/Supplier/Home/SupplierHomePage";
@@ -56,7 +53,8 @@ export function PageRouting() {
         <div className="App">
             <Routes>
 
-                {/*<Route path="/" element={<Login/>}/>*/}
+{/*===================================================Public Routes=================================================================*/}
+
                 <Route path="/" element={<GetStartedPage/>}/>
                 <Route path="/admin" element={<AdminLandingPage/>}/>
                 <Route path="/create" element={<CreatAccountSelectionPage/>}/>
@@ -69,14 +67,6 @@ export function PageRouting() {
                 <Route path="/adminLoginSignup" element={<AdminLoginSignUp />} />
 
                 <Route path="/test" element={<CustomizedTable2/>}/>
-
-
-{/*===================================================Public Routes=================================================================*/}
-
-                {/*<Route path="/login" element={<Login/>}/>*/}
-                {/*<Route path="/signup" element={<Signup/>}/>*/}
-
-                {/*<Route path="/admin" element={<AdminLogin/>}/>*/}
 
                 {/*Payment Gateway*/}
                 <Route path="/success" element={<Success/>}/>
