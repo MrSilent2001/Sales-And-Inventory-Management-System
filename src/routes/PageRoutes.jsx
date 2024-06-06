@@ -49,6 +49,7 @@ import CreatAccountSelectionPage from "../pages/login & SignUp/_newLogin/CreatAc
 import LoginSelectionPage from "../pages/login & SignUp/_newLogin/LoginSelectionPage/LoginSelectionPage";
 import {SupplierLoginSignUp} from "../pages/login & SignUp/_newLogin/SupplierLoginSignUp/SupplierLoginSignUp";
 import {CustomerLoginSignUp} from "../pages/login & SignUp/_newLogin/CustomerLoginSignUp/CustomerLoginSignUp";
+import {AdminLoginSignUp} from "../pages/login & SignUp/_newLogin/AdminLoginSignUp/AdminLoginSignUp";
 
 export function PageRouting() {
     return (
@@ -64,8 +65,8 @@ export function PageRouting() {
                 <Route path="/supplierLoginSignup" element={<SupplierLoginSignUp />} />
                 <Route path="/customerLoginSignup/:mode" element={<CustomerLoginSignUp />} />
                 <Route path="/customerLoginSignup" element={<CustomerLoginSignUp />} />
-                <Route path="/adminLoginSignup/:mode" element={<CustomerLoginSignUp />} />
-                <Route path="/adminLoginSignup" element={<CustomerLoginSignUp />} />
+                <Route path="/adminLoginSignup/:mode" element={<AdminLoginSignUp />} />
+                <Route path="/adminLoginSignup" element={<AdminLoginSignUp />} />
 
                 <Route path="/test" element={<CustomizedTable2/>}/>
 

@@ -85,12 +85,12 @@ export function CustomerLoginSignUp() {
     return (
         <>
         <LoginAppBar/>
-        <div className="customer-login-signup-page-container">
+        <div className="login-signup-page-container">
 
             <Components.Container>
                 <Components.SignUpContainer signingIn={signIn}>
                     <Components.Form onSubmit={signUpFormik.handleSubmit}>
-                        <Components.Title>Create Supplier Account</Components.Title>
+                        <Components.Title>Create Customer Account</Components.Title>
                         <Components.Input
                             type="text"
                             placeholder="Username"
@@ -146,7 +146,7 @@ export function CustomerLoginSignUp() {
                 </Components.SignUpContainer>
                 <Components.SignInContainer signingIn={signIn}>
                     <Components.Form onSubmit={loginFormik.handleSubmit}>
-                        <Components.Title>Sign in as Supplier</Components.Title>
+                        <Components.Title>Sign in as Customer</Components.Title>
                         <Components.Input
                             type="text"
                             placeholder="Username"

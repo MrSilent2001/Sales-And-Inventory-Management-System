@@ -24,7 +24,7 @@ const signUpSchema = Yup.object().shape({
         .required("Confirm password is required"),
 });
 
-export function CustomerLoginSignUp() {
+export function AdminLoginSignUp() {
     const { adminLogin } = useAuth();
     const { mode } = useParams();  // This will capture the 'mode' parameter from the URL
     const defaultSignIn = mode === 'signup' ? false : true; // Default to true if mode is not 'signup'
@@ -40,8 +40,8 @@ export function CustomerLoginSignUp() {
         validationSchema: signInSchema,
         onSubmit: async (values, { resetForm }) => {
             try {
-                await customerLogin(values.username, values.password);
-                navigate("/customerHome");
+                await adminLogin(values.username, values.password);
+                navigate("/adminDashboard");
                 resetForm();
             } catch (error) {
                 console.error('Login error:', error);
@@ -83,7 +83,7 @@ export function CustomerLoginSignUp() {
     return (
         <>
         <LoginAppBar/>
-        <div className="customer-login-signup-page-container">
+        <div className="login-signup-page-container">
 
             <Components.Container>
                 <Components.SignUpContainer signingIn={signIn}>

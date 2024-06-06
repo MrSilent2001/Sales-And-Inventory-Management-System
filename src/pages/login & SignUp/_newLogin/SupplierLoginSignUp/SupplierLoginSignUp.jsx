@@ -92,7 +92,7 @@ export function SupplierLoginSignUp() {
     return (
         <>
             <LoginAppBar />
-            <div className="supplier-login-signup-page-container">
+            <div className="login-signup-page-container">
                 <Components.Container>
                     <Components.SignUpContainer signingIn={signIn}>
                         <Components.Form onSubmit={signUpFormik.handleSubmit}>
