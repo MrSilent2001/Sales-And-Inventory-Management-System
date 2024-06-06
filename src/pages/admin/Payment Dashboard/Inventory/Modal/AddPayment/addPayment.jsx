@@ -10,6 +10,7 @@ import CustomizedAlert from "../../../../../../components/Alert/alert";
 import dayjs from "dayjs";
 import CustomDatePicker from "../../../../../../components/DatePicker/datePicker";
 import FormControl from "@mui/material/FormControl";
+import {uploadFileToBlob} from "../../../../../Supplier/Inventory Dashboard/productBlobStorage";
 
 function AddPayment(props){
     const [formData, setFormData] = useState({
@@ -18,11 +19,12 @@ function AddPayment(props){
         date: '',
         itemsPurchased: '',
         billAmount: '',
-        receipt: null
+        receipt: ''
     });
 
     const [errors, setErrors] = useState({});
     const token = localStorage.getItem('accessToken');
+    const [supplierPaymentReceipt, setSupplierPaymentReceipt] = useState(null);
 
     const handleChange = (name, value) => {
         if (name === 'receipt') {
@@ -42,6 +44,7 @@ function AddPayment(props){
     };
 
     const handleFileUpload = (file) => {
+        setSupplierPaymentReceipt(file);
         setFormData(prevState => ({
             ...prevState,
             receipt: file
@@ -95,13 +98,17 @@ function AddPayment(props){
         setErrors(validationErrors);
         if(Object.keys(validationErrors).length === 0){
             try {
+                let imageUrl = '';
+                if(supplierPaymentReceipt){
+                    imageUrl = await uploadFileToBlob(supplierPaymentReceipt);
+                }
                 await axios.post('http://localhost:9000/payment/supplierPayment/create', {
                     supplierId: formData.supplierId,
                     supplierName: formData.supplierName,
                     date: formData.date,
                     itemsPurchased: formData.itemsPurchased,
                     billAmount: formData.billAmount,
-                    filePath: formData.receipt
+                    receipt: imageUrl
                 }, {
                     headers: {
                         Authorization: `Bearer ${token}`,
