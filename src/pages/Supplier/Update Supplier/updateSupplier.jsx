@@ -44,11 +44,12 @@ function UpdateSupplier(props) {
         }));
     };
 
-    const handleFileChange = (file) => {
+    const handleFileChange = async (file) => {
         setSupplierImage(file);
+        const imageUrl = await uploadFileToBlob(file);
         setFormData(prevState => ({
             ...prevState,
-            profilePicture: file
+            profilePicture: imageUrl
         }));
     }
 
@@ -83,14 +84,14 @@ function UpdateSupplier(props) {
             email: supplier.email || '',
             paymentMethod: supplier.paymentMethod || '',
             paymentDetails: supplier.paymentDetails || '',
-            profilePicture: supplier.profilePicture
+            profilePicture: supplier.profilePicture || ''
         });
     }, [supplier]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            let imageUrl = '';
+            let imageUrl = formData.profilePicture;
             if(supplierImage){
                 imageUrl = await uploadFileToBlob(supplierImage);
 
@@ -130,7 +131,7 @@ function UpdateSupplier(props) {
                 <div className="UpdateSupplierInner">
                     <div className="UpdateSupplierProfile">
                         <div className="updateAvatar">
-                            <Avatar src={formData.profilePicture || "/broken-image.jpg"}
+                            <Avatar src={formData.profilePicture}
                                     sx={{ width: 230, height: 230, border: 2, borderRadius: 2, marginTop: '-0.8em' }} />
                             <div className='uploadButton'>
                                 <FileUpload
