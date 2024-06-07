@@ -4,13 +4,14 @@ import CenteredModal from "../../../../../../components/Modal/modal";
 import BasicTextField from "../../../../../../components/Form Inputs/textfield";
 import CustomizedButton from "../../../../../../components/Button/button";
 import FileUpload from "../../../../../../components/Form Inputs/fileUpload";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import CustomizedAlert from "../../../../../../components/Alert/alert";
 import dayjs from "dayjs";
 import CustomDatePicker from "../../../../../../components/DatePicker/datePicker";
 import FormControl from "@mui/material/FormControl";
 import {uploadFileToBlob} from "../../../../../Supplier/Inventory Dashboard/productBlobStorage";
+import ComboBox from "../../../../../../components/Form Inputs/comboBox";
 
 function AddPayment(props){
     const [formData, setFormData] = useState({
@@ -25,6 +26,8 @@ function AddPayment(props){
     const [errors, setErrors] = useState({});
     const token = localStorage.getItem('accessToken');
     const [supplierPaymentReceipt, setSupplierPaymentReceipt] = useState(null);
+    const [supplierIds, setSupplierIds] = useState([]);
+    const [suppliers, setSuppliers] = useState({});
 
     const handleChange = (name, value) => {
         if (name === 'receipt') {
@@ -34,13 +37,19 @@ function AddPayment(props){
                 ...prevState,
                 [name]: value[0]
             }));
+        }else if(name === 'supplierId'){
+            const selectedSupplier = suppliers[value];
+            setFormData(prevState => ({
+                ...prevState,
+                supplierId: value,
+                supplierName: selectedSupplier ? selectedSupplier.supplierName : ''
+            }));
         } else {
             setFormData(prevState => ({
                 ...prevState,
                 [name]: value
             }));
         }
-        console.log(formData);
     };
 
     const handleFileUpload = (file) => {
@@ -69,6 +78,38 @@ function AddPayment(props){
     const handleCloseError = () => {
         setOpenError(false);
     };
+
+    useEffect(() => {
+        const fetchSupplierDetails = async () => {
+            try {
+                const response = await axios.get('http://localhost:9000/supplier/getAllSuppliers', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const supplierDetails = response.data;
+                console.log('Fetched supplier details:', supplierDetails);
+
+                const supplierIds = supplierDetails.map(supplier => ({ label: supplier.id.toString(), value: supplier.id }));
+                setSupplierIds(supplierIds);
+
+                // Store products details in state
+                const supplierMap = supplierDetails.reduce((acc, supplier) => {
+                    acc[supplier.id] = {
+                        supplierName: supplier.username
+                    };
+                    return acc;
+                }, {});
+                setSuppliers(supplierMap);
+                console.log('Products map:', supplierMap);
+
+            } catch (error) {
+                console.error('Error fetching product details:', error);
+            }
+        };
+        fetchSupplierDetails();
+    }, [token]);
+
 
     const handleSubmit = async (e) => {
         console.log(formData);
@@ -147,11 +188,13 @@ function AddPayment(props){
                                     <h5>Supplier Id:</h5>
                                 </div>
                                 <div className="addPaymentidInput">
-                                    <BasicTextField
-                                        name="supplierId"
-                                        type="text"
-                                        size='small'
+                                    <ComboBox
+                                        value={formData.supplierId}
                                         onChange={(e) => handleChange("supplierId", e.target.value)}
+                                        options={supplierIds}
+                                        style={{width: '17.25em', height: '2em', marginRight: '0.5em'}}
+                                        label="Category"
+                                        size="small"
                                     />
                                 </div>
                             </div>
@@ -166,7 +209,7 @@ function AddPayment(props){
                                         name="supplierName"
                                         type="text"
                                         size='small'
-                                        onChange={(e) => handleChange("supplierName", e.target.value)}
+                                        value={formData.supplierName}
                                     />
                                 </div>
                             </div>

@@ -1,20 +1,10 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import Footer from "../../../layout/footer/footer";
-import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 import axios from "axios";
 import "./paymentDashboard.css";
-import SearchBar from "../../../components/search bar/search bar";
 import SalesNavbar from "../../../layout/navbar/Sales navbar/sales navbar";
 import PageLoader from "../../../components/Page Loader/pageLoader";
 import DynamicTable from "../../../components/Table/customizedTable2";
-
-// const columns = [
-//     { columnId: 'id', label: 'Id', minWidth: 100, align: 'center' },
-//     { columnId: 'customerName', label: 'Customer Name', minWidth: 100, align: 'center' },
-//     { columnId: 'contactNo', label: 'Contact No.', minWidth: 170, align: 'center' },
-//     { columnId: 'customerEmail', label: 'E-mail', minWidth: 170, align: 'center' },
-//     { columnId: 'totalAmount', label: 'Total Amount', minWidth: 170, align: 'center'}
-// ];
 
 function PaymentDashboard() {
     const [visible, setVisible] = useState(false);
@@ -23,7 +13,6 @@ function PaymentDashboard() {
     const [openError, setOpenError] = useState(false);
 
     const columns = useMemo(() => [
-        { accessorKey: 'id', header: 'Id', size: 75 },
         { accessorKey: 'customerName', header: 'Customer Name', size: 75  },
         { accessorKey: 'contactNo', header: 'Contact', size: 75  },
         { accessorKey: 'customerEmail', header: 'E-mail', size: 75  },
@@ -97,7 +86,7 @@ function PaymentDashboard() {
                             <DynamicTable
                                 columns={columns}
                                 data={payments}
-                                includeProfile={true}
+                                includeProfile={false}
                             />
                         )}
                     </div>
