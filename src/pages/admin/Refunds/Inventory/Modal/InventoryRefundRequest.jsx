@@ -6,29 +6,29 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import {styled} from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
-import {Link} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { useState } from 'react';
 
 // Mock data for suppliers and items, replace with your actual data
 const suppliers = [
-    {code: 'S0001', name: 'Supplier 1'},
-    {code: 'S0002', name: 'Supplier 2'},
+    { code: 'S0001', name: 'Supplier 1' },
+    { code: 'S0002', name: 'Supplier 2' },
     // ... more suppliers
 ];
 
 const items = [
-    {code: 'I0001', name: 'Item 1'},
-    {code: 'I0002', name: 'Item 2'},
-    {code: 'I0003', name: 'Item 3'},
+    { code: 'I0001', name: 'Item 1' },
+    { code: 'I0002', name: 'Item 2' },
+    { code: 'I0003', name: 'Item 3' },
     // ... more items
 ];
 
-function Dropdown({label, value, onChange, options}) {
+function Dropdown({ label, value, onChange, options }) {
     return (
-        <Box sx={{minWidth: 120}}>
+        <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
                 <InputLabel id={`select-${label}-label`}>{label}</InputLabel>
                 <Select
@@ -54,7 +54,7 @@ function Dropdown({label, value, onChange, options}) {
     );
 }
 
-function BasicTextFields({id, variant, size, type}) {
+function BasicTextFields({ id, variant, size, type, value, onChange, error, helperText }) {
     return (
         <Box
             component="form"
@@ -62,7 +62,7 @@ function BasicTextFields({id, variant, size, type}) {
                 '& > :not(style)': {
                     m: 1,
                     width: '17em',
-                    "& .MuiInputBase-root":{
+                    "& .MuiInputBase-root": {
                         height: '2.5em',
                         backgroundColor: '#e9eeff'
                     },
@@ -75,7 +75,17 @@ function BasicTextFields({id, variant, size, type}) {
             noValidate
             autoComplete="off"
         >
-            <TextField id={id} variant={variant} size={size} type={type} margin='normal'/>
+            <TextField
+                id={id}
+                variant={variant}
+                size={size}
+                type={type}
+                value={value}
+                onChange={onChange}
+                error={error}
+                helperText={helperText}
+                margin='normal'
+            />
         </Box>
     );
 }
@@ -84,7 +94,7 @@ const CancelButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#D41400'),
     backgroundColor: '#D41400',
     '&:hover': {
-        backgroundColor: '#e03a26' 
+        backgroundColor: '#e03a26'
     },
     '&.MuiButton-root': {
         width: '11.625em',
@@ -124,7 +134,36 @@ function InventoryRefundRequest(props) {
     const [reason, setReason] = useState('');
     const [price, setPrice] = useState('');
 
+    const [quantityError, setQuantityError] = useState('');
+    const [priceError, setPriceError] = useState('');
+
+    const navigate = useNavigate();
+
+    const validateField = (field, value) => {
+        const regex = /^[1-9]\d*$/; // Positive integers
+        if (!regex.test(value)) {
+            if (field === 'quantity') {
+                setQuantityError('Quantity must be a positive integer');
+            } else if (field === 'price') {
+                setPriceError('Total price must be a positive integer');
+            }
+        } else {
+            if (field === 'quantity') {
+                setQuantityError('');
+            } else if (field === 'price') {
+                setPriceError('');
+            }
+        }
+    };
+
     const handleSubmit = async () => {
+        validateField('quantity', quantity);
+        validateField('price', price);
+
+        if (quantityError || priceError) {
+            return; // Do not submit if there are validation errors
+        }
+
         const refundRequestData = {
             supplier,
             item,
@@ -133,119 +172,125 @@ function InventoryRefundRequest(props) {
             price,
         };
 
-
-          
         try {
             await axios.post('http://localhost:9000/refund/inventoryRefund/create', refundRequestData);
             console.log('Refund request submitted successfully');
-            
+
+            // Navigate to the target component and pass the state
+            navigate('/InventoryGeneratedRequest', { state: { refundRequestData } });
         } catch (error) {
             console.error('Error submitting refund request:', error);
         }
     };
 
     return (
-            <CenteredModal>
-                <div className="refundRequestOuter">
-                    <div className="refundRequestModel">
-                        <h2>Refund Request</h2>
-                        <div className="refundRequestForm">
-                            <div className="refundRequestformField">
-                                <div className="refundRequestidField">
-                                    <h5>Supplier:</h5>
-                                </div>
-                                <div className="refundRequestidInput">
-                                    <Dropdown
-                                        label="Supplier"
-                                        value={supplier}
-                                        onChange={(e) => setSupplier(e.target.value)}
-                                        options={suppliers}
-                                    />
-                                </div>
+        <CenteredModal>
+            <div className="refundRequestOuter">
+                <div className="refundRequestModel">
+                    <h2>Refund Request</h2>
+                    <div className="refundRequestForm">
+                        <div className="refundRequestformField">
+                            <div className="refundRequestidField">
+                                <h5>Supplier:</h5>
+                            </div>
+                            <div className="refundRequestidInput">
+                                <Dropdown
+                                    label="Supplier"
+                                    value={supplier}
+                                    onChange={(e) => setSupplier(e.target.value)}
+                                    options={suppliers}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="refundRequestformField">
+                            <div className="refundRequestidField">
+                                <h5>Item:</h5>
+                            </div>
+                            <div className="refundRequestidInput">
+                                <Dropdown
+                                    label="Item"
+                                    value={item}
+                                    onChange={(e) => setItem(e.target.value)}
+                                    options={items}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="refundRequestformField">
+                            <div className="addSupplieridField">
+                                <h5>Quantity:</h5>
+                            </div>
+                            <div className="refundRequestidInput">
+                                <BasicTextFields
+                                    id="quantity"
+                                    variant="outlined"
+                                    size="small"
+                                    type="number"
+                                    value={quantity}
+                                    onChange={(e) => {
+                                        setQuantity(e.target.value);
+                                        validateField('quantity', e.target.value);
+                                    }}
+                                    error={!!quantityError}
+                                    helperText={quantityError}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="refundRequestformField">
+                            <div className="refundRequestidField">
+                                <h5>Reason:</h5>
+                            </div>
+                            <div className="refundRequestidInput">
+                                <Dropdown
+                                    label="Reason"
+                                    value={reason}
+                                    onChange={(e) => setReason(e.target.value)}
+                                    options={[
+                                        { code: 'defected', name: 'Defected Item' },
+                                        { code: 'not-as-described', name: 'Not as Described' },
+                                        { code: 'expired', name: 'Expired' }
+                                    ]}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="refundRequestformField">
+                            <div className="refundRequestidField">
+                                <h5>Total Price:</h5>
+                            </div>
+                            <div className="refundRequestidInput">
+                                <BasicTextFields
+                                    id="total-price"
+                                    variant="outlined"
+                                    size="small"
+                                    type="number"
+                                    value={price}
+                                    onChange={(e) => {
+                                        setPrice(e.target.value);
+                                        validateField('price', e.target.value);
+                                    }}
+                                    error={!!priceError}
+                                    helperText={priceError}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="refundRequestformFieldButtons">
+                            <div className="addSupplierButton">
+                                <CreateRequestButton onClick={handleSubmit}>Create Request</CreateRequestButton>
                             </div>
 
-                            <div className="refundRequestformField">
-                                <div className="refundRequestidField">
-                                    <h5>Item:</h5>
-                                </div>
-                                <div className="refundRequestidInput">
-                                    <Dropdown
-                                        label="Item"
-                                        value={item}
-                                        onChange={(e) => setItem(e.target.value)}
-                                        options={items}
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="refundRequestformField">
-                                <div className="addSupplieridField">
-                                    <h5>Quantity:</h5>
-                                </div>
-                                <div className="refundRequestidInput">
-                                    <BasicTextFields 
-                                       id="quantity"
-                                       variant="outlined"
-                                       size="small"
-                                       type="number"
-                                       value={quantity}
-                                       onChange={(e) => setQuantity(e.target.value)}
-                                       />
-                                </div>
-                            </div>
-
-                            <div className="refundRequestformField">
-                                <div className="refundRequestidField">
-                                    <h5>Reason:</h5>
-                                </div>
-                                <div className="refundRequestidInput">
-                                    <Dropdown
-                                        label="Reason"
-                                        value={reason}
-                                        onChange={(e) => setReason(e.target.value)}
-                                        options={[
-                                            {code: 'defected', name: 'Defected Item'},
-                                            {code: 'not-as-described', name: 'Not as Described'},
-                                            {code: 'expired', name: 'Expired'}
-                                        ]}
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="refundRequestformField">
-                                <div className="refundRequestidField">
-                                    <h5>Total Price:</h5>
-                                </div>
-                                <div className="refundRequestidInput">
-                                    <BasicTextFields 
-                                      id="total-price"
-                                      variant="outlined"
-                                      size="small"
-                                      type="number"
-                                      value={price}
-                                      onChange={(e) => setPrice(e.target.value)}
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="refundRequestformFieldButtons">
-                                <div className="addSupplierButton">
-                                    <Link to="/InventoryGeneratedRequest">
-                                        <CreateRequestButton onClick={handleSubmit}>Create Request</CreateRequestButton>
-                                    </Link>
-                                </div>
-
-                                <div className="refundRequestcancelButton">
-                                    <CancelButton onClick={() => props.onClose(false)}>Cancel</CancelButton>
-                                </div>
+                            <div className="refundRequestcancelButton">
+                                <CancelButton onClick={() => props.onClose(false)}>Cancel</CancelButton>
                             </div>
                         </div>
                     </div>
                 </div>
-
-            </CenteredModal>
+            </div>
+        </CenteredModal>
     );
 }
 
 export default InventoryRefundRequest;
-
