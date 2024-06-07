@@ -6,7 +6,7 @@ import Footer from "../../../../../layout/footer/footer";
 import { Link } from "react-router-dom";
 import InventoryRefundRequest from "../../../../../pages/admin/Refunds/Inventory/Modal/InventoryRefundRequest";
 import CustomizedButton from "../../../../../components/Button/button";
-import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
+import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable"; // This refers to the second version
 
 const InventoryRefundRequestsTable = ({ onViewApproved }) => {
     const [visible, setVisible] = useState(false);
@@ -39,6 +39,7 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
     ];
 
     const mappedData = refundRequests.map(row => ({
+        id: row.inventory_id, // Ensure each row has a unique id for React key
         name: row.supplier,
         contact_number: row.phone,
         inventory_id: row.inventory_id,
@@ -55,7 +56,8 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
                 sx={{
                     backgroundColor: '#DBDFFD',
                     width: '100%',
-                    height: '47em'
+                    height: '47em',
+                    overflow: 'hidden' // Ensure no outer scrollbar
                 }}
             >
                 <Box>
@@ -133,13 +135,13 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
                         <CustomizedTable
                             columns={columns}
                             rows={mappedData}
-                            style={{ minWidth: 700, height: 21000 }}
+                            style={{ minWidth: 700, maxHeight: 400 }}
                         />
                     )}
                 </Box>
             </Container>
             <Modal open={visible}>
-                <InventoryRefundRequest onClose={(value) => { setVisible(false) }}></InventoryRefundRequest>
+                <InventoryRefundRequest onClose={() => setVisible(false)} />
             </Modal>
             <Footer />
         </>
