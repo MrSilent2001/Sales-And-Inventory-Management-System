@@ -31,12 +31,17 @@ function AdminProfile({ show, onClose }) {
         });
     };
 
-    const handleFileChange = (file) => {
-        setAdminImage(file);
-        setFormData(prevState => ({
-            ...prevState,
-            profilePicture: file
-        }));
+    const handleFileChange = async (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const imagePreviewUrl = URL.createObjectURL(file);
+            setAdminImage(imagePreviewUrl);
+            const imageUrl = await uploadFileToBlob(file);
+            setFormData(prevState => ({
+                ...prevState,
+                profilePicture: imageUrl
+            }));
+        }
     }
 
     const handleClickShowPassword = () => {
@@ -68,18 +73,18 @@ function AdminProfile({ show, onClose }) {
 
     useEffect(() => {
         setFormData({
-            profilePicture: user.profilePicture || '',
             username: user.username || '',
             contactNo: user.contactNo || '',
             email: user.email || '',
             password: user.password,
+            profilePicture: user.profilePicture || ''
         });
     }, [user]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            let imageUrl = '';
+            let imageUrl = user.profilePicture;
             if(adminImage){
                 imageUrl = await uploadFileToBlob(adminImage);
             }
