@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Container, Modal, Typography, CircularProgress } from '@mui/material';
+import { Box, Container, Modal, Typography } from '@mui/material';
 import axios from 'axios';
 import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../../layout/footer/footer";
 import { Link } from "react-router-dom";
 import InventoryRefundRequest from "../../../../../pages/admin/Refunds/Inventory/Modal/InventoryRefundRequest";
 import CustomizedButton from "../../../../../components/Button/button";
-import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable"; // This refers to the second version
+import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable"; 
+import PageLoader from "../../../../../components/Page Loader/pageLoader"; 
 
 const InventoryRefundRequestsTable = ({ onViewApproved }) => {
     const [visible, setVisible] = useState(false);
@@ -57,7 +58,7 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
                     backgroundColor: '#DBDFFD',
                     width: '100%',
                     height: '47em',
-                    overflow: 'hidden' // Ensure no outer scrollbar
+                    overflow: 'hidden' 
                 }}
             >
                 <Box>
@@ -125,7 +126,7 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
                     <br />
                     {loading ? (
                         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-                            <CircularProgress />
+                            <PageLoader />
                         </Box>
                     ) : error ? (
                         <Typography variant="body1" color="error">

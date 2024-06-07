@@ -1,5 +1,5 @@
+import React, { useState } from 'react';
 import './InventoryRefundRequest.css';
-import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
@@ -10,7 +10,7 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { useState } from 'react';
+import CustomizedAlert from "../../../../../components/Alert/alert";
 
 // Mock data for suppliers and items, replace with your actual data
 const suppliers = [
@@ -137,6 +137,10 @@ function InventoryRefundRequest(props) {
     const [quantityError, setQuantityError] = useState('');
     const [priceError, setPriceError] = useState('');
 
+    const [alertOpen, setAlertOpen] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertSeverity, setAlertSeverity] = useState('error');
+
     const navigate = useNavigate();
 
     const validateField = (field, value) => {
@@ -157,6 +161,13 @@ function InventoryRefundRequest(props) {
     };
 
     const handleSubmit = async () => {
+        if (!supplier || !item || !quantity || !reason || !price) {
+            setAlertMessage('All fields are required to create a request.');
+            setAlertSeverity('error');
+            setAlertOpen(true);
+            return;
+        }
+
         validateField('quantity', quantity);
         validateField('price', price);
 
@@ -289,6 +300,12 @@ function InventoryRefundRequest(props) {
                     </div>
                 </div>
             </div>
+            <CustomizedAlert
+                open={alertOpen}
+                onClose={() => setAlertOpen(false)}
+                message={alertMessage}
+                severity={alertSeverity}
+            />
         </CenteredModal>
     );
 }

@@ -61,7 +61,8 @@ function InventoryGeneratedRequest() {
                                 padding: '0.5em 0.625em',
                                 borderRadius: '0.35em',
                                 fontWeight: '550',
-                                marginTop: '0.625em',
+                                marginTop: '2.625em',
+                                marginBottom: '4.625em',
                                 textTransform: 'none',
                                 textAlign: 'center',
                             }}>
