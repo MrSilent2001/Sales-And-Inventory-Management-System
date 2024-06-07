@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Box, Paper } from '@mui/material';
 import './ApprovedRefundsTable.css';
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../../../layout/footer/footer";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import BackArrow from "../../../../../components/Icons/backArrow";
-import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
-import {useState, useEffect} from "react";
+import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable"; // This refers to the second version
 import axios from "axios";
 import PageLoader from "../../../../../components/Page Loader/pageLoader";
 
@@ -29,7 +28,6 @@ const ApprovedRefundsTable = ({ onBack }) => {
   useEffect(() => {
     const fetchApprovedRefunds = async () => {
       setIsLoading(true);
-      setLoading(true);
       try {
         const response = await axios.get('http://localhost:9000/refund/approvedRefunds/getAll', {
           headers: {
@@ -41,7 +39,7 @@ const ApprovedRefundsTable = ({ onBack }) => {
       } catch (err) {
         console.error('Failed to fetch approved refunds:', err);
         setError('Failed to load data');
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
@@ -49,6 +47,7 @@ const ApprovedRefundsTable = ({ onBack }) => {
   }, []);
 
   const mappedData = rows.map(row => ({
+    id: row.inventory_id, // Ensure each row has a unique id for React key
     name: row.supplier, // Assuming mapping from supplier to name
     contact_number: row.phone, // Assuming phone maps to contact number
     inventory_id: row.inventory_id, // Direct mapping
@@ -68,13 +67,9 @@ const ApprovedRefundsTable = ({ onBack }) => {
             <span style={{ fontWeight: "bold", }}>Refund Request</span>
           </div>
           {error && <p>{error}</p>}
-          {loading ? <p>Loading...</p> : (
-            <Paper elevation={4}>
-              {isLoading ? (
-                  <PageLoader />
-              ) : (
-                  <CustomizedTable columns={columns} rows={rows} style={{ width: '85%' }} />
-              )}
+          {isLoading ? <PageLoader /> : (
+            <Paper elevation={4} style={{ width: '100%' }}>
+              <CustomizedTable columns={columns} rows={mappedData} style={{ width: '100%' }} />
             </Paper>
           )}
         </Box>
