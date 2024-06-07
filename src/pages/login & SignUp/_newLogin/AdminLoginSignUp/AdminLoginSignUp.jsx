@@ -66,7 +66,8 @@ export function AdminLoginSignUp() {
                     password: values.password,
                     email: values.email,
                     contactNo: values.contactNo,
-                    role: 'admin'
+                    role: 'admin',
+                    profilePicture: 'https://tradeasy.blob.core.windows.net/products/1717660436560-Dafault%20Profile%20Picture.jpg?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2024-09-30T15:47:46Z&st=2024-06-06T07:47:46Z&spr=https,http&sig=ykh2IcyRb2Y7FKpCv40r8pTz%2FNDw5UjB0iuvhA7MR2o%3D'
                 });
                 resetForm();
             } catch (error) {

@@ -5,6 +5,7 @@ import BasicTextField from "../../../../components/Form Inputs/textfield";
 import FormControl from "@mui/material/FormControl";
 import PasswordField from "../../../../components/Form Inputs/passwordField";
 import axios from "axios";
+import {uploadFileToBlob} from "../../../Supplier/Inventory Dashboard/productBlobStorage";
 
 function AdminProfile({ show, onClose }) {
     const [user, setUser] = useState([]);
@@ -13,11 +14,12 @@ function AdminProfile({ show, onClose }) {
         email: "",
         contactNo: "",
         password: "",
+        profilePicture: ""
     });
 
     const [errors, setErrors] = useState({});
     const [showPassword, setShowPassword] = useState(false);
-    const [profileImage, setProfileImage] = useState(null);
+    const [adminImage, setAdminImage] = useState(null);
 
     const id = parseInt(localStorage.getItem('id'));
     const token = localStorage.getItem('accessToken');
@@ -29,12 +31,13 @@ function AdminProfile({ show, onClose }) {
         });
     };
 
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            setProfileImage(URL.createObjectURL(file));
-        }
-    };
+    const handleFileChange = (file) => {
+        setAdminImage(file);
+        setFormData(prevState => ({
+            ...prevState,
+            profilePicture: file
+        }));
+    }
 
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
@@ -69,18 +72,23 @@ function AdminProfile({ show, onClose }) {
             username: user.username || '',
             contactNo: user.contactNo || '',
             email: user.email || '',
-            password: user.password
+            password: user.password,
         });
     }, [user]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            let imageUrl = '';
+            if(adminImage){
+                imageUrl = await uploadFileToBlob(adminImage);
+            }
             await axios.put(`http://localhost:9000/admin/update/${id}`, {
                 username: formData.username,
                 email: formData.email,
                 contactNo: formData.contactNo,
                 password: formData.password,
+                profilePicture: imageUrl
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -107,9 +115,9 @@ function AdminProfile({ show, onClose }) {
                     <FormControl fullWidth>
                         <div className="adminProfileformField">
                             <div className="profile-picture-container">
-                                {profileImage ? (
+                                {adminImage ? (
                                     <img
-                                        src={profileImage}
+                                        src={adminImage}
                                         alt="Profile"
                                         className="profile-picture"
                                     />
@@ -119,7 +127,7 @@ function AdminProfile({ show, onClose }) {
                                 <input
                                     type="file"
                                     accept="image/*"
-                                    onChange={handleImageChange}
+                                    onChange={handleFileChange}
                                     className="profile-picture-input"
                                 />
                             </div>
