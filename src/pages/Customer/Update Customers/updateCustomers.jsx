@@ -5,10 +5,11 @@ import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navb
 import Footer from "../../../layout/footer/footer";
 import CustomizedButton from "../../../components/Button/button";
 import BasicTextField from "../../../components/Form Inputs/textfield";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import axios from "axios";
 import FileUpload from "../../../components/Form Inputs/fileUpload";
 import {uploadFileToBlob} from "../../Supplier/Inventory Dashboard/productBlobStorage";
+import CustomizedAlert from "../../../components/Alert/alert";
 
 function UpdateCustomers() {
     const [customer, setCustomer] = useState({});
@@ -45,11 +46,12 @@ function UpdateCustomers() {
         setNavigate(true);
     };
 
-    const handleFileChange = (file) => {
+    const handleFileChange = async (file) => {
         setCustomerImage(file);
+        const imageUrl = await uploadFileToBlob(file);
         setFormData(prevState => ({
             ...prevState,
-            profilePicture: file
+            profilePicture: imageUrl
         }));
     }
 
@@ -68,6 +70,7 @@ function UpdateCustomers() {
                     ...prevCustomer,
                     ...response.data
                 }));
+                console.log(customer)
             } catch (error) {
                 console.error('Error fetching users:', error);
             }
@@ -82,7 +85,7 @@ function UpdateCustomers() {
                 address: customer.address || '',
                 contactNo: customer.contactNo || '',
                 email: customer.email || '',
-                profilePicture: customer.profilePicture
+                profilePicture: customer.profilePicture || ''
             });
         }
     }, [customer]);
@@ -90,7 +93,7 @@ function UpdateCustomers() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            let imageUrl = '';
+            let imageUrl = formData.profilePicture;
             if(customerImage){
                 imageUrl = await uploadFileToBlob(customerImage);
             }
@@ -99,14 +102,14 @@ function UpdateCustomers() {
                 address: formData.address,
                 contactNo: formData.contactNo,
                 email: formData.email,
-                profilePicture: formData.profilePicture
+                profilePicture: imageUrl
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
 
-            console.log('Customer updated successfully');
+            console.log(formData);
             handleClickSuccess();
             handleNavigate();
 
@@ -128,7 +131,7 @@ function UpdateCustomers() {
 
                     <div className="UpdateCustomerProfile">
                         <div className="updateAvatar">
-                            <Avatar src={formData.profilePicture || "/broken-image.jpg"}
+                            <Avatar src={formData.profilePicture}
                                     sx={{ width: 230, height: 230, border: 2, borderRadius: 2, marginTop: '-0.8em' }} />
                             <div className='uploadButton'>
                                 <FileUpload
@@ -223,8 +226,21 @@ function UpdateCustomers() {
                 </div>
 
             </div>
-
             <Footer/>
+
+            <CustomizedAlert
+                open={openSuccess}
+                onClose={handleClickSuccess}
+                severity="success"
+                message="Profile Updated Successfully!"
+            />
+
+            <CustomizedAlert
+                open={openError}
+                onClose={handleClickError}
+                severity="error"
+                message="Something Went Wrong!"
+            />
         </>
     )
 }

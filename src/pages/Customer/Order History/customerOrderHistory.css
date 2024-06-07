@@ -10,12 +10,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 37.625em;
+    height: 45em;
 }
 
 .orderHistory{
-    width: 85%;
-    height: 37.625em;
+    width: 90%;
+}
+
+.customerOrdersTopic{
+    margin-left: 5.5em;
 }
 
 .customerOrdersTopicWithTextfield{
