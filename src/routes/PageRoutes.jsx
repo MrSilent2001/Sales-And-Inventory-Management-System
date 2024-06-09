@@ -75,7 +75,7 @@ export function PageRouting() {
                 <Route path="/bill" element={<SalesReceipt/>}/>
 
 {/*===================================================Protected Routes==============================================================*/}
-                <Route element={<ProtectedRoute />}>
+                {/*<Route element={<ProtectedRoute />}>*/}
 
                     {/*Supplier view routes*/}
                     <Route path="/supplierHome" element={<SupplierHome/>}/>
@@ -139,7 +139,7 @@ export function PageRouting() {
                     <Route path="/SalesViewRequest" element={<SalesViewRequest/>}/>
                     <Route path="/SalesRefundRequestTable" element={<SalesRefundRequestsTable/>}/>
 
-                </Route>
+                {/*</Route>*/}
             </Routes>
         </div>
     );
