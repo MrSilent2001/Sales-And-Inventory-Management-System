@@ -1,45 +1,54 @@
-import React, {useMemo, useState} from 'react';
-import {Box, Container, Paper, Typography} from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Box, Container, Typography } from '@mui/material';
+import axios from 'axios';
 import Footer from "../../../../../layout/footer/footer";
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import CustomizedButton from "../../../../../components/Button/button";
-import viewRefunds from "../../../../../context/data.json";
-import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
+import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable"; // Use Component 1
 import PageLoader from "../../../../../components/Page Loader/pageLoader";
-import DynamicTable from "../../../../../components/Table/customizedTable2";
 
+const SalesRefundRequestsTable = ({ onViewApproved }) => {
+    const [isLoading, setIsLoading] = useState(true);
+    const [refundRequests, setRefundRequests] = useState([]);
+    const [error, setError] = useState('');
 
-const SalesRefundRequestsTable = ({onViewApproved}) => {
-    const [isLoading, setIsLoading] = useState(false);
+    useEffect(() => {
+        const fetchRefundRequests = async () => {
+            try {
+                const response = await axios.get('http://localhost:9000/refund/customerRefund/getAll');
+                setRefundRequests(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error fetching refund requests:', error);
+                setError('Failed to fetch refund requests. Please try again later.');
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchRefundRequests();
+    }, []);
+
     const handleStatusButtonClick = requestId => {
         console.log('Button for request ID', requestId, 'was clicked');
     };
 
-    // const columns=[
-    //     { id: 'name', label: 'Name', minWidth: 70,align: 'center'  },
-    //     { id: 'requestId', label: 'Request Id', minWidth: 150,align: 'center'  },
-    //     { id: 'orderId', label: 'Order Id', minWidth: 120,align: 'center'  },
-    //     { id: 'actions', label:'', minWidth: 200,align: 'center'  }
-    // ];
+    const columns = [
+        { columnId: 'name', label: 'Name', minWidth: 70, align: 'center' },
+        { columnId: 'requestId', label: 'Request Id', minWidth: 100, align: 'center' },
+        { columnId: 'orderId', label: 'Order Id', minWidth: 100, align: 'center' },
+        { columnId: 'actions', label: 'Actions', minWidth: 150, align: 'center' }
+    ];
 
-    const columns = useMemo(() => [
-        { accessorKey: 'name', header: 'Name', size: 70, align: 'center' },
-        { accessorKey: 'requestId', header: 'Request Id', size: 100, align: 'center' },
-        { accessorKey: 'orderId', header: 'Order Id', size: 100, align: 'center' }
-    ], []);
-
-
-    const rows = viewRefunds.viewRefunds || [];
-
-    const mappedData = rows.map(row => ({
+    const mappedData = refundRequests.map(row => ({
+        id: row.requestId, // Ensure each row has a unique id for React key
         name: row.name,
         requestId: row.requestId,
         orderId: row.orderId,
         actions: (
             <Link to="/SalesViewRequest">
                 <CustomizedButton
-                    onClick={() => handleStatusButtonClick}
+                    onClick={() => handleStatusButtonClick(row.requestId)}
                     hoverBackgroundColor="#2d3ed2"
                     style={{
                         color: '#ffffff',
@@ -62,11 +71,10 @@ const SalesRefundRequestsTable = ({onViewApproved}) => {
         )
     }));
 
-
     return (
         <>
-            <SalesNavbar/>
-            <Container maxWidth="90%" style={{backgroundColor: '#DBDFFD', height: '37.5em'}}>
+            <SalesNavbar />
+            <Container maxWidth="90%" style={{ backgroundColor: '#DBDFFD', height: '37.5em' }}>
                 <Box>
                     <Box
                         sx={{
@@ -77,11 +85,11 @@ const SalesRefundRequestsTable = ({onViewApproved}) => {
                             marginBottom: 2
                         }}
                     >
-                        <Typography variant="h6" sx={{fontWeight: 'bold'}}>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                             Refund Request
                         </Typography>
                         <Box>
-                            <Link to="/ApprovedRefundsTable">
+                            <Link to="/SalesApprovedRefundsTable">
                                 <CustomizedButton
                                     onClick={onViewApproved}
                                     hoverBackgroundColor="#2d3ed2"
@@ -103,22 +111,24 @@ const SalesRefundRequestsTable = ({onViewApproved}) => {
                                     Approved Refunds
                                 </CustomizedButton>
                             </Link>
-
                         </Box>
                     </Box>
-                        {isLoading ? (
-                            <PageLoader />
-                        ) : (
-
-                            <DynamicTable
-                                columns={columns}
-                                data={viewRefunds}
-                                includeProfile={false}
-                            />
-                        )}
+                    {isLoading ? (
+                        <PageLoader />
+                    ) : error ? (
+                        <Typography variant="body1" color="error">
+                            {error}
+                        </Typography>
+                    ) : (
+                        <CustomizedTable
+                            columns={columns}
+                            rows={mappedData}
+                            style={{ minWidth: 700, maxHeight: 400 }}
+                        />
+                    )}
                 </Box>
             </Container>
-            <Footer/>
+            <Footer />
         </>
     );
 };
