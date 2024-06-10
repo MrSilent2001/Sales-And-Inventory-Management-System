@@ -19,7 +19,7 @@ const SalesApprovedRefundsTable = () => {
       try {
         const response = await axios.get('http://localhost:9000/refund/customerRefund/getRefundByStatus', {
           params: {
-            refundStatus: 'approved'
+            refundStatus: 'accepted'
           }
         });
         setApprovedRefunds(response.data);
