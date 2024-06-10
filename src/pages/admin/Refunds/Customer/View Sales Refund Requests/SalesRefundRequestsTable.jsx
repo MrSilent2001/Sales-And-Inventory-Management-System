@@ -82,7 +82,7 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
                         <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                             Refund Request
                         </Typography>
-                        <Box>
+                        <Box sx={{ display: 'flex', gap: '1em' }}>
                             <Link to="/SalesApprovedRefundsTable">
                                 <CustomizedButton
                                     onClick={onViewApproved}
@@ -103,6 +103,28 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
                                         textAlign: 'center',
                                     }}>
                                     Approved Refunds
+                                </CustomizedButton>
+                            </Link>
+                            <Link to="/SalesRejectedRefundsTable" >
+                                <CustomizedButton
+                                    onClick={onViewApproved}
+                                    hoverBackgroundColor="#2d3ed2"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#242F9B',
+                                        border: '1px solid #242F9B',
+                                        width: '11em',
+                                        height: '2.5em',
+                                        fontSize: '0.95em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        fontWeight: '550',
+                                        marginTop: '0.625em',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                    }}>
+                                    Rejected Refunds
                                 </CustomizedButton>
                             </Link>
                         </Box>
