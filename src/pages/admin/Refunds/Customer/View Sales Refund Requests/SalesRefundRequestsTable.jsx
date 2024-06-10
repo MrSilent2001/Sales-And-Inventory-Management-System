@@ -16,7 +16,11 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
     useEffect(() => {
         const fetchRefundRequests = async () => {
             try {
-                const response = await axios.get('http://localhost:9000/refund/customerRefund/getAll');
+                const response = await axios.get('http://localhost:9000/refund/customerRefund/getRefundByStatus', {
+                    params: {
+                        refundStatus: 'pending'
+                    }
+                });
                 setRefundRequests(response.data);
                 console.log(response.data);
             } catch (error) {
