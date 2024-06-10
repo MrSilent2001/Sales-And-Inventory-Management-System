@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, Typography, Tooltip } from '@mui/material';
 import axios from 'axios';
 import Footer from "../../../../../layout/footer/footer";
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import { Link } from "react-router-dom";
 import CustomizedButton from "../../../../../components/Button/button";
-import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable"; // Use Component 1
+import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 import PageLoader from "../../../../../components/Page Loader/pageLoader";
+import WarningIcon from '@mui/icons-material/Warning';
+import CustomizedAlert from '../../../../../components/Alert/alert';
 
 const SalesRefundRequestsTable = ({ onViewApproved }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [refundRequests, setRefundRequests] = useState([]);
     const [error, setError] = useState('');
+    const [hasOverdue, setHasOverdue] = useState(false);
 
     useEffect(() => {
         const fetchRefundRequests = async () => {
@@ -21,8 +24,22 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
                         refundStatus: 'pending'
                     }
                 });
-                setRefundRequests(response.data);
-                console.log(response.data);
+                const currentDate = new Date();
+                const dataWithWarning = response.data.map(request => {
+                    const createdDate = new Date(request.createdDate);
+                    const timeDifference = Math.floor((currentDate - createdDate) / (1000 * 60 * 60 * 24));
+                    const warning = timeDifference > 5;
+                    if (warning) {
+                        setHasOverdue(true);
+                    }
+                    return {
+                        ...request,
+                        warning,
+                        daysPending: timeDifference
+                    };
+                });
+                setRefundRequests(dataWithWarning);
+                console.log(dataWithWarning);
             } catch (error) {
                 console.error('Error fetching refund requests:', error);
                 setError('Failed to fetch refund requests. Please try again later.');
@@ -41,31 +58,38 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
     ];
 
     const mappedData = refundRequests.map(row => ({
-        id: row.id, // Ensure each row has a unique id for React key
+        id: row.id,
         customerName: row.customerName,
         orderId: row.orderId,
         actions: (
-            <Link to={`/SalesViewRequest/${row.id}`}>
-                <CustomizedButton
-                    hoverBackgroundColor="#2d3ed2"
-                    style={{
-                        color: '#ffffff',
-                        backgroundColor: '#242F9B',
-                        border: '1px solid #242F9B',
-                        width: '6em',
-                        height: '2.5em',
-                        fontSize: '0.95em',
-                        fontFamily: 'inter',
-                        padding: '0.5em 0.625em',
-                        borderRadius: '0.35em',
-                        fontWeight: '550',
-                        marginTop: '0.625em',
-                        textTransform: 'none',
-                        textAlign: 'center',
-                    }}>
-                    View
-                </CustomizedButton>
-            </Link>
+            <Box key={row.id} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Link to={`/SalesViewRequest/${row.id}`} key={row.id}>
+                    <CustomizedButton
+                        hoverBackgroundColor="#2d3ed2"
+                        style={{
+                            color: '#ffffff',
+                            backgroundColor: '#242F9B',
+                            border: '1px solid #242F9B',
+                            width: '6em',
+                            height: '2.5em',
+                            fontSize: '0.95em',
+                            fontFamily: 'inter',
+                            padding: '0.5em 0.625em',
+                            borderRadius: '0.35em',
+                            fontWeight: '550',
+                            marginTop: '0.625em',
+                            textTransform: 'none',
+                            textAlign: 'center',
+                        }}>
+                        View
+                    </CustomizedButton>
+                </Link>
+                {row.warning && (
+                    <Tooltip title={`Overdue by ${row.daysPending - 5} days`}>
+                        <WarningIcon style={{ color: 'red', marginLeft: '0.5em' }} />
+                    </Tooltip>
+                )}
+            </Box>
         )
     }));
 
@@ -73,6 +97,15 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
         <>
             <SalesNavbar />
             <Container maxWidth="90%" style={{ backgroundColor: '#DBDFFD', height: '37.5em' }}>
+                {hasOverdue && (
+                    <CustomizedAlert
+                        onClose={() => {}}
+                        open={hasOverdue}
+                        message="There are overdue refund requests !"
+                        severity="warning"
+                        style={{ marginBottom: 16 }}
+                    />
+                )}
                 <Box>
                     <Box
                         sx={{
@@ -109,7 +142,7 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
                                     Approved Refunds
                                 </CustomizedButton>
                             </Link>
-                            <Link to="/SalesRejectedRefundsTable" >
+                            <Link to="/SalesRejectedRefundsTable">
                                 <CustomizedButton
                                     onClick={onViewApproved}
                                     hoverBackgroundColor="#2d3ed2"
