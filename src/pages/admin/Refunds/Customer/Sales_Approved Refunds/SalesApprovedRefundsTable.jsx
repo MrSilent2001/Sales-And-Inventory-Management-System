@@ -34,19 +34,19 @@ const SalesApprovedRefundsTable = () => {
   }, []);
 
   const columns = [
-    { columnId: 'name', label: 'Name', minWidth: 70, align: 'center' },
-    { columnId: 'requestId', label: 'Request Id', minWidth: 150, align: 'center' },
+    { columnId: 'customerName', label: 'Name', minWidth: 70, align: 'center' },
+    { columnId: 'id', label: 'Request Id', minWidth: 150, align: 'center' },
     { columnId: 'orderId', label: 'Order Id', minWidth: 120, align: 'center' },
-    { columnId: 'amount', label: 'Amount', minWidth: 100, align: 'center' },
+    { columnId: 'totalPrice', label: 'Amount', minWidth: 100, align: 'center' },
     { columnId: 'status', label: 'Status', minWidth: 100, align: 'center' }
   ];
 
   const mappedData = approvedRefunds.map(row => ({
-    id: row.requestId, // Ensure each row has a unique id for React key
-    name: row.name,
+    id: row.id, 
+    customerName: row.customerName,
     requestId: row.requestId,
     orderId: row.orderId,
-    amount: row.amount,
+    totalPrice: row.totalPrice,
     status: row.status
   }));
 
