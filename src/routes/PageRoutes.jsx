@@ -136,7 +136,7 @@ export function PageRouting() {
 
 
                     <Route path="/SalesRefundDenialForm" element={<SalesRefundDenialForm/>}/>
-                    <Route path="/SalesViewRequest" element={<SalesViewRequest/>}/>
+                    <Route path="/SalesViewRequest/:id" element={<SalesViewRequest/>}/>
                     <Route path="/SalesRefundRequestTable" element={<SalesRefundRequestsTable/>}/>
 
                 {/*</Route>*/}

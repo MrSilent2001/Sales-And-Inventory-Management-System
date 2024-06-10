@@ -29,26 +29,20 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
         fetchRefundRequests();
     }, []);
 
-    const handleStatusButtonClick = requestId => {
-        console.log('Button for request ID', requestId, 'was clicked');
-    };
-
     const columns = [
-        { columnId: 'name', label: 'Name', minWidth: 70, align: 'center' },
-        { columnId: 'requestId', label: 'Request Id', minWidth: 100, align: 'center' },
+        { columnId: 'customerName', label: 'Name', minWidth: 70, align: 'center' },
+        { columnId: 'id', label: 'Request Id', minWidth: 100, align: 'center' },
         { columnId: 'orderId', label: 'Order Id', minWidth: 100, align: 'center' },
         { columnId: 'actions', label: 'Actions', minWidth: 150, align: 'center' }
     ];
 
     const mappedData = refundRequests.map(row => ({
-        id: row.requestId, // Ensure each row has a unique id for React key
-        name: row.name,
-        requestId: row.requestId,
+        id: row.id, // Ensure each row has a unique id for React key
+        customerName: row.customerName,
         orderId: row.orderId,
         actions: (
-            <Link to="/SalesViewRequest">
+            <Link to={`/SalesViewRequest/${row.id}`}>
                 <CustomizedButton
-                    onClick={() => handleStatusButtonClick(row.requestId)}
                     hoverBackgroundColor="#2d3ed2"
                     style={{
                         color: '#ffffff',
