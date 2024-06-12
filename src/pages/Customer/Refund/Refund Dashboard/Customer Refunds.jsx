@@ -14,7 +14,7 @@ import Footer from "../../../../layout/footer/footer";
 import { Link } from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
+// import jwt_decode from 'jwt-decode';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.body}`]: {
@@ -41,19 +41,29 @@ function CustomerRefundRequestTables({ rows }) {
                         sx={{ width: '88em', maxHeight: '25em', overflowY: 'auto', position: 'relative' }}>
             <Table sx={{ minWidth: '30em' }} aria-label="customized table">
                 <TableBody>
-                    {rows.map((row, index) => (
-                        <StyledTableRow key={index}>
-                            <StyledTableCell align="right">{row.customerName}</StyledTableCell>
-                            <StyledTableCell align="right">{row.contact}</StyledTableCell>
-                            <StyledTableCell align="right">{row.item}</StyledTableCell>
-                            <StyledTableCell align="right">{row.totalPrice}</StyledTableCell>
-                            <StyledTableCell align="right">{row.status}</StyledTableCell>
+                    {Array.isArray(rows) && rows.length > 0 ? (
+                        rows.map((row, index) => (
+                            <StyledTableRow key={index}>
+                                <StyledTableCell align="right">{row.customerName}</StyledTableCell>
+                                <StyledTableCell align="right">{row.contact}</StyledTableCell>
+                                <StyledTableCell align="right">{row.item}</StyledTableCell>
+                                <StyledTableCell align="right">{row.totalPrice}</StyledTableCell>
+                                <StyledTableCell align="right">{row.status}</StyledTableCell>
+                            </StyledTableRow>
+                        ))
+                    ) : (
+                        <StyledTableRow>
+                            <StyledTableCell colSpan={5} align="center">
+                                No refund requests available.
+                            </StyledTableCell>
                         </StyledTableRow>
-                    ))}
+                    )}
                 </TableBody>
             </Table>
-            <Modal open={visible}>
-                <UpdateItem onClose={() => setVisible(false)}></UpdateItem>
+            <Modal open={visible} onClose={() => setVisible(false)}>
+                <div>
+                    <UpdateItem onClose={() => setVisible(false)} />
+                </div>
             </Modal>
         </TableContainer>
     );
@@ -61,23 +71,20 @@ function CustomerRefundRequestTables({ rows }) {
 
 function CustomerRefunds() {
     const [rows, setRows] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const token = localStorage.getItem('accessToken');
-        if (token) {
-            const decodedToken = jwt_decode(token);
-            const customerId = decodedToken.customerId; // Adjust this according to your token structure
-
-            axios.get(`/refund/customerRefund/getByCustomerId?customerId=${customerId}`)
-                .then(response => {
-                    setRows(response.data);
-                })
-                .catch(error => {
-                    console.error('Error fetching refund requests:', error);
-                });
-        } else {
-            console.error('No token found in local storage');
-        }
+        const customerId = 12345; // Temporary value
+        axios.get(`http://localhost:9000/refund/customerRefund/getByCustomerId?customerId=${customerId}`)
+            .then(response => {
+                console.log('API Response:', response.data); // Log the response data
+                setRows(response.data);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error('Error fetching refund requests:', error);
+                setLoading(false);
+            });
     }, []);
 
     return (
@@ -114,7 +121,11 @@ function CustomerRefunds() {
                         </div>
                     </div>
                     <div className="customerRefundTable">
-                        <CustomerRefundRequestTables rows={rows} />
+                        {loading ? (
+                            <div>Loading...</div>
+                        ) : (
+                            <CustomerRefundRequestTables rows={rows} />
+                        )}
                     </div>
                 </div>
             </div>
