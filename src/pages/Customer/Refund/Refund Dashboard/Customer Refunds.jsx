@@ -1,22 +1,27 @@
-import './Customer Refunds.css'
-import {styled} from "@mui/material/styles";
-import TableCell, {tableCellClasses} from "@mui/material/TableCell";
+
+
+
+
+
+import './Customer Refunds.css';
+import { styled } from "@mui/material/styles";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import {Modal} from "@mui/material";
+import { Modal } from "@mui/material";
 import UpdateItem from "../../../admin/View Inventory/Modals/Update Item/Update Item";
 import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";
 import Footer from "../../../../layout/footer/footer";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
-import customerRefunds from "../../../../context/data.json";
+import axios from 'axios';
+// import jwt_decode from 'jwt-decode';
 
-
-const StyledTableCell = styled(TableCell)(({theme}) => ({
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.body}`]: {
         fontSize: '0.7em',
         textAlign: 'center',
@@ -24,7 +29,7 @@ const StyledTableCell = styled(TableCell)(({theme}) => ({
     },
 }));
 
-const StyledTableRow = styled(TableRow)(({theme}) => ({
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
         backgroundColor: theme.palette.action.hover,
     },
@@ -33,48 +38,69 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
     },
 }));
 
-const rows = customerRefunds.customerRefunds || [];
-
-function CustomerRefundRequestTables() {
-    const [visible, setVisible] = useState(false)
+function CustomerRefundRequestTables({ rows }) {
+    const [visible, setVisible] = useState(false);
 
     return (
         <TableContainer component={Paper}
-                        sx={{width: '88em', maxHeight: '25em', overflowY: 'auto', position: 'relative'}}>
-            <Table sx={{minWidth: '30em'}} aria-label="customized table">
+                        sx={{ width: '88em', maxHeight: '25em', overflowY: 'auto', position: 'relative' }}>
+            <Table sx={{ minWidth: '30em' }} aria-label="customized table">
                 <TableBody>
-                    {rows.map((row) => (
-                        <StyledTableRow key={row.name}>
-                            <StyledTableCell align="right">{row.customerName}</StyledTableCell>
-                            <StyledTableCell align="right">{row.mobileNumber}</StyledTableCell>
-                            <StyledTableCell align="right">{row.itemId}</StyledTableCell>
-                            <StyledTableCell align="right">{row.payment}</StyledTableCell>
-                            <StyledTableCell align="right">{row.refundStatus}</StyledTableCell>
+                    {Array.isArray(rows) && rows.length > 0 ? (
+                        rows.map((row, index) => (
+                            <StyledTableRow key={index}>
+                                <StyledTableCell align="right">{row.customerName}</StyledTableCell>
+                                <StyledTableCell align="right">{row.contact}</StyledTableCell>
+                                <StyledTableCell align="right">{row.item}</StyledTableCell>
+                                <StyledTableCell align="right">{row.totalPrice}</StyledTableCell>
+                                <StyledTableCell align="right">{row.status}</StyledTableCell>
+                            </StyledTableRow>
+                        ))
+                    ) : (
+                        <StyledTableRow>
+                            <StyledTableCell colSpan={5} align="center">
+                                No refund requests available.
+                            </StyledTableCell>
                         </StyledTableRow>
-                    ))}
+                    )}
                 </TableBody>
             </Table>
-            <Modal open={visible}>
-                <UpdateItem onClose={(value) => {
-                    setVisible(false)
-                }}></UpdateItem>
+            <Modal open={visible} onClose={() => setVisible(false)}>
+                <div>
+                    <UpdateItem onClose={() => setVisible(false)} />
+                </div>
             </Modal>
         </TableContainer>
     );
 }
 
 function CustomerRefunds() {
+    const [rows, setRows] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const customerId = 12345; // Temporary value
+        axios.get(`http://localhost:9000/refund/customerRefund/getByCustomerId?customerId=${customerId}`)
+            .then(response => {
+                console.log('API Response:', response.data); // Log the response data
+                setRows(response.data);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error('Error fetching refund requests:', error);
+                setLoading(false);
+            });
+    }, []);
+
     return (
         <>
-            <CustomerNavbar/>
+            <CustomerNavbar />
             <div className="customerRefundsOuter">
                 <div className="customerRefundsInner">
-
                     <div className="customerRefundTopicWithButton">
                         <div className="customerRefundTopic">
                             <h3>Refund Request</h3>
                         </div>
-
                         <div className="customerRefundRequestButton">
                             <Link to="/createrefund">
                                 <CustomizedButton
@@ -99,16 +125,18 @@ function CustomerRefunds() {
                             </Link>
                         </div>
                     </div>
-
                     <div className="customerRefundTable">
-                        <CustomerRefundRequestTables></CustomerRefundRequestTables>
+                        {loading ? (
+                            <div>Loading...</div>
+                        ) : (
+                            <CustomerRefundRequestTables rows={rows} />
+                        )}
                     </div>
-
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </>
-    )
+    );
 }
 
 export default CustomerRefunds;
