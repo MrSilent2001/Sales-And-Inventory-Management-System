@@ -1,4 +1,4 @@
-import './Customer Refund Request.css'
+import './Customer Refund Request.css';
 import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -7,23 +7,17 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Footer from "../../../../layout/footer/footer";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
 import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";
+import axios from 'axios';
 
-function SelectItem() {
-
-    const [age, setAge] = React.useState('');
-
-    const handleChange = (event) => {
-        setAge(event.target.value);
-    };
-
+function SelectItem({ value, onChange, error }) {
     return (
-        <Box sx={{minWidth: 80}}>
-            <FormControl fullWidth>
+        <Box sx={{ minWidth: 80 }}>
+            <FormControl fullWidth error={error}>
                 <InputLabel
-                    id="demo-simple-select-label"
+                    id="item-select-label"
                     sx={{
                         fontSize: '10px',
                         display: 'flex',
@@ -34,11 +28,11 @@ function SelectItem() {
                     Select
                 </InputLabel>
                 <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={age}
-                    label="Age"
-                    onChange={handleChange}
+                    labelId="item-select-label"
+                    id="item-select"
+                    value={value}
+                    label="Item"
+                    onChange={onChange}
                     sx={{
                         height: 40,
                         width: '40.8em',
@@ -50,28 +44,21 @@ function SelectItem() {
                         },
                     }}
                 >
-                    <MenuItem value={10}>I0001</MenuItem>
-                    <MenuItem value={20}>I0002</MenuItem>
-                    <MenuItem value={30}>I0003</MenuItem>
+                    <MenuItem value="I0001">I0001</MenuItem>
+                    <MenuItem value="I0002">I0002</MenuItem>
+                    <MenuItem value="I0003">I0003</MenuItem>
                 </Select>
             </FormControl>
         </Box>
-    )
+    );
 }
 
-function SelectReason() {
-
-    const [age, setAge] = React.useState('');
-
-    const handleChange = (event) => {
-        setAge(event.target.value);
-    };
-
+function SelectReason({ value, onChange, error }) {
     return (
-        <Box sx={{minWidth: 80}}>
-            <FormControl fullWidth>
+        <Box sx={{ minWidth: 80 }}>
+            <FormControl fullWidth error={error}>
                 <InputLabel
-                    id="demo-simple-select-label"
+                    id="reason-select-label"
                     sx={{
                         fontSize: '10px',
                         display: 'flex',
@@ -82,11 +69,11 @@ function SelectReason() {
                     Select
                 </InputLabel>
                 <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={age}
-                    label="Age"
-                    onChange={handleChange}
+                    labelId="reason-select-label"
+                    id="reason-select"
+                    value={value}
+                    label="Reason"
+                    onChange={onChange}
                     sx={{
                         height: 40,
                         width: '40.8em',
@@ -98,16 +85,16 @@ function SelectReason() {
                         },
                     }}
                 >
-                    <MenuItem value={10}>Defected Item</MenuItem>
-                    <MenuItem value={20}>No as Described</MenuItem>
-                    <MenuItem value={30}>Expired</MenuItem>
+                    <MenuItem value="Defective Item">Defective Item</MenuItem>
+                    <MenuItem value="Not as Described">Not as Described</MenuItem>
+                    <MenuItem value="Expired">Expired</MenuItem>
                 </Select>
             </FormControl>
         </Box>
-    )
+    );
 }
 
-function BasicTextFields() {
+function BasicTextFields({ name, value, onChange, error }) {
     return (
         <Box
             component="form"
@@ -128,30 +115,96 @@ function BasicTextFields() {
             noValidate
             autoComplete="off"
         >
-            <TextField id="outlined-basic" variant="outlined" margin='normal'/>
+            <TextField
+                id="outlined-basic"
+                variant="outlined"
+                margin='normal'
+                name={name}
+                value={value}
+                onChange={onChange}
+                error={error}
+                helperText={error && "This field is required"}
+            />
         </Box>
     );
 }
 
 function CustomerRefundRequest() {
+    const [formData, setFormData] = React.useState({
+        customerId: '12345', // Temporary value
+        customerName: 'John Doe', // Temporary value
+        contact: '',
+        item: '',
+        quantity: '',
+        reason: '',
+        totalPrice: ''
+    });
+
+    const [errors, setErrors] = React.useState({
+        contact: false,
+        item: false,
+        quantity: false,
+        reason: false,
+        totalPrice: false
+    });
+
+    const handleChange = (event) => {
+        setFormData({
+            ...formData,
+            [event.target.name]: event.target.value
+        });
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        const newErrors = {
+            contact: !formData.contact,
+            item: !formData.item,
+            quantity: !formData.quantity,
+            reason: !formData.reason,
+            totalPrice: !formData.totalPrice
+        };
+
+        setErrors(newErrors);
+
+        const hasError = Object.values(newErrors).some(error => error);
+        if (hasError) {
+            return;
+        }
+
+        console.log('Submitting form with data:', formData); // Debugging: Log the form data
+        axios.post('http://localhost:9000/refund/customerRefund/create', formData)
+            .then(response => {
+                console.log('Refund request created:', response.data);
+                document.getElementById('navigate-link').click();
+            })
+            .catch(error => {
+                console.error('Error creating refund request:', error.response ? error.response.data : error.message);
+            });
+    };
+
     return (
         <>
-            <CustomerNavbar></CustomerNavbar>
+            <CustomerNavbar />
             <div className="customerRefundRequestOuter">
                 <div className="customerRefundRequestInner">
-
                     <div className="customerRefundRequestTopic">
                         <h2>Refund Request</h2>
                     </div>
 
-                    <div className="customerRefundRequestForm">
-
+                    <form onSubmit={handleSubmit} className="customerRefundRequestForm">
                         <div className="customerFormField">
                             <div className="customerTextField">
                                 <h5>Contact</h5>
                             </div>
                             <div className="customerTextField">
-                                <BasicTextFields></BasicTextFields>
+                                <BasicTextFields
+                                    name="contact"
+                                    value={formData.contact}
+                                    onChange={handleChange}
+                                    error={errors.contact}
+                                />
                             </div>
                         </div>
 
@@ -160,7 +213,11 @@ function CustomerRefundRequest() {
                                 <h5>Item</h5>
                             </div>
                             <div className="customerTextField">
-                                <SelectItem></SelectItem>
+                                <SelectItem
+                                    value={formData.item}
+                                    onChange={(e) => handleChange({ target: { name: 'item', value: e.target.value } })}
+                                    error={errors.item}
+                                />
                             </div>
                         </div>
 
@@ -169,7 +226,12 @@ function CustomerRefundRequest() {
                                 <h5>Quantity</h5>
                             </div>
                             <div className="customerTextField">
-                                <BasicTextFields></BasicTextFields>
+                                <BasicTextFields
+                                    name="quantity"
+                                    value={formData.quantity}
+                                    onChange={handleChange}
+                                    error={errors.quantity}
+                                />
                             </div>
                         </div>
 
@@ -178,7 +240,11 @@ function CustomerRefundRequest() {
                                 <h5>Reason</h5>
                             </div>
                             <div className="customerTextField">
-                                <SelectReason></SelectReason>
+                                <SelectReason
+                                    value={formData.reason}
+                                    onChange={(e) => handleChange({ target: { name: 'reason', value: e.target.value } })}
+                                    error={errors.reason}
+                                />
                             </div>
                         </div>
 
@@ -187,13 +253,18 @@ function CustomerRefundRequest() {
                                 <h5>Total Price</h5>
                             </div>
                             <div className="customerTextField">
-                                <BasicTextFields></BasicTextFields>
+                                <BasicTextFields
+                                    name="totalPrice"
+                                    value={formData.totalPrice}
+                                    onChange={handleChange}
+                                    error={errors.totalPrice}
+                                />
                             </div>
                         </div>
 
                         <div className="customerRefundButtonField">
                             <div className="customerRefundRequestButtons">
-                                <Link to="/generatedrefund">
+                                <button type="submit" style={{ background: 'none', border: 'none', padding: 0,margin:0}}>
                                     <CustomizedButton
                                         hoverBackgroundColor="#2d3ed2"
                                         style={{
@@ -210,38 +281,44 @@ function CustomerRefundRequest() {
                                             marginTop: '0.625em',
                                             textTransform: 'none',
                                             textAlign: 'center',
-                                        }}>
+                                        }}
+                                    >
                                         Create Request
                                     </CustomizedButton>
-                                </Link>
-
-                                <CustomizedButton
-                                    hoverBackgroundColor="#f11717"
-                                    style={{
-                                        color: '#ffffff',
-                                        backgroundColor: '#ff0000',
-                                        width: '10em',
-                                        height: '2.85em',
-                                        fontSize: '0.75em',
-                                        fontFamily: 'inter',
-                                        padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        fontWeight: '500',
-                                        marginTop: '0.625em',
-                                        textTransform: 'none',
-                                        textAlign: 'center',
-                                    }}>
-                                    Cancel Request
-                                </CustomizedButton>
+                                </button>
+                                <Link id="navigate-link" to="/generatedrefund" style={{ display: 'none' }}>Navigate</Link>
+                                <button type="button" style={{ background: 'none', border: 'none', padding: 0 }}>
+                                    <CustomizedButton
+                                        hoverBackgroundColor="#f11717"
+                                        style={{
+                                            color: '#ffffff',
+                                            backgroundColor: '#ff0000',
+                                            border: '1px solid #ff0000',
+                                            width: '10em',
+                                            height: '2.85em',
+                                            fontSize: '0.75em',
+                                            fontFamily: 'inter',
+                                            padding: '0.5em 0.625em',
+                                            borderRadius: '0.35em',
+                                            fontWeight: '500',
+                                            marginTop: '0.625em',
+                                            textTransform: 'none',
+                                            textAlign: 'center',
+                                            marginLeft: '0.1em'
+                                        }}
+                                        onClick={() => document.getElementById('navigate-link').click()}
+                                    >
+                                        Cancel Request
+                                    </CustomizedButton>
+                                </button>
                             </div>
                         </div>
-
-                    </div>
+                    </form>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </>
-    )
+    );
 }
 
 export default CustomerRefundRequest;
