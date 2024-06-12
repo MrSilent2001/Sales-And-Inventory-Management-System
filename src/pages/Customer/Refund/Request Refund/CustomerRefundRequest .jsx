@@ -7,7 +7,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Footer from "../../../../layout/footer/footer";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
 import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";
 import axios from 'axios';
@@ -148,6 +148,8 @@ function CustomerRefundRequest() {
         totalPrice: false
     });
 
+    const history = useHistory();
+
     const handleChange = (event) => {
         setFormData({
             ...formData,
@@ -177,7 +179,7 @@ function CustomerRefundRequest() {
         axios.post('http://localhost:9000/refund/customerRefund/create', formData)
             .then(response => {
                 console.log('Refund request created:', response.data);
-                document.getElementById('navigate-link').click();
+                history.push('/generatedrefund', { formData });
             })
             .catch(error => {
                 console.error('Error creating refund request:', error.response ? error.response.data : error.message);
@@ -264,16 +266,16 @@ function CustomerRefundRequest() {
 
                         <div className="customerRefundButtonField">
                             <div className="customerRefundRequestButtons">
-                                <button type="submit" style={{ background: 'none', border: 'none', padding: 0,margin:0}}>
+                                <button type="submit" style={{ background: 'none', border: 'none', padding: 0, margin: 0 }}>
                                     <CustomizedButton
                                         hoverBackgroundColor="#2d3ed2"
                                         style={{
                                             color: '#ffffff',
                                             backgroundColor: '#242F9B',
                                             border: '1px solid #242F9B',
-                                            width: '10em',
-                                            height: '2.85em',
-                                            fontSize: '0.75em',
+                                            width: '12em',
+                                            height: '3.5em',
+                                            fontSize: '1em',
                                             fontFamily: 'inter',
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
@@ -294,9 +296,9 @@ function CustomerRefundRequest() {
                                             color: '#ffffff',
                                             backgroundColor: '#ff0000',
                                             border: '1px solid #ff0000',
-                                            width: '10em',
-                                            height: '2.85em',
-                                            fontSize: '0.75em',
+                                            width: '12em',
+                                            height: '3.5em',
+                                            fontSize: '1em',
                                             fontFamily: 'inter',
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
@@ -304,7 +306,7 @@ function CustomerRefundRequest() {
                                             marginTop: '0.625em',
                                             textTransform: 'none',
                                             textAlign: 'center',
-                                            marginLeft: '0.1em'
+                                            marginLeft: '0.5em'
                                         }}
                                         onClick={() => document.getElementById('navigate-link').click()}
                                     >
