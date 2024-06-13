@@ -1,5 +1,5 @@
 import './Customer Refund Request.css';
-import * as React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
@@ -7,7 +7,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Footer from "../../../../layout/footer/footer";
-import { Link, useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
 import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";
 import axios from 'axios';
@@ -130,7 +130,7 @@ function BasicTextFields({ name, value, onChange, error }) {
 }
 
 function CustomerRefundRequest() {
-    const [formData, setFormData] = React.useState({
+    const [formData, setFormData] = useState({
         customerId: '12345', // Temporary value
         customerName: 'John Doe', // Temporary value
         contact: '',
@@ -140,7 +140,7 @@ function CustomerRefundRequest() {
         totalPrice: ''
     });
 
-    const [errors, setErrors] = React.useState({
+    const [errors, setErrors] = useState({
         contact: false,
         item: false,
         quantity: false,
@@ -148,7 +148,7 @@ function CustomerRefundRequest() {
         totalPrice: false
     });
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         setFormData({
@@ -179,7 +179,7 @@ function CustomerRefundRequest() {
         axios.post('http://localhost:9000/refund/customerRefund/create', formData)
             .then(response => {
                 console.log('Refund request created:', response.data);
-                history.push('/generatedrefund', { formData });
+                navigate('/generatedrefund', { state: { formData } });
             })
             .catch(error => {
                 console.error('Error creating refund request:', error.response ? error.response.data : error.message);
@@ -288,7 +288,6 @@ function CustomerRefundRequest() {
                                         Create Request
                                     </CustomizedButton>
                                 </button>
-                                <Link id="navigate-link" to="/generatedrefund" style={{ display: 'none' }}>Navigate</Link>
                                 <button type="button" style={{ background: 'none', border: 'none', padding: 0 }}>
                                     <CustomizedButton
                                         hoverBackgroundColor="#f11717"
@@ -308,7 +307,7 @@ function CustomerRefundRequest() {
                                             textAlign: 'center',
                                             marginLeft: '0.5em'
                                         }}
-                                        onClick={() => document.getElementById('navigate-link').click()}
+                                        onClick={() => navigate('/')}
                                     >
                                         Cancel Request
                                     </CustomizedButton>

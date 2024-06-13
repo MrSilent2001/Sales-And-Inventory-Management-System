@@ -1,29 +1,37 @@
-import './Generated Customer Refund Request.css'
-import * as React from "react";
+import './Generated Customer Refund Request.css';
+import React from "react";
 import Footer from "../../../../layout/footer/footer";
-import {Link} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
 import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";
 
 function GeneratedCustomerRefundRequest() {
+    const location = useLocation();
+    const { formData } = location.state || {
+        customerName: '',
+        contact: '',
+        item: '',
+        quantity: '',
+        reason: '',
+        totalPrice: ''
+    };
+
     return (
         <>
-            <CustomerNavbar></CustomerNavbar>
+            <CustomerNavbar />
             <div className="generatedCustomerRefundRequestOuter">
                 <div className="generatedCustomerRefundRequestInner">
-
                     <div className="generatedRefundRequestTopic">
                         <h2>Generated Request</h2>
                     </div>
 
                     <div className="customerRefundRequestDetails">
-
                         <div className="customerRefundFormField">
                             <div className="customerRefundTextField">
                                 <h5>Customer</h5>
                             </div>
                             <div className="customerRefundInputData">
-                                <h6>WAP Saman Perera</h6>
+                                <h6>{formData.customerName}</h6>
                             </div>
                         </div>
 
@@ -32,7 +40,7 @@ function GeneratedCustomerRefundRequest() {
                                 <h5>Contact</h5>
                             </div>
                             <div className="customerRefundInputData">
-                                <h6>0771112234</h6>
+                                <h6>{formData.contact}</h6>
                             </div>
                         </div>
 
@@ -41,7 +49,7 @@ function GeneratedCustomerRefundRequest() {
                                 <h5>Item</h5>
                             </div>
                             <div className="customerRefundInputData">
-                                <h6>I0001</h6>
+                                <h6>{formData.item}</h6>
                             </div>
                         </div>
 
@@ -50,7 +58,7 @@ function GeneratedCustomerRefundRequest() {
                                 <h5>Quantity</h5>
                             </div>
                             <div className="customerRefundInputData">
-                                <h6>35</h6>
+                                <h6>{formData.quantity}</h6>
                             </div>
                         </div>
 
@@ -59,7 +67,7 @@ function GeneratedCustomerRefundRequest() {
                                 <h5>Reason</h5>
                             </div>
                             <div className="customerRefundInputData">
-                                <h6>Defected Items</h6>
+                                <h6>{formData.reason}</h6>
                             </div>
                         </div>
 
@@ -68,10 +76,9 @@ function GeneratedCustomerRefundRequest() {
                                 <h5>Total Price</h5>
                             </div>
                             <div className="customerRefundInputData">
-                                <h6>Rs.120,000</h6>
+                                <h6>{formData.totalPrice}</h6>
                             </div>
                         </div>
-
                     </div>
 
                     <div className="refundButtonField">
@@ -94,18 +101,18 @@ function GeneratedCustomerRefundRequest() {
                                         marginLeft: '-3.5em',
                                         textTransform: 'none',
                                         textAlign: 'center',
-                                    }}>
+                                    }}
+                                >
                                     Go Back
                                 </CustomizedButton>
                             </Link>
                         </div>
                     </div>
-
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </>
-    )
+    );
 }
 
 export default GeneratedCustomerRefundRequest;
