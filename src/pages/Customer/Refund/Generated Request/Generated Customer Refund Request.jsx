@@ -83,7 +83,7 @@ function GeneratedCustomerRefundRequest() {
 
                     <div className="refundButtonField">
                         <div className="refundRequestButtons">
-                            <Link to="/createrefund">
+                            <Link to="/refundRequests">
                                 <CustomizedButton
                                     hoverBackgroundColor="#2d3ed2"
                                     style={{
