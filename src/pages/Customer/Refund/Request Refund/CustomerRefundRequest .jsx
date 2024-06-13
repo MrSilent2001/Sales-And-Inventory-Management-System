@@ -1,5 +1,5 @@
 import './Customer Refund Request.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
 import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 
 function SelectItem({ value, onChange, error }) {
     return (
@@ -131,8 +132,8 @@ function BasicTextFields({ name, value, onChange, error }) {
 
 function CustomerRefundRequest() {
     const [formData, setFormData] = useState({
-        customerId: '12345', // Temporary value
-        customerName: 'John Doe', // Temporary value
+        customerId: '', 
+        customerName: '', 
         contact: '',
         item: '',
         quantity: '',
@@ -149,6 +150,18 @@ function CustomerRefundRequest() {
     });
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            const decodedToken = jwtDecode(token);
+            setFormData(prevData => ({
+                ...prevData,
+                customerId: decodedToken.id,
+                customerName: decodedToken.username
+            }));
+        }
+    }, []);
 
     const handleChange = (event) => {
         setFormData({
