@@ -1,8 +1,3 @@
-
-
-
-
-
 import './Customer Refunds.css';
 import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -19,7 +14,7 @@ import Footer from "../../../../layout/footer/footer";
 import { Link } from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
 import axios from 'axios';
-// import jwt_decode from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.body}`]: {
@@ -79,17 +74,24 @@ function CustomerRefunds() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const customerId = 12345; // Temporary value
-        axios.get(`http://localhost:9000/refund/customerRefund/getByCustomerId?customerId=${customerId}`)
-            .then(response => {
-                console.log('API Response:', response.data); // Log the response data
-                setRows(response.data);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error('Error fetching refund requests:', error);
-                setLoading(false);
-            });
+        const token = localStorage.getItem('token');
+        if (token) {
+            const decodedToken = jwtDecode(token);
+            const customerId = decodedToken.id;
+
+            axios.get(`http://localhost:9000/refund/customerRefund/getByCustomerId?customerId=${customerId}`)
+                .then(response => {
+                    console.log('API Response:', response.data); // Log the response data
+                    setRows(response.data);
+                    setLoading(false);
+                })
+                .catch(error => {
+                    console.error('Error fetching refund requests:', error);
+                    setLoading(false);
+                });
+        } else {
+            setLoading(false);
+        }
     }, []);
 
     return (
