@@ -1,0 +1,11 @@
+.inv_inner_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #DBDFFD;
+    max-width:100%;
+}
+  
+
+
+  
