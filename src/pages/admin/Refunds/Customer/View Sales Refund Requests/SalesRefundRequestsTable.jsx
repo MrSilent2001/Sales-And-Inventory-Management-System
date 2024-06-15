@@ -1,72 +1,111 @@
-import React, {useMemo, useState} from 'react';
-import {Box, Container, Paper, Typography} from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Box, Container, Typography, Tooltip } from '@mui/material';
+import axios from 'axios';
 import Footer from "../../../../../layout/footer/footer";
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import CustomizedButton from "../../../../../components/Button/button";
-import viewRefunds from "../../../../../context/data.json";
 import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 import PageLoader from "../../../../../components/Page Loader/pageLoader";
-import DynamicTable from "../../../../../components/Table/customizedTable2";
+import WarningIcon from '@mui/icons-material/Warning';
+import CustomizedAlert from '../../../../../components/Alert/alert';
 
+const SalesRefundRequestsTable = ({ onViewApproved }) => {
+    const [isLoading, setIsLoading] = useState(true);
+    const [refundRequests, setRefundRequests] = useState([]);
+    const [error, setError] = useState('');
+    const [hasOverdue, setHasOverdue] = useState(false);
 
-const SalesRefundRequestsTable = ({onViewApproved}) => {
-    const [isLoading, setIsLoading] = useState(false);
-    const handleStatusButtonClick = requestId => {
-        console.log('Button for request ID', requestId, 'was clicked');
-    };
+    useEffect(() => {
+        const fetchRefundRequests = async () => {
+            try {
+                const response = await axios.get('http://localhost:9000/refund/customerRefund/getRefundByStatus', {
+                    params: {
+                        refundStatus: 'pending'
+                    }
+                });
+                const currentDate = new Date();
+                const dataWithWarning = response.data.map(request => {
+                    const createdDate = new Date(request.createdDate);
+                    const timeDifference = Math.floor((currentDate - createdDate) / (1000 * 60 * 60 * 24));
+                    const warning = timeDifference > 5;
+                    if (warning) {
+                        setHasOverdue(true);
+                    }
+                    return {
+                        ...request,
+                        warning,
+                        daysPending: timeDifference
+                    };
+                });
+                setRefundRequests(dataWithWarning);
+                console.log(dataWithWarning);
+            } catch (error) {
+                console.error('Error fetching refund requests:', error);
+                setError('Failed to fetch refund requests. Please try again later.');
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchRefundRequests();
+    }, []);
 
-    // const columns=[
-    //     { id: 'name', label: 'Name', minWidth: 70,align: 'center'  },
-    //     { id: 'requestId', label: 'Request Id', minWidth: 150,align: 'center'  },
-    //     { id: 'orderId', label: 'Order Id', minWidth: 120,align: 'center'  },
-    //     { id: 'actions', label:'', minWidth: 200,align: 'center'  }
-    // ];
+    const columns = [
+        { columnId: 'customerName', label: 'Name', minWidth: 70, align: 'center' },
+        { columnId: 'id', label: 'Request Id', minWidth: 100, align: 'center' },
+        { columnId: 'orderId', label: 'Order Id', minWidth: 100, align: 'center' },
+        { columnId: 'actions', label: 'Actions', minWidth: 150, align: 'center' }
+    ];
 
-    const columns = useMemo(() => [
-        { accessorKey: 'name', header: 'Name', size: 70, align: 'center' },
-        { accessorKey: 'requestId', header: 'Request Id', size: 100, align: 'center' },
-        { accessorKey: 'orderId', header: 'Order Id', size: 100, align: 'center' }
-    ], []);
-
-
-    const rows = viewRefunds.viewRefunds || [];
-
-    const mappedData = rows.map(row => ({
-        name: row.name,
-        requestId: row.requestId,
+    const mappedData = refundRequests.map(row => ({
+        id: row.id,
+        customerName: row.customerName,
         orderId: row.orderId,
         actions: (
-            <Link to="/SalesViewRequest">
-                <CustomizedButton
-                    onClick={() => handleStatusButtonClick}
-                    hoverBackgroundColor="#2d3ed2"
-                    style={{
-                        color: '#ffffff',
-                        backgroundColor: '#242F9B',
-                        border: '1px solid #242F9B',
-                        width: '6em',
-                        height: '2.5em',
-                        fontSize: '0.95em',
-                        fontFamily: 'inter',
-                        padding: '0.5em 0.625em',
-                        borderRadius: '0.35em',
-                        fontWeight: '550',
-                        marginTop: '0.625em',
-                        textTransform: 'none',
-                        textAlign: 'center',
-                    }}>
-                    View
-                </CustomizedButton>
-            </Link>
+            <Box key={row.id} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Link to={`/SalesViewRequest/${row.id}`} key={row.id}>
+                    <CustomizedButton
+                        hoverBackgroundColor="#2d3ed2"
+                        style={{
+                            color: '#ffffff',
+                            backgroundColor: '#242F9B',
+                            border: '1px solid #242F9B',
+                            width: '6em',
+                            height: '2.5em',
+                            fontSize: '0.95em',
+                            fontFamily: 'inter',
+                            padding: '0.5em 0.625em',
+                            borderRadius: '0.35em',
+                            fontWeight: '550',
+                            marginTop: '0.625em',
+                            textTransform: 'none',
+                            textAlign: 'center',
+                        }}>
+                        View
+                    </CustomizedButton>
+                </Link>
+                {row.warning && (
+                    <Tooltip title={`Overdue by ${row.daysPending - 5} days`}>
+                        <WarningIcon style={{ color: 'red', marginLeft: '0.5em' }} />
+                    </Tooltip>
+                )}
+            </Box>
         )
     }));
 
-
     return (
         <>
-            <SalesNavbar/>
-            <Container maxWidth="90%" style={{backgroundColor: '#DBDFFD', height: '37.5em'}}>
+            <SalesNavbar />
+            <Container maxWidth="90%" style={{ backgroundColor: '#DBDFFD', height: '37.5em' }}>
+                {hasOverdue && (
+                    <CustomizedAlert
+                        onClose={() => {}}
+                        open={hasOverdue}
+                        message="There are overdue refund requests !"
+                        severity="warning"
+                        style={{ marginBottom: 16 }}
+                    />
+                )}
                 <Box>
                     <Box
                         sx={{
@@ -77,11 +116,11 @@ const SalesRefundRequestsTable = ({onViewApproved}) => {
                             marginBottom: 2
                         }}
                     >
-                        <Typography variant="h6" sx={{fontWeight: 'bold'}}>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                             Refund Request
                         </Typography>
-                        <Box>
-                            <Link to="/ApprovedRefundsTable">
+                        <Box sx={{ display: 'flex', gap: '1em' }}>
+                            <Link to="/SalesApprovedRefundsTable">
                                 <CustomizedButton
                                     onClick={onViewApproved}
                                     hoverBackgroundColor="#2d3ed2"
@@ -103,22 +142,46 @@ const SalesRefundRequestsTable = ({onViewApproved}) => {
                                     Approved Refunds
                                 </CustomizedButton>
                             </Link>
-
+                            <Link to="/SalesRejectedRefundsTable">
+                                <CustomizedButton
+                                    onClick={onViewApproved}
+                                    hoverBackgroundColor="#2d3ed2"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#242F9B',
+                                        border: '1px solid #242F9B',
+                                        width: '11em',
+                                        height: '2.5em',
+                                        fontSize: '0.95em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        fontWeight: '550',
+                                        marginTop: '0.625em',
+                                        textTransform: 'none',
+                                        textAlign: 'center',
+                                    }}>
+                                    Rejected Refunds
+                                </CustomizedButton>
+                            </Link>
                         </Box>
                     </Box>
-                        {isLoading ? (
-                            <PageLoader />
-                        ) : (
-
-                            <DynamicTable
-                                columns={columns}
-                                data={viewRefunds}
-                                includeProfile={false}
-                            />
-                        )}
+                    {isLoading ? (
+                        <PageLoader />
+                    ) : error ? (
+                        <Typography variant="body1" color="error">
+                            {error}
+                        </Typography>
+                    ) : (
+                        <CustomizedTable
+                            columns={columns}
+                            rows={mappedData}
+                            style={{ minWidth: 700, maxHeight: 400 }}
+                        />
+                    )}
                 </Box>
             </Container>
-            <Footer/>
+            <Footer />
         </>
     );
 };

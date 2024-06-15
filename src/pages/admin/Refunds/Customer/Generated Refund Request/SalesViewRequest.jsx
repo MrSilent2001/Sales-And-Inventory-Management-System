@@ -1,24 +1,78 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import './SalesViewRequest.css';
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../../../layout/footer/footer";
 import CustomizedButton from "../../../../../components/Button/button";
 
+// API call function to update refund status
+const updateRefundStatus = async (id, status) => {
+    try {
+        const response = await axios.put('http://localhost:9000/refund/customerRefund/updateStatus', {
+            id,
+            status,
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error updating refund status:', error);
+        throw error;
+    }
+};
+
 function SalesViewRequest() {
+    const { id } = useParams();
+    const [refundRequest, setRefundRequest] = useState(null);
+
+    useEffect(() => {
+        // Fetch the refund request details using the ID from the URL
+        const fetchRefundRequest = async () => {
+            try {
+                const response = await axios.get(`http://localhost:9000/refund/customerRefund/get/${id}`);
+                setRefundRequest(response.data);
+            } catch (error) {
+                console.error('Error fetching refund request:', error);
+            }
+        };
+
+        fetchRefundRequest();
+    }, [id]);
+
+    const handleAccept = async () => {
+        try {
+            const response = await updateRefundStatus(id, 'accepted');
+            alert(`Order has been accepted: ${response.status}`);
+        } catch (error) {
+            alert('Error accepting the order');
+        }
+    };
+
+    const handleReject = async () => {
+        try {
+            const response = await updateRefundStatus(id, 'rejected');
+            alert(`Order has been rejected: ${response.status}`);
+        } catch (error) {
+            alert('Error rejecting the order');
+        }
+    };
+
+    if (!refundRequest) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <>
-            <SalesNavbar/>
+            <SalesNavbar />
             <div className='outer'>
                 <div className="generated-request">
                     <h2>Generated Request</h2>
                     <div className="refundRequestDetails">
-
                         <div className="formField">
                             <div className="textField">
                                 <h5>Customer</h5>
                             </div>
                             <div className="inputData">
-                                <h6>WAP Saman Perera</h6>
+                                <h6>{refundRequest.customerName}</h6>
                             </div>
                         </div>
 
@@ -27,7 +81,7 @@ function SalesViewRequest() {
                                 <h5>Contact</h5>
                             </div>
                             <div className="inputData">
-                                <h6>0771112234</h6>
+                                <h6>{refundRequest.contact}</h6>
                             </div>
                         </div>
 
@@ -36,7 +90,7 @@ function SalesViewRequest() {
                                 <h5>Item</h5>
                             </div>
                             <div className="inputData">
-                                <h6>I0001</h6>
+                                <h6>{refundRequest.item}</h6>
                             </div>
                         </div>
 
@@ -45,7 +99,7 @@ function SalesViewRequest() {
                                 <h5>Quantity</h5>
                             </div>
                             <div className="inputData">
-                                <h6>35</h6>
+                                <h6>{refundRequest.quantity}</h6>
                             </div>
                         </div>
 
@@ -54,7 +108,7 @@ function SalesViewRequest() {
                                 <h5>Reason</h5>
                             </div>
                             <div className="inputData">
-                                <h6>Defected Items</h6>
+                                <h6>{refundRequest.reason}</h6>
                             </div>
                         </div>
 
@@ -63,14 +117,14 @@ function SalesViewRequest() {
                                 <h5>Total Price</h5>
                             </div>
                             <div className="inputData">
-                                <h6>Rs.120,000</h6>
+                                <h6>{refundRequest.totalPrice}</h6>
                             </div>
                         </div>
-
                     </div>
 
-                    <div style={{display:'flex'}}>
+                    <div style={{ display: 'flex' }}>
                         <CustomizedButton
+                            onClick={handleAccept}
                             hoverBackgroundColor="#2d3ed2"
                             style={{
                                 color: '#ffffff',
@@ -92,7 +146,7 @@ function SalesViewRequest() {
                         </CustomizedButton>
 
                         <CustomizedButton
-                            onClick={() =>{alert("Order has been Cancelled")}}
+                            onClick={handleReject}
                             hoverBackgroundColor="#f11717"
                             style={{
                                 color: '#ffffff',
@@ -113,9 +167,8 @@ function SalesViewRequest() {
                         </CustomizedButton>
                     </div>
                 </div>
-
             </div>
-            <Footer/>
+            <Footer />
         </>
     );
 }

@@ -5,6 +5,7 @@ import View from "../pages/admin/Customer Dashboard/view";
 import ApprovedRefundsTable from "../pages/admin/Refunds/Inventory/Approved Refunds/ApprovedRefundsTable";
 import InventoryGeneratedRequest from "../pages/admin/Refunds/Inventory/generatedRequests/InventoryGeneratedRequest";
 import SalesApprovedRefundsTable from "../pages/admin/Refunds/Customer/Sales_Approved Refunds/SalesApprovedRefundsTable";
+import SalesRejectedRefundsTable from "../pages/admin/Refunds/Customer/Sales_Rejected Refunds/SalesRejectedRefundsTable";
 import SalesRefundDenialForm from "../pages/admin/Refunds/Customer/Refund Denial Form/SalesRefundDenialForm";
 import SalesViewRequest from "../pages/admin/Refunds/Customer/Generated Refund Request/SalesViewRequest";
 import Success from "../pages/Customer/Cart/success";
@@ -75,7 +76,7 @@ export function PageRouting() {
                 <Route path="/bill" element={<SalesReceipt/>}/>
 
 {/*===================================================Protected Routes==============================================================*/}
-                <Route element={<ProtectedRoute />}>
+                {/*<Route element={<ProtectedRoute />}>*/}
 
                     {/*Supplier view routes*/}
                     <Route path="/supplierHome" element={<SupplierHome/>}/>
@@ -127,7 +128,7 @@ export function PageRouting() {
                     <Route path="/InventoryGeneratedRequest" element={<InventoryGeneratedRequest/>}/>
                     <Route path="/InventoryRefundRequestsTable" element={<InventoryRefundRequestsTable/>}/>
                     <Route path="/SalesApprovedRefundsTable" element={<SalesApprovedRefundsTable/>}/>
-
+                    <Route path="/SalesRejectedRefundsTable" element={<SalesRejectedRefundsTable/>}/>
 
 
                     <Route path="/orderHistory/:id" element={<AdminOrderHistory/>}/>
@@ -136,10 +137,10 @@ export function PageRouting() {
 
 
                     <Route path="/SalesRefundDenialForm" element={<SalesRefundDenialForm/>}/>
-                    <Route path="/SalesViewRequest" element={<SalesViewRequest/>}/>
+                    <Route path="/SalesViewRequest/:id" element={<SalesViewRequest/>}/>
                     <Route path="/SalesRefundRequestTable" element={<SalesRefundRequestsTable/>}/>
 
-                </Route>
+                 {/*</Route>*/}
             </Routes>
         </div>
     );
