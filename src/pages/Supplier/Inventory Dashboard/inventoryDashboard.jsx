@@ -1,57 +1,33 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import "./inventoryDashboard.css";
 import {Modal} from "@mui/material";
 import AddItem from "./Modals/Add Item/AddItem";
 import UpdateItem from "./Modals/Update Item/UpdateItem";
 import Footer from "../../../layout/footer/footer";
 import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navbar";
-import SearchBar from "../../../components/search bar/search bar";
 import CustomizedButton from "../../../components/Button/button";
-import CustomizedTable from "../../../components/Table/Customized Table/customizedTable";
 import CustomizedAlert from "../../../components/Alert/alert";
 import axios from "axios";
+import PageLoader from "../../../components/Page Loader/pageLoader";
+import DynamicTable from "../../../components/Table/customizedTable2";
 
-const columns = [
-    {columnId: 'sellerId', label: 'Supplier Id', minWidth: 70, align: 'center'},
-    {columnId: 'productName', label: 'Item Name', minWidth: 100, align: 'center'},
-    {
-        columnId: 'productDescription',
-        label: 'Item Description',
-        minWidth: 200,
-        align: 'center',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-        columnId: 'productCategory',
-        label: 'Item Category',
-        minWidth: 120,
-        align: 'center',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-        columnId: 'productUnitPrice',
-        label: 'Unit Price',
-        minWidth: 100,
-        align: 'center',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-        columnId: 'productQuantity',
-        label: 'Qty.',
-        minWidth: 100,
-        align: 'center',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-    { columnId: 'actions', label: '', minWidth: 170, align: 'center' },
-];
 function InventoryDashboard(){
-    const [addVisible,setAddVisible] = useState(false);
+    const [visible, setVisible] = useState(false);
     const [updateVisible,setUpdateVisible] = useState(false);
-
+    const [isLoading, setIsLoading] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
     const [inventory, setInventory] = useState([]);
+    const [selectedItem, setSelectedItem] = useState(null);
 
+    const columns = useMemo(() => [
+        { accessorKey: 'sellerId', header: 'Supplier Id', size: 70 },
+        { accessorKey: 'productName', header: 'Item Name', size: 100 },
+        { accessorKey: 'productDescription', header: 'Item Description', size: 200 },
+        { accessorKey: 'productCategory', header: 'Item Category', size: 120 },
+        { accessorKey: 'productUnitPrice', header: 'Unit Price', size: 100 },
+        { accessorKey: 'productQuantity', header: 'Qty.', size: 100 }
+    ], []);
 
     const handleClickSuccess = () => {
         setOpenSuccess(true);
@@ -96,23 +72,16 @@ function InventoryDashboard(){
 
     const handleUpdate = async (id) => {
         try {
-            await axios.delete(`http://localhost:9000/inventory/update/${id}`, {
+            const response = await axios.get(`http://localhost:9000/inventory/get/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
-
-            // Fetching the updated list of items after deletion
-            const response = await axios.get('http://localhost:9000/inventory/getAll', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            setInventory(response.data);
-            handleClickSuccess();
-
+            setSelectedItem(response.data);
+            setUpdateVisible(true);
         } catch (error) {
-            console.error('Error updating Items:', error);
+            console.error('Error fetching item:', error);
+            handleClickError();
         }
     };
 
@@ -138,7 +107,7 @@ function InventoryDashboard(){
         return (
             <div style={{ display: 'flex' }}>
                 <CustomizedButton
-                    onClick={() => { setUpdateVisible(true)}}
+                    onClick={() => handleUpdate(id)}
                     hoverBackgroundColor="#2d3ed2"
                     style={{
                         color: '#ffffff',
@@ -176,6 +145,30 @@ function InventoryDashboard(){
         );
     };
 
+    const createAddItemButton = () => {
+        const buttonStyle = {
+            backgroundColor: '#242F9B',
+            border: '1px solid #242F9B',
+            width: '9.5em',
+            height: '2.5em',
+            fontSize: '0.75em',
+            padding: '0.5em 0.625em',
+            borderRadius: '0.35em',
+            fontWeight: '550',
+        };
+
+        return (
+            <CustomizedButton
+                onClick={() => setVisible(true)}
+                hoverBackgroundColor="#2d3ed2"
+                style={buttonStyle}
+            >
+                Add Item
+            </CustomizedButton>
+        );
+    };
+
+
     rows = rows.map(row => ({...row, actions: createActionButtons(row.id)}));
 
     const handleInventoryAdded = (updatedInventory) => {
@@ -185,73 +178,38 @@ function InventoryDashboard(){
         setInventory(updatedInventory);
     };
 
-    // Fetch Items function with query parameter
-    const fetchItems = async (query) => {
-        try {
-            const response = await axios.get(`http://localhost:9000/inventory/search?keyword=${query}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            setInventory(response.data);
-        } catch (error) {
-            console.error('Error fetching Items:', error);
-        }
-    };
-
-
     return(
         <>
             <SupplierNavbar/>
 
             <div className="supplierViewInventoryOuter">
                 <div className="supplierViewInventoryInner">
-                    <div className="supplierInvSearchAndButtons">
-                        <div className="supplierViewInventorySearch">
-                            <SearchBar
-                                label="Search Items"
-                                onKeyPress={fetchItems}
-                            />
-                        </div>
-                        <div className="supplierViewInventoryButtons">
-                            <CustomizedButton
-                                onClick={()=>setAddVisible(true)}
-                                hoverBackgroundColor="#2d3ed2"
-                                style={{
-                                    backgroundColor: '#242F9B',
-                                    border: '1px solid #242F9B',
-                                    width: '9.5em',
-                                    height: '2.5em',
-                                    fontSize: '0.8em',
-                                    padding: '0.5em 0.625em',
-                                    borderRadius: '0.35em',
-                                    fontWeight: '500',
-                                    marginTop: '0.625em',
-                                    marginRight: '1.5em',
-                                }}>
-                                Add Item
-                            </CustomizedButton>
-                        </div>
-                    </div>
-
                     <div className="supplierItemTable">
-                        <CustomizedTable
-                            columns={columns}
-                            rows={rows}
-                            style={{width: '95%'}}
-                        />
+                        {isLoading ? (
+                            <PageLoader />
+                        ) : (
+
+                            <DynamicTable
+                                columns={columns}
+                                data={rows}
+                                createActions={createActionButtons}
+                                renderToolbarItems={createAddItemButton}
+                                includeProfile={false}
+                            />
+                        )}
                     </div>
                 </div>
 
-                <Modal open={addVisible}>
+                <Modal open={visible}>
                     <AddItem
-                        onClose={() => { setAddVisible(false)}}
+                        onClose={() => { setVisible(false)}}
                         onInventoryAdded={handleInventoryAdded}
                     />
                 </Modal>
 
                 <Modal open={updateVisible}>
                     <UpdateItem
+                        itemData={selectedItem}
                         onClose={() => { setUpdateVisible(false)}}
                         onInventoryUpdated={handleInventoryUpdated}
                     />

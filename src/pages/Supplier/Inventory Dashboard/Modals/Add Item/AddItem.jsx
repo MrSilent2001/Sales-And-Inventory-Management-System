@@ -345,8 +345,7 @@ function AddSupplierInventoryItem(props) {
                                         height: '2.5em',
                                         fontSize: '0.8em',
                                         padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        margin: '0 1em 1.25em 0'
+                                        borderRadius: '0.35em'
                                     }}>
                                     Add Item
                                 </CustomizedButton>
@@ -360,8 +359,7 @@ function AddSupplierInventoryItem(props) {
                                         height: '2.5em',
                                         fontSize: '0.8em',
                                         padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        margin: '0 0 1.25em 1em'
+                                        borderRadius: '0.35em'
                                     }}>
                                     Cancel
                                 </CustomizedButton>

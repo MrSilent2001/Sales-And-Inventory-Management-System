@@ -11,11 +11,13 @@ import CustomDatePicker from "../../../../../components/DatePicker/datePicker";
 import dayjs from "dayjs";
 import FileUpload from "../../../../../components/Form Inputs/fileUpload";
 import CustomizedAlert from "../../../../../components/Alert/alert";
+import Avatar from "@mui/material/Avatar";
+import {uploadFileToBlob} from "../../productBlobStorage";
+import * as item from "date-fns/locale";
 
 function UpdateItem(props) {
-
+    const { itemData, onClose, onInventoryUpdated } = props;
     const [formData, setFormData] = useState({
-        supplierId: '',
         itemName: '',
         itemDesc: '',
         category: '',
@@ -28,6 +30,22 @@ function UpdateItem(props) {
 
     });
 
+    useEffect(() => {
+        if (itemData) {
+            setFormData({
+                itemName: itemData.productName || '',
+                itemDesc: itemData.productDescription || '',
+                category: itemData.productCategory || '',
+                brand: itemData.productBrand || '',
+                manufacturedDate: itemData.productManufacturer || '',
+                color: itemData.productColour || '',
+                quantity: itemData.productQuantity || '',
+                price: itemData.productUnitPrice || '',
+                image: itemData.productImage || ''
+            });
+        }
+    }, [itemData]);
+
     const handleChange = (name, value) => {
         setFormData(prevState => ({
             ...prevState,
@@ -35,7 +53,8 @@ function UpdateItem(props) {
         }));
         console.log(formData);
     };
-
+    const [errors, setErrors] = useState({});
+    const [productImages, setProductImages] = useState(null);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
 
@@ -57,59 +76,80 @@ function UpdateItem(props) {
 
     const token = localStorage.getItem('accessToken');
 
-    useEffect(() => {
-        // Fetch item data from backend and set form data
-        async function fetchItemData(id) {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const validationErrors = {};
+
+        if (!formData.itemName) {
+            validationErrors.itemName = " *This Field is required";
+        }
+        if (!formData.itemDesc) {
+            validationErrors.itemDesc = " *This Field is required";
+        }
+        if (!formData.category) {
+            validationErrors.category = " *This Field is required";
+        }
+        if (!formData.brand) {
+            validationErrors.brand = " *This Field is required";
+        }
+        if (!formData.manufacturedDate) {
+            validationErrors.manufacturedDate = " *This Field is required";
+        }
+        if (!formData.color) {
+            validationErrors.color = " *This Field is required";
+        }
+        if (!formData.quantity) {
+            validationErrors.quantity = " *This Field is required";
+        }
+        if (!formData.price) {
+            validationErrors.price = " *This Field is required";
+        }
+        if (!formData.image) {
+            validationErrors.image = " *This Field is required";
+        }
+
+        setErrors(validationErrors);
+        if(Object.keys(validationErrors).length === 0){
             try {
-                const response = await axios.get(`http://localhost:9000/inventory/getItem/${id}` , {
+                let imageUrl = '';
+                if(productImages){
+                    imageUrl = await uploadFileToBlob(productImages);
+
+                }
+                await axios.put(`http://localhost:9000/inventory/update${item.id}`, {
+                    productName: formData.itemName,
+                    productDescription: formData.itemDesc,
+                    productCategory: formData.category,
+                    productBrand: formData.brand,
+                    productManufacturer: formData.manufacturedDate,
+                    productColour: formData.color,
+                    productQuantity: formData.quantity,
+                    productUnitPrice: formData.price,
+                    productImage: [imageUrl]
+                },{
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                });
+
+                const response = await axios.get('http://localhost:9000/inventory/getAll' , {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
+                const updatedInventory = response.data;
+
+                props.onInventoryAdded(updatedInventory);
+                handleClickSuccess();
+                props.onClose(false);
             } catch (error) {
-                console.error('Error fetching item data:', error);
+                console.error('Error adding Item:', error);
+                handleClickError();
             }
+        }else{
+            console.log("error");
         }
-
-        fetchItemData();
-    }, []);
-
-    const handleSubmit = async (e, id) => {
-        e.preventDefault();
-
-        try {
-            await axios.put(`http://localhost:9000/inventory/update/${id}`, {
-                sellerId: formData.supplierId,
-                productName: formData.itemName,
-                productDescription: formData.itemDesc,
-                productCategory: formData.category,
-                productBrand: formData.brand,
-                productManufacturer: formData.manufacturedDate,
-                productColour: formData.color,
-                productQuantity: formData.quantity,
-                productUnitPrice: formData.price,
-                // productImage: formData.image
-            } , {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-
-            const response = await axios.get('http://localhost:9000/inventory/getAll' , {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            const updatedInventory = response.data;
-
-            props.onInventoryAdded(updatedInventory);
-            handleClickSuccess();
-            props.onClose(false);
-        } catch (error) {
-            console.error('Error adding Item:', error);
-            handleClickError();
-        }
-
     };
 
     const options = [
@@ -123,200 +163,216 @@ function UpdateItem(props) {
         {value: 'Construction Chemicals', label: 'Construction Chemicals'}
     ];
 
+
     return (
         <CenteredModal>
             <FormControl onSubmit={handleSubmit}>
                 <div className="updateSupplierItemOuter">
-                    <div className="updateSupplierItemModel">
-                        <h2>Update Item</h2>
-                        <div className="updateSupplierItemForm">
-                            <div className="updateSupplierItemformField">
-                                <div className="updateSupplierItemidField">
-                                    <h5>Supplier Id:</h5>
-                                </div>
-                                <div className="updateSupplierItemidInput">
-                                    <BasicTextField
-                                        name="supplierId"
-                                        type="text"
-                                        size='small'
-                                        value={formData.supplierId}
-                                        onChange={(e) => handleChange("supplierId", e.target.value)}
-                                    />
-                                </div>
+                    <div className="item-image">
+                        <Avatar src={formData.productImage}
+                                sx={{ width: 230, height: 230, border: 2}} />
+                        <div className='uploadButton'>
+                            <FileUpload
+                                style={{ width: "15em", top: "2em" }}
+                                onChange={''}
+                            />
+                        </div>
+                    </div>
+                    <div className="item-details">
+                        <div className="item-form-field">
+                            <div className="item-form-field-label">
+                                <h5>Item Name:</h5>
                             </div>
-
-                            <div className="updateSupplierItemformField">
-                                <div className="updateSupplierItemidField">
-                                    <h5>Item Name:</h5>
-                                </div>
-                                <div className="updateSupplierItemidInput">
-                                    <BasicTextField
-                                        name="itemName"
-                                        type="text"
-                                        size='small'
-                                        onChange={(e) => handleChange("itemName", e.target.value)}
-                                    />
-                                </div>
+                            <div className="item-input-field">
+                                <BasicTextField
+                                    name="itemName"
+                                    type="text"
+                                    size='small'
+                                    value={formData.itemName}
+                                    onChange={(e) => handleChange("itemName", e.target.value)}
+                                />
                             </div>
+                        </div>
+                        {errors.itemName && <span style={{
+                            color: 'red',
+                            fontSize: '0.8em',
+                            padding: '0 0 0.5em 0.5em'
+                        }}>{errors.itemName}</span>}
 
-                            <div className="updateSupplierItemformField">
-                                <div className="updateSupplierItemidField">
-                                    <h5>Item Description:</h5>
-                                </div>
-                                <div className="updateSupplierItemInput">
-                                    <BasicTextField
-                                        name="itemDesc"
-                                        type="text"
-                                        size='small'
-                                        onChange={(e) => handleChange("itemDesc", e.target.value)}
-                                    />
-                                </div>
+
+                        <div className="item-form-field">
+                            <div className="item-form-field-label">
+                                <h5>Item Description:</h5>
                             </div>
-
-                            <div className="customRow">
-                                <div className="updateSupplierItemformField">
-                                    <div className="updateSupplierItemidField">
-                                        <h5>Category:</h5>
-                                    </div>
-                                    <div className="updateSupplierItemidInput">
-                                        <ComboBox
-                                            name="category"
-                                            onChange={(e) => handleChange("category", e.target.value)}
-                                            style={{
-                                                width: '10.5em',
-                                                height: '2em',
-                                                marginRight: '0.5em',
-                                                border: '1px solid white'
-                                            }}
-                                            options={options}
-                                            size="small"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="updateSupplierItemformField">
-                                    <div className="updateSupplierItemidField">
-                                        <h5>Brand:</h5>
-                                    </div>
-                                    <div className="updateSupplierItemidInput">
-                                        <BasicTextField
-                                            name="brand"
-                                            type="text"
-                                            size='small'
-                                            onChange={(e) => handleChange("brand", e.target.value)}
-                                            style={{width: '90%'}}
-                                        />
-                                    </div>
-                                </div>
+                            <div className="item-input-field">
+                                <BasicTextField
+                                    name="itemDesc"
+                                    type="text"
+                                    size='small'
+                                    value={formData.itemDesc}
+                                    onChange={(e) => handleChange("itemDesc", e.target.value)}
+                                />
                             </div>
+                        </div>
+                        {errors.itemDesc && <span style={{
+                            color: 'red',
+                            fontSize: '0.8em',
+                            padding: '0 0 0.5em 0.5em'
+                        }}>{errors.itemDesc}</span>}
 
-                            <div className="customRow">
-                                <div className="updateSupplierItemformField">
-                                    <div className="updateSupplierItemidField">
-                                        <h5>Manufactured Date</h5>
-                                    </div>
-                                    <div className="updateSupplierItemidInput">
-                                        <CustomDatePicker
-                                            name="manufacturedDate"
-                                            slotProps={{textField: {size: 'small', width: '10em'}}}
-                                            required
-                                            onChange={(date) => {
-                                                const formattedDate = dayjs(date).format('YYYY-MM-DD');
-                                                console.log(formattedDate);
-                                                handleChange("manufacturedDate", formattedDate);
-                                            }}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="updateSupplierItemformField">
-                                    <div className="updateSupplierItemidField">
-                                        <h5>Color:</h5>
-                                    </div>
-                                    <div className="updateSupplierItemidInput">
-                                        <BasicTextField
-                                            name="color"
-                                            type="text"
-                                            size='small'
-                                            onChange={(e) => handleChange("color", e.target.value)}
-                                            style={{width: '90%'}}
-                                        />
-                                    </div>
-                                </div>
+                        <div className="item-form-field">
+                            <div className="item-form-field-label">
+                                <h5>Category:</h5>
                             </div>
-
-                            <div className="customRow">
-                                <div className="updateSupplierItemformField">
-                                    <div className="addSupplierItemidField">
-                                        <h5>Quantity:</h5>
-                                    </div>
-                                    <div className="updateSupplierItemidInput">
-                                        <BasicTextField
-                                            name="quantity"
-                                            type="number"
-                                            size='small'
-                                            onChange={(e) => handleChange("quantity", e.target.value)}
-                                            style={{width: '90%'}}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="updateSupplierItemformField">
-                                    <div className="updateSupplierItemidField">
-                                        <h5>Offering Price:</h5>
-                                    </div>
-                                    <div className="updateSupplierItemidInput">
-                                        <BasicTextField
-                                            name="price"
-                                            type="number"
-                                            size='small'
-                                            onChange={(e) => handleChange("price", e.target.value)}
-                                            style={{width: '90%'}}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="updateSupplierItemformField">
-                                <div className="updateSupplierItemidField">
-                                    <h5>Item Image:</h5>
-                                </div>
-                                <FileUpload/>
-                            </div>
-
-                            <div className="updateSupplierItemformFieldButtons">
-                                <CustomizedButton
-                                    onClick={handleSubmit}
-                                    hoverBackgroundColor="#2d3ed2"
+                            <div className="item-input-field">
+                                <ComboBox
+                                    name="category"
+                                    onChange={(e) => handleChange("category", e.target.value)}
                                     style={{
-                                        backgroundColor: '#242F9B',
-                                        border: '1px solid #242F9B',
-                                        width: '8em',
-                                        height: '2.5em',
-                                        fontSize: '0.8em',
-                                        padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        margin: '0 1em 1.25em 0'
-                                    }}>
-                                    Update Item
-                                </CustomizedButton>
-
-                                <CustomizedButton
-                                    onClick={() => props.onClose(false)}
-                                    hoverBackgroundColor="#f11717"
-                                    style={{
-                                        backgroundColor: '#960505',
-                                        width: '8em',
-                                        height: '2.5em',
-                                        fontSize: '0.8em',
-                                        padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        margin: '0 0 1.25em 1em'
-                                    }}>
-                                    Cancel
-                                </CustomizedButton>
-
+                                        width: '10.5em',
+                                        height: '2em',
+                                        marginRight: '0.5em',
+                                        border: '1px solid white'
+                                    }}
+                                    value={formData.category}
+                                    options={options}
+                                    size="small"
+                                />
                             </div>
+                        </div>
+                        {errors.category && <span style={{
+                            color: 'red',
+                            fontSize: '0.8em',
+                            padding: '0 0 0.5em 0.5em'
+                        }}>{errors.category}</span>}
+
+
+                        <div className="item-form-field">
+                            <div className="item-form-field-label">
+                                <h5>Brand:</h5>
+                            </div>
+                            <div className="item-input-field">
+                                <BasicTextField
+                                    name="brand"
+                                    type="text"
+                                    size='small'
+                                    value={formData.brand}
+                                    onChange={(e) => handleChange("brand", e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        {errors.brand && <span
+                            style={{color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em'}}>{errors.brand}</span>}
+
+
+                        <div className="item-form-field">
+                            <div className="item-form-field-label">
+                                <h5>Manufactured Date</h5>
+                            </div>
+                            <div className="item-input-field">
+                                <CustomDatePicker
+                                    name="manufacturedDate"
+                                    slotProps={{textField: {size: 'small', width: '10em'}}}
+                                    required
+                                    onChange={(date) => {
+                                        const formattedDate = dayjs(date).format('YYYY-MM-DD');
+                                        console.log(formattedDate);
+                                        handleChange("manufacturedDate", formattedDate);
+                                    }}
+                                />
+                            </div>
+                        </div>
+                        {errors.manufacturedDate && <span style={{
+                            color: 'red',
+                            fontSize: '0.8em',
+                            padding: '0 0 0.5em 0.5em'
+                        }}>{errors.manufacturedDate}</span>}
+
+
+                        <div className="item-form-field">
+                            <div className="item-form-field-label">
+                                <h5>Color:</h5>
+                            </div>
+                            <div className="item-input-field">
+                                <BasicTextField
+                                    name="color"
+                                    type="text"
+                                    size='small'
+                                    value={formData.color}
+                                    onChange={(e) => handleChange("color", e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        {errors.color && <span
+                            style={{color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em'}}>{errors.color}</span>}
+
+                        <div className="item-form-field">
+                            <div className="item-form-field-label">
+                                <h5>Quantity:</h5>
+                            </div>
+                            <div className="item-input-field">
+                                <BasicTextField
+                                    name="quantity"
+                                    type="number"
+                                    size='small'
+                                    value={formData.quantity}
+                                    onChange={(e) => handleChange("quantity", e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        {errors.quantity && <span style={{
+                            color: 'red',
+                            fontSize: '0.8em',
+                            padding: '0 0 0.5em 0.5em'
+                        }}>{errors.quantity}</span>}
+
+                        <div className="item-form-field">
+                            <div className="item-form-field-label">
+                                <h5>Offering Price:</h5>
+                            </div>
+                            <div className="item-input-field">
+                                <BasicTextField
+                                    name="price"
+                                    type="number"
+                                    size='small'
+                                    value={formData.price}
+                                    onChange={(e) => handleChange("price", e.target.value)}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="addItemButtons">
+                            <CustomizedButton
+                                onClick={handleSubmit}
+                                hoverBackgroundColor="#2d3ed2"
+                                style={{
+                                    backgroundColor: '#242F9B',
+                                    border: '1px solid #242F9B',
+                                    width: '8em',
+                                    height: '2.5em',
+                                    fontSize: '0.8em',
+                                    padding: '0.5em 0.625em',
+                                    borderRadius: '0.35em',
+                                    margin: '0 1em 1.25em 5em'
+                                }}>
+                                Update
+                            </CustomizedButton>
+
+                            <CustomizedButton
+                                onClick={() => props.onClose(false)}
+                                hoverBackgroundColor="#f11717"
+                                style={{
+                                    backgroundColor: '#960505',
+                                    width: '8em',
+                                    height: '2.5em',
+                                    fontSize: '0.8em',
+                                    padding: '0.5em 0.625em',
+                                    borderRadius: '0.35em',
+                                    margin: '0 0 1.25em 1em'
+                                }}>
+                                Cancel
+                            </CustomizedButton>
+
                         </div>
                     </div>
                 </div>
