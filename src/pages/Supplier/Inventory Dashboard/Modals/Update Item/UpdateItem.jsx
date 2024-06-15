@@ -13,7 +13,6 @@ import FileUpload from "../../../../../components/Form Inputs/fileUpload";
 import CustomizedAlert from "../../../../../components/Alert/alert";
 import Avatar from "@mui/material/Avatar";
 import {uploadFileToBlob} from "../../productBlobStorage";
-import * as item from "date-fns/locale";
 
 function UpdateItem(props) {
     const { itemData, onClose, onInventoryUpdated } = props;
@@ -27,7 +26,6 @@ function UpdateItem(props) {
         quantity: '',
         price: '',
         image: ''
-
     });
 
     useEffect(() => {
@@ -53,6 +51,7 @@ function UpdateItem(props) {
         }));
         console.log(formData);
     };
+
     const [errors, setErrors] = useState({});
     const [productImages, setProductImages] = useState(null);
     const [openSuccess, setOpenSuccess] = useState(false);
@@ -110,14 +109,15 @@ function UpdateItem(props) {
         }
 
         setErrors(validationErrors);
-        if(Object.keys(validationErrors).length === 0){
+        if (Object.keys(validationErrors).length === 0) {
             try {
-                let imageUrl = '';
-                if(productImages){
+                let imageUrl = formData.image;
+                if (productImages) {
                     imageUrl = await uploadFileToBlob(productImages);
-
+                    handleChange("image", imageUrl);
                 }
-                await axios.put(`http://localhost:9000/inventory/update${item.id}`, {
+
+                await axios.put(`http://localhost:9000/inventory/update${itemData.id}`, {
                     productName: formData.itemName,
                     productDescription: formData.itemDesc,
                     productCategory: formData.category,
@@ -127,54 +127,55 @@ function UpdateItem(props) {
                     productQuantity: formData.quantity,
                     productUnitPrice: formData.price,
                     productImage: [imageUrl]
-                },{
+                }, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     }
                 });
 
-                const response = await axios.get('http://localhost:9000/inventory/getAll' , {
+                const response = await axios.get('http://localhost:9000/inventory/getAll', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
                 const updatedInventory = response.data;
 
-                props.onInventoryAdded(updatedInventory);
+                onInventoryUpdated(updatedInventory);
                 handleClickSuccess();
-                props.onClose(false);
+                onClose(false);
             } catch (error) {
                 console.error('Error adding Item:', error);
                 handleClickError();
             }
-        }else{
-            console.log("error");
+        } else {
+            console.log("Validation errors");
         }
     };
 
     const options = [
-        {value: 'Building Material', label: 'Building Material'},
-        {value: 'Hardware and Tools', label: 'Hardware and Tools'},
-        {value: 'Safety Equipments', label: 'Safety Equipments'},
-        {value: 'Electrical Supplies', label: 'Electrical Supplies'},
-        {value: 'Plumbing Supplies', label: 'Plumbing Supplies'},
-        {value: 'Interior Finishes', label: 'Interior Finishes'},
-        {value: 'Landscaping Products', label: 'Landscaping Products'},
-        {value: 'Construction Chemicals', label: 'Construction Chemicals'}
+        { value: 'Building Material', label: 'Building Material' },
+        { value: 'Hardware and Tools', label: 'Hardware and Tools' },
+        { value: 'Safety Equipments', label: 'Safety Equipments' },
+        { value: 'Electrical Supplies', label: 'Electrical Supplies' },
+        { value: 'Plumbing Supplies', label: 'Plumbing Supplies' },
+        { value: 'Interior Finishes', label: 'Interior Finishes' },
+        { value: 'Landscaping Products', label: 'Landscaping Products' },
+        { value: 'Construction Chemicals', label: 'Construction Chemicals' }
     ];
-
 
     return (
         <CenteredModal>
             <FormControl onSubmit={handleSubmit}>
                 <div className="updateSupplierItemOuter">
                     <div className="item-image">
-                        <Avatar src={formData.productImage}
-                                sx={{ width: 230, height: 230, border: 2}} />
+                        <Avatar
+                            src={formData.image}
+                            sx={{ width: 230, height: 230, border: 2 }}
+                        />
                         <div className='uploadButton'>
                             <FileUpload
                                 style={{ width: "15em", top: "2em" }}
-                                onChange={''}
+                                onChange={(e) => setProductImages(e.target.files[0])}
                             />
                         </div>
                     </div>
@@ -193,12 +194,7 @@ function UpdateItem(props) {
                                 />
                             </div>
                         </div>
-                        {errors.itemName && <span style={{
-                            color: 'red',
-                            fontSize: '0.8em',
-                            padding: '0 0 0.5em 0.5em'
-                        }}>{errors.itemName}</span>}
-
+                        {errors.itemName && <span style={{ color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em' }}>{errors.itemName}</span>}
 
                         <div className="item-form-field">
                             <div className="item-form-field-label">
@@ -214,11 +210,7 @@ function UpdateItem(props) {
                                 />
                             </div>
                         </div>
-                        {errors.itemDesc && <span style={{
-                            color: 'red',
-                            fontSize: '0.8em',
-                            padding: '0 0 0.5em 0.5em'
-                        }}>{errors.itemDesc}</span>}
+                        {errors.itemDesc && <span style={{ color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em' }}>{errors.itemDesc}</span>}
 
                         <div className="item-form-field">
                             <div className="item-form-field-label">
@@ -228,24 +220,14 @@ function UpdateItem(props) {
                                 <ComboBox
                                     name="category"
                                     onChange={(e) => handleChange("category", e.target.value)}
-                                    style={{
-                                        width: '10.5em',
-                                        height: '2em',
-                                        marginRight: '0.5em',
-                                        border: '1px solid white'
-                                    }}
+                                    style={{ width: '10.5em', height: '2em', marginRight: '0.5em', border: '1px solid white' }}
                                     value={formData.category}
                                     options={options}
                                     size="small"
                                 />
                             </div>
                         </div>
-                        {errors.category && <span style={{
-                            color: 'red',
-                            fontSize: '0.8em',
-                            padding: '0 0 0.5em 0.5em'
-                        }}>{errors.category}</span>}
-
+                        {errors.category && <span style={{ color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em' }}>{errors.category}</span>}
 
                         <div className="item-form-field">
                             <div className="item-form-field-label">
@@ -261,19 +243,18 @@ function UpdateItem(props) {
                                 />
                             </div>
                         </div>
-                        {errors.brand && <span
-                            style={{color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em'}}>{errors.brand}</span>}
-
+                        {errors.brand && <span style={{ color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em' }}>{errors.brand}</span>}
 
                         <div className="item-form-field">
                             <div className="item-form-field-label">
-                                <h5>Manufactured Date</h5>
+                                <h5>Manufactured Date:</h5>
                             </div>
                             <div className="item-input-field">
                                 <CustomDatePicker
                                     name="manufacturedDate"
-                                    slotProps={{textField: {size: 'small', width: '10em'}}}
+                                    slotProps={{ textField: { size: 'small', width: '10em' } }}
                                     required
+                                    value={dayjs(formData.manufacturedDate)}
                                     onChange={(date) => {
                                         const formattedDate = dayjs(date).format('YYYY-MM-DD');
                                         console.log(formattedDate);
@@ -282,12 +263,7 @@ function UpdateItem(props) {
                                 />
                             </div>
                         </div>
-                        {errors.manufacturedDate && <span style={{
-                            color: 'red',
-                            fontSize: '0.8em',
-                            padding: '0 0 0.5em 0.5em'
-                        }}>{errors.manufacturedDate}</span>}
-
+                        {errors.manufacturedDate && <span style={{ color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em' }}>{errors.manufacturedDate}</span>}
 
                         <div className="item-form-field">
                             <div className="item-form-field-label">
@@ -303,8 +279,7 @@ function UpdateItem(props) {
                                 />
                             </div>
                         </div>
-                        {errors.color && <span
-                            style={{color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em'}}>{errors.color}</span>}
+                        {errors.color && <span style={{ color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em' }}>{errors.color}</span>}
 
                         <div className="item-form-field">
                             <div className="item-form-field-label">
@@ -320,11 +295,7 @@ function UpdateItem(props) {
                                 />
                             </div>
                         </div>
-                        {errors.quantity && <span style={{
-                            color: 'red',
-                            fontSize: '0.8em',
-                            padding: '0 0 0.5em 0.5em'
-                        }}>{errors.quantity}</span>}
+                        {errors.quantity && <span style={{ color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em' }}>{errors.quantity}</span>}
 
                         <div className="item-form-field">
                             <div className="item-form-field-label">
@@ -392,7 +363,7 @@ function UpdateItem(props) {
                 message="Something Went Wrong!"
             />
         </CenteredModal>
-    )
+    );
 }
 
 export default UpdateItem;

@@ -14,7 +14,7 @@ import Footer from "../../../../layout/footer/footer";
 import { Link } from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
 import axios from 'axios';
-import jwtDecode from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.body}`]: {
