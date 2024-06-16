@@ -53,7 +53,7 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
     };
 
     const columns = [
-        { columnId: 'name', label: 'Name', minWidth: 70, align: 'center' },
+        { columnId: 'supplierName', label: 'Name', minWidth: 70, align: 'center' },
         { columnId: 'contact_number', label: 'Contact number', minWidth: 150, align: 'center' },
         { columnId: 'inventory_id', label: 'Refund Id', minWidth: 120, align: 'center' },
         { columnId: 'amount', label: 'Price', minWidth: 200, align: 'center' },
@@ -62,10 +62,9 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
     ];
 
     const mappedData = refundRequests.map(row => ({
-        id: row.inventory_id,
-        name: row.supplier,
-        contact_number: row.phone,
         inventory_id: row.inventory_id,
+        supplierName: row.supplierName,
+        contact_number: row.phone,
         amount: row.price,
         status: row.status,
         actions: (

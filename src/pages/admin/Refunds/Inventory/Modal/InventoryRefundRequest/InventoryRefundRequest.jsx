@@ -1,58 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './InventoryRefundRequest.css';
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import CustomizedAlert from '../../../../../../components/Alert/alert';
+import ComboBox from '../../../../../../components/Form Inputs/comboBox';
 
-// Mock data for suppliers and items, replace with your actual data
-const suppliers = [
-    { code: 'S0001', name: 'Supplier 1' },
-    { code: 'S0002', name: 'Supplier 2' },
-    // ... more suppliers
-];
-
-const items = [
-    { code: 'I0001', name: 'Item 1' },
-    { code: 'I0002', name: 'Item 2' },
-    { code: 'I0003', name: 'Item 3' },
-    // ... more items
-];
-
-function Dropdown({ label, value, onChange, options }) {
-    return (
-        <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
-                <InputLabel id={`select-${label}-label`}>{label}</InputLabel>
-                <Select
-                    labelId={`select-${label}-label`}
-                    id={`select-${label}`}
-                    value={value}
-                    label={label}
-                    onChange={onChange}
-                    sx={{
-                        height: 40,
-                        width: '27em',
-                        fontSize: 10,
-                        backgroundColor: '#e9eeff',
-                        marginRight: '8px',
-                    }}
-                >
-                    {options.map((option) => (
-                        <MenuItem key={option.code} value={option.code}>{option.name}</MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
-        </Box>
-    );
-}
 
 function BasicTextFields({ id, variant, size, type, value, onChange, error, helperText }) {
     return (
@@ -129,7 +85,9 @@ const CenteredModal = styled('div')({
 
 function InventoryRefundRequest(props) {
     const [supplier, setSupplier] = useState('');
+    const [suppliers, setSuppliers] = useState([]);
     const [item, setItem] = useState('');
+    const [items, setItems] = useState([]);
     const [quantity, setQuantity] = useState('');
     const [reason, setReason] = useState('');
     const [price, setPrice] = useState('');
@@ -142,6 +100,41 @@ function InventoryRefundRequest(props) {
     const [alertSeverity, setAlertSeverity] = useState('error');
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchSuppliers = async () => {
+            try {
+                const response = await axios.get('http://localhost:9000/purchaseOrder/suppliersList');
+                const formattedSuppliers = response.data.map(supplier => ({
+                    value: supplier.id,
+                    label: supplier.name
+                }));
+                setSuppliers(formattedSuppliers);
+            } catch (error) {
+                console.error('Error fetching suppliers:', error);
+            }
+        };
+        fetchSuppliers();
+    }, []);
+
+    useEffect(() => {
+        const fetchItems = async () => {
+            if (supplier) {
+                try {
+                    const response = await axios.get(`http://localhost:9000/purchaseOrder/itemsList/${supplier}`);
+                    const itemsArray = response.data.flatMap(item => item.split(',').map(i => i.trim()));
+                    const formattedItems = itemsArray.map(item => ({
+                        value: item,
+                        label: item
+                    }));
+                    setItems(formattedItems);
+                } catch (error) {
+                    console.error('Error fetching items:', error);
+                }
+            }
+        };
+        fetchItems();
+    }, [supplier]);
 
     const validateField = (field, value) => {
         const regex = /^[1-9]\d*$/; // Positive integers
@@ -175,8 +168,10 @@ function InventoryRefundRequest(props) {
             return; // Do not submit if there are validation errors
         }
 
+        const selectedSupplier = suppliers.find(s => s.value === supplier);
         const refundRequestData = {
-            supplier,
+            supplierId: selectedSupplier.value,
+            supplierName: selectedSupplier.label,
             item,
             quantity,
             reason,
@@ -205,11 +200,12 @@ function InventoryRefundRequest(props) {
                                 <h5>Supplier:</h5>
                             </div>
                             <div className="refundRequestidInput">
-                                <Dropdown
+                                <ComboBox
                                     label="Supplier"
                                     value={supplier}
                                     onChange={(e) => setSupplier(e.target.value)}
                                     options={suppliers}
+                                    style={{ width: '17em', height: '2.5em', backgroundColor: '#e9eeff', marginRight: '8px' }}
                                 />
                             </div>
                         </div>
@@ -219,11 +215,12 @@ function InventoryRefundRequest(props) {
                                 <h5>Item:</h5>
                             </div>
                             <div className="refundRequestidInput">
-                                <Dropdown
+                                <ComboBox
                                     label="Item"
                                     value={item}
                                     onChange={(e) => setItem(e.target.value)}
                                     options={items}
+                                    style={{ width: '17em', height: '2.5em', backgroundColor: '#e9eeff', marginRight: '8px' }}
                                 />
                             </div>
                         </div>
@@ -254,15 +251,16 @@ function InventoryRefundRequest(props) {
                                 <h5>Reason:</h5>
                             </div>
                             <div className="refundRequestidInput">
-                                <Dropdown
+                                <ComboBox
                                     label="Reason"
                                     value={reason}
                                     onChange={(e) => setReason(e.target.value)}
                                     options={[
-                                        { code: 'defected', name: 'Defected Item' },
-                                        { code: 'not-as-described', name: 'Not as Described' },
-                                        { code: 'expired', name: 'Expired' }
+                                        { value: 'defected', label: 'Defected Item' },
+                                        { value: 'not-as-described', label: 'Not as Described' },
+                                        { value: 'expired', label: 'Expired' }
                                     ]}
+                                    style={{ width: '17em', height: '2.5em', backgroundColor: '#e9eeff', marginRight: '8px' }}
                                 />
                             </div>
                         </div>
