@@ -10,7 +10,7 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import CustomizedAlert from "../../../../../components/Alert/alert";
+import CustomizedAlert from '../../../../../../components/Alert/alert';
 
 // Mock data for suppliers and items, replace with your actual data
 const suppliers = [

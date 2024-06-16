@@ -90,7 +90,7 @@ const PurchaseOrderDashboard = () => {
     };
 
     const columns = [
-        { columnId: 'supplierNamw', label: 'Supplier', minWidth: 70, align: 'center' },
+        { columnId: 'supplierName', label: 'Supplier', minWidth: 70, align: 'center' },
         { columnId: 'Address', label: 'Address', minWidth: 150, align: 'center' },
         { columnId: 'mail', label: 'Email', minWidth: 120, align: 'center' },
         { columnId: 'contact_number', label: 'Contact', minWidth: 100, align: 'center' },
