@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Box, Paper } from '@mui/material';
+import { Container, Box, Paper, Modal } from '@mui/material';
 import './ApprovedRefundsTable.css';
 import InventoryNavbar from '../../../../../layout/navbar/Inventory navbar/Inventory navbar';
 import Footer from "../../../../../layout/footer/footer";
@@ -9,6 +9,7 @@ import CustomizedTable from "../../../../../components/Table/Customized Table/cu
 import axios from "axios";
 import PageLoader from "../../../../../components/Page Loader/pageLoader";
 import ViewInventoryRequest from '../Modal/viewInventoryRefundRequest/viewInventoryRequest';
+import CustomizedButton from '../../../../../components/Button/button';
 
 const ApprovedRefundsTable = () => {
   const [rows, setRows] = useState([]);
@@ -19,9 +20,8 @@ const ApprovedRefundsTable = () => {
 
   const token = localStorage.getItem('accessToken');
 
-  // Column details from InventoryRefundRequestsTable.js
   const columns = [
-    { columnId: 'name', label: 'Name', minWidth: 70, align: 'center' },
+    { columnId: 'supplierName', label: 'Name', minWidth: 70, align: 'center' },
     { columnId: 'contact_number', label: 'Contact number', minWidth: 150, align: 'center' },
     { columnId: 'inventory_id', label: 'Refund Id', minWidth: 120, align: 'center' },
     { columnId: 'amount', label: 'Price', minWidth: 200, align: 'center' },
@@ -56,19 +56,8 @@ const ApprovedRefundsTable = () => {
     setViewRequestVisible(true);
   };
 
-  const handleDeleteRequest = async (requestId) => {
-    console.log('Deleting request:', requestId);
-    try {
-      await axios.delete(`http://localhost:9000/refund/inventoryRefund/delete/${requestId}`);
-      setRows(prevRequests => prevRequests.filter(request => request.inventory_id !== requestId));
-    } catch (error) {
-      console.error('Error deleting request:', error);
-    }
-  };
-
   const mappedData = rows.map(row => ({
-    id: row.inventory_id,
-    name: row.supplier,
+    supplierNname: row.supplierName,
     contact_number: row.phone,
     inventory_id: row.inventory_id,
     amount: row.price,
@@ -89,28 +78,9 @@ const ApprovedRefundsTable = () => {
             borderRadius: '0.35em',
             fontWeight: '550',
             textTransform: 'none',
-            textAlign: 'center',
-            marginRight: '1.5em'
+            textAlign: 'center'
           }}>
           View
-        </CustomizedButton>
-        <CustomizedButton
-          onClick={() => handleDeleteRequest(row.inventory_id)}
-          hoverBackgroundColor="#960505"
-          style={{
-            color: 'white',
-            backgroundColor: '#960505',
-            width: '7.5em',
-            height: '2.75em',
-            fontSize: '0.95em',
-            fontFamily: 'inter',
-            padding: '0.5em 0.625em',
-            borderRadius: '0.35em',
-            fontWeight: '550',
-            textTransform: 'none',
-            textAlign: 'center',
-          }}>
-          Delete
         </CustomizedButton>
       </div>
     )
@@ -135,7 +105,7 @@ const ApprovedRefundsTable = () => {
           )}
         </Box>
       </Container>
-      <Modal open={viewRequestVisible}>
+      <Modal open={viewRequestVisible} onClose={() => setViewRequestVisible(false)}>
         <ViewInventoryRequest request={selectedRequest} onClose={() => setViewRequestVisible(false)} />
       </Modal>
       <Footer />
