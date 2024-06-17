@@ -1,58 +1,67 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import "./viewOrder.css";
+import "./viewInventoryRequest.css";
 import CustomizedButton from "../../../../../../components/Button/button";
 import CenteredModal from "../../../../../../components/Modal/modal";
 
-function ViewOrder({ order, onClose }) {
-    const [orderDetails, setOrderDetails] = useState({
+function ViewInventoryRequest({ request, onClose }) {
+    const [requestDetails, setRequestDetails] = useState({
         id: '',
-        supplierName: '',
+        supplier: '',
         Address: '',
         mail: '',
         contact_number: '',
-        items: [],
-        createdDate: '',
-        status:''
+        items: '',
+        amount: ''
     });
 
     useEffect(() => {
-        const fetchOrderDetails = async () => {
-            if (!order) return;
+        if (!request) {
+            console.error('Request is missing');
+            return;
+        }
+        console.log('Request', request); // Debugging line to check the request ID
+        console.log('Request ID:', request.inventory_id); // Debugging line to check the request ID
+        const fetchRequestDetails = async () => {
+            if (!request.inventory_id) {
+                console.error('Request ID is missing');
+                return;
+            }
 
             try {
-                const response = await axios.get(`http://localhost:9000/purchaseOrder/get/${order.id}`);
-                setOrderDetails({
-                    id: response.data.id,
-                    supplierName: response.data.supplierName,
-                    Address: response.data.Address,
-                    mail: response.data.mail,
-                    contact_number: response.data.contact_number,
-                    items: response.data.items || [],
-                    createdDate: response.data.createdDate,
-                    status: response.data.status
+                const response = await axios.get(`http://localhost:9000/refund/inventoryRefund/get/${request.inventory_id}`);
+                console .log('Response:', response); // Debugging line to check the response
+                setRequestDetails({
+                    inventory_id: response.data.inventory_id,
+                    supplier: response.data.supplier,
+                    item: response.data.item,
+                    quantity: response.data.quantity,
+                    phone: response.data.phone,
+                    price: response.data.price,
+                    status: response.data.status,
+                    createdDate: response.data.createdDate
                 });
                 console.log("Fetched data", response.data);
             } catch (err) {
-                console.error('Failed to fetch order details:', err);
+                console.error('Failed to fetch request details:', err);
             }
         };
 
-        fetchOrderDetails();
-    }, [order]);
+        fetchRequestDetails();
+    }, [request]);
 
     return (
         <CenteredModal>
-            <div className="viewOrderOuter">
-                <div className="viewOrderModel">
-                    <h2>Inventory Order</h2>
-                    <div className="viewOrderForm">
+            <div className="viewRequestOuter">
+                <div className="viewRequestModel">
+                    <h2>Inventory Refund Request</h2>
+                    <div className="viewRequestForm">
                         <div className="formField">
                             <div className="idField">
-                                <h5>Order Id:</h5>
+                                <h5>Request Id:</h5>
                             </div>
                             <div className="idInput">
-                                {orderDetails.id}
+                                {requestDetails.inventory_id}
                             </div>
                         </div>
 
@@ -61,34 +70,17 @@ function ViewOrder({ order, onClose }) {
                                 <h5>Supplier:</h5>
                             </div>
                             <div className="idInput">
-                                {orderDetails.supplierName}
+                                {requestDetails.supplier}
                             </div>
                         </div>
 
+                        
                         <div className="formField">
                             <div className="idField">
-                                <h5>Delivery Address:</h5>
+                                <h5>Contact number:</h5>
                             </div>
                             <div className="idInput">
-                                {orderDetails.Address}
-                            </div>
-                        </div>
-
-                        <div className="formField">
-                            <div className="idField">
-                                <h5>Email:</h5>
-                            </div>
-                            <div className="idInput">
-                                {orderDetails.mail}
-                            </div>
-                        </div>
-
-                        <div className="formField">
-                            <div className="idField">
-                                <h5>Contact Number:</h5>
-                            </div>
-                            <div className="idInput">
-                                {orderDetails.contact_number}
+                                {requestDetails.phone}
                             </div>
                         </div>
 
@@ -96,26 +88,47 @@ function ViewOrder({ order, onClose }) {
                             <div className="idField">
                                 <h5>Items:</h5>
                             </div>
+                            <div className="idInput">
+                                {requestDetails.item}
+                            </div>
+                        </div>
+
+
+                        <div className="formField">
+                            <div className="idField">
+                                <h5>Quantity:</h5>
+                            </div>
                             <div className="idInput" id="items">
-                                {Array.isArray(orderDetails.items) ? orderDetails.items.join(', ') : orderDetails.items}
+                                {requestDetails.quantity}
                             </div>
                         </div>
 
                         <div className="formField">
                             <div className="idField">
-                                <h5>Created date:</h5>
+                                <h5>Total amount:</h5>
                             </div>
                             <div className="idInput">
-                                {orderDetails.createdDate}
+                                {requestDetails.price}
                             </div>
                         </div>
+
+                        
 
                         <div className="formField">
                             <div className="idField">
                                 <h5>Status:</h5>
                             </div>
                             <div className="idInput">
-                                {orderDetails.status}
+                                {requestDetails.status}
+                            </div>
+                        </div>
+
+                        <div className="formField">
+                            <div className="idField">
+                                <h5>Created date::</h5>
+                            </div>
+                            <div className="idInput">
+                                {requestDetails.createdDate}
                             </div>
                         </div>
 
@@ -147,4 +160,4 @@ function ViewOrder({ order, onClose }) {
     );
 }
 
-export default ViewOrder;
+export default ViewInventoryRequest;
