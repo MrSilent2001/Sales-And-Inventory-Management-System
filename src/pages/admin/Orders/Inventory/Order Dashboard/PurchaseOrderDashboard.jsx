@@ -90,7 +90,7 @@ const PurchaseOrderDashboard = () => {
     };
 
     const columns = [
-        { columnId: 'supplier', label: 'Supplier ID', minWidth: 70, align: 'center' },
+        { columnId: 'supplierName', label: 'Supplier', minWidth: 70, align: 'center' },
         { columnId: 'Address', label: 'Address', minWidth: 150, align: 'center' },
         { columnId: 'mail', label: 'Email', minWidth: 120, align: 'center' },
         { columnId: 'contact_number', label: 'Contact', minWidth: 100, align: 'center' },
@@ -99,7 +99,7 @@ const PurchaseOrderDashboard = () => {
 
     const mappedData = purchasedOrders.map(row => ({
         id: row.id,
-        supplier: row.supplier,
+        supplierName: row.supplierName,
         Address: row.Address,
         mail: row.mail,
         contact_number: row.contact_number,

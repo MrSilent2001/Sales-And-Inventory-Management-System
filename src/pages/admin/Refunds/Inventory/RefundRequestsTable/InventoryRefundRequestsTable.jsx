@@ -4,14 +4,19 @@ import axios from 'axios';
 import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../../layout/footer/footer";
 import { Link } from "react-router-dom";
-import InventoryRefundRequest from "../../../../../pages/admin/Refunds/Inventory/Modal/InventoryRefundRequest";
+import InventoryRefundRequest from '../Modal/InventoryRefundRequest/InventoryRefundRequest';
 import CustomizedButton from "../../../../../components/Button/button";
 import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable"; 
-import PageLoader from "../../../../../components/Page Loader/pageLoader"; 
+import PageLoader from "../../../../../components/Page Loader/pageLoader";
+import ViewInventoryRequest from '../Modal/viewInventoryRefundRequest/viewInventoryRequest';
+
+
 
 const InventoryRefundRequestsTable = ({ onViewApproved }) => {
     const [visible, setVisible] = useState(false);
+    const [viewRequestVisible, setViewRequestVisible] = useState(false);
     const [refundRequests, setRefundRequests] = useState([]);
+    const [selectedRequest, setSelectedRequest] = useState(null);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
 
@@ -31,21 +36,78 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
         fetchRefundRequests();
     }, []);
 
+    const handleViewRequest = (request) => {
+        console.log('Request:', request); 
+        setSelectedRequest(request);
+        setViewRequestVisible(true);
+    };
+
+    const handleDeleteRequest = async (requestId) => {
+        console.log('Deleting request:', requestId);
+        try {
+            await axios.delete(`http://localhost:9000/refund/inventoryRefund/delete/${requestId}`);
+            setRefundRequests(prevRequests => prevRequests.filter(request => request.inventory_id !== requestId));
+        } catch (error) {
+            console.error('Error deleting request:', error);
+        }
+    };
+
     const columns = [
-        { columnId: 'name', label: 'Name', minWidth: 70, align: 'center' },
+        { columnId: 'supplierName', label: 'Name', minWidth: 70, align: 'center' },
         { columnId: 'contact_number', label: 'Contact number', minWidth: 150, align: 'center' },
         { columnId: 'inventory_id', label: 'Refund Id', minWidth: 120, align: 'center' },
         { columnId: 'amount', label: 'Price', minWidth: 200, align: 'center' },
-        { columnId: 'status', label: 'Status', minWidth: 200, align: 'center' }
+        { columnId: 'status', label: 'Status', minWidth: 200, align: 'center' },
+        { columnId: 'actions', label: 'Actions', minWidth: 250, align: 'center' } // Increased minWidth for additional button
     ];
 
     const mappedData = refundRequests.map(row => ({
-        id: row.inventory_id, // Ensure each row has a unique id for React key
-        name: row.supplier,
-        contact_number: row.phone,
         inventory_id: row.inventory_id,
+        supplierName: row.supplierName,
+        contact_number: row.phone,
         amount: row.price,
-        status: row.status
+        status: row.status,
+        actions: (
+            <div style={{ display: 'flex' }}>
+                <CustomizedButton
+                    onClick={() => handleViewRequest(row)}
+                    hoverBackgroundColor="#242F9B"
+                    style={{
+                        color: 'white',
+                        backgroundColor: '#242F9B',
+                        width: '7.5em',
+                        height: '2.75em',
+                        fontSize: '0.95em',
+                        fontFamily: 'inter',
+                        padding: '0.5em 0.625em',
+                        borderRadius: '0.35em',
+                        fontWeight: '550',
+                        textTransform: 'none',
+                        textAlign: 'center',
+                        marginRight: '1.5em'
+                    }}>
+                    View
+                </CustomizedButton>
+                <CustomizedButton
+                    onClick={() => handleDeleteRequest(row.inventory_id)}
+                    hoverBackgroundColor="#960505"
+                    style={{
+                        color: 'white',
+                        backgroundColor: '#960505',
+                        width: '7.5em',
+                        height: '2.75em',
+                        fontSize: '0.95em',
+                        fontFamily: 'inter',
+                        padding: '0.5em 0.625em',
+                        borderRadius: '0.35em',
+                        fontWeight: '550',
+                        textTransform: 'none',
+                        textAlign: 'center',
+                    }}>
+                    Delete
+                </CustomizedButton>
+            </div>
+        )
     }));
 
     return (
@@ -58,7 +120,7 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
                     backgroundColor: '#DBDFFD',
                     width: '100%',
                     height: '47em',
-                    overflow: 'hidden' 
+                    overflow: 'hidden'
                 }}
             >
                 <Box>
@@ -143,6 +205,9 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
             </Container>
             <Modal open={visible}>
                 <InventoryRefundRequest onClose={() => setVisible(false)} />
+            </Modal>
+            <Modal open={viewRequestVisible}>
+                <ViewInventoryRequest request={selectedRequest} onClose={() => setViewRequestVisible(false)} />
             </Modal>
             <Footer />
         </>
