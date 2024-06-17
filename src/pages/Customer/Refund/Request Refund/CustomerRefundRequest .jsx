@@ -13,6 +13,7 @@ import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer n
 import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
 
+
 function SelectItem({ value, onChange, error }) {
     return (
         <Box sx={{ minWidth: 80 }}>
@@ -152,7 +153,7 @@ function CustomerRefundRequest() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('accessToken');
         if (token) {
             const decodedToken = jwtDecode(token);
             setFormData(prevData => ({
