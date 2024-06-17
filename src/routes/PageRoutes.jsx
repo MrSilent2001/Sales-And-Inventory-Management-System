@@ -48,6 +48,8 @@ import LoginSelectionPage from "../pages/login & SignUp/_newLogin/LoginSelection
 import {SupplierLoginSignUp} from "../pages/login & SignUp/_newLogin/SupplierLoginSignUp/SupplierLoginSignUp";
 import {CustomerLoginSignUp} from "../pages/login & SignUp/_newLogin/CustomerLoginSignUp/CustomerLoginSignUp";
 import {AdminLoginSignUp} from "../pages/login & SignUp/_newLogin/AdminLoginSignUp/AdminLoginSignUp";
+import SupplierOrders from "../pages/Supplier/Supplier Orders/supplierOrders";
+import SupplierRefunds from "../pages/Supplier/Supplier Refund/supplierRefunds";
 
 export function PageRouting() {
     return (
@@ -81,6 +83,8 @@ export function PageRouting() {
                     {/*Supplier view routes*/}
                     <Route path="/supplierHome" element={<SupplierHome/>}/>
                     <Route path="/supplierDashboard" element={<InventoryDashboard/>}/>
+                    <Route path="/supplierOrders" element={<SupplierOrders/>}/>
+                    <Route path="/supplierRefund" element={<SupplierRefunds/>}/>
                     <Route path="/supplierProfile" element={<SupplierProfile/>}/>
                     <Route path="/updateSupplier" element={<UpdateSupplier/>}/>
 

@@ -1,0 +1,24 @@
+.supplierOrderManagementOuter{
+    width: 100%;
+    height: 100%;
+}
+
+.supplierOrderManagementInner{
+    padding-top: 1.5em;
+    width: 100%;
+    height: 40em;
+    background-color: rgba(219, 223, 253, 0.8);
+}
+
+.supplierOrderManagement{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.supplierOrderManagement-title{
+    font-size: 1.3em;
+    text-align: left;
+    margin-left: 5.5em;
+}

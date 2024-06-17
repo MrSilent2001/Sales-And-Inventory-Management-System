@@ -21,7 +21,6 @@ function InventoryDashboard(){
     const [selectedItem, setSelectedItem] = useState(null);
 
     const columns = useMemo(() => [
-        { accessorKey: 'sellerId', header: 'Supplier Id', size: 70 },
         { accessorKey: 'productName', header: 'Item Name', size: 100 },
         { accessorKey: 'productDescription', header: 'Item Description', size: 200 },
         { accessorKey: 'productCategory', header: 'Item Category', size: 120 },

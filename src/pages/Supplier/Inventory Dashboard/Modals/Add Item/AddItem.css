@@ -1,53 +1,52 @@
-.addSupplierItemModel{
+.addSupplierItemOuter {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 32.5em;
+    width: 80em;
     height: 40em;
-    padding: 0.5em 0 0 0;
     background-color: #DBDFFD;
     border-radius: 0.5em;
 }
 
-
-.addSupplierItemForm{
+.item-image {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.addSupplierItemformField{
-    width: 27.5em;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.addSupplierItemformField-custom{
-    width: 50%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.addSupplierItemformField h5{
-    font-family: Inter;
-    font-weight: 600;
-    font-size: 0.75em;
-}
-
-.addSupplierItemformFieldButtons{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 18em;
     justify-content: center;
-    padding: 2em 0;
+    width: 35em;
+    padding: 1em;
 }
 
-.customRow{
-    width: 50%;
+.item-details {
     display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 45em;
+    padding: 2em;
+}
+
+.item-form-field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.item-form-field-label {
+    text-align: left;
+    width: 30%;
+}
+
+.item-input-field {
+    width: 50%;
+}
+
+.item-input-field input, .item-input-field .MuiFormControl-root, .item-input-field .MuiInputBase-root {
+    width: 100%;
+}
+
+.addItemButtons{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 3em;
 }

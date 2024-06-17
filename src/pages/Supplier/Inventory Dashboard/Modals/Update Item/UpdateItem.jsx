@@ -52,6 +52,15 @@ function UpdateItem(props) {
         console.log(formData);
     };
 
+    const handleFileChange = async (file) => {
+        setProductImages(file);
+        const imageUrl = await uploadFileToBlob(file);
+        setFormData(prevState => ({
+            ...prevState,
+            image: imageUrl
+        }));
+    }
+
     const [errors, setErrors] = useState({});
     const [productImages, setProductImages] = useState(null);
     const [openSuccess, setOpenSuccess] = useState(false);
@@ -114,10 +123,9 @@ function UpdateItem(props) {
                 let imageUrl = formData.image;
                 if (productImages) {
                     imageUrl = await uploadFileToBlob(productImages);
-                    handleChange("image", imageUrl);
                 }
 
-                await axios.put(`http://localhost:9000/inventory/update${itemData.id}`, {
+                await axios.put(`http://localhost:9000/inventory/update/${itemData.id}`, {
                     productName: formData.itemName,
                     productDescription: formData.itemDesc,
                     productCategory: formData.category,
@@ -175,7 +183,7 @@ function UpdateItem(props) {
                         <div className='uploadButton'>
                             <FileUpload
                                 style={{ width: "15em", top: "2em" }}
-                                onChange={(e) => setProductImages(e.target.files[0])}
+                                onChange={handleFileChange}
                             />
                         </div>
                     </div>
