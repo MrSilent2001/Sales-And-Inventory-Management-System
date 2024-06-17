@@ -159,11 +159,12 @@ function CustomerRefundRequest() {
             setFormData(prevData => ({
                 ...prevData,
                 customerId: decodedToken.id,
-                customerName: decodedToken.username
+                customerName: decodedToken.username,
+                contact:decodedToken.contactNo
             }));
         }
     }, []);
-
+    console.log('Form data conttact number:', formData.contact);
     const handleChange = (event) => {
         setFormData({
             ...formData,
@@ -223,7 +224,7 @@ function CustomerRefundRequest() {
                                 />
                             </div>
                         </div>
-
+                         
                         <div className="customerFormField">
                             <div className="customerTextField">
                                 <h5>Item</h5>
@@ -321,7 +322,7 @@ function CustomerRefundRequest() {
                                             textAlign: 'center',
                                             marginLeft: '0.5em'
                                         }}
-                                        onClick={() => navigate('/')}
+                                        onClick={() => navigate('/refundRequests')}
                                     >
                                         Cancel Request
                                     </CustomizedButton>
