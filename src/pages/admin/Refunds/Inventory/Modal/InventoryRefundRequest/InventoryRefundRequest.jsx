@@ -91,6 +91,7 @@ function InventoryRefundRequest(props) {
     const [quantity, setQuantity] = useState('');
     const [reason, setReason] = useState('');
     const [price, setPrice] = useState('');
+    const [phone, setphone] = useState('');
 
     const [quantityError, setQuantityError] = useState('');
     const [priceError, setPriceError] = useState('');
@@ -136,6 +137,20 @@ function InventoryRefundRequest(props) {
         fetchItems();
     }, [supplier]);
 
+    useEffect(() => {
+        const fetchSupplierDetails = async () => {
+            if (supplier) {
+                try {
+                    const response = await axios.get(`http://localhost:9000/supplier/getSupplier/${supplier}`);
+                    setphone(response.data.contactNo);
+                } catch (error) {
+                    console.error('Error fetching supplier details:', error);
+                }
+            }
+        };
+        fetchSupplierDetails();
+    }, [supplier]);
+
     const validateField = (field, value) => {
         const regex = /^[1-9]\d*$/; // Positive integers
         if (!regex.test(value)) {
@@ -172,10 +187,11 @@ function InventoryRefundRequest(props) {
         const refundRequestData = {
             supplierId: selectedSupplier.value,
             supplierName: selectedSupplier.label,
+            phone,
             item,
             quantity,
             reason,
-            price,
+            price
         };
 
         try {

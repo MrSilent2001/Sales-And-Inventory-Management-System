@@ -17,7 +17,7 @@ function CustomerOrderHistory() {
 
     const id = localStorage.getItem('id');
     const token = localStorage.getItem('accessToken');
-
+    console.log(id);
     const columns = useMemo(() => [
         { accessorKey: 'orderId', header: 'Order Id', size: 75, align: 'center' },
         { accessorKey: 'orderItems', header: 'Ordered Items', size: 100, align: 'center' },

@@ -50,7 +50,7 @@ import {CustomerLoginSignUp} from "../pages/login & SignUp/_newLogin/CustomerLog
 import {AdminLoginSignUp} from "../pages/login & SignUp/_newLogin/AdminLoginSignUp/AdminLoginSignUp";
 import SupplierOrders from "../pages/Supplier/Supplier Orders/supplierOrders";
 import SupplierRefunds from "../pages/Supplier/Supplier Refund/supplierRefunds";
-import SupplierPayments from "../pages/Supplier/Supplier Payments/supplierPayments";
+import EligibleOrdersForRefund from "../pages/Customer/Refund/eligibleOrdersForRefund/eligibleOrdersForRefund";
 
 export function PageRouting() {
     return (
@@ -86,9 +86,9 @@ export function PageRouting() {
                     <Route path="/supplierDashboard" element={<InventoryDashboard/>}/>
                     <Route path="/supplierOrders" element={<SupplierOrders/>}/>
                     <Route path="/supplierRefund" element={<SupplierRefunds/>}/>
-                    <Route path="/supplierPayments" element={<SupplierPayments/>}/>
                     <Route path="/supplierProfile" element={<SupplierProfile/>}/>
                     <Route path="/updateSupplier" element={<UpdateSupplier/>}/>
+
 
 
                     {/*Customer view routes*/}
@@ -102,6 +102,7 @@ export function PageRouting() {
                     <Route path="/updateProfile" element={<UpdateCustomers/>}/>
 
                     <Route path="/refundRequests" element={<CustomerRefunds/>}/>
+                    <Route path="/eligibleOrdersForRefund" element={<EligibleOrdersForRefund/>}/>   
                     <Route path="/createrefund" element={<CustomerRefundRequest/>}/>
                     <Route path="/generatedrefund" element={<GeneratedCustomerRefundRequest/>}/>
 
