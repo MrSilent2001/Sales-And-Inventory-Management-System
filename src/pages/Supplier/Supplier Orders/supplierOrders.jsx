@@ -11,8 +11,6 @@ import ComboBox from "../../../components/Form Inputs/comboBox";
 
 function SupplierOrders() {
     const [orders, setOrders] = useState([]);
-    const [orderId, setOrderId] = useState(null);
-    const [orderStatus, setOrderStatus] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
@@ -56,19 +54,15 @@ function SupplierOrders() {
                     },
                 });
 
-                const supplierName = supplierResponse.data.username;
-
                 const orderResponse = await axios.get('http://localhost:9000/purchaseOrder/getAll', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
 
-                // Filter orders based on supplier name
-                const filteredOrders = orderResponse.data.filter(order => order.supplier === supplierName);
+                // Filter orders based on supplier ID
+                const filteredOrders = orderResponse.data.filter(order => order.supplierId === id);
                 setOrders(filteredOrders);
-                setOrderId(filteredOrders.data.id);
-                setOrderStatus(filteredOrders.data.status);
             } catch (error) {
                 handleClickError();
                 console.error('Error fetching orders:', error);
@@ -77,7 +71,7 @@ function SupplierOrders() {
             }
         };
         fetchOrders();
-    }, [token]);
+    }, [token, id]);
 
     // Options to dropdown
     const options = [
@@ -97,16 +91,10 @@ function SupplierOrders() {
                 },
             });
 
-            // await axios.post('http://localhost:9000/sendEmail', { orderId, orderStatus: newStatus }, {
-            //     headers: {
-            //         Authorization: `Bearer ${token}`,
-            //     },
-            // });
-
             // Update order status locally
             setOrders(prevOrders =>
                 prevOrders.map(order =>
-                    order.orderId === orderId ? { ...order, orderStatus: newStatus } : order
+                    order.id === orderId ? { ...order, orderStatus: newStatus } : order
                 )
             );
 
@@ -121,7 +109,7 @@ function SupplierOrders() {
         return (
             <div>
                 <ComboBox
-                    onChange={(event) => handleStatusChange(event, row.orderId)}
+                    onChange={(event) => handleStatusChange(event, row.id)}
                     style={{ width: '10em' }}
                     options={options}
                     label="Category"

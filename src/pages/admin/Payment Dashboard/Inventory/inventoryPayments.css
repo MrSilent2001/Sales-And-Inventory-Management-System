@@ -7,15 +7,9 @@
     background-color: #d2d5f5;
 }
 
-.invPaymentDashboardInner{
-    width: 90%;
-    max-width: 1200px;
-    margin-top: 1.5em;
-}
-
 .invTitleContainer{
     text-align: left;
-    margin-left: 5em;
+    margin: 2.5em 0 0 6em;
 }
 
 

@@ -10,6 +10,11 @@
     padding: 1em 0;
 }
 
+.supplierInventory{
+    text-align: left;
+    margin-left: 5em;
+}
+
 .supplierInvSearchAndButtons {
     display: flex;
     width: 87em;

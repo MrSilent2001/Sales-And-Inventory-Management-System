@@ -183,9 +183,10 @@ function InventoryDashboard(){
 
             <div className="supplierViewInventoryOuter">
                 <div className="supplierViewInventoryInner">
+                    <h2 className="supplierInventory">Available Products</h2>
                     <div className="supplierItemTable">
                         {isLoading ? (
-                            <PageLoader />
+                            <PageLoader/>
                         ) : (
 
                             <DynamicTable
@@ -200,7 +201,7 @@ function InventoryDashboard(){
                 </div>
 
                 <Modal open={visible}>
-                    <AddItem
+                <AddItem
                         onClose={() => { setVisible(false)}}
                         onInventoryAdded={handleInventoryAdded}
                     />

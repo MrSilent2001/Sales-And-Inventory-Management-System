@@ -1,8 +1,6 @@
 import React from "react";
 import './SupplierHomePage.css';
 import Footer from "../../../layout/footer/footer";
-import {Link} from "react-router-dom";
-import CustomizedButton from "../../../components/Button/button";
 import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navbar";
 
 function SupplierHome() {
@@ -11,9 +9,7 @@ function SupplierHome() {
             <SupplierNavbar/>
             <div className="supplierHome">
 
-                <div className="carouselOuter">
-                    {/*<img src={require('./HomeCarousel.jpg')} alt=""/>*/}
-
+                <div className="carouselOuter-supplier">
                     <div className="carouselText">
                         <div className="carouselHeader">
                             <h1>TRADEASY</h1>
