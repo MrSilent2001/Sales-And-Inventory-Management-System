@@ -13,6 +13,7 @@ import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer n
 import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
 
+
 function SelectItem({ value, onChange, error }) {
     return (
         <Box sx={{ minWidth: 80 }}>
@@ -152,17 +153,18 @@ function CustomerRefundRequest() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('accessToken');
         if (token) {
             const decodedToken = jwtDecode(token);
             setFormData(prevData => ({
                 ...prevData,
                 customerId: decodedToken.id,
-                customerName: decodedToken.username
+                customerName: decodedToken.username,
+                contact:decodedToken.contactNo
             }));
         }
     }, []);
-
+    console.log('Form data conttact number:', formData.contact);
     const handleChange = (event) => {
         setFormData({
             ...formData,
@@ -222,7 +224,7 @@ function CustomerRefundRequest() {
                                 />
                             </div>
                         </div>
-
+                         
                         <div className="customerFormField">
                             <div className="customerTextField">
                                 <h5>Item</h5>
@@ -320,7 +322,7 @@ function CustomerRefundRequest() {
                                             textAlign: 'center',
                                             marginLeft: '0.5em'
                                         }}
-                                        onClick={() => navigate('/')}
+                                        onClick={() => navigate('/refundRequests')}
                                     >
                                         Cancel Request
                                     </CustomizedButton>

@@ -14,7 +14,7 @@ import Footer from "../../../../layout/footer/footer";
 import { Link } from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
 import axios from 'axios';
-import {jwtDecode} from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode'; // Correct import statement
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.body}`]: {
@@ -74,7 +74,7 @@ function CustomerRefunds() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('accessToken');
         if (token) {
             const decodedToken = jwtDecode(token);
             const customerId = decodedToken.id;
@@ -104,7 +104,7 @@ function CustomerRefunds() {
                             <h3>Refund Request</h3>
                         </div>
                         <div className="customerRefundRequestButton">
-                            <Link to="/createrefund">
+                            <Link to="/eligibleOrdersForRefund">
                                 <CustomizedButton
                                     hoverBackgroundColor="#2d3ed2"
                                     style={{

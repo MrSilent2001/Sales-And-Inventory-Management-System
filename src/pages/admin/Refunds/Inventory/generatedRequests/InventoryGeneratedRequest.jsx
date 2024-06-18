@@ -39,7 +39,7 @@ function InventoryGeneratedRequest() {
                             justifyContent: "space-around",
                            
                         }}>
-                            <span className="value">{refundRequestData?.supplier || 'N/A'}</span>
+                            <span className="value">{refundRequestData?.supplierName || 'N/A'}</span>
                             <span className="value">{refundRequestData?.item || 'N/A'}</span>
                             <span className="value">{refundRequestData?.quantity || 'N/A'}</span>
                             <span className="value">{refundRequestData?.reason || 'N/A'}</span>
