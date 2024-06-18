@@ -6,12 +6,13 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import Footer from "../../../../layout/footer/footer";
+
 import { useNavigate } from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
-import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";
+
 import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
+
 
 
 function SelectItem({ value, onChange, error }) {
@@ -131,7 +132,7 @@ function BasicTextFields({ name, value, onChange, error }) {
     );
 }
 
-function CustomerRefundRequest() {
+function CustomerRefundRequest({ order, onClose }) {
     const [formData, setFormData] = useState({
         customerId: '', 
         customerName: '', 
@@ -155,16 +156,29 @@ function CustomerRefundRequest() {
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
         if (token) {
-            const decodedToken = jwtDecode(token);
-            setFormData(prevData => ({
-                ...prevData,
-                customerId: decodedToken.id,
-                customerName: decodedToken.username,
-                contact:decodedToken.contactNo
+            try {
+                const decoded = jwtDecode(token);
+                setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    contact: decoded.contactNo || ''
+                }));
+            } catch (error) {
+                console.error('Invalid token:', error);
+            }
+        }
+
+        if (order) {
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                customerId: order.orderCustomerId,
+                customerName: order.customerName,
+                item: order.orderItems,
+                quantity: order.quantity,
+                totalPrice: order.orderPrice
             }));
         }
-    }, []);
-    console.log('Form data conttact number:', formData.contact);
+    }, [order]);
+
     const handleChange = (event) => {
         setFormData({
             ...formData,
@@ -190,11 +204,11 @@ function CustomerRefundRequest() {
             return;
         }
 
-        console.log('Submitting form with data:', formData); // Debugging: Log the form data
         axios.post('http://localhost:9000/refund/customerRefund/create', formData)
             .then(response => {
                 console.log('Refund request created:', response.data);
                 navigate('/generatedrefund', { state: { formData } });
+                onClose();
             })
             .catch(error => {
                 console.error('Error creating refund request:', error.response ? error.response.data : error.message);
@@ -203,7 +217,6 @@ function CustomerRefundRequest() {
 
     return (
         <>
-            <CustomerNavbar />
             <div className="customerRefundRequestOuter">
                 <div className="customerRefundRequestInner">
                     <div className="customerRefundRequestTopic">
@@ -322,7 +335,7 @@ function CustomerRefundRequest() {
                                             textAlign: 'center',
                                             marginLeft: '0.5em'
                                         }}
-                                        onClick={() => navigate('/refundRequests')}
+                                        onClick={onClose}
                                     >
                                         Cancel Request
                                     </CustomizedButton>
@@ -332,7 +345,7 @@ function CustomerRefundRequest() {
                     </form>
                 </div>
             </div>
-            <Footer />
+         
         </>
     );
 }
