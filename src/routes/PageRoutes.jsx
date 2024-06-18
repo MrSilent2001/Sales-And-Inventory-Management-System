@@ -51,6 +51,7 @@ import {AdminLoginSignUp} from "../pages/login & SignUp/_newLogin/AdminLoginSign
 import SupplierOrders from "../pages/Supplier/Supplier Orders/supplierOrders";
 import SupplierRefunds from "../pages/Supplier/Supplier Refund/supplierRefunds";
 import EligibleOrdersForRefund from "../pages/Customer/Refund/eligibleOrdersForRefund/eligibleOrdersForRefund";
+import SupplierPayments from "../pages/Supplier/Supplier Payments/supplierPayments";
 
 export function PageRouting() {
     return (
@@ -86,6 +87,7 @@ export function PageRouting() {
                     <Route path="/supplierDashboard" element={<InventoryDashboard/>}/>
                     <Route path="/supplierOrders" element={<SupplierOrders/>}/>
                     <Route path="/supplierRefund" element={<SupplierRefunds/>}/>
+                    <Route path="/supplierPayments" element={<SupplierPayments/>}/>
                     <Route path="/supplierProfile" element={<SupplierProfile/>}/>
                     <Route path="/updateSupplier" element={<UpdateSupplier/>}/>
 
