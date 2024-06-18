@@ -1,105 +1,124 @@
-import * as React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import "./supplierRefunds.css";
-import Footer from "../../../layout/footer/footer";
-import {useEffect, useMemo, useState} from "react";
-import axios from "axios";
-import CustomizedAlert from "../../../components/Alert/alert";
-import PageLoader from "../../../components/Page Loader/pageLoader";
-import DynamicTable from "../../../components/Table/customizedTable2";
-import {useNavigate} from "react-router-dom";
-import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navbar";
-import CustomizedButton from "../../../components/Button/button";
+import axios from 'axios';
+import SupplierNavbar from '../../../layout/navbar/Supplier Navbar/Supplier Navbar';
+import DynamicTable from '../../../components/Table/customizedTable2';
+import PageLoader from '../../../components/Page Loader/pageLoader';
+import ComboBox from '../../../components/Form Inputs/comboBox';
+import Footer from '../../../layout/footer/footer';
 
 function SupplierRefunds() {
     const [refunds, setRefunds] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [openDialog, setOpenDialog] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
-    const navigate = useNavigate();
 
-    const columns = useMemo(() => [
-        { accessorKey: 'username', header: 'Name', size: 75 },
-        { accessorKey: 'email', header: 'Email', size: 75  },
-        { accessorKey: 'contactNo', header: 'Contact', size: 75  },
-        { accessorKey: 'address', header: 'Address', size: 75  },
-        { accessorKey: 'lastLogin', header: 'Last Login', size: 75  }
-    ], []);
-
+    const id = localStorage.getItem('id');
     const token = localStorage.getItem('accessToken');
 
-    const handleClickSuccess = () => {
-        setOpenSuccess(true);
-    };
+    const columns = useMemo(
+        () => [
+            { accessorKey: 'customerName', header: 'Name', size: 75 },
+            { accessorKey: 'email', header: 'Email', size: 75 },
+            { accessorKey: 'contactNo', header: 'Contact', size: 75 },
+            { accessorKey: 'item', header: 'Purchased Products', size: 75 },
+            { accessorKey: 'price', header: 'Bill Amount', size: 75 },
+            { accessorKey: 'reason', header: 'Reason', size: 75 },
+            { accessorKey: 'createdDate', header: 'Ordered Date', size: 75 },
+        ],
+        []
+    );
 
-    const handleClickError = () => {
-        setOpenError(true);
-    };
-
-    const handleCloseSuccess = () => {
-        setOpenSuccess(false);
-    };
-
-    const handleCloseError = () => {
-        setOpenError(false);
-    };
+    const options = [
+        { value: 'Pending', label: 'Pending' },
+        { value: 'Accepted', label: 'Accepted' },
+        { value: 'Rejected', label: 'Rejected' },
+    ];
 
     useEffect(() => {
         const fetchRefunds = async () => {
             setIsLoading(true);
             try {
+                // Fetch supplier details
                 const supplierResponse = await axios.get(`http://localhost:9000/supplier/getSupplier/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
 
-                const supplierName = supplierResponse.data.username;
-
+                // Fetch all refunds and filter based on supplier ID
                 const refundResponse = await axios.get('http://localhost:9000/refund/inventoryRefund/getAll', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
 
-                // Filter orders based on supplier name
-                const filteredRefunds = refundResponse.data.filter(refund => refund.supplier === supplierName);
+                const filteredRefunds = refundResponse.data.filter(refund => refund.supplierId === id);
                 setRefunds(filteredRefunds);
-                console.log(filteredRefunds.data)
             } catch (error) {
-                handleClickError();
-                console.error('Error fetching users:', error);
+                console.error('Error fetching refunds:', error);
+                setOpenError(true);
             } finally {
                 setIsLoading(false);
             }
         };
+
         fetchRefunds();
-    }, [token]);
+    }, [id, token]);
 
-    let rows = refunds;
+    const handleStatusChange = async (eventId, newStatus) => {
+        try {
+            await axios.put(
+                `http://localhost:9000/refund/inventoryRefund/update/${refunds[0].inventory_id}`,
+                { status: newStatus },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
 
-    const createActionButtons = (id) => {
+            // Update local state with new status
+            setRefunds(prevRefunds =>
+                prevRefunds.map(refund =>
+                    refund.id === eventId ? { ...refund, status: newStatus } : refund
+                )
+            );
+
+            // Example of sending email on status change
+            await axios.post(
+                'http://localhost:9000/email/send/inventoryRefundStatus',
+                {
+                    receiverName: "Tradeasy Pvt Ltd",
+                    emailSubject: "Refund Request Status Update!",
+                    emailBody: `Your refund request under the Request Id: ${eventId} has been ${newStatus}. Thank You!`,
+                    receiverEmail: "dmcoder01@gmail.com"
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+            setOpenSuccess(true);
+        } catch (error) {
+            console.error('Error updating refund status:', error);
+            setOpenError(true);
+        }
+    };
+
+    const createActions = (row,refund) => {
+        const refundStatus = refund ? refund.status : 'Pending';
         return (
-            <div style={{ display: 'flex' }}>
-                <CustomizedButton
-                    onClick={() => handleUpdate(id)}
-                    hoverBackgroundColor="#2d3ed2"
-                    style={{
-                        color: '#ffffff',
-                        backgroundColor: '#242F9B',
-                        width: '8.5em',
-                        height: '2.5em',
-                        fontSize: '0.8em',
-                        padding: '0.5em 0.625em',
-                        borderRadius: '0.625em',
-                        fontWeight: '550',
-                        border: 'none',
-                        margin: '0.625em 2em 0 0'
-                    }}>
-                    View
-                </CustomizedButton>
-
-            </div>
+            <ComboBox
+                onChange={(event) => handleStatusChange(event, row?.id)}
+                style={{ width: '10em' }}
+                options={options}
+                label="Status"
+                size="small"
+                defaultValue={refundStatus}
+            />
         );
     };
 
@@ -108,26 +127,22 @@ function SupplierRefunds() {
             <SupplierNavbar />
             <div className="supplierRefundManagementOuter">
                 <div className="supplierRefundManagementInner">
-
                     <h2 className="supplierRefundManagement-title">Refunds</h2>
-
                     <div className="supplierRefundManagement">
                         {isLoading ? (
                             <PageLoader />
                         ) : (
-
                             <DynamicTable
                                 columns={columns}
-                                data={rows}
+                                data={refunds}
+                                createActions={createActions}
                                 includeProfile={false}
                             />
                         )}
                     </div>
                 </div>
             </div>
-
             <Footer />
-
         </>
     );
 }

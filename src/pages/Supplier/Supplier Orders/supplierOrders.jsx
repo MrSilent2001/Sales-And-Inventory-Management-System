@@ -78,7 +78,7 @@ function SupplierOrders() {
         { value: 'In-Processing', label: 'In-Processing' }
     ];
 
-    const handleStatusChange = async (event, orderId) => {
+    const handleStatusChange = async (event) => {
         const newStatus = event.target.value;
         try {
             await axios.put(`http://localhost:9000/purchaseOrder/update/${orders[0].id}`, { status: newStatus }, {
