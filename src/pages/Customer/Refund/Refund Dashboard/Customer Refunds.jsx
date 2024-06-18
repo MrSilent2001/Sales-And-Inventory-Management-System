@@ -104,7 +104,7 @@ function CustomerRefunds() {
                             <h3>Refund Request</h3>
                         </div>
                         <div className="customerRefundRequestButton">
-                            <Link to="/createrefund">
+                            <Link to="/eligibleOrdersForRefund">
                                 <CustomizedButton
                                     hoverBackgroundColor="#2d3ed2"
                                     style={{
