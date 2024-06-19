@@ -65,7 +65,7 @@ const CreateRequestButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#242F9B'),
     backgroundColor: '#242F9B',
     '&:hover': {
-        backgroundColor: '#2d3ed2' // You can adjust the darken value as needed
+        backgroundColor: '#2d3ed2' 
     },
     '&.MuiButton-root': {
         width: '11.625em',
@@ -80,7 +80,7 @@ const CenteredModal = styled('div')({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100vh', // Make the container take the full height of the viewport
+    height: '100vh', 
 });
 
 function InventoryRefundRequest(props) {
