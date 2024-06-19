@@ -8,63 +8,79 @@ import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import DynamicTable from '../../../../components/Table/customizedTable2';
 import CustomizedAlert from '../../../../components/Alert/alert';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from "react-router-dom";
 
 function EligibleOrdersForRefund() {
     const [isLoading, setIsLoading] = useState(false);
     const [eligibleOrders, setEligibleOrders] = useState([]);
     const [openError, setOpenError] = useState(false);
-
     const token = localStorage.getItem('accessToken');
     const decodedToken = jwtDecode(token);
-    const id = decodedToken.id;
-   console.log(id);
+    const customerId = localStorage.getItem('id');
+    const navigate = useNavigate();
+
     const columns = useMemo(() => [
         { accessorKey: 'orderId', header: 'Order Id', size: 75, align: 'center' },
-        { accessorKey: 'orderItems', header: 'Ordered Items', size: 100, align: 'center' },
+        { accessorKey: 'orderItems', header: 'Ordered Items', size: 100, align: 'center', Cell: ({ value }) => <span>{value}</span> },
         { accessorKey: 'orderPrice', header: 'Bill Amount', size: 170, align: 'center' },
         { accessorKey: 'orderDate', header: 'Date', size: 170, align: 'center' },
         { accessorKey: 'orderStatus', header: 'Order Status', size: 170, align: 'center' },
-        { accessorKey: 'refund', header: 'Refund', size: 100, align: 'center', Cell: ({ row }) => (
-            <CustomizedButton
-                onClick={() => handleRefund(row.original)}
-                hoverBackgroundColor="#2d3ed2"
-                style={{
-                    color: '#ffffff',
-                    backgroundColor: '#242F9B',
-                    border: '1px solid #242F9B',
-                    width: '6em',
-                    height: '2.5em',
-                    fontSize: '0.8em',
-                    padding: '0.5em 0.625em',
-                    borderRadius: '0.35em',
-                    fontWeight: '500',
-                    marginTop: '0.625em',
-                    textTransform: 'none',
-                    textAlign: 'center',
-                }}
-            >
-                Refund
-            </CustomizedButton>
-        ) }
     ], []);
+
+    const createRefundRequestButton = () => {
+        const buttonStyle = {
+            color: '#ffffff',
+            backgroundColor: '#242F9B',
+            border: '1px solid #242F9B',
+            width: '12em',
+            height: '2.5em',
+            fontSize: '0.8em',
+            padding: '0.5em 0.625em',
+            borderRadius: '0.35em',
+            fontWeight: '500',
+            marginTop: '0.625em',
+            textTransform: 'none',
+            textAlign: 'center',
+        };
+
+        return (
+            <CustomizedButton
+                onClick={() => handleRefund(eligibleOrders.orderId)}
+                hoverBackgroundColor="#2d3ed2"
+                style={buttonStyle}
+            >
+                Request Refund
+            </CustomizedButton>
+        );
+    };
 
     const handleClickError = () => {
         setOpenError(true);
     };
 
-    const handleRefund = (order) => {
-        // Handle the refund logic here, maybe navigate to a refund request form
-        console.log('Refund requested for order:', order);
-        // For example, navigate to the refund request form and pass the order details
-        // navigate('/refundRequest', { state: { order } });
+    const handleRefund = (orderId) => {
+        console.log('Refund requested for order:', orderId);
+        // navigate(`/createrefund/${orderId}`);
+        navigate('/createrefund', { state: { orderId } });
+    };
+
+    const handleRowClick = (row) => {
+        const orderId = row.orderId;
+        // navigate(`/createrefund/${orderId}`);
+        navigate('/createrefund', { state: { orderId } });
     };
 
     useEffect(() => {
         const fetchEligibleOrders = async () => {
             setIsLoading(true);
             try {
-                const response = await axios.get(`http://localhost:9000/order/getAllOrdersByCustomerId/${id}`, {
+                if (!customerId) {
+                    console.error('Customer ID not found in token');
+                    return;
+                }
+
+                const response = await axios.get(`http://localhost:9000/order/getAllOrders`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -72,13 +88,47 @@ function EligibleOrdersForRefund() {
 
                 const orders = response.data;
 
-                // Filter orders made within the last 7 days
+                const customerOrders = orders.filter(order => order.orderCustomerId === customerId);
+
+                const departedOrders = customerOrders.filter(order => order.orderStatus === "Departed");
+
                 const sevenDaysAgo = new Date();
                 sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
-                const recentOrders = orders.filter(order => new Date(order.orderDate) >= sevenDaysAgo);
+                const recentCustomerOrders = departedOrders.filter(order => new Date(order.lastOrderStatusUpdatedDate) >= sevenDaysAgo);
 
-                setEligibleOrders(recentOrders);
+                const refundResponse = await axios.get('http://localhost:9000/refund/customerRefund/getAll', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                const refundRequests = refundResponse.data.map(refund => refund.orderId);
+
+                const eligibleOrders = recentCustomerOrders.filter(order => !refundRequests.includes(order.orderId));
+
+                const productsResponse = await axios.get('http://localhost:9000/product/getAllProducts', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const products = productsResponse.data.reduce((acc, product) => {
+                    acc[product.id] = product.productName;
+                    return acc;
+                }, {});
+
+                const formattedOrders = eligibleOrders.map(order => {
+                    const orderItemsWithName = order.orderItems.map(itemStr => {
+                        const item = JSON.parse(itemStr);
+                        const productName = products[item.id];
+                        return `${productName} x ${item.amount}`;
+                    });
+                    const formattedOrderItems = orderItemsWithName.join(', ');
+                    return { ...order, orderItems: formattedOrderItems };
+                });
+
+                setEligibleOrders(formattedOrders);
+
             } catch (error) {
                 handleClickError();
                 console.error('Error fetching orders:', error);
@@ -88,7 +138,7 @@ function EligibleOrdersForRefund() {
         };
 
         fetchEligibleOrders();
-    }, [id, token]);
+    }, [customerId, token]);
 
     return (
         <>
@@ -108,6 +158,8 @@ function EligibleOrdersForRefund() {
                                 columns={columns}
                                 data={eligibleOrders}
                                 includeProfile={false}
+                                createActions={createRefundRequestButton}
+                                onRowClick={handleRowClick}
                             />
                         )}
                     </div>
@@ -117,7 +169,7 @@ function EligibleOrdersForRefund() {
 
             <CustomizedAlert
                 open={openError}
-                onClose={handleClickError}
+                onClose={() => setOpenError(false)}
                 severity="error"
                 message="Something Went Wrong!"
             />
