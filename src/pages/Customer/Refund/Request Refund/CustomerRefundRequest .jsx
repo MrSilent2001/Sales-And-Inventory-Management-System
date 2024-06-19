@@ -14,7 +14,6 @@ import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
 
 
-
 function SelectItem({ value, onChange, error, items }) {
     return (
         <Box sx={{ minWidth: 80 }}>
@@ -161,7 +160,9 @@ function CustomerRefundRequest({ order, onClose }) {
                 const decoded = jwtDecode(token);
                 setFormData((prevFormData) => ({
                     ...prevFormData,
-                    contact: decoded.contactNo || ''
+                    customerId: decoded.id || '',
+                    contact: decoded.contactNo || '',
+                    customerName: decoded.username || '',
                 }));
             } catch (error) {
                 console.error('Invalid token:', error);
@@ -169,14 +170,11 @@ function CustomerRefundRequest({ order, onClose }) {
         }
 
         if (order) {
-            //const itemsArray = order.orderItems.split(','); // Extracting and splitting items
-            const itemsArray = "item1,item2,item3".split(','); // Extracting and splitting items
-
+            const itemsArray = "item1,item2,item3".split(','); // Hardcoded items for demonstration
             setItems(itemsArray); // Setting the items array in state
             setFormData((prevFormData) => ({
                 ...prevFormData,
-                customerId: order.orderCustomerId,
-                customerName: order.customerName,
+                orderId: order.orderId,
                 item: '', // Initially setting item to an empty string
                 quantity: order.quantity,
                 totalPrice: order.orderPrice
@@ -208,6 +206,7 @@ function CustomerRefundRequest({ order, onClose }) {
         if (hasError) {
             return;
         }
+        console.log('Form data:', formData);
 
         axios.post('http://localhost:9000/refund/customerRefund/create', formData)
             .then(response => {
@@ -351,7 +350,6 @@ function CustomerRefundRequest({ order, onClose }) {
                     </form>
                 </div>
             </div>
-         
         </>
     );
 }
