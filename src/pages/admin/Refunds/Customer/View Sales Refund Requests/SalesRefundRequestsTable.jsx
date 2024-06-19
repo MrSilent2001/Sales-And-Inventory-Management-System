@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useMemo } from 'react';
 import { Box, Container, Typography, Tooltip } from '@mui/material';
 import axios from 'axios';
 import Footer from "../../../../../layout/footer/footer";
@@ -9,6 +9,7 @@ import CustomizedTable from "../../../../../components/Table/Customized Table/cu
 import PageLoader from "../../../../../components/Page Loader/pageLoader";
 import WarningIcon from '@mui/icons-material/Warning';
 import CustomizedAlert from '../../../../../components/Alert/alert';
+import DynamicTable from '../../../../../components/Table/customizedTable2';
 
 const SalesRefundRequestsTable = ({ onViewApproved }) => {
     const [isLoading, setIsLoading] = useState(true);
@@ -50,14 +51,14 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
         fetchRefundRequests();
     }, []);
 
-    const columns = [
-        { columnId: 'customerName', label: 'Name', minWidth: 70, align: 'center' },
-        { columnId: 'id', label: 'Request Id', minWidth: 100, align: 'center' },
-        { columnId: 'orderId', label: 'Order Id', minWidth: 100, align: 'center' },
-        { columnId: 'actions', label: 'Actions', minWidth: 150, align: 'center' }
-    ];
+    const columns = useMemo(() => [
+        { accessorKey: 'customerName', header: 'Name', size: 70, align: 'center' },
+        { accessorKey: 'id', header: 'Request Id', size: 100, align: 'center' },
+        { accessorKey: 'orderId', header: 'Order Id', size: 100, align: 'center' },
+        { accessorKey: 'actions', header: 'Actions', size: 150, align: 'center' }
+    ], []);
 
-    const mappedData = refundRequests.map(row => ({
+    const dataWithActions = refundRequests.map(row => ({
         id: row.id,
         customerName: row.customerName,
         orderId: row.orderId,
@@ -173,10 +174,14 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
                             {error}
                         </Typography>
                     ) : (
-                        <CustomizedTable
+                        <DynamicTable
                             columns={columns}
-                            rows={mappedData}
+                            data={dataWithActions}
                             style={{ minWidth: 700, maxHeight: 400 }}
+                            includeProfile={false}
+                            tableWidth="100%"
+                            enableFilters={false}
+                            initialShowGlobalFilter={true}
                         />
                     )}
                 </Box>
