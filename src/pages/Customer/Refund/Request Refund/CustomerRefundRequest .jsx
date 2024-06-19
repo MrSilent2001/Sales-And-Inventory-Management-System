@@ -13,7 +13,9 @@ import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer n
 import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
 
-function SelectItem({ value, onChange, error }) {
+
+
+function SelectItem({ value, onChange, error, items }) {
     return (
         <Box sx={{ minWidth: 80 }}>
             <FormControl fullWidth error={error}>
@@ -45,9 +47,9 @@ function SelectItem({ value, onChange, error }) {
                         },
                     }}
                 >
-                    <MenuItem value="I0001">I0001</MenuItem>
-                    <MenuItem value="I0002">I0002</MenuItem>
-                    <MenuItem value="I0003">I0003</MenuItem>
+                    {items.map((item, index) => (
+                        <MenuItem key={index} value={item}>{item}</MenuItem>
+                    ))}
                 </Select>
             </FormControl>
         </Box>
@@ -149,6 +151,7 @@ function CustomerRefundRequest({ order, onClose }) {
         totalPrice: false
     });
 
+    const [items, setItems] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -166,11 +169,15 @@ function CustomerRefundRequest({ order, onClose }) {
         }
 
         if (order) {
+            //const itemsArray = order.orderItems.split(','); // Extracting and splitting items
+            const itemsArray = "item1,item2,item3".split(','); // Extracting and splitting items
+
+            setItems(itemsArray); // Setting the items array in state
             setFormData((prevFormData) => ({
                 ...prevFormData,
                 customerId: order.orderCustomerId,
                 customerName: order.customerName,
-                item: order.orderItems,
+                item: '', // Initially setting item to an empty string
                 quantity: order.quantity,
                 totalPrice: order.orderPrice
             }));
@@ -245,6 +252,7 @@ function CustomerRefundRequest({ order, onClose }) {
                                     value={formData.item}
                                     onChange={(e) => handleChange({ target: { name: 'item', value: e.target.value } })}
                                     error={errors.item}
+                                    items={items}
                                 />
                             </div>
                         </div>
@@ -349,10 +357,3 @@ function CustomerRefundRequest({ order, onClose }) {
 }
 
 export default CustomerRefundRequest;
-
-
-
-
-
-
-
