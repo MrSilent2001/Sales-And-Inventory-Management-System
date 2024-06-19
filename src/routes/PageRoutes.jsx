@@ -52,6 +52,7 @@ import SupplierOrders from "../pages/Supplier/Supplier Orders/supplierOrders";
 import SupplierRefunds from "../pages/Supplier/Supplier Refund/supplierRefunds";
 import EligibleOrdersForRefund from "../pages/Customer/Refund/eligibleOrdersForRefund/eligibleOrdersForRefund";
 import SupplierPayments from "../pages/Supplier/Supplier Payments/supplierPayments";
+import InventoryDetail from "../pages/admin/View Inventory/inventoryDetail";
 
 export function PageRouting() {
     return (
@@ -131,6 +132,7 @@ export function PageRouting() {
                     {/*Admin view routes - Inventory*/}
 
                     <Route path="/viewInventory" element={<ViewInventory/>}/>
+                    <Route path="/viewInventoryDetail/:itemId" element={<InventoryDetail/>}/>
                     <Route path="/viewSupplier" element={<ViewSupplier/>}/>
                     <Route path="/purchasedOrder" element={<PurchaseOrderDashboard/>}/>
                     <Route path="/InventoryGeneratedRequest" element={<InventoryGeneratedRequest/>}/>
