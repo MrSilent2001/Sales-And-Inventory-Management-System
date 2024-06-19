@@ -45,12 +45,13 @@ function CustomerRefunds() {
     }, []);
 
     const columns = useMemo(() => [
-        { accessorKey: 'customerName', header: 'Customer Name', size: 100, align: 'center' },
-        { accessorKey: 'contact', header: 'Contact', size: 100, align: 'center' },
+        { accessorKey: 'orderId', header: 'Order Id', size: 100, align: 'center' },
         { accessorKey: 'item', header: 'Item', size: 100, align: 'center' },
         { accessorKey: 'totalPrice', header: 'Total Price', size: 100, align: 'center' },
+        { accessorKey: 'createdDate', header: 'Created Date', size: 100, align: 'center' },
         { accessorKey: 'status', header: 'Status', size: 100, align: 'center' }
     ], []);
+    
 
     return (
         <>
