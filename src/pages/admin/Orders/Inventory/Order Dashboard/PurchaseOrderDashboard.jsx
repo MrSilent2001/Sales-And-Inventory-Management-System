@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useMemo } from 'react';
 import {
     Box,
     Card,
@@ -13,8 +13,10 @@ import Footer from "../../../../../layout/footer/footer";
 import PlaceOrder from "../../../Orders/Inventory/Modals/Place Order/placeOrder";
 import ViewOrder from "../../../Orders/Inventory/Modals/View Order/viewOrder";
 import CustomizedButton from "../../../../../components/Button/button";
-import SearchBar from "../../../../../components/search bar/search bar";
-import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
+
+import DynamicTable from '../../../../../components/Table/customizedTable2';
+
+
 
 const PurchaseOrderDashboard = () => {
 
@@ -26,15 +28,6 @@ const PurchaseOrderDashboard = () => {
     const [inProgressOrders, setInProgressOrders] = useState(0);
     const [completedOrders, setCompletedOrders] = useState(0);
     const [selectedOrder, setSelectedOrder] = useState(null);
-
-    const fetchItems = async (query) => {
-        try {
-            const response = await axios.get(`http://localhost:9000/purchaseOrder/search?keyword=${query}`);
-            setPurchasedOrders(response.data);
-        } catch (error) {
-            console.error('Error fetching Items:', error);
-        }
-    };
 
     useEffect(() => {
         const fetchPurchasedOrders = async () => {
@@ -89,15 +82,15 @@ const PurchaseOrderDashboard = () => {
         setViewOrderVisible(true);
     };
 
-    const columns = [
-        { columnId: 'supplierName', label: 'Supplier', minWidth: 70, align: 'center' },
-        { columnId: 'Address', label: 'Address', minWidth: 150, align: 'center' },
-        { columnId: 'mail', label: 'Email', minWidth: 120, align: 'center' },
-        { columnId: 'contact_number', label: 'Contact', minWidth: 100, align: 'center' },
-        { columnId: 'actions', label: '', minWidth: 200, align: 'center' }
-    ];
+    const columns = useMemo(() => [
+        { accessorKey: 'supplierName', header: 'Supplier', size: 70, align: 'center' },
+        { accessorKey: 'Address', header: 'Address', size: 150, align: 'center' },
+        { accessorKey: 'mail', header: 'Email', size: 120, align: 'center' },
+        { accessorKey: 'contact_number', header: 'Contact', size: 100, align: 'center' },
+        { accessorKey: 'actions', header: 'Actions', size: 200, align: 'center' }
+    ], []);
 
-    const mappedData = purchasedOrders.map(row => ({
+    const dataWithActions = purchasedOrders.map(row => ({
         id: row.id,
         supplierName: row.supplierName,
         Address: row.Address,
@@ -187,17 +180,14 @@ const PurchaseOrderDashboard = () => {
 
                 {/* Main Content */}
                 <Container maxWidth={false} sx={{ bgcolor: '#DBDFFD', height: 'auto' }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'flex-start', paddingTop: 7, paddingBottom: 7 }}>
-                        <SearchBar
-                            label="Search Orders"
-                            onKeyPress={fetchItems}
-                        />
-                    </Box>
                     <div style={{ overflow: 'auto', maxHeight: '50vh' }}>
-                        <CustomizedTable
-                            style={{ width: '100%', overflowY: 'auto' }}
+                        <DynamicTable
                             columns={columns}
-                            rows={mappedData}
+                            data={dataWithActions}
+                            includeProfile={false}
+                            tableWidth="100%"  // Increase the width of the table
+                            enableFilters={false}
+                            initialShowGlobalFilter={true}  // Show the global search filter
                         />
                     </div>
 
