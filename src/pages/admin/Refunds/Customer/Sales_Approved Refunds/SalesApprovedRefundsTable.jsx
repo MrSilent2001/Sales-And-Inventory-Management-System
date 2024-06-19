@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Box, Button, Paper, Typography } from '@mui/material';
+import React, { useState, useEffect,useMemo } from 'react';
+import { Container, Box, Button, Typography } from '@mui/material';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../../layout/footer/footer";
 import BackArrow from "../../../../../components/Icons/backArrow";
-import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 import PageLoader from "../../../../../components/Page Loader/pageLoader";
 import './SalesApprovedRefundsTable.css';
+import DynamicTable from '../../../../../components/Table/customizedTable2';
 
 const SalesApprovedRefundsTable = () => {
   const [approvedRefunds, setApprovedRefunds] = useState([]);
@@ -33,13 +33,13 @@ const SalesApprovedRefundsTable = () => {
     fetchApprovedRefunds();
   }, []);
 
-  const columns = [
-    { columnId: 'customerName', label: 'Name', minWidth: 70, align: 'center' },
-    { columnId: 'id', label: 'Request Id', minWidth: 150, align: 'center' },
-    { columnId: 'orderId', label: 'Order Id', minWidth: 120, align: 'center' },
-    { columnId: 'totalPrice', label: 'Amount', minWidth: 100, align: 'center' },
-    { columnId: 'status', label: 'Status', minWidth: 100, align: 'center' }
-  ];
+  const columns = useMemo(() => [
+    { accessorKey: 'customerName', header: 'Name', size: 70, align: 'center' },
+    { accessorKey: 'id', header: 'Request Id', size: 150, align: 'center' },
+    { accessorKey: 'orderId', header: 'Order Id', size: 120, align: 'center' },
+    { accessorKey: 'totalPrice', header: 'Amount', size: 100, align: 'center' },
+    { accessorKey: 'status', header: 'Status', size: 100, align: 'center' }
+  ], []);
 
   const mappedData = approvedRefunds.map(row => ({
     id: row.id, 
@@ -53,14 +53,14 @@ const SalesApprovedRefundsTable = () => {
   return (
     <>
       <InventoryNavbar />
-      <Container className='inv_inner_container' maxWidth="80%">
+      <Container className='inv_inner_container' maxWidth="80%" style={{ padding: 0 }}>
         <Box sx={{ my: 4, display: 'flex', flexDirection: 'column' }}>
           <Link to="/viewRefundRequests">
             <Button
               startIcon={<BackArrow />}
               size="large"
               style={{ color: "black", fontWeight: 'bold', textTransform: "none" }}
-              sx={{ width: '20%', mt: '2%', mb: '2%', ml: '-87.5%' }}
+              sx={{ width: '20%', mt: '2%', mb: '2%', ml: 0 }}
             >
               Refund Requests
             </Button>
@@ -72,12 +72,14 @@ const SalesApprovedRefundsTable = () => {
               {error}
             </Typography>
           ) : (
-            <Paper elevation={4}>
-              <CustomizedTable
-                columns={columns}
-                rows={mappedData}
-              />
-            </Paper>
+            <DynamicTable
+              columns={columns}
+              data={mappedData}
+              includeProfile={false}
+              tableWidth="100%"
+              enableFilters={false}
+              initialShowGlobalFilter={true}
+            />
           )}
         </Box>
       </Container>
