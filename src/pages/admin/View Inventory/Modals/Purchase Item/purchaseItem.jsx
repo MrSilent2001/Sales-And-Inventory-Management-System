@@ -1,97 +1,119 @@
 import * as React from 'react';
-import './Update Item.css';
+import './purchaseItem.css';
 import CenteredModal from "../../../../../components/Modal/modal";
 import BasicTextField from "../../../../../components/Form Inputs/textfield";
 import CustomizedButton from "../../../../../components/Button/button";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import ComboBox from "../../../../../components/Form Inputs/comboBox";
 
-function UpdateItem(props){
+function PurchaseItem(props) {
+    const { inventoryItem, supplier, onClose } = props;
 
+    const [id, setId] = useState('');
+    const [brand, setBrand] = useState('');
+    const [name, setName] = useState('');
     const [description, setDescription] = useState('');
+    const [manufacturer, setManufacturer] = useState('');
+    const [colour, setColour] = useState('');
     const [category, setCategory] = useState('');
     const [quantity, setQuantity] = useState('');
     const [unitPrice, setUnitPrice] = useState('');
-    const [manufacturedDate, setManufacturedDate] = useState('');
-    const [expireDate, setExpireDate] = useState('');
+    const [purchaseQuantity, setPurchaseQuantity] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0);
 
-    const [inventoryItem, setInventoryItem] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState('');
-
-    const getInventoryItem = (id) => {
-        axios.get(`http://localhost:9000/inventory/get/${id}`).then(res=> {
-            setInventoryItem(res.data);
-            setSelectedCategory(res.data.itemCategory);
-            console.log(res.data);
-        }).catch(err => {
-            console.log(err);
-        })
-    }
+    const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
-        getInventoryItem(props.selectedRow)
+        console.log(supplier);
     }, []);
+
+    useEffect(() => {
+        if (inventoryItem) {
+            setId(inventoryItem.id);
+            setBrand(inventoryItem.productBrand);
+            setName(inventoryItem.productName);
+            setDescription(inventoryItem.productDescription);
+            setManufacturer(inventoryItem.productManufacturer);
+            setColour(inventoryItem.productColour);
+            setCategory(inventoryItem.productCategory);
+            setQuantity(inventoryItem.productQuantity);
+            setUnitPrice(inventoryItem.productUnitPrice);
+        }
+    }, [inventoryItem]);
+
+    useEffect(() => {
+        if (unitPrice && purchaseQuantity) {
+            setTotalPrice(unitPrice * purchaseQuantity);
+        }
+    }, [unitPrice, purchaseQuantity]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const newItem = {
-            itemDescription: description,
-            itemCategory: category,
-            itemQuantity: quantity,
-            itemUnitPrice: unitPrice,
-            manufacturedDate : manufacturedDate,
-            expireDate : expireDate
+        const newProduct = {
+            productName: name,
+            productBrand: brand,
+            productManufacture: manufacturer,
+            productCategory: category,
+            productDescription: description,
+            productImage: inventoryItem.productImage,
+            productColor: colour,
+            productQuantity: Number(quantity),
+            productSellingPrice: Number(unitPrice)
         };
 
-        axios.post('http://localhost:9000/inventory/add',newItem).then(res=>{
-            console.log(res.data);
-        }).catch(err=>{
+        const newPurchaseOrder = {
+            supplierId: supplier.id,
+            supplierName: supplier.username,
+            Address: supplier.address,
+            mail: supplier.email,
+            contact_number: supplier.contactNo,
+            items: inventoryItem.id,
+            status: "pending",
+            createdDate: new Date().toISOString().split('T')[0]
+        };
+
+        axios.all([
+            axios.post('http://localhost:9000/product/create', newProduct),
+            axios.post('http://localhost:9000/purchaseOrder/create', newPurchaseOrder),
+        ], {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then(axios.spread((productRes, orderRes) => {
+            console.log(productRes.data);
+            console.log(orderRes.data);
+            onClose();
+        })).catch(err => {
             console.log(err);
-        })
+        });
+    };
 
-        // Clear the form fields after submission
-        /*setInventoryId('');
-        setDescription('');
-        setCategory('');
-        setQuantity('');
-        setUnitPrice('');*/
-
-
-    }
-
-    const options = [
-        {value: 'Category 02', label: 'Category 02'},
-        {value: 'Building Material', label: 'Building Material'},
-        {value: 'Category 03', label: 'Category 03'}
-    ];
-
-    return(
+    return (
         <CenteredModal>
             <div className="updateItemOuter">
                 <div className="updateItemModel">
-                    <h2>Update Item</h2>
+                    <h2>Purchase Item</h2>
                     <div className="updateItemForm">
                         <div className="updateItemformField">
                             <div className="updateItemidField">
-                                <h5>Inventory Id</h5>
+                                <h5>Product Id</h5>
                             </div>
                             <div className="updateItemidInput">
-                                <BasicTextField value={inventoryItem.id}/>
+                                <BasicTextField value={id} readOnly />
                             </div>
                         </div>
 
                         <div className="updateItemformField">
                             <div className="updateItemidField">
-                                <h5>Item Description</h5>
+                                <h5>Product Name</h5>
                             </div>
                             <div className="updateItemidInput">
                                 <BasicTextField
-                                    name="Desc"
-                                    value={inventoryItem.itemDescription}
+                                    name="Name"
+                                    value={name}
                                     onChange={(e) => {
-                                        setDescription(e.target.value);
+                                        setName(e.target.value);
                                     }}
                                 />
                             </div>
@@ -102,21 +124,12 @@ function UpdateItem(props){
                                 <h5>Item Category</h5>
                             </div>
                             <div className="updateItemidInput">
-                                <ComboBox
-                                    name="category"
-                                    value={selectedCategory}
+                                <BasicTextField
+                                    name="Category"
+                                    value={category}
                                     onChange={(e) => {
                                         setCategory(e.target.value);
                                     }}
-                                    style={{
-                                        width: '17.5em',
-                                        height: '2em',
-                                        marginRight: '0.5em',
-                                        border: '1px solid white'
-                                    }}
-                                    options={options}
-                                    label="Category"
-                                    size="small"
                                 />
                             </div>
                         </div>
@@ -128,7 +141,7 @@ function UpdateItem(props){
                             <div className="updateItemidInput">
                                 <BasicTextField
                                     name="Qty"
-                                    value={inventoryItem.itemQuantity}
+                                    value={quantity}
                                     onChange={(e) => {
                                         setQuantity(e.target.value);
                                     }}
@@ -143,7 +156,7 @@ function UpdateItem(props){
                             <div className="updateItemidInput">
                                 <BasicTextField
                                     name="Price"
-                                    value={inventoryItem.itemUnitPrice}
+                                    value={unitPrice}
                                     onChange={(e) => {
                                         setUnitPrice(e.target.value);
                                     }}
@@ -153,14 +166,14 @@ function UpdateItem(props){
 
                         <div className="updateItemformField">
                             <div className="updateItemidField">
-                                <h5>Manufacture Dated</h5>
+                                <h5>Number of Items to Purchase</h5>
                             </div>
                             <div className="updateItemidInput">
                                 <BasicTextField
-                                    name="manufacturedDate"
-                                    value={inventoryItem.manufacturedDate}
+                                    name="purchaseQuantity"
+                                    value={purchaseQuantity}
                                     onChange={(e) => {
-                                        setManufacturedDate(e.target.value);
+                                        setPurchaseQuantity(e.target.value);
                                     }}
                                 />
                             </div>
@@ -168,24 +181,21 @@ function UpdateItem(props){
 
                         <div className="updateItemformField">
                             <div className="updateItemidField">
-                                <h5>Expire Date</h5>
+                                <h5>Total Price</h5>
                             </div>
                             <div className="updateItemidInput">
                                 <BasicTextField
-                                    name="expireDate"
-                                    value={inventoryItem.expireDate}
-                                    onChange={(e) => {
-                                        setExpireDate(e.target.value);
-                                    }}
+                                    name="totalPrice"
+                                    value={totalPrice}
+                                    readOnly
                                 />
                             </div>
                         </div>
 
                         <div className="updateItemformFieldButtons">
-
                             <div className="updateItemcancelButton">
                                 <CustomizedButton
-                                    onClick={() => props.onClose(false)}
+                                    onClick={() => onClose(false)}
                                     hoverBackgroundColor="#f11717"
                                     style={{
                                         backgroundColor: '#960505',
@@ -203,6 +213,7 @@ function UpdateItem(props){
 
                             <div className="updateItemupdateButton">
                                 <CustomizedButton
+                                    onClick={handleSubmit}
                                     hoverBackgroundColor="#2d3ed2"
                                     style={{
                                         backgroundColor: '#242F9B',
@@ -215,7 +226,7 @@ function UpdateItem(props){
                                         fontWeight: '500',
                                         marginTop: '0.625em'
                                     }}>
-                                    Update Item
+                                    Purchase
                                 </CustomizedButton>
                             </div>
                         </div>
@@ -223,7 +234,7 @@ function UpdateItem(props){
                 </div>
             </div>
         </CenteredModal>
-    )
+    );
 }
 
-export default UpdateItem;
+export default PurchaseItem;

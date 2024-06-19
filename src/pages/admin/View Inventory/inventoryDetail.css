@@ -1,0 +1,88 @@
+.inventoryDetailsOuter{
+    align-content: center;
+    min-height: 36em;
+    padding: 0 1.5em 0 1.5em;
+}
+
+.inventoryDetailsInner{
+    display: flex;
+    height: 34em;
+}
+
+.productImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36em;
+    margin-left: 4em;
+}
+
+.productDetails{
+    width: 62.5%;
+    padding: 2.1em 0 0 2em;
+}
+
+.productTopic{
+    text-align: left;
+}
+
+.productTopic h1{
+    font-family: Arial;
+    margin-bottom: 1.25em;
+}
+
+.productDataOuter{
+    width: auto;
+}
+
+.productDetailOuter{
+    margin-bottom: 1em;
+}
+
+.productDetail{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.productDetailTopic{
+    margin: 0 1em 0 0;
+}
+
+.productDetailTopic h3{
+    font-size: 1em;
+    font-weight: 550;
+    margin-top: 0.2em;
+}
+
+.loadedProductDetail h3{
+    font-size: 0.9em;
+    font-weight: 450;
+    margin-top: 0.2em;
+}
+
+.supplierDetail{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.supplierDetailTopic{
+    margin: 0 1em 0 0;
+}
+
+.supplierDetailTopic h3{
+    font-weight: 550;
+    font-size: 1em;
+}
+
+.loadedSupplierDetail h3{
+    font-size: 0.9em;
+    font-weight: 450;
+}
+
+.productDetailButtons{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2em;
+}
