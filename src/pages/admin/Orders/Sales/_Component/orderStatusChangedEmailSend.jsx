@@ -1,35 +1,40 @@
 import axios from 'axios';
 
-const sendOrderStatusEmail = async (orderId,token, reason = null) => {
+const sendOrderStatusEmail = async (orderId, token, reason = null) => {
     try {
         // Fetch order details
-        const orderResponse = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`,  {
+        const orderResponse = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
-            },});
+            },
+        });
         const orderData = orderResponse.data;
 
         // Fetch customer details
-        const customerResponse = await axios.get(`http://localhost:9000/customer/findCustomer/${orderData.orderCustomerId}`,  {
+        const customerResponse = await axios.get(`http://localhost:9000/customer/findCustomer/${orderData.orderCustomerId}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
-            },}
-        );
+            },
+        });
         const customerData = customerResponse.data;
 
         // Fetch all products
-        const productsResponse = await axios.get('http://localhost:9000/product/getAllProducts',  {
+        const productsResponse = await axios.get('http://localhost:9000/product/getAllProducts', {
             headers: {
                 Authorization: `Bearer ${token}`,
-            },}
-        );
+            },
+        });
         const products = productsResponse.data.reduce((acc, product) => {
             acc[product.id] = product.productName; // Map product ID to its name
             return acc;
         }, {});
 
-        // Replace item IDs with names
-        const orderItemsWithName = orderData.orderItems.map(itemId => products[itemId]);
+        // Replace item IDs with names and format orderItems
+        const orderItemsWithName = orderData.orderItems.map(itemStr => {
+            const item = JSON.parse(itemStr); // Parse the JSON string
+            const productName = products[item.id]; // Get the product name by ID
+            return `${productName} x ${item.amount}`; // Format as "Item name x item amount"
+        });
         const formattedOrderItems = orderItemsWithName.join(', ');
 
         const emailBody = reason
@@ -45,11 +50,11 @@ const sendOrderStatusEmail = async (orderId,token, reason = null) => {
         };
 
         // Send email
-        await axios.post('http://localhost:9000/email/send/orderStatus', emailData,  {
+        await axios.post('http://localhost:9000/email/send/orderStatus', emailData, {
             headers: {
                 Authorization: `Bearer ${token}`,
-            },}
-        );
+            },
+        });
         console.log(emailData);
 
         console.log('Email sent successfully');
@@ -57,5 +62,6 @@ const sendOrderStatusEmail = async (orderId,token, reason = null) => {
         console.error('Error fetching order or customer details:', error);
     }
 };
+
 
 export default sendOrderStatusEmail;

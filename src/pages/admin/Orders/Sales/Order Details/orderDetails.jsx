@@ -54,7 +54,6 @@ function OrderDetails() {
         setUpdateErrorOpenSuccess(true);
     };
 
-
     const [order, setOrder] = useState({
         orderId: '',
         orderReceiverName: '',
@@ -74,10 +73,11 @@ function OrderDetails() {
     const [orderPrice, setOrderPrice] = useState('');
 
     const token = localStorage.getItem('accessToken');
+
     const fetchOrderById = async (orderId) => {
         if (!orderId) {
             console.log('Order ID is empty. Fetch operation aborted.');
-            makeFieldsEmpty()
+            makeFieldsEmpty();
             return;
         }
 
@@ -89,26 +89,40 @@ function OrderDetails() {
             });
 
             if (!response.data || Object.keys(response.data).length === 0) {
-                // throw new Error('Order ID does not exist.');
                 IDNotExistErrorHandleClickSuccess();
                 makeFieldsEmpty();
-                return;;
-
+                return;
             }
 
-            console.log(response.data);
+            // Fetch all products
+            const productsResponse = await axios.get('http://localhost:9000/product/getAllProducts', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const products = productsResponse.data.reduce((acc, product) => {
+                acc[product.id] = product.productName; // Map product ID to its name
+                return acc;
+            }, {});
+
+            // Replace item IDs with names and format orderItems
+            const orderItemsWithName = response.data.orderItems.map(itemStr => {
+                const item = JSON.parse(itemStr); // Parse the JSON string
+                const productName = products[item.id]; // Get the product name by ID
+                return `ID ${item.id}:${productName} x ${item.amount}`; // Format as "Item name(itemid) x item amount"
+            });
+            const formattedOrderItems = orderItemsWithName.join(', ');
+
             setReceiverName(response.data.orderReceiverName);
             setReceiverAddress(response.data.orderReceiverAddress);
             setReceiverContact(response.data.orderReceiverContact);
-            setOrderItems(response.data.orderItems);
+            setOrderItems(formattedOrderItems);
             setOrderPrice(response.data.orderPrice);
         } catch (error) {
             console.error('Error fetching order:', error);
             dataErrorHandleClickSuccess();
         }
     };
-
-
 
     const handleCancel = async () => {
         setOrderId('');
@@ -136,7 +150,7 @@ function OrderDetails() {
                 orderItems: orderItems,
                 orderPrice: orderPrice
             };
-            const response = await axios.put(`http://localhost:9000/order/update/${orderId}`, updatedOrder,  {
+            const response = await axios.put(`http://localhost:9000/order/update/${orderId}`, updatedOrder, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -146,12 +160,10 @@ function OrderDetails() {
                 // Optionally, you can fetch the order again to update the state
                 fetchOrderById(orderId);
             } else {
-                // alert("Failed to update order details");
                 updateErrorHandleClickSuccess();
             }
         } catch (error) {
             console.error('Error updating order:', error);
-            // alert("Failed to update order details");
             updateErrorHandleClickSuccess();
         }
     };
@@ -171,7 +183,6 @@ function OrderDetails() {
         fetchOrderById(orderId);
     }, [orderId]);
 
-
     return (
         <>
             <SalesNavbar/>
@@ -181,7 +192,6 @@ function OrderDetails() {
                         <SalesOrderSidebar/>
                     </div>
                     <div className="orderDetailsInner">
-
                         <div className="updateFormbox">
                             <form>
                                 <div className="textSection">
@@ -225,7 +235,7 @@ function OrderDetails() {
                                 <div className="textSection">
                                     <label className='label'>Items</label>
                                     <BasicTextField
-                                        disabled={!orderId}
+                                        disabled={true}
                                         readOnly={true}
                                         value={orderItems}
                                         onChange={(e) => setOrderItems(e.target.value)}
@@ -235,7 +245,7 @@ function OrderDetails() {
                                 <div className="textSection">
                                     <label className='label'>Amount</label>
                                     <BasicTextField
-                                        disabled={!orderId}
+                                        disabled={true}
                                         readOnly={true}
                                         value={orderPrice}
                                         onChange={(e) => setOrderPrice(e.target.value)}
@@ -287,12 +297,8 @@ function OrderDetails() {
                                         Cancel
                                     </CustomizedButton>
                                 </div>
-
                             </form>
-
-
                         </div>
-
                     </div>
                 </div>
             </div>

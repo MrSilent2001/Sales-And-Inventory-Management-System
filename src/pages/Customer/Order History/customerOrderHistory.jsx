@@ -74,17 +74,21 @@ function CustomerOrderHistory() {
                 const filteredOrders = response.data.filter(order => order.orderCustomerId === id);
 
                 // Replace item IDs with names and format orderItems
-                // const ordersWithNamesAndFormattedItems = filteredOrders.map(order => {
-                //     const orderItemsWithName = order.orderItems.map(itemId => products[itemId]);
-                //     const formattedOrderItems = orderItemsWithName.join(', ');
-                //     return { ...order, orderItems: formattedOrderItems };
-                // });
-                //
-                // // Sort orders by date (latest to oldest)
-                // const sortedOrders = ordersWithNamesAndFormattedItems.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
+                const ordersWithNamesAndFormattedItems = filteredOrders.map(order => {
+                    const orderItemsWithName = order.orderItems.map(itemStr => {
+                        const item = JSON.parse(itemStr); // Parse the JSON string
+                        const productName = products[item.id]; // Get the product name by ID
+                        return `${productName} x ${item.amount}`; // Format as "Item name x item amount"
+                    });
+                    const formattedOrderItems = orderItemsWithName.join(', ');
+                    return { ...order, orderItems: formattedOrderItems };
+                });
+
+                // Sort orders by date (latest to oldest)
+                const sortedOrders = ordersWithNamesAndFormattedItems.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
 
                 console.log(filteredOrders);
-                setPreviousOrders(filteredOrders);
+                setPreviousOrders(sortedOrders);
             } catch (error) {
                 handleClickError();
                 console.error('Error fetching orders:', error);
@@ -96,6 +100,10 @@ function CustomerOrderHistory() {
         fetchPreviousOrders();
 
     }, []);
+
+
+
+
 
 
 
@@ -119,6 +127,7 @@ function CustomerOrderHistory() {
                             <DynamicTable
                                 columns={columns}
                                 data={previousOrders}
+                                // data={previousOrders}
                                 includeProfile={false}
                             />
                         )}
