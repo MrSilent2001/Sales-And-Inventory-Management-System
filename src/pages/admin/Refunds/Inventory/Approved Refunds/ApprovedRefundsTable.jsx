@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useMemo } from 'react';
 import { Container, Box, Paper, Modal } from '@mui/material';
 import './ApprovedRefundsTable.css';
 import InventoryNavbar from '../../../../../layout/navbar/Inventory navbar/Inventory navbar';
@@ -10,6 +10,7 @@ import axios from "axios";
 import PageLoader from "../../../../../components/Page Loader/pageLoader";
 import ViewInventoryRequest from '../Modal/viewInventoryRefundRequest/viewInventoryRequest';
 import CustomizedButton from '../../../../../components/Button/button';
+import DynamicTable from '../../../../../components/Table/customizedTable2';
 
 const ApprovedRefundsTable = () => {
   const [rows, setRows] = useState([]);
@@ -20,14 +21,14 @@ const ApprovedRefundsTable = () => {
 
   const token = localStorage.getItem('accessToken');
 
-  const columns = [
-    { columnId: 'supplierName', label: 'Name', minWidth: 70, align: 'center' },
-    { columnId: 'contact_number', label: 'Contact number', minWidth: 150, align: 'center' },
-    { columnId: 'inventory_id', label: 'Refund Id', minWidth: 120, align: 'center' },
-    { columnId: 'amount', label: 'Price', minWidth: 200, align: 'center' },
-    { columnId: 'status', label: 'Status', minWidth: 200, align: 'center' },
-    { columnId: 'actions', label: 'Actions', minWidth: 250, align: 'center' } // Increased minWidth for additional buttons
-  ];
+  const columns = useMemo(() => [
+    { accessorKey: 'supplierName', header: 'Name', size: 70, align: 'center' },
+    { accessorKey: 'contact_number', header: 'Contact number', size: 150, align: 'center' },
+    { accessorKey: 'inventory_id', header: 'Refund Id', size: 120, align: 'center' },
+    { accessorKey: 'amount', header: 'Price', size: 200, align: 'center' },
+    { accessorKey: 'status', header: 'Status', size: 200, align: 'center' },
+    { accessorKey: 'actions', header: 'Actions', size: 250, align: 'center' } // Increased minWidth for additional buttons
+  ], []);
 
   useEffect(() => {
     const fetchApprovedRefunds = async () => {
@@ -56,8 +57,8 @@ const ApprovedRefundsTable = () => {
     setViewRequestVisible(true);
   };
 
-  const mappedData = rows.map(row => ({
-    supplierNname: row.supplierName,
+  const dataWithActions = rows.map(row => ({
+    supplierName: row.supplierName,
     contact_number: row.phone,
     inventory_id: row.inventory_id,
     amount: row.price,
@@ -100,7 +101,14 @@ const ApprovedRefundsTable = () => {
           {error && <p>{error}</p>}
           {isLoading ? <PageLoader /> : (
             <Paper elevation={4} style={{ width: '100%' }}>
-              <CustomizedTable columns={columns} rows={mappedData} style={{ width: '100%' }} />
+              <DynamicTable
+                columns={columns}
+                data={dataWithActions}
+                includeProfile={false}
+                tableWidth="100%"
+                enableFilters={false}
+                initialShowGlobalFilter={true}
+              />
             </Paper>
           )}
         </Box>
