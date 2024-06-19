@@ -13,6 +13,7 @@ const Redirect = () => {
     const navigateTo = useNavigate();
 
     const productsPurchased = cart.map(item => item.productName);
+    const productsPurchasedId = cart.map(item => item.id);
 
     useEffect(() => {
         const fetchSession = async () => {
@@ -60,7 +61,7 @@ const Redirect = () => {
                     orderReceiverName: customer.username,
                     orderReceiverAddress: customer.address,
                     orderReceiverContact: customer.contactNo,
-                    orderItems: productsPurchased,
+                    orderItems: productsPurchasedId,
                     orderPrice: session.amount_total / 100,
                     orderCustomerId: customer.id,
                 },{
