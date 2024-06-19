@@ -82,7 +82,7 @@ export const Title = styled.h1`
 
 export const Input = styled.input`
   background-color: #eee;
-  border: none;
+  border: 1px solid #9e9ea4;
   padding: 12px 15px;
   margin: 8px 0;
   width: 400px;
