@@ -213,6 +213,22 @@ function CustomerRefundRequest({ order, onClose }) {
                 console.log('Refund request created:', response.data);
                 navigate('/generatedrefund', { state: { formData } });
                 onClose();
+
+                
+                const emailData = {
+                    receiverEmail: decoded.email, 
+                    subject: "Refund Request Created",
+                    text: `Dear ${formData.customerName}, your refund request for ${formData.item} has been successfully created. Reason: ${formData.reason}.`
+                };
+
+                axios.post('http://localhost:9000/send-email', emailData)
+                    .then(emailResponse => {
+                        console.log('Email sent successfully:', emailResponse.data);
+                    })
+                    .catch(emailError => {
+                        console.error('Error sending email:', emailError.response ? emailError.response.data : emailError.message);
+                    });
+
             })
             .catch(error => {
                 console.error('Error creating refund request:', error.response ? error.response.data : error.message);
