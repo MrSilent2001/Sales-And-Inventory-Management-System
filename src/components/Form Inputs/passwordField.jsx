@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import {css} from "@emotion/react";
 
 const Input = styled.input`
   background-color: #eee;
@@ -23,9 +24,14 @@ const ToggleButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
+    ${(props) =>
+            props.customStyles &&
+            css`
+      ${props.customStyles}
+    `}
 `;
 
-const PasswordInput = ({ placeholder, ...props }) => {
+const PasswordInput = ({ placeholder, toggleButtonStyles, ...props }) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleTogglePassword = () => {
@@ -39,7 +45,7 @@ const PasswordInput = ({ placeholder, ...props }) => {
                 placeholder={placeholder}
                 {...props}
             />
-            <ToggleButton type="button" onClick={handleTogglePassword}>
+            <ToggleButton type="button" onClick={handleTogglePassword} customStyles={toggleButtonStyles}>
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
             </ToggleButton>
         </InputContainer>
