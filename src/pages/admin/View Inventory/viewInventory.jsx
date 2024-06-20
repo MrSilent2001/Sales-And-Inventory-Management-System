@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
+import { useNavigate } from "react-router-dom";
 import { Box } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import "./viewInventory.css";
 import { Modal } from "@mui/material";
 import AddItem from "./Modals/Add Item/Add Item";
-import UpdateItem from "./Modals/Update Item/Update Item";
 import InventoryNavbar from "../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../layout/footer/footer";
 import DeleteItem from "./Modals/Delete Item/Delete Item";
@@ -15,13 +15,13 @@ import ComboBox from "../../../components/Form Inputs/comboBox";
 import axios from "axios";
 import MultiActionAreaCard from "../../../components/Cards/inventoryCard";
 
-function ViewInventory(){
+function ViewInventory() {
+    const navigate = useNavigate(); // Add this line
     const [visible, setVisible] = useState(false);
     const [addItemVisible, setAddItemVisible] = useState(false);
     const [deleteItemVisible, setDeleteItemVisible] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
     const [allInventoryItems, setAllInventoryItems] = useState([]);
-
     const [category, setCategory] = React.useState('');
     const [stock, setStock] = React.useState(true);
     const token = localStorage.getItem('accessToken');
@@ -49,8 +49,8 @@ function ViewInventory(){
         setVisible(true);
     };
 
-    const handleButtonClick = () => {
-        console.log("view")
+    const handleButtonClick = (item) => {
+        navigate(`/viewInventoryDetail/${item.id}`)
     };
 
     const columns = [
@@ -85,16 +85,10 @@ function ViewInventory(){
         getAllInventoryItems();
     }, [category]);
 
-    /*const mappedData = allInventoryItems.map(inventoryItem => ({ ...inventoryItem,
-        viewAction: createViewButton(inventoryItem.id),
-        deleteAction: createDeleteButton(handleButtonClick),
-        inventoryStatus: inventoryItem.itemQuantity > 0 ? 'In Stock' : 'Out of Stock' }
-    ));*/
-
     function createViewButton(id) {
         return (
             <CustomizedButton
-                onClick={() => handleSetVisible(id)}
+                onClick={() => navigate(`/viewInventoryDetail`)} // Modify this line to use navigate
                 hoverBackgroundColor="#2d3ed2"
                 style={{
                     backgroundColor: '#242F9B',
@@ -137,7 +131,6 @@ function ViewInventory(){
             </CustomizedButton>
         );
     }
-
 
     return(
         <>
@@ -243,8 +236,11 @@ function ViewInventory(){
                         <div className="inventoryItemGrid">
                             {allInventoryItems.map((item) => (
                                 <div className="card" key={item.id} >
-                                    <MultiActionAreaCard item={item} buttonText="View"/>
-                                    {/*handleClick={handleClick}*/}
+                                    <MultiActionAreaCard
+                                        item={item}
+                                        handleClick={handleButtonClick}
+                                        buttonText="View"
+                                    />
                                 </div>
                             ))}
                         </div>
@@ -257,10 +253,6 @@ function ViewInventory(){
 
                 <Modal open={deleteItemVisible}>
                     <DeleteItem onClose={(value) => { setDeleteItemVisible(false)}} />
-                </Modal>
-
-                <Modal open={visible}>
-                    <UpdateItem onClose={(value) => { setVisible(false)}} selectedRow={selectedRow} />
                 </Modal>
             </div>
 

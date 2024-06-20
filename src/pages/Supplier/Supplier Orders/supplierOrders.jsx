@@ -14,7 +14,6 @@ function SupplierOrders() {
     const [isLoading, setIsLoading] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
-    const navigate = useNavigate();
 
     const token = localStorage.getItem('accessToken');
     const id = localStorage.getItem('id');
@@ -60,7 +59,6 @@ function SupplierOrders() {
                     },
                 });
 
-                // Filter orders based on supplier ID
                 const filteredOrders = orderResponse.data.filter(order => order.supplierId === id);
                 setOrders(filteredOrders);
             } catch (error) {
@@ -73,30 +71,39 @@ function SupplierOrders() {
         fetchOrders();
     }, [token, id]);
 
-    // Options to dropdown
     const options = [
         { value: 'Pending', label: 'Pending' },
         { value: 'Accepted', label: 'Accepted' },
         { value: 'Rejected', label: 'Rejected' },
-        { value: 'In-Processing', label: 'In-Processing' },
-        { value: 'Cancelled', label: 'Cancelled' },
+        { value: 'In-Processing', label: 'In-Processing' }
     ];
 
-    const handleStatusChange = async (event, orderId) => {
+    const handleStatusChange = async (event) => {
         const newStatus = event.target.value;
         try {
-            await axios.put(`http://localhost:9000/purchaseOrder/update/${orderId}`, { orderStatus: newStatus }, {
+            await axios.put(`http://localhost:9000/purchaseOrder/update/${orders[0].id}`, { status: newStatus }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
 
-            // Update order status locally
             setOrders(prevOrders =>
                 prevOrders.map(order =>
-                    order.id === orderId ? { ...order, orderStatus: newStatus } : order
+                    order.id === orderId ? { ...order, status: newStatus } : order
                 )
             );
+
+            const order = orders.find(order => order.id === orderId);
+            await axios.post('http://localhost:9000/email/send/purchaseOrderStatus', {
+                receiverName: "Tradeasy Pvt Ltd",
+                emailSubject: "Order Status Update!",
+                emailBody: `Your order under the Order Id: ${orders[0].id} has been ${newStatus}. Thank You!`,
+                receiverEmail: orders[0].mail
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
             handleClickSuccess();
         } catch (error) {
@@ -105,16 +112,17 @@ function SupplierOrders() {
         }
     };
 
-    const createActionButtons = (row) => {
+    const createActionButtons = (row, order) => {
+        const orderStatus = order ? order.status : 'Pending';
         return (
             <div>
                 <ComboBox
                     onChange={(event) => handleStatusChange(event, row.id)}
                     style={{ width: '10em' }}
                     options={options}
-                    label="Category"
+                    label="Status"
                     size="small"
-                    defaultValue={row.orderStatus}
+                    defaultValue={orderStatus}
                 />
             </div>
         );
@@ -133,7 +141,7 @@ function SupplierOrders() {
                             <DynamicTable
                                 columns={columns}
                                 data={orders}
-                                createActions={createActionButtons}
+                                createActions={(row) => createActionButtons(row, orders.find(order => order.id === row.id))}
                                 includeProfile={false}
                             />
                         )}

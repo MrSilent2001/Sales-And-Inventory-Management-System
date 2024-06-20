@@ -8,7 +8,7 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import { Modal } from "@mui/material";
-import UpdateItem from "../../../admin/View Inventory/Modals/Update Item/Update Item";
+import UpdateItem from "../../../admin/View Inventory/Modals/Purchase Item/purchaseItem";
 import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";
 import Footer from "../../../../layout/footer/footer";
 import { Link } from "react-router-dom";

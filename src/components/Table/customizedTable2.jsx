@@ -23,23 +23,23 @@ const DynamicTable = ({
                       }) => {
 
     const [globalFilter, setGlobalFilter] = useState('');
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate();
 
     const transformedColumns = useMemo(() => {
         const baseColumns = [
-            {
-                accessorKey: 'id',
-                header: 'Id',
-                enableClickToCopy: true,
-                size: 20,
-                Cell: ({ renderedCellValue }) => <Box textAlign="center">{renderedCellValue}</Box>,
-            },
+            // {
+            //     accessorKey: 'id',
+            //     header: 'Id',
+            //     enableClickToCopy: true,
+            //     size: 20,
+            //     Cell: ({ renderedCellValue }) => <Box textAlign="center">{renderedCellValue}</Box>,
+            // },
             ...columns.filter(col => col.accessorKey !== 'id').map(col => ({
                 accessorKey: col.accessorKey,
                 header: col.header,
                 size: col.size,
                 enableClickToCopy: true,
-                Cell: ({ renderedCellValue }) => {
+                Cell: col.cellRenderer || (({ renderedCellValue }) => {
                     const value = renderedCellValue;
                     const isMatch = globalFilter && value.toString().toLowerCase().includes(globalFilter.toLowerCase());
                     return (
@@ -47,7 +47,7 @@ const DynamicTable = ({
                             {value}
                         </Box>
                     );
-                },
+                }),
             }))
         ];
 

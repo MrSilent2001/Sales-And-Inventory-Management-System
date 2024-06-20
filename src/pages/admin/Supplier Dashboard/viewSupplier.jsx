@@ -214,14 +214,10 @@ function ViewSupplier() {
 
             <div className="viewSupplierOuter">
                 <div className="viewSupplierInner">
-
-                    <div className="supplierSearchAndButtons">
-                        <div className="viewSupplierSearch">
-                            <h3>Suppliers</h3>
-                        </div>
+                    <div className="title">
+                        <h3>Suppliers</h3>
                     </div>
-
-                    <div className="itemTable" style={{paddingBottom: '3em'}}>
+                    <div className="itemTable" style={{paddingBottom: '2em'}}>
 
                         {isLoading ? (
                             <PageLoader />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import * as Components from "../Component";
 import "../styles.css";
 import LoginAppBar from "../LoginAppbar/LoginAppBar";
@@ -7,6 +7,7 @@ import {useAuth} from "../../../../context/AuthContext";
 import axios from "axios";
 import {useFormik} from "formik";
 import * as Yup from "yup";
+import PasswordInput from "../../../../components/Form Inputs/passwordField";
 
 const signInSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
@@ -91,6 +92,7 @@ export function AdminLoginSignUp() {
                     <Components.Form onSubmit={signUpFormik.handleSubmit}>
                         <Components.Title>Create Admin Account</Components.Title>
                         <Components.Input
+                            className="input-field"
                             type="text"
                             placeholder="Username"
                             {...signUpFormik.getFieldProps("username")}
@@ -99,6 +101,7 @@ export function AdminLoginSignUp() {
                             <div className="error-message">{signUpFormik.errors.username}</div>
                         ) : null}
                         <Components.Input
+                            className="input-field"
                             type="email"
                             placeholder="Email"
                             {...signUpFormik.getFieldProps("email")}
@@ -107,6 +110,7 @@ export function AdminLoginSignUp() {
                             <div className="error-message">{signUpFormik.errors.email}</div>
                         ) : null}
                         <Components.Input
+                            className="input-field"
                             type="number"
                             placeholder="Contact No"
                             {...signUpFormik.getFieldProps("contactNo")}
@@ -114,18 +118,18 @@ export function AdminLoginSignUp() {
                         {signUpFormik.touched.contactNo && signUpFormik.errors.contactNo ? (
                             <div className="error-message">{signUpFormik.errors.contactNo}</div>
                         ) : null}
-                        <Components.Input
-                            type="password"
+                        <PasswordInput
+                            className="input-field"
                             placeholder="Password"
-                            {...signUpFormik.getFieldProps("password")}
+                            {...signUpFormik.getFieldProps('password')}
                         />
                         {signUpFormik.touched.password && signUpFormik.errors.password ? (
                             <div className="error-message">{signUpFormik.errors.password}</div>
                         ) : null}
-                        <Components.Input
-                            type="password"
+                        <PasswordInput
+                            className="input-field"
                             placeholder="Confirm-Password"
-                            {...signUpFormik.getFieldProps("confirmPassword")}
+                            {...signUpFormik.getFieldProps('confirmPassword')}
                         />
                         {signUpFormik.touched.confirmPassword && signUpFormik.errors.confirmPassword ? (
                             <div className="error-message">{signUpFormik.errors.confirmPassword}</div>
@@ -139,6 +143,7 @@ export function AdminLoginSignUp() {
                     <Components.Form onSubmit={loginFormik.handleSubmit}>
                         <Components.Title>Sign in as Admin</Components.Title>
                         <Components.Input
+                            className="input-field"
                             type="text"
                             placeholder="Username"
                             {...loginFormik.getFieldProps("username")}
@@ -146,10 +151,10 @@ export function AdminLoginSignUp() {
                         {loginFormik.touched.username && loginFormik.errors.username ? (
                             <div className="error-message">{loginFormik.errors.username}</div>
                         ) : null}
-                        <Components.Input
-                            type="password"
+                        <PasswordInput
+                            className="input-field"
                             placeholder="Password"
-                            {...loginFormik.getFieldProps("password")}
+                            {...loginFormik.getFieldProps('password')}
                         />
                         {loginFormik.touched.password && loginFormik.errors.password ? (
                             <div className="error-message">{loginFormik.errors.password}</div>

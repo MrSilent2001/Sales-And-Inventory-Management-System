@@ -38,15 +38,16 @@
     font-size: 4.15em;
     font-family: Inter;
     letter-spacing: 0.075em;
-    color: white;
+    color: #000000;
     margin: 0 0 0.1em 0;
+    text-shadow: 2px 2px 4px rgba(236, 225, 225, 0.6);
 }
 
 .carouselHeader p{
     font-size: 1em;
     font-family: Inter;
     font-weight: 600;
-    color: white;
+    color: #373636;
     margin: 0;
 }
 

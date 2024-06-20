@@ -17,9 +17,10 @@ function SupplierNavbar(){
             </div>
             <div className="navigation">
                 <NavLink to="/supplierHome">Home</NavLink>
+                <NavLink to="/supplierDashboard">Inventory</NavLink>
                 <NavLink to="/supplierOrders">Orders</NavLink>
                 <NavLink to="/supplierRefund">Refund</NavLink>
-                <NavLink to="/supplierDashboard">Inventory</NavLink>
+                <NavLink to="/supplierPayments">Payments</NavLink>
                 <NavLink to="/supplierProfile">Profile</NavLink>
                 <NavLink
                     to="/"
