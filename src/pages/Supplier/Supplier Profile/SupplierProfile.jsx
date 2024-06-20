@@ -88,10 +88,10 @@ function SupplierProfile() {
                     <div className="SupplierProfile">
                         <div className="profileAvatar">
                             <Avatar src={supplier.profilePicture}
-                                    sx={{width: 230, height: 230, border: 2, borderRadius: 2, marginTop: '-0.8em'}}
+                                    sx={{width: 275, height: 275, border: 2, borderRadius: 50, marginTop: '-0.8em'}}
                             />
-                            <h3>{supplier.username}</h3>
-                            <h4 style={{textAlign:'left'}}>ID:{localStorage.getItem('id')}</h4>
+                            <h2>{supplier.username}</h2>
+                            <h3>Id:{localStorage.getItem('id')}</h3>
                         </div>
                     </div>
 
@@ -99,7 +99,7 @@ function SupplierProfile() {
                         <form>
                             <div className="SupplierProfileFormField">
                                 <div className="SupplierProfileField">
-                                    <h5>Address:</h5>
+                                    <span className="title">Address:</span>
                                 </div>
                                 <div className="SupplierProfileInput">
                                     <span>{supplier.address}</span>
@@ -108,7 +108,7 @@ function SupplierProfile() {
 
                             <div className="SupplierProfileFormField">
                                 <div className="SupplierProfileField">
-                                    <h5>Email:</h5>
+                                    <span className="title">Email:</span>
                                 </div>
                                 <div className="SupplierProfileInput">
                                     <span>{supplier.email}</span>
@@ -117,7 +117,7 @@ function SupplierProfile() {
 
                             <div className="SupplierProfileFormField">
                                 <div className="SupplierProfileField">
-                                    <h5>Contact No:</h5>
+                                    <span className="title">Contact No:</span>
                                 </div>
                                 <div className="SupplierProfileInput">
                                     <span>{supplier.contactNo}</span>
@@ -126,7 +126,7 @@ function SupplierProfile() {
 
                             <div className="SupplierProfileFormField">
                                 <div className="SupplierProfileField">
-                                    <h5>NIC:</h5>
+                                    <span className="title">NIC:</span>
                                 </div>
                                 <div className="SupplierProfileInput">
                                     <span>{supplier.nic}</span>
@@ -135,7 +135,7 @@ function SupplierProfile() {
 
                             <div className="SupplierProfileFormField">
                                 <div className="SupplierProfileField">
-                                    <h5>Payment Method:</h5>
+                                    <span className="title">Payment Method:</span>
                                 </div>
                                 <div className="SupplierProfileInput">
                                     <span>{supplier.paymentMethod || '-'}</span>
@@ -144,7 +144,7 @@ function SupplierProfile() {
 
                             <div className="SupplierProfileFormField">
                                 <div className="SupplierProfileField">
-                                    <h5>Payment Details:</h5>
+                                    <span className="title">Payment Details:</span>
                                 </div>
                                 <div className="SupplierProfileInput">
                                     <span>{supplier.paymentDetails || '-'}</span>
@@ -165,9 +165,8 @@ function SupplierProfile() {
                                             fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
-                                            fontWeight: '550',
                                             marginTop: '0.625em',
-                                            marginRight:'7.5em',
+                                            marginRight:'2.5em',
                                         }}>
                                         Edit Profile
                                     </CustomizedButton>
@@ -180,10 +179,10 @@ function SupplierProfile() {
                                             backgroundColor: '#960505',
                                             width: '9em',
                                             height: '2.5em',
-                                            fontSize: '0.85em',
+                                            fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
-                                            marginLeft: '1em',
+                                            marginLeft: '2.5em',
                                         }}>
                                         Delete Profile
                                     </CustomizedButton>
