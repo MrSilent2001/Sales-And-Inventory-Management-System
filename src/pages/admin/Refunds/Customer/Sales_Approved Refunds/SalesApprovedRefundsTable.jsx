@@ -1,13 +1,13 @@
 import React, { useState, useEffect,useMemo } from 'react';
-import { Container, Box, Button, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../../layout/footer/footer";
 import BackArrow from "../../../../../components/Icons/backArrow";
 import PageLoader from "../../../../../components/Page Loader/pageLoader";
 import './SalesApprovedRefundsTable.css';
 import DynamicTable from '../../../../../components/Table/customizedTable2';
+import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 
 const SalesApprovedRefundsTable = () => {
   const [approvedRefunds, setApprovedRefunds] = useState([]);
@@ -42,7 +42,7 @@ const SalesApprovedRefundsTable = () => {
   ], []);
 
   const mappedData = approvedRefunds.map(row => ({
-    id: row.id, 
+    id: row.id,
     customerName: row.customerName,
     requestId: row.requestId,
     orderId: row.orderId,
@@ -51,40 +51,49 @@ const SalesApprovedRefundsTable = () => {
   }));
 
   return (
-    <>
-      <InventoryNavbar />
-      <Container className='inv_inner_container' maxWidth="80%" style={{ padding: 0 }}>
-        <Box sx={{ my: 4, display: 'flex', flexDirection: 'column' }}>
-          <Link to="/viewRefundRequests">
-            <Button
-              startIcon={<BackArrow />}
-              size="large"
-              style={{ color: "black", fontWeight: 'bold', textTransform: "none" }}
-              sx={{ width: '20%', mt: '2%', mb: '2%', ml: 0 }}
-            >
-              Refund Requests
-            </Button>
-          </Link>
-          {loading ? (
-            <PageLoader />
-          ) : error ? (
-            <Typography variant="body1" color="error">
-              {error}
-            </Typography>
-          ) : (
-            <DynamicTable
-              columns={columns}
-              data={mappedData}
-              includeProfile={false}
-              tableWidth="100%"
-              enableFilters={false}
-              initialShowGlobalFilter={true}
-            />
-          )}
-        </Box>
-      </Container>
-      <Footer />
-    </>
+      <>
+        <SalesNavbar/>
+        <div className="approvedRefundsDashboardOuter">
+          <div className="approvedRefundsDashboardInner">
+            <div className="searchContainer">
+              <Link to="/viewRefundRequests">
+                <Button
+                    startIcon={<BackArrow/>}
+                    size="large"
+                    style={{
+                      color: "black",
+                      fontWeight: 'bold',
+                      textTransform: "none",
+                      fontSize: '1.25em'
+                    }}
+                >
+                  Approved Refunds
+                </Button>
+              </Link>
+
+            </div>
+            <div className="approvedRefunds-dashboard">
+              {loading ? (
+                  <PageLoader />
+              ) : error ? (
+                  <Typography variant="body1" color="error">
+                    {error}
+                  </Typography>
+              ) : (
+                  <DynamicTable
+                      columns={columns}
+                      data={mappedData}
+                      includeProfile={false}
+                      tableWidth="100%"
+                      enableFilters={false}
+                      initialShowGlobalFilter={true}
+                  />
+              )}
+            </div>
+          </div>
+        </div>
+        <Footer/>
+      </>
   );
 };
 

@@ -5,7 +5,6 @@ import Footer from "../../../../../layout/footer/footer";
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import { Link } from "react-router-dom";
 import CustomizedButton from "../../../../../components/Button/button";
-import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 import PageLoader from "../../../../../components/Page Loader/pageLoader";
 import WarningIcon from '@mui/icons-material/Warning';
 import CustomizedAlert from '../../../../../components/Alert/alert';
@@ -74,13 +73,9 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
                             width: '6em',
                             height: '2.5em',
                             fontSize: '0.95em',
-                            fontFamily: 'inter',
                             padding: '0.5em 0.625em',
                             borderRadius: '0.35em',
-                            fontWeight: '550',
-                            marginTop: '0.625em',
-                            textTransform: 'none',
-                            textAlign: 'center',
+                            marginTop: '0.625em'
                         }}>
                         View
                     </CustomizedButton>
@@ -93,6 +88,65 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
             </Box>
         )
     }));
+
+    const createToolbarButton = () => {
+        const buttonStyle1 = {
+            backgroundColor: '#242F9B',
+            border: '1px solid #242F9B',
+            width: '11em',
+            height: '2.5em',
+            fontSize: '0.75em',
+            padding: '0.5em 0.625em',
+            borderRadius: '0.35em',
+            fontWeight: '550',
+            marginRight: '1em'
+        };
+
+        const buttonStyle2 = {
+            backgroundColor: '#242F9B',
+            border: '1px solid #242F9B',
+            width: '11em',
+            height: '2.5em',
+            fontSize: '0.75em',
+            padding: '0.5em 0.625em',
+            borderRadius: '0.35em',
+            fontWeight: '550',
+            marginLeft: '1em'
+        };
+
+        return (
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: 2,
+                    marginBottom: 2
+                }}
+            >
+                <Link to="/SalesApprovedRefundsTable">
+                <CustomizedButton
+                    onClick={onViewApproved}
+                    hoverBackgroundColor="#2d3ed2"
+                    style={buttonStyle1}
+                >
+                    Approved Refunds
+                </CustomizedButton>
+                </Link>
+
+                <Link to="/SalesRejectedRefundsTable">
+                <CustomizedButton
+                    onClick={onViewApproved}
+                    hoverBackgroundColor="#2d3ed2"
+                    style={buttonStyle2}
+                >
+                    Rejected Refunds
+                </CustomizedButton>
+                </Link>
+            </Box>
+        );
+    };
+
 
     return (
         <>
@@ -113,59 +167,14 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
                             display: 'flex',
                             justifyContent: 'space-between',
                             alignItems: 'center',
-                            padding: 2,
-                            marginBottom: 2
+                            padding: '2em 0 1em 7em',
+                            marginBottom: 0.5
                         }}
                     >
                         <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                             Refund Request
                         </Typography>
-                        <Box sx={{ display: 'flex', gap: '1em' }}>
-                            <Link to="/SalesApprovedRefundsTable">
-                                <CustomizedButton
-                                    onClick={onViewApproved}
-                                    hoverBackgroundColor="#2d3ed2"
-                                    style={{
-                                        color: '#ffffff',
-                                        backgroundColor: '#242F9B',
-                                        border: '1px solid #242F9B',
-                                        width: '11em',
-                                        height: '2.5em',
-                                        fontSize: '0.95em',
-                                        fontFamily: 'inter',
-                                        padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        fontWeight: '550',
-                                        marginTop: '0.625em',
-                                        textTransform: 'none',
-                                        textAlign: 'center',
-                                    }}>
-                                    Approved Refunds
-                                </CustomizedButton>
-                            </Link>
-                            <Link to="/SalesRejectedRefundsTable">
-                                <CustomizedButton
-                                    onClick={onViewApproved}
-                                    hoverBackgroundColor="#2d3ed2"
-                                    style={{
-                                        color: '#ffffff',
-                                        backgroundColor: '#242F9B',
-                                        border: '1px solid #242F9B',
-                                        width: '11em',
-                                        height: '2.5em',
-                                        fontSize: '0.95em',
-                                        fontFamily: 'inter',
-                                        padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        fontWeight: '550',
-                                        marginTop: '0.625em',
-                                        textTransform: 'none',
-                                        textAlign: 'center',
-                                    }}>
-                                    Rejected Refunds
-                                </CustomizedButton>
-                            </Link>
-                        </Box>
+
                     </Box>
                     {isLoading ? (
                         <PageLoader />
@@ -182,6 +191,7 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
                             tableWidth="100%"
                             enableFilters={false}
                             initialShowGlobalFilter={true}
+                            renderToolbarItems={createToolbarButton}
                         />
                     )}
                 </Box>

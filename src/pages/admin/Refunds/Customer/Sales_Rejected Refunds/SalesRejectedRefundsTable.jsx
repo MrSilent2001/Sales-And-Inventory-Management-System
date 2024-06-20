@@ -1,14 +1,13 @@
 import React, { useState, useEffect,useMemo } from 'react';
-import { Container, Box, Button, Paper, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../../layout/footer/footer";
 import BackArrow from "../../../../../components/Icons/backArrow";
-import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
 import PageLoader from "../../../../../components/Page Loader/pageLoader";
 import './SalesRejectedRefundsTable.css';
 import DynamicTable from '../../../../../components/Table/customizedTable2';
+import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 
 
 const SalesRejectedRefundsTable = () => {
@@ -54,38 +53,46 @@ const SalesRejectedRefundsTable = () => {
 
     return (
         <>
-            <InventoryNavbar />
-            <Container className='inv_inner_container' maxWidth="90%" style={{ padding: 0 }}>
-                <Box sx={{ my: 4, display: 'flex', flexDirection: 'column' }}>
+            <SalesNavbar/>
+            <div className="rejectedRefundsDashboardOuter">
+                <div className="rejectedRefundsDashboardInner">
+                    <div className="searchContainer">
                     <Link to="/viewRefundRequests">
                         <Button
-                            startIcon={<BackArrow />}
+                            startIcon={<BackArrow/>}
                             size="large"
-                            style={{ color: "black", fontWeight: 'bold', textTransform: "none" }}
-                            sx={{ width: '20%', mt: '2%', mb: '2%', ml: 0 }}
+                            style={{
+                                color: "black",
+                                fontWeight: 'bold',
+                                textTransform: "none",
+                                fontSize: '1.25em'
+                            }}
                         >
-                            Refund Requests
+                            Rejected Refunds
                         </Button>
                     </Link>
-                    {loading ? (
-                        <PageLoader />
-                    ) : error ? (
-                        <Typography variant="body1" color="error">
-                            {error}
-                        </Typography>
-                    ) : (
-                        <DynamicTable
-                            columns={columns}
-                            data={mappedData}
-                            includeProfile={false}
-                            tableWidth="100%"
-                            enableFilters={false}
-                            initialShowGlobalFilter={true}
-                        />
-                    )}
-                </Box>
-            </Container>
-            <Footer />
+                    </div>
+                    <div className="rejectedRefunds-dashboard">
+                        {loading ? (
+                            <PageLoader/>
+                        ) : error ? (
+                            <Typography variant="body1" color="error">
+                                {error}
+                            </Typography>
+                        ) : (
+                            <DynamicTable
+                                columns={columns}
+                                data={mappedData}
+                                includeProfile={false}
+                                tableWidth="100%"
+                                enableFilters={false}
+                                initialShowGlobalFilter={true}
+                            />
+                        )}
+                    </div>
+                </div>
+            </div>
+            <Footer/>
         </>
     );
 };

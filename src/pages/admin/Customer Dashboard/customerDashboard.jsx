@@ -21,10 +21,9 @@ function CustomerDashboard() {
     const navigate = useNavigate();
 
     const columns = useMemo(() => [
-        { accessorKey: 'username', header: 'Name', size: 75 },
         { accessorKey: 'email', header: 'Email', size: 75  },
-        { accessorKey: 'contactNo', header: 'Contact', size: 75  },
         { accessorKey: 'address', header: 'Address', size: 75  },
+        { accessorKey: 'contactNo', header: 'Contact', size: 75  },
         { accessorKey: 'lastLogin', header: 'Last Login', size: 75  }
     ], []);
 
@@ -182,7 +181,6 @@ function CustomerDashboard() {
             fontSize: '0.75em',
             padding: '0.5em 0.625em',
             borderRadius: '0.35em',
-            fontWeight: '550',
             marginTop: '0.625em',
             marginRight: '1.5em',
             cursor: enabled ? 'pointer' : 'not-allowed',
@@ -228,18 +226,13 @@ function CustomerDashboard() {
             <SalesNavbar />
             <div className="CustomerManagementOuter">
                 <div className="CustomerManagementInner">
-
                     <div className="customerManagementTitleWithButton">
-
-                        <h2 className="customerManagement-title">Customers</h2>
-
+                        <h3 className="customerManagement-title">Customers</h3>
                     </div>
-
                     <div className="CustomerManagement">
                         {isLoading ? (
                             <PageLoader />
                         ) : (
-
                         <DynamicTable
                             columns={columns}
                             data={customer}
