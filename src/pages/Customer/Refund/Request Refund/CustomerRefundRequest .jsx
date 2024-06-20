@@ -280,6 +280,7 @@ function CustomerRefundRequest() {
     };
 
     const handleSubmit = (event) => {
+        const token = localStorage.getItem('accessToken');
         event.preventDefault();
 
         const newErrors = {
@@ -298,7 +299,11 @@ function CustomerRefundRequest() {
         }
 
         console.log('Submitting form with data:', formData);
-        axios.post('http://localhost:9000/refund/customerRefund/create', formData)
+        axios.post('http://localhost:9000/refund/customerRefund/create', formData, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
             .then((response) => {
                 console.log('Refund request created:', response.data);
                 navigate('/generatedrefund', { state: { formData } });
