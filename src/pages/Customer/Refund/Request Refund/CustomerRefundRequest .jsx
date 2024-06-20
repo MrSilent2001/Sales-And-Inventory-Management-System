@@ -11,10 +11,10 @@ import { useNavigate } from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
 import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";
 import axios from 'axios';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
+import { useLocation } from 'react-router-dom';
 
-
-function SelectItem({ value, onChange, error }) {
+function SelectItem({ value, onChange, error, items }) {
     return (
         <Box sx={{ minWidth: 80 }}>
             <FormControl fullWidth error={error}>
@@ -27,7 +27,7 @@ function SelectItem({ value, onChange, error }) {
                         justifyContent: 'center',
                     }}
                 >
-                    Select
+                    Select Item
                 </InputLabel>
                 <Select
                     labelId="item-select-label"
@@ -46,11 +46,105 @@ function SelectItem({ value, onChange, error }) {
                         },
                     }}
                 >
-                    <MenuItem value="I0001">I0001</MenuItem>
-                    <MenuItem value="I0002">I0002</MenuItem>
-                    <MenuItem value="I0003">I0003</MenuItem>
+                    {items.map((item) => (
+                        <MenuItem key={item.id} value={item.id}>
+                            {item.name}
+                        </MenuItem>
+                    ))}
                 </Select>
             </FormControl>
+        </Box>
+    );
+}
+
+function BasicTextFields({ name, value, onChange, error }) {
+    return (
+        <Box
+            component="form"
+            sx={{
+                '& > :not(style)': {
+                    m: 1,
+                    width: '25.5em',
+                    "& .MuiInputBase-root": {
+                        height: '2.5em',
+                        backgroundColor: '#e9eeff'
+                    },
+                    "& .MuiInputLabel-root": {
+                        fontSize: '0.5em',
+                        textAlign: 'center',
+                    },
+                },
+            }}
+            noValidate
+            autoComplete="off"
+        >
+            <TextField
+                id="outlined-basic"
+                variant="outlined"
+                margin='normal'
+                name={name}
+                value={value}
+                onChange={onChange}
+                error={error}
+                helperText={error && "This field is required"}
+            />
+        </Box>
+    );
+}
+
+function QuantityField({ name, value, onChange, max, error, disabled }) {
+    const handleIncrement = () => {
+        if (value < max) {
+            onChange({ target: { name, value: value + 1 } });
+        }
+    };
+
+    const handleDecrement = () => {
+        if (value > 1) {
+            onChange({ target: { name, value: value - 1 } });
+        }
+    };
+
+    return (
+        <Box
+            component="form"
+            sx={{
+                '& > :not(style)': {
+                    m: 1,
+                    width: '25.5em',
+                    "& .MuiInputBase-root": {
+                        height: '2.5em',
+                        backgroundColor: '#e9eeff',
+                    },
+                    "& .MuiInputLabel-root": {
+                        fontSize: '0.5em',
+                        textAlign: 'center',
+                    },
+                },
+            }}
+            noValidate
+            autoComplete="off"
+        >
+            <TextField
+                id="outlined-basic"
+                variant="outlined"
+                margin='normal'
+                name={name}
+                value={value}
+                onChange={onChange}
+                error={error}
+                helperText={error && "This field is required"}
+                disabled={disabled}
+                type="number"
+                InputProps={{
+                    endAdornment: (
+                        <div>
+                            <button type="button" onClick={handleIncrement} disabled={value >= max}>+</button>
+                            <button type="button" onClick={handleDecrement} disabled={value <= 1}>-</button>
+                        </div>
+                    )
+                }}
+            />
         </Box>
     );
 }
@@ -96,79 +190,92 @@ function SelectReason({ value, onChange, error }) {
     );
 }
 
-function BasicTextFields({ name, value, onChange, error }) {
-    return (
-        <Box
-            component="form"
-            sx={{
-                '& > :not(style)': {
-                    m: 1,
-                    width: '25.5em',
-                    "& .MuiInputBase-root": {
-                        height: '2.5em',
-                        backgroundColor: '#e9eeff'
-                    },
-                    "& .MuiInputLabel-root": {
-                        fontSize: '0.5em',
-                        textAlign: 'center',
-                    },
-                },
-            }}
-            noValidate
-            autoComplete="off"
-        >
-            <TextField
-                id="outlined-basic"
-                variant="outlined"
-                margin='normal'
-                name={name}
-                value={value}
-                onChange={onChange}
-                error={error}
-                helperText={error && "This field is required"}
-            />
-        </Box>
-    );
-}
-
 function CustomerRefundRequest() {
     const [formData, setFormData] = useState({
-        customerId: '', 
-        customerName: '', 
+        customerId: '',
+        customerName: '',
         contact: '',
         item: '',
-        quantity: '',
+        quantity: 1,
         reason: '',
-        totalPrice: ''
+        totalPrice: '',
     });
-
+    const [items, setItems] = useState([]);
+    const [maxQuantity, setMaxQuantity] = useState(0);
     const [errors, setErrors] = useState({
         contact: false,
         item: false,
         quantity: false,
         reason: false,
-        totalPrice: false
+        totalPrice: false,
     });
-
     const navigate = useNavigate();
+    const location = useLocation();
+    const { orderId } = location.state || {};
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
         if (token) {
             const decodedToken = jwtDecode(token);
-            setFormData(prevData => ({
+            setFormData((prevData) => ({
                 ...prevData,
                 customerId: decodedToken.id,
                 customerName: decodedToken.username,
-                contact:decodedToken.contactNo
+                contact: decodedToken.contactNo,
             }));
         }
-    }, []);
-    console.log('Form data conttact number:', formData.contact);
+
+        const fetchOrderDetails = async () => {
+            try {
+                const orderResponse = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                const productResponse = await axios.get('http://localhost:9000/product/getAllProducts', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                const products = productResponse.data.reduce((acc, product) => {
+                    acc[product.id] = product.productName;
+                    return acc;
+                }, {});
+
+                const orderItems = orderResponse.data.orderItems.map((item) => {
+                    const parsedItem = JSON.parse(item);
+                    return {
+                        id: parsedItem.id,
+                        name: products[parsedItem.id],
+                        amount: parsedItem.amount,
+                    };
+                });
+
+                setItems(orderItems);
+
+            } catch (error) {
+                console.error('Error fetching order details:', error);
+            }
+        };
+
+        if (orderId) {
+            fetchOrderDetails();
+        }
+    }, [orderId]);
+
     const handleChange = (event) => {
+        const { name, value } = event.target;
+
+        if (name === 'item') {
+            const selectedItem = items.find((item) => item.id === value);
+            setMaxQuantity(selectedItem ? selectedItem.amount : 0);
+        }
+
         setFormData({
             ...formData,
-            [event.target.name]: event.target.value
+            [name]: value,
         });
     };
 
@@ -180,23 +287,23 @@ function CustomerRefundRequest() {
             item: !formData.item,
             quantity: !formData.quantity,
             reason: !formData.reason,
-            totalPrice: !formData.totalPrice
+            totalPrice: !formData.totalPrice,
         };
 
         setErrors(newErrors);
 
-        const hasError = Object.values(newErrors).some(error => error);
+        const hasError = Object.values(newErrors).some((error) => error);
         if (hasError) {
             return;
         }
 
-        console.log('Submitting form with data:', formData); // Debugging: Log the form data
+        console.log('Submitting form with data:', formData);
         axios.post('http://localhost:9000/refund/customerRefund/create', formData)
-            .then(response => {
+            .then((response) => {
                 console.log('Refund request created:', response.data);
                 navigate('/generatedrefund', { state: { formData } });
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error('Error creating refund request:', error.response ? error.response.data : error.message);
             });
     };
@@ -221,10 +328,11 @@ function CustomerRefundRequest() {
                                     value={formData.contact}
                                     onChange={handleChange}
                                     error={errors.contact}
+                                    disabled={true}
                                 />
                             </div>
                         </div>
-                         
+
                         <div className="customerFormField">
                             <div className="customerTextField">
                                 <h5>Item</h5>
@@ -234,6 +342,7 @@ function CustomerRefundRequest() {
                                     value={formData.item}
                                     onChange={(e) => handleChange({ target: { name: 'item', value: e.target.value } })}
                                     error={errors.item}
+                                    items={items}
                                 />
                             </div>
                         </div>
@@ -243,11 +352,13 @@ function CustomerRefundRequest() {
                                 <h5>Quantity</h5>
                             </div>
                             <div className="customerTextField">
-                                <BasicTextFields
+                                <QuantityField
                                     name="quantity"
                                     value={formData.quantity}
                                     onChange={handleChange}
                                     error={errors.quantity}
+                                    max={maxQuantity}
+                                    disabled={formData.item === ''}
                                 />
                             </div>
                         </div>
@@ -287,44 +398,17 @@ function CustomerRefundRequest() {
                                         style={{
                                             color: '#ffffff',
                                             backgroundColor: '#242F9B',
-                                            border: '1px solid #242F9B',
-                                            width: '12em',
-                                            height: '3.5em',
-                                            fontSize: '1em',
-                                            fontFamily: 'inter',
-                                            padding: '0.5em 0.625em',
-                                            borderRadius: '0.35em',
-                                            fontWeight: '500',
-                                            marginTop: '0.625em',
-                                            textTransform: 'none',
-                                            textAlign: 'center',
+                                            border: '1px solid #000000',
+                                            borderRadius: '10px',
+                                            width: '240px',
+                                            height: '40px',
+                                            fontSize: '17px',
+                                            fontWeight: 'bold',
+                                            margin: '0',
+                                            marginBottom: '20px',
                                         }}
                                     >
-                                        Create Request
-                                    </CustomizedButton>
-                                </button>
-                                <button type="button" style={{ background: 'none', border: 'none', padding: 0 }}>
-                                    <CustomizedButton
-                                        hoverBackgroundColor="#f11717"
-                                        style={{
-                                            color: '#ffffff',
-                                            backgroundColor: '#ff0000',
-                                            border: '1px solid #ff0000',
-                                            width: '12em',
-                                            height: '3.5em',
-                                            fontSize: '1em',
-                                            fontFamily: 'inter',
-                                            padding: '0.5em 0.625em',
-                                            borderRadius: '0.35em',
-                                            fontWeight: '500',
-                                            marginTop: '0.625em',
-                                            textTransform: 'none',
-                                            textAlign: 'center',
-                                            marginLeft: '0.5em'
-                                        }}
-                                        onClick={() => navigate('/refundRequests')}
-                                    >
-                                        Cancel Request
+                                        Request Refund
                                     </CustomizedButton>
                                 </button>
                             </div>
