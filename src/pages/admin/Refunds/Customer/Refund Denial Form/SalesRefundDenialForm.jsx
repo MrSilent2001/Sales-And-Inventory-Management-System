@@ -3,7 +3,18 @@ import CustomizedButton from "../../../../../components/Button/button";
 import axios from 'axios';
 
 
-const SalesRefundDenialForm = ({ id, setShowDenialForm, setAlert }) => {
+// Function to send email to customer
+const sendEmailToCustomer = async (emailData) => {
+    try {
+        const response = await axios.post('http://localhost:9000/send-email', emailData);
+        return response.data;
+    } catch (error) {
+        console.error('Error sending email:', error);
+        throw error;
+    }
+};
+
+const SalesRefundDenialForm = ({ id, email, customerName, item, setShowDenialForm, setAlert }) => {
     const [reason, setReason] = useState('');
     const [error, setError] = useState('');
 
@@ -21,9 +32,21 @@ const SalesRefundDenialForm = ({ id, setShowDenialForm, setAlert }) => {
                 denialReason: reason,
             });
             setAlert({ open: true, message: `Order has been rejected: ${response.status}`, severity: 'success' });
+
+            // Prepare email data
+            const emailData = {
+                receiverEmail: email, // Use the email passed as a prop
+                subject: "Refund Request Rejected",
+                text: `Dear ${customerName}, your refund request for ${item} has been rejected for the following reason: ${reason}.`
+            };
+
+            // Send email to customer
+            await sendEmailToCustomer(emailData);
+
             setTimeout(() => {
                 window.location.href = '/viewRefundRequests';
-            },0); // 2 seconds delay
+            }, 0); // 2 seconds delay
+
             setShowDenialForm(false);
         } catch (error) {
             setError('Error rejecting the order');
