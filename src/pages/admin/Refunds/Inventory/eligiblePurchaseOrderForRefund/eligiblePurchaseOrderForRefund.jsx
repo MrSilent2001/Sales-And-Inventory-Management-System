@@ -9,9 +9,11 @@ import axios from "axios";
 import DynamicTable from '../../../../../components/Table/customizedTable2';
 import CustomizedAlert from '../../../../../components/Alert/alert';
 import {jwtDecode} from 'jwt-decode';
-import { Modal } from '@mui/material';
+import {Button, Modal} from '@mui/material';
 import Box from '@mui/material/Box';
 import InventoryRefundRequest from '../Modal/InventoryRefundRequest/InventoryRefundRequest';
+import {Link} from "react-router-dom";
+import BackArrow from "../../../../../components/Icons/backArrow";
 
 
 const EligibleOrderForRefund = () => {
@@ -104,13 +106,10 @@ const EligibleOrderForRefund = () => {
                 width: '10em',
                 height: '3em',
                 fontSize: '0.9em',
-                fontFamily: 'inter',
                 padding: '0.5em 0.625em',
                 borderRadius: '0.35em',
                 fontWeight: '500',
-                marginTop: '0.625em',
-                textTransform: 'none',
-                textAlign: 'center',
+                marginTop: '0.625em'
             }}
             onClick={() => handleOpenModal(order)}
         >
@@ -126,14 +125,25 @@ const EligibleOrderForRefund = () => {
     return (
         <>
             <InventoryNavbar/>
-            <div className="CustomerOrdersOuter">
-                <div className="CustomerOrdersInner">
-                    <div className="customerOrdersTopicWithTextfield">
-                        <div className="customerOrdersTopic">
-                            <h2>Eligible Orders for Refund</h2>
-                        </div>
+            <div className="eligibleOrdersDashboardOuter">
+                <div className="eligibleOrdersDashboardInner">
+                    <div className="searchContainer">
+                        <Link to="/InventoryRefundRequestsTable">
+                            <Button
+                                startIcon={<BackArrow/>}
+                                size="large"
+                                style={{
+                                    color: "black",
+                                    fontWeight: 'bold',
+                                    textTransform: "none",
+                                    fontSize: '1.25em'
+                                }}
+                            >
+                                Eligible Orders for Refund
+                            </Button>
+                        </Link>
                     </div>
-                    <div className='orderHistory'>
+                    <div className="eligibleOrders-dashboard">
                         {isLoading ? (
                             <PageLoader />
                         ) : (
@@ -146,7 +156,7 @@ const EligibleOrderForRefund = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <Footer/>
 
             <CustomizedAlert
                 open={openError}
@@ -162,7 +172,7 @@ const EligibleOrderForRefund = () => {
                 aria-describedby="modal-description"
             >
                 <Box className="modalBox">
-                    {selectedOrder && <InventoryRefundRequest order={selectedOrder} onClose={handleCloseModal} />}
+                    {selectedOrder && <InventoryRefundRequest order={selectedOrder} onClose={handleCloseModal}/>}
                 </Box>
             </Modal>
         </>

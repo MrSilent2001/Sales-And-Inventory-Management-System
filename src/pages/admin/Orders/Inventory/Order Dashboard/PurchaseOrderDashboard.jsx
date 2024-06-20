@@ -83,11 +83,11 @@ const PurchaseOrderDashboard = () => {
     };
 
     const columns = useMemo(() => [
-        { accessorKey: 'supplierName', header: 'Supplier', size: 70, align: 'center' },
-        { accessorKey: 'Address', header: 'Address', size: 150, align: 'center' },
-        { accessorKey: 'mail', header: 'Email', size: 120, align: 'center' },
-        { accessorKey: 'contact_number', header: 'Contact', size: 100, align: 'center' },
-        { accessorKey: 'actions', header: 'Actions', size: 200, align: 'center' }
+        { accessorKey: 'supplierName', header: 'Supplier', size: 50, align: 'center' },
+        { accessorKey: 'Address', header: 'Address', size: 175, align: 'center' },
+        { accessorKey: 'mail', header: 'Email', size: 60, align: 'center' },
+        { accessorKey: 'contact_number', header: 'Contact', size: 50, align: 'center' },
+        { accessorKey: 'actions', header: 'Actions', size: 120, align: 'center' }
     ], []);
 
     const dataWithActions = purchasedOrders.map(row => ({
@@ -105,18 +105,13 @@ const PurchaseOrderDashboard = () => {
                     style={{
                         color: 'white',
                         backgroundColor: '#242F9B',
-                        width: '7.5em',
+                        width: '6.5em',
                         height: '2.75em',
-                        fontSize: '0.95em',
-                        fontFamily: 'inter',
+                        fontSize: '0.8em',
                         padding: '0.5em 0.625em',
                         borderRadius: '0.35em',
-                        fontWeight: '550',
                         marginTop: '0.625em',
-                        marginRight: '2.5em',
-                        marginLeft: '2.5em',
-                        textTransform: 'none',
-                        textAlign: 'center',
+                        marginRight: '0.75em'
                     }}>
                     View
                 </CustomizedButton>
@@ -127,17 +122,13 @@ const PurchaseOrderDashboard = () => {
                     style={{
                         color: 'white',
                         backgroundColor: '#960505',
-                        width: '7.5em',
+                        width: '6.5em',
                         height: '2.75em',
-                        fontSize: '0.95em',
-                        fontFamily: 'inter',
+                        fontSize: '0.8em',
                         padding: '0.5em 0.625em',
                         borderRadius: '0.35em',
-                        fontWeight: '550',
                         marginTop: '0.625em',
-                        marginRight: '1.5em',
-                        textTransform: 'none',
-                        textAlign: 'center',
+                        marginLeft: '0.75em',
                     }}>
                     Cancel
                 </CustomizedButton>
@@ -148,7 +139,7 @@ const PurchaseOrderDashboard = () => {
     return (
         <>
             <InventoryNavbar />
-            <Box sx={{ display: 'flex', height: '47rem' }}>
+            <Box sx={{ display: 'flex', height: '37.5em' }}>
                 {/* Sidebar */}
                 <Box sx={{ width: '15%', height: 'auto', bgcolor: '#646FD4', color: 'white', p: 2 }}>
                     <Card sx={{ mb: 2, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
@@ -179,8 +170,7 @@ const PurchaseOrderDashboard = () => {
                 </Box>
 
                 {/* Main Content */}
-                <Container maxWidth={false} sx={{ bgcolor: '#DBDFFD', height: 'auto' }}>
-                    <div style={{ overflow: 'auto', maxHeight: '50vh' }}>
+                <Container maxWidth={false} sx={{ bgcolor: '#DBDFFD', height: 'auto', padding: '1.5em 0' }}>
                         <DynamicTable
                             columns={columns}
                             data={dataWithActions}
@@ -189,7 +179,6 @@ const PurchaseOrderDashboard = () => {
                             enableFilters={false}
                             initialShowGlobalFilter={true}  // Show the global search filter
                         />
-                    </div>
 
                     <Modal open={viewOrderVisible}>
                         <ViewOrder order={selectedOrder} onClose={() => setViewOrderVisible(false)} />

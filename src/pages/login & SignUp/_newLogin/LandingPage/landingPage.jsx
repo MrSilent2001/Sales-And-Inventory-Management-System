@@ -50,7 +50,7 @@ const theme = createTheme({
                     borderColor: '#1e3a8a',
                     color: '#1e3a8a',
                     '&:hover': {
-                        backgroundColor: '#1e3a8a20',
+                        backgroundColor: '#1e3a8a',
                     },
                 },
             },
