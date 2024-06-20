@@ -9,7 +9,6 @@ import SalesRefundDenialForm from '../Refund Denial Form/SalesRefundDenialForm';
 import CustomizedAlert from '../../../../../components/Alert/alert';
 
 
-// API call function to update refund status
 const updateRefundStatus = async (id, status, denialReason = '') => {
     try {
         const response = await axios.put(`http://localhost:9000/refund/customerRefund/updateStatus`, {
@@ -20,6 +19,17 @@ const updateRefundStatus = async (id, status, denialReason = '') => {
         return response.data;
     } catch (error) {
         console.error('Error updating refund status:', error);
+        throw error;
+    }
+};
+
+// Function to send email to customer
+const sendEmailToCustomer = async (emailData) => {
+    try {
+        const response = await axios.post('http://localhost:9000/send-email', emailData);
+        return response.data;
+    } catch (error) {
+        console.error('Error sending email:', error);
         throw error;
     }
 };
@@ -49,6 +59,17 @@ function SalesViewRequest() {
         try {
             const response = await updateRefundStatus(id, 'accepted');
             setAlert({ open: true, message: `Order has been accepted: ${response.status}`, severity: 'success', redirect: true });
+
+            // Prepare email data
+            const emailData = {
+                receiverEmail: refundRequest.email, // Ensure the refund request data includes the customer's email
+                subject: "Refund Request Accepted",
+                text: `Dear ${refundRequest.customerName}, your refund request for ${refundRequest.item} has been accepted.`
+            };
+
+            // Send email to customer
+            await sendEmailToCustomer(emailData);
+
         } catch (error) {
             setAlert({ open: true, message: 'Error accepting the order', severity: 'error' });
         }
@@ -69,7 +90,7 @@ function SalesViewRequest() {
                 <div className="generated-request">
                     <h2>Generated Request</h2>
                     <div className="refundRequestDetails">
-                        {['Customer', 'Contact', 'Item', 'Quantity', 'Reason', 'Total Price'].map((field, index) => (
+                        {['Customer', 'Email', 'Item', 'Quantity', 'Reason', 'Total Price'].map((field, index) => (
                             <div className="formField" key={index}>
                                 <div className="textField">
                                     <h5>{field}</h5>
@@ -130,7 +151,16 @@ function SalesViewRequest() {
             </div>
             <Footer />
 
-            {showDenialForm && <SalesRefundDenialForm id={id} setShowDenialForm={setShowDenialForm} setAlert={setAlert} />}
+            {showDenialForm && (
+                <SalesRefundDenialForm
+                    id={id}
+                    email={refundRequest.email}
+                    customerName={refundRequest.customerName}
+                    item={refundRequest.item}
+                    setShowDenialForm={setShowDenialForm}
+                    setAlert={setAlert}
+                />
+            )}
 
             <CustomizedAlert
                 onClose={() => {
