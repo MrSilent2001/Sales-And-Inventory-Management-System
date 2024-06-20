@@ -51,6 +51,7 @@ import {AdminLoginSignUp} from "../pages/login & SignUp/_newLogin/AdminLoginSign
 import SupplierOrders from "../pages/Supplier/Supplier Orders/supplierOrders";
 import SupplierRefunds from "../pages/Supplier/Supplier Refund/supplierRefunds";
 import EligibleOrdersForRefund from "../pages/Customer/Refund/eligibleOrdersForRefund/eligibleOrdersForRefund";
+import EligiblePurchaseOrderForRefund from "../pages/admin/Refunds/Inventory/eligiblePurchaseOrderForRefund/eligiblePurchaseOrderForRefund";
 import SupplierPayments from "../pages/Supplier/Supplier Payments/supplierPayments";
 import InventoryDetail from "../pages/admin/View Inventory/inventoryDetail";
 
@@ -137,6 +138,9 @@ export function PageRouting() {
                     <Route path="/purchasedOrder" element={<PurchaseOrderDashboard/>}/>
                     <Route path="/InventoryGeneratedRequest" element={<InventoryGeneratedRequest/>}/>
                     <Route path="/InventoryRefundRequestsTable" element={<InventoryRefundRequestsTable/>}/>
+                    <Route path="/eligiblePurchaseOrderForRefund" element={<EligiblePurchaseOrderForRefund/>}/>
+
+                    {/*Sales Refund Requests*/}
                     <Route path="/SalesApprovedRefundsTable" element={<SalesApprovedRefundsTable/>}/>
                     <Route path="/SalesRejectedRefundsTable" element={<SalesRejectedRefundsTable/>}/>
 

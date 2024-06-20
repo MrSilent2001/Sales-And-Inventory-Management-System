@@ -1,21 +1,20 @@
 import './customerOrderHistory.css';
 import * as React from 'react';
-import CustomizedButton from "../../../../components/Button/button";
-import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";
-import PageLoader from '../../../../components/Page Loader/pageLoader';
-import Footer from "../../../../layout/footer/footer";
+import CustomizedButton from '../../../../../components/Button/button';
+import InventoryNavbar from '../../../../../layout/navbar/Inventory navbar/Inventory navbar';
+import PageLoader from '../../../../../components/Page Loader/pageLoader';
+import  Footer from "../../../../../layout/footer/footer";
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
-import DynamicTable from '../../../../components/Table/customizedTable2';
-import CustomizedAlert from '../../../../components/Alert/alert';
+import DynamicTable from '../../../../../components/Table/customizedTable2';
+import CustomizedAlert from '../../../../../components/Alert/alert';
 import {jwtDecode} from 'jwt-decode';
 import { Modal } from '@mui/material';
 import Box from '@mui/material/Box';
-import CustomerRefundRequest from '../Request Refund/CustomerRefundRequest ';
+import InventoryRefundRequest from '../Modal/InventoryRefundRequest/InventoryRefundRequest';
 
 
-
-function EligibleOrderForRefund() {
+const EligibleOrderForRefund = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [eligibleOrders, setEligibleOrders] = useState([]);
     const [openError, setOpenError] = useState(false);
@@ -28,30 +27,10 @@ function EligibleOrderForRefund() {
     const columns = useMemo(() => [
         { accessorKey: 'orderId', header: 'Order Id', size: 75, align: 'center' },
         { accessorKey: 'orderItems', header: 'Ordered Items', size: 100, align: 'center' },
-        {
-            accessorKey: 'orderPrice',
-            header: 'Bill Amount',
-            size: 170,
-            align: 'center'
-        },
-        {
-            accessorKey: 'orderDate',
-            header: 'Date',
-            size: 170,
-            align: 'center',
-        },
-        {
-            accessorKey: 'orderStatus',
-            header: 'Order Status',
-            size: 170,
-            align: 'center'
-        },
-        {
-            accessorKey: 'actions',
-            header: 'Actions',
-            size: 170,
-            align: 'center'
-        }
+        { accessorKey: 'orderPrice', header: 'Bill Amount', size: 170, align: 'center' },
+        { accessorKey: 'orderDate', header: 'Date', size: 170, align: 'center' },
+        { accessorKey: 'orderStatus', header: 'Order Status', size: 170, align: 'center' },
+        { accessorKey: 'actions', header: 'Actions', size: 170, align: 'center' }
     ], []);
 
     const handleClickError = () => {
@@ -82,7 +61,7 @@ function EligibleOrderForRefund() {
                     return acc;
                 }, {});
 
-                const response = await axios.get('http://localhost:9000/order/getAllOrders', {
+                const response = await axios.get('http://localhost:9000/purchaseOrder/getAll', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -146,7 +125,7 @@ function EligibleOrderForRefund() {
 
     return (
         <>
-            <CustomerNavbar />
+            <InventoryNavbar/>
             <div className="CustomerOrdersOuter">
                 <div className="CustomerOrdersInner">
                     <div className="customerOrdersTopicWithTextfield">
@@ -183,7 +162,7 @@ function EligibleOrderForRefund() {
                 aria-describedby="modal-description"
             >
                 <Box className="modalBox">
-                    {selectedOrder && <CustomerRefundRequest order={selectedOrder} onClose={handleCloseModal} />}
+                    {selectedOrder && <InventoryRefundRequest order={selectedOrder} onClose={handleCloseModal} />}
                 </Box>
             </Modal>
         </>

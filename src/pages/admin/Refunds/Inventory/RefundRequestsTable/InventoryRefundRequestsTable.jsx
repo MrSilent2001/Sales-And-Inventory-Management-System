@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useMemo } from 'react';
 import { Box, Container, Modal, Typography } from '@mui/material';
 import axios from 'axios';
 import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
@@ -6,13 +6,14 @@ import Footer from "../../../../../layout/footer/footer";
 import { Link } from "react-router-dom";
 import InventoryRefundRequest from '../Modal/InventoryRefundRequest/InventoryRefundRequest';
 import CustomizedButton from "../../../../../components/Button/button";
-import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable"; 
 import PageLoader from "../../../../../components/Page Loader/pageLoader";
 import ViewInventoryRequest from '../Modal/viewInventoryRefundRequest/viewInventoryRequest';
+import DynamicTable from '../../../../../components/Table/customizedTable2';
+import { useNavigate } from "react-router-dom";
 
-
-
+ 
 const InventoryRefundRequestsTable = ({ onViewApproved }) => {
+    const navigate = useNavigate(); 
     const [visible, setVisible] = useState(false);
     const [viewRequestVisible, setViewRequestVisible] = useState(false);
     const [refundRequests, setRefundRequests] = useState([]);
@@ -37,7 +38,7 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
     }, []);
 
     const handleViewRequest = (request) => {
-        console.log('Request:', request); 
+        console.log('Request:', request);
         setSelectedRequest(request);
         setViewRequestVisible(true);
     };
@@ -52,16 +53,16 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
         }
     };
 
-    const columns = [
-        { columnId: 'supplierName', label: 'Name', minWidth: 70, align: 'center' },
-        { columnId: 'contact_number', label: 'Contact number', minWidth: 150, align: 'center' },
-        { columnId: 'inventory_id', label: 'Refund Id', minWidth: 120, align: 'center' },
-        { columnId: 'amount', label: 'Price', minWidth: 200, align: 'center' },
-        { columnId: 'status', label: 'Status', minWidth: 200, align: 'center' },
-        { columnId: 'actions', label: 'Actions', minWidth: 250, align: 'center' } // Increased minWidth for additional button
-    ];
+    const columns = useMemo(() => [
+        { accessorKey: 'supplierName', header: 'Name', size: 70, align: 'center' },
+        { accessorKey: 'contact_number', header: 'Contact number', size: 150, align: 'center' },
+        { accessorKey: 'inventory_id', header: 'Refund Id', size: 120, align: 'center' },
+        { accessorKey: 'amount', header: 'Price', size: 200, align: 'center' },
+        { accessorKey: 'status', header: 'Status', size: 200, align: 'center' },
+        { accessorKey: 'actions', header: 'Actions', size: 250, align: 'center' } // Increased minWidth for additional button
+    ], []);
 
-    const mappedData = refundRequests.map(row => ({
+    const dataWithActions = refundRequests.map(row => ({
         inventory_id: row.inventory_id,
         supplierName: row.supplierName,
         contact_number: row.phone,
@@ -138,7 +139,7 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
                         </Typography>
                         <div style={{ display: 'flex' }}>
                             <CustomizedButton
-                                onClick={() => setVisible(true)}
+                                onClick={() => navigate('/eligiblePurchaseOrderForRefund')}
                                 hoverBackgroundColor="#2d3ed2"
                                 style={{
                                     color: '#ffffff',
@@ -195,10 +196,14 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
                             {error}
                         </Typography>
                     ) : (
-                        <CustomizedTable
+                        <DynamicTable
                             columns={columns}
-                            rows={mappedData}
+                            data={dataWithActions}
                             style={{ minWidth: 700, maxHeight: 400 }}
+                            includeProfile={false}
+                            tableWidth="100%"
+                            enableFilters={false}
+                            initialShowGlobalFilter={true}
                         />
                     )}
                 </Box>
