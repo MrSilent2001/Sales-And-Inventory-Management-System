@@ -97,7 +97,7 @@ function SupplierProfile() {
 
                     <div className="SupplierProfileForm">
                         <form>
-                            <div className="SupplierProfileFormField">
+                            <div className="SupplierProfileFormField" style={{marginTop: '2em'}}>
                                 <div className="SupplierProfileField">
                                     <span className="title">Address:</span>
                                 </div>
