@@ -1,14 +1,4 @@
 import './Customer Refunds.css';
-import { styled } from "@mui/material/styles";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableRow from "@mui/material/TableRow";
-
-import TableContainer from "@mui/material/TableContainer";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import { Modal } from "@mui/material";
-import UpdateItem from "../../../admin/View Inventory/Modals/Purchase Item/purchaseItem";
 import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";
 import Footer from "../../../../layout/footer/footer";
 import { Link } from "react-router-dom";
@@ -18,6 +8,8 @@ import {jwtDecode} from 'jwt-decode';
 
 import React, { useEffect, useMemo, useState } from "react";
 import DynamicTable from '../../../../components/Table/customizedTable2';
+import PageLoader from "../../../../components/Page Loader/pageLoader";
+import {Box} from "@mui/material";
 
 function CustomerRefunds() {
     const [rows, setRows] = useState([]);
@@ -51,8 +43,41 @@ function CustomerRefunds() {
         { accessorKey: 'createdDate', header: 'Created Date', size: 100, align: 'center' },
         { accessorKey: 'status', header: 'Status', size: 100, align: 'center' }
     ], []);
-    
 
+    const createToolbarButton = () => {
+        const buttonStyle = {
+            backgroundColor: '#242F9B',
+            border: '1px solid #242F9B',
+            width: '11em',
+            height: '2.5em',
+            fontSize: '0.75em',
+            padding: '0.5em 0.625em',
+            borderRadius: '0.35em',
+            fontWeight: '550',
+            marginRight: '1em'
+        };
+
+        return (
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: 2,
+                    marginBottom: 2
+                }}
+            >
+                <Link to="/eligibleOrdersForRefund">
+                    <CustomizedButton
+                        hoverBackgroundColor="#2d3ed2"
+                        style={buttonStyle}
+                    >
+                        Request Refund
+                    </CustomizedButton>
+                </Link>
+            </Box>
+        );
+    };
     return (
         <>
             <CustomerNavbar />
@@ -62,38 +87,17 @@ function CustomerRefunds() {
                         <div className="customerRefundTopic">
                             <h3>Refund Request</h3>
                         </div>
-                        <div className="customerRefundRequestButton">
-                            <Link to="/eligibleOrdersForRefund">
-                                <CustomizedButton
-                                    hoverBackgroundColor="#2d3ed2"
-                                    style={{
-                                        color: '#ffffff',
-                                        backgroundColor: '#242F9B',
-                                        border: '1px solid #242F9B',
-                                        width: '12em',
-                                        height: '2.9em',
-                                        fontSize: '0.75em',
-                                        fontFamily: 'inter',
-                                        padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        fontWeight: '500',
-                                        marginTop: '0.625em',
-                                        textTransform: 'none',
-                                        textAlign: 'center',
-                                    }}>
-                                    Request Refund
-                                </CustomizedButton>
-                            </Link>
-                        </div>
+
                     </div>
                     <div className="customerRefundTable">
                         {loading ? (
-                            <div>Loading...</div>
+                            <PageLoader/>
                         ) : (
                             <DynamicTable
                                 columns={columns}
                                 data={rows}
                                 includeProfile={false}
+                                renderToolbarItems={createToolbarButton}
                             />
                         )}
                     </div>

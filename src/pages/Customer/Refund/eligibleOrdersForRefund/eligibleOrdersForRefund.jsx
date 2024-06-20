@@ -9,9 +9,11 @@ import axios from "axios";
 import DynamicTable from '../../../../components/Table/customizedTable2';
 import CustomizedAlert from '../../../../components/Alert/alert';
 import {jwtDecode} from 'jwt-decode';
-import { Modal } from '@mui/material';
+import {Button, Modal} from '@mui/material';
 import Box from '@mui/material/Box';
 import CustomerRefundRequest from '../Request Refund/CustomerRefundRequest ';
+import {Link} from "react-router-dom";
+import BackArrow from "../../../../components/Icons/backArrow";
 
 
 
@@ -31,25 +33,25 @@ function EligibleOrderForRefund() {
         {
             accessorKey: 'orderPrice',
             header: 'Bill Amount',
-            size: 170,
+            size: 75,
             align: 'center'
         },
         {
             accessorKey: 'orderDate',
             header: 'Date',
-            size: 170,
+            size: 75,
             align: 'center',
         },
         {
             accessorKey: 'orderStatus',
             header: 'Order Status',
-            size: 170,
+            size: 75,
             align: 'center'
         },
         {
             accessorKey: 'actions',
             header: 'Actions',
-            size: 170,
+            size: 150,
             align: 'center'
         }
     ], []);
@@ -122,16 +124,12 @@ function EligibleOrderForRefund() {
                 color: '#ffffff',
                 backgroundColor: '#242F9B',
                 border: '1px solid #242F9B',
-                width: '10em',
-                height: '3em',
-                fontSize: '0.9em',
-                fontFamily: 'inter',
+                width: '11em',
+                height: '2.75em',
+                fontSize: '0.8em',
                 padding: '0.5em 0.625em',
                 borderRadius: '0.35em',
-                fontWeight: '500',
-                marginTop: '0.625em',
-                textTransform: 'none',
-                textAlign: 'center',
+                marginTop: '0.625em'
             }}
             onClick={() => handleOpenModal(order)}
         >
@@ -147,16 +145,27 @@ function EligibleOrderForRefund() {
     return (
         <>
             <CustomerNavbar />
-            <div className="CustomerOrdersOuter">
-                <div className="CustomerOrdersInner">
-                    <div className="customerOrdersTopicWithTextfield">
-                        <div className="customerOrdersTopic">
-                            <h2>Eligible Orders for Refund</h2>
-                        </div>
+            <div className="customerEligibleOrdersOuter">
+                <div className="customerEligibleOrdersInner">
+                    <div className="searchContainer">
+                        <Link to="/refundRequests">
+                            <Button
+                                startIcon={<BackArrow/>}
+                                size="large"
+                                style={{
+                                    color: "black",
+                                    fontWeight: 'bold',
+                                    textTransform: "none",
+                                    fontSize: '1.25em'
+                                }}
+                            >
+                                Eligible Orders for Refund
+                            </Button>
+                        </Link>
                     </div>
-                    <div className='orderHistory'>
+                    <div className='customerEligibleOrders-dashboard'>
                         {isLoading ? (
-                            <PageLoader />
+                            <PageLoader/>
                         ) : (
                             <DynamicTable
                                 columns={columns}
@@ -167,7 +176,7 @@ function EligibleOrderForRefund() {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <Footer/>
 
             <CustomizedAlert
                 open={openError}
@@ -183,7 +192,7 @@ function EligibleOrderForRefund() {
                 aria-describedby="modal-description"
             >
                 <Box className="modalBox">
-                    {selectedOrder && <CustomerRefundRequest order={selectedOrder} onClose={handleCloseModal} />}
+                    {selectedOrder && <CustomerRefundRequest order={selectedOrder} onClose={handleCloseModal}/>}
                 </Box>
             </Modal>
         </>

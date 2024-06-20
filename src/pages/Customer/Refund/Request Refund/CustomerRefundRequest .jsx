@@ -1,140 +1,18 @@
 import './Customer Refund Request.css';
 import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import Footer from "../../../../layout/footer/footer";
 import { useNavigate } from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
-import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";
 import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
-
-
-function SelectItem({ value, onChange, error, items }) {
-    return (
-        <Box sx={{ minWidth: 80 }}>
-            <FormControl fullWidth error={error}>
-                <InputLabel
-                    id="item-select-label"
-                    sx={{
-                        fontSize: '10px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    }}
-                >
-                    Select
-                </InputLabel>
-                <Select
-                    labelId="item-select-label"
-                    id="item-select"
-                    value={value}
-                    label="Item"
-                    onChange={onChange}
-                    sx={{
-                        height: 40,
-                        width: '40.8em',
-                        fontSize: 10,
-                        backgroundColor: '#e9eeff',
-                        marginRight: '8px',
-                        '& .MuiInputLabel-root': {
-                            fontSize: 4,
-                        },
-                    }}
-                >
-                    {items.map((item, index) => (
-                        <MenuItem key={index} value={item}>{item}</MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
-        </Box>
-    );
-}
-
-function SelectReason({ value, onChange, error }) {
-    return (
-        <Box sx={{ minWidth: 80 }}>
-            <FormControl fullWidth error={error}>
-                <InputLabel
-                    id="reason-select-label"
-                    sx={{
-                        fontSize: '10px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    }}
-                >
-                    Select
-                </InputLabel>
-                <Select
-                    labelId="reason-select-label"
-                    id="reason-select"
-                    value={value}
-                    label="Reason"
-                    onChange={onChange}
-                    sx={{
-                        height: 40,
-                        width: '40.8em',
-                        fontSize: 10,
-                        backgroundColor: '#e9eeff',
-                        marginRight: '8px',
-                        '& .MuiInputLabel-root': {
-                            fontSize: 4,
-                        },
-                    }}
-                >
-                    <MenuItem value="Defective Item">Defective Item</MenuItem>
-                    <MenuItem value="Not as Described">Not as Described</MenuItem>
-                    <MenuItem value="Expired">Expired</MenuItem>
-                </Select>
-            </FormControl>
-        </Box>
-    );
-}
-
-function BasicTextFields({ name, value, onChange, error }) {
-    return (
-        <Box
-            component="form"
-            sx={{
-                '& > :not(style)': {
-                    m: 1,
-                    width: '25.5em',
-                    "& .MuiInputBase-root": {
-                        height: '2.5em',
-                        backgroundColor: '#e9eeff'
-                    },
-                    "& .MuiInputLabel-root": {
-                        fontSize: '0.5em',
-                        textAlign: 'center',
-                    },
-                },
-            }}
-            noValidate
-            autoComplete="off"
-        >
-            <TextField
-                id="outlined-basic"
-                variant="outlined"
-                margin='normal'
-                name={name}
-                value={value}
-                onChange={onChange}
-                error={error}
-                helperText={error && "This field is required"}
-            />
-        </Box>
-    );
-}
+import CenteredModal from "../../../../components/Modal/modal";
+import ComboBox from "../../../../components/Form Inputs/comboBox";
+import BasicTextField from "../../../../components/Form Inputs/textfield";
+import CustomizedAlert from "../../../../components/Alert/alert";
 
 function CustomerRefundRequest({ order, onClose }) {
     const [formData, setFormData] = useState({
-        customerId: '', 
-        customerName: '', 
+        customerId: '',
+        customerName: '',
         contact: '',
         item: '',
         quantity: '',
@@ -171,7 +49,7 @@ function CustomerRefundRequest({ order, onClose }) {
 
         if (order) {
             const itemsArray = "item1,item2,item3".split(','); // Hardcoded items for demonstration
-            setItems(itemsArray); // Setting the items array in state
+            setItems(itemsArray.map(item => ({ value: item, label: item }))); // Setting the items array in state
             setFormData((prevFormData) => ({
                 ...prevFormData,
                 orderId: order.orderId,
@@ -219,138 +97,198 @@ function CustomerRefundRequest({ order, onClose }) {
             });
     };
 
+    const [openSuccess, setOpenSuccess] = useState(false);
+    const [openError, setOpenError] = useState(false);
+
+    const handleClickSuccess = () => {
+        setOpenSuccess(true);
+    };
+
+    const handleClickError = () => {
+        setOpenError(true);
+    };
+
+    const handleCloseSuccess = () => {
+        setOpenSuccess(false);
+    };
+
+    const handleCloseError = () => {
+        setOpenError(false);
+    };
+
     return (
-        <>
-            <div className="customerRefundRequestOuter">
-                <div className="customerRefundRequestInner">
-                    <div className="customerRefundRequestTopic">
-                        <h2>Refund Request</h2>
+        <CenteredModal>
+            <form onSubmit={handleSubmit}>
+                <div className="customerRefundRequestsOuter">
+                    <div className="customerRefundRequestsModel">
+                        <h2>Add Discounts</h2>
+                        <div className="customerRefundRequestsForm">
+                            <div className="customerRefundRequestsFormField">
+                                <div className="customerRefundRequestsLabelField">
+                                    <h5>Contact:</h5>
+                                </div>
+                                <div className="customerRefundRequestsInput">
+                                    <BasicTextField
+                                        disabled={true}
+                                        name="contact"
+                                        size="small"
+                                        type="text"
+                                        value={formData.contact}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                            </div>
+                            {errors.contact && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.contact}</span>}
+
+                            <div className="customerRefundRequestsFormField">
+                                <div className="customerRefundRequestsLabelField">
+                                    <h5>Item Name:</h5>
+                                </div>
+                                <div className="customerRefundRequestsInput">
+                                    <ComboBox
+                                        value={formData.item}
+                                        onChange={(e) => handleChange({ target: { name: 'item', value: e.target.value } })}
+                                        options={items || []}
+                                        style={{ width: '17.25em', height: '2em', marginRight: '0.5em' }}
+                                        defaultValue=""
+                                    />
+                                </div>
+                            </div>
+                            {errors.item && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.item}</span>}
+
+                            <div className="customerRefundRequestsFormField">
+                                <div className="customerRefundRequestsLabelField">
+                                    <h5>Quantity:</h5>
+                                </div>
+                                <div className="customerRefundRequestsInput">
+                                    <BasicTextField
+                                        disabled={true}
+                                        name="quantity"
+                                        size="small"
+                                        type="text"
+                                        value={formData.quantity}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                            </div>
+                            {errors.quantity && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.quantity}</span>}
+
+                            <div className="customerRefundRequestsFormField">
+                                <div className="customerRefundRequestsLabelField">
+                                    <h5>Reason:</h5>
+                                </div>
+                                <div className="customerRefundRequestsInput">
+                                    <ComboBox
+                                        value={formData.reason}
+                                        onChange={(e) => handleChange({
+                                            target: {
+                                                name: 'reason',
+                                                value: e.target.value
+                                            }
+                                        })}
+                                        options={[
+                                            { value: 'reason1', label: 'Reason 1' },
+                                            { value: 'reason2', label: 'Reason 2' },
+                                            { value: 'reason3', label: 'Reason 3' }
+                                        ]}
+                                        style={{ width: '17.25em', height: '2em', marginRight: '0.5em' }}
+                                        defaultValue=""
+                                    />
+                                </div>
+                            </div>
+                            {errors.reason && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.reason}</span>}
+
+                            <div className="customerRefundRequestsFormField">
+                                <div className="customerRefundRequestsLabelField">
+                                    <h5>Total Amount: </h5>
+                                </div>
+                                <div className="customerRefundRequestsInput">
+                                    <BasicTextField
+                                        name="totalPrice"
+                                        value={formData.totalPrice}
+                                        onChange={handleChange}
+                                        error={errors.totalPrice}
+                                    />
+                                </div>
+                            </div>
+                            {errors.totalPrice && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.totalPrice}</span>}
+                        </div>
+                        <div className="customerRefundRequestsFormFieldButtons">
+                            <div className="customerRefundRequestsButton">
+                                <CustomizedButton
+                                    hoverBackgroundColor="#2d3ed2"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#242F9B',
+                                        width: '7.5em',
+                                        height: '2.75em',
+                                        fontSize: '0.8em',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        marginTop: '0.625em'
+                                    }}
+                                    type="submit"
+                                >
+                                    Create
+                                </CustomizedButton>
+                            </div>
+                            <div className="customerRefundRequestsButton">
+                                <CustomizedButton
+                                    hoverBackgroundColor="#f11717"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#960505',
+                                        width: '7.5em',
+                                        height: '2.75em',
+                                        fontSize: '0.8em',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        marginTop: '0.625em',
+                                        marginRight: '0.625em'
+                                    }}
+                                    onClick={onClose}
+                                >
+                                    Cancel
+                                </CustomizedButton>
+                            </div>
+                        </div>
                     </div>
-
-                    <form onSubmit={handleSubmit} className="customerRefundRequestForm">
-                        <div className="customerFormField">
-                            <div className="customerTextField">
-                                <h5>Contact</h5>
-                            </div>
-                            <div className="customerTextField">
-                                <BasicTextFields
-                                    name="contact"
-                                    value={formData.contact}
-                                    onChange={handleChange}
-                                    error={errors.contact}
-                                />
-                            </div>
-                        </div>
-                         
-                        <div className="customerFormField">
-                            <div className="customerTextField">
-                                <h5>Item</h5>
-                            </div>
-                            <div className="customerTextField">
-                                <SelectItem
-                                    value={formData.item}
-                                    onChange={(e) => handleChange({ target: { name: 'item', value: e.target.value } })}
-                                    error={errors.item}
-                                    items={items}
-                                />
-                            </div>
-                        </div>
-
-                        <div className="customerFormField">
-                            <div className="customerTextField">
-                                <h5>Quantity</h5>
-                            </div>
-                            <div className="customerTextField">
-                                <BasicTextFields
-                                    name="quantity"
-                                    value={formData.quantity}
-                                    onChange={handleChange}
-                                    error={errors.quantity}
-                                />
-                            </div>
-                        </div>
-
-                        <div className="customerFormField">
-                            <div className="customerTextField">
-                                <h5>Reason</h5>
-                            </div>
-                            <div className="customerTextField">
-                                <SelectReason
-                                    value={formData.reason}
-                                    onChange={(e) => handleChange({ target: { name: 'reason', value: e.target.value } })}
-                                    error={errors.reason}
-                                />
-                            </div>
-                        </div>
-
-                        <div className="customerFormField">
-                            <div className="customerTextField">
-                                <h5>Total Price</h5>
-                            </div>
-                            <div className="customerTextField">
-                                <BasicTextFields
-                                    name="totalPrice"
-                                    value={formData.totalPrice}
-                                    onChange={handleChange}
-                                    error={errors.totalPrice}
-                                />
-                            </div>
-                        </div>
-
-                        <div className="customerRefundButtonField">
-                            <div className="customerRefundRequestButtons">
-                                <button type="submit" style={{ background: 'none', border: 'none', padding: 0, margin: 0 }}>
-                                    <CustomizedButton
-                                        hoverBackgroundColor="#2d3ed2"
-                                        style={{
-                                            color: '#ffffff',
-                                            backgroundColor: '#242F9B',
-                                            border: '1px solid #242F9B',
-                                            width: '12em',
-                                            height: '3.5em',
-                                            fontSize: '1em',
-                                            fontFamily: 'inter',
-                                            padding: '0.5em 0.625em',
-                                            borderRadius: '0.35em',
-                                            fontWeight: '500',
-                                            marginTop: '0.625em',
-                                            textTransform: 'none',
-                                            textAlign: 'center',
-                                        }}
-                                    >
-                                        Create Request
-                                    </CustomizedButton>
-                                </button>
-                                <button type="button" style={{ background: 'none', border: 'none', padding: 0 }}>
-                                    <CustomizedButton
-                                        hoverBackgroundColor="#f11717"
-                                        style={{
-                                            color: '#ffffff',
-                                            backgroundColor: '#ff0000',
-                                            border: '1px solid #ff0000',
-                                            width: '12em',
-                                            height: '3.5em',
-                                            fontSize: '1em',
-                                            fontFamily: 'inter',
-                                            padding: '0.5em 0.625em',
-                                            borderRadius: '0.35em',
-                                            fontWeight: '500',
-                                            marginTop: '0.625em',
-                                            textTransform: 'none',
-                                            textAlign: 'center',
-                                            marginLeft: '0.5em'
-                                        }}
-                                        onClick={onClose}
-                                    >
-                                        Cancel Request
-                                    </CustomizedButton>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
-            </div>
-        </>
+            </form>
+            <CustomizedAlert
+                open={openSuccess}
+                onClose={handleCloseSuccess}
+                severity="success"
+                message="Supplier Added Successfully!"
+            />
+
+            <CustomizedAlert
+                open={openError}
+                onClose={handleCloseError}
+                severity="error"
+                message="Something Went Wrong!"
+            />
+        </CenteredModal>
     );
 }
 

@@ -29,10 +29,10 @@ const EligibleOrderForRefund = () => {
     const columns = useMemo(() => [
         { accessorKey: 'orderId', header: 'Order Id', size: 75, align: 'center' },
         { accessorKey: 'orderItems', header: 'Ordered Items', size: 100, align: 'center' },
-        { accessorKey: 'orderPrice', header: 'Bill Amount', size: 170, align: 'center' },
-        { accessorKey: 'orderDate', header: 'Date', size: 170, align: 'center' },
-        { accessorKey: 'orderStatus', header: 'Order Status', size: 170, align: 'center' },
-        { accessorKey: 'actions', header: 'Actions', size: 170, align: 'center' }
+        { accessorKey: 'orderPrice', header: 'Bill Amount', size: 75, align: 'center' },
+        { accessorKey: 'orderDate', header: 'Date', size: 75, align: 'center' },
+        { accessorKey: 'orderStatus', header: 'Order Status', size: 75, align: 'center' },
+        { accessorKey: 'actions', header: 'Actions', size: 150, align: 'center' }
     ], []);
 
     const handleClickError = () => {
@@ -103,12 +103,11 @@ const EligibleOrderForRefund = () => {
                 color: '#ffffff',
                 backgroundColor: '#242F9B',
                 border: '1px solid #242F9B',
-                width: '10em',
-                height: '3em',
-                fontSize: '0.9em',
+                width: '11em',
+                height: '1.75em',
+                fontSize: '0.8em',
                 padding: '0.5em 0.625em',
                 borderRadius: '0.35em',
-                fontWeight: '500',
                 marginTop: '0.625em'
             }}
             onClick={() => handleOpenModal(order)}

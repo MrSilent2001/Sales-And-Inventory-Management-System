@@ -10,6 +10,7 @@ import axios from "axios";
 import FileUpload from "../../../components/Form Inputs/fileUpload";
 import {uploadFileToBlob} from "../../Supplier/Inventory Dashboard/productBlobStorage";
 import CustomizedAlert from "../../../components/Alert/alert";
+import BasicTextArea from "../../../components/Form Inputs/textArea";
 
 function UpdateCustomers() {
     const [customer, setCustomer] = useState({});
@@ -126,105 +127,95 @@ function UpdateCustomers() {
     return (
         <>
             <CustomerNavbar/>
-            <div className="UpdateCustomersOuter">
-                <div className="UpdateCustomersInner">
-
+            <div className="UpdateCustomerOuter">
+                <div className="UpdateCustomerInner">
                     <div className="UpdateCustomerProfile">
-                        <div className="updateAvatar">
+                        <div className="profileAvatar">
                             <Avatar src={formData.profilePicture}
-                                    sx={{ width: 230, height: 230, border: 2, borderRadius: 2, marginTop: '-0.8em' }} />
-                            <div className='uploadButton'>
-                                <FileUpload
-                                    style={{ width: "15em", top: "2em" }}
-                                    onChange={handleFileChange}
-                                />
-                            </div>
+                                    sx={{width: 275, height: 275, border: 2, borderRadius: 50, marginTop: '-0.8em'}}/>
+
+                            <FileUpload
+                                style={{marginTop: '1em'}}
+                                onChange={handleFileChange}
+                            />
                         </div>
-
                     </div>
-
                     <div className="UpdateCustomerForm">
-
-                        <div className="UpdateCustomerFormField">
-                            <div className="UpdateCustomerTextField">
-                                <h5>Name</h5>
+                        <form onSubmit={handleSubmit}>
+                            <div className="UpdateCustomerFormField">
+                                <div className="UpdateCustomerTextField">
+                                    <h5>Name:</h5>
+                                </div>
+                                <div className="UpdateCustomerTextInput">
+                                    <BasicTextField
+                                        name="name"
+                                        style={{width: '20em'}}
+                                        value={formData.username}
+                                        onChange={(e) => handleChange("username", e.target.value)}
+                                    />
+                                </div>
                             </div>
-                            <div className="UpdateCustomerTextInput">
-                                <BasicTextField
-                                    name="name"
-                                    style={{ width: '20em' }}
-                                    value={formData.username}
-                                    onChange={(e) => handleChange("username", e.target.value)}
-                                />
+                            <div className="UpdateCustomerFormField">
+                                <div className="UpdateCustomerTextField">
+                                    <h5>Address:</h5>
+                                </div>
+                                <div className="UpdateCustomerTextInput">
+                                    <BasicTextField
+                                        name="address"
+                                        style={{width: '20em'}}
+                                        value={formData.address}
+                                        onChange={(e) => handleChange("address", e.target.value)}
+                                    />
+                                </div>
                             </div>
-                        </div>
-
-                        <div className="UpdateCustomerFormField">
-                            <div className="UpdateCustomerTextField">
-                                <h5>Address</h5>
+                            <div className="UpdateCustomerFormField">
+                                <div className="UpdateCustomerTextField">
+                                    <h5>Contact No:</h5>
+                                </div>
+                                <div className="UpdateCustomerTextInput">
+                                    <BasicTextField
+                                        name={"contact"}
+                                        style={{width: '20em'}}
+                                        value={formData.contactNo}
+                                        onChange={(e) => handleChange("contactNo", e.target.value)}
+                                    />
+                                </div>
                             </div>
-                            <div className="UpdateCustomerTextInput">
-                                <BasicTextField
-                                    name="address"
-                                    style={{ width: '20em' }}
-                                    value={formData.address}
-                                    onChange={(e) => handleChange("address", e.target.value)}
-                                />
+                            <div className="UpdateCustomerFormField">
+                                <div className="UpdateCustomerTextField">
+                                    <h5>Email:</h5>
+                                </div>
+                                <div className="UpdateCustomerTextInput">
+                                    <BasicTextField
+                                        name="email"
+                                        style={{width: '20em'}}
+                                        value={formData.email}
+                                        onChange={(e) => handleChange("email", e.target.value)}
+                                    />
+                                </div>
                             </div>
-                        </div>
-
-                        <div className="UpdateCustomerFormField">
-                            <div className="UpdateCustomerTextField">
-                                <h5>Contact</h5>
+                            
+                            <div className="UpdateCustomerButtonField">
+                                <div className="UpdateCustomerButtons">
+                                    <CustomizedButton
+                                        type="submit"
+                                        hoverBackgroundColor="#2d3ed2"
+                                        style={{
+                                            color: '#ffffff',
+                                            backgroundColor: '#242F9B',
+                                            border: '1px solid #242F9B',
+                                            width: '8em',
+                                            height: '2.5em',
+                                            fontSize: '0.8em',
+                                            padding: '0.5em 0.625em'
+                                        }}>
+                                        Update
+                                    </CustomizedButton>
+                                </div>
                             </div>
-                            <div className="UpdateCustomerTextInput">
-                                <BasicTextField
-                                    name="contact"
-                                    style={{ width: '20em' }}
-                                    value={formData.contactNo}
-                                    onChange={(e) => handleChange("contactNo", e.target.value)}
-                                />
-                            </div>
-                        </div>
-
-                        <div className="UpdateCustomerFormField">
-                            <div className="UpdateCustomerTextField">
-                                <h5>Email</h5>
-                            </div>
-                            <div className="UpdateCustomerTextInput">
-                                <BasicTextField
-                                    name="email"
-                                    style={{ width: '20em' }}
-                                    value={formData.email}
-                                    onChange={(e) => handleChange("email", e.target.value)}
-                                />
-                            </div>
-                        </div>
-
-                        <div className="UpdateCustomerButtonField">
-                            <div className="UpdateCustomerButtons">
-                                <CustomizedButton
-                                    onClick={handleSubmit}
-                                    hoverBackgroundColor="#2d3ed2"
-                                    style={{
-                                        color: '#ffffff',
-                                        backgroundColor: '#242F9B',
-                                        border: '1px solid #242F9B',
-                                        width: '8em',
-                                        height: '2.5em',
-                                        fontSize: '0.95em',
-                                        padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        marginTop: '0.625em',
-                                    }}>
-                                    Update
-                                </CustomizedButton>
-                            </div>
-                        </div>
+                        </form>
                     </div>
-
                 </div>
-
             </div>
             <Footer/>
 

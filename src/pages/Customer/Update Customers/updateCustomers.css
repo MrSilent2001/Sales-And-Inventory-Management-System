@@ -1,42 +1,38 @@
-.UpdateCustomersOuter{
+.UpdateCustomerOuter{
     position: relative;
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 90%;
     background-color: #DBDFFD;
 }
 
-.UpdateCustomersInner{
+.UpdateCustomerInner{
     display: flex;
     align-items: center;
-    width: 92.875em;
-    height: 34em;
+    width: 80%;
+    height: 30em;
     background-color:rgb(240, 240, 245);
-    margin-top: 5em;
-    margin-bottom: 5em;
-    margin-left: 3em;
-    margin-right: 3em;
     border-radius: 0.5em;
-    margin-left: 5em;
-    margin-right: 5em;
-
+    margin: 3em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-
-.UpdateCustomerForm{
+.UpdateCustomerProfile{
+    background-color: #adbbda;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 25em;
-    height: 20em;
-    padding: 1em;
-    border-radius: 0.5em;
-    flex: 2;
     justify-content: center;
-    margin-top: 3em;
-    margin-right: 10em;
-  
+    width: 35%;
+    height: 100%;
+    border-radius: 0.5em 0 0 0.5em;
+}
+
+.UpdateCustomerForm{
+    padding-top: 5em;
+    width: 65%;
+    height: 100%;
+    border-radius:  0 0.5em 0.5em 0;
 }
 
 .UpdateCustomerFormField{
@@ -55,39 +51,17 @@
 }
 
 .UpdateCustomerTextField h4{
-    font-family: Inter;
     font-weight: 700;
     font-size: 0.8em;
 }
 
 .UpdateCustomerTextInput{
-    margin-left: 3em;
-   
+    margin-left: 1em;
 }
 
-.UpdateCustomerButtonField{
+.UpdateCustomerButtons{
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-left: 13em;
-    margin-top: 1.5em;
-}
-
-
-
-.updateAvatar {
-    flex: 1;
-    margin-left: 16em;
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2em;
-    margin-top: 1em;
-}
-.UpdateTopicName{
-    margin-left: 13em;
-    
-
+    margin-top: 3.5em;
 }
