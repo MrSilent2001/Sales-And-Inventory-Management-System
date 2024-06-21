@@ -339,12 +339,13 @@ function CustomerRefundRequest() {
         }
 
         console.log('Submitting form with data:', formData);
-        axios.post('http://localhost:9000/refund/customerRefund/create', formData, {
+        axios.post('http://localhost:9000/refund/customerRefund/create', { ...formData, orderId }, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         })
-            .then((response) => {
+
+    .then((response) => {
                 console.log('Refund request created:', response.data);
                 navigate('/generatedrefund', { state: { formData } });
             })
