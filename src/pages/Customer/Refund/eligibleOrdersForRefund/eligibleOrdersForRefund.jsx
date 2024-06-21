@@ -27,48 +27,91 @@ function EligibleOrdersForRefund() {
         { accessorKey: 'orderPrice', header: 'Bill Amount', size: 70, align: 'center' },
         { accessorKey: 'orderDate', header: 'Date', size: 170, align: 'center' },
         { accessorKey: 'orderStatus', header: 'Order Status', size: 70, align: 'center' },
+        {
+            accessorKey: 'actions',
+            header: '',
+            size: 200,
+            cellRenderer: ({ row }) => (
+                <div style={{ display: 'flex' }}>
+                    <CustomizedButton
+                        onClick={() => handleRefund(row.original)}
+                        hoverBackgroundColor="#2d3ed2"
+                        disabled={row.original.eligibleItems === "No items for refund"}
+                        style={{
+                            color: '#ffffff',
+                            backgroundColor: '#242F9B',
+                            border: '1px solid #242F9B',
+                            width: '12em',
+                            height: '2.5em',
+                            fontSize: '0.95em',
+                            fontFamily: 'inter',
+                            padding: '0.5em 0.625em',
+                            borderRadius: '0.35em',
+                            fontWeight: '550',
+                            marginTop: '0.625em',
+                            marginRight: '1.5em',
+                            textTransform: 'none',
+                            textAlign: 'center',
+                        }}>
+                        Request Refund
+                    </CustomizedButton>
+                </div>
+            ),
+        }
     ], []);
 
-    const createRefundRequestButton = () => {
-        const buttonStyle = {
-            color: '#ffffff',
-            backgroundColor: '#242F9B',
-            border: '1px solid #242F9B',
-            width: '12em',
-            height: '2.5em',
-            fontSize: '0.8em',
-            padding: '0.5em 0.625em',
-            borderRadius: '0.35em',
-            fontWeight: '500',
-            marginTop: '0.625em',
-            textTransform: 'none',
-            textAlign: 'center',
-        };
-
-        return (
-            <CustomizedButton
-                onClick={() => handleRefund(eligibleOrders.orderId)}
-                hoverBackgroundColor="#2d3ed2"
-                style={buttonStyle}
-            >
-                Request Refund
-            </CustomizedButton>
-        );
-    };
+    // const createRefundRequestButton = (row) => {
+    //     const buttonStyle = {
+    //         color: '#ffffff',
+    //         backgroundColor: '#242F9B',
+    //         border: '1px solid #242F9B',
+    //         width: '12em',
+    //         height: '2.5em',
+    //         fontSize: '0.8em',
+    //         padding: '0.5em 0.625em',
+    //         borderRadius: '0.35em',
+    //         fontWeight: '500',
+    //         marginTop: '0.625em',
+    //         textTransform: 'none',
+    //         textAlign: 'center',
+    //     };
+    //     // console.log(eligibleOrders);
+    //
+    //     return (
+    //         <CustomizedButton
+    //             onClick={() => handleRefund()}
+    //             hoverBackgroundColor="#2d3ed2"
+    //             style={buttonStyle}
+    //             // disabled={}
+    //         >
+    //             Request Refund
+    //         </CustomizedButton>
+    //     );
+    // };
 
     const handleClickError = () => {
         setOpenError(true);
     };
 
-    const handleRefund = (orderId) => {
-        console.log('Refund requested for order:', orderId);
-        navigate('/createrefund', { state: { orderId } });
+    const handleRefund = (row) => {
+        const orderId = row.orderId;
+        console.log('Refund requested for order:', row.eligibleItems);
+        // navigate('/createrefund', { state: { orderId } });
+
+        if (!(row.eligibleItems === "No items for refund")){
+            navigate('/createrefund', { state: { orderId } });
+
+        }
     };
 
-    const handleRowClick = (row) => {
-        const orderId = row.orderId;
-        navigate('/createrefund', { state: { orderId } });
-    };
+    // const handleRowClick = (row) => {
+    //     const orderId = row.orderId;
+    //     console.log(row.eligibleItems);
+    //     if (row.eligibleItems){
+    //         navigate('/createrefund', { state: { orderId } });
+    //
+    //     }
+    // };
 
     useEffect(() => {
         const fetchEligibleOrders = async () => {
@@ -136,7 +179,9 @@ function EligibleOrdersForRefund() {
                     const formattedOrderItems = orderItemsWithName.join(', ');
                     const formattedEligibleItems = eligibleItemsWithName.join(', ');
 
-                    return { ...order, orderItems: formattedOrderItems, eligibleItems: formattedEligibleItems };
+
+                    return { ...order, orderItems: formattedOrderItems, eligibleItems: formattedEligibleItems.length > 0 ? formattedEligibleItems : "No items for refund" };
+
                 });
 
                 setEligibleOrders(formattedOrders);
@@ -170,8 +215,8 @@ function EligibleOrdersForRefund() {
                                 columns={columns}
                                 data={eligibleOrders}
                                 includeProfile={false}
-                                createActions={createRefundRequestButton}
-                                onRowClick={handleRowClick}
+                                // createActions={createRefundRequestButton}
+                                // onRowClick={handleRowClick}
                             />
                         )}
                     </div>

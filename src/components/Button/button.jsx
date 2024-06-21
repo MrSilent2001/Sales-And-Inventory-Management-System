@@ -21,7 +21,9 @@ function CustomizedButton({
     }, [defaultTextColor, hoverTextColor]);
 
     const handleMouseEnter = () => {
-        setIsHovered(true);
+        if (!disabled) {
+            setIsHovered(true);
+        }
     };
 
     const handleMouseLeave = () => {
@@ -39,14 +41,19 @@ function CustomizedButton({
                 isActive={isActive}
                 style={{
                     ...style,
-                    backgroundColor: isActive ? 'lightblue' : (isHovered ? hoverBackgroundColor : style.backgroundColor || 'default'),
-                    cursor: isHovered ? 'pointer' : 'default',
+                    backgroundColor: isActive
+                        ? 'lightblue'
+                        : (disabled ? '#d3d3d3' : (isHovered ? hoverBackgroundColor : style.backgroundColor || 'default')),
+                    cursor: disabled ? 'not-allowed' : (isHovered ? 'pointer' : 'default'),
                     fontFamily: 'inter',
                     textTransform: 'none',
                     fontWeight: '500',
                     borderRadius: '0.35em',
-                    color: isActive ? hoverTextColorInner : (isHovered ? hoverTextColorInner : defaultTextColorInner),
-                    textAlign: 'center'
+                    color: isActive
+                        ? hoverTextColorInner
+                        : (disabled ? '#a9a9a9' : (isHovered ? hoverTextColorInner : defaultTextColorInner)),
+                    textAlign: 'center',
+                    border: `2px solid ${disabled ? '#a9a9a9' : 'transparent'}`, // Adjust border color here
                 }}
                 onClick={onClick}
                 onMouseEnter={handleMouseEnter}
