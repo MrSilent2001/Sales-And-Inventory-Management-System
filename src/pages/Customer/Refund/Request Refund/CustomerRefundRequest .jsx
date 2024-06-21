@@ -14,6 +14,7 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { useLocation } from 'react-router-dom';
 
+
 function SelectItem({ value, onChange, error, items }) {
     return (
         <Box sx={{ minWidth: 80 }}>
@@ -136,7 +137,6 @@ function QuantityField({ name, value, onChange, max, error, disabled }) {
                 error={error}
                 helperText={error && "This field is required"}
                 disabled={disabled}
-                // type="number"
                 InputProps={{
                     endAdornment: (
                         <div>
@@ -216,7 +216,6 @@ function CustomerRefundRequest() {
     const navigate = useNavigate();
     const location = useLocation();
     const { orderId } = location.state || {};
-
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
@@ -306,7 +305,6 @@ function CustomerRefundRequest() {
         }
     }, [orderId]);
 
-
     const handleChange = (event) => {
         const { name, value } = event.target;
 
@@ -324,7 +322,6 @@ function CustomerRefundRequest() {
             const itemPrice = productPrices[updatedFormData.item]?.price || 0;
             let totalPrice = itemPrice * updatedFormData.quantity;
             console.log(orderDate)
-
 
             const applicableDiscount = discounts.find((discount) =>
                 parseInt(discount.productId) === parseInt(updatedFormData.item) &&
@@ -368,13 +365,27 @@ function CustomerRefundRequest() {
                 Authorization: `Bearer ${token}`,
             },
         })
-
-    .then((response) => {
+            .then((response) => {
                 console.log('Refund request created:', response.data);
                 navigate('/generatedrefund', { state: { formData } });
+
+                const emailData = {
+                    receiverEmail: formData.contact,
+                    subject: "Refund Request Created",
+                    text: `Dear ${formData.customerName}, your refund request for ${formData.item} has been successfully created. Reason: ${formData.reason}.`
+                };
+
+                return axios.post('http://localhost:9000/send-email', emailData, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+            })
+            .then((emailResponse) => {
+                console.log('Email sent successfully:', emailResponse.data);
             })
             .catch((error) => {
-                console.error('Error creating refund request:', error.response ? error.response.data : error.message);
+                console.error('Error creating refund request or sending email:', error.response ? error.response.data : error.message);
             });
     };
 
