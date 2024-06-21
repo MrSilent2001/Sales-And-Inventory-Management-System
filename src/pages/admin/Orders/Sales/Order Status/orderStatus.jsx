@@ -19,6 +19,11 @@ let columns = [
         cellRenderer: ({ renderedCellValue }) => renderedCellValue.toLocaleString('en-US'),
     },
     {
+        accessorKey: 'items',
+        header: 'Items',
+        size: 300,
+    },
+    {
         accessorKey: 'status',
         header: '',
         size: 100,
@@ -34,21 +39,43 @@ function OrderStatus() {
     const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
-        const fetchOrders = async () => {
+        const fetchOrdersAndProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:9000/order/getAllOrders', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
+                const [ordersResponse, productsResponse] = await Promise.all([
+                    axios.get('http://localhost:9000/order/getAllOrders', {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }),
+                    axios.get('http://localhost:9000/product/getAllProducts', {
+                        headers: { Authorization: `Bearer ${token}` },
+                    })
+                ]);
+
+                const products = productsResponse.data.reduce((acc, product) => {
+                    acc[product.id] = product.productName;
+                    return acc;
+                }, {});
+
+                const orders = ordersResponse.data.map(order => {
+                    const formattedItems = order.orderItems.map(itemStr => {
+                        const item = JSON.parse(itemStr);
+                        const productName = products[item.id];
+                        return `${productName} (${item.id}) x ${item.amount}`;
+                    }).join(', ');
+
+                    return {
+                        ...order,
+                        items: formattedItems,
+                    };
                 });
-                setOrderStatusRows(response.data);
+
+                setOrderStatusRows(orders);
             } catch (error) {
-                console.error('Error fetching orders:', error);
+                console.error('Error fetching orders or products:', error);
                 setDataErrorOpenSuccess(true);
             }
         };
 
-        fetchOrders();
+        fetchOrdersAndProducts();
     }, []);
 
     const [statuses, setStatuses] = useState(orderStatusRows.map(() => ""));
@@ -74,7 +101,7 @@ function OrderStatus() {
     const options = [
         { value: 'Pending', label: 'Pending' },
         { value: 'Accepted', label: 'Accepted' },
-        { value: 'Rejected', label: 'Rejected' },
+        // { value: 'Rejected', label: 'Rejected' },
         { value: 'In-Processing', label: 'In-Processing' },
         { value: 'Departed', label: 'Departed' },
         { value: 'Cancelled', label: 'Cancelled' },
@@ -87,6 +114,7 @@ function OrderStatus() {
             id: row.orderId,
             name: row.orderReceiverName,
             amount: row.orderPrice,
+            items: row.items,
             status: (
                 <ComboBox
                     value={statuses[index]}
