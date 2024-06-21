@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import "./pendingOrders.css";
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../../../layout/footer/footer";
 import CustomizedButton from "../../../../../components/Button/button";
-import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
+import DynamicTable from "../../../../../components/Table/customizedTable2";
 import axios from "axios";
 import SalesOrderSidebar from "../../../../../layout/sidebar/salesOrderSidebar";
 import CustomizedAlert from "../../../../../components/Alert/alert";
@@ -15,11 +15,8 @@ function PendingOrders() {
 
     const [openAccept, setOpenAccept] = useState(false);
     const [openReject, setOpenReject] = useState(false);
-    //data fetching error Alert Variables
     const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
-    //data Update error Alert Variables
     const [updateErrorOpenSuccess, setUpdateErrorOpenSuccess] = useState(false);
-
 
     const handleClickAccept = () => {
         setOpenAccept(true);
@@ -37,7 +34,6 @@ function PendingOrders() {
         setOpenReject(false);
     };
 
-    //Handle Data Error Alert Variable
     const dataErrorHandleCloseSuccess = () => {
         setDataErrorOpenSuccess(false);
     };
@@ -46,7 +42,6 @@ function PendingOrders() {
         setDataErrorOpenSuccess(true);
     };
 
-    //Handle Update Data Error Alert Variable
     const updateErrorHandleCloseSuccess = () => {
         setUpdateErrorOpenSuccess(false);
     };
@@ -55,19 +50,17 @@ function PendingOrders() {
         setUpdateErrorOpenSuccess(true);
     };
 
-
     const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await axios.get('http://localhost:9000/order/getAllOrders' , {
+                const response = await axios.get('http://localhost:9000/order/getAllOrders', {
                     headers: {
                         Authorization: `Bearer ${token}`,
-                    },}
-                );
+                    },
+                });
                 setRows(response.data);
-                console.log(rows);
             } catch (error) {
                 console.error('Error fetching orders:', error);
                 dataErrorHandleClickSuccess();
@@ -79,7 +72,7 @@ function PendingOrders() {
 
     const handleOrderStatus = async (orderId, orderStatus, orderCancelReason = '') => {
         try {
-            await axios.put(`http://localhost:9000/order/update/${orderId}`, { orderStatus, orderCancelReason } , {
+            await axios.put(`http://localhost:9000/order/update/${orderId}`, { orderStatus, orderCancelReason }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -94,12 +87,12 @@ function PendingOrders() {
                 return row;
             });
             setRows(updatedRows);
-            if (orderStatus === "Accepted"){
-                handleClickAccept()
+            if (orderStatus === "Accepted") {
+                handleClickAccept();
             }
 
-            if (orderStatus === "Rejected"){
-                handleClickReject()
+            if (orderStatus === "Rejected") {
+                handleClickReject();
             }
         } catch (error) {
             console.error('Error updating order status:', error);
@@ -107,26 +100,23 @@ function PendingOrders() {
         }
     };
 
-    const columns = [
-        { columnId: 'order_id', label: 'Id', minWidth: 170, align: 'center' },
-        { columnId: 'customer_name', label: 'Customer Name', minWidth: 170, align: 'center' },
+    const columns = useMemo(() => [
+        { accessorKey: 'order_id', header: 'Id', size: 170 },
+        { accessorKey: 'customer_name', header: 'Customer Name', size: 170 },
         {
-            columnId: 'amount',
-            label: 'Amount(\u20A8.)',
-            minWidth: 170,
-            align: 'center',
-            format: (value) => value.toLocaleString('en-US'),
+            accessorKey: 'amount',
+            header: 'Amount(\u20A8.)',
+            size: 170,
+            cellRenderer: ({ renderedCellValue }) => renderedCellValue.toLocaleString('en-US'),
         },
         {
-            columnId: 'actions',
-            label: '',
-            minWidth: 200,
-            align: 'center',
-            format: (accept, reject) => (
+            accessorKey: 'actions',
+            header: '',
+            size: 200,
+            cellRenderer: ({ row }) => (
                 <div style={{ display: 'flex' }}>
                     <CustomizedButton
-                        onClick={() => { alert("Order has been Accepted") }}
-                        // onClick={() => handleOrderStatus(orderId, 'Accept')}
+                        onClick={() => handleOrderStatus(row.original.order_id, "Accepted")}
                         hoverBackgroundColor="#2d3ed2"
                         style={{
                             color: '#ffffff',
@@ -146,8 +136,8 @@ function PendingOrders() {
                         }}>
                         Accept
                     </CustomizedButton>
-
                     <CustomizedButton
+                        onClick={() => handleOrderStatus(row.original.order_id, "Rejected")}
                         hoverBackgroundColor="#f11717"
                         style={{
                             color: '#ffffff',
@@ -168,62 +158,17 @@ function PendingOrders() {
                 </div>
             ),
         }
-    ];
+    ], []);
 
-    const mappedData = rows
+    const mappedData = useMemo(() => rows
         .filter(row => row.orderStatus === 'Pending')
         .sort((a, b) => a.orderId - b.orderId)
         .map(row => ({
             order_id: row.orderId,
             customer_name: row.orderReceiverName,
             amount: row.orderPrice,
-            orderStatus: row.orderStatus,
-            actions: (
-                <div style={{ display: 'flex' }}>
-                    <CustomizedButton
-                        onClick={() => handleOrderStatus(row.orderId, "Accepted")}
-                        hoverBackgroundColor="#2d3ed2"
-                        style={{
-                            color: '#ffffff',
-                            backgroundColor: '#242F9B',
-                            border: '1px solid #242F9B',
-                            width: '6em',
-                            height: '2.5em',
-                            fontSize: '0.95em',
-                            fontFamily: 'inter',
-                            padding: '0.5em 0.625em',
-                            borderRadius: '0.35em',
-                            fontWeight: '550',
-                            marginTop: '0.625em',
-                            marginRight: '1.5em',
-                            textTransform: 'none',
-                            textAlign: 'center',
-                        }}>
-                        Accept
-                    </CustomizedButton>
-                    <CustomizedButton
-                        onClick={() => handleOrderStatus(row.orderId, "Rejected")}
-                        hoverBackgroundColor="#f11717"
-                        style={{
-                            color: '#ffffff',
-                            backgroundColor: '#960505',
-                            width: '6em',
-                            height: '2.5em',
-                            fontSize: '0.95em',
-                            fontFamily: 'inter',
-                            padding: '0.5em 0.625em',
-                            borderRadius: '0.35em',
-                            fontWeight: '550',
-                            marginTop: '0.625em',
-                            textTransform: 'none',
-                            textAlign: 'center',
-                        }}>
-                        Reject
-                    </CustomizedButton>
-                </div>
-            )
-        }));
-
+            actions: null, // Actions are handled in columns configuration
+        })), [rows]);
 
     const handleButtonClick = (buttonText) => {
         setActiveButton(buttonText);
@@ -231,20 +176,25 @@ function PendingOrders() {
 
     return (
         <>
-            <SalesNavbar/>
+            <SalesNavbar />
             <div className="PendingordersOuter">
                 <div className="body">
                     <div className="PendingOrdersFilter">
-                        <SalesOrderSidebar/>
+                        <SalesOrderSidebar />
                     </div>
                     <div className="PendingOrdersInner">
                         <div className="table1">
-                            <CustomizedTable
+                            <DynamicTable
                                 columns={columns}
-                                rows={mappedData.map(row => ({
-                                    ...row,
-                                    actions: row.actions
-                                }))}
+                                data={mappedData}
+                                enableFilters={true}
+                                enableSorting={true}
+                                initialShowFilters={false}
+                                initialShowGlobalFilter={true}
+                                rowsPerPageOptions={[7, 14, 21]}
+                                onRowClick={(row) => {
+                                    console.log('Row clicked:', row);
+                                }}
                             />
                         </div>
                     </div>
@@ -279,7 +229,7 @@ function PendingOrders() {
                 message="Error Occurs!"
             />
 
-            <Footer/>
+            <Footer />
         </>
     );
 }
