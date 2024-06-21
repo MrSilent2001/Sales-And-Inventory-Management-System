@@ -7,6 +7,7 @@ import {useAuth} from "../../../../context/AuthContext";
 import axios from "axios";
 import {useFormik} from "formik";
 import * as Yup from "yup";
+import PasswordInput from "../../../../components/Form Inputs/passwordField";
 
 const signInSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
@@ -99,6 +100,7 @@ export function SupplierLoginSignUp() {
                         <Components.Form onSubmit={signUpFormik.handleSubmit}>
                             <Components.Title>Create Supplier Account</Components.Title>
                             <Components.Input
+                                className="input-field"
                                 type="text"
                                 placeholder="Username"
                                 {...signUpFormik.getFieldProps("username")}
@@ -107,6 +109,7 @@ export function SupplierLoginSignUp() {
                                 <div className="error-message">{signUpFormik.errors.username}</div>
                             ) : null}
                             <Components.Input
+                                className="input-field"
                                 type="email"
                                 placeholder="Email"
                                 {...signUpFormik.getFieldProps("email")}
@@ -115,6 +118,7 @@ export function SupplierLoginSignUp() {
                                 <div className="error-message">{signUpFormik.errors.email}</div>
                             ) : null}
                             <Components.Input
+                                className="input-field"
                                 type="number"
                                 placeholder="Contact No"
                                 {...signUpFormik.getFieldProps("contactNo")}
@@ -123,6 +127,7 @@ export function SupplierLoginSignUp() {
                                 <div className="error-message">{signUpFormik.errors.contactNo}</div>
                             ) : null}
                             <Components.Input
+                                className="input-field"
                                 type="text"
                                 placeholder="Address"
                                 {...signUpFormik.getFieldProps("address")}
@@ -131,6 +136,7 @@ export function SupplierLoginSignUp() {
                                 <div className="error-message">{signUpFormik.errors.address}</div>
                             ) : null}
                             <Components.Input
+                                className="input-field"
                                 type="number"
                                 placeholder="NIC"
                                 {...signUpFormik.getFieldProps("nic")}
@@ -139,6 +145,7 @@ export function SupplierLoginSignUp() {
                                 <div className="error-message">{signUpFormik.errors.nic}</div>
                             ) : null}
                             <Components.Input
+                                className="input-field"
                                 type="text"
                                 placeholder="Payment Details"
                                 {...signUpFormik.getFieldProps("paymentDetails")}
@@ -146,18 +153,18 @@ export function SupplierLoginSignUp() {
                             {signUpFormik.touched.paymentDetails && signUpFormik.errors.paymentDetails ? (
                                 <div className="error-message">{signUpFormik.errors.paymentDetails}</div>
                             ) : null}
-                            <Components.Input
-                                type="password"
+                            <PasswordInput
+                                className="input-field"
                                 placeholder="Password"
-                                {...signUpFormik.getFieldProps("password")}
+                                {...signUpFormik.getFieldProps('password')}
                             />
                             {signUpFormik.touched.password && signUpFormik.errors.password ? (
                                 <div className="error-message">{signUpFormik.errors.password}</div>
                             ) : null}
-                            <Components.Input
-                                type="password"
+                            <PasswordInput
+                                className="input-field"
                                 placeholder="Confirm-Password"
-                                {...signUpFormik.getFieldProps("confirmPassword")}
+                                {...signUpFormik.getFieldProps('confirmPassword')}
                             />
                             {signUpFormik.touched.confirmPassword && signUpFormik.errors.confirmPassword ? (
                                 <div className="error-message">{signUpFormik.errors.confirmPassword}</div>
@@ -171,6 +178,7 @@ export function SupplierLoginSignUp() {
                         <Components.Form onSubmit={loginFormik.handleSubmit}>
                             <Components.Title>Sign in as Supplier</Components.Title>
                             <Components.Input
+                                className="input-field"
                                 type="text"
                                 placeholder="Username"
                                 {...loginFormik.getFieldProps("username")}
@@ -178,10 +186,10 @@ export function SupplierLoginSignUp() {
                             {loginFormik.touched.username && loginFormik.errors.username ? (
                                 <div className="error-message">{loginFormik.errors.username}</div>
                             ) : null}
-                            <Components.Input
-                                type="password"
+                            <PasswordInput
+                                className="input-field"
                                 placeholder="Password"
-                                {...loginFormik.getFieldProps("password")}
+                                {...loginFormik.getFieldProps('password')}
                             />
                             {loginFormik.touched.password && loginFormik.errors.password ? (
                                 <div className="error-message">{loginFormik.errors.password}</div>

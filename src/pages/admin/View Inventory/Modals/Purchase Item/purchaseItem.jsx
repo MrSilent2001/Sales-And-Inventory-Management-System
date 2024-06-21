@@ -20,12 +20,9 @@ function PurchaseItem(props) {
     const [unitPrice, setUnitPrice] = useState('');
     const [purchaseQuantity, setPurchaseQuantity] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const token = localStorage.getItem('accessToken');
-
-    useEffect(() => {
-        console.log(supplier);
-    }, []);
 
     useEffect(() => {
         if (inventoryItem) {
@@ -47,8 +44,23 @@ function PurchaseItem(props) {
         }
     }, [unitPrice, purchaseQuantity]);
 
-    const handleSubmit = (e) => {
+    const handlePurchaseQuantityChange = (e) => {
+        const value = e.target.value;
+        if (Number(value) > Number(quantity)) {
+            setErrorMessage(`Cannot purchase more than available quantity (${quantity})`);
+        } else {
+            setErrorMessage('');
+            setPurchaseQuantity(Number(value));
+        }
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (purchaseQuantity > quantity) {
+            setErrorMessage(`Cannot purchase more than available quantity (${quantity})`);
+            return;
+        }
 
         const newProduct = {
             productName: name,
@@ -58,7 +70,7 @@ function PurchaseItem(props) {
             productDescription: description,
             productImage: inventoryItem.productImage,
             productColor: colour,
-            productQuantity: Number(quantity),
+            productQuantity: Number(purchaseQuantity),
             productSellingPrice: Number(unitPrice)
         };
 
@@ -73,20 +85,86 @@ function PurchaseItem(props) {
             createdDate: new Date().toISOString().split('T')[0]
         };
 
-        axios.all([
-            axios.post('http://localhost:9000/product/create', newProduct),
-            axios.post('http://localhost:9000/purchaseOrder/create', newPurchaseOrder),
-        ], {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        }).then(axios.spread((productRes, orderRes) => {
-            console.log(productRes.data);
-            console.log(orderRes.data);
-            onClose();
-        })).catch(err => {
-            console.log(err);
-        });
+        try {
+            const response = await axios.get(`http://localhost:9000/product/getByName/${name}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (!response.data) {
+                await axios.all([
+                    axios.post('http://localhost:9000/product/create', newProduct, {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }),
+                    axios.post('http://localhost:9000/purchaseOrder/create', newPurchaseOrder, {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    })
+                ])
+                    .then(axios.spread((productRes, orderRes) => {
+                        onClose();
+                    }))
+                    .catch(err => {
+                        if (err.response && err.response.status === 401) {
+                            console.log('Unauthorized: Token may be invalid or expired.');
+                        }
+                    });
+            } else {
+                const itemQuantity = {
+                    productQuantity: Number(purchaseQuantity) + Number(response.data.productQuantity),
+                };
+
+                await axios.all([
+                    axios.put(`http://localhost:9000/product/updateQuantity/${response.data.id}`, itemQuantity, {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }),
+                    axios.post('http://localhost:9000/purchaseOrder/create', newPurchaseOrder, {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    })
+                ])
+                    .then(axios.spread((productRes, orderRes) => {
+                        onClose();
+                    }))
+                    .catch(err => {
+                        if (err.response && err.response.status === 401) {
+                            console.log('Unauthorized: Token may be invalid or expired.');
+                        }
+                    });
+            }
+        } catch (error) {
+            if (error.response && error.response.status === 404) {
+                await axios.all([
+                    axios.post('http://localhost:9000/product/create', newProduct, {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }),
+                    axios.post('http://localhost:9000/purchaseOrder/create', newPurchaseOrder, {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    })
+                ])
+                    .then(axios.spread((productRes, orderRes) => {
+                        onClose();
+                    }))
+                    .catch(err => {
+                        if (err.response && err.response.status === 401) {
+                            console.log('Unauthorized: Token may be invalid or expired.');
+                        }
+                    });
+            } else {
+                console.log('Error:', error);
+            }
+        }
     };
 
     return (
@@ -172,11 +250,12 @@ function PurchaseItem(props) {
                                 <BasicTextField
                                     name="purchaseQuantity"
                                     value={purchaseQuantity}
-                                    onChange={(e) => {
-                                        setPurchaseQuantity(e.target.value);
-                                    }}
+                                    onChange={handlePurchaseQuantityChange}
                                 />
                             </div>
+                            {errorMessage && (
+                                <div className="error-message">{errorMessage}</div>
+                            )}
                         </div>
 
                         <div className="updateItemformField">
@@ -204,28 +283,28 @@ function PurchaseItem(props) {
                                         fontSize: '0.8em',
                                         padding: '0.5em 0.625em',
                                         borderRadius: '0.35em',
-                                        fontWeight: '500',
-                                        marginTop: '0.625em'
-                                    }}>
+                                        fontWeight: '700',
+                                        color: 'white',
+                                    }}
+                                >
                                     Cancel
                                 </CustomizedButton>
                             </div>
-
-                            <div className="updateItemupdateButton">
+                            <div className="updateItempurchaseButton">
                                 <CustomizedButton
                                     onClick={handleSubmit}
-                                    hoverBackgroundColor="#2d3ed2"
+                                    hoverBackgroundColor="#007bff"
                                     style={{
-                                        backgroundColor: '#242F9B',
-                                        border: '1px solid #242F9B',
+                                        backgroundColor: '#0056b3',
                                         width: '10em',
                                         height: '2.75em',
                                         fontSize: '0.8em',
                                         padding: '0.5em 0.625em',
                                         borderRadius: '0.35em',
-                                        fontWeight: '500',
-                                        marginTop: '0.625em'
-                                    }}>
+                                        fontWeight: '700',
+                                        color: 'white',
+                                    }}
+                                >
                                     Purchase
                                 </CustomizedButton>
                             </div>

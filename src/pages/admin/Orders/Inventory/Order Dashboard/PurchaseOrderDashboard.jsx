@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useMemo } from 'react';
 import {
     Box,
     Card,
@@ -13,8 +13,10 @@ import Footer from "../../../../../layout/footer/footer";
 import PlaceOrder from "../../../Orders/Inventory/Modals/Place Order/placeOrder";
 import ViewOrder from "../../../Orders/Inventory/Modals/View Order/viewOrder";
 import CustomizedButton from "../../../../../components/Button/button";
-import SearchBar from "../../../../../components/search bar/search bar";
-import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
+
+import DynamicTable from '../../../../../components/Table/customizedTable2';
+
+
 
 const PurchaseOrderDashboard = () => {
 
@@ -26,15 +28,6 @@ const PurchaseOrderDashboard = () => {
     const [inProgressOrders, setInProgressOrders] = useState(0);
     const [completedOrders, setCompletedOrders] = useState(0);
     const [selectedOrder, setSelectedOrder] = useState(null);
-
-    const fetchItems = async (query) => {
-        try {
-            const response = await axios.get(`http://localhost:9000/purchaseOrder/search?keyword=${query}`);
-            setPurchasedOrders(response.data);
-        } catch (error) {
-            console.error('Error fetching Items:', error);
-        }
-    };
 
     useEffect(() => {
         const fetchPurchasedOrders = async () => {
@@ -89,15 +82,15 @@ const PurchaseOrderDashboard = () => {
         setViewOrderVisible(true);
     };
 
-    const columns = [
-        { columnId: 'supplierName', label: 'Supplier', minWidth: 70, align: 'center' },
-        { columnId: 'Address', label: 'Address', minWidth: 150, align: 'center' },
-        { columnId: 'mail', label: 'Email', minWidth: 120, align: 'center' },
-        { columnId: 'contact_number', label: 'Contact', minWidth: 100, align: 'center' },
-        { columnId: 'actions', label: '', minWidth: 200, align: 'center' }
-    ];
+    const columns = useMemo(() => [
+        { accessorKey: 'supplierName', header: 'Supplier', size: 50, align: 'center' },
+        { accessorKey: 'Address', header: 'Address', size: 175, align: 'center' },
+        { accessorKey: 'mail', header: 'Email', size: 60, align: 'center' },
+        { accessorKey: 'contact_number', header: 'Contact', size: 50, align: 'center' },
+        { accessorKey: 'actions', header: 'Actions', size: 120, align: 'center' }
+    ], []);
 
-    const mappedData = purchasedOrders.map(row => ({
+    const dataWithActions = purchasedOrders.map(row => ({
         id: row.id,
         supplierName: row.supplierName,
         Address: row.Address,
@@ -112,18 +105,13 @@ const PurchaseOrderDashboard = () => {
                     style={{
                         color: 'white',
                         backgroundColor: '#242F9B',
-                        width: '7.5em',
+                        width: '6.5em',
                         height: '2.75em',
-                        fontSize: '0.95em',
-                        fontFamily: 'inter',
+                        fontSize: '0.8em',
                         padding: '0.5em 0.625em',
                         borderRadius: '0.35em',
-                        fontWeight: '550',
                         marginTop: '0.625em',
-                        marginRight: '2.5em',
-                        marginLeft: '2.5em',
-                        textTransform: 'none',
-                        textAlign: 'center',
+                        marginRight: '0.75em'
                     }}>
                     View
                 </CustomizedButton>
@@ -134,17 +122,13 @@ const PurchaseOrderDashboard = () => {
                     style={{
                         color: 'white',
                         backgroundColor: '#960505',
-                        width: '7.5em',
+                        width: '6.5em',
                         height: '2.75em',
-                        fontSize: '0.95em',
-                        fontFamily: 'inter',
+                        fontSize: '0.8em',
                         padding: '0.5em 0.625em',
                         borderRadius: '0.35em',
-                        fontWeight: '550',
                         marginTop: '0.625em',
-                        marginRight: '1.5em',
-                        textTransform: 'none',
-                        textAlign: 'center',
+                        marginLeft: '0.75em',
                     }}>
                     Cancel
                 </CustomizedButton>
@@ -155,7 +139,7 @@ const PurchaseOrderDashboard = () => {
     return (
         <>
             <InventoryNavbar />
-            <Box sx={{ display: 'flex', height: '47rem' }}>
+            <Box sx={{ display: 'flex', height: '37.5em' }}>
                 {/* Sidebar */}
                 <Box sx={{ width: '15%', height: 'auto', bgcolor: '#646FD4', color: 'white', p: 2 }}>
                     <Card sx={{ mb: 2, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
@@ -186,20 +170,15 @@ const PurchaseOrderDashboard = () => {
                 </Box>
 
                 {/* Main Content */}
-                <Container maxWidth={false} sx={{ bgcolor: '#DBDFFD', height: 'auto' }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'flex-start', paddingTop: 7, paddingBottom: 7 }}>
-                        <SearchBar
-                            label="Search Orders"
-                            onKeyPress={fetchItems}
-                        />
-                    </Box>
-                    <div style={{ overflow: 'auto', maxHeight: '50vh' }}>
-                        <CustomizedTable
-                            style={{ width: '100%', overflowY: 'auto' }}
+                <Container maxWidth={false} sx={{ bgcolor: '#DBDFFD', height: 'auto', padding: '1.5em 0' }}>
+                        <DynamicTable
                             columns={columns}
-                            rows={mappedData}
+                            data={dataWithActions}
+                            includeProfile={false}
+                            tableWidth="100%"  // Increase the width of the table
+                            enableFilters={false}
+                            initialShowGlobalFilter={true}  // Show the global search filter
                         />
-                    </div>
 
                     <Modal open={viewOrderVisible}>
                         <ViewOrder order={selectedOrder} onClose={() => setViewOrderVisible(false)} />

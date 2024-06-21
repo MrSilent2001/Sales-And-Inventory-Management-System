@@ -40,6 +40,7 @@ const theme = createTheme({
                     fontWeight: '700',
                     borderRadius: '10px',
                     padding: '10px 50px',
+                    width: '175px'
                 },
                 containedPrimary: {
                     background: '#1e3a8a',
@@ -49,7 +50,7 @@ const theme = createTheme({
                     borderColor: '#1e3a8a',
                     color: '#1e3a8a',
                     '&:hover': {
-                        backgroundColor: '#1e3a8a20',
+                        backgroundColor: '#1e3a8a',
                     },
                 },
             },
@@ -70,7 +71,7 @@ function LandingPage() {
                         flexDirection: 'column',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        minHeight: '100vh',
+                        minHeight: '82.5vh',
                         textAlign: 'center',
                         padding: 4,
                     }}
@@ -82,10 +83,10 @@ function LandingPage() {
                         Discover the best products at unbeatable prices. Shop now and experience seamless online shopping like never before.
                     </Typography>
                     <Box sx={{ mt: 2 }}>
-                        <Button variant="contained" color="primary" sx={{ mx: 1 }} component={Link} to="/loginSelect">
+                        <Button variant="contained" color="primary" sx={{ mx: 1, width: '175px' }} component={Link} to="/loginSelect">
                             Login
                         </Button>
-                        <Button variant="outlined" color="primary" sx={{ mx: 1 }} component={Link} to="/create">
+                        <Button variant="outlined" color="primary" sx={{ mx: 1, width: '175px' }} component={Link} to="/create">
                             Sign Up
                         </Button>
                     </Box>

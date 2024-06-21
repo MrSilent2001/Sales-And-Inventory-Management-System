@@ -40,6 +40,7 @@ const theme = createTheme({
                     fontWeight: '700',
                     borderRadius: '10px',
                     padding: '10px 50px',
+                    width: '175px'
                 },
                 containedPrimary: {
                     background: '#1e3a8a',
@@ -70,7 +71,7 @@ function LandingPage() {
                         flexDirection: 'column',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        minHeight: '100vh',
+                        minHeight: '82.5vh',
                         textAlign: 'center',
                         padding: 4,
                     }}

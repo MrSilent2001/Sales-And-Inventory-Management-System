@@ -11,7 +11,7 @@ function SupplierHome() {
 
                 <div className="carouselOuter-supplier">
                     <div className="carouselText">
-                        <div className="carouselHeader">
+                        <div className="supplierCarouselHeader">
                             <h1>TRADEASY</h1>
                             <p>Best Place for the Construction Substances</p>
                         </div>

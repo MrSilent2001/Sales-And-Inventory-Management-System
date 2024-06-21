@@ -44,6 +44,7 @@ function CustomizedButton({
                     fontFamily: 'inter',
                     textTransform: 'none',
                     fontWeight: '500',
+                    borderRadius: '0.35em',
                     color: isActive ? hoverTextColorInner : (isHovered ? hoverTextColorInner : defaultTextColorInner),
                     textAlign: 'center'
                 }}

@@ -24,7 +24,7 @@ function ViewSupplier() {
 
     const columns = useMemo(() => [
         { accessorKey: 'id', header: 'Supplier Id', size: 100, align: 'center' },
-        { accessorKey: 'username', header: 'Supplier Name', size: 150, align: 'center' },
+        // { accessorKey: 'username', header: 'Supplier Name', size: 150, align: 'center' },
         { accessorKey: 'email', header: 'E-mail', size: 120, align: 'center' },
         { accessorKey: 'nic', header: 'NIC', size: 100, align: 'center' },
         // { accessorKey: 'address', header: 'Address', size: 170, align: 'center' },
@@ -214,14 +214,10 @@ function ViewSupplier() {
 
             <div className="viewSupplierOuter">
                 <div className="viewSupplierInner">
-
-                    <div className="supplierSearchAndButtons">
-                        <div className="viewSupplierSearch">
-                            <h3>Suppliers</h3>
-                        </div>
+                    <div className="title">
+                        <h3>Suppliers</h3>
                     </div>
-
-                    <div className="itemTable" style={{paddingBottom: '3em'}}>
+                    <div className="itemTable" style={{paddingBottom: '2em'}}>
 
                         {isLoading ? (
                             <PageLoader />

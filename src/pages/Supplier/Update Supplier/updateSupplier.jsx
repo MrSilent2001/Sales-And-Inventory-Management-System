@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import {uploadFileToBlob} from "../Inventory Dashboard/productBlobStorage";
+import BasicTextArea from "../../../components/Form Inputs/textArea";
 
 function UpdateSupplier(props) {
     const [supplier, setSupplier] = useState({});
@@ -130,15 +131,14 @@ function UpdateSupplier(props) {
             <div className="UpdateSupplierOuter">
                 <div className="UpdateSupplierInner">
                     <div className="UpdateSupplierProfile">
-                        <div className="updateAvatar">
+                        <div className="profileAvatar">
                             <Avatar src={formData.profilePicture}
-                                    sx={{ width: 230, height: 230, border: 2, borderRadius: 2, marginTop: '-0.8em' }} />
-                            <div className='uploadButton'>
-                                <FileUpload
-                                    style={{ width: "15em", top: "2em" }}
-                                    onChange={handleFileChange}
-                                />
-                            </div>
+                                    sx={{ width: 275, height: 275, border: 2, borderRadius: 50, marginTop: '-0.8em' }} />
+
+                            <FileUpload
+                                style={{marginTop: '1em'}}
+                                onChange={handleFileChange}
+                            />
                         </div>
                     </div>
                     <div className="UpdateSupplierForm">
@@ -213,9 +213,10 @@ function UpdateSupplier(props) {
                                     <h5>Payment Details</h5>
                                 </div>
                                 <div className="UpdateSupplierTextInput">
-                                    <BasicTextField
+                                    <BasicTextArea
+                                        rows={3}
                                         name="paymentDetails"
-                                        style={{ width: '20em' }}
+                                        style={{ width: '20em', marginTop:'3em' }}
                                         value={formData.paymentDetails}
                                         onChange={(e) => handleChange("paymentDetails", e.target.value)}
                                     />
@@ -234,9 +235,7 @@ function UpdateSupplier(props) {
                                             height: '2.5em',
                                             fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
-                                            borderRadius: '0.35em',
-                                            marginTop: '0.625em',
-                                            marginRight: '7.5em',
+                                            borderRadius: '0.35em'
                                         }}>
                                         Update
                                     </CustomizedButton>

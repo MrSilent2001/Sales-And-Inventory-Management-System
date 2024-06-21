@@ -78,125 +78,119 @@ function CustomerProfile() {
         handleDialogOpen();
     };
 
+    const handleNavigate = () => {
+        navigate('/updateProfile');
+    };
+
     return (
         <>
             <CustomerNavbar/>
-
-            <div className="customerProfileManagementOuter">
-                <div className="customerProfileManagementInner">
-
-                    <div className="customer-profile">
-
-                        <div className="avatar">
+            <div className="CustomerProfileOuter">
+                <div className="CustomerProfileInner">
+                    <div className="CustomerProfile">
+                        <div className="profileAvatar">
                             <Avatar src={customer.profilePicture}
-                                    sx={{ width: 230, height: 230, border: 2, borderRadius: 3 }}
+                                    sx={{width: 275, height: 275, border: 2, borderRadius: 50, marginTop: '-0.8em'}}
                             />
-                            <h2 className='profileName'>{customer.customerName}</h2>
+                            <h2>{customer.username}</h2>
                         </div>
+                    </div>
 
-                        <div className="customer-profile-details">
-                            <div className="customerProfileManagementDetails">
-
-                                <div className="formField">
-                                    <div className="textField">
-                                        <h4>Customer ID</h4>
-                                    </div>
-                                    <div className="inputData">
-                                        <h5>{customer.id}</h5>
-                                    </div>
+                    <div className="CustomerProfileForm">
+                        <form>
+                            <div className="CustomerProfileFormField" style={{marginTop: '2em'}}>
+                                <div className="CustomerProfileField">
+                                    <span className="title">Customer Id:</span>
                                 </div>
-
-                                <div className="formField">
-                                    <div className="textField">
-                                        <h4>Address</h4>
-                                    </div>
-                                    <div className="inputData">
-                                        <h5>{customer.address}</h5>
-                                    </div>
-                                </div>
-
-                                <div className="formField">
-                                    <div className="textField">
-                                        <h4>E-mail</h4>
-                                    </div>
-                                    <div className="inputData">
-                                        <h5>{customer.email}</h5>
-                                    </div>
-                                </div>
-
-                                <div className="formField">
-                                    <div className="textField">
-                                        <h4>Contact</h4>
-                                    </div>
-                                    <div className="inputData">
-                                        <h5>{customer.contactNo}</h5>
-                                    </div>
-                                </div>
-
-                                <div className="formField">
-                                    <div className="textField">
-                                        <h4>My Orders</h4>
-                                    </div>
-                                    <div className="inputData">
-                                        <CustomizedButton
-                                            onClick={() => navigate('/previousOrders')}
-                                            hoverBackgroundColor="#2d3ed2"
-                                            style={{
-                                                color: '#ffffff',
-                                                backgroundColor: '#242F9B',
-                                                border: '1px solid #242F9B',
-                                                width: '4.5em',
-                                                height: '2.25em',
-                                                fontSize: '0.8em',
-                                                padding: '0.5em 0.625em',
-                                                borderRadius: '0.35em',
-                                                fontWeight: '550',
-                                                marginTop: '0.625em',
-                                                marginRight: '1.5em'
-                                            }}>
-                                            View
-                                        </CustomizedButton>
-                                    </div>
+                                <div className="CustomerProfileInput">
+                                    <span>{customer.id}</span>
                                 </div>
                             </div>
-                            <div className='buttonStack'>
-                                <Link to="/updateProfile" state={{ customer }}>
+
+                            <div className="CustomerProfileFormField">
+                                <div className="CustomerProfileField">
+                                    <span className="title">Address:</span>
+                                </div>
+                                <div className="CustomerProfileInput">
+                                    <span>{customer.address}</span>
+                                </div>
+                            </div>
+
+                            <div className="CustomerProfileFormField">
+                                <div className="CustomerProfileField">
+                                    <span className="title">E-mail:</span>
+                                </div>
+                                <div className="CustomerProfileInput">
+                                    <span>{customer.email}</span>
+                                </div>
+                            </div>
+
+                            <div className="CustomerProfileFormField">
+                                <div className="CustomerProfileField">
+                                    <span className="title">Contact No:</span>
+                                </div>
+                                <div className="CustomerProfileInput">
+                                    <span>{customer.contactNo}</span>
+                                </div>
+                            </div>
+                            <div className="CustomerProfileFormField">
+                                <div className="CustomerProfileField">
+                                    <span className="title">My Orders:</span>
+                                </div>
+                                <div className="CustomerProfileInput">
                                     <CustomizedButton
+                                        onClick={() => navigate('/previousOrders')}
+                                        hoverBackgroundColor="#0aaf0b"
+                                        style={{
+                                            color: '#ffffff',
+                                            backgroundColor: '#0a810a',
+                                            width: '4.5em',
+                                            height: '2.25em',
+                                            fontSize: '0.8em',
+                                            padding: '0.5em 0.625em',
+                                            marginRight: '1.5em'
+                                        }}>
+                                        View
+                                    </CustomizedButton>
+                                </div>
+                            </div>
+
+                            <div className="CustomerProfileButtonField">
+                                <div className="CustomerProfileButtons">
+                                    <CustomizedButton
+                                        onClick={handleNavigate}
                                         hoverBackgroundColor="#2d3ed2"
                                         style={{
                                             color: '#ffffff',
                                             backgroundColor: '#242F9B',
                                             border: '1px solid #242F9B',
-                                            width: '9.5em',
+                                            width: '9em',
                                             height: '2.5em',
-                                            fontSize: '0.85em',
+                                            fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
-                                            borderRadius: '0.35em',
                                             marginTop: '0.625em',
-                                            marginRight: '1.5em'
+                                            marginRight: '2.5em',
                                         }}>
-                                        Update Profile
+                                        Edit Profile
                                     </CustomizedButton>
-                                </Link>
 
-                                <CustomizedButton
-                                    onClick={handleDelete}
-                                    hoverBackgroundColor="#f11717"
-                                    style={{
-                                        color: '#ffffff',
-                                        backgroundColor: '#960505',
-                                        width: '9.5em',
-                                        height: '2.5em',
-                                        fontSize: '0.85em',
-                                        padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        marginTop: '0.625em',
-                                        marginLeft: '1em',
-                                    }}>
-                                    Delete Profile
-                                </CustomizedButton>
+                                    <CustomizedButton
+                                        onClick={handleDelete}
+                                        hoverBackgroundColor="#f11717"
+                                        style={{
+                                            color: '#ffffff',
+                                            backgroundColor: '#960505',
+                                            width: '9em',
+                                            height: '2.5em',
+                                            fontSize: '0.8em',
+                                            padding: '0.5em 0.625em',
+                                            marginLeft: '2.5em',
+                                        }}>
+                                        Delete Profile
+                                    </CustomizedButton>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

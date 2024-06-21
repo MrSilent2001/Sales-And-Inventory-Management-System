@@ -5,13 +5,17 @@ import './SalesViewRequest.css';
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../../../layout/footer/footer";
 import CustomizedButton from "../../../../../components/Button/button";
+import SalesRefundDenialForm from '../Refund Denial Form/SalesRefundDenialForm';
+import CustomizedAlert from '../../../../../components/Alert/alert';
+
 
 // API call function to update refund status
-const updateRefundStatus = async (id, status) => {
+const updateRefundStatus = async (id, status, denialReason = '') => {
     try {
-        const response = await axios.put('http://localhost:9000/refund/customerRefund/updateStatus', {
+        const response = await axios.put(`http://localhost:9000/refund/customerRefund/updateStatus`, {
             id,
             status,
+            denialReason,
         });
         return response.data;
     } catch (error) {
@@ -23,6 +27,8 @@ const updateRefundStatus = async (id, status) => {
 function SalesViewRequest() {
     const { id } = useParams();
     const [refundRequest, setRefundRequest] = useState(null);
+    const [showDenialForm, setShowDenialForm] = useState(false);
+    const [alert, setAlert] = useState({ open: false, message: '', severity: '', redirect: false });
 
     useEffect(() => {
         // Fetch the refund request details using the ID from the URL
@@ -32,6 +38,7 @@ function SalesViewRequest() {
                 setRefundRequest(response.data);
             } catch (error) {
                 console.error('Error fetching refund request:', error);
+                setAlert({ open: true, message: 'Error fetching refund request', severity: 'error' });
             }
         };
 
@@ -41,19 +48,14 @@ function SalesViewRequest() {
     const handleAccept = async () => {
         try {
             const response = await updateRefundStatus(id, 'accepted');
-            alert(`Order has been accepted: ${response.status}`);
+            setAlert({ open: true, message: `Order has been accepted: ${response.status}`, severity: 'success', redirect: true });
         } catch (error) {
-            alert('Error accepting the order');
+            setAlert({ open: true, message: 'Error accepting the order', severity: 'error' });
         }
     };
 
-    const handleReject = async () => {
-        try {
-            const response = await updateRefundStatus(id, 'rejected');
-            alert(`Order has been rejected: ${response.status}`);
-        } catch (error) {
-            alert('Error rejecting the order');
-        }
+    const handleReject = () => {
+        setShowDenialForm(true);
     };
 
     if (!refundRequest) {
@@ -63,63 +65,20 @@ function SalesViewRequest() {
     return (
         <>
             <SalesNavbar />
-            <div className='outer'>
+            <div className={`outer ${showDenialForm ? 'dark-overlay' : ''}`}>
                 <div className="generated-request">
                     <h2>Generated Request</h2>
                     <div className="refundRequestDetails">
-                        <div className="formField">
-                            <div className="textField">
-                                <h5>Customer</h5>
+                        {['Customer', 'Contact', 'Item', 'Quantity', 'Reason', 'Total Price'].map((field, index) => (
+                            <div className="formField" key={index}>
+                                <div className="textField">
+                                    <h5>{field}</h5>
+                                </div>
+                                <div className="inputData">
+                                    <h6>{refundRequest[field.toLowerCase().replace(' ', '')]}</h6>
+                                </div>
                             </div>
-                            <div className="inputData">
-                                <h6>{refundRequest.customerName}</h6>
-                            </div>
-                        </div>
-
-                        <div className="formField">
-                            <div className="textField">
-                                <h5>Contact</h5>
-                            </div>
-                            <div className="inputData">
-                                <h6>{refundRequest.contact}</h6>
-                            </div>
-                        </div>
-
-                        <div className="formField">
-                            <div className="textField">
-                                <h5>Item</h5>
-                            </div>
-                            <div className="inputData">
-                                <h6>{refundRequest.item}</h6>
-                            </div>
-                        </div>
-
-                        <div className="formField">
-                            <div className="textField">
-                                <h5>Quantity</h5>
-                            </div>
-                            <div className="inputData">
-                                <h6>{refundRequest.quantity}</h6>
-                            </div>
-                        </div>
-
-                        <div className="formField">
-                            <div className="textField">
-                                <h5>Reason</h5>
-                            </div>
-                            <div className="inputData">
-                                <h6>{refundRequest.reason}</h6>
-                            </div>
-                        </div>
-
-                        <div className="formField">
-                            <div className="textField">
-                                <h5>Total Price</h5>
-                            </div>
-                            <div className="inputData">
-                                <h6>{refundRequest.totalPrice}</h6>
-                            </div>
-                        </div>
+                        ))}
                     </div>
 
                     <div style={{ display: 'flex' }}>
@@ -151,6 +110,7 @@ function SalesViewRequest() {
                             style={{
                                 color: '#ffffff',
                                 backgroundColor: '#960505',
+                                border: '1px solid #960505',
                                 width: '6em',
                                 height: '2.5em',
                                 fontSize: '0.95em',
@@ -169,6 +129,20 @@ function SalesViewRequest() {
                 </div>
             </div>
             <Footer />
+
+            {showDenialForm && <SalesRefundDenialForm id={id} setShowDenialForm={setShowDenialForm} setAlert={setAlert} />}
+
+            <CustomizedAlert
+                onClose={() => {
+                    setAlert({ ...alert, open: false });
+                    if (alert.redirect) {
+                        window.location.href = '/viewRefundRequests';
+                    }
+                }}
+                open={alert.open}
+                message={alert.message}
+                severity={alert.severity}
+            />
         </>
     );
 }

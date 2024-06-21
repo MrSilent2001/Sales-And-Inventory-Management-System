@@ -1,37 +1,55 @@
-// PasswordField.js
-import React from 'react';
-import { FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import {css} from "@emotion/react";
 
-const PasswordField = ({ label, onChange, showPassword, handleClickShowPassword, handleMouseDownPassword, style, placeholder, name }) => {
+const Input = styled.input`
+  background-color: #eee;
+  border: 1px solid #9e9ea4;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 400px;
+`;
+
+const InputContainer = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
+const ToggleButton = styled.button`
+  position: absolute;
+  right: 120px;
+  top: 55%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+    ${(props) =>
+            props.customStyles &&
+            css`
+      ${props.customStyles}
+    `}
+`;
+
+const PasswordInput = ({ placeholder, toggleButtonStyles, ...props }) => {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleTogglePassword = () => {
+        setShowPassword(!showPassword);
+    };
 
     return (
-        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">{label}</InputLabel>
-            <OutlinedInput
-                id="outlined-adornment-password"
-                name={name}
-                type={showPassword ? 'text' : 'password'}
-                size="small"
+        <InputContainer>
+            <Input
+                type={showPassword ? "text" : "password"}
                 placeholder={placeholder}
-                style={style}
-                onChange={onChange}
-                label={label}
-                endAdornment={
-                    <InputAdornment position="end">
-                        <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            edge="end"
-                        >
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                    </InputAdornment>
-                }
+                {...props}
             />
-        </FormControl>
+            <ToggleButton type="button" onClick={handleTogglePassword} customStyles={toggleButtonStyles}>
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </ToggleButton>
+        </InputContainer>
     );
 };
 
-export default PasswordField;
+export default PasswordInput;
