@@ -136,7 +136,7 @@ function QuantityField({ name, value, onChange, max, error, disabled }) {
                 error={error}
                 helperText={error && "This field is required"}
                 disabled={disabled}
-                type="number"
+                // type="number"
                 InputProps={{
                     endAdornment: (
                         <div>
