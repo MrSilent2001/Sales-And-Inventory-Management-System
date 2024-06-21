@@ -8,15 +8,17 @@ import axios from "axios";
 import SalesOrderSidebar from "../../../../../layout/sidebar/salesOrderSidebar";
 import CustomizedAlert from "../../../../../components/Alert/alert";
 import sendOrderStatusEmail from "../_Component/orderStatusChangedEmailSend";
+import {useNavigate} from "react-router-dom";
 
 function PendingOrders() {
     const [activeButton, setActiveButton] = useState(null);
     const [rows, setRows] = useState([]);
-
+    const [products, setProducts] = useState({});
     const [openAccept, setOpenAccept] = useState(false);
     const [openReject, setOpenReject] = useState(false);
     const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
     const [updateErrorOpenSuccess, setUpdateErrorOpenSuccess] = useState(false);
+    const navigate = useNavigate();
 
     const handleClickAccept = () => {
         setOpenAccept(true);
@@ -53,22 +55,36 @@ function PendingOrders() {
     const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
-        const fetchOrders = async () => {
+        const fetchOrdersAndProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:9000/order/getAllOrders', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                setRows(response.data);
+                const [orderResponse, productResponse] = await Promise.all([
+                    axios.get('http://localhost:9000/order/getAllOrders', {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }),
+                    axios.get('http://localhost:9000/product/getAllProducts', {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    })
+                ]);
+
+                const products = productResponse.data.reduce((acc, product) => {
+                    acc[product.id] = product.productName;
+                    return acc;
+                }, {});
+
+                setRows(orderResponse.data);
+                setProducts(products);
             } catch (error) {
-                console.error('Error fetching orders:', error);
+                console.error('Error fetching data:', error);
                 dataErrorHandleClickSuccess();
             }
         };
 
-        fetchOrders();
-    }, []);
+        fetchOrdersAndProducts();
+    }, [token]);
 
     const handleOrderStatus = async (orderId, orderStatus, orderCancelReason = '') => {
         try {
@@ -78,8 +94,6 @@ function PendingOrders() {
                 },
             });
 
-            sendOrderStatusEmail(orderId, token);
-
             const updatedRows = rows.map(row => {
                 if (row.orderId === orderId) {
                     return { ...row, orderStatus };
@@ -88,21 +102,43 @@ function PendingOrders() {
             });
             setRows(updatedRows);
             if (orderStatus === "Accepted") {
+                sendOrderStatusEmail(orderId, token);
                 handleClickAccept();
+
             }
 
-            if (orderStatus === "Rejected") {
-                handleClickReject();
-            }
+            // if (orderStatus === "Rejected") {
+            //     // handleClickReject();
+            //     navigate('/cancelOrders');
+            // }
         } catch (error) {
             console.error('Error updating order status:', error);
             updateErrorHandleClickSuccess();
         }
     };
 
+    const handleReject = () => {
+            // handleClickReject();
+            navigate('/cancelOrders');
+
+    }
+
     const columns = useMemo(() => [
         { accessorKey: 'order_id', header: 'Id', size: 170 },
         { accessorKey: 'customer_name', header: 'Customer Name', size: 170 },
+        {
+            accessorKey: 'items',
+            header: 'Items',
+            size: 300,
+            cellRenderer: ({ row }) => {
+                const orderItems = row.original.orderItems.map(itemStr => {
+                    const item = JSON.parse(itemStr);
+                    const productName = products[item.id];
+                    return `${productName} (${item.id}) x ${item.amount}`;
+                });
+                return orderItems.join(', ');
+            }
+        },
         {
             accessorKey: 'amount',
             header: 'Amount(\u20A8.)',
@@ -137,7 +173,7 @@ function PendingOrders() {
                         Accept
                     </CustomizedButton>
                     <CustomizedButton
-                        onClick={() => handleOrderStatus(row.original.order_id, "Rejected")}
+                        onClick={() => handleReject()}
                         hoverBackgroundColor="#f11717"
                         style={{
                             color: '#ffffff',
@@ -158,7 +194,7 @@ function PendingOrders() {
                 </div>
             ),
         }
-    ], []);
+    ], [products]);
 
     const mappedData = useMemo(() => rows
         .filter(row => row.orderStatus === 'Pending')
@@ -167,6 +203,7 @@ function PendingOrders() {
             order_id: row.orderId,
             customer_name: row.orderReceiverName,
             amount: row.orderPrice,
+            orderItems: row.orderItems,
             actions: null, // Actions are handled in columns configuration
         })), [rows]);
 

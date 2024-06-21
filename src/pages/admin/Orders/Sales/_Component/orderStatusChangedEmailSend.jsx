@@ -38,7 +38,7 @@ const sendOrderStatusEmail = async (orderId, token, reason = null) => {
         const formattedOrderItems = orderItemsWithName.join(', ');
 
         const emailBody = reason
-            ? `Your order with order items (${formattedOrderItems}) has been ${orderData.orderStatus} due to the reason of ${reason}.`
+            ? `Your order with order items (${formattedOrderItems}) has been ${orderData.orderStatus} due to the reason of ${reason}. You will get the refunded payment in 7 business days. `
             : `Your order with order items (${formattedOrderItems}) has been ${orderData.orderStatus}.`;
 
         // Prepare email data
