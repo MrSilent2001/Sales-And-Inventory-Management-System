@@ -12,7 +12,9 @@ const Redirect = () => {
     const [updatedQuantities, setUpdatedQuantities] = useState({});
     const navigateTo = useNavigate();
 
-    const productsPurchased = cart.map(item => item.productName);
+    // const productsPurchased = cart.map(item => item.productName);
+    // const productsPurchasedId = cart.map(item => item.id);
+    const productsPurchasedIdAndAmount = cart.map(item => ({ id: item.id, amount: item.amount }));
 
     useEffect(() => {
         const fetchSession = async () => {
@@ -60,7 +62,7 @@ const Redirect = () => {
                     orderReceiverName: customer.username,
                     orderReceiverAddress: customer.address,
                     orderReceiverContact: customer.contactNo,
-                    orderItems: productsPurchased,
+                    orderItems: productsPurchasedIdAndAmount,
                     orderPrice: session.amount_total / 100,
                     orderCustomerId: customer.id,
                 },{

@@ -1,52 +1,58 @@
-.customerRefundRequestsModel{
+.customerRefundRequestOuter{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.customerRefundRequestInner{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 30.5em;
-    height: 35.75em;
-    padding: 0.25em 0 0 0;
+    width: 92.875em;
+    height: 32.5em;
     background-color: #DBDFFD;
+    margin: 1.563em 0 0 0;
     border-radius: 0.5em;
 }
 
-.customerRefundRequestsModel h2{
+.customerRefundRequestTopic h2{
     font-family: Inter;
-    padding: 1.25em 0 0 0;
+    margin: 2em 0 0 0;
 }
 
-.customerRefundRequestsForm{
+.customerRefundRequestForm{
+    margin: 1.5em 0 0 0;
+}
+
+.customerFormField{
+    width: 34em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.1em 0 0 0;
+}
+
+.customerRefundButtonField{
+    width: 34em;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    max-height: 35.75em;
-    overflow-y: auto;
-}
-
-.customerRefundRequestsFormField{
-    width: 27.5em;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
-    gap: 0.25em!important;
+    margin: 0.1em 0 0 0;
 }
 
-.customerRefundRequestsFormField h5{
+.customerRefundRequestButtons{
+    width: 16.5em;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin: 0.75em 0.5em 0 0;
+}
+
+.textField h5{
     font-family: Inter;
     font-weight: 600;
-    font-size: 0.75em;
-}
-
-.customerRefundRequestsForm{
-    margin-top: 0.3em;
-}
-
-.customerRefundRequestsFormFieldButtons{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 16.25em;
-    justify-content: space-between;
-    margin: 2em 0 0 0;
-    padding-bottom: 3em;
+    font-size: 0.9em;
 }

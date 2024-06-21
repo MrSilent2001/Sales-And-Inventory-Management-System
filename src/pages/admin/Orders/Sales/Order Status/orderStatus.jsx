@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import "./orderStatus.css";
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../../../layout/footer/footer";
-import CustomizedTable from "../../../../../components/Table/Customized Table/customizedTable";
+import DynamicTable from "../../../../../components/Table/customizedTable2";
 import ComboBox from "../../../../../components/Form Inputs/comboBox";
 import axios from "axios";
 import SalesOrderSidebar from "../../../../../layout/sidebar/salesOrderSidebar";
@@ -10,111 +10,67 @@ import CustomizedAlert from "../../../../../components/Alert/alert";
 import sendOrderStatusEmail from "../_Component/orderStatusChangedEmailSend";
 
 let columns = [
-    {columnId: 'id', label: 'Id', minWidth: 170, align: 'center'},
-    {columnId: 'name', label: 'Customer Name', minWidth: 170, align: 'center'},
+    { accessorKey: 'id', header: 'Id', size: 170 },
+    { accessorKey: 'name', header: 'Customer Name', size: 170 },
     {
-        columnId: 'amount',
-        label: 'Amount(\u20A8.)',
-        minWidth: 100,
-        align: 'center',
-        format: (value) => value.toLocaleString('en-US'),
+        accessorKey: 'amount',
+        header: 'Amount(\u20A8.)',
+        size: 100,
+        cellRenderer: ({ renderedCellValue }) => renderedCellValue.toLocaleString('en-US'),
     },
     {
-        columnId: 'status',
-        label: '',
-        minWidth: 100,
-        align: 'center',
-
+        accessorKey: 'status',
+        header: '',
+        size: 100,
     }
 ];
 
-
 function OrderStatus() {
     const [activeButton, setActiveButton] = useState(null);
-
     const [openSuccess, setOpenSuccess] = useState(false);
-    //data fetching error Alert Variables
     const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
-    //data Update error Alert Variables
     const [updateErrorOpenSuccess, setUpdateErrorOpenSuccess] = useState(false);
-
-
-    const handleClickSuccess = () => {
-        setOpenSuccess(true);
-    };
-
-    const handleCloseSuccess = () => {
-        setOpenSuccess(false);
-    };
-
-    //Handle Data Error Alert Variable
-    const dataErrorHandleCloseSuccess = () => {
-        setDataErrorOpenSuccess(false);
-    };
-
-    const dataErrorHandleClickSuccess = () => {
-        setDataErrorOpenSuccess(true);
-    };
-
-    //Handle Update Data Error Alert Variable
-    const updateErrorHandleCloseSuccess = () => {
-        setUpdateErrorOpenSuccess(false);
-    };
-
-    const updateErrorHandleClickSuccess = () => {
-        setUpdateErrorOpenSuccess(true);
-    };
-
-
-    const handleButtonClick = (buttonText) => {
-        setActiveButton(buttonText);
-    };
-
     const [orderStatusRows, setOrderStatusRows] = useState([]);
     const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await axios.get('http://localhost:9000/order/getAllOrders' ,  {
+                const response = await axios.get('http://localhost:9000/order/getAllOrders', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
                 setOrderStatusRows(response.data);
-
             } catch (error) {
                 console.error('Error fetching orders:', error);
-                dataErrorHandleClickSuccess();
+                setDataErrorOpenSuccess(true);
             }
         };
 
         fetchOrders();
     }, []);
 
-    //array of states to manage status for each row
     const [statuses, setStatuses] = useState(orderStatusRows.map(() => ""));
 
-    // Handler to update status for a specific row
     const handleChange = async (event, orderId, index, orderCancelReason = '') => {
         const newStatuses = [...statuses];
         newStatuses[index] = event.target.value;
         setStatuses(newStatuses);
         try {
-            await axios.put(`http://localhost:9000/order/update/${orderId}`, { orderStatus: event.target.value, orderCancelReason} ,  {
+            await axios.put(`http://localhost:9000/order/update/${orderId}`, { orderStatus: event.target.value, orderCancelReason }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
-                },}
-            );
-            handleClickSuccess();
+                },
+            });
+            setOpenSuccess(true);
             sendOrderStatusEmail(orderId, token);
         } catch (error) {
             console.error('Error updating order status:', error);
-            updateErrorHandleClickSuccess();
+            setUpdateErrorOpenSuccess(true);
         }
     };
 
-        // Options to dropdown
     const options = [
         { value: 'Pending', label: 'Pending' },
         { value: 'Accepted', label: 'Accepted' },
@@ -122,44 +78,41 @@ function OrderStatus() {
         { value: 'In-Processing', label: 'In-Processing' },
         { value: 'Departed', label: 'Departed' },
         { value: 'Cancelled', label: 'Cancelled' },
-        
-     
     ];
 
     const mappedData = orderStatusRows
-        .filter(row => row.orderStatus === 'Accepted' || row.orderStatus === 'In-Processing' || row.orderStatus === 'Departed' || row.orderStatus === 'Rejected' || row.orderStatus === 'Cancelled')
+        .filter(row => ['Accepted', 'In-Processing', 'Departed', 'Rejected', 'Cancelled'].includes(row.orderStatus))
         .sort((a, b) => a.orderId - b.orderId)
         .map((row, index) => ({
-        id: row.orderId,
-        name: row.orderReceiverName,
-        amount: row.orderPrice,
-        status: (
-            <div>
+            id: row.orderId,
+            name: row.orderReceiverName,
+            amount: row.orderPrice,
+            status: (
                 <ComboBox
                     value={statuses[index]}
                     onChange={(event) => handleChange(event, row.orderId, index)}
-                    style={{width: '14em'}}
+                    style={{ width: '14em' }}
                     options={options}
                     label="Category"
                     size="small"
                     defaultValue={row.orderStatus}
                 />
-            </div>
-        )
-    }));
+            )
+        }));
 
     return (
         <>
-            <SalesNavbar/>
+            <SalesNavbar />
             <div className="orderStatusOuter">
                 <div className="body">
                     <div className="orderStatusFilter">
-                        <SalesOrderSidebar/>
+                        <SalesOrderSidebar />
                     </div>
                     <div className="orderStatusInner">
-                        <CustomizedTable
+                        <DynamicTable
                             columns={columns}
-                            rows={mappedData}
+                            data={mappedData}
+                            initialShowGlobalFilter={true}
                         />
                     </div>
                 </div>
@@ -167,25 +120,25 @@ function OrderStatus() {
 
             <CustomizedAlert
                 open={openSuccess}
-                onClose={handleCloseSuccess}
+                onClose={() => setOpenSuccess(false)}
                 severity="success"
                 message="Order Status Updated!"
             />
 
             <CustomizedAlert
                 open={dataErrorOpenSuccess}
-                onClose={dataErrorHandleCloseSuccess}
+                onClose={() => setDataErrorOpenSuccess(false)}
                 severity="error"
                 message="Error Fetching Data!"
             />
 
             <CustomizedAlert
                 open={updateErrorOpenSuccess}
-                onClose={updateErrorHandleCloseSuccess}
+                onClose={() => setUpdateErrorOpenSuccess(false)}
                 severity="error"
                 message="Failed to Update Order Status!"
             />
-            <Footer/>
+            <Footer />
         </>
     );
 }

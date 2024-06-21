@@ -1,9 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import "./cancelOrders.css";
-import BasicTextFields from '../../../../../components/Form Inputs/textfield';
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 import Footer from "../../../../../layout/footer/footer";
-import {Link} from "react-router-dom";
 import CustomizedButton from "../../../../../components/Button/button";
 import axios from "axios";
 import BasicTextField from "../../../../../components/Form Inputs/textfield";
@@ -70,11 +68,6 @@ function CancelOrder() {
         setUpdateErrorOpenSuccess(true);
     };
 
-
-    const handleButtonClick = (buttonText) => {
-        setActiveButton(buttonText);
-    };
-
     const [orderId, setOrderId] = useState('');
     const [orderCancelReason, setOrderCancelReason] = useState('');
     const [order, setOrder] = useState({
@@ -86,6 +79,7 @@ function CancelOrder() {
     });
 
     const token = localStorage.getItem('accessToken');
+
     const fetchOrderById = async (orderId) => {
         if (!orderId) {
             console.log('Order ID is empty. Fetch operation aborted.');
@@ -94,30 +88,48 @@ function CancelOrder() {
         }
 
         try {
-            const response = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`,  {
+            const response = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
 
             if (!response.data || Object.keys(response.data).length === 0) {
-                // throw new Error('Order ID does not exist.');
                 makeEmptyFields();
                 IDNotExistErrorHandleClickSuccess();
                 return;
-
             }
 
             if (response.data.orderStatus === 'Cancelled') {
-                // console.error('Order is already cancelled.');
-                // makeEmptyFields();
-
                 orderAlreadyCancelledHandleClickSuccess();
-                // return;
             }
 
+            // Fetch all products
+            const productsResponse = await axios.get('http://localhost:9000/product/getAllProducts', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const products = productsResponse.data.reduce((acc, product) => {
+                acc[product.id] = product.productName; // Map product ID to its name
+                return acc;
+            }, {});
 
-            setOrder(response.data);
+            // Replace item IDs with names and format orderItems
+            const orderItemsWithName = response.data.orderItems.map(itemStr => {
+                const item = JSON.parse(itemStr); // Parse the JSON string
+                const productName = products[item.id]; // Get the product name by ID
+                return `${productName}(${item.id}) x ${item.amount}`; // Format as "Item name(itemid) x item amount"
+            });
+            const formattedOrderItems = orderItemsWithName.join(', ');
+
+            setOrder({
+                orderId: response.data.orderId,
+                orderReceiverName: response.data.orderReceiverName,
+                orderItems: formattedOrderItems,
+                orderPrice: response.data.orderPrice,
+                orderCancelReason: response.data.orderCancelReason
+            });
             setOrderCancelReason(response.data.orderCancelReason);
         } catch (error) {
             console.error('Error fetching order:', error);
@@ -126,15 +138,13 @@ function CancelOrder() {
         }
     };
 
-
-
     const handleCancelOrder = async () => {
         try {
             const updatedOrder = {
                 orderCancelReason: orderCancelReason,
-                orderStatus:"Cancelled",
+                orderStatus: "Cancelled",
             };
-            const response = await axios.put(`http://localhost:9000/order/update/${orderId}`, updatedOrder,  {
+            const response = await axios.put(`http://localhost:9000/order/update/${orderId}`, updatedOrder, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -147,12 +157,10 @@ function CancelOrder() {
                 // Optionally, you can fetch the order again to update the state
                 // fetchOrderById(orderId);
             } else {
-                // alert("Failed to update order details");
                 updateErrorHandleClickSuccess();
             }
         } catch (error) {
             console.error('Error updating order:', error);
-            // alert("Failed to update order details");
             updateErrorHandleClickSuccess();
         }
     };
@@ -168,7 +176,6 @@ function CancelOrder() {
 
         setOrderCancelReason('');
     };
-
 
     const handleCancel = async () => {
         setOrderId('');
@@ -189,23 +196,19 @@ function CancelOrder() {
         fetchOrderById(orderId);
     }, [orderId]);
 
-
     return (
         <>
-            <SalesNavbar/>
+            <SalesNavbar />
             <div className="cancelOrderOuter">
                 <div className="body">
                     <div className="cancelOrderFilter">
-                        <SalesOrderSidebar/>
+                        <SalesOrderSidebar />
                     </div>
                     <div className="cancelOrderInner">
-
                         <div className="cancelOrderformbox">
                             <form>
                                 <div className="textSection">
-
                                     <label className='label'>Order Id</label>
-
                                     <BasicTextField
                                         value={orderId}
                                         onChange={handleIdChange}
@@ -213,58 +216,43 @@ function CancelOrder() {
                                         helperText={orderId === '' ? 'Please enter the ID' : ''}
                                         error={orderId === '' ? 'Please enter the ID' : ''}
                                     />
-
                                 </div>
 
                                 <div className="textSection">
-
                                     <label className='label'>Receiver</label>
-
                                     <BasicTextField
                                         value={order.orderReceiverName}
-                                        disabled={!orderId}
+                                        disabled={true}
                                         readOnly={true}
                                     />
-
                                 </div>
 
                                 <div className="textSection">
-
                                     <label className='label'>Items</label>
-
                                     <BasicTextField
                                         value={order.orderItems}
-                                        disabled={!orderId}
+                                        disabled={true}
                                         readOnly={true}
                                     />
-
                                 </div>
 
                                 <div className="textSection">
-
                                     <label className='label'>Amount</label>
-
                                     <BasicTextField
                                         value={order.orderPrice}
-                                        disabled={!orderId}
+                                        disabled={true}
                                         readOnly={true}
                                     />
-
                                 </div>
 
                                 <div className="textSection">
-
                                     <label className='label'>Reasons</label>
-
                                     <BasicTextField
                                         value={orderCancelReason}
                                         onChange={(e) => setOrderCancelReason(e.target.value)}
                                         disabled={!orderId}
                                     />
-
                                 </div>
-
-
 
                                 <div className="formButtons">
                                     <CustomizedButton
@@ -295,7 +283,7 @@ function CancelOrder() {
                                         style={{
                                             color: '#ffffff',
                                             backgroundColor: '#960505',
-                                            width: '6em',
+                                            width: '9em',
                                             height: '2.5em',
                                             fontSize: '0.95em',
                                             fontFamily: 'inter',
@@ -307,7 +295,7 @@ function CancelOrder() {
                                             textTransform: 'none',
                                             textAlign: 'center',
                                         }}>
-                                        Cancel
+                                        Cancel Order
                                     </CustomizedButton>
 
                                 </div>
