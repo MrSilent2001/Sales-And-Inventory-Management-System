@@ -15,7 +15,7 @@ const Description = ({ onQuant, onAdd, onRemove, onAddToCart, title, description
             </p>
             <div className="price">
                 <div className="main-tag">
-                    <p>${finalPrice.toFixed(2)}</p> {/* Display the final price */}
+                    <p>Rs {finalPrice.toFixed(2)}</p> {/* Display the final price */}
                     {offer !== null && <p>{offer}%</p>} {/* Display the offer percentage if available */}
                 </div>
                 {offer !== null && <s>{price.toFixed(2)}</s>} {/* Display the original price if offer is available */}
