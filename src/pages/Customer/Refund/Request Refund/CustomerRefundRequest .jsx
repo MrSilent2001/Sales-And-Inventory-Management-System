@@ -232,25 +232,30 @@ function CustomerRefundRequest() {
 
         const fetchOrderDetails = async () => {
             try {
-                const orderResponse = await axios.get(`http://localhost:9000/order/findOrder/${orderId}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+                const [orderResponse, productResponse, refundResponse, discountResponse] = await Promise.all([
+                    axios.get(`http://localhost:9000/order/findOrder/${orderId}`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }),
+                    axios.get('http://localhost:9000/product/getAllProducts', {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }),
+                    axios.get('http://localhost:9000/refund/customerRefund/getAll', {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }),
+                    axios.get('http://localhost:9000/discounts/getAll', {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }),
+                ]);
 
                 setOrderDate(orderResponse.data.orderDate);
-
-                const productResponse = await axios.get('http://localhost:9000/product/getAllProducts', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-
-                const discountResponse = await axios.get('http://localhost:9000/discounts/getAll', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
 
                 const products = productResponse.data.reduce((acc, product) => {
                     acc[product.id] = {
@@ -260,14 +265,32 @@ function CustomerRefundRequest() {
                     return acc;
                 }, {});
 
+                const refundRequests = refundResponse.data.reduce((acc, refund) => {
+                    if (!acc[refund.orderId]) {
+                        acc[refund.orderId] = {};
+                    }
+                    if (!acc[refund.orderId][refund.item]) {
+                        acc[refund.orderId][refund.item] = 0;
+                    }
+                    acc[refund.orderId][refund.item] += parseInt(refund.quantity);
+                    return acc;
+                }, {});
+
                 const orderItems = orderResponse.data.orderItems.map((item) => {
                     const parsedItem = JSON.parse(item);
-                    return {
-                        id: parsedItem.id,
-                        name: products[parsedItem.id].name,
-                        amount: parsedItem.amount,
-                    };
-                });
+                    const refundedQuantity = refundRequests[orderId]?.[parsedItem.id] || 0;
+                    const eligibleQuantity = parsedItem.amount - refundedQuantity;
+
+                    if (eligibleQuantity > 0) {
+                        return {
+                            id: parsedItem.id,
+                            name: products[parsedItem.id].name,
+                            amount: eligibleQuantity,
+                        };
+                    }
+
+                    return null;
+                }).filter(Boolean);
 
                 setItems(orderItems);
                 setProductPrices(products);
@@ -282,6 +305,7 @@ function CustomerRefundRequest() {
             fetchOrderDetails();
         }
     }, [orderId]);
+
 
     const handleChange = (event) => {
         const { name, value } = event.target;

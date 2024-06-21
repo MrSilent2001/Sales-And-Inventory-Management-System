@@ -21,11 +21,12 @@ function EligibleOrdersForRefund() {
     const navigate = useNavigate();
 
     const columns = useMemo(() => [
-        { accessorKey: 'orderId', header: 'Order Id', size: 75, align: 'center' },
+        { accessorKey: 'orderId', header: 'Order Id', size: 10, align: 'center' },
         { accessorKey: 'orderItems', header: 'Ordered Items', size: 100, align: 'center', Cell: ({ value }) => <span>{value}</span> },
-        { accessorKey: 'orderPrice', header: 'Bill Amount', size: 170, align: 'center' },
+        { accessorKey: 'eligibleItems', header: 'Eligible Items for Refund', size: 170, align: 'center', Cell: ({ value }) => <span>{value}</span> },
+        { accessorKey: 'orderPrice', header: 'Bill Amount', size: 70, align: 'center' },
         { accessorKey: 'orderDate', header: 'Date', size: 170, align: 'center' },
-        { accessorKey: 'orderStatus', header: 'Order Status', size: 170, align: 'center' },
+        { accessorKey: 'orderStatus', header: 'Order Status', size: 70, align: 'center' },
     ], []);
 
     const createRefundRequestButton = () => {
@@ -61,13 +62,11 @@ function EligibleOrdersForRefund() {
 
     const handleRefund = (orderId) => {
         console.log('Refund requested for order:', orderId);
-        // navigate(`/createrefund/${orderId}`);
         navigate('/createrefund', { state: { orderId } });
     };
 
     const handleRowClick = (row) => {
         const orderId = row.orderId;
-        // navigate(`/createrefund/${orderId}`);
         navigate('/createrefund', { state: { orderId } });
     };
 
@@ -80,40 +79,39 @@ function EligibleOrdersForRefund() {
                     return;
                 }
 
-                const response = await axios.get(`http://localhost:9000/order/getAllOrders`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+                const [ordersResponse, refundsResponse, productsResponse] = await Promise.all([
+                    axios.get('http://localhost:9000/order/getAllOrders', {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }),
+                    axios.get('http://localhost:9000/refund/customerRefund/getAll', {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }),
+                    axios.get('http://localhost:9000/product/getAllProducts', {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }),
+                ]);
 
-                const orders = response.data;
-
-                const customerOrders = orders.filter(order => order.orderCustomerId === customerId);
-
-                const departedOrders = customerOrders.filter(order => order.orderStatus === "Departed");
-
-                const sevenDaysAgo = new Date();
-                sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-
-                const recentCustomerOrders = departedOrders.filter(order => new Date(order.lastOrderStatusUpdatedDate) >= sevenDaysAgo);
-
-                const refundResponse = await axios.get('http://localhost:9000/refund/customerRefund/getAll', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-
-                const refundRequests = refundResponse.data.map(refund => refund.orderId);
-
-                const eligibleOrders = recentCustomerOrders.filter(order => !refundRequests.includes(order.orderId));
-
-                const productsResponse = await axios.get('http://localhost:9000/product/getAllProducts', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+                const orders = ordersResponse.data;
+                const refundRequests = refundsResponse.data;
                 const products = productsResponse.data.reduce((acc, product) => {
                     acc[product.id] = product.productName;
+                    return acc;
+                }, {});
+
+                const customerOrders = orders.filter(order => order.orderCustomerId === customerId);
+                const departedOrders = customerOrders.filter(order => order.orderStatus === "Departed");
+                const sevenDaysAgo = new Date();
+                sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+                const eligibleOrders = departedOrders.filter(order => new Date(order.lastOrderStatusUpdatedDate) >= sevenDaysAgo);
+
+                const refundMap = refundRequests.reduce((acc, refund) => {
+                    if (!acc[refund.orderId]) {
+                        acc[refund.orderId] = {};
+                    }
+                    if (!acc[refund.orderId][refund.item]) {
+                        acc[refund.orderId][refund.item] = 0;
+                    }
+                    acc[refund.orderId][refund.item] += parseInt(refund.quantity);
                     return acc;
                 }, {});
 
@@ -123,8 +121,22 @@ function EligibleOrdersForRefund() {
                         const productName = products[item.id];
                         return `${productName} x ${item.amount}`;
                     });
+
+                    const eligibleItemsWithName = order.orderItems.map(itemStr => {
+                        const item = JSON.parse(itemStr);
+                        const refundedQuantity = refundMap[order.orderId]?.[item.id] || 0;
+                        const eligibleQuantity = item.amount - refundedQuantity;
+                        if (eligibleQuantity > 0) {
+                            const productName = products[item.id];
+                            return `${productName} x ${eligibleQuantity}`;
+                        }
+                        return null;
+                    }).filter(Boolean);
+
                     const formattedOrderItems = orderItemsWithName.join(', ');
-                    return { ...order, orderItems: formattedOrderItems };
+                    const formattedEligibleItems = eligibleItemsWithName.join(', ');
+
+                    return { ...order, orderItems: formattedOrderItems, eligibleItems: formattedEligibleItems };
                 });
 
                 setEligibleOrders(formattedOrders);
