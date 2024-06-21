@@ -57,7 +57,7 @@ function SelectItem({ value, onChange, error, items }) {
     );
 }
 
-function BasicTextFields({ name, value, onChange, error }) {
+function BasicTextFields({ name, value, onChange, error, disabled }) {
     return (
         <Box
             component="form"
@@ -87,6 +87,7 @@ function BasicTextFields({ name, value, onChange, error }) {
                 onChange={onChange}
                 error={error}
                 helperText={error && "This field is required"}
+                disabled={disabled}
             />
         </Box>
     );
@@ -202,6 +203,9 @@ function CustomerRefundRequest() {
     });
     const [items, setItems] = useState([]);
     const [maxQuantity, setMaxQuantity] = useState(0);
+    const [productPrices, setProductPrices] = useState({});
+    const [orderDate, setOrderDate] = useState()
+    const [discounts, setDiscounts] = useState([]);
     const [errors, setErrors] = useState({
         contact: false,
         item: false,
@@ -212,6 +216,7 @@ function CustomerRefundRequest() {
     const navigate = useNavigate();
     const location = useLocation();
     const { orderId } = location.state || {};
+
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
@@ -233,14 +238,25 @@ function CustomerRefundRequest() {
                     },
                 });
 
+                setOrderDate(orderResponse.data.orderDate);
+
                 const productResponse = await axios.get('http://localhost:9000/product/getAllProducts', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
 
+                const discountResponse = await axios.get('http://localhost:9000/discounts/getAll', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
                 const products = productResponse.data.reduce((acc, product) => {
-                    acc[product.id] = product.productName;
+                    acc[product.id] = {
+                        name: product.productName,
+                        price: product.productSellingPrice,
+                    };
                     return acc;
                 }, {});
 
@@ -248,12 +264,14 @@ function CustomerRefundRequest() {
                     const parsedItem = JSON.parse(item);
                     return {
                         id: parsedItem.id,
-                        name: products[parsedItem.id],
+                        name: products[parsedItem.id].name,
                         amount: parsedItem.amount,
                     };
                 });
 
                 setItems(orderItems);
+                setProductPrices(products);
+                setDiscounts(discountResponse.data);
 
             } catch (error) {
                 console.error('Error fetching order details:', error);
@@ -273,10 +291,32 @@ function CustomerRefundRequest() {
             setMaxQuantity(selectedItem ? selectedItem.amount : 0);
         }
 
-        setFormData({
+        const updatedFormData = {
             ...formData,
             [name]: value,
-        });
+        };
+
+        if (name === 'item' || name === 'quantity') {
+            const itemPrice = productPrices[updatedFormData.item]?.price || 0;
+            let totalPrice = itemPrice * updatedFormData.quantity;
+            console.log(orderDate)
+
+
+            const applicableDiscount = discounts.find((discount) =>
+                parseInt(discount.productId) === parseInt(updatedFormData.item) &&
+                new Date(discount.startDate) <= new Date(orderDate) &&
+                new Date(orderDate) <= new Date(discount.endDate)
+            );
+
+            if (applicableDiscount) {
+                const discountAmount = totalPrice * (applicableDiscount.discountRate / 100);
+                totalPrice -= discountAmount;
+            }
+
+            updatedFormData.totalPrice = totalPrice.toFixed(2);
+        }
+
+        setFormData(updatedFormData);
     };
 
     const handleSubmit = (event) => {
@@ -391,6 +431,7 @@ function CustomerRefundRequest() {
                                     value={formData.totalPrice}
                                     onChange={handleChange}
                                     error={errors.totalPrice}
+                                    disabled={true}
                                 />
                             </div>
                         </div>
