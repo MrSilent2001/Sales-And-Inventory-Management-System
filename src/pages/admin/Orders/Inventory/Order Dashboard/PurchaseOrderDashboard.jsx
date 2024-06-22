@@ -7,20 +7,17 @@ import {
     Container,
     Modal
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
-import Footer from "../../../../../layout/footer/footer";
-import PlaceOrder from "../../../Orders/Inventory/Modals/Place Order/placeOrder";
+import Footer from "../../../../../layout/footer/footer";;
 import ViewOrder from "../../../Orders/Inventory/Modals/View Order/viewOrder";
 import CustomizedButton from "../../../../../components/Button/button";
-
 import DynamicTable from '../../../../../components/Table/customizedTable2';
-
 
 
 const PurchaseOrderDashboard = () => {
 
-    const [placeOrderVisible, setPlaceOrderVisible] = useState(false);
     const [viewOrderVisible, setViewOrderVisible] = useState(false);
     const [currentMonth, setCurrentMonth] = useState('');
     const [purchasedOrders, setPurchasedOrders] = useState([]);
@@ -163,14 +160,33 @@ const PurchaseOrderDashboard = () => {
                             <Typography variant="h6" sx={{ textAlign: 'center' }}>{completedOrders}</Typography>
                         </CardContent>
                     </Card>
-
-                    <Modal open={placeOrderVisible}>
-                        <PlaceOrder onClose={() => setPlaceOrderVisible(false)} />
-                    </Modal>
+                    
+                 
                 </Box>
 
                 {/* Main Content */}
-                <Container maxWidth={false} sx={{ bgcolor: '#DBDFFD', height: 'auto', padding: '1.5em 0' }}>
+                <Container maxWidth={false} sx={{ bgcolor: '#DBDFFD', height: 'auto', padding: '1.5em 0', position: 'relative' }}>
+                    <Link to="/acceptedOrders">
+                        <CustomizedButton
+                            hoverBackgroundColor="#242F9B"
+                            style={{
+                                color: 'white',
+                                backgroundColor: '#242F9B',
+                                width: '10em',
+                                height: '2.75em',
+                                fontSize: '0.8em',
+                                padding: '0.5em 0.625em',
+                                borderRadius: '0.35em',
+                                position: 'absolute',
+                                right: '0',
+                                top: '5.75em', // Adjust based on your layout
+                                marginRight: '3em',
+                                marginBottom: '1em'
+                            }}
+                        >
+                            Accepted Orders
+                        </CustomizedButton>
+                    </Link>
                         <DynamicTable
                             columns={columns}
                             data={dataWithActions}
