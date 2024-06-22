@@ -13,10 +13,7 @@ import Footer from "../../../../../layout/footer/footer";
 import PlaceOrder from "../../../Orders/Inventory/Modals/Place Order/placeOrder";
 import ViewOrder from "../../../Orders/Inventory/Modals/View Order/viewOrder";
 import CustomizedButton from "../../../../../components/Button/button";
-
 import DynamicTable from '../../../../../components/Table/customizedTable2';
-
-
 
 const PurchaseOrderDashboard = () => {
 
@@ -29,10 +26,16 @@ const PurchaseOrderDashboard = () => {
     const [completedOrders, setCompletedOrders] = useState(0);
     const [selectedOrder, setSelectedOrder] = useState(null);
 
+    const token = localStorage.getItem('accessToken');
+
     useEffect(() => {
         const fetchPurchasedOrders = async () => {
             try {
-                const response = await axios.get('http://localhost:9000/purchaseOrder/getAll');
+                const response = await axios.get('http://localhost:9000/purchaseOrder/getAll', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 setPurchasedOrders(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -42,7 +45,11 @@ const PurchaseOrderDashboard = () => {
 
         const fetchCurrentMonthName = async () => {
             try {
-                const response = await axios.get('http://localhost:9000/purchaseOrder/getCurrentMonthName');
+                const response = await axios.get('http://localhost:9000/purchaseOrder/getCurrentMonthName', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 setCurrentMonth(response.data);
             } catch (error) {
                 console.error('Error fetching current month name:', error);
@@ -51,9 +58,21 @@ const PurchaseOrderDashboard = () => {
 
         const fetchOrderCounts = async () => {
             try {
-                const totalResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/total');
-                const inProgressResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/pending');
-                const completedResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/completed');
+                const totalResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/total', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const inProgressResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/pending', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const completedResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/completed', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
 
                 setTotalOrders(totalResponse.data);
                 setInProgressOrders(inProgressResponse.data);
@@ -70,7 +89,11 @@ const PurchaseOrderDashboard = () => {
 
     const handleCancelOrder = async (orderId) => {
         try {
-            await axios.delete(`http://localhost:9000/purchaseOrder/delete/${orderId}`);
+            await axios.delete(`http://localhost:9000/purchaseOrder/delete/${orderId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setPurchasedOrders(prevOrders => prevOrders.filter(order => order.id !== orderId));
         } catch (error) {
             console.error('Error deleting order:', error);

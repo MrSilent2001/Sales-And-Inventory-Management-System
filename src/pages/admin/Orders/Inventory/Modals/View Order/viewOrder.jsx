@@ -16,12 +16,18 @@ function ViewOrder({ order, onClose }) {
         status:''
     });
 
+    const token = localStorage.getItem('accessToken');
+
     useEffect(() => {
         const fetchOrderDetails = async () => {
             if (!order) return;
 
             try {
-                const response = await axios.get(`http://localhost:9000/purchaseOrder/get/${order.id}`);
+                const response = await axios.get(`http://localhost:9000/purchaseOrder/get/${order.id}`,{
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 setOrderDetails({
                     id: response.data.id,
                     supplierName: response.data.supplierName,
@@ -127,14 +133,11 @@ function ViewOrder({ order, onClose }) {
                                     style={{
                                         backgroundColor: '#242F9B',
                                         border: '1px solid #242F9B',
-                                        width: '11em',
+                                        width: '9.5em',
                                         height: '2.5em',
-                                        fontSize: '0.95em',
+                                        fontSize: '0.8em',
                                         padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        fontWeight: '550',
                                         marginTop: '0.625em',
-                                        marginRight: '1.5em',
                                     }}>
                                     Go Back
                                 </CustomizedButton>

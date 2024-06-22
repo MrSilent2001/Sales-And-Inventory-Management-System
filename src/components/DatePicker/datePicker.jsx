@@ -4,7 +4,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 
 function CustomDatePicker(props) {
-    const { className, slotProps, required, onChange, style, ...otherProps, disablePastDates } = props;
+    const { className, slotProps, required, onChange, style,disablePastDates, ...otherProps } = props;
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
