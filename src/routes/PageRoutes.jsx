@@ -54,6 +54,7 @@ import EligibleOrdersForRefund from "../pages/Customer/Refund/eligibleOrdersForR
 import EligiblePurchaseOrderForRefund from "../pages/admin/Refunds/Inventory/eligiblePurchaseOrderForRefund/eligiblePurchaseOrderForRefund";
 import SupplierPayments from "../pages/Supplier/Supplier Payments/supplierPayments";
 import InventoryDetail from "../pages/admin/View Inventory/inventoryDetail";
+import AcceptedOrdersDashboard from "../pages/admin/Orders/Inventory/Order Dashboard/AccepteddOrderDashboard";
 
 export function PageRouting() {
     return (
@@ -136,6 +137,7 @@ export function PageRouting() {
                     <Route path="/viewInventoryDetail/:itemId" element={<InventoryDetail/>}/>
                     <Route path="/viewSupplier" element={<ViewSupplier/>}/>
                     <Route path="/purchasedOrder" element={<PurchaseOrderDashboard/>}/>
+                    <Route path="/acceptedOrders" element={<AcceptedOrdersDashboard/>}/>
                     <Route path="/InventoryGeneratedRequest" element={<InventoryGeneratedRequest/>}/>
                     <Route path="/InventoryRefundRequestsTable" element={<InventoryRefundRequestsTable/>}/>
                     <Route path="/eligiblePurchaseOrderForRefund" element={<EligiblePurchaseOrderForRefund/>}/>
