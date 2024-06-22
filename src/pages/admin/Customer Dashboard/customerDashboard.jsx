@@ -176,7 +176,7 @@ function CustomerDashboard() {
             color: enabled ? '#ffffff' : '#a9a9a9',
             backgroundColor: enabled ? defaultColor : '#d3d3d3',
             border: enabled ? `1px solid ${defaultColor}` : '1px solid #d3d3d3',
-            width: '8.5em',
+            width: '10em',
             height: '2.5em',
             fontSize: '0.75em',
             padding: '0.5em 0.625em',

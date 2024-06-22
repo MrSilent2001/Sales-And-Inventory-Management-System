@@ -16,13 +16,18 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
     const [error, setError] = useState('');
     const [hasOverdue, setHasOverdue] = useState(false);
 
+    const token = localStorage.getItem('accessToken');
+
     useEffect(() => {
         const fetchRefundRequests = async () => {
             try {
                 const response = await axios.get('http://localhost:9000/refund/customerRefund/getRefundByStatus', {
                     params: {
                         refundStatus: 'pending'
-                    }
+                    },
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
                 const currentDate = new Date();
                 const dataWithWarning = response.data.map(request => {
@@ -97,8 +102,6 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
             height: '2.5em',
             fontSize: '0.75em',
             padding: '0.5em 0.625em',
-            borderRadius: '0.35em',
-            fontWeight: '550',
             marginRight: '1em'
         };
 
@@ -109,7 +112,6 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
             height: '2.5em',
             fontSize: '0.75em',
             padding: '0.5em 0.625em',
-            borderRadius: '0.35em',
             fontWeight: '550',
             marginLeft: '1em'
         };
