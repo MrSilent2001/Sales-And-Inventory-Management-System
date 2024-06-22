@@ -135,7 +135,7 @@
 //                     marginRight: '-2em'
 //                 }}
 //             >
-//                 View
+//                 ViewCustomerProfile
 //             </CustomizedButton>
 //         );
 //     }

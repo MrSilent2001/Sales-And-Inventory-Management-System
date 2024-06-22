@@ -1,0 +1,61 @@
+.CustomerOrderProfileOuter{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: #DBDFFD;
+}
+
+.CustomerOrderProfileInner{
+    display: flex;
+    align-items: center;
+    width: 80%;
+    height: 30em;
+    background-color: rgb(240, 240, 245);
+    border-radius: 0.5em;
+    margin: 3em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.CustomerOrderProfile{
+    background-color: #adbbda;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 35%;
+    height: 100%;
+    border-radius: 0.5em 0 0 0.5em;
+}
+
+.CustomerOrderProfileForm{
+    width: 65%;
+    height: 100%;
+    border-radius:  0 0.5em 0.5em 0;
+}
+
+.title{
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.CustomerOrderProfileFormField{
+    display: flex;
+    padding: 1.25em 0;
+}
+
+.CustomerOrderProfileField{
+    width: 20em;
+    text-align: left;
+}
+
+.CustomerOrderProfileInput{
+    margin-left: 2.5em;
+}
+
+.CustomerOrderProfileButtons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1em;
+}

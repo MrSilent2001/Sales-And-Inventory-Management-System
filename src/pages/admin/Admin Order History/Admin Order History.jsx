@@ -1,13 +1,14 @@
 import './Admin Order History.css';
 import * as React from 'react';
-import Paper from '@mui/material/Paper';
 import SalesNavbar from '../../../layout/navbar/Sales navbar/sales navbar';
 import Footer from "../../../layout/footer/footer";
 import {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import PageLoader from "../../../components/Page Loader/pageLoader";
 import DynamicTable from "../../../components/Table/customizedTable2";
+import {Button} from "@mui/material";
+import BackArrow from "../../../components/Icons/backArrow";
 
 function AdminOrderHistory() {
     const [order, setOrder] = useState([]);
@@ -67,16 +68,27 @@ function AdminOrderHistory() {
     return (
         <>
             <SalesNavbar/>
-            <div className="AdminOrdersOuter">
-                <div className="AdminOrdersInner">
-                    <div className="AdminOrdersTopicWithTextfield">
-                        <div className="AdminOrdersTopic">
-                            <h2>Orders</h2>
-                        </div>
+            <div className="viewCustomerOrdersOuter">
+                <div className="viewCustomerOrdersInner">
+                    <div className="viewCustomerOrders-title">
+                        <Link to={`/profile/${id}`}>
+                            <Button
+                                startIcon={<BackArrow/>}
+                                size="large"
+                                style={{
+                                    color: "black",
+                                    fontWeight: 'bold',
+                                    textTransform: "none",
+                                    fontSize: '1.25em'
+                                }}
+                            >
+                                Order History
+                            </Button>
+                        </Link>
                     </div>
-
+                    <div className="viewCustomerOrders">
                         {isLoading ? (
-                            <PageLoader />
+                            <PageLoader/>
                         ) : (
                             <DynamicTable
                                 columns={columns}
@@ -84,9 +96,9 @@ function AdminOrderHistory() {
                                 includeProfile={false}
                             />
                         )}
+                    </div>
                 </div>
             </div>
-
             <Footer/>
         </>
     );

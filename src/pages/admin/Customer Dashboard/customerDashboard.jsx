@@ -21,9 +21,9 @@ function CustomerDashboard() {
     const navigate = useNavigate();
 
     const columns = useMemo(() => [
-        { accessorKey: 'email', header: 'Email', size: 75  },
-        { accessorKey: 'address', header: 'Address', size: 75  },
-        { accessorKey: 'contactNo', header: 'Contact', size: 75  },
+        { accessorKey: 'email', header: 'Email', size: 50  },
+        { accessorKey: 'address', header: 'Address', size: 100  },
+        { accessorKey: 'contactNo', header: 'Contact', size: 50  },
         { accessorKey: 'lastLogin', header: 'Last Login', size: 75  }
     ], []);
 
@@ -244,7 +244,6 @@ function CustomerDashboard() {
                     </div>
                 </div>
             </div>
-
             <Footer />
             <CustomizedAlert
                 open={openSuccess}

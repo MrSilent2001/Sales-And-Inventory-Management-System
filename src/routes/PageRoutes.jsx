@@ -1,7 +1,7 @@
 import {Route, Routes} from "react-router-dom";
 import CustomerDashboard from "../pages/admin/Customer Dashboard/customerDashboard";
 import CustomerOrderHistory from "../pages/Customer/Order History/customerOrderHistory";
-import View from "../pages/admin/Customer Dashboard/view";
+import ViewCustomerProfile from "../pages/admin/Customer Dashboard/viewCustomerProfile";
 import ApprovedRefundsTable from "../pages/admin/Refunds/Inventory/Approved Refunds/ApprovedRefundsTable";
 import InventoryGeneratedRequest from "../pages/admin/Refunds/Inventory/generatedRequests/InventoryGeneratedRequest";
 import SalesApprovedRefundsTable from "../pages/admin/Refunds/Customer/Sales_Approved Refunds/SalesApprovedRefundsTable";
@@ -146,7 +146,7 @@ export function PageRouting() {
 
 
                     <Route path="/orderHistory/:id" element={<AdminOrderHistory/>}/>
-                    <Route path="/profile/:id" element={<View/>}/>
+                    <Route path="/profile/:id" element={<ViewCustomerProfile/>}/>
                     <Route path="/inventoryPayments" element={<InventoryPayments/>}/>
 
 

@@ -103,7 +103,7 @@ function ViewInventory() {
                     marginRight: '-2em'
                 }}
             >
-                View
+                ViewCustomerProfile
             </CustomizedButton>
         );
     }
@@ -239,7 +239,7 @@ function ViewInventory() {
                                     <MultiActionAreaCard
                                         item={item}
                                         handleClick={handleButtonClick}
-                                        buttonText="View"
+                                        buttonText="ViewCustomerProfile"
                                     />
                                 </div>
                             ))}
