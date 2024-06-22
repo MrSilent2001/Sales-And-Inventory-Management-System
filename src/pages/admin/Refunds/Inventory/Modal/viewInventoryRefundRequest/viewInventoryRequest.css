@@ -1,58 +1,48 @@
-.viewRequestOuter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.viewRequestModel {
+.viewInventoryRefundRequestModel {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 37.5em;
-    height: 38.75em;
+    width: 30.5em;
+    height: 37.5em;
     padding: 0.25em 0 0 0;
     background-color: #DBDFFD;
     border-radius: 0.5em;
 }
 
-.viewRequestModel h2 {
+.viewInventoryRefundRequestModel h2 {
     font-family: Inter;
-    padding: 1.25em 0 0 0;
+    padding: 1em 0 0 0;
 }
 
-.viewRequestForm {
+.viewInventoryRefundRequestForm {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 0.3em;
 }
 
-.formField {
-    width: 27.5em;
+.viewInventoryRefundformField {
+    width: 22.5em;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin: 0.1em 0 0 0;
+    text-align: left;
 }
 
-.formField h5 {
+.idInput{
+    margin-left: 2.5em;
+    width: 10em;
+    font-size: 0.75em;
+}
+
+.viewInventoryRefundformField h5 {
     font-family: Inter;
     font-weight: 600;
     font-size: 0.75em;
 }
 
-.formFieldButtons {
+.viewInventoryRefundButtons {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 16.25em;
-    justify-content: space-between;
-    margin: 2em 0 0 7.5em;
 }

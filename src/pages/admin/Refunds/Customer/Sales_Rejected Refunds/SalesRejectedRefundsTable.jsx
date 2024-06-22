@@ -9,11 +9,12 @@ import './SalesRejectedRefundsTable.css';
 import DynamicTable from '../../../../../components/Table/customizedTable2';
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 
-
 const SalesRejectedRefundsTable = () => {
     const [rejectedRefunds, setRejectedRefunds] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+
+    const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
         const fetchRejectedRefunds = async () => {
@@ -21,7 +22,10 @@ const SalesRejectedRefundsTable = () => {
                 const response = await axios.get('http://localhost:9000/refund/customerRefund/getRefundByStatus', {
                     params: {
                         refundStatus: 'rejected'
-                    }
+                    },
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
                 setRejectedRefunds(response.data);
             } catch (error) {

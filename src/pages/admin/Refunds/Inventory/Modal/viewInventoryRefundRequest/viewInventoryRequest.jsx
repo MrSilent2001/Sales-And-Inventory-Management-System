@@ -15,6 +15,8 @@ function ViewInventoryRequest({ request, onClose }) {
         amount: ''
     });
 
+    const token = localStorage.getItem('accessToken');
+
     useEffect(() => {
         if (!request) {
             console.error('Request is missing');
@@ -29,8 +31,11 @@ function ViewInventoryRequest({ request, onClose }) {
             }
 
             try {
-                const response = await axios.get(`http://localhost:9000/refund/inventoryRefund/get/${request.inventory_id}`);
-                console .log('Response:', response); // Debugging line to check the response
+                const response = await axios.get(`http://localhost:9000/refund/inventoryRefund/get/${request.inventory_id}`,{
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 setRequestDetails({
                     inventory_id: response.data.inventory_id,
                     supplier: response.data.supplier,
@@ -52,11 +57,11 @@ function ViewInventoryRequest({ request, onClose }) {
 
     return (
         <CenteredModal>
-            <div className="viewRequestOuter">
-                <div className="viewRequestModel">
-                    <h2>Inventory Refund Request</h2>
-                    <div className="viewRequestForm">
-                        <div className="formField">
+            <div className="viewInventoryRefundRequestOuter">
+                <div className="viewInventoryRefundRequestModel">
+                    <h2>Refund Request</h2>
+                    <div className="viewInventoryRefundRequestForm">
+                        <div className="viewInventoryRefundformField">
                             <div className="idField">
                                 <h5>Request Id:</h5>
                             </div>
@@ -65,7 +70,7 @@ function ViewInventoryRequest({ request, onClose }) {
                             </div>
                         </div>
 
-                        <div className="formField">
+                        <div className="viewInventoryRefundformField">
                             <div className="idField">
                                 <h5>Supplier:</h5>
                             </div>
@@ -75,7 +80,7 @@ function ViewInventoryRequest({ request, onClose }) {
                         </div>
 
                         
-                        <div className="formField">
+                        <div className="viewInventoryRefundformField">
                             <div className="idField">
                                 <h5>Contact number:</h5>
                             </div>
@@ -84,7 +89,7 @@ function ViewInventoryRequest({ request, onClose }) {
                             </div>
                         </div>
 
-                        <div className="formField">
+                        <div className="viewInventoryRefundformField">
                             <div className="idField">
                                 <h5>Items:</h5>
                             </div>
@@ -94,7 +99,7 @@ function ViewInventoryRequest({ request, onClose }) {
                         </div>
 
 
-                        <div className="formField">
+                        <div className="viewInventoryRefundformField">
                             <div className="idField">
                                 <h5>Quantity:</h5>
                             </div>
@@ -103,7 +108,7 @@ function ViewInventoryRequest({ request, onClose }) {
                             </div>
                         </div>
 
-                        <div className="formField">
+                        <div className="viewInventoryRefundformField">
                             <div className="idField">
                                 <h5>Total amount:</h5>
                             </div>
@@ -114,7 +119,7 @@ function ViewInventoryRequest({ request, onClose }) {
 
                         
 
-                        <div className="formField">
+                        <div className="viewInventoryRefundformField">
                             <div className="idField">
                                 <h5>Status:</h5>
                             </div>
@@ -123,7 +128,7 @@ function ViewInventoryRequest({ request, onClose }) {
                             </div>
                         </div>
 
-                        <div className="formField">
+                        <div className="viewInventoryRefundformField">
                             <div className="idField">
                                 <h5>Created date::</h5>
                             </div>
@@ -132,7 +137,7 @@ function ViewInventoryRequest({ request, onClose }) {
                             </div>
                         </div>
 
-                        <div className="formFieldButtons">
+                        <div className="viewInventoryRefundButtons">
                             <div className="saveButton">
                                 <CustomizedButton
                                     onClick={onClose}
@@ -140,14 +145,11 @@ function ViewInventoryRequest({ request, onClose }) {
                                     style={{
                                         backgroundColor: '#242F9B',
                                         border: '1px solid #242F9B',
-                                        width: '11em',
+                                        width: '9.5em',
                                         height: '2.5em',
-                                        fontSize: '0.95em',
+                                        fontSize: '0.8em',
                                         padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        fontWeight: '550',
                                         marginTop: '0.625em',
-                                        marginRight: '1.5em',
                                     }}>
                                     Go Back
                                 </CustomizedButton>

@@ -6,6 +6,7 @@ import CenteredModal from "../../../../../components/Modal/modal";
 import FormControl from "@mui/material/FormControl";
 import axios from "axios";
 import CustomizedAlert from "../../../../../components/Alert/alert";
+import BasicTextArea from "../../../../../components/Form Inputs/textArea";
 
 const AddSupplier = forwardRef((props, ref) => {
 
@@ -156,11 +157,10 @@ const AddSupplier = forwardRef((props, ref) => {
                                     <h5>Address:</h5>
                                 </div>
                                 <div className="addSupplieridInput">
-                                    <BasicTextField
+                                    <BasicTextArea
                                         id="outlined-textarea"
                                         size="small"
                                         onChange={(e) => handleChange("address", e.target.value)}
-
                                     />
                                 </div>
                             </div>
@@ -200,6 +200,7 @@ const AddSupplier = forwardRef((props, ref) => {
                                     <BasicTextField
                                         id="outlined-required"
                                         size="small"
+                                        type="number"
                                         onChange={(e) => handleChange("contactNo", e.target.value)}
 
                                     />
@@ -220,6 +221,7 @@ const AddSupplier = forwardRef((props, ref) => {
                                     <BasicTextField
                                         id="outlined-required"
                                         size="small"
+                                        type="number"
                                         onChange={(e) => handleChange("nic", e.target.value)}
                                     />
                                 </div>
@@ -230,46 +232,40 @@ const AddSupplier = forwardRef((props, ref) => {
                                 padding: '0 0 0.5em 0.5em'
                             }}>{errors.nic}</span>}
 
+                        </div>
+                        <div className="addSupplierformFieldButtons">
+                            <div className="addSupplierButton">
+                                <CustomizedButton
+                                    onClick={handleSubmit}
+                                    hoverBackgroundColor="#2d3ed2"
+                                    style={{
+                                        backgroundColor: '#242F9B',
+                                        border: '1px solid #242F9B',
+                                        width: '8em',
+                                        height: '2.5em',
+                                        fontSize: '0.8em',
+                                        padding: '0.5em 0.625em',
+                                        marginTop: '0.625em',
+                                        marginRight: '1.5em',
+                                    }}>
+                                    Add Supplier
+                                </CustomizedButton>
+                            </div>
 
-                            <div className="addSupplierformFieldButtons">
-                                <div className="addSupplierButton">
-                                    <CustomizedButton
-                                        onClick={handleSubmit}
-                                        hoverBackgroundColor="#2d3ed2"
-                                        style={{
-                                            backgroundColor: '#242F9B',
-                                            border: '1px solid #242F9B',
-                                            width: '8em',
-                                            height: '2.5em',
-                                            fontSize: '0.8em',
-                                            padding: '0.5em 0.625em',
-                                            borderRadius: '0.35em',
-                                            fontWeight: '550',
-                                            marginTop: '0.625em',
-                                            marginRight: '1.5em',
-                                        }}>
-                                        Add Supplier
-                                    </CustomizedButton>
-                                </div>
-
-                                <div className="addSuppliercancelButton">
-                                    <CustomizedButton
-                                        onClick={() => props.onClose(false)}
-                                        hoverBackgroundColor="#f11717"
-                                        style={{
-                                            backgroundColor: '#960505',
-                                            width: '9.5em',
-                                            height: '2.5em',
-                                            fontSize: '0.8em',
-                                            fontFamily: 'inter',
-                                            padding: '0.5em 0.625em',
-                                            borderRadius: '0.35em',
-                                            fontWeight: '500',
-                                            marginTop: '0.625em',
-                                        }}>
-                                        Cancel
-                                    </CustomizedButton>
-                                </div>
+                            <div className="addSuppliercancelButton">
+                                <CustomizedButton
+                                    onClick={() => props.onClose(false)}
+                                    hoverBackgroundColor="#f11717"
+                                    style={{
+                                        backgroundColor: '#960505',
+                                        width: '9.5em',
+                                        height: '2.5em',
+                                        fontSize: '0.8em',
+                                        padding: '0.5em 0.625em',
+                                        marginTop: '0.625em',
+                                    }}>
+                                    Cancel
+                                </CustomizedButton>
                             </div>
                         </div>
                     </div>

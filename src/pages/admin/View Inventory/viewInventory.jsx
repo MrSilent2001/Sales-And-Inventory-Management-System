@@ -239,7 +239,7 @@ function ViewInventory() {
                                     <MultiActionAreaCard
                                         item={item}
                                         handleClick={handleButtonClick}
-                                        buttonText="ViewCustomerProfile"
+                                        buttonText="View"
                                     />
                                 </div>
                             ))}
