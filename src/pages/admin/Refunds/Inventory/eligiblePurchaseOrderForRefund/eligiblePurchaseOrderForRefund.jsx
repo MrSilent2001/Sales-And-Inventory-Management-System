@@ -8,128 +8,139 @@ import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import DynamicTable from '../../../../../components/Table/customizedTable2';
 import CustomizedAlert from '../../../../../components/Alert/alert';
-import {jwtDecode} from 'jwt-decode';
+
 import {Button, Modal} from '@mui/material';
-import Box from '@mui/material/Box';
+
 import InventoryRefundRequest from '../Modal/InventoryRefundRequest/InventoryRefundRequest';
-import {Link} from "react-router-dom";
 import BackArrow from "../../../../../components/Icons/backArrow";
+import { jwtDecode } from 'jwt-decode';
+import { Link, useNavigate } from "react-router-dom";
 
 
-const EligibleOrderForRefund = () => {
+
+
+function EligiblePurchaseOrdersForRefund() {
     const [isLoading, setIsLoading] = useState(false);
-    const [eligibleOrders, setEligibleOrders] = useState([]);
+    const [eligiblePurchaseOrders, setEligiblePurchaseOrders] = useState([]);
     const [openError, setOpenError] = useState(false);
-    const [openModal, setOpenModal] = useState(false);
-    const [selectedOrder, setSelectedOrder] = useState(null);
-
-    const id = localStorage.getItem('id');
     const token = localStorage.getItem('accessToken');
+    const navigate = useNavigate();
 
     const columns = useMemo(() => [
-        { accessorKey: 'orderId', header: 'Order Id', size: 75, align: 'center' },
-        { accessorKey: 'orderItems', header: 'Ordered Items', size: 100, align: 'center' },
-        { accessorKey: 'orderPrice', header: 'Bill Amount', size: 75, align: 'center' },
-        { accessorKey: 'orderDate', header: 'Date', size: 75, align: 'center' },
-        { accessorKey: 'orderStatus', header: 'Order Status', size: 75, align: 'center' },
-        { accessorKey: 'actions', header: 'Actions', size: 150, align: 'center' }
+        { accessorKey: 'orderId', header: 'Order Id', size: 5, align: 'center' },
+        { accessorKey: 'productName', header: 'Product Name', size: 50, align: 'center' },
+        { accessorKey: 'supplierName', header: 'Supplier Name', size: 20, align: 'center' },
+        { accessorKey: 'total_amount', header: 'Total Amount', size: 50, align: 'center' },
+        { accessorKey: 'createdDate', header: 'Order Date', size: 50, align: 'center' },
+        {
+            accessorKey: 'actions',
+            header: 'Actions',
+            size: 100,
+            cellRenderer: ({ row }) => (
+                <div style={{ display: 'flex' }}>
+                    <CustomizedButton
+                        onClick={() => handleRefund(row.original)}
+                        hoverBackgroundColor="#2d3ed2"
+                        disabled={row.original.eligibleForRefund === false}
+                        style={{
+                            color: '#ffffff',
+                            backgroundColor: '#242F9B',
+                            border: '1px solid #242F9B',
+                            width: '10em',
+                            height: '2.5em',
+                            fontSize: '0.8em',
+                            padding: '0.5em 0.625em',
+                            marginTop: '0.625em'
+                        }}>
+                        Request Refund
+                    </CustomizedButton>
+                </div>
+            ),
+        }
     ], []);
 
     const handleClickError = () => {
         setOpenError(true);
     };
 
-    const handleOpenModal = (order) => {
-        setSelectedOrder(order);
-        setOpenModal(true);
-    };
-
-    const handleCloseModal = () => {
-        setOpenModal(false);
-        setSelectedOrder(null);
+    const handleRefund = (order) => {
+        const orderData = {
+            orderId: order.id,
+            productName: order.productName,
+            sellingPrice: order.total_amount / order.quantity, // Assuming total_amount is the total price and quantity is the number of items
+            itemCode: order.items // Adjust this according to the actual data structure if needed
+        };
+        console.log('Refund requested for order:', orderData);
+        navigate('/createrefund', { state: orderData });
     };
 
     useEffect(() => {
-        const fetchEligibleOrders = async () => {
+        const fetchEligiblePurchaseOrders = async () => {
             setIsLoading(true);
             try {
-                const productsResponse = await axios.get('http://localhost:9000/product/getAllProducts', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+                const [ordersResponse, refundsResponse, productsResponse] = await Promise.all([
+                    axios.get('http://localhost:9000/purchaseOrder/getAll', {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }),
+                    axios.get('http://localhost:9000/refund/inventoryRefund/getAll', {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }),
+                    axios.get('http://localhost:9000/product/getAllProducts', {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }),
+                ]);
+
+                const orders = ordersResponse.data;
+                const refundRequests = refundsResponse.data;
                 const products = productsResponse.data.reduce((acc, product) => {
                     acc[product.id] = product.productName;
                     return acc;
                 }, {});
 
-                const response = await axios.get('http://localhost:9000/purchaseOrder/getAll', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+                const departedOrders = orders.filter(order => order.status === "Departed");
+                const sevenDaysAgo = new Date();
+                sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+                const recentDepartedOrders = departedOrders.filter(order => new Date(order.departedDate) >= sevenDaysAgo);
 
-                const filteredOrders = response.data.filter(order => {
-                    const orderDate = new Date(order.orderDate);
-                    const currentDate = new Date();
-                    const sevenDaysAgo = new Date();
-                    sevenDaysAgo.setDate(currentDate.getDate() - 7);
-                    return order.orderCustomerId === id && orderDate >= sevenDaysAgo;
-                });
+                const refundMap = refundRequests.reduce((acc, refund) => {
+                    acc[refund.orderId] = true;
+                    return acc;
+                }, {});
 
-                const ordersWithNamesAndFormattedItems = filteredOrders.map(order => {
-                    const orderItemsWithName = order.orderItems.map(itemId => products[itemId]);
-                    const formattedOrderItems = orderItemsWithName.join(', ');
-                    return { ...order, orderItems: formattedOrderItems };
-                });
+                const eligibleOrders = recentDepartedOrders.filter(order => !refundMap[order.id])
+                    .map(order => ({
+                        id: order.id,
+                        productName: products[order.items],
+                        supplierName: order.supplierName,
+                        total_amount: order.total_amount,
+                        createdDate: order.createdDate,
+                        quantity: order.quantity, // Assuming order has a quantity field
+                        items: order.items,
+                        eligibleForRefund: true
+                    }));
 
-                console.log(ordersWithNamesAndFormattedItems);
-                setEligibleOrders(ordersWithNamesAndFormattedItems);
+                setEligiblePurchaseOrders(eligibleOrders);
+
             } catch (error) {
                 handleClickError();
-                console.error('Error fetching orders:', error);
+                console.error('Error fetching purchase orders:', error);
             } finally {
                 setIsLoading(false);
             }
         };
 
-        fetchEligibleOrders();
-    }, []);
-
-    const createActions = (order) => (
-        <CustomizedButton
-            hoverBackgroundColor="#2d3ed2"
-            style={{
-                color: '#ffffff',
-                backgroundColor: '#242F9B',
-                border: '1px solid #242F9B',
-                width: '11em',
-                height: '1.75em',
-                fontSize: '0.8em',
-                padding: '0.5em 0.625em',
-                borderRadius: '0.35em',
-                marginTop: '0.625em'
-            }}
-            onClick={() => handleOpenModal(order)}
-        >
-            Request Refund
-        </CustomizedButton>
-    );
-
-    const dataWithActions = eligibleOrders.map(order => ({
-        ...order,
-        actions: createActions(order)
-    }));
+        fetchEligiblePurchaseOrders();
+    }, [token]);
 
     return (
         <>
-            <InventoryNavbar/>
-            <div className="eligibleOrdersDashboardOuter">
-                <div className="eligibleOrdersDashboardInner">
+            <InventoryNavbar />
+            <div className="eligiblePurchaseOrdersOuter">
+                <div className="eligiblePurchaseOrdersInner">
                     <div className="searchContainer">
-                        <Link to="/InventoryRefundRequestsTable">
+                        <Link to="/refundRequests">
                             <Button
-                                startIcon={<BackArrow/>}
+                                startIcon={<BackArrow />}
                                 size="large"
                                 style={{
                                     color: "black",
@@ -138,44 +149,33 @@ const EligibleOrderForRefund = () => {
                                     fontSize: '1.25em'
                                 }}
                             >
-                                Eligible Orders for Refund
+                                Eligible Purchase Orders for Refund
                             </Button>
                         </Link>
                     </div>
-                    <div className="eligibleOrders-dashboard">
+                    <div className="eligiblePurchaseOrders-dashboard">
                         {isLoading ? (
                             <PageLoader />
                         ) : (
                             <DynamicTable
                                 columns={columns}
-                                data={dataWithActions}
+                                data={eligiblePurchaseOrders}
                                 includeProfile={false}
                             />
                         )}
                     </div>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
 
             <CustomizedAlert
                 open={openError}
-                onClose={handleClickError}
+                onClose={() => setOpenError(false)}
                 severity="error"
                 message="Something Went Wrong!"
             />
-
-            <Modal
-                open={openModal}
-                onClose={handleCloseModal}
-                aria-labelledby="modal-title"
-                aria-describedby="modal-description"
-            >
-                <Box className="modalBox">
-                    {selectedOrder && <InventoryRefundRequest order={selectedOrder} onClose={handleCloseModal}/>}
-                </Box>
-            </Modal>
         </>
     );
 }
 
-export default EligibleOrderForRefund;
+export default EligiblePurchaseOrdersForRefund;
