@@ -248,7 +248,7 @@ function ViewSupplier() {
                 open={openSuccess}
                 onClose={handleCloseSuccess}
                 severity="success"
-                message="Supplier action completed successfully!"
+                message="Supplier Removed successfully!"
             />
 
             <CustomizedAlert

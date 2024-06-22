@@ -63,6 +63,10 @@ const AddDiscount = forwardRef((props, ref) => {
 
     const token = localStorage.getItem('accessToken');
 
+    const disablePastDates = (date) => {
+        return date < dayjs().startOf('day');
+    };
+
     useEffect(() => {
         const fetchProductDetails = async () => {
             try {
@@ -145,7 +149,9 @@ const AddDiscount = forwardRef((props, ref) => {
 
                 props.onDiscountAdded(updatedDiscounts);
                 handleClickSuccess();
-                props.onClose(false);
+                setTimeout(() => {
+                    props.onClose(false);
+                }, 1000);
             } catch (error) {
                 console.error('Error applying discount:', error);
                 handleClickError();
@@ -254,10 +260,11 @@ const AddDiscount = forwardRef((props, ref) => {
                                         slotProps={{textField: {size: 'small'}}}
                                         sx={{
                                             width: '17.5em',
-                                            height: '0.75em',
+                                            height: '0.15em',
                                             marginRight: '0.5em',
                                             marginTop: '-0.5em'
                                         }}
+                                        shouldDisableDate={disablePastDates}
                                         required
                                         onChange={(date) => {
                                             const formattedDate = dayjs(date).format('YYYY-MM-DD');
@@ -281,8 +288,9 @@ const AddDiscount = forwardRef((props, ref) => {
                                     <CustomDatePicker
                                         name="endDate"
                                         slotProps={{textField: {size: 'small'}}}
-                                        sx={{width: '17.5em', height: '0.75em', marginRight: '0.5em'}}
+                                        sx={{width: '17.5em', height: '0.75em', marginRight: '0.5em', marginBottom: '1em'}}
                                         required
+                                        shouldDisableDate={disablePastDates}
                                         onChange={(date) => {
                                             const formattedDate = dayjs(date).format('YYYY-MM-DD');
                                             console.log('Selected end date:', formattedDate);
@@ -309,7 +317,6 @@ const AddDiscount = forwardRef((props, ref) => {
                                         height: '2.5em',
                                         fontSize: '0.8em',
                                         padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
                                         margin: '0.625em 1.5em 0 2.5em',
                                     }}>
                                     Apply
@@ -325,9 +332,7 @@ const AddDiscount = forwardRef((props, ref) => {
                                         width: '9.5em',
                                         height: '2.5em',
                                         fontSize: '0.8em',
-                                        fontFamily: 'inter',
                                         padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
                                         margin: '0.625em 0 0 2.5em'
                                     }}>
                                     Cancel
@@ -337,11 +342,12 @@ const AddDiscount = forwardRef((props, ref) => {
                     </div>
                 </div>
             </form>
+
             <CustomizedAlert
                 open={openSuccess}
                 onClose={handleCloseSuccess}
                 severity="success"
-                message="Supplier Added Successfully!"
+                message="Discount Added Successfully!"
             />
 
             <CustomizedAlert

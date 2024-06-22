@@ -3,10 +3,11 @@
     flex-direction: column;
     align-items: center;
     width: 30.5em;
-    max-height: 35.75em;
+    height: 37.5em;
     padding: 0.25em 0 0 0;
     background-color: #DBDFFD;
     border-radius: 0.5em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .addDiscountsModel h2{
@@ -18,8 +19,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-height: 35.75em;
-    overflow-y: auto;
+    max-height: 37.5em;
+    overflow: auto;
 }
 
 .addDiscountsFormField{
@@ -47,6 +48,6 @@
     align-items: center;
     width: 16.25em;
     justify-content: space-between;
-    margin: 1.4em 0 0 0;
+    margin: 2em 0 0 0;
     padding-bottom: 3em;
 }

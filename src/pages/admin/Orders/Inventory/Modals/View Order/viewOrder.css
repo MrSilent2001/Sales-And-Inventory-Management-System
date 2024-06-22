@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 37.5em;
-    height: 38.75em;
+    width: 30.5em;
+    height: 37.5em;
     padding: 0.25em 0 0 0;
     background-color: #DBDFFD;
     border-radius: 0.5em;
@@ -20,8 +20,14 @@
     align-items: center;
 }
 
+.idInput{
+    margin-left: 2.5em;
+    width: 10em;
+    font-size: 0.75em;
+}
+
 .formField{
-    width: 27.5em;
+    width: 22.5em;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -35,15 +41,10 @@
     font-size: 0.75em;
 }
 
-.viewOrderForm{
-    margin-top: 0.3em;
-}
 
 .formFieldButtons{
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 16.25em;
-    justify-content: space-between;
-    margin: 2em 0 0 7.5em;
+    justify-content: center;
 }

@@ -14,13 +14,18 @@ const SalesApprovedRefundsTable = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  const token = localStorage.getItem('accessToken');
+
   useEffect(() => {
     const fetchApprovedRefunds = async () => {
       try {
         const response = await axios.get('http://localhost:9000/refund/customerRefund/getRefundByStatus', {
           params: {
             refundStatus: 'accepted'
-          }
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
         setApprovedRefunds(response.data);
       } catch (error) {

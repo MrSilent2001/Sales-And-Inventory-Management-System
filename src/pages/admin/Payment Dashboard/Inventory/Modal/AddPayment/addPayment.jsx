@@ -275,9 +275,9 @@ function AddPayment(props){
                                     <div className="addPaymentidField">
                                         <h5>Payment Receipt:</h5>
                                     </div>
-                                    <div className="addPaymentidInput">
+                                    <div className="addPaymentidInput"  style={{marginRight: '0.75em'}}>
                                         <FileUpload
-                                            style={{display: 'flex', justifyContent: 'center', width: '100%', float: 'left'}}
+                                            style={{height:32.5, width:275}}
                                             onChange={handleFileUpload}
                                         />
                                     </div>
@@ -294,12 +294,10 @@ function AddPayment(props){
                                         style={{
                                             color: '#ffffff',
                                             backgroundColor: '#242F9B',
-                                            width: '8em',
+                                            width: '9.5em',
                                             height: '2.5em',
                                             fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
-                                            borderRadius: '0.35em',
-                                            fontWeight: '550',
                                             marginTop: '0.5em',
                                             marginRight: '1.5em'
                                         }}>
@@ -313,12 +311,10 @@ function AddPayment(props){
                                         style={{
                                             color: '#ffffff',
                                             backgroundColor: '#D41400',
-                                            width: '8em',
+                                            width: '9.5em',
                                             height: '2.5em',
                                             fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
-                                            borderRadius: '0.35em',
-                                            fontWeight: '550',
                                             marginTop: '0.5em',
                                         }}>
                                         Cancel

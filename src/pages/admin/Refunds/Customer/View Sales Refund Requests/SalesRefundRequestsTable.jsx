@@ -106,7 +106,7 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
         };
 
         const buttonStyle2 = {
-            backgroundColor: '#242F9B',
+            backgroundColor: '#960505',
             border: '1px solid #242F9B',
             width: '11em',
             height: '2.5em',
@@ -139,7 +139,7 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
                 <Link to="/SalesRejectedRefundsTable">
                 <CustomizedButton
                     onClick={onViewApproved}
-                    hoverBackgroundColor="#2d3ed2"
+                    hoverBackgroundColor="#f11717"
                     style={buttonStyle2}
                 >
                     Rejected Refunds

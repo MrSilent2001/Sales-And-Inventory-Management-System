@@ -7,6 +7,7 @@
     padding: 0.25em 0 0 0;
     background-color: #DBDFFD;
     border-radius: 0.5em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .addSupplierModel h2{
@@ -18,6 +19,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-height: 25em;
+    overflow-y: auto;
 }
 
 .addSupplierformField{
