@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import TextField from '@mui/material/TextField';
 
-export default function BasicTextField({ id, name, variant, size, type, style, value, onChange, error, onKeyDown, helperText, disabled, readOnly }) {
+export default function BasicTextField({ id, name, variant, size, type, style, value, onChange, error, onKeyDown, helperText, disabled, readOnly, InputProps }) {
     return (
         <Box
             component="form"
@@ -42,6 +42,7 @@ export default function BasicTextField({ id, name, variant, size, type, style, v
                     error: error,
                 }}
                 InputProps={{
+                    ...InputProps,
                     readOnly: readOnly
                 }}
             />

@@ -13,38 +13,19 @@ import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer n
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { useLocation } from 'react-router-dom';
+import BasicTextField from "../../../../components/Form Inputs/textfield";
 
 function SelectItem({ value, onChange, error, items }) {
     return (
         <Box sx={{ minWidth: 80 }}>
             <FormControl fullWidth error={error}>
-                <InputLabel
-                    id="item-select-label"
-                    sx={{
-                        fontSize: '10px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    }}
-                >
-                    Select Item
-                </InputLabel>
                 <Select
                     labelId="item-select-label"
                     id="item-select"
                     value={value}
-                    label="Item"
                     onChange={onChange}
-                    sx={{
-                        height: 40,
-                        width: '40.8em',
-                        fontSize: 10,
-                        backgroundColor: '#e9eeff',
-                        marginRight: '8px',
-                        '& .MuiInputLabel-root': {
-                            fontSize: 4,
-                        },
-                    }}
+                    style={{width: '17.25em', height: '2em', marginRight: '0.5em'}}
+
                 >
                     {items.map((item) => (
                         <MenuItem key={item.id} value={item.id}>
@@ -53,42 +34,6 @@ function SelectItem({ value, onChange, error, items }) {
                     ))}
                 </Select>
             </FormControl>
-        </Box>
-    );
-}
-
-function BasicTextFields({ name, value, onChange, error, disabled }) {
-    return (
-        <Box
-            component="form"
-            sx={{
-                '& > :not(style)': {
-                    m: 1,
-                    width: '25.5em',
-                    "& .MuiInputBase-root": {
-                        height: '2.5em',
-                        backgroundColor: '#e9eeff'
-                    },
-                    "& .MuiInputLabel-root": {
-                        fontSize: '0.5em',
-                        textAlign: 'center',
-                    },
-                },
-            }}
-            noValidate
-            autoComplete="off"
-        >
-            <TextField
-                id="outlined-basic"
-                variant="outlined"
-                margin='normal'
-                name={name}
-                value={value}
-                onChange={onChange}
-                error={error}
-                helperText={error && "This field is required"}
-                disabled={disabled}
-            />
         </Box>
     );
 }
@@ -107,46 +52,23 @@ function QuantityField({ name, value, onChange, max, error, disabled }) {
     };
 
     return (
-        <Box
-            component="form"
-            sx={{
-                '& > :not(style)': {
-                    m: 1,
-                    width: '25.5em',
-                    "& .MuiInputBase-root": {
-                        height: '2.5em',
-                        backgroundColor: '#e9eeff',
-                    },
-                    "& .MuiInputLabel-root": {
-                        fontSize: '0.5em',
-                        textAlign: 'center',
-                    },
-                },
+
+        <BasicTextField
+            name={name}
+            size="small"
+            value={value}
+            onChange={onChange}
+            error={error}
+            disabled={disabled}
+            InputProps={{
+                endAdornment: (
+                    <div>
+                        <button type="button" onClick={handleIncrement} disabled={value >= max}>+</button>
+                        <button type="button" onClick={handleDecrement} disabled={value <= 1}>-</button>
+                    </div>
+                )
             }}
-            noValidate
-            autoComplete="off"
-        >
-            <TextField
-                id="outlined-basic"
-                variant="outlined"
-                margin='normal'
-                name={name}
-                value={value}
-                onChange={onChange}
-                error={error}
-                helperText={error && "This field is required"}
-                disabled={disabled}
-                // type="number"
-                InputProps={{
-                    endAdornment: (
-                        <div>
-                            <button type="button" onClick={handleIncrement} disabled={value >= max}>+</button>
-                            <button type="button" onClick={handleDecrement} disabled={value <= 1}>-</button>
-                        </div>
-                    )
-                }}
-            />
-        </Box>
+        />
     );
 }
 
@@ -154,33 +76,13 @@ function SelectReason({ value, onChange, error }) {
     return (
         <Box sx={{ minWidth: 80 }}>
             <FormControl fullWidth error={error}>
-                <InputLabel
-                    id="reason-select-label"
-                    sx={{
-                        fontSize: '10px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    }}
-                >
-                    Select
-                </InputLabel>
+
                 <Select
                     labelId="reason-select-label"
                     id="reason-select"
                     value={value}
-                    label="Reason"
                     onChange={onChange}
-                    sx={{
-                        height: 40,
-                        width: '40.8em',
-                        fontSize: 10,
-                        backgroundColor: '#e9eeff',
-                        marginRight: '8px',
-                        '& .MuiInputLabel-root': {
-                            fontSize: 4,
-                        },
-                    }}
+                    style={{width: '17.25em', height: '2em', marginRight: '0.5em'}}
                 >
                     <MenuItem value="Defective Item">Defective Item</MenuItem>
                     <MenuItem value="Not as Described">Not as Described</MenuItem>
@@ -393,8 +295,10 @@ function CustomerRefundRequest() {
                                 <h5>Contact</h5>
                             </div>
                             <div className="customerTextField">
-                                <BasicTextFields
+                                <BasicTextField
                                     name="contact"
+                                    size="small"
+                                    type="number"
                                     value={formData.contact}
                                     onChange={handleChange}
                                     error={errors.contact}
@@ -414,6 +318,7 @@ function CustomerRefundRequest() {
                                     error={errors.item}
                                     items={items}
                                 />
+
                             </div>
                         </div>
 
@@ -451,8 +356,10 @@ function CustomerRefundRequest() {
                                 <h5>Total Price</h5>
                             </div>
                             <div className="customerTextField">
-                                <BasicTextFields
+                                <BasicTextField
                                     name="totalPrice"
+                                    size="small"
+                                    type="number"
                                     value={formData.totalPrice}
                                     onChange={handleChange}
                                     error={errors.totalPrice}
@@ -463,25 +370,34 @@ function CustomerRefundRequest() {
 
                         <div className="customerRefundButtonField">
                             <div className="customerRefundRequestButtons">
-                                <button type="submit" style={{ background: 'none', border: 'none', padding: 0, margin: 0 }}>
-                                    <CustomizedButton
-                                        hoverBackgroundColor="#2d3ed2"
-                                        style={{
-                                            color: '#ffffff',
-                                            backgroundColor: '#242F9B',
-                                            border: '1px solid #000000',
-                                            borderRadius: '10px',
-                                            width: '240px',
-                                            height: '40px',
-                                            fontSize: '17px',
-                                            fontWeight: 'bold',
-                                            margin: '0',
-                                            marginBottom: '20px',
-                                        }}
-                                    >
-                                        Request Refund
-                                    </CustomizedButton>
-                                </button>
+                                <CustomizedButton
+                                    onClick={() => props.onClose(false)}
+                                    hoverBackgroundColor="#f11717"
+                                    style={{
+                                        backgroundColor: '#960505',
+                                        width: '9.5em',
+                                        height: '2.5em',
+                                        fontSize: '0.8em',
+                                        fontFamily: 'inter',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.35em',
+                                        margin: '2em 2.5em 0 0'
+                                    }}>
+                                    Cancel
+                                </CustomizedButton>
+                                <CustomizedButton
+                                    type="submit"
+                                    hoverBackgroundColor="#2d3ed2"
+                                    style={{
+                                        backgroundColor: '#242F9B',
+                                        border: '1px solid #242F9B',
+                                        width: '9.5em',
+                                        height: '2.5em',
+                                        fontSize: '0.8em',
+                                        padding: '0.5em 0.625em',
+                                    }}>
+                                    Request
+                                </CustomizedButton>
                             </div>
                         </div>
                     </form>

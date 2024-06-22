@@ -1,6 +1,4 @@
 .generatedCustomerRefundRequestOuter{
-    display: flex;
-    justify-content: center;
     width: 100%;
     height: 100%;
 }
@@ -9,16 +7,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 92.875em;
-    height: 33em;
+    height: 37.5em;
     background-color: #DBDFFD;
-    margin: 1.5em 0 0 0;
-    border-radius: 0.5em;
 }
 
 .generatedRefundRequestTopic h2{
     font-family: Inter;
-    margin: 1.45em 0 0 0;
+    padding-top: 2em;
 }
 
 .customerRefundRequestDetails{
@@ -65,8 +60,8 @@
 .refundButtonField{
     width: 38em;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-end;
-    justify-content: space-between;
+    justify-content: center;
     margin: 1.25em 0 0 0;
 }

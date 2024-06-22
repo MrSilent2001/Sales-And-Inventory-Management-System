@@ -2,33 +2,33 @@
     font-family: Inter, serif;
 }
 
-.customerEligibleOrdersOuter{
+.eligibleCustomerOrdersOuter{
     width: 100%;
     height: 100%;
 }
 
-.customerEligibleOrdersInner{
+.eligibleCustomerOrdersInner{
     padding-top: 1.5em;
     width: 100%;
     height: 37.625em;
     background-color: #DBDFFD;
 }
 
-.customerEligibleOrders-dashboard{
+.eligibleCustomerOrders-dashboard{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.customerEligibleOrdersTitle{
+.eligibleCustomerOrdersTitle{
     text-align: left;
     margin: 0;
     padding: 1.25em 0;
 
 }
 
-.customerEligibleOrdersTitleWithSearchbar{
+.eligibleCustomerOrdersTitleWithSearchbar{
     margin: 0 0 1.5em 2.5em;
     width: 95%;
     height: 3em;

@@ -93,14 +93,8 @@ function GeneratedCustomerRefundRequest() {
                                         width: '9.5em',
                                         height: '2.75em',
                                         fontSize: '0.75em',
-                                        fontFamily: 'inter',
                                         padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        fontWeight: '550',
                                         marginTop: '0.25em',
-                                        marginLeft: '-3.5em',
-                                        textTransform: 'none',
-                                        textAlign: 'center',
                                     }}
                                 >
                                     Go Back

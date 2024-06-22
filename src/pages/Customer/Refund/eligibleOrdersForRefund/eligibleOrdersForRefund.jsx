@@ -9,11 +9,13 @@ import axios from "axios";
 import DynamicTable from '../../../../components/Table/customizedTable2';
 import CustomizedAlert from '../../../../components/Alert/alert';
 import { jwtDecode } from 'jwt-decode';
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {Button} from "@mui/material";
+import BackArrow from "../../../../components/Icons/backArrow";
 
 function EligibleOrdersForRefund() {
     const [isLoading, setIsLoading] = useState(false);
-    const [eligibleOrders, setEligibleOrders] = useState([]);
+    const [eligibleCustomerOrders, setEligibleOrders] = useState([]);
     const [openError, setOpenError] = useState(false);
     const token = localStorage.getItem('accessToken');
     const decodedToken = jwtDecode(token);
@@ -21,16 +23,16 @@ function EligibleOrdersForRefund() {
     const navigate = useNavigate();
 
     const columns = useMemo(() => [
-        { accessorKey: 'orderId', header: 'Order Id', size: 10, align: 'center' },
-        { accessorKey: 'orderItems', header: 'Ordered Items', size: 100, align: 'center', Cell: ({ value }) => <span>{value}</span> },
-        { accessorKey: 'eligibleItems', header: 'Eligible Items for Refund', size: 170, align: 'center', Cell: ({ value }) => <span>{value}</span> },
-        { accessorKey: 'orderPrice', header: 'Bill Amount', size: 70, align: 'center' },
-        { accessorKey: 'orderDate', header: 'Date', size: 170, align: 'center' },
-        { accessorKey: 'orderStatus', header: 'Order Status', size: 70, align: 'center' },
+        { accessorKey: 'orderId', header: 'Order Id', size: 5, align: 'center' },
+        { accessorKey: 'orderItems', header: 'Ordered Items', size: 50, align: 'center', Cell: ({ value }) => <span>{value}</span> },
+        { accessorKey: 'eligibleItems', header: 'Refundable Items', size: 50, align: 'center', Cell: ({ value }) => <span>{value}</span> },
+        { accessorKey: 'orderPrice', header: 'Amount', size: 50, align: 'center' },
+        { accessorKey: 'orderDate', header: 'Date', size: 50, align: 'center' },
+        { accessorKey: 'orderStatus', header: 'Status', size: 20, align: 'center' },
         {
             accessorKey: 'actions',
-            header: '',
-            size: 200,
+            header: 'Actions',
+            size: 100,
             cellRenderer: ({ row }) => (
                 <div style={{ display: 'flex' }}>
                     <CustomizedButton
@@ -41,17 +43,11 @@ function EligibleOrdersForRefund() {
                             color: '#ffffff',
                             backgroundColor: '#242F9B',
                             border: '1px solid #242F9B',
-                            width: '12em',
+                            width: '10em',
                             height: '2.5em',
-                            fontSize: '0.95em',
-                            fontFamily: 'inter',
+                            fontSize: '0.8em',
                             padding: '0.5em 0.625em',
-                            borderRadius: '0.35em',
-                            fontWeight: '550',
-                            marginTop: '0.625em',
-                            marginRight: '1.5em',
-                            textTransform: 'none',
-                            textAlign: 'center',
+                            marginTop: '0.625em'
                         }}>
                         Request Refund
                     </CustomizedButton>
@@ -75,7 +71,7 @@ function EligibleOrdersForRefund() {
     //         textTransform: 'none',
     //         textAlign: 'center',
     //     };
-    //     // console.log(eligibleOrders);
+    //     // console.log(eligibleCustomerOrders);
     //
     //     return (
     //         <CustomizedButton
@@ -145,7 +141,7 @@ function EligibleOrdersForRefund() {
                 const departedOrders = customerOrders.filter(order => order.orderStatus === "Departed");
                 const sevenDaysAgo = new Date();
                 sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-                const eligibleOrders = departedOrders.filter(order => new Date(order.lastOrderStatusUpdatedDate) >= sevenDaysAgo);
+                const eligibleCustomerOrders = departedOrders.filter(order => new Date(order.lastOrderStatusUpdatedDate) >= sevenDaysAgo);
 
                 const refundMap = refundRequests.reduce((acc, refund) => {
                     if (!acc[refund.orderId]) {
@@ -158,7 +154,7 @@ function EligibleOrdersForRefund() {
                     return acc;
                 }, {});
 
-                const formattedOrders = eligibleOrders.map(order => {
+                const formattedOrders = eligibleCustomerOrders.map(order => {
                     const orderItemsWithName = order.orderItems.map(itemStr => {
                         const item = JSON.parse(itemStr);
                         const productName = products[item.id];
@@ -199,30 +195,39 @@ function EligibleOrdersForRefund() {
 
     return (
         <>
-            <CustomerNavbar />
-            <div className="CustomerOrdersOuter">
-                <div className="CustomerOrdersInner">
-                    <div className="customerOrdersTopicWithTextfield">
-                        <div className="customerOrdersTopic">
-                            <h2>Eligible Orders for Refund</h2>
-                        </div>
+            <CustomerNavbar/>
+            <div className="eligibleCustomerOrdersOuter">
+                <div className="eligibleCustomerOrdersInner">
+                    <div className="searchContainer">
+                        <Link to="/refundRequests">
+                            <Button
+                                startIcon={<BackArrow/>}
+                                size="large"
+                                style={{
+                                    color: "black",
+                                    fontWeight: 'bold',
+                                    textTransform: "none",
+                                    fontSize: '1.25em'
+                                }}
+                            >
+                                Eligible Orders for Refund
+                            </Button>
+                        </Link>
                     </div>
-                    <div className='orderHistory'>
+                    <div className="eligibleCustomerOrders-dashboard">
                         {isLoading ? (
-                            <PageLoader />
+                            <PageLoader/>
                         ) : (
                             <DynamicTable
                                 columns={columns}
-                                data={eligibleOrders}
+                                data={eligibleCustomerOrders}
                                 includeProfile={false}
-                                // createActions={createRefundRequestButton}
-                                // onRowClick={handleRowClick}
                             />
                         )}
                     </div>
                 </div>
             </div>
-            <Footer />
+            <Footer/>
 
             <CustomizedAlert
                 open={openError}
