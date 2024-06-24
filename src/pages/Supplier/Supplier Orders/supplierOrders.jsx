@@ -75,8 +75,14 @@ function SupplierOrders() {
                 )
             );
 
+            await axios.put(`http://localhost:9000/purchaseOrder/update/${orderId}`, { status: newStatus }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
             const order = orders.find(order => order.id === orderId);
-            await axios.post('http://localhost:9000/email/send/purchaseOrderStatus', {
+            axios.post('http://localhost:9000/email/send/purchaseOrderStatus', {
                 receiverName: "Tradeasy Pvt Ltd",
                 emailSubject: "Order Status Update!",
                 emailBody: `Your order under the Order Id: ${orderId} has been ${newStatus}. Thank You!`,
@@ -98,7 +104,8 @@ function SupplierOrders() {
         { value: 'Pending', label: 'Pending', backgroundColor: 'orange' },
         { value: 'Accepted', label: 'Accepted', backgroundColor: 'blue' },
         { value: 'Rejected', label: 'Rejected', backgroundColor: 'red' },
-        { value: 'In-Processing', label: 'In-Processing', backgroundColor: 'green' }
+        { value: 'In-Processing', label: 'In-Processing', backgroundColor: 'green' },
+        { value: 'Departed', label: 'Departed', backgroundColor: 'yellow' }
     ];
 
     const mappedData = orders.map((order, index) => ({

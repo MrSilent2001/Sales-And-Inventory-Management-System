@@ -78,6 +78,18 @@ function Cart() {
         removeFromCartHandleClickSuccess();
     };
 
+    const lineItems = cart.map(item => {
+        // Calculate the discounted price for each item if discountRate is present
+        const finalPrice = item.discountRate
+            ? item.productSellingPrice * (1 - item.discountRate / 100)
+            : item.productSellingPrice;
+
+        // Use the first image URL from the array, or adjust as needed
+        const imageUrl = item.productImage.length > 0 ? item.productImage[0] : '';
+
+        console.log(imageUrl)
+    })
+
     // Redirect to Stripe checkout
     const redirectToCheckout = async () => {
         setLoading(true);
@@ -100,6 +112,8 @@ function Cart() {
                 quantity: item.amount,
             };
         });
+
+        console.log(cart)
 
         const metadata = cart.map(item => ({
             name: item.productName,

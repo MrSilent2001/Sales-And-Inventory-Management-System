@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import {Box, Button, Container} from '@mui/material';
 import axios from 'axios';
 import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
-import Footer from "../../../../../layout/footer/footer";;
+import Footer from "../../../../../layout/footer/footer";
 import CustomizedButton from "../../../../../components/Button/button";
 import DynamicTable from '../../../../../components/Table/customizedTable2';
 import { Link } from 'react-router-dom';
@@ -16,6 +16,7 @@ const AcceptedOrdersDashboard = () => {
 
     const [departedOrders, setDepartedOrders] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
         fetchDepartedOrders();
@@ -23,8 +24,16 @@ const AcceptedOrdersDashboard = () => {
 
     const fetchDepartedOrders = async () => {
         try {
-            const response = await axios.get('http://localhost:9000/purchaseOrder/getAll');
-            const filteredOrders = response.data.filter(order => order.status === 'Accepted' || order.status === 'Departed');
+            const response = await axios.get('http://localhost:9000/purchaseOrder/getAll', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const filteredOrders = response.data.filter(order => order.status === 'Accepted' || order.status === 'Departed', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setDepartedOrders(filteredOrders);
             //setIsLoading(true);
         } catch (error) {
@@ -34,7 +43,11 @@ const AcceptedOrdersDashboard = () => {
 
     const handleMarkAsDeparted = async (id) => {
         try {
-            await axios.put(`http://localhost:9000/purchaseOrder/markAsDeparted/${id}`);
+            await axios.put(`http://localhost:9000/purchaseOrder/markAsDeparted/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             fetchDepartedOrders();
         } catch (error) {
             console.error('Error updating order status:', error);
@@ -65,7 +78,7 @@ const AcceptedOrdersDashboard = () => {
                 style={{
                     color: 'white',
                     backgroundColor: '#242F9B',
-                    width: '6.5em',
+                    width: '11em',
                     height: '2.75em',
                     fontSize: '0.8em',
                     padding: '0.5em 0.625em',
@@ -97,7 +110,7 @@ const AcceptedOrdersDashboard = () => {
                                     fontSize: '1.25em'
                                 }}
                             >
-                                Back
+                                Accepted Orders
                             </Button>
                         </Link>
                     </div>

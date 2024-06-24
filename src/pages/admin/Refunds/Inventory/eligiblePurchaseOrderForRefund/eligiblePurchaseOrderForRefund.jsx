@@ -138,7 +138,7 @@ function EligiblePurchaseOrdersForRefund() {
             <div className="eligiblePurchaseOrdersOuter">
                 <div className="eligiblePurchaseOrdersInner">
                     <div className="searchContainer">
-                        <Link to="/refundRequests">
+                        <Link to="/InventoryRefundRequestsTable">
                             <Button
                                 startIcon={<BackArrow />}
                                 size="large"
