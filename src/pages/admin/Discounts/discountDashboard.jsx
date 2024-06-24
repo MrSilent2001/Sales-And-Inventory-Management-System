@@ -110,7 +110,6 @@ function DiscountDashboard() {
             fontSize: '0.75em',
             padding: '0.5em 0.625em',
             borderRadius: '0.35em',
-            fontWeight: '550',
         };
 
         return (

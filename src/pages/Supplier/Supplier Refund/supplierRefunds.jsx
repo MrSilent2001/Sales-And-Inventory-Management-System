@@ -18,13 +18,13 @@ function SupplierRefunds() {
 
     const columns = useMemo(
         () => [
-            { accessorKey: 'customerName', header: 'Name', size: 75 },
             { accessorKey: 'email', header: 'Email', size: 75 },
             { accessorKey: 'contactNo', header: 'Contact', size: 75 },
             { accessorKey: 'item', header: 'Purchased Products', size: 75 },
             { accessorKey: 'price', header: 'Bill Amount', size: 75 },
             { accessorKey: 'reason', header: 'Reason', size: 75 },
             { accessorKey: 'createdDate', header: 'Ordered Date', size: 75 },
+            { accessorKey: 'status', header: 'Refund Status', size: 100 }
         ],
         []
     );
@@ -53,7 +53,9 @@ function SupplierRefunds() {
                     },
                 });
 
-                const filteredRefunds = refundResponse.data.filter(refund => refund.supplierId === id);
+                console.log(refundResponse.data)
+
+                const filteredRefunds = refundResponse.data.filter(refund => String(refund.supplierId) === String(id));
                 setRefunds(filteredRefunds);
             } catch (error) {
                 console.error('Error fetching refunds:', error);
@@ -92,7 +94,7 @@ function SupplierRefunds() {
                     receiverName: "Tradeasy Pvt Ltd",
                     emailSubject: "Refund Request Status Update!",
                     emailBody: `Your refund request under the Request Id: ${eventId} has been ${newStatus}. Thank You!`,
-                    receiverEmail: "dmcoder01@gmail.com"
+                    receiverEmail: "tradeasy.official01@gmail.com"
                 },
                 {
                     headers: {
@@ -135,7 +137,6 @@ function SupplierRefunds() {
                             <DynamicTable
                                 columns={columns}
                                 data={refunds}
-                                createActions={createActions}
                                 includeProfile={false}
                             />
                         )}

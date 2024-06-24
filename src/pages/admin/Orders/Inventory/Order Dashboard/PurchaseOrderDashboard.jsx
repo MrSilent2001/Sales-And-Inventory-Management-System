@@ -14,6 +14,7 @@ import Footer from "../../../../../layout/footer/footer";;
 import ViewOrder from "../../../Orders/Inventory/Modals/View Order/viewOrder";
 import CustomizedButton from "../../../../../components/Button/button";
 import DynamicTable from '../../../../../components/Table/customizedTable2';
+import PageLoader from "../../../../../components/Page Loader/pageLoader";
 
 const PurchaseOrderDashboard = () => {
 
@@ -24,6 +25,7 @@ const PurchaseOrderDashboard = () => {
     const [inProgressOrders, setInProgressOrders] = useState(0);
     const [completedOrders, setCompletedOrders] = useState(0);
     const [selectedOrder, setSelectedOrder] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const token = localStorage.getItem('accessToken');
 
@@ -36,6 +38,7 @@ const PurchaseOrderDashboard = () => {
                     },
                 });
                 setPurchasedOrders(response.data);
+                //setIsLoading(true);
                 console.log(response.data);
             } catch (error) {
                 console.error('Error fetching purchase orders:', error);
@@ -131,9 +134,7 @@ const PurchaseOrderDashboard = () => {
                         height: '2.75em',
                         fontSize: '0.8em',
                         padding: '0.5em 0.625em',
-                        borderRadius: '0.35em',
                         marginTop: '0.625em',
-                        marginRight: '0.75em'
                     }}>
                     View
                 </CustomizedButton>
@@ -157,6 +158,30 @@ const PurchaseOrderDashboard = () => {
             </div>
         )
     }));
+
+    const createToolbarButton = () => {
+        const buttonStyle = {
+            backgroundColor: '#242F9B',
+            border: '1px solid #242F9B',
+            width: '11em',
+            height: '2.5em',
+            fontSize: '0.75em',
+            padding: '0.5em 0.625em',
+            borderRadius: '0.35em',
+        };
+
+        return (
+            <Link to="/acceptedOrders">
+            <CustomizedButton
+                onClick={() => setVisible(true)}
+                hoverBackgroundColor="#2d3ed2"
+                style={buttonStyle}
+            >
+                Accepted Orders
+            </CustomizedButton>
+            </Link>
+        );
+    };
 
     return (
         <>
@@ -191,27 +216,10 @@ const PurchaseOrderDashboard = () => {
 
                 {/* Main Content */}
                 <Container maxWidth={false} sx={{ bgcolor: '#DBDFFD', height: 'auto', padding: '1.5em 0', position: 'relative' }}>
-                    <Link to="/acceptedOrders">
-                        <CustomizedButton
-                            hoverBackgroundColor="#242F9B"
-                            style={{
-                                color: 'white',
-                                backgroundColor: '#242F9B',
-                                width: '10em',
-                                height: '2.75em',
-                                fontSize: '0.8em',
-                                padding: '0.5em 0.625em',
-                                borderRadius: '0.35em',
-                                position: 'absolute',
-                                right: '0',
-                                top: '5.75em', // Adjust based on your layout
-                                marginRight: '3em',
-                                marginBottom: '1em'
-                            }}
-                        >
-                            Accepted Orders
-                        </CustomizedButton>
-                    </Link>
+                    {isLoading ? (
+                        <PageLoader />
+                    ) : (
+
                         <DynamicTable
                             columns={columns}
                             data={dataWithActions}
@@ -219,7 +227,9 @@ const PurchaseOrderDashboard = () => {
                             tableWidth="100%"  // Increase the width of the table
                             enableFilters={false}
                             initialShowGlobalFilter={true}  // Show the global search filter
+                            renderToolbarItems={createToolbarButton}
                         />
+                    )}
 
                     <Modal open={viewOrderVisible}>
                         <ViewOrder order={selectedOrder} onClose={() => setViewOrderVisible(false)} />

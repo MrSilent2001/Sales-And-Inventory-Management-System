@@ -2,12 +2,12 @@
     font-family: Inter, serif;
 }
 
-.eligibleOrdersDashboardOuter{
+.eligiblePurchaseOrdersOuter{
     width: 100%;
     height: 100%;
 }
 
-.eligibleOrdersDashboardInner{
+.eligiblePurchaseOrdersInner{
     padding-top: 1.5em;
     width: 100%;
     height: 37.625em;

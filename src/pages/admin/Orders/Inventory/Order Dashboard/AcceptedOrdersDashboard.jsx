@@ -1,12 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import {
-    Box,
-    Card,
-    CardContent,
-    Typography,
-    Container,
-    Modal
-} from '@mui/material';
+import {Box, Button, Container} from '@mui/material';
 import axios from 'axios';
 import InventoryNavbar from "../../../../../layout/navbar/Inventory navbar/Inventory navbar";
 import Footer from "../../../../../layout/footer/footer";;
@@ -15,11 +8,14 @@ import DynamicTable from '../../../../../components/Table/customizedTable2';
 import { Link } from 'react-router-dom';
 
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import PageLoader from "../../../../../components/Page Loader/pageLoader";
+import BackArrow from "../../../../../components/Icons/backArrow";
 
 
 const AcceptedOrdersDashboard = () => {
 
     const [departedOrders, setDepartedOrders] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         fetchDepartedOrders();
@@ -30,6 +26,7 @@ const AcceptedOrdersDashboard = () => {
             const response = await axios.get('http://localhost:9000/purchaseOrder/getAll');
             const filteredOrders = response.data.filter(order => order.status === 'Accepted' || order.status === 'Departed');
             setDepartedOrders(filteredOrders);
+            //setIsLoading(true);
         } catch (error) {
             console.error('Error fetching departed orders:', error);
         }
@@ -72,7 +69,6 @@ const AcceptedOrdersDashboard = () => {
                     height: '2.75em',
                     fontSize: '0.8em',
                     padding: '0.5em 0.625em',
-                    borderRadius: '0.35em',
                     marginTop: '0.625em',
                     marginRight: '0.75em'
                 }}
@@ -82,44 +78,46 @@ const AcceptedOrdersDashboard = () => {
         )
     }));
 
+
     return (
         <>
             <InventoryNavbar />
-            <Box sx={{ display: 'flex', height: '37.5em' }}>
-                <Container maxWidth={false} sx={{ bgcolor: '#DBDFFD', height: 'auto', padding: '1.5em 0', position: 'relative' }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
-                        <Link to="/purchase-orders">
-                            <CustomizedButton
-                                hoverBackgroundColor="#242F9B"
+            <Box sx={{display: 'flex', height: '37.5em'}}>
+                <Container maxWidth={false}
+                           sx={{bgcolor: '#DBDFFD', height: 'auto', padding: '1.5em 0', position: 'relative'}}>
+                    <div className="searchContainer">
+                        <Link to="/purchasedOrder">
+                            <Button
+                                startIcon={<BackArrow/>}
+                                size="large"
                                 style={{
-                                    color: 'white',
-                                    backgroundColor: '#242F9B',
-                                    width: '10em',
-                                    height: '2.75em',
-                                    fontSize: '0.8em',
-                                    padding: '0.5em 0.625em',
-                                    borderRadius: '0.35em',
-                                    marginBottom: '1em',
-                                    position: 'absolute',
-                                    right: '1em',
-                                    top: '1em'
+                                    color: "black",
+                                    fontWeight: 'bold',
+                                    textTransform: "none",
+                                    fontSize: '1.25em'
                                 }}
                             >
-                                Back to Orders
-                            </CustomizedButton>
+                                Back
+                            </Button>
                         </Link>
-                    </Box>
-                    <DynamicTable
-                        columns={columns}
-                        data={dataWithActions}
-                        includeProfile={false}
-                        tableWidth="100%"
-                        enableFilters={false}
-                        initialShowGlobalFilter={true}
-                    />
+                    </div>
+                    {isLoading ? (
+                        <PageLoader/>
+                    ) : (
+
+                        <DynamicTable
+                            columns={columns}
+                            data={dataWithActions}
+                            includeProfile={false}
+                            tableWidth="100%"
+                            enableFilters={false}
+                            initialShowGlobalFilter={true}
+                        />
+                    )}
+
                 </Container>
             </Box>
-            <Footer />
+            <Footer/>
         </>
     );
 };
