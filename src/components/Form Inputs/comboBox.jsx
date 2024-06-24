@@ -1,6 +1,10 @@
 import React from 'react';
 import { Select, MenuItem } from '@mui/material';
 
+const getOptionStyles = (backgroundColor) => ({
+    backgroundColor,
+});
+
 const ComboBox = ({ value, onChange, options, style, defaultValue }) => {
     return (
         <Select
@@ -10,7 +14,7 @@ const ComboBox = ({ value, onChange, options, style, defaultValue }) => {
             defaultValue={defaultValue}
         >
             {options.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
+                <MenuItem key={option.value} value={option.value} style={getOptionStyles(option.backgroundColor)}>
                     {option.label}
                 </MenuItem>
             ))}
@@ -19,4 +23,3 @@ const ComboBox = ({ value, onChange, options, style, defaultValue }) => {
 };
 
 export default ComboBox;
-

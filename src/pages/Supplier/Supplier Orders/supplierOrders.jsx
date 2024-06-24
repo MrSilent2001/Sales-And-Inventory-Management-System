@@ -1,47 +1,30 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./supplierOrders.css";
 import Footer from "../../../layout/footer/footer";
 import axios from "axios";
 import CustomizedAlert from "../../../components/Alert/alert";
 import PageLoader from "../../../components/Page Loader/pageLoader";
 import DynamicTable from "../../../components/Table/customizedTable2";
-import { useNavigate } from "react-router-dom";
 import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navbar";
 import ComboBox from "../../../components/Form Inputs/comboBox";
 
+const columns = [
+    { accessorKey: 'mail', header: 'Email', size: 25 },
+    { accessorKey: 'contact_number', header: 'Contact', size: 25 },
+    { accessorKey: 'Address', header: 'Address', size: 200 },
+    { accessorKey: 'createdDate', header: 'Ordered Date', size: 50 },
+    { accessorKey: 'items', header: 'Order Details', size: 75 },
+    { accessorKey: 'status', header: 'Order Status', size: 100 }
+];
+
 function SupplierOrders() {
     const [orders, setOrders] = useState([]);
+    const [statuses, setStatuses] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
-
     const token = localStorage.getItem('accessToken');
     const id = localStorage.getItem('id');
-
-    const columns = useMemo(() => [
-        { accessorKey: 'customerName', header: 'Customer Name', size: 75 },
-        { accessorKey: 'mail', header: 'Email', size: 25 },
-        { accessorKey: 'contact_number', header: 'Contact', size: 25 },
-        { accessorKey: 'Address', header: 'Address', size: 100 },
-        { accessorKey: 'createdDate', header: 'Ordered Date', size: 75 },
-        { accessorKey: 'items', header: 'Order Details', size: 100 }
-    ], []);
-
-    const handleClickSuccess = () => {
-        setOpenSuccess(true);
-    };
-
-    const handleClickError = () => {
-        setOpenError(true);
-    };
-
-    const handleCloseSuccess = () => {
-        setOpenSuccess(false);
-    };
-
-    const handleCloseError = () => {
-        setOpenError(false);
-    };
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -59,10 +42,12 @@ function SupplierOrders() {
                     },
                 });
 
-                const filteredOrders = orderResponse.data.filter(order => order.supplierId === id);
+
+                const filteredOrders = orderResponse.data.filter(order => String(order.supplierId) === String(id));
                 setOrders(filteredOrders);
+                setStatuses(filteredOrders.map(order => order.status));
             } catch (error) {
-                handleClickError();
+                setOpenError(true);
                 console.error('Error fetching orders:', error);
             } finally {
                 setIsLoading(false);
@@ -71,17 +56,14 @@ function SupplierOrders() {
         fetchOrders();
     }, [token, id]);
 
-    const options = [
-        { value: 'Pending', label: 'Pending' },
-        { value: 'Accepted', label: 'Accepted' },
-        { value: 'Rejected', label: 'Rejected' },
-        { value: 'In-Processing', label: 'In-Processing' }
-    ];
-
-    const handleStatusChange = async (event) => {
+    const handleStatusChange = async (event, orderId, index) => {
         const newStatus = event.target.value;
+        const newStatuses = [...statuses];
+        newStatuses[index] = newStatus;
+        setStatuses(newStatuses);
+
         try {
-            await axios.put(`http://localhost:9000/purchaseOrder/update/${orders[0].id}`, { status: newStatus }, {
+            await axios.put(`http://localhost:9000/purchaseOrder/update/${orderId}`, { status: newStatus }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -97,36 +79,42 @@ function SupplierOrders() {
             await axios.post('http://localhost:9000/email/send/purchaseOrderStatus', {
                 receiverName: "Tradeasy Pvt Ltd",
                 emailSubject: "Order Status Update!",
-                emailBody: `Your order under the Order Id: ${orders[0].id} has been ${newStatus}. Thank You!`,
-                receiverEmail: orders[0].mail
+                emailBody: `Your order under the Order Id: ${orderId} has been ${newStatus}. Thank You!`,
+                receiverEmail: 'tradeasy.official01@gmail.com'
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
 
-            handleClickSuccess();
+            setOpenSuccess(true);
         } catch (error) {
-            handleClickError();
+            setOpenError(true);
             console.error('Error updating order status:', error);
         }
     };
 
-    const createActionButtons = (row, order) => {
-        const orderStatus = order ? order.status : 'Pending';
-        return (
-            <div>
-                <ComboBox
-                    onChange={(event) => handleStatusChange(event, row.id)}
-                    style={{ width: '10em' }}
-                    options={options}
-                    label="Status"
-                    size="small"
-                    defaultValue={orderStatus}
-                />
-            </div>
-        );
-    };
+    const options = [
+        { value: 'Pending', label: 'Pending', backgroundColor: 'orange' },
+        { value: 'Accepted', label: 'Accepted', backgroundColor: 'blue' },
+        { value: 'Rejected', label: 'Rejected', backgroundColor: 'red' },
+        { value: 'In-Processing', label: 'In-Processing', backgroundColor: 'green' }
+    ];
+
+    const mappedData = orders.map((order, index) => ({
+        ...order,
+        status: (
+            <ComboBox
+                value={statuses[index]}
+                onChange={(event) => handleStatusChange(event, order.id, index)}
+                style={{ width: '10em' }}
+                options={options}
+                label="Status"
+                size="small"
+                defaultValue={order.status}
+            />
+        )
+    }));
 
     return (
         <>
@@ -140,9 +128,8 @@ function SupplierOrders() {
                         ) : (
                             <DynamicTable
                                 columns={columns}
-                                data={orders}
-                                createActions={(row) => createActionButtons(row, orders.find(order => order.id === row.id))}
-                                includeProfile={false}
+                                data={mappedData}
+                                initialShowGlobalFilter={true}
                             />
                         )}
                     </div>
@@ -151,13 +138,13 @@ function SupplierOrders() {
             <Footer />
             <CustomizedAlert
                 open={openSuccess}
-                onClose={handleCloseSuccess}
+                onClose={() => setOpenSuccess(false)}
                 severity="success"
                 message="Order status updated successfully!"
             />
             <CustomizedAlert
                 open={openError}
-                onClose={handleCloseError}
+                onClose={() => setOpenError(false)}
                 severity="error"
                 message="Error updating order status."
             />

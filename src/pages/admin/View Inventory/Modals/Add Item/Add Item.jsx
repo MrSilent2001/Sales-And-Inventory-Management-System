@@ -215,8 +215,6 @@ function AddItem(props) {
                                             height: '2.75em',
                                             fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
-                                            borderRadius: '0.35em',
-                                            fontWeight: '500',
                                             marginTop: '0.625em'
                                         }}>
                                         Add Item
