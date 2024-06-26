@@ -4,6 +4,9 @@ import "./viewOrder.css";
 import CustomizedButton from "../../../../../../components/Button/button";
 import CenteredModal from "../../../../../../components/Modal/modal";
 
+
+
+
 function ViewOrder({ order, onClose }) {
     const [orderDetails, setOrderDetails] = useState({
         id: '',
@@ -11,30 +14,55 @@ function ViewOrder({ order, onClose }) {
         Address: '',
         mail: '',
         contact_number: '',
-        items: [],
+        item: '',
         createdDate: '',
-        status:''
+        status: ''
     });
-
+    const [itemMapping, setItemMapping] = useState({});
     const token = localStorage.getItem('accessToken');
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get('http://localhost:9000/product/getAllProducts', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const products = response.data.reduce((acc, product) => {
+                    acc[product.id] = product.productName;
+                    return acc;
+                }, {});
+                setItemMapping(products);
+            } catch (err) {
+                console.error('Failed to fetch products:', err);
+            }
+        };
+
+        fetchProducts();
+    }, [token]);
 
     useEffect(() => {
         const fetchOrderDetails = async () => {
             if (!order) return;
 
             try {
-                const response = await axios.get(`http://localhost:9000/purchaseOrder/get/${order.id}`,{
+                const response = await axios.get(`http://localhost:9000/purchaseOrder/get/${order.id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
+                console.log("Order details response:", response.data);
+
+                const itemWithName = itemMapping[response.data.items] || '';
+
                 setOrderDetails({
                     id: response.data.id,
                     supplierName: response.data.supplierName,
                     Address: response.data.Address,
                     mail: response.data.mail,
                     contact_number: response.data.contact_number,
-                    items: response.data.items || [],
+                    item: itemWithName,
                     createdDate: response.data.createdDate,
                     status: response.data.status
                 });
@@ -45,7 +73,7 @@ function ViewOrder({ order, onClose }) {
         };
 
         fetchOrderDetails();
-    }, [order]);
+    }, [order, itemMapping]);
 
     return (
         <CenteredModal>
@@ -100,10 +128,10 @@ function ViewOrder({ order, onClose }) {
 
                         <div className="formField">
                             <div className="idField">
-                                <h5>Items:</h5>
+                                <h5>Item:</h5>
                             </div>
                             <div className="idInput" id="items">
-                                {Array.isArray(orderDetails.items) ? orderDetails.items.join(', ') : orderDetails.items}
+                                {orderDetails.item}
                             </div>
                         </div>
 
