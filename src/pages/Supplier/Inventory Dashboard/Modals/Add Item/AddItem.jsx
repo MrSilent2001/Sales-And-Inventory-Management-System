@@ -161,6 +161,7 @@ function AddSupplierInventoryItem(props) {
         <CenteredModal>
             <form onSubmit={handleSubmit}>
                 <div className="addSupplierItemOuter">
+                    <div className="addSupplierItemInner">
                     <div className="item-image">
                         <Avatar
                             src={formData.image}
@@ -355,6 +356,7 @@ function AddSupplierInventoryItem(props) {
                             </CustomizedButton>
 
                         </div>
+                    </div>
                     </div>
                 </div>
             </form>
