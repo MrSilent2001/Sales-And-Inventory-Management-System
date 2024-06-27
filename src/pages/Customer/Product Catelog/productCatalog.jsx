@@ -151,7 +151,7 @@ function ProductCatalog() {
         setSearchQuery(query);
     };
 
-    // Filter products based on category and search query
+    // Filter products based on category, search query, and productStatus
     const filteredProducts = productsWithOffers
         .filter(product => {
             const matchesCategory = Object.entries(checkedItems).every(([category, checked]) =>
@@ -160,9 +160,12 @@ function ProductCatalog() {
 
             const matchesSearchQuery = product.productName.toLowerCase().includes(searchQuery.toLowerCase());
 
-            return matchesCategory && matchesSearchQuery;
+            const isApproved = product.productStatus === "Approved";
+
+            return matchesCategory && matchesSearchQuery && isApproved;
         })
         .sort((a, b) => a.id - b.id); // Sort by id in ascending order
+
 
 
     //Handle add to cart Alert Variable
