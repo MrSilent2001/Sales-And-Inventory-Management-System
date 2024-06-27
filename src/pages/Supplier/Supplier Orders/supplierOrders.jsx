@@ -8,6 +8,8 @@ import DynamicTable from "../../../components/Table/customizedTable2";
 import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navbar";
 import ComboBox from "../../../components/Form Inputs/comboBox";
 
+
+
 const columns = [
     { accessorKey: 'mail', header: 'Email', size: 25 },
     { accessorKey: 'contact_number', header: 'Contact', size: 25 },
@@ -23,8 +25,30 @@ function SupplierOrders() {
     const [isLoading, setIsLoading] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
+    const [itemMapping, setItemMapping] = useState({});
     const token = localStorage.getItem('accessToken');
     const id = localStorage.getItem('id');
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get('http://localhost:9000/product/getAllProducts', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const products = response.data.reduce((acc, product) => {
+                    acc[product.id] = product.productName;
+                    return acc;
+                }, {});
+                setItemMapping(products);
+            } catch (err) {
+                console.error('Failed to fetch products:', err);
+            }
+        };
+
+        fetchProducts();
+    }, [token]);
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -35,13 +59,12 @@ function SupplierOrders() {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-
+                console.log('supplier response',supplierResponse)
                 const orderResponse = await axios.get('http://localhost:9000/purchaseOrder/getAll', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-
 
                 const filteredOrders = orderResponse.data.filter(order => String(order.supplierId) === String(id));
                 setOrders(filteredOrders);
@@ -75,12 +98,6 @@ function SupplierOrders() {
                 )
             );
 
-            await axios.put(`http://localhost:9000/purchaseOrder/update/${orderId}`, { status: newStatus }, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-
             const order = orders.find(order => order.id === orderId);
             axios.post('http://localhost:9000/email/send/purchaseOrderStatus', {
                 receiverName: "Tradeasy Pvt Ltd",
@@ -110,6 +127,7 @@ function SupplierOrders() {
 
     const mappedData = orders.map((order, index) => ({
         ...order,
+        items: order.items.map(itemId => itemMapping[itemId] || itemId).join(', '),
         status: (
             <ComboBox
                 value={statuses[index]}
