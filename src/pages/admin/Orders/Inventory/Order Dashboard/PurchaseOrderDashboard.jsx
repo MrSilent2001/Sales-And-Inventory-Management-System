@@ -16,6 +16,8 @@ import CustomizedButton from "../../../../../components/Button/button";
 import DynamicTable from '../../../../../components/Table/customizedTable2';
 import PageLoader from "../../../../../components/Page Loader/pageLoader";
 
+
+
 const PurchaseOrderDashboard = () => {
 
     const [viewOrderVisible, setViewOrderVisible] = useState(false);
@@ -37,9 +39,9 @@ const PurchaseOrderDashboard = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                setPurchasedOrders(response.data);
-                //setIsLoading(true);
-                console.log(response.data);
+                const pendingOrders = response.data.filter(order => order.status === 'Pending');
+                setPurchasedOrders(pendingOrders);
+                console.log(pendingOrders);
             } catch (error) {
                 console.error('Error fetching purchase orders:', error);
             }
@@ -65,19 +67,24 @@ const PurchaseOrderDashboard = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                const inProgressResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/pending', {
+                const pendingResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/Pending', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                const completedResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/completed', {
+                const acceptedResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/Accepted', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const completedResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/Departed', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
 
                 setTotalOrders(totalResponse.data);
-                setInProgressOrders(inProgressResponse.data);
+                setInProgressOrders(pendingResponse.data + acceptedResponse.data);
                 setCompletedOrders(completedResponse.data);
             } catch (error) {
                 console.error('Error fetching order counts:', error);
@@ -172,13 +179,13 @@ const PurchaseOrderDashboard = () => {
 
         return (
             <Link to="/acceptedOrders">
-            <CustomizedButton
-                onClick={() => setVisible(true)}
-                hoverBackgroundColor="#2d3ed2"
-                style={buttonStyle}
-            >
-                Accepted Orders
-            </CustomizedButton>
+                <CustomizedButton
+                    onClick={() => setVisible(true)}
+                    hoverBackgroundColor="#2d3ed2"
+                    style={buttonStyle}
+                >
+                    Accepted Orders
+                </CustomizedButton>
             </Link>
         );
     };
@@ -210,8 +217,6 @@ const PurchaseOrderDashboard = () => {
                             <Typography variant="h6" sx={{ textAlign: 'center' }}>{completedOrders}</Typography>
                         </CardContent>
                     </Card>
-                    
-                 
                 </Box>
 
                 {/* Main Content */}
@@ -219,7 +224,6 @@ const PurchaseOrderDashboard = () => {
                     {isLoading ? (
                         <PageLoader />
                     ) : (
-
                         <DynamicTable
                             columns={columns}
                             data={dataWithActions}
