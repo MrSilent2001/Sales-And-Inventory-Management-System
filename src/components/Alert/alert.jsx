@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, Snackbar} from "@mui/material";
+import { Alert, Snackbar } from "@mui/material";
 
 function CustomizedAlert({ onClose, open, message, severity, style }) {
     return (
@@ -8,6 +8,7 @@ function CustomizedAlert({ onClose, open, message, severity, style }) {
             autoHideDuration={5000}
             onClose={onClose}
             anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            data-testid="customized-snackbar"
         >
             <Alert
                 onClose={onClose}
@@ -17,6 +18,7 @@ function CustomizedAlert({ onClose, open, message, severity, style }) {
                     ...style,
                     width: '100%'
                 }}
+                data-testid="customized-alert"
             >
                 {message}
             </Alert>

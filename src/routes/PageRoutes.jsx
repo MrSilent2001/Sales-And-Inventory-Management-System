@@ -39,7 +39,7 @@ import ProtectedRoute from "./protectedRoutes";
 import Redirect from "../pages/Customer/Cart/redirect";
 import SupplierHome from "../pages/Supplier/Home/SupplierHomePage";
 import SalesReceipt from "../pages/Customer/Cart/Bill/invoice";
-import CustomizedTable2 from "../pages/admin/View Inventory/test";
+import CustomizedTable2 from "../pages/admin/View Inventory/adminTest";
 import GetStartedPage from "../pages/login & SignUp/_newLogin/LandingPage/landingPage";
 import AdminLandingPage from "../pages/login & SignUp/_newLogin/LandingPage/adminLandingPage";
 import CreatAccountSelectionPage from "../pages/login & SignUp/_newLogin/CreatAccountSelectionPage/CreatAccountSelectionPage";
