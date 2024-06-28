@@ -13,12 +13,15 @@ const columns = [
     { accessorKey: 'contact_number', header: 'Contact', size: 25 },
     { accessorKey: 'Address', header: 'Address', size: 200 },
     { accessorKey: 'createdDate', header: 'Ordered Date', size: 50 },
-    { accessorKey: 'items', header: 'Order Details', size: 75 },
+    { accessorKey: 'items', header: 'Item Name', size: 75 },
+    { accessorKey: 'quantity', header: 'Qty', size: 75 },
+    { accessorKey: 'total_amount', header: 'Total Amount', size: 75 },
     { accessorKey: 'status', header: 'Order Status', size: 100 }
 ];
 
 function SupplierOrders() {
     const [orders, setOrders] = useState([]);
+    const [itemData, setItemData] = useState({});
     const [statuses, setStatuses] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
@@ -42,10 +45,39 @@ function SupplierOrders() {
                     },
                 });
 
-
                 const filteredOrders = orderResponse.data.filter(order => String(order.supplierId) === String(id));
                 setOrders(filteredOrders);
                 setStatuses(filteredOrders.map(order => order.status));
+
+                const itemIds = [...new Set(filteredOrders.map(order => order.items))];
+
+                const itemNamesPromises = itemIds.map(itemId =>
+                    axios.get(`http://localhost:9000/inventory/get/${itemId}`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    })
+                );
+
+                const itemNamesResponses = await Promise.all(itemNamesPromises);
+
+                const itemData = itemNamesResponses.reduce((acc, response) => {
+                    acc[response.data.id] = {
+                        sellerId: response.data.sellerId,
+                        productName: response.data.productName,
+                        productBrand: response.data.productBrand,
+                        productManufacturer: response.data.productManufacturer,
+                        productCategory: response.data.productCategory,
+                        productDescription: response.data.productDescription,
+                        productImage: response.data.productImage,
+                        productColour: response.data.productColour,
+                        productUnitPrice: response.data.productUnitPrice,
+                        productQuantity: response.data.productQuantity
+                    };
+                    return acc;
+                }, {});
+                setItemData(itemData);
+
             } catch (error) {
                 setOpenError(true);
                 console.error('Error fetching orders:', error);
@@ -75,14 +107,41 @@ function SupplierOrders() {
                 )
             );
 
-            await axios.put(`http://localhost:9000/purchaseOrder/update/${orderId}`, { status: newStatus }, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-
             const order = orders.find(order => order.id === orderId);
-            axios.post('http://localhost:9000/email/send/purchaseOrderStatus', {
+            const item = itemData[order.items];
+
+            if (newStatus === 'Accepted') {
+                const newItemQty = Number(item.productQuantity) - Number(order.quantity);
+                console.log('newItemQty', newItemQty);
+
+                await axios.put(`http://localhost:9000/inventory/update/${order.items}`, { productQuantity: newItemQty }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+            }
+
+            if (newStatus === 'Departed') {
+                const newProduct = {
+                    productName: item.productName,
+                    productBrand: item.productBrand,
+                    productManufacture: item.productManufacturer,
+                    productCategory: item.productCategory,
+                    productDescription: item.productDescription,
+                    productImage: item.productImage,
+                    productColor: item.productColour,
+                    productQuantity: item.productQuantity,
+                    productSellingPrice: item.productUnitPrice + (item.productUnitPrice * 0.05)
+                };
+
+                await axios.post('http://localhost:9000/product/create', newProduct, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+            }
+
+            await axios.post('http://localhost:9000/email/send/purchaseOrderStatus', {
                 receiverName: "Tradeasy Pvt Ltd",
                 emailSubject: "Order Status Update!",
                 emailBody: `Your order under the Order Id: ${orderId} has been ${newStatus}. Thank You!`,
@@ -95,27 +154,44 @@ function SupplierOrders() {
 
             setOpenSuccess(true);
         } catch (error) {
-            setOpenError(true);
             console.error('Error updating order status:', error);
+            setOpenError(true);
         }
     };
 
-    const options = [
-        { value: 'Pending', label: 'Pending', backgroundColor: 'orange' },
-        { value: 'Accepted', label: 'Accepted', backgroundColor: 'blue' },
-        { value: 'Rejected', label: 'Rejected', backgroundColor: 'red' },
-        { value: 'In-Processing', label: 'In-Processing', backgroundColor: 'green' },
-        { value: 'Departed', label: 'Departed', backgroundColor: 'yellow' }
-    ];
+    const getOptions = (status) => {
+        if (status === 'Accepted') {
+            return [
+                { value: 'Accepted', label: 'Accepted' },
+                { value: 'Rejected', label: 'Rejected' },
+                { value: 'In-Processing', label: 'In-Processing' },
+                { value: 'Departed', label: 'Departed' }
+            ];
+        }
+        else if (status === 'Departed'){
+            return [
+                { value: 'Departed', label: 'Departed' }
+            ];
+        }else {
+            return [
+                {value: 'Pending', label: 'Pending'},
+                {value: 'Accepted', label: 'Accepted'},
+                {value: 'Rejected', label: 'Rejected'},
+                {value: 'In-Processing', label: 'In-Processing'},
+                {value: 'Departed', label: 'Departed'}
+            ];
+        }
+    };
 
     const mappedData = orders.map((order, index) => ({
         ...order,
+        items: itemData[order.items]?.productName || '',
         status: (
             <ComboBox
                 value={statuses[index]}
                 onChange={(event) => handleStatusChange(event, order.id, index)}
                 style={{ width: '10em' }}
-                options={options}
+                options={getOptions(statuses[index])}
                 label="Status"
                 size="small"
                 defaultValue={order.status}

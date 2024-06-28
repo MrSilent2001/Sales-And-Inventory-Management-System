@@ -62,18 +62,6 @@ function PurchaseItem(props) {
             return;
         }
 
-        const newProduct = {
-            productName: name,
-            productBrand: brand,
-            productManufacture: manufacturer,
-            productCategory: category,
-            productDescription: description,
-            productImage: inventoryItem.productImage,
-            productColor: colour,
-            productQuantity: Number(purchaseQuantity),
-            productSellingPrice: Number(unitPrice)
-        };
-
         const newPurchaseOrder = {
             supplierId: supplier.id,
             supplierName: supplier.username,
@@ -81,6 +69,8 @@ function PurchaseItem(props) {
             mail: supplier.email,
             contact_number: supplier.contactNo,
             items: inventoryItem.id,
+            quantity: purchaseQuantity,
+            total_amount: (Number(unitPrice) * Number(purchaseQuantity)).toString(),
             status: "pending",
             createdDate: new Date().toISOString().split('T')[0]
         };
@@ -94,11 +84,6 @@ function PurchaseItem(props) {
 
             if (!response.data) {
                 await axios.all([
-                    axios.post('http://localhost:9000/product/create', newProduct, {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }),
                     axios.post('http://localhost:9000/purchaseOrder/create', newPurchaseOrder, {
                         headers: {
                             Authorization: `Bearer ${token}`,
