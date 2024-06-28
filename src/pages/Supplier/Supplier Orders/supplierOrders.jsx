@@ -132,7 +132,7 @@ function SupplierOrders() {
                     productColor: item.productColour,
                     productQuantity: item.productQuantity,
                     productSellingPrice: item.productUnitPrice,
-                    productStatus: 'Departed'
+                    productStatus: 'Approved'
                 };
 
                 await axios.post('http://localhost:9000/product/create', newProduct, {
