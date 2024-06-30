@@ -21,7 +21,7 @@
 }
 
 .customerFormField{
-    width: 25em;
+    width: 30em;
     display: flex;
     flex-direction: row;
     align-items: center;

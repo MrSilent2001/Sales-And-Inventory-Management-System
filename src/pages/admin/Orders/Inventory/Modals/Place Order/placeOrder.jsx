@@ -147,8 +147,6 @@ function PlaceOrder(props){
                                         height: '2.5em',
                                         fontSize: '0.95em',
                                         padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        fontWeight: '550',
                                         marginTop: '0.625em',
                                         marginRight: '1.5em',
                                     }}>
@@ -168,11 +166,7 @@ function PlaceOrder(props){
                                         fontSize: '0.95em',
                                         fontFamily: 'inter',
                                         padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        fontWeight: '550',
-                                        marginTop: '0.625em',
-                                        textTransform: 'none',
-                                        textAlign: 'center',
+                                        marginTop: '0.625em'
                                     }}>
                                     Cancel
                                 </CustomizedButton>

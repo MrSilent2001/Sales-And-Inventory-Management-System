@@ -1,9 +1,7 @@
 import './Customer Refund Request.css';
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Footer from "../../../../layout/footer/footer";
@@ -11,9 +9,10 @@ import { useNavigate } from "react-router-dom";
 import CustomizedButton from "../../../../components/Button/button";
 import CustomerNavbar from "../../../../layout/navbar/Customer navbar/Customer navbar";
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 import { useLocation } from 'react-router-dom';
 import BasicTextField from "../../../../components/Form Inputs/textfield";
+import BasicTextArea from "../../../../components/Form Inputs/textArea";
 
 function SelectItem({ value, onChange, error, items }) {
     return (
@@ -24,8 +23,7 @@ function SelectItem({ value, onChange, error, items }) {
                     id="item-select"
                     value={value}
                     onChange={onChange}
-                    style={{width: '17.25em', height: '2em', marginRight: '0.5em'}}
-
+                    style={{ width: '17.25em', height: '2em', marginRight: '0.5em' }}
                 >
                     {items.map((item) => (
                         <MenuItem key={item.id} value={item.id}>
@@ -52,7 +50,6 @@ function QuantityField({ name, value, onChange, max, error, disabled }) {
     };
 
     return (
-
         <BasicTextField
             name={name}
             size="small"
@@ -76,13 +73,12 @@ function SelectReason({ value, onChange, error }) {
     return (
         <Box sx={{ minWidth: 80 }}>
             <FormControl fullWidth error={error}>
-
                 <Select
                     labelId="reason-select-label"
                     id="reason-select"
                     value={value}
                     onChange={onChange}
-                    style={{width: '17.25em', height: '2em', marginRight: '0.5em'}}
+                    style={{ width: '17.25em', height: '2em', marginRight: '0.5em' }}
                 >
                     <MenuItem value="Defective Item">Defective Item</MenuItem>
                     <MenuItem value="Not as Described">Not as Described</MenuItem>
@@ -98,6 +94,7 @@ function CustomerRefundRequest() {
         customerId: '',
         customerName: '',
         contact: '',
+        accountDetails: '',
         item: '',
         quantity: 1,
         reason: '',
@@ -106,10 +103,11 @@ function CustomerRefundRequest() {
     const [items, setItems] = useState([]);
     const [maxQuantity, setMaxQuantity] = useState(0);
     const [productPrices, setProductPrices] = useState({});
-    const [orderDate, setOrderDate] = useState()
+    const [orderDate, setOrderDate] = useState();
     const [discounts, setDiscounts] = useState([]);
     const [errors, setErrors] = useState({
         contact: false,
+        accountDetails: false,
         item: false,
         quantity: false,
         reason: false,
@@ -118,7 +116,6 @@ function CustomerRefundRequest() {
     const navigate = useNavigate();
     const location = useLocation();
     const { orderId } = location.state || {};
-
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
@@ -208,9 +205,9 @@ function CustomerRefundRequest() {
         }
     }, [orderId]);
 
-
-    const handleChange = (event) => {
-        const { name, value } = event.target;
+    const handleChange = (eventOrData) => {
+        const isEvent = eventOrData.target !== undefined;
+        const { name, value } = isEvent ? eventOrData.target : eventOrData;
 
         if (name === 'item') {
             const selectedItem = items.find((item) => item.id === value);
@@ -226,7 +223,6 @@ function CustomerRefundRequest() {
             const itemPrice = productPrices[updatedFormData.item]?.price || 0;
             let totalPrice = itemPrice * updatedFormData.quantity;
             console.log(orderDate)
-
 
             const applicableDiscount = discounts.find((discount) =>
                 parseInt(discount.productId) === parseInt(updatedFormData.item) &&
@@ -251,6 +247,7 @@ function CustomerRefundRequest() {
 
         const newErrors = {
             contact: !formData.contact,
+            accountDetails: !formData.accountDetails,
             item: !formData.item,
             quantity: !formData.quantity,
             reason: !formData.reason,
@@ -270,8 +267,7 @@ function CustomerRefundRequest() {
                 Authorization: `Bearer ${token}`,
             },
         })
-
-    .then((response) => {
+            .then((response) => {
                 console.log('Refund request created:', response.data);
                 navigate('/generatedrefund', { state: { formData } });
             })
@@ -292,7 +288,7 @@ function CustomerRefundRequest() {
                     <form onSubmit={handleSubmit} className="customerRefundRequestForm">
                         <div className="customerFormField">
                             <div className="customerTextField">
-                                <h5>Contact</h5>
+                                <h5>Contact:</h5>
                             </div>
                             <div className="customerTextField">
                                 <BasicTextField
@@ -309,28 +305,41 @@ function CustomerRefundRequest() {
 
                         <div className="customerFormField">
                             <div className="customerTextField">
-                                <h5>Item</h5>
+                                <h5>Account Details: </h5>
                             </div>
                             <div className="customerTextField">
-                                <SelectItem
-                                    value={formData.item}
-                                    onChange={(e) => handleChange({ target: { name: 'item', value: e.target.value } })}
-                                    error={errors.item}
-                                    items={items}
+                                <BasicTextArea
+                                    rows={3}
+                                    name="accountDetails"
+                                    style={{ width: '17.5em', marginTop: '1em' }}
+                                    onChange={(e) => handleChange({ name: 'accountDetails', value: e.target.value })}
                                 />
-
                             </div>
                         </div>
 
                         <div className="customerFormField">
                             <div className="customerTextField">
-                                <h5>Quantity</h5>
+                                <h5>Item:</h5>
+                            </div>
+                            <div className="customerTextField">
+                                <SelectItem
+                                    value={formData.item}
+                                    onChange={(e) => handleChange({ name: 'item', value: e.target.value })}
+                                    error={errors.item}
+                                    items={items}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="customerFormField">
+                            <div className="customerTextField">
+                                <h5>Quantity:</h5>
                             </div>
                             <div className="customerTextField">
                                 <QuantityField
                                     name="quantity"
                                     value={formData.quantity}
-                                    onChange={handleChange}
+                                    onChange={(e) => handleChange({ name: 'quantity', value: parseInt(e.target.value) })}
                                     error={errors.quantity}
                                     max={maxQuantity}
                                     disabled={formData.item === ''}
@@ -340,12 +349,12 @@ function CustomerRefundRequest() {
 
                         <div className="customerFormField">
                             <div className="customerTextField">
-                                <h5>Reason</h5>
+                                <h5>Reason:</h5>
                             </div>
                             <div className="customerTextField">
                                 <SelectReason
                                     value={formData.reason}
-                                    onChange={(e) => handleChange({ target: { name: 'reason', value: e.target.value } })}
+                                    onChange={(e) => handleChange({ name: 'reason', value: e.target.value })}
                                     error={errors.reason}
                                 />
                             </div>
@@ -353,7 +362,7 @@ function CustomerRefundRequest() {
 
                         <div className="customerFormField">
                             <div className="customerTextField">
-                                <h5>Total Price</h5>
+                                <h5>Total Price:</h5>
                             </div>
                             <div className="customerTextField">
                                 <BasicTextField
@@ -371,7 +380,7 @@ function CustomerRefundRequest() {
                         <div className="customerRefundButtonField">
                             <div className="customerRefundRequestButtons">
                                 <CustomizedButton
-                                    onClick={() => props.onClose(false)}
+                                    onClick={() => navigate(-1)}
                                     hoverBackgroundColor="#f11717"
                                     style={{
                                         backgroundColor: '#960505',

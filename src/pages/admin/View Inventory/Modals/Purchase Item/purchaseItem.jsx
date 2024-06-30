@@ -124,6 +124,7 @@ function PurchaseItem(props) {
                         }
                     });
             }
+
         } catch (error) {
             if (error.response && error.response.status === 404) {
                 await axios.all([
