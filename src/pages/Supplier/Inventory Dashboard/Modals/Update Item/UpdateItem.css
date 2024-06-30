@@ -1,8 +1,17 @@
 .updateSupplierItemOuter {
     display: flex;
     width: 80em;
-    height: 40em;
-    background-color: #DBDFFD;
+    height: 37.5em;
+    background-color: rgb(240, 240, 245);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 0.5em;
+}
+
+.updateSupplierItemInner{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 37.5em;
     border-radius: 0.5em;
 }
 
@@ -11,16 +20,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 35em;
-    padding: 1em;
+    height: 37.5em;
+    border-radius: 5px 0 0 5px;
+    width: 40%;
+    background-color: #adbbda;
 }
 
 .item-details {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 45em;
-    padding: 2em;
+    height: 100%;
+    width: 60%;
 }
 
 .item-form-field {
@@ -44,9 +55,9 @@
     width: 100%;
 }
 
-.addItemButtons{
+.updateItemButtons{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    margin-top: 3em;
+    margin: 0.5em 0 1.5em 0;
 }

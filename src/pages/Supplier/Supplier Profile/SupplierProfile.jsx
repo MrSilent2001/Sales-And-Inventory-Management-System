@@ -133,14 +133,14 @@ function SupplierProfile() {
                                 </div>
                             </div>
 
-                            <div className="SupplierProfileFormField">
-                                <div className="SupplierProfileField">
-                                    <span className="title">Payment Method:</span>
-                                </div>
-                                <div className="SupplierProfileInput">
-                                    <span>{supplier.paymentMethod || '-'}</span>
-                                </div>
-                            </div>
+                            {/*<div className="SupplierProfileFormField">*/}
+                            {/*    <div className="SupplierProfileField">*/}
+                            {/*        <span className="title">Payment Method:</span>*/}
+                            {/*    </div>*/}
+                            {/*    <div className="SupplierProfileInput">*/}
+                            {/*        <span>{supplier.paymentMethod || '-'}</span>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
 
                             <div className="SupplierProfileFormField">
                                 <div className="SupplierProfileField">

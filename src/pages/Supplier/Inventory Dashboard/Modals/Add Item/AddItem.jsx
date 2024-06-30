@@ -4,12 +4,12 @@ import BasicTextField from "../../../../../components/Form Inputs/textfield";
 import CustomizedButton from "../../../../../components/Button/button";
 import CenteredModal from "../../../../../components/Modal/modal";
 import ComboBox from "../../../../../components/Form Inputs/comboBox";
-import { useState } from "react";
+import {useState} from "react";
 import axios from "axios";
 import CustomDatePicker from "../../../../../components/DatePicker/datePicker";
 import CustomizedAlert from "../../../../../components/Alert/alert";
 import FileUpload from "../../../../../components/Form Inputs/fileUpload";
-import { uploadFileToBlob } from '../../productBlobStorage';
+import {uploadFileToBlob} from '../../productBlobStorage';
 import Avatar from "@mui/material/Avatar";
 
 function AddSupplierInventoryItem(props) {
@@ -147,14 +147,14 @@ function AddSupplierInventoryItem(props) {
     };
 
     const options = [
-        { value: 'Building Material', label: 'Building Material' },
-        { value: 'Hardware and Tools', label: 'Hardware and Tools' },
-        { value: 'Safety Equipments', label: 'Safety Equipments' },
-        { value: 'Electrical Supplies', label: 'Electrical Supplies' },
-        { value: 'Plumbing Supplies', label: 'Plumbing Supplies' },
-        { value: 'Interior Finishes', label: 'Interior Finishes' },
-        { value: 'Landscaping Products', label: 'Landscaping Products' },
-        { value: 'Construction Chemicals', label: 'Construction Chemicals' }
+        {value: 'Building Material', label: 'Building Material'},
+        {value: 'Hardware and Tools', label: 'Hardware and Tools'},
+        {value: 'Safety Equipments', label: 'Safety Equipments'},
+        {value: 'Electrical Supplies', label: 'Electrical Supplies'},
+        {value: 'Plumbing Supplies', label: 'Plumbing Supplies'},
+        {value: 'Interior Finishes', label: 'Interior Finishes'},
+        {value: 'Landscaping Products', label: 'Landscaping Products'},
+        {value: 'Construction Chemicals', label: 'Construction Chemicals'}
     ];
 
     return (
@@ -162,201 +162,209 @@ function AddSupplierInventoryItem(props) {
             <form onSubmit={handleSubmit}>
                 <div className="addSupplierItemOuter">
                     <div className="addSupplierItemInner">
-                    <div className="item-image">
-                        <Avatar
-                            src={formData.image}
-                            sx={{ width: 230, height: 230, border: 2 }}
-                        />
-                        <div className='uploadButton'>
-                            <FileUpload
-                                style={{ width: "15em", top: "2em" }}
-                                onChange={handleFileChange}
+                        <div className="item-image">
+                            <Avatar
+                                src={formData.image}
+                                sx={{width: 375, height: 375, borderRadius: 5, border: 2, borderColor: '#000'}}
                             />
-                        </div>
-                    </div>
-                    <div className="item-details">
-                        <div className="item-form-field">
-                            <div className="item-form-field-label">
-                                <h5>Item Name:</h5>
-                            </div>
-                            <div className="item-input-field">
-                                <BasicTextField
-                                    name="itemName"
-                                    type="text"
-                                    size='small'
-                                    onChange={(e) => handleChange("itemName", e.target.value)}
+                            <div className='uploadButton'>
+                                <FileUpload
+                                    text={"upload image"}
+                                    style={{width: "15em", top: "2em"}}
+                                    onChange={handleFileChange}
                                 />
                             </div>
                         </div>
-                        {errors.itemName && <span style={{
-                            color: 'red',
-                            fontSize: '0.8em',
-                            padding: '0 0 0.5em 0.5em'
-                        }}>{errors.itemName}</span>}
+                        <div className="item-details">
+                            <div className="item-form-field" style={{marginTop: '1em'}}>
+                                <div className="item-form-field-label">
+                                    <h5>Item Name:</h5>
+                                </div>
+                                <div className="item-input-field">
+                                    <BasicTextField
+                                        name="itemName"
+                                        type="text"
+                                        size='small'
+                                        onChange={(e) => handleChange("itemName", e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                            {errors.itemName && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.itemName}</span>}
 
-                        <div className="item-form-field">
-                            <div className="item-form-field-label">
-                                <h5>Item Description:</h5>
+                            <div className="item-form-field">
+                                <div className="item-form-field-label">
+                                    <h5>Item Description:</h5>
+                                </div>
+                                <div className="item-input-field">
+                                    <BasicTextField
+                                        name="itemDesc"
+                                        type="text"
+                                        size='small'
+                                        onChange={(e) => handleChange("itemDesc", e.target.value)}
+                                    />
+                                </div>
                             </div>
-                            <div className="item-input-field">
-                                <BasicTextField
-                                    name="itemDesc"
-                                    type="text"
-                                    size='small'
-                                    onChange={(e) => handleChange("itemDesc", e.target.value)}
-                                />
-                            </div>
-                        </div>
-                        {errors.itemDesc && <span style={{
-                            color: 'red',
-                            fontSize: '0.8em',
-                            padding: '0 0 0.5em 0.5em'
-                        }}>{errors.itemDesc}</span>}
+                            {errors.itemDesc && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.itemDesc}</span>}
 
-                        <div className="item-form-field">
-                            <div className="item-form-field-label">
-                                <h5>Category:</h5>
+                            <div className="item-form-field">
+                                <div className="item-form-field-label">
+                                    <h5>Category:</h5>
+                                </div>
+                                <div className="item-input-field">
+                                    <ComboBox
+                                        name="category"
+                                        onChange={(e) => handleChange("category", e.target.value)}
+                                        style={{
+                                            width: '12.5em',
+                                            height: '2em',
+                                            marginLeft: '0.5em',
+                                            border: '1px solid white'
+                                        }}
+                                        options={options}
+                                        size="small"
+                                    />
+                                </div>
                             </div>
-                            <div className="item-input-field">
-                                <ComboBox
-                                    name="category"
-                                    onChange={(e) => handleChange("category", e.target.value)}
+                            {errors.category && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.category}</span>}
+
+                            <div className="item-form-field">
+                                <div className="item-form-field-label">
+                                    <h5>Brand:</h5>
+                                </div>
+                                <div className="item-input-field">
+                                    <BasicTextField
+                                        name="brand"
+                                        type="text"
+                                        size='small'
+                                        onChange={(e) => handleChange("brand", e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                            {errors.brand && <span
+                                style={{
+                                    color: 'red',
+                                    fontSize: '0.8em',
+                                    padding: '0 0 0.5em 0.5em'
+                                }}>{errors.brand}</span>}
+
+                            <div className="item-form-field">
+                                <div className="item-form-field-label">
+                                    <h5>Manufactured Date:</h5>
+                                </div>
+                                <div className="item-input-field">
+                                    <CustomDatePicker
+                                        name="manufacturedDate"
+                                        slotProps={{textField: {size: 'small'}}}
+                                        sx={{marginLeft: '0.5em'}}
+                                        onChange={(date) => handleChange("manufacturedDate", date)}
+                                    />
+                                </div>
+                            </div>
+                            {errors.manufacturedDate && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.manufacturedDate}</span>}
+
+                            <div className="item-form-field">
+                                <div className="item-form-field-label">
+                                    <h5>Color:</h5>
+                                </div>
+                                <div className="item-input-field">
+                                    <BasicTextField
+                                        name="color"
+                                        type="text"
+                                        size='small'
+                                        onChange={(e) => handleChange("color", e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                            {errors.color && <span
+                                style={{
+                                    color: 'red',
+                                    fontSize: '0.8em',
+                                    padding: '0 0 0.5em 0.5em'
+                                }}>{errors.color}</span>}
+
+                            <div className="item-form-field">
+                                <div className="item-form-field-label">
+                                    <h5>Quantity:</h5>
+                                </div>
+                                <div className="item-input-field">
+                                    <BasicTextField
+                                        name="quantity"
+                                        type="number"
+                                        size='small'
+                                        onChange={(e) => handleChange("quantity", e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                            {errors.quantity && <span style={{
+                                color: 'red',
+                                fontSize: '0.8em',
+                                padding: '0 0 0.5em 0.5em'
+                            }}>{errors.quantity}</span>}
+
+                            <div className="item-form-field">
+                                <div className="item-form-field-label">
+                                    <h5>Price:</h5>
+                                </div>
+                                <div className="item-input-field">
+                                    <BasicTextField
+                                        name="price"
+                                        type="number"
+                                        size='small'
+                                        onChange={(e) => handleChange("price", e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                            {errors.price && <span
+                                style={{
+                                    color: 'red',
+                                    fontSize: '0.8em',
+                                    padding: '0 0 0.5em 0.5em'
+                                }}>{errors.price}</span>}
+
+                            <div className="addItemButtons">
+                                <CustomizedButton
+                                    type="submit"
+                                    hoverBackgroundColor="#2d3ed2"
                                     style={{
-                                        width: '10.5em',
-                                        height: '2em',
-                                        marginRight: '0.5em',
-                                        border: '1px solid white'
-                                    }}
-                                    options={options}
-                                    size="small"
-                                />
+                                        backgroundColor: '#242F9B',
+                                        border: '1px solid #242F9B',
+                                        width: '8em',
+                                        height: '2.5em',
+                                        fontSize: '0.8em'
+                                    }}>
+                                    Add
+                                </CustomizedButton>
+
+                                <CustomizedButton
+                                    onClick={() => props.onClose(false)}
+                                    hoverBackgroundColor="#f11717"
+                                    style={{
+                                        backgroundColor: '#960505',
+                                        width: '8em',
+                                        height: '2.5em',
+                                        fontSize: '0.8em'
+                                    }}>
+                                    Cancel
+                                </CustomizedButton>
+
                             </div>
                         </div>
-                        {errors.category && <span style={{
-                            color: 'red',
-                            fontSize: '0.8em',
-                            padding: '0 0 0.5em 0.5em'
-                        }}>{errors.category}</span>}
-
-                        <div className="item-form-field">
-                            <div className="item-form-field-label">
-                                <h5>Brand:</h5>
-                            </div>
-                            <div className="item-input-field">
-                                <BasicTextField
-                                    name="brand"
-                                    type="text"
-                                    size='small'
-                                    onChange={(e) => handleChange("brand", e.target.value)}
-                                />
-                            </div>
-                        </div>
-                        {errors.brand && <span
-                            style={{color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em'}}>{errors.brand}</span>}
-
-                        <div className="item-form-field">
-                            <div className="item-form-field-label">
-                                <h5>Manufactured Date:</h5>
-                            </div>
-                            <div className="item-input-field">
-                                <CustomDatePicker
-                                    name="manufacturedDate"
-                                    slotProps={{textField: {size: 'small'}}}
-                                    onChange={(date) => handleChange("manufacturedDate", date)}
-                                />
-                            </div>
-                        </div>
-                        {errors.manufacturedDate && <span style={{
-                            color: 'red',
-                            fontSize: '0.8em',
-                            padding: '0 0 0.5em 0.5em'
-                        }}>{errors.manufacturedDate}</span>}
-
-                        <div className="item-form-field">
-                            <div className="item-form-field-label">
-                                <h5>Color:</h5>
-                            </div>
-                            <div className="item-input-field">
-                                <BasicTextField
-                                    name="color"
-                                    type="text"
-                                    size='small'
-                                    onChange={(e) => handleChange("color", e.target.value)}
-                                />
-                            </div>
-                        </div>
-                        {errors.color && <span
-                            style={{color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em'}}>{errors.color}</span>}
-
-                        <div className="item-form-field">
-                            <div className="item-form-field-label">
-                                <h5>Quantity:</h5>
-                            </div>
-                            <div className="item-input-field">
-                                <BasicTextField
-                                    name="quantity"
-                                    type="number"
-                                    size='small'
-                                    onChange={(e) => handleChange("quantity", e.target.value)}
-                                />
-                            </div>
-                        </div>
-                        {errors.quantity && <span style={{
-                            color: 'red',
-                            fontSize: '0.8em',
-                            padding: '0 0 0.5em 0.5em'
-                        }}>{errors.quantity}</span>}
-
-                        <div className="item-form-field">
-                            <div className="item-form-field-label">
-                                <h5>Price:</h5>
-                            </div>
-                            <div className="item-input-field">
-                                <BasicTextField
-                                    name="price"
-                                    type="number"
-                                    size='small'
-                                    onChange={(e) => handleChange("price", e.target.value)}
-                                />
-                            </div>
-                        </div>
-                        {errors.price && <span
-                            style={{color: 'red', fontSize: '0.8em', padding: '0 0 0.5em 0.5em'}}>{errors.price}</span>}
-
-                        <div className="addItemButtons">
-                            <CustomizedButton
-                                type="submit"
-                                hoverBackgroundColor="#2d3ed2"
-                                style={{
-                                    backgroundColor: '#242F9B',
-                                    border: '1px solid #242F9B',
-                                    width: '8em',
-                                    height: '2.5em',
-                                    fontSize: '0.8em',
-                                    padding: '0.5em 0.625em',
-                                    borderRadius: '0.35em',
-                                    margin: '0 1em 1.25em 5em'
-                                }}>
-                                Add
-                            </CustomizedButton>
-
-                            <CustomizedButton
-                                onClick={() => props.onClose(false)}
-                                hoverBackgroundColor="#f11717"
-                                style={{
-                                    backgroundColor: '#960505',
-                                    width: '8em',
-                                    height: '2.5em',
-                                    fontSize: '0.8em',
-                                    padding: '0.5em 0.625em',
-                                    borderRadius: '0.35em',
-                                    margin: '0 0 1.25em 1em'
-                                }}>
-                                Cancel
-                            </CustomizedButton>
-
-                        </div>
-                    </div>
                     </div>
                 </div>
             </form>
