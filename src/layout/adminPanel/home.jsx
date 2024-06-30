@@ -1,18 +1,19 @@
 import React, {useEffect, useState} from 'react'
 import './adminPanel.css';
 import
-{ BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill}
+{BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill}
     from 'react-icons/bs'
 import
-{ BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line }
+{BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line}
     from 'recharts';
 import axios from "axios";
-import { parseISO, format } from 'date-fns';
+import {parseISO, format} from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
     const [no0fCustomers, setNoOfCustomers] = useState(0);
     const [no0fRefunds, setNoOfRefunds] = useState(0);
-    const [no0fCategories, setNoOfCategories] = useState(0);
+    const [no0fOrders, setNoOfOrders] = useState(0);
     const [no0fProducts, setNoOfProducts] = useState(0);
 
     const [dailySale, setDailySale] = useState(0);
@@ -20,14 +21,14 @@ function Home() {
     const [stockLevel, setStockLevel] = useState(0);
     const [monthlyRevenue, setMonthlyRevenue] = useState(0);
 
-    const data = [
-        {
-        }
-    ];
+    const navigate = useNavigate();
 
+    const handleNavigation = (path) => {
+        navigate(path);
+    };
     const token = localStorage.getItem('accessToken');
 
-    const Items = async() =>{
+    const Items = async () => {
         try {
             const response = await axios.get('http://localhost:9000/', {
                 headers: {
@@ -40,7 +41,7 @@ function Home() {
         }
     }
 
-    const sale = async() =>{
+    const sale = async () => {
         try {
             const response = await axios.get('http://localhost:9000/', {
                 headers: {
@@ -53,7 +54,7 @@ function Home() {
         }
     }
 
-    const stock = async() =>{
+    const stock = async () => {
         try {
             const response = await axios.get('http://localhost:9000/product/getAllProducts', {
                 headers: {
@@ -71,7 +72,7 @@ function Home() {
         }
     }
 
-    const revenue = async() =>{
+    const revenue = async () => {
         try {
             const response = await axios.get('http://localhost:9000/payment/customerPayment/getAllCustomerPayments', {
                 headers: {
@@ -108,9 +109,9 @@ function Home() {
         }
     }
 
-    const customers = async() =>{
+    const customers = async () => {
         try {
-            const response = await axios.get('http://localhost:9000/customer/activeCustomers',{
+            const response = await axios.get('http://localhost:9000/customer/activeCustomers', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -122,7 +123,7 @@ function Home() {
         }
     }
 
-    const refunds = async() =>{
+    const refunds = async () => {
         try {
             const response = await axios.get('http://localhost:9000/refund/customerRefundCount', {
                 headers: {
@@ -135,20 +136,20 @@ function Home() {
         }
     }
 
-    const categories = async() =>{
+    const salesOrders = async () => {
         try {
-            const response = await axios.get('http://localhost:9000/product/getProductsCategoryCount', {
+            const response = await axios.get('http://localhost:9000/order/getOrdersCount', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            setNoOfCategories(response.data);
+            setNoOfOrders(response.data);
         } catch (error) {
             console.error('Error fetching Payment data:', error);
         }
     }
 
-    const products = async() =>{
+    const products = async () => {
         try {
             const response = await axios.get('http://localhost:9000/product/getProductsCount', {
                 headers: {
@@ -164,7 +165,7 @@ function Home() {
     useEffect(() => {
         customers();
         refunds();
-        categories();
+        salesOrders();
         products();
         Items();
         sale();
@@ -179,28 +180,31 @@ function Home() {
             </div>
 
             <div className='main-cards'>
-                <div className='admin-panel-card'>
+                <div className='admin-panel-card' onClick={() => handleNavigation('/viewInventory')}>
                     <div className='card-inner'>
                         <h3>PRODUCTS</h3>
                         <BsFillArchiveFill className='card_icon'/>
                     </div>
                     <h1>{no0fProducts}</h1>
                 </div>
-                <div className='admin-panel-card'>
+
+                <div className='admin-panel-card' onClick={() => handleNavigation('/pendingOrders')}>
                     <div className='card-inner'>
-                        <h3>CATEGORIES</h3>
+                        <h3>SALES ORDERS</h3>
                         <BsFillGrid3X3GapFill className='card_icon'/>
                     </div>
-                    <h1>{no0fCategories}</h1>
+                    <h1>{no0fOrders}</h1>
                 </div>
-                <div className='admin-panel-card'>
+
+                <div className='admin-panel-card' onClick={() => handleNavigation('/customerdashboard')}>
                     <div className='card-inner'>
                         <h3>ACTIVE CUSTOMERS</h3>
                         <BsPeopleFill className='card_icon'/>
                     </div>
                     <h1>{no0fCustomers}</h1>
                 </div>
-                <div className='admin-panel-card'>
+
+                <div className='admin-panel-card' onClick={() => handleNavigation('/viewRefundRequests')}>
                     <div className='card-inner'>
                         <h3>REFUND REQUEST</h3>
                         <BsFillBellFill className='card_icon'/>
@@ -210,50 +214,6 @@ function Home() {
             </div>
 
             <div className='charts'>
-                <ResponsiveContainer width="100%" height="100%">
-                    {/*Daily sale of Items*/}
-                    <BarChart
-                        width={500}
-                        height={300}
-                        data={dailySale}
-                        margin={{
-                            top: 5,
-                            right: 30,
-                            left: 20,
-                            bottom: 5,
-                        }}
-                    >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" scale="point" padding={{ left: 10, right: 10 }} />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Bar dataKey="Item" fill="#82ca9d" />
-                    </BarChart>
-                </ResponsiveContainer>
-
-                <ResponsiveContainer width="100%" height="100%">
-                    {/*Monthly Sale*/}
-                    <LineChart
-                        width={500}
-                        height={300}
-                        data={monthlySale}
-                        margin={{
-                            top: 5,
-                            right: 30,
-                            left: 20,
-                            bottom: 5,
-                        }}
-                    >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line type="monotone" dataKey="month" stroke="#82ca9d" activeDot={{ r: 8 }} />
-                    </LineChart>
-                </ResponsiveContainer>
-
                 <ResponsiveContainer width="100%" height="100%">
                     {/*Stock level of Items*/}
                     <BarChart
@@ -265,12 +225,12 @@ function Home() {
                             bottom: 5,
                         }}
                     >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" scale="point" padding={{ left: 10, right: 10 }} />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Bar dataKey="qty" fill="#8884d8" />
+                        <CartesianGrid strokeDasharray="3 3"/>
+                        <XAxis dataKey="name" scale="point" padding={{left: 10, right: 10}}/>
+                        <YAxis/>
+                        <Tooltip/>
+                        <Legend/>
+                        <Bar dataKey="qty" fill="#8884d8"/>
                     </BarChart>
                 </ResponsiveContainer>
 
@@ -287,12 +247,12 @@ function Home() {
                             bottom: 5,
                         }}
                     >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line type="monotone" dataKey="totalAmount" stroke="#82ca9d" />
+                        <CartesianGrid strokeDasharray="3 3"/>
+                        <XAxis dataKey="month"/>
+                        <YAxis/>
+                        <Tooltip/>
+                        <Legend/>
+                        <Line type="monotone" dataKey="totalAmount" stroke="#82ca9d"/>
                     </LineChart>
                 </ResponsiveContainer>
             </div>
