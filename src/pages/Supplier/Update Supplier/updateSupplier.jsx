@@ -11,6 +11,7 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 import {uploadFileToBlob} from "../Inventory Dashboard/productBlobStorage";
 import BasicTextArea from "../../../components/Form Inputs/textArea";
+import CustomizedAlert from "../../../components/Alert/alert";
 
 function UpdateSupplier(props) {
     const [supplier, setSupplier] = useState({});
@@ -113,7 +114,9 @@ function UpdateSupplier(props) {
 
             console.log('Supplier added successfully');
             handleClickSuccess();
-            setNavigate(true);
+            setTimeout(() => {
+                setNavigate(true);
+            }, 1500);
 
         } catch (error) {
             console.error('Error adding user:', error);
@@ -136,6 +139,7 @@ function UpdateSupplier(props) {
                                     sx={{ width: 275, height: 275, border: 2, borderRadius: 50, marginTop: '-0.8em' }} />
 
                             <FileUpload
+                                text={"upload image"}
                                 style={{marginTop: '1em'}}
                                 onChange={handleFileChange}
                             />
@@ -195,19 +199,19 @@ function UpdateSupplier(props) {
                                     />
                                 </div>
                             </div>
-                            <div className="UpdateSupplierFormField">
-                                <div className="UpdateCustomerTextField">
-                                    <h5>Payment Method</h5>
-                                </div>
-                                <div className="UpdateSupplierTextInput">
-                                    <BasicTextField
-                                        name="paymentMethod"
-                                        style={{ width: '20em' }}
-                                        value={formData.paymentMethod}
-                                        onChange={(e) => handleChange("paymentMethod", e.target.value)}
-                                    />
-                                </div>
-                            </div>
+                            {/*<div className="UpdateSupplierFormField">*/}
+                            {/*    <div className="UpdateCustomerTextField">*/}
+                            {/*        <h5>Payment Method</h5>*/}
+                            {/*    </div>*/}
+                            {/*    <div className="UpdateSupplierTextInput">*/}
+                            {/*        <BasicTextField*/}
+                            {/*            name="paymentMethod"*/}
+                            {/*            style={{ width: '20em' }}*/}
+                            {/*            value={formData.paymentMethod}*/}
+                            {/*            onChange={(e) => handleChange("paymentMethod", e.target.value)}*/}
+                            {/*        />*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
                             <div className="UpdateSupplierFormField">
                                 <div className="UpdateCustomerTextField">
                                     <h5>Payment Details</h5>
@@ -235,7 +239,6 @@ function UpdateSupplier(props) {
                                             height: '2.5em',
                                             fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
-                                            borderRadius: '0.35em'
                                         }}>
                                         Update
                                     </CustomizedButton>
@@ -246,6 +249,20 @@ function UpdateSupplier(props) {
                 </div>
             </div>
             <Footer />
+
+            <CustomizedAlert
+                open={openSuccess}
+                onClose={handleClickSuccess}
+                severity="success"
+                message="Profile Updated Successfully!"
+            />
+
+            <CustomizedAlert
+                open={openError}
+                onClose={handleClickError}
+                severity="error"
+                message="Something Went Wrong!"
+            />
         </>
     )
 }

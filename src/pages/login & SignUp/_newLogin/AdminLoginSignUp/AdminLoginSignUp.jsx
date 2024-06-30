@@ -8,6 +8,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import PasswordInput from "../../../../components/Form Inputs/passwordField";
+import CustomizedAlert from "../../../../components/Alert/alert";
 
 const signInSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
@@ -32,6 +33,14 @@ export function AdminLoginSignUp() {
     const [signIn, toggle] = React.useState(defaultSignIn);
     const navigate = useNavigate();
 
+    const [openSuccess, setOpenSuccess] = useState(false);
+    const [openError, setOpenError] = useState(false);
+
+    const handleClickSuccess = () => setOpenSuccess(true);
+    const handleClickError = () => setOpenError(true);
+    const handleCloseSuccess = () => setOpenSuccess(false);
+    const handleCloseError = () => setOpenError(false);
+
     // Login
     const loginFormik = useFormik({
         initialValues: {
@@ -47,7 +56,7 @@ export function AdminLoginSignUp() {
             } catch (error) {
                 console.error('Login error:', error);
                 // Display error message to user
-                alert('Login failed. Please check your credentials.');
+                handleClickError();
             }
         }
     });
@@ -75,6 +84,8 @@ export function AdminLoginSignUp() {
                     profilePicture: 'https://tradeasy.blob.core.windows.net/products/1717660436560-Dafault%20Profile%20Picture.jpg?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2024-09-30T15:47:46Z&st=2024-06-06T07:47:46Z&spr=https,http&sig=ykh2IcyRb2Y7FKpCv40r8pTz%2FNDw5UjB0iuvhA7MR2o%3D'
                 });
                 resetForm();
+                handleClickSuccess();
+                navigate("/adminLogin");
             } catch (error) {
                 console.error('Sign up error:', error);
                 // Display error message to user
@@ -204,6 +215,20 @@ export function AdminLoginSignUp() {
                     </Components.OverlayContainer>
                 </Components.Container>
             </div>
+
+            <CustomizedAlert
+                open={openSuccess}
+                onClose={handleCloseSuccess}
+                severity="success"
+                message="You've signed-up Successfully!"
+            />
+
+            <CustomizedAlert
+                open={openError}
+                onClose={handleCloseError}
+                severity="error"
+                message="Login failed. Please check your credentials."
+            />
         </>
     );
 }

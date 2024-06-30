@@ -5,7 +5,7 @@ function CustomizedAlert({ onClose, open, message, severity, style }) {
     return (
         <Snackbar
             open={open}
-            autoHideDuration={5000}
+            autoHideDuration={3000}
             onClose={onClose}
             anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         >

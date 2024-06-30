@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import * as Components from "../Component";
 import "../styles.css";
 import LoginAppBar from "../LoginAppbar/LoginAppBar";
-import {useNavigate, useParams} from "react-router-dom";
-import {useAuth} from "../../../../context/AuthContext";
+import { useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "../../../../context/AuthContext";
 import axios from "axios";
-import {useFormik} from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import PasswordInput from "../../../../components/Form Inputs/passwordField";
+import CustomizedAlert from "../../../../components/Alert/alert";
 
 const signInSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
@@ -32,7 +33,18 @@ export function CustomerLoginSignUp() {
     const [signIn, toggle] = React.useState(defaultSignIn);
     const navigate = useNavigate();
 
-    //Login
+    const [openSuccess, setOpenSuccess] = useState(false);
+    const [openError, setOpenError] = useState(false);
+    const [openError2, setOpenError2] = useState(false);
+
+    const handleClickSuccess = () => setOpenSuccess(true);
+    const handleClickError = () => setOpenError(true);
+    const handleClickError2 = () => setOpenError2(true);
+    const handleCloseSuccess = () => setOpenSuccess(false);
+    const handleCloseError = () => setOpenError(false);
+    const handleCloseError2 = () => setOpenError2(false);
+
+    // Login
     const loginFormik = useFormik({
         initialValues: {
             username: '',
@@ -46,11 +58,12 @@ export function CustomerLoginSignUp() {
                 resetForm();
             } catch (error) {
                 console.error('Login error:', error);
+                handleClickError();
             }
         }
     });
 
-    //SignUp
+    // SignUp
     const signUpFormik = useFormik({
         initialValues: {
             username: '',
@@ -73,8 +86,11 @@ export function CustomerLoginSignUp() {
                     profilePicture: 'https://tradeasy.blob.core.windows.net/products/1717660436560-Dafault%20Profile%20Picture.jpg?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2024-09-30T15:47:46Z&st=2024-06-06T07:47:46Z&spr=https,http&sig=ykh2IcyRb2Y7FKpCv40r8pTz%2FNDw5UjB0iuvhA7MR2o%3D'
                 });
                 resetForm();
+                handleClickSuccess();
+                toggle(true); // Switch to sign-in form
             } catch (error) {
                 console.error('Sign up error:', error);
+                handleClickError2();
             }
         }
     });
@@ -86,120 +102,140 @@ export function CustomerLoginSignUp() {
 
     return (
         <>
-        <LoginAppBar/>
-        <div className="login-signup-page-container">
-
-            <Components.Container>
-                <Components.SignUpContainer signingIn={signIn}>
-                    <Components.Form onSubmit={signUpFormik.handleSubmit}>
-                        <Components.Title>Create Customer Account</Components.Title>
-                        <Components.Input
-                            className="input-field"
-                            type="text"
-                            placeholder="Username"
-                            {...signUpFormik.getFieldProps("username")}
-                        />
-                        {signUpFormik.touched.username && signUpFormik.errors.username ? (
-                            <div className="error-message">{signUpFormik.errors.username}</div>
-                        ) : null}
-                        <Components.Input
-                            className="input-field"
-                            type="email"
-                            placeholder="Email"
-                            {...signUpFormik.getFieldProps("email")}
-                        />
-                        {signUpFormik.touched.email && signUpFormik.errors.email ? (
-                            <div className="error-message">{signUpFormik.errors.email}</div>
-                        ) : null}
-                        <Components.Input
-                            className="input-field"
-                            type="number"
-                            placeholder="Contact No"
-                            {...signUpFormik.getFieldProps("contactNo")}
-                        />
-                        {signUpFormik.touched.contactNo && signUpFormik.errors.contactNo ? (
-                            <div className="error-message">{signUpFormik.errors.contactNo}</div>
-                        ) : null}
-                        <Components.Input
-                            className="input-field"
-                            type="text"
-                            placeholder="Address"
-                            {...signUpFormik.getFieldProps("address")}
-                        />
-                        {signUpFormik.touched.address && signUpFormik.errors.address ? (
-                            <div className="error-message">{signUpFormik.errors.address}</div>
-                        ) : null}
-                        <PasswordInput
-                            className="input-field"
-                            placeholder="Password"
-                            {...signUpFormik.getFieldProps('password')}
-                        />
-                        {signUpFormik.touched.password && signUpFormik.errors.password ? (
-                            <div className="error-message">{signUpFormik.errors.password}</div>
-                        ) : null}
-                        <PasswordInput
-                            className="input-field"
-                            placeholder="Confirm-Password"
-                            {...signUpFormik.getFieldProps('confirmPassword')}
-                        />
-                        {signUpFormik.touched.confirmPassword && signUpFormik.errors.confirmPassword ? (
-                            <div className="error-message">{signUpFormik.errors.confirmPassword}</div>
-                        ) : null}
-                        <Components.Button type="submit">
-                            Sign Up
-                        </Components.Button>
-                    </Components.Form>
-                </Components.SignUpContainer>
-                <Components.SignInContainer signingIn={signIn}>
-                    <Components.Form onSubmit={loginFormik.handleSubmit}>
-                        <Components.Title>Sign in as Customer</Components.Title>
-                        <Components.Input
-                            className="input-field"
-                            type="text"
-                            placeholder="Username"
-                            {...loginFormik.getFieldProps("username")}
-                        />
-                        {loginFormik.touched.username && loginFormik.errors.username ? (
-                            <div className="error-message">{loginFormik.errors.username}</div>
-                        ) : null}
-                        <PasswordInput
-                            className="input-field"
-                            placeholder="Password"
-                            {...loginFormik.getFieldProps('password')}
-                        />
-                        {loginFormik.touched.password && loginFormik.errors.password ? (
-                            <div className="error-message">{loginFormik.errors.password}</div>
-                        ) : null}
-                        <Components.Anchor href="#">Forgot your password?</Components.Anchor>
-                        <Components.Button type="submit">
-                            Sign In
-                        </Components.Button>
-                    </Components.Form>
-                </Components.SignInContainer>
-                <Components.OverlayContainer signingIn={signIn}>
-                    <Components.Overlay signingIn={signIn}>
-                        <Components.LeftOverlayPanel signingIn={signIn}>
-                            <Components.Title>Already have an account?</Components.Title>
-                            <Components.Paragraph>
-                                then click signup Sign In button to Login
-                            </Components.Paragraph>
-                            <Components.GhostButton onClick={() => toggle(true)}>
-                                Sign In
-                            </Components.GhostButton>
-                        </Components.LeftOverlayPanel>
-                        <Components.RightOverlayPanel signingIn={signIn}>
-                            <Components.Title>Don't have an account?</Components.Title>
-                            <Components.Paragraph>
-                                Then click Sign Up button to Sign Up
-                            </Components.Paragraph>
-                            <Components.GhostButton onClick={() => toggle(false)}>
+            <LoginAppBar />
+            <div className="login-signup-page-container">
+                <Components.Container>
+                    <Components.SignUpContainer signingIn={signIn}>
+                        <Components.Form onSubmit={signUpFormik.handleSubmit}>
+                            <Components.Title>Create Customer Account</Components.Title>
+                            <Components.Input
+                                className="input-field"
+                                type="text"
+                                placeholder="Username"
+                                {...signUpFormik.getFieldProps("username")}
+                            />
+                            {signUpFormik.touched.username && signUpFormik.errors.username ? (
+                                <div className="error-message">{signUpFormik.errors.username}</div>
+                            ) : null}
+                            <Components.Input
+                                className="input-field"
+                                type="email"
+                                placeholder="Email"
+                                {...signUpFormik.getFieldProps("email")}
+                            />
+                            {signUpFormik.touched.email && signUpFormik.errors.email ? (
+                                <div className="error-message">{signUpFormik.errors.email}</div>
+                            ) : null}
+                            <Components.Input
+                                className="input-field"
+                                type="number"
+                                placeholder="Contact No"
+                                {...signUpFormik.getFieldProps("contactNo")}
+                            />
+                            {signUpFormik.touched.contactNo && signUpFormik.errors.contactNo ? (
+                                <div className="error-message">{signUpFormik.errors.contactNo}</div>
+                            ) : null}
+                            <Components.Input
+                                className="input-field"
+                                type="text"
+                                placeholder="Address"
+                                {...signUpFormik.getFieldProps("address")}
+                            />
+                            {signUpFormik.touched.address && signUpFormik.errors.address ? (
+                                <div className="error-message">{signUpFormik.errors.address}</div>
+                            ) : null}
+                            <PasswordInput
+                                className="input-field"
+                                placeholder="Password"
+                                {...signUpFormik.getFieldProps('password')}
+                            />
+                            {signUpFormik.touched.password && signUpFormik.errors.password ? (
+                                <div className="error-message">{signUpFormik.errors.password}</div>
+                            ) : null}
+                            <PasswordInput
+                                className="input-field"
+                                placeholder="Confirm-Password"
+                                {...signUpFormik.getFieldProps('confirmPassword')}
+                            />
+                            {signUpFormik.touched.confirmPassword && signUpFormik.errors.confirmPassword ? (
+                                <div className="error-message">{signUpFormik.errors.confirmPassword}</div>
+                            ) : null}
+                            <Components.Button type="submit">
                                 Sign Up
-                            </Components.GhostButton>
-                        </Components.RightOverlayPanel>
-                    </Components.Overlay>
-                </Components.OverlayContainer>
-            </Components.Container>
-        </div>
+                            </Components.Button>
+                        </Components.Form>
+                    </Components.SignUpContainer>
+                    <Components.SignInContainer signingIn={signIn}>
+                        <Components.Form onSubmit={loginFormik.handleSubmit}>
+                            <Components.Title>Sign in as Customer</Components.Title>
+                            <Components.Input
+                                className="input-field"
+                                type="text"
+                                placeholder="Username"
+                                {...loginFormik.getFieldProps("username")}
+                            />
+                            {loginFormik.touched.username && loginFormik.errors.username ? (
+                                <div className="error-message">{loginFormik.errors.username}</div>
+                            ) : null}
+                            <PasswordInput
+                                className="input-field"
+                                placeholder="Password"
+                                {...loginFormik.getFieldProps('password')}
+                            />
+                            {loginFormik.touched.password && loginFormik.errors.password ? (
+                                <div className="error-message">{loginFormik.errors.password}</div>
+                            ) : null}
+                            <Components.Anchor href="#">Forgot your password?</Components.Anchor>
+                            <Components.Button type="submit">
+                                Sign In
+                            </Components.Button>
+                        </Components.Form>
+                    </Components.SignInContainer>
+                    <Components.OverlayContainer signingIn={signIn}>
+                        <Components.Overlay signingIn={signIn}>
+                            <Components.LeftOverlayPanel signingIn={signIn}>
+                                <Components.Title>Already have an account?</Components.Title>
+                                <Components.Paragraph>
+                                    then click signup Sign In button to Login
+                                </Components.Paragraph>
+                                <Components.GhostButton onClick={() => toggle(true)}>
+                                    Sign In
+                                </Components.GhostButton>
+                            </Components.LeftOverlayPanel>
+                            <Components.RightOverlayPanel signingIn={signIn}>
+                                <Components.Title>Don't have an account?</Components.Title>
+                                <Components.Paragraph>
+                                    Then click Sign Up button to Sign Up
+                                </Components.Paragraph>
+                                <Components.GhostButton onClick={() => toggle(false)}>
+                                    Sign Up
+                                </Components.GhostButton>
+                            </Components.RightOverlayPanel>
+                        </Components.Overlay>
+                    </Components.OverlayContainer>
+                </Components.Container>
+            </div>
+
+            <CustomizedAlert
+                open={openSuccess}
+                onClose={handleCloseSuccess}
+                severity="success"
+                message="You've signed-up Successfully!"
+            />
+
+            <CustomizedAlert
+                open={openError}
+                onClose={handleCloseError}
+                severity="error"
+                message="Login failed. Please check your credentials."
+            />
+
+            <CustomizedAlert
+                open={openError2}
+                onClose={handleCloseError2}
+                severity="error"
+                message="Sign-Up failed. Please try Again."
+            />
         </>
     );
 }

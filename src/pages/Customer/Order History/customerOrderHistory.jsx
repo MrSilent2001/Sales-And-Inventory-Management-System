@@ -8,6 +8,9 @@ import {useEffect, useMemo, useState} from "react";
 import axios from "axios";
 import DynamicTable from "../../../components/Table/customizedTable2";
 import CustomizedAlert from "../../../components/Alert/alert";
+import {Button} from "@mui/material";
+import BackArrow from "../../../components/Icons/backArrow";
+import {Link} from "react-router-dom";
 
 
 function CustomerOrderHistory() {
@@ -114,11 +117,22 @@ function CustomerOrderHistory() {
             <CustomerNavbar/>
             <div className="CustomerOrdersOuter">
                 <div className="CustomerOrdersInner">
-                    <div className="customerOrdersTopicWithTextfield">
                         <div className="customerOrdersTopic">
-                            <h2>My Orders</h2>
+                            <Link to="/customerProfile">
+                                <Button
+                                    startIcon={<BackArrow />}
+                                    size="large"
+                                    style={{
+                                        color: "black",
+                                        fontWeight: 'bold',
+                                        textTransform: "none",
+                                        fontSize: '1.25em'
+                                    }}
+                                >
+                                    My Orders History
+                                </Button>
+                            </Link>
                         </div>
-                    </div>
                     <div className='orderHistory'>
                         {isLoading ? (
                             <PageLoader />

@@ -112,7 +112,7 @@ function UpdateCustomers() {
 
             console.log(formData);
             handleClickSuccess();
-            handleNavigate();
+            setTimeout(handleNavigate, 1500);
 
         } catch (error) {
             console.error('Error updating customer:', error);
@@ -135,6 +135,7 @@ function UpdateCustomers() {
                                     sx={{width: 275, height: 275, border: 2, borderRadius: 50, marginTop: '-0.8em'}}/>
 
                             <FileUpload
+                                text={"upload image"}
                                 style={{marginTop: '1em'}}
                                 onChange={handleFileChange}
                             />

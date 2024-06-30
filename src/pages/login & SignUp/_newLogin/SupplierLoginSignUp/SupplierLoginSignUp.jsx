@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import * as Components from "../Component";
 import "../styles.css";
 import LoginAppBar from "../LoginAppbar/LoginAppBar";
@@ -8,6 +8,7 @@ import axios from "axios";
 import {useFormik} from "formik";
 import * as Yup from "yup";
 import PasswordInput from "../../../../components/Form Inputs/passwordField";
+import CustomizedAlert from "../../../../components/Alert/alert";
 
 const signInSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
@@ -34,6 +35,18 @@ export function SupplierLoginSignUp() {
     const [signIn, toggle] = React.useState(defaultSignIn);
     const navigate = useNavigate();
 
+    const [openSuccess, setOpenSuccess] = useState(false);
+    const [openError, setOpenError] = useState(false);
+    const [openError2, setOpenError2] = useState(false);
+
+    const handleClickSuccess = () => setOpenSuccess(true);
+    const handleClickError = () => setOpenError(true);
+    const handleClickError2 = () => setOpenError2(true);
+    const handleCloseSuccess = () => setOpenSuccess(false);
+    const handleCloseError = () => setOpenError(false);
+    const handleCloseError2 = () => setOpenError2(false);
+
+
     //Login
     const loginFormik = useFormik({
         initialValues: {
@@ -48,6 +61,7 @@ export function SupplierLoginSignUp() {
                 resetForm();
             } catch (error) {
                 console.error('Login error:', error);
+                handleClickError();
             }
         }
     });
@@ -79,8 +93,11 @@ export function SupplierLoginSignUp() {
                     profilePicture: 'https://tradeasy.blob.core.windows.net/products/1717660436560-Dafault%20Profile%20Picture.jpg?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2024-09-30T15:47:46Z&st=2024-06-06T07:47:46Z&spr=https,http&sig=ykh2IcyRb2Y7FKpCv40r8pTz%2FNDw5UjB0iuvhA7MR2o%3D'
                 });
                 resetForm();
+                handleClickSuccess();
+                toggle(true); // Switch to sign-in form
             } catch (error) {
                 console.error('Sign up error:', error);
+                handleClickError2();
             }
         }
     });
@@ -224,6 +241,27 @@ export function SupplierLoginSignUp() {
                     </Components.OverlayContainer>
                 </Components.Container>
             </div>
+
+            <CustomizedAlert
+                open={openSuccess}
+                onClose={handleCloseSuccess}
+                severity="success"
+                message="You've signed-up Successfully!"
+            />
+
+            <CustomizedAlert
+                open={openError}
+                onClose={handleCloseError}
+                severity="error"
+                message="Login failed. Please check your credentials."
+            />
+
+            <CustomizedAlert
+                open={openError2}
+                onClose={handleCloseError2}
+                severity="error"
+                message="Sign-Up failed. Please try Again."
+            />
         </>
     );
 }
