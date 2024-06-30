@@ -9,6 +9,11 @@ import SalesOrderSidebar from "../../../../../layout/sidebar/salesOrderSidebar";
 import CustomizedAlert from "../../../../../components/Alert/alert";
 import sendOrderStatusEmail from "../_Component/orderStatusChangedEmailSend";
 import {useNavigate} from "react-router-dom";
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+
 
 function PendingOrders() {
     const [activeButton, setActiveButton] = useState(null);
@@ -123,25 +128,60 @@ function PendingOrders() {
 
     }
 
+    const LightTooltip = styled(({ className, ...props }) => (
+        <Tooltip {...props} classes={{ popper: className }} />
+    ))(({ theme }) => ({
+        [`& .${tooltipClasses.tooltip}`]: {
+            backgroundColor: theme.palette.common.white,
+            color: 'rgba(0, 0, 0, 0.87)',
+            boxShadow: theme.shadows[1],
+            fontSize: 13,
+        },
+    }));
+
+    const CustomButton = styled(Button)(({ theme }) => ({
+        color: '#646ed3',
+        backgroundColor: 'rgba(100,110,211,0.11)',
+        border: '1px solid #646ed3',
+        width: '7em',
+        height: '2.5em',
+        fontSize: '0.95em',
+        fontFamily: 'inter',
+        padding: '0.5em 0.625em',
+        borderRadius: '0.35em',
+        fontWeight: '550',
+        marginTop: '0.625em',
+        marginRight: '1.5em',
+        textTransform: 'none',
+        textAlign: 'center',
+        '&:hover': {
+            backgroundColor: '#e0e0e0',
+        },
+    }));
+
     const columns = useMemo(() => [
-        { accessorKey: 'order_id', header: 'Id', size: 170 },
-        { accessorKey: 'customer_name', header: 'Customer Name', size: 170 },
+        { accessorKey: 'order_id', header: 'ID', size: 10 },
+        { accessorKey: 'customer_name', header: 'NAME', size: 70 },
         {
             accessorKey: 'items',
-            header: 'Items',
-            size: 300,
+            header: 'ORDERED ITEMS',
+            size: 100,
             cellRenderer: ({ row }) => {
                 const orderItems = row.original.orderItems.map(itemStr => {
                     const item = JSON.parse(itemStr);
                     const productName = products[item.id];
                     return `${productName} (${item.id}) x ${item.amount}`;
                 });
-                return orderItems.join(', ');
+                return (
+                    <LightTooltip title={orderItems.join(', ')}>
+                        <CustomButton>View items</CustomButton>
+                    </LightTooltip>
+                );
             }
         },
         {
             accessorKey: 'amount',
-            header: 'Amount(\u20A8.)',
+            header: 'AMOUNT(\u20A8.)',
             size: 170,
             cellRenderer: ({ renderedCellValue }) => renderedCellValue.toLocaleString('en-US'),
         },
@@ -151,13 +191,12 @@ function PendingOrders() {
             size: 200,
             cellRenderer: ({ row }) => (
                 <div style={{ display: 'flex' }}>
-                    <CustomizedButton
+                    <CustomButton
                         onClick={() => handleOrderStatus(row.original.order_id, "Accepted")}
-                        hoverBackgroundColor="#2d3ed2"
                         style={{
-                            color: '#ffffff',
-                            backgroundColor: '#242F9B',
-                            border: '1px solid #242F9B',
+                            color: '#42b631',
+                            backgroundColor: 'rgba(66,182,49,0.10)',
+                            border: '1px solid #42b631',
                             width: '6em',
                             height: '2.5em',
                             fontSize: '0.95em',
@@ -171,13 +210,13 @@ function PendingOrders() {
                             textAlign: 'center',
                         }}>
                         Accept
-                    </CustomizedButton>
-                    <CustomizedButton
+                    </CustomButton>
+                    <CustomButton
                         onClick={() => handleReject()}
-                        hoverBackgroundColor="#f11717"
                         style={{
-                            color: '#ffffff',
-                            backgroundColor: '#960505',
+                            color: '#f5665f',
+                            backgroundColor: 'rgba(245,102,95,0.10)',
+                            border: '1px solid #f5665f',
                             width: '6em',
                             height: '2.5em',
                             fontSize: '0.95em',
@@ -190,11 +229,12 @@ function PendingOrders() {
                             textAlign: 'center',
                         }}>
                         Reject
-                    </CustomizedButton>
+                    </CustomButton>
                 </div>
             ),
         }
     ], [products]);
+
 
     const mappedData = useMemo(() => rows
         .filter(row => row.orderStatus === 'Pending')

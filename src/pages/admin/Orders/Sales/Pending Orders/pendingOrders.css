@@ -6,6 +6,8 @@
 .body{
     display: flex;
     flex-direction: row;
+    background-color: #F5F5F5;
+    height: 33em;
 }
 
 .PendingOrdersFilter{
@@ -19,7 +21,9 @@
     width : 78.5em;
     height: 33em;
     margin: 1.5em 0 0 1em;
-     background-color: #DBDFFD; 
+    background-color: #F5F5F5;
+    max-height: 33em;
+    overflow-y: auto;
 }
 
 .searchAndButtons{
@@ -52,7 +56,7 @@
 
 .table1{
     margin-top: 1em;
-    margin-left: 1em;
+    margin-left: 0.5em;
     margin-right: 1em;
 
 }

@@ -5,7 +5,7 @@ import {
     MRT_GlobalFilterTextField,
     MRT_ToggleFiltersButton,
 } from 'material-react-table';
-import { Box, lighten } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 const DynamicTable = ({
@@ -19,21 +19,14 @@ const DynamicTable = ({
                           createActions = null,
                           includeProfile = false,
                           renderToolbarItems = null,
-                          onRowClick
+                          onRowClick,
                       }) => {
-
     const [globalFilter, setGlobalFilter] = useState('');
     const navigate = useNavigate();
+    const theme = useTheme();
 
     const transformedColumns = useMemo(() => {
         const baseColumns = [
-            // {
-            //     accessorKey: 'id',
-            //     header: 'Id',
-            //     enableClickToCopy: true,
-            //     size: 20,
-            //     Cell: ({ renderedCellValue }) => <Box textAlign="center">{renderedCellValue}</Box>,
-            // },
             ...columns.filter(col => col.accessorKey !== 'id').map(col => ({
                 accessorKey: col.accessorKey,
                 header: col.header,
@@ -43,7 +36,7 @@ const DynamicTable = ({
                     const value = renderedCellValue;
                     const isMatch = globalFilter && value.toString().toLowerCase().includes(globalFilter.toLowerCase());
                     return (
-                        <Box textAlign="left" sx={isMatch ? { backgroundColor: 'yellow' } : {}}>
+                        <Box textAlign="left" sx={isMatch ? { backgroundColor: theme.palette.warning.light } : {}}>
                             {value}
                         </Box>
                     );
@@ -71,7 +64,7 @@ const DynamicTable = ({
         }
 
         return baseColumns;
-    }, [columns, includeProfile, globalFilter]);
+    }, [columns, includeProfile, globalFilter, theme.palette.warning.light]);
 
     const table = useMaterialReactTable({
         columns: transformedColumns,
@@ -110,18 +103,22 @@ const DynamicTable = ({
             sx: {
                 textAlign: 'center',
                 cursor: 'pointer',
+                backgroundColor: theme.palette.background.default,
+                color: theme.palette.text.primary,
+                fontWeight: 'bold',
             },
         },
         renderTopToolbar: ({ table }) => (
             (enableFilters || initialShowGlobalFilter || renderToolbarItems) && (
                 <Box
-                    sx={(theme) => ({
-                        backgroundColor: lighten(theme.palette.background.default, 0.05),
+                    sx={{
+                        backgroundColor: theme.palette.background.paper,
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
                         p: '8px 20px',
-                    })}
+                        borderBottom: `1px solid ${theme.palette.divider}`,
+                    }}
                 >
                     <Box sx={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                         {initialShowGlobalFilter && <MRT_GlobalFilterTextField table={table} />}
@@ -144,6 +141,9 @@ const DynamicTable = ({
                     cursor: 'pointer',
                 },
                 cursor: 'pointer',
+                '&:hover': {
+                    backgroundColor: theme.palette.action.hover,
+                },
             },
         }),
     });
