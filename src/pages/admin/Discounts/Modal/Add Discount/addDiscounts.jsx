@@ -329,7 +329,7 @@ const AddDiscount = forwardRef((props, ref) => {
                                     hoverBackgroundColor="#f11717"
                                     style={{
                                         backgroundColor: '#960505',
-                                        width: '9.5em',
+                                        width: '8em',
                                         height: '2.5em',
                                         fontSize: '0.8em',
                                         padding: '0.5em 0.625em',
