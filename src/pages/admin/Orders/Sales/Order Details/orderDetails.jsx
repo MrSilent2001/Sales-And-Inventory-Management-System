@@ -154,14 +154,15 @@ function OrderDetails() {
                                         value={formik.values.orderId}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
+                                        placeholder="Input Order ID"
                                         onKeyDown={(e) => {
                                             if (e.key === 'Enter') {
                                                 fetchOrderById(formik.values.orderId);
                                                 e.preventDefault();
                                             }
                                         }}
-                                        helperText={formik.touched.orderId && formik.errors.orderId ? formik.errors.orderId : 'Input Order ID'}
-                                        error={(formik.touched.orderId && Boolean(formik.errors.orderId)) || formik.values.orderId === ''}
+                                        helperText={formik.touched.orderId && formik.errors.orderId ? formik.errors.orderId : ''}
+                                        error={!!(formik.touched.orderId && formik.errors.orderId)}
                                     />
                                 </div>
 

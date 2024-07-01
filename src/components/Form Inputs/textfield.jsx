@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import TextField from '@mui/material/TextField';
 
-export default function BasicTextField({ id, name, variant, size, type, style, value, onChange, error, onKeyDown, helperText, disabled, readOnly, InputProps }) {
+export default function BasicTextField({ id, name, variant, size, type, style, value, onChange, error, onKeyDown, helperText, disabled, readOnly, InputProps, placeholder }) {
     return (
         <Box
             component="form"
@@ -37,6 +37,7 @@ export default function BasicTextField({ id, name, variant, size, type, style, v
                 error={error}
                 helperText={helperText}
                 disabled={disabled}
+                placeholder={placeholder} // Add the placeholder prop here
                 InputLabelProps={{
                     shrink: true,
                     error: error,
