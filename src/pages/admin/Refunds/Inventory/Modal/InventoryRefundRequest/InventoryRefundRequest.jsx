@@ -9,11 +9,6 @@ import axios from 'axios';
 import CustomizedAlert from '../../../../../../components/Alert/alert';
 import ComboBox from '../../../../../../components/Form Inputs/comboBox';
 
-import { useNavigate, useLocation } from "react-router-dom";
-
-
-
-
 function BasicTextFields({ id, variant, size, type, value, onChange, error, helperText, disabled }) {
     return (
         <Box
@@ -88,10 +83,7 @@ const CenteredModal = styled('div')({
     height: '100vh', 
 });
 
-function InventoryRefundRequest() {
-    const location = useLocation();
-    const order = location.state;
-
+function InventoryRefundRequest({ order, onClose }) {
     const [supplier, setSupplier] = useState(order.supplierName);
     const [item, setItem] = useState(order.productName);
     const [quantity, setQuantity] = useState('');
@@ -105,8 +97,6 @@ function InventoryRefundRequest() {
     const [alertOpen, setAlertOpen] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [alertSeverity, setAlertSeverity] = useState('error');
-
-    const navigate = useNavigate();
 
     const validateField = (field, value) => {
         const regex = /^[1-9]\d*$/; // Positive integers
@@ -152,7 +142,8 @@ function InventoryRefundRequest() {
         try {
             // Simulate successful submission
             console.log('Refund request submitted successfully:', refundRequestData);
-            navigate('/InventoryGeneratedRequest', { state: { refundRequestData } });
+            // Close the modal
+            onClose();
         } catch (error) {
             console.error('Error submitting refund request:', error);
         }
@@ -224,13 +215,16 @@ function InventoryRefundRequest() {
                                 <h5>Reason:</h5>
                             </div>
                             <div className="refundRequestidInput">
-                                <BasicTextFields
-                                    id="reason"
-                                    variant="outlined"
-                                    size="small"
-                                    type="text"
+                                <ComboBox
+                                    label="Reason"
                                     value={reason}
                                     onChange={(e) => setReason(e.target.value)}
+                                    options={[
+                                        { value: 'defected', label: 'Defected Item' },
+                                        { value: 'not-as-described', label: 'Not as Described' },
+                                        { value: 'expired', label: 'Expired' }
+                                    ]}
+                                    style={{ width: '17em', height: '2.5em', backgroundColor: '#e9eeff', marginRight: '8px' }}
                                 />
                             </div>
                         </div>
@@ -260,7 +254,7 @@ function InventoryRefundRequest() {
                             </div>
 
                             <div className="refundRequestcancelButton">
-                                <CancelButton onClick={() => navigate(-1)}>Cancel</CancelButton>
+                                <CancelButton onClick={onClose}>Cancel</CancelButton>
                             </div>
                         </div>
                     </div>
