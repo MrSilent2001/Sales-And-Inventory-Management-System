@@ -92,8 +92,14 @@ function ProductCatalog() {
             } catch (error) {
                 console.error("Error parsing cart data from localStorage:", error);
             }
+        } else {
+            // Initialize the cart in local storage if it doesn't exist
+            const initialCart = [];
+            localStorage.setItem("cart", JSON.stringify(initialCart));
+            setCart(initialCart);
         }
     }, []);
+
 
     // Handle adding items to the cart
     const handleAddToCart = (item) => {
