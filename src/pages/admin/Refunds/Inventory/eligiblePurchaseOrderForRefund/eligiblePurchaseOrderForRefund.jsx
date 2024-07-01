@@ -18,7 +18,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 
-
 function EligiblePurchaseOrdersForRefund() {
     const [isLoading, setIsLoading] = useState(false);
     const [eligiblePurchaseOrders, setEligiblePurchaseOrders] = useState([]);
@@ -26,8 +25,9 @@ function EligiblePurchaseOrdersForRefund() {
     const token = localStorage.getItem('accessToken');
     const navigate = useNavigate();
 
+    // Define table columns with appropriate accessor keys
     const columns = useMemo(() => [
-        { accessorKey: 'orderId', header: 'Order Id', size: 5, align: 'center' },
+        { accessorKey: 'order_id', header: 'Order Id', size: 5, align: 'center' },
         { accessorKey: 'productName', header: 'Product Name', size: 50, align: 'center' },
         { accessorKey: 'supplierName', header: 'Supplier Name', size: 20, align: 'center' },
         { accessorKey: 'total_amount', header: 'Total Amount', size: 50, align: 'center' },
@@ -41,7 +41,7 @@ function EligiblePurchaseOrdersForRefund() {
                     <CustomizedButton
                         onClick={() => handleRefund(row.original)}
                         hoverBackgroundColor="#2d3ed2"
-                        disabled={row.original.eligibleForRefund === false}
+                        disabled={!row.original.eligibleForRefund}
                         style={{
                             color: '#ffffff',
                             backgroundColor: '#242F9B',
@@ -65,13 +65,14 @@ function EligiblePurchaseOrdersForRefund() {
 
     const handleRefund = (order) => {
         const orderData = {
-            orderId: order.id,
+            orderId: order.order_id,
             productName: order.productName,
-            sellingPrice: order.total_amount / order.quantity, // Assuming total_amount is the total price and quantity is the number of items
-            itemCode: order.items // Adjust this according to the actual data structure if needed
+            productSellingPrice: order.productSellingPrice,
+            quantity: order.quantity,
+            supplierName: order.supplierName,
         };
         console.log('Refund requested for order:', orderData);
-        navigate('/createrefund', { state: orderData });
+        navigate('/createInventoryRefund', { state: orderData });
     };
 
     useEffect(() => {
@@ -93,7 +94,10 @@ function EligiblePurchaseOrdersForRefund() {
                 const orders = ordersResponse.data;
                 const refundRequests = refundsResponse.data;
                 const products = productsResponse.data.reduce((acc, product) => {
-                    acc[product.id] = product.productName;
+                    acc[product.id] = {
+                        name: product.productName,
+                        sellingPrice: product.productSellingPrice
+                    };
                     return acc;
                 }, {});
 
@@ -103,22 +107,37 @@ function EligiblePurchaseOrdersForRefund() {
                 const recentDepartedOrders = departedOrders.filter(order => new Date(order.departedDate) >= sevenDaysAgo);
 
                 const refundMap = refundRequests.reduce((acc, refund) => {
-                    acc[refund.orderId] = true;
+                    if (!acc[refund.orderId]) {
+                        acc[refund.orderId] = {};
+                    }
+                    if (!acc[refund.orderId][refund.item]) {
+                        acc[refund.orderId][refund.item] = 0;
+                    }
+                    acc[refund.orderId][refund.item] += parseInt(refund.quantity);
                     return acc;
                 }, {});
 
-                const eligibleOrders = recentDepartedOrders.filter(order => !refundMap[order.id])
-                    .map(order => ({
-                        id: order.id,
-                        productName: products[order.items],
+                const eligibleOrders = recentDepartedOrders.map(order => {
+                    const refundedQuantity = refundMap[order.id]?.[order.items] || 0;
+                    const eligibleQuantity = order.quantity - refundedQuantity;
+                    const product = products[order.items] || {};
+                    const productName = product.name || 'Unknown Product';
+                    const productSellingPrice = product.sellingPrice || 0;
+
+                    return {
+                        order_id: order.id,
+                        productName: productName,
+                        productSellingPrice: productSellingPrice,
                         supplierName: order.supplierName,
                         total_amount: order.total_amount,
                         createdDate: order.createdDate,
-                        quantity: order.quantity, // Assuming order has a quantity field
+                        quantity: order.quantity,
                         items: order.items,
-                        eligibleForRefund: true
-                    }));
+                        eligibleForRefund: eligibleQuantity > 0
+                    };
+                });
 
+                console.log('Eligible Purchase Orders:', eligibleOrders);
                 setEligiblePurchaseOrders(eligibleOrders);
 
             } catch (error) {
