@@ -17,15 +17,14 @@ import { jwtDecode } from 'jwt-decode';
 import { Link, useNavigate } from "react-router-dom";
 
 
-
 function EligiblePurchaseOrdersForRefund() {
     const [isLoading, setIsLoading] = useState(false);
     const [eligiblePurchaseOrders, setEligiblePurchaseOrders] = useState([]);
     const [openError, setOpenError] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
+    const [selectedOrder, setSelectedOrder] = useState(null);
     const token = localStorage.getItem('accessToken');
-    const navigate = useNavigate();
 
-    // Define table columns with appropriate accessor keys
     const columns = useMemo(() => [
         { accessorKey: 'order_id', header: 'Order Id', size: 5, align: 'center' },
         { accessorKey: 'productName', header: 'Product Name', size: 50, align: 'center' },
@@ -64,15 +63,13 @@ function EligiblePurchaseOrdersForRefund() {
     };
 
     const handleRefund = (order) => {
-        const orderData = {
-            orderId: order.order_id,
-            productName: order.productName,
-            productSellingPrice: order.productSellingPrice,
-            quantity: order.quantity,
-            supplierName: order.supplierName,
-        };
-        console.log('Refund requested for order:', orderData);
-        navigate('/createInventoryRefund', { state: orderData });
+        setSelectedOrder(order);
+        setOpenModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setOpenModal(false);
+        setSelectedOrder(null);
     };
 
     useEffect(() => {
@@ -193,6 +190,22 @@ function EligiblePurchaseOrdersForRefund() {
                 severity="error"
                 message="Something Went Wrong!"
             />
+
+            <Modal
+                open={openModal}
+                onClose={handleCloseModal}
+                aria-labelledby="refund-request-modal-title"
+                aria-describedby="refund-request-modal-description"
+            >
+                <div>
+                    {selectedOrder && (
+                        <InventoryRefundRequest
+                            order={selectedOrder}
+                            onClose={handleCloseModal}
+                        />
+                    )}
+                </div>
+            </Modal>
         </>
     );
 }
