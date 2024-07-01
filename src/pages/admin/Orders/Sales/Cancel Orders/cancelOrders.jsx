@@ -191,8 +191,8 @@ function CancelOrder() {
                                         onChange={formik.handleChange}
                                         onKeyDown={handleEnterPress}
                                         name="orderId"
-                                        helperText={formik.touched.orderId && formik.errors.orderId ? formik.errors.orderId : ''}
-                                        error={formik.touched.orderId && Boolean(formik.errors.orderId)}
+                                        helperText={formik.touched.orderId && formik.errors.orderId ? formik.errors.orderId : 'Input Order ID'}
+                                        error={(formik.touched.orderId && Boolean(formik.errors.orderId)) || formik.values.orderId === ''}
                                     />
                                 </div>
 

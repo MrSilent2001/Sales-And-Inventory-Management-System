@@ -160,8 +160,8 @@ function OrderDetails() {
                                                 e.preventDefault();
                                             }
                                         }}
-                                        helperText={formik.touched.orderId && formik.errors.orderId ? formik.errors.orderId : ''}
-                                        error={formik.touched.orderId && formik.errors.orderId ? true : false}
+                                        helperText={formik.touched.orderId && formik.errors.orderId ? formik.errors.orderId : 'Input Order ID'}
+                                        error={(formik.touched.orderId && Boolean(formik.errors.orderId)) || formik.values.orderId === ''}
                                     />
                                 </div>
 
@@ -266,7 +266,7 @@ function OrderDetails() {
                                             fontWeight: '550',
                                             marginTop: '-3em',
                                             marginRight: '4em',
-                                            marginLeft: '1.5em',
+                                            marginLeft: '0.7em',
                                             textTransform: 'none',
                                             textAlign: 'center',
                                         }}>
