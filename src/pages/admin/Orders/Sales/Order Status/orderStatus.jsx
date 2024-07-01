@@ -44,7 +44,7 @@ const CustomButton = styled(Button)(({ theme }) => ({
 }));
 
 let columns = [
-    { accessorKey: 'id', header: 'ID', size: 70 },
+    { accessorKey: 'order_id', header: 'ID', size: 10 },
     { accessorKey: 'name', header: 'NAME', size: 70 },
     {
         accessorKey: 'amount',
@@ -54,7 +54,7 @@ let columns = [
     },
     {
         accessorKey: 'items',
-        header: 'ORDERED ITEMS',
+        header: 'ITEMS',
         size: 70,
     },
 
@@ -159,12 +159,13 @@ function OrderStatus() {
         // { value: 'Cancelled', label: 'Cancelled', rgb: '244, 67, 54' },
         // { value: 'Rejected', label: 'Rejected', rgb: '233, 30, 99' },
     ];
+    console.log(orderStatusRows)
 
     const mappedData = orderStatusRows
         .filter(row => ['Accepted', 'In-Processing', 'Departed', 'Rejected'].includes(row.orderStatus))
-        .sort((a, b) => a.orderId - b.orderId)
+        .sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate))
         .map((row, index) => ({
-            id: row.orderId,
+            order_id: row.orderId,
             name: row.orderReceiverName,
             amount: row.orderPrice,
             items: (
@@ -184,6 +185,8 @@ function OrderStatus() {
                 />
             )
         }));
+
+    console.log(mappedData)
 
     return (
         <>

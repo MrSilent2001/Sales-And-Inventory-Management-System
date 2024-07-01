@@ -238,7 +238,8 @@ function PendingOrders() {
 
     const mappedData = useMemo(() => rows
         .filter(row => row.orderStatus === 'Pending')
-        .sort((a, b) => a.orderId - b.orderId)
+        // .sort((a, b) => a.orderId - b.orderId)
+        .sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate))
         .map(row => ({
             order_id: row.orderId,
             customer_name: row.orderReceiverName,
