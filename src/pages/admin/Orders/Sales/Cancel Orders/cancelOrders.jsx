@@ -8,74 +8,37 @@ import BasicTextField from "../../../../../components/Form Inputs/textfield";
 import SalesOrderSidebar from "../../../../../layout/sidebar/salesOrderSidebar";
 import CustomizedAlert from "../../../../../components/Alert/alert";
 import sendOrderStatusEmail from "../_Component/orderStatusChangedEmailSend";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 function CancelOrder() {
     const [activeButton, setActiveButton] = useState(null);
 
     //Successful Alert Variables
     const [openSuccess, setOpenSuccess] = useState(false);
-    //data fetching error Alert Variables
     const [dataErrorOpenSuccess, setDataErrorOpenSuccess] = useState(false);
-    //IDNotExist fetching error Alert Variables
     const [IDNotExistErrorOpenSuccess, setIDNotExistErrorOpenSuccess] = useState(false);
-    //Already Cancelled error Alert Variables
     const [orderAlreadyCancelledOpenSuccess, setOrderAlreadyCancelledOpenSuccess] = useState(false);
-    //data Update error Alert Variables
     const [updateErrorOpenSuccess, setUpdateErrorOpenSuccess] = useState(false);
 
-    //Handle Submit Successful Alert Variables
-    const handleClickSuccess = () => {
-        setOpenSuccess(true);
-    };
+    const handleClickSuccess = () => setOpenSuccess(true);
+    const handleCloseSuccess = () => setOpenSuccess(false);
+    const dataErrorHandleCloseSuccess = () => setDataErrorOpenSuccess(false);
+    const dataErrorHandleClickSuccess = () => setDataErrorOpenSuccess(true);
+    const IDNotExistErrorHandleCloseSuccess = () => setIDNotExistErrorOpenSuccess(false);
+    const IDNotExistErrorHandleClickSuccess = () => setIDNotExistErrorOpenSuccess(true);
+    const orderAlreadyCancelledHandleCloseSuccess = () => setOrderAlreadyCancelledOpenSuccess(false);
+    const orderAlreadyCancelledHandleClickSuccess = () => setOrderAlreadyCancelledOpenSuccess(true);
+    const updateErrorHandleCloseSuccess = () => setUpdateErrorOpenSuccess(false);
+    const updateErrorHandleClickSuccess = () => setUpdateErrorOpenSuccess(true);
 
-    const handleCloseSuccess = () => {
-        setOpenSuccess(false);
-    };
-
-    //Handle Data Error Alert Variable
-    const dataErrorHandleCloseSuccess = () => {
-        setDataErrorOpenSuccess(false);
-    };
-
-    const dataErrorHandleClickSuccess = () => {
-        setDataErrorOpenSuccess(true);
-    };
-
-    //Handle IDNotExist Error Alert Variable
-    const IDNotExistErrorHandleCloseSuccess = () => {
-        setIDNotExistErrorOpenSuccess(false);
-    };
-
-    const IDNotExistErrorHandleClickSuccess = () => {
-        setIDNotExistErrorOpenSuccess(true);
-    };
-
-    //Handle Order Already Cancelled Error Alert Variable
-    const orderAlreadyCancelledHandleCloseSuccess = () => {
-        setOrderAlreadyCancelledOpenSuccess(false);
-    };
-
-    const orderAlreadyCancelledHandleClickSuccess = () => {
-        setOrderAlreadyCancelledOpenSuccess(true);
-    };
-
-    //Handle Update Data Error Alert Variable
-    const updateErrorHandleCloseSuccess = () => {
-        setUpdateErrorOpenSuccess(false);
-    };
-
-    const updateErrorHandleClickSuccess = () => {
-        setUpdateErrorOpenSuccess(true);
-    };
-
-    const [orderId, setOrderId] = useState('');
-    const [orderCancelReason, setOrderCancelReason] = useState('');
     const [order, setOrder] = useState({
         orderId: '',
         orderReceiverName: '',
         orderItems: '',
         orderPrice: '',
-        orderCancelReason: ''
+        orderCancelReason: '',
+        orderStatus: ''
     });
 
     const token = localStorage.getItem('accessToken');
@@ -95,7 +58,7 @@ function CancelOrder() {
             });
 
             if (!response.data || Object.keys(response.data).length === 0) {
-                makeEmptyFields();
+                clearFields();
                 IDNotExistErrorHandleClickSuccess();
                 return;
             }
@@ -104,22 +67,20 @@ function CancelOrder() {
                 orderAlreadyCancelledHandleClickSuccess();
             }
 
-            // Fetch all products
             const productsResponse = await axios.get('http://localhost:9000/product/getAllProducts', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
             const products = productsResponse.data.reduce((acc, product) => {
-                acc[product.id] = product.productName; // Map product ID to its name
+                acc[product.id] = product.productName;
                 return acc;
             }, {});
 
-            // Replace item IDs with names and format orderItems
             const orderItemsWithName = response.data.orderItems.map(itemStr => {
-                const item = JSON.parse(itemStr); // Parse the JSON string
-                const productName = products[item.id]; // Get the product name by ID
-                return `${productName}(${item.id}) x ${item.amount}`; // Format as "Item name(itemid) x item amount"
+                const item = JSON.parse(itemStr);
+                const productName = products[item.id];
+                return `${productName}(${item.id}) x ${item.amount}`;
             });
             const formattedOrderItems = orderItemsWithName.join(', ');
 
@@ -128,9 +89,10 @@ function CancelOrder() {
                 orderReceiverName: response.data.orderReceiverName,
                 orderItems: formattedOrderItems,
                 orderPrice: response.data.orderPrice,
-                orderCancelReason: response.data.orderCancelReason
+                orderCancelReason: response.data.orderCancelReason,
+                orderStatus: response.data.orderStatus
             });
-            setOrderCancelReason(response.data.orderCancelReason);
+            formik.setFieldValue('orderCancelReason', response.data.orderCancelReason);
         } catch (error) {
             console.error('Error fetching order:', error);
             makeEmptyFields();
@@ -138,21 +100,21 @@ function CancelOrder() {
         }
     };
 
-    const handleCancelOrder = async () => {
+    const handleCancelOrder = async (values) => {
         try {
             const updatedOrder = {
-                orderCancelReason: orderCancelReason,
+                orderCancelReason: values.orderCancelReason,
                 orderStatus: "Cancelled",
             };
-            const response = await axios.put(`http://localhost:9000/order/update/${orderId}`, updatedOrder, {
+            const response = await axios.put(`http://localhost:9000/order/update/${values.orderId}`, updatedOrder, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
             handleClickSuccess();
-            setOrderId('');
+            formik.resetForm();
 
-            sendOrderStatusEmail(orderId, token, orderCancelReason);
+            sendOrderStatusEmail(values.orderId, token, values.orderCancelReason);
             if (response.status === 200) {
                 // Optionally, you can fetch the order again to update the state
                 // fetchOrderById(orderId);
@@ -165,36 +127,51 @@ function CancelOrder() {
         }
     };
 
-    const makeEmptyFields = async () => {
+    const makeEmptyFields = () => {
         setOrder({
             orderId: '',
             orderReceiverName: '',
             orderItems: '',
             orderPrice: '',
-            orderCancelReason: ''
+            orderCancelReason: '',
+            orderStatus: ''
         });
-
-        setOrderCancelReason('');
+        formik.resetForm();
     };
 
-    const handleCancel = async () => {
-        setOrderId('');
+    const clearFields = () => {
+        setOrder({
+            orderReceiverName: '',
+            orderItems: '',
+            orderPrice: '',
+            orderCancelReason: '',
+            orderStatus: ''
+        });
+        // formik.resetForm();
     };
+
+    const formik = useFormik({
+        initialValues: {
+            orderId: '',
+            orderCancelReason: ''
+        },
+        validationSchema: Yup.object({
+            orderId: Yup.string().required('Order ID is required'),
+            orderCancelReason: Yup.string().required('Cancel reason is required')
+        }),
+        onSubmit: handleCancelOrder
+    });
 
     const handleEnterPress = async (event) => {
         if (event.key === 'Enter') {
-            fetchOrderById(orderId);
-            await event.preventDefault();
+            fetchOrderById(formik.values.orderId);
+            event.preventDefault();
         }
     };
 
-    const handleIdChange = (event) => {
-        setOrderId(event.target.value);
-    };
-
     useEffect(() => {
-        fetchOrderById(orderId);
-    }, [orderId]);
+        fetchOrderById(formik.values.orderId);
+    }, [formik.values.orderId]);
 
     return (
         <>
@@ -206,15 +183,16 @@ function CancelOrder() {
                     </div>
                     <div className="cancelOrderInner">
                         <div className="cancelOrderformbox">
-                            <form>
+                            <form onSubmit={formik.handleSubmit}>
                                 <div className="textSection">
                                     <label className='label'>Order Id</label>
                                     <BasicTextField
-                                        value={orderId}
-                                        onChange={handleIdChange}
+                                        value={formik.values.orderId}
+                                        onChange={formik.handleChange}
                                         onKeyDown={handleEnterPress}
-                                        helperText={orderId === '' ? 'Please enter the ID' : ''}
-                                        error={orderId === '' ? 'Please enter the ID' : ''}
+                                        name="orderId"
+                                        helperText={formik.touched.orderId && formik.errors.orderId ? formik.errors.orderId : ''}
+                                        error={formik.touched.orderId && Boolean(formik.errors.orderId)}
                                     />
                                 </div>
 
@@ -248,15 +226,18 @@ function CancelOrder() {
                                 <div className="textSection">
                                     <label className='label'>Reasons</label>
                                     <BasicTextField
-                                        value={orderCancelReason}
-                                        onChange={(e) => setOrderCancelReason(e.target.value)}
-                                        disabled={!orderId}
+                                        value={formik.values.orderCancelReason}
+                                        onChange={formik.handleChange}
+                                        name="orderCancelReason"
+                                        helperText={formik.touched.orderCancelReason && formik.errors.orderCancelReason ? formik.errors.orderCancelReason : ''}
+                                        error={formik.touched.orderCancelReason && Boolean(formik.errors.orderCancelReason)}
+                                        disabled={!formik.values.orderId}
                                     />
                                 </div>
 
                                 <div className="formButtons">
                                     <CustomizedButton
-                                        onClick={handleCancel}
+                                        onClick={makeEmptyFields}
                                         hoverBackgroundColor="#2d3ed2"
                                         style={{
                                             color: '#ffffff',
@@ -278,7 +259,7 @@ function CancelOrder() {
                                     </CustomizedButton>
 
                                     <CustomizedButton
-                                        onClick={handleCancelOrder}
+                                        type="submit"
                                         hoverBackgroundColor="#f11717"
                                         style={{
                                             color: '#ffffff',
@@ -297,53 +278,44 @@ function CancelOrder() {
                                         }}>
                                         Cancel Order
                                     </CustomizedButton>
-
                                 </div>
-
                             </form>
-
-
                         </div>
-
                     </div>
                 </div>
             </div>
+            <Footer />
+
             <CustomizedAlert
                 open={openSuccess}
                 onClose={handleCloseSuccess}
                 severity="success"
-                message="Order Cancelled Sucessfully!"
+                message="Order Cancelled Successfully"
             />
-
             <CustomizedAlert
                 open={dataErrorOpenSuccess}
                 onClose={dataErrorHandleCloseSuccess}
                 severity="error"
-                message="Error Fetching Data!"
+                message="Error Occurred While Fetching Data"
             />
-
             <CustomizedAlert
                 open={IDNotExistErrorOpenSuccess}
                 onClose={IDNotExistErrorHandleCloseSuccess}
                 severity="error"
-                message="Order ID does not exist.!"
+                message="Order Id Does Not Exist"
             />
-
-            <CustomizedAlert
-                open={updateErrorOpenSuccess}
-                onClose={updateErrorHandleCloseSuccess}
-                severity="error"
-                message="Order Cacellation Failed!"
-            />
-
             <CustomizedAlert
                 open={orderAlreadyCancelledOpenSuccess}
                 onClose={orderAlreadyCancelledHandleCloseSuccess}
                 severity="warning"
-                message="This Order is Alredy Cancelled!"
+                message="Order Already Cancelled"
             />
-
-            <Footer/>
+            <CustomizedAlert
+                open={updateErrorOpenSuccess}
+                onClose={updateErrorHandleCloseSuccess}
+                severity="error"
+                message="Error Updating Order"
+            />
         </>
     );
 }

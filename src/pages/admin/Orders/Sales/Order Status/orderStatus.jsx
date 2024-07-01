@@ -155,13 +155,13 @@ function OrderStatus() {
         { value: 'Pending', label: 'Pending', rgb: '100, 110, 211' },
         { value: 'Accepted', label: 'Accepted', rgb: '76, 175, 80' },
         { value: 'In-Processing', label: 'In-Processing', rgb: '255, 193, 7' },
-        { value: 'Departed', label: 'Departed', rgb: '255, 152, 0' },
+        { value: 'Departed', label: 'Departed', rgb: '233, 30, 99' },
         // { value: 'Cancelled', label: 'Cancelled', rgb: '244, 67, 54' },
-        { value: 'Rejected', label: 'Rejected', rgb: '233, 30, 99' },
+        // { value: 'Rejected', label: 'Rejected', rgb: '233, 30, 99' },
     ];
 
     const mappedData = orderStatusRows
-        .filter(row => ['Accepted', 'In-Processing', 'Departed', 'Rejected', 'Cancelled'].includes(row.orderStatus))
+        .filter(row => ['Accepted', 'In-Processing', 'Departed', 'Rejected'].includes(row.orderStatus))
         .sort((a, b) => a.orderId - b.orderId)
         .map((row, index) => ({
             id: row.orderId,
