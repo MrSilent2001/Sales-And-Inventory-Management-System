@@ -60,6 +60,9 @@
     background-color: white;
     width:48em;
     height:30em;
+    /*height: 100%;*/
+    overflow-x: clip;
+    overflow-y: auto;
     border-radius : 0.2em;
     margin-left: 15em;
     margin-top: 0.5em;

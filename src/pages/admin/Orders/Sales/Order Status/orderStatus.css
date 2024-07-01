@@ -2,6 +2,7 @@
 .orderStatusOuter{
     display: flex;
     background-color: #f1f1f1;
+    height: 33em;
 }
 
 .body{
@@ -21,6 +22,8 @@
     height: 33em;
     margin: 3em 0 0 3em;
     background-color: #f3f3f3;
+    overflow-y: auto;
+    max-height: 29em;
 }
 
 .searchAndButtons{
