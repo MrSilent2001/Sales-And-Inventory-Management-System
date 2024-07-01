@@ -9,6 +9,8 @@ import CustomizedButton from "../../../components/Button/button";
 import axios from "axios";
 import SearchBar from "../../../components/search bar/search bar";
 import CustomizedAlert from "../../../components/Alert/alert";
+import {styled} from "@mui/material/styles";
+import Button from "@mui/material/Button";
 
 function ProductCatalog() {
     const navigate = useNavigate();
@@ -201,14 +203,50 @@ function ProductCatalog() {
         setQuantityErrorOpenSuccess(true);
     };
 
+
+
     return (
         <>
             <div className="productCatalogBody">
                 <CustomerNavbar />
                 <div className="Catalogouter">
+                    {/*<div className="sidebar">*/}
+                    {/*    {Object.keys(checkedItems).map((name) => (*/}
+                    {/*        <div className="content" key={name}>*/}
+                    {/*            <Checkboxes*/}
+                    {/*                checked={checkedItems[name]}*/}
+                    {/*                onChange={(event) => handleCheckboxChange(event, name)}*/}
+                    {/*            />*/}
+                    {/*            <label>{name}</label>*/}
+                    {/*        </div>*/}
+                    {/*    ))}*/}
+                    {/*    <div className="content-cart-button">*/}
+                    {/*        <Link to="/cart">*/}
+                    {/*            /!*<CustomizedButton*!/*/}
+                    {/*            /!*    hoverBackgroundColor="#2ec931"*!/*/}
+                    {/*            /!*    style={{*!/*/}
+                    {/*            /!*        color: '#ffffff',*!/*/}
+                    {/*            /!*        backgroundColor: '#1d8a1f',*!/*/}
+                    {/*            /!*        width: '7.5em',*!/*/}
+                    {/*            /!*        height: '2.5em',*!/*/}
+                    {/*            /!*        fontSize: '0.95em',*!/*/}
+                    {/*            /!*        fontFamily: 'inter',*!/*/}
+                    {/*            /!*        padding: '0.5em 0.625em',*!/*/}
+                    {/*            /!*        borderRadius: '0.35em',*!/*/}
+                    {/*            /!*        fontWeight: '550',*!/*/}
+                    {/*            /!*        margin: 'auto',*!/*/}
+                    {/*            /!*        textTransform: 'none',*!/*/}
+                    {/*            /!*        textAlign: 'center',*!/*/}
+                    {/*            /!*    }}*!/*/}
+                    {/*            /!*>*!/*/}
+                    {/*            /!*    Go to Cart*!/*/}
+                    {/*            /!*</CustomizedButton>*!/*/}
+                    {/*        </Link>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                     <div className="sidebar">
                         {Object.keys(checkedItems).map((name) => (
-                            <div className="content" key={name}>
+                            <div className={`content ${checkedItems[name] ? 'checked' : ''}`} key={name}>
                                 <Checkboxes
                                     checked={checkedItems[name]}
                                     onChange={(event) => handleCheckboxChange(event, name)}
@@ -216,30 +254,9 @@ function ProductCatalog() {
                                 <label>{name}</label>
                             </div>
                         ))}
-                        <div className="content-cart-button">
-                            <Link to="/cart">
-                                <CustomizedButton
-                                    hoverBackgroundColor="#2ec931"
-                                    style={{
-                                        color: '#ffffff',
-                                        backgroundColor: '#1d8a1f',
-                                        width: '7.5em',
-                                        height: '2.5em',
-                                        fontSize: '0.95em',
-                                        fontFamily: 'inter',
-                                        padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        fontWeight: '550',
-                                        margin: 'auto',
-                                        textTransform: 'none',
-                                        textAlign: 'center',
-                                    }}
-                                >
-                                    Go to Cart
-                                </CustomizedButton>
-                            </Link>
-                        </div>
                     </div>
+
+
                     <div className="productCatalogRight">
                         <div className="search-bar-container">
                             <SearchBar

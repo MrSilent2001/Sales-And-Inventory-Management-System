@@ -8,6 +8,7 @@
     display: grid;
     grid-template-columns: 10em 1fr;
     height : 80%;
+    background-color: #F5F5F5;
 }
 
 .customerItemGrid{
@@ -30,7 +31,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: white !important;
+    background-color: #F5F5F5 !important;
+    /*background-color: white !important;*/
 
 
 
@@ -45,27 +47,59 @@
 
 
 
-.sidebar{
-    background-color:#DBDFFD;
+/* Minimalistic Sidebar CSS */
+.sidebar {
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
-    width: 18.5em;
-    float: left;
-    padding-top: 1.5em;
-    line-height: 3em;
-    justify-content: left;
-    justify-items: left;
+    width: 250px;
+    padding: 20px;
+    border-right: 1px solid #E0E0E0;
 }
 
-.content{
-
+.sidebar .content {
     display: flex;
     align-items: center;
-    justify-content: left;
-    width: 80%;
-
-
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
+
+.sidebar .content:hover {
+    background-color: #E7E9EB;
+}
+
+.sidebar .content.checked {
+    background-color: rgba(100, 110, 211, 0.4); /* Locked background color when checkbox is checked */
+}
+
+.sidebar .content:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar label {
+    margin-left: 10px;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #333;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.2);
+}
+
+
+
+/*.content{*/
+
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: left;*/
+/*    width: 80%;*/
+
+
+/*}*/
 
 .content-cart-button{
 
@@ -77,6 +111,6 @@
 
 }
 
-.label{
-    margin-left: -3em;
-}
+/*.label{*/
+/*    margin-left: -3em;*/
+/*}*/

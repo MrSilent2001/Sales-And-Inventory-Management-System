@@ -4,7 +4,8 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, CardActions, Box } from '@mui/material';
-import CustomizedButton from "../Button/button";
+import { styled } from "@mui/material/styles";
+import Button from "@mui/material/Button";
 
 export default function MultiActionAreaCard({ item, handleClick, handleBodyClick, handleImageClick }) {
     const { productName, productSellingPrice, productImage, discountRate, productQuantity } = item;
@@ -12,15 +13,54 @@ export default function MultiActionAreaCard({ item, handleClick, handleBodyClick
     // Calculate the final price after discount if discountRate is not null
     const finalPrice = discountRate ? productSellingPrice * (1 - discountRate / 100) : productSellingPrice;
 
+    const CustomButton = styled(Button)(({ theme }) => ({
+        color: '#242f9a',
+        backgroundColor: 'rgba(36,47,154,0.14)',
+        border: '1px solid #242f9a',
+        width: '12em',
+        height: '2.5em',
+        fontSize: '0.95em',
+        fontFamily: 'inter',
+        padding: '0.5em 0.625em',
+        borderRadius: '0.35em',
+        fontWeight: '550',
+        marginTop: '0.625em',
+        marginBottom: '1em',
+        textTransform: 'none',
+        textAlign: 'center',
+        '&:hover': {
+            backgroundColor: '#242f9a',
+            color: '#FFFFFF',
+        },
+    }));
+
+    const OutOfStockButton = styled(Button)(({ theme }) => ({
+        color: '#ffffff',
+        backgroundColor: '#f44336',
+        border: '1px solid #f44336',
+        width: '12em',
+        height: '2.5em',
+        fontSize: '0.95em',
+        fontFamily: 'inter',
+        padding: '0.5em 0.625em',
+        borderRadius: '0.35em',
+        fontWeight: '550',
+        marginTop: '0.625em',
+        marginBottom: '1em',
+        textTransform: 'none',
+        textAlign: 'center',
+        cursor: 'not-allowed',
+        '&.Mui-disabled': {
+            color: '#ffffff', // Ensure the text remains white when disabled
+            backgroundColor: '#f44336',
+        },
+    }));
+
     return (
         <Card sx={{ maxWidth: 300, width: 300, minHeight: 400 }}>
             <CardActionArea
-                // onClick={() => {
-                //     if (productQuantity > 0) handleBodyClick(item);
-                // }}
                 onClick={() => handleBodyClick(item)}
-                // disabled={productQuantity === 0}
-                // sx={{ opacity: productQuantity === 0 ? 0.5 : 1 }}
+                sx={{ opacity: productQuantity === 0 ? 1 : 1 }}
             >
                 <CardMedia
                     component="img"
@@ -61,40 +101,20 @@ export default function MultiActionAreaCard({ item, handleClick, handleBodyClick
                     <Typography variant="body2" color="text.primary" sx={{ fontWeight: 'bold' }}>
                         Rs.{finalPrice.toFixed(2)}
                     </Typography>
-                    {productQuantity === 0 && (
-                        <Typography variant="body2" color="error" sx={{ fontWeight: 'bold' }}>
-                            Out of Stock
-                        </Typography>
-                    )}
+                    {/*{productQuantity === 0 && (*/}
+                    {/*    <Typography variant="body2" color="error" sx={{ fontWeight: 'bold' }}>*/}
+                    {/*        Out of Stock*/}
+                    {/*    </Typography>*/}
+                    {/*)}*/}
                 </CardContent>
             </CardActionArea>
-            {productQuantity > 0 && ( // Render button only if productQuantity is greater than zero
-                <CardActions sx={{ justifyContent: 'center' }}>
-                    <CustomizedButton
-                        onClick={() => handleClick(item)}
-                        hoverBackgroundColor="#2d3ed2"
-                        disableElevation
-                        style={{
-                            color: '#ffffff',
-                            backgroundColor: '#242F9B',
-                            border: '1px solid #242F9B',
-                            width: '11em',
-                            height: '2.5em',
-                            fontSize: '0.95em',
-                            fontFamily: 'inter',
-                            padding: '0.5em 0.625em',
-                            borderRadius: '0.35em',
-                            fontWeight: '550',
-                            margin: 'auto',
-                            // marginBottom: '1em',
-                            textTransform: 'none',
-                            textAlign: 'center',
-                        }}
-                    >
-                        Add to Cart
-                    </CustomizedButton>
-                </CardActions>
-            )}
+            <CardActions sx={{ justifyContent: 'center' }}>
+                {productQuantity > 0 ? (
+                    <CustomButton onClick={() => handleClick(item)}>Add to Cart</CustomButton>
+                ) : (
+                    <OutOfStockButton disabled>Out of Stock</OutOfStockButton>
+                )}
+            </CardActions>
         </Card>
     );
 }
