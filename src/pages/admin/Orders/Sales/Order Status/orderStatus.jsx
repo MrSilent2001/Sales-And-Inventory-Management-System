@@ -8,21 +8,74 @@ import axios from "axios";
 import SalesOrderSidebar from "../../../../../layout/sidebar/salesOrderSidebar";
 import CustomizedAlert from "../../../../../components/Alert/alert";
 import sendOrderStatusEmail from "../_Component/orderStatusChangedEmailSend";
+import {styled} from "@mui/material/styles";
+import Tooltip, {tooltipClasses} from "@mui/material/Tooltip";
+import Button from "@mui/material/Button";
+
+const LightTooltip = styled(({ className, ...props }) => (
+    <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+    [`& .${tooltipClasses.tooltip}`]: {
+        backgroundColor: theme.palette.common.white,
+        color: 'rgba(0, 0, 0, 0.87)',
+        boxShadow: theme.shadows[1],
+        fontSize: 13,
+    },
+}));
+
+const CustomButton = styled(Button)(({ theme }) => ({
+    color: '#646ed3',
+    backgroundColor: 'rgba(100,110,211,0.11)',
+    border: '1px solid #646ed3',
+    width: '7em',
+    height: '2.5em',
+    fontSize: '0.95em',
+    fontFamily: 'inter',
+    padding: '0.5em 0.625em',
+    borderRadius: '0.35em',
+    fontWeight: '550',
+    marginTop: '0.625em',
+    marginRight: '1.5em',
+    textTransform: 'none',
+    textAlign: 'center',
+    '&:hover': {
+        backgroundColor: '#e0e0e0',
+    },
+}));
 
 let columns = [
-    { accessorKey: 'id', header: 'Id', size: 170 },
-    { accessorKey: 'name', header: 'Customer Name', size: 170 },
+    { accessorKey: 'id', header: 'ID', size: 70 },
+    { accessorKey: 'name', header: 'NAME', size: 70 },
     {
         accessorKey: 'amount',
-        header: 'Amount(\u20A8.)',
-        size: 100,
+        header: 'AMOUNT(\u20A8.)',
+        size: 70,
         cellRenderer: ({ renderedCellValue }) => renderedCellValue.toLocaleString('en-US'),
     },
     {
         accessorKey: 'items',
-        header: 'Items',
-        size: 300,
+        header: 'ORDERED ITEMS',
+        size: 70,
     },
+
+    // {
+    //     accessorKey: 'items',
+    //     header: 'ORDERED ITEMS',
+    //     size: 100,
+    //     cellRenderer: ({ row }) => {
+    //         const orderItems = row.original.orderItems.map(itemStr => {
+    //             const item = JSON.parse(itemStr);
+    //             const productName = products[item.id];
+    //             return `${productName} (${item.id}) x ${item.amount}`;
+    //         });
+    //         return (
+    //             <LightTooltip title={orderItems.join(', ')}>
+    //                 <CustomButton>View items</CustomButton>
+    //             </LightTooltip>
+    //         );
+    //     }
+    // },
+
     {
         accessorKey: 'status',
         header: '',
@@ -99,12 +152,12 @@ function OrderStatus() {
     };
 
     const options = [
-        { value: 'Pending', label: 'Pending' },
-        { value: 'Accepted', label: 'Accepted' },
-        // { value: 'Rejected', label: 'Rejected' },
-        { value: 'In-Processing', label: 'In-Processing' },
-        { value: 'Departed', label: 'Departed' },
-        { value: 'Cancelled', label: 'Cancelled' },
+        { value: 'Pending', label: 'Pending', rgb: '100, 110, 211' },
+        { value: 'Accepted', label: 'Accepted', rgb: '76, 175, 80' },
+        { value: 'In-Processing', label: 'In-Processing', rgb: '255, 193, 7' },
+        { value: 'Departed', label: 'Departed', rgb: '255, 152, 0' },
+        // { value: 'Cancelled', label: 'Cancelled', rgb: '244, 67, 54' },
+        { value: 'Rejected', label: 'Rejected', rgb: '233, 30, 99' },
     ];
 
     const mappedData = orderStatusRows
@@ -114,7 +167,11 @@ function OrderStatus() {
             id: row.orderId,
             name: row.orderReceiverName,
             amount: row.orderPrice,
-            items: row.items,
+            items: (
+                <LightTooltip title={row.items}>
+                    <CustomButton>View items</CustomButton>
+                </LightTooltip>
+            ),
             status: (
                 <ComboBox
                     value={statuses[index]}

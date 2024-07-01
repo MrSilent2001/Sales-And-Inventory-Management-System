@@ -1,7 +1,7 @@
 
 .orderStatusOuter{
     display: flex;
-    background-color: #DBDFFD;
+    background-color: #f1f1f1;
 }
 
 .body{
@@ -20,7 +20,7 @@
     width : 76.5em;
     height: 33em;
     margin: 3em 0 0 3em;
-    background-color: #DBDFFD;
+    background-color: #f3f3f3;
 }
 
 .searchAndButtons{

@@ -1,6 +1,6 @@
 .orderDetailsOuter{
     display: flex;
-    background-color: #DBDFFD;
+    background-color: #f1f1f1;
 }
 
 .body{
@@ -19,7 +19,7 @@
     width : 78.5em;
     height: 33em;
     margin: 1.5em 0 0 1em;
-    background-color: #DBDFFD;
+    background-color: #f3f3f3;
 }
 
 /* .searchAndButtons{
@@ -58,11 +58,11 @@
 
 .updateFormbox{
     background-color: white;
-    width:58em;
-    height:29em;
+    width:48em;
+    height:30em;
     border-radius : 0.2em;
-    margin-left: 12em;
-    margin-top: 1em;
+    margin-left: 15em;
+    margin-top: 0.5em;
 
 }
 
@@ -91,5 +91,5 @@
 .UpdateformButtons{
     display: flex;
     margin-top: 2.5em;
-    margin-left: 34em;
+    margin-left: 27em;
 }
