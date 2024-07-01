@@ -44,16 +44,16 @@ function Sidebar({openSidebarToggle, OpenSidebar, openProfileModal }) {
                     </a>
                 </li>
 
-                <li className='sidebar-list-item'>
-                    <a href="/viewInventory">
-                        <BsMenuButtonWideFill className='icon'/> Reviews
-                    </a>
-                </li>
-                <li className='sidebar-list-item'>
-                    <a href="/viewInventory">
-                        <BsFillGearFill className='icon'/> Setting
-                    </a>
-                </li>
+                {/*<li className='sidebar-list-item'>*/}
+                {/*    <a href="/viewInventory">*/}
+                {/*        <BsMenuButtonWideFill className='icon'/> Reviews*/}
+                {/*    </a>*/}
+                {/*</li>*/}
+                {/*<li className='sidebar-list-item'>*/}
+                {/*    <a href="/viewInventory">*/}
+                {/*        <BsFillGearFill className='icon'/> Setting*/}
+                {/*    </a>*/}
+                {/*</li>*/}
             </ul>
         </aside>
     )
