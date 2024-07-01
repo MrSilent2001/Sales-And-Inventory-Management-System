@@ -103,21 +103,33 @@ const DynamicTable = ({
             sx: {
                 textAlign: 'center',
                 cursor: 'pointer',
-                backgroundColor: theme.palette.background.default,
+                backgroundColor: '#ffffff', // Light gray for header background
                 color: theme.palette.text.primary,
                 fontWeight: 'bold',
+                boxShadow: 'none', // Remove shadow
+                borderBottom: 'none', // Remove border
+                padding: '10px 16px', // Add padding
+            },
+        },
+        muiTableBodyCellProps: {
+            sx: {
+                backgroundColor: '#ffffff', // Standardize white color
+                boxShadow: 'none', // Remove shadow
+                borderBottom: 'none', // Remove border
+                padding: '10px 16px', // Add padding
             },
         },
         renderTopToolbar: ({ table }) => (
             (enableFilters || initialShowGlobalFilter || renderToolbarItems) && (
                 <Box
                     sx={{
-                        backgroundColor: theme.palette.background.paper,
+                        backgroundColor: '#ffffff', // Standardize white color
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
                         p: '8px 20px',
                         borderBottom: `1px solid ${theme.palette.divider}`,
+                        boxShadow: 'none', // Remove shadow
                     }}
                 >
                     <Box sx={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
@@ -143,6 +155,19 @@ const DynamicTable = ({
                 cursor: 'pointer',
                 '&:hover': {
                     backgroundColor: theme.palette.action.hover,
+                },
+                backgroundColor: '#ffffff', // Standardize white color
+                boxShadow: 'none', // Remove shadow
+                '&:not(:last-child)': {
+                    borderBottom: '1px solid #e0e0e0', // Light border between rows
+                },
+                '& td:first-of-type': {
+                    borderLeft: 'none', // Remove border for the first column
+                    width: '40px', // Reduce width of the checkbox column
+                    backgroundColor: '#ffffff', // Ensure checkbox column is pure white
+                },
+                '& td': {
+                    borderLeft: 'none', // Remove border between columns
                 },
             },
         }),
