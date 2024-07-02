@@ -175,6 +175,7 @@ const PurchaseOrderDashboard = () => {
             fontSize: '0.75em',
             padding: '0.5em 0.625em',
             borderRadius: '0.35em',
+            marginRight:'7.5em'
         };
 
         return (
@@ -193,24 +194,24 @@ const PurchaseOrderDashboard = () => {
     return (
         <>
             <InventoryNavbar />
-            <Box sx={{ display: 'flex', height: '37.5em' }}>
+            <Box sx={{ display: 'flex', height: '47em' }}>
                 {/* Sidebar */}
                 <Box sx={{ width: '15%', height: 'auto', bgcolor: '#646FD4', color: 'white', p: 2 }}>
-                    <Card sx={{ mb: 2, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
+                    <Card sx={{ mt:10, mb: 6, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
                         <CardContent>
                             <Typography variant="subtitle1" sx={{ color: '#E74646', fontWeight: 'bold', mr: 6 }}>{currentMonth}</Typography>
                             <Typography variant="h6">Total Orders</Typography>
                             <Typography variant="h6" sx={{ textAlign: 'center' }}>{totalOrders}</Typography>
                         </CardContent>
                     </Card>
-                    <Card sx={{ mb: 2, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
+                    <Card sx={{ mb: 6, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
                         <CardContent>
                             <Typography variant="subtitle1" sx={{ color: '#E74646', fontWeight: 'bold', mr: 6 }}>{currentMonth}</Typography>
                             <Typography variant="h6">In-Progress</Typography>
                             <Typography variant="h6" sx={{ textAlign: 'center' }}>{inProgressOrders}</Typography>
                         </CardContent>
                     </Card>
-                    <Card sx={{ mb: 2, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
+                    <Card sx={{ mb: 6, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
                         <CardContent>
                             <Typography variant="subtitle1" sx={{ color: '#E74646', fontWeight: 'bold', mr: 6 }}>{currentMonth}</Typography>
                             <Typography variant="h6">Completed</Typography>
@@ -220,7 +221,7 @@ const PurchaseOrderDashboard = () => {
                 </Box>
 
                 {/* Main Content */}
-                <Container maxWidth={false} sx={{ bgcolor: '#DBDFFD', height: 'auto', padding: '1.5em 0', position: 'relative' }}>
+                <Container maxWidth={false} sx={{ bgcolor: '#DBDFFD', height: 'auto', padding: '1.5em 0', position: 'relative', paddingTop:'7em' }}>
                     {isLoading ? (
                         <PageLoader />
                     ) : (
