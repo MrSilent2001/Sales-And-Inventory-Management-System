@@ -6,24 +6,24 @@ import Footer from "../../../../../layout/footer/footer";
 import {Link, useLocation} from "react-router-dom";
 import CustomizedButton from "../../../../../components/Button/button";
 
+
 function InventoryGeneratedRequest() {
     const location = useLocation();
     const { refundRequestData } = location.state || {};
 
     return (
         <>
-            <InventoryNavbar/>
+            <InventoryNavbar />
             <div className='generateRequestsOuter'>
                 <div className="generated-request-inner">
                     <h2>Generated Request</h2>
-                    <div className='request-container' style={{display: "flex", width: "50%", height: "100%"}}>
+                    <div className='request-container' style={{ display: "flex", width: "50%", height: "100%" }}>
                         <div className='inner1' style={{
                             width: "30%",
                             height: "100%",
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "space-around",
-                            
                         }}>
                             <h4>Supplier</h4>
                             <h4>Item</h4>
@@ -37,10 +37,9 @@ function InventoryGeneratedRequest() {
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "space-around",
-                           
                         }}>
                             <span className="value">{refundRequestData?.supplierName || 'N/A'}</span>
-                            <span className="value">{refundRequestData?.item || 'N/A'}</span>
+                            <span className="value">{refundRequestData?.productName || 'N/A'}</span>
                             <span className="value">{refundRequestData?.quantity || 'N/A'}</span>
                             <span className="value">{refundRequestData?.reason || 'N/A'}</span>
                             <span className="value">{refundRequestData?.price || 'N/A'}</span>
@@ -71,7 +70,7 @@ function InventoryGeneratedRequest() {
                     </Link>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </>
     );
 }

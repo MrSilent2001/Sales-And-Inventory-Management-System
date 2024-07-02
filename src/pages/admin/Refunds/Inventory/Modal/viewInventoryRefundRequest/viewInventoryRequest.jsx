@@ -4,6 +4,7 @@ import "./viewInventoryRequest.css";
 import CustomizedButton from "../../../../../../components/Button/button";
 import CenteredModal from "../../../../../../components/Modal/modal";
 
+
 function ViewInventoryRequest({ request, onClose }) {
     const [requestDetails, setRequestDetails] = useState({
         id: '',
@@ -11,35 +12,53 @@ function ViewInventoryRequest({ request, onClose }) {
         Address: '',
         mail: '',
         contact_number: '',
-        items: '',
-        amount: ''
+        item: '',
+        amount: '',
+        quantity: '',
+        status: '',
+        createdDate: ''
     });
 
+    const [itemMapping, setItemMapping] = useState({});
     const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
-        if (!request) {
-            console.error('Request is missing');
-            return;
-        }
-        console.log('Request', request); // Debugging line to check the request ID
-        console.log('Request ID:', request.inventory_id); // Debugging line to check the request ID
-        const fetchRequestDetails = async () => {
-            if (!request.inventory_id) {
-                console.error('Request ID is missing');
-                return;
-            }
-
+        const fetchProducts = async () => {
             try {
-                const response = await axios.get(`http://localhost:9000/refund/inventoryRefund/get/${request.inventory_id}`,{
+                const response = await axios.get('http://localhost:9000/product/getAllProducts', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
+                const products = response.data.reduce((acc, product) => {
+                    acc[product.id] = product.productName;
+                    return acc;
+                }, {});
+                setItemMapping(products);
+            } catch (err) {
+                console.error('Failed to fetch products:', err);
+            }
+        };
+
+        fetchProducts();
+    }, [token]);
+
+    useEffect(() => {
+        const fetchRequestDetails = async () => {
+            if (!request) return;
+
+            try {
+                const response = await axios.get(`http://localhost:9000/refund/inventoryRefund/get/${request.inventory_id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const itemWithName = itemMapping[response.data.item] || '';
+
                 setRequestDetails({
                     inventory_id: response.data.inventory_id,
-                    supplier: response.data.supplier,
-                    item: response.data.item,
+                    supplier: response.data.supplierName,
+                    item: itemWithName,
                     quantity: response.data.quantity,
                     phone: response.data.phone,
                     price: response.data.price,
@@ -53,7 +72,7 @@ function ViewInventoryRequest({ request, onClose }) {
         };
 
         fetchRequestDetails();
-    }, [request]);
+    }, [request, itemMapping, token]);
 
     return (
         <CenteredModal>
@@ -79,7 +98,6 @@ function ViewInventoryRequest({ request, onClose }) {
                             </div>
                         </div>
 
-                        
                         <div className="viewInventoryRefundformField">
                             <div className="idField">
                                 <h5>Contact number:</h5>
@@ -91,19 +109,18 @@ function ViewInventoryRequest({ request, onClose }) {
 
                         <div className="viewInventoryRefundformField">
                             <div className="idField">
-                                <h5>Items:</h5>
+                                <h5>Item:</h5>
                             </div>
-                            <div className="idInput">
+                            <div className="idInput" id="items">
                                 {requestDetails.item}
                             </div>
                         </div>
-
 
                         <div className="viewInventoryRefundformField">
                             <div className="idField">
                                 <h5>Quantity:</h5>
                             </div>
-                            <div className="idInput" id="items">
+                            <div className="idInput">
                                 {requestDetails.quantity}
                             </div>
                         </div>
@@ -117,8 +134,6 @@ function ViewInventoryRequest({ request, onClose }) {
                             </div>
                         </div>
 
-                        
-
                         <div className="viewInventoryRefundformField">
                             <div className="idField">
                                 <h5>Status:</h5>
@@ -130,7 +145,7 @@ function ViewInventoryRequest({ request, onClose }) {
 
                         <div className="viewInventoryRefundformField">
                             <div className="idField">
-                                <h5>Created date::</h5>
+                                <h5>Created date:</h5>
                             </div>
                             <div className="idInput">
                                 {requestDetails.createdDate}
