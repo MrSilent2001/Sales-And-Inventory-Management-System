@@ -126,6 +126,7 @@ function EligiblePurchaseOrdersForRefund() {
                         productName: productName,
                         productSellingPrice: productSellingPrice,
                         supplierName: order.supplierName,
+                        supplierId: order.supplierId, // Add supplierId here
                         total_amount: order.total_amount,
                         createdDate: order.createdDate,
                         quantity: order.quantity,
