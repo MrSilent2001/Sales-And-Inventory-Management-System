@@ -93,11 +93,14 @@
 }
 
 .emptyCartContainer {
-    height: 76vh;
+    height: 78vh;
     width: 100vw;
     background-color: white;
     text-align: center;
-    margin: -1em;
+    margin-top : -2em;
+    margin-bottom : -1em;
+    margin-left : -1em;
+    margin-right : -1em;
     overflow-y: clip;
 }
 

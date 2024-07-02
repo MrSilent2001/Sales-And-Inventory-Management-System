@@ -11,6 +11,8 @@ import { useAuth } from "../../../context/AuthContext";
 import CustomizedAlert from "../../../components/Alert/alert";
 import {Link} from "react-router-dom";
 import emptyCartImage from "../../../assets/images/empty-cart-image.png";
+import {styled} from "@mui/material/styles";
+import Button from "@mui/material/Button";
 
 
 const getStripe = () => {
@@ -160,6 +162,27 @@ function Cart() {
         }
     };
 
+    const CustomButton = styled(Button)(({ theme }) => ({
+        color: '#FFFFFF',
+        backgroundColor: 'rgb(55,85,189)',
+        border: '1px solid #242f9a',
+        width: '12em',
+        height: '2.5em',
+        fontSize: '0.95em',
+        fontFamily: 'inter',
+        padding: '0.5em 0.625em',
+        borderRadius: '0.35em',
+        fontWeight: '550',
+        marginTop: '0.625em',
+        marginBottom: '1em',
+        textTransform: 'none',
+        textAlign: 'center',
+        '&:hover': {
+            backgroundColor: '#242f9a',
+            color: '#FFFFFF',
+        },
+    }));
+
     // Handle closing the alert
     const removeFromCartHandleCloseSuccess = () => {
         setRemoveFromCartOpenSuccess(false);
@@ -180,9 +203,18 @@ function Cart() {
                     </Link>
                 </div>
                 {cart.length === 0 ? (
-                    <div className="emptyCartContainer">
-                        <img src={emptyCartImage} alt="Cart is empty" className="emptyCartImage"/>
-                    </div>
+                    <>
+                        <div className="emptyCartContainer">
+                            <img src={emptyCartImage} alt="Cart is empty" className="emptyCartImage"/>
+                            <div className="ProductCatelogEmptyCartbutton">
+                                <Link to="/products">
+                                    <CustomButton>Continue Shopping</CustomButton>
+                                </Link>
+                            </div>
+                        </div>
+
+
+                    </>
                 ) : (
                     <>
                         <div className="cardspace">
