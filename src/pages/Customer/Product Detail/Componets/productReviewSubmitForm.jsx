@@ -46,7 +46,7 @@ export default function ProductReviewSubmitForm({ productId, submitAlert ,submit
     };
 
     return (
-        <Paper elevation={3} sx={{width: 900, marginLeft: 2, paddingRight: 4,marginTop: 4,marginBottom: 10 }}>
+        <Paper elevation={0} sx={{width: 900, marginLeft: 2, paddingRight: 4,marginTop: 4,marginBottom: 10, backgroundColor:'#F5F5F5' }}>
             <Box sx={{ padding: 5 }} component="form" onSubmit={handleSubmit}>
                 <Typography variant="h6" gutterBottom sx={{ paddingBottom: 5 }}>
                     Submit a Review
@@ -124,7 +124,7 @@ export default function ProductReviewSubmitForm({ productId, submitAlert ,submit
                     <Grid item xs={12} sm={6} />
                     <Grid item xs={12} sm={5} />
                     <Grid item xs={12} sm={4}>
-                        <Button type="submit" variant="contained" sx={{ color: "#ffff" }}>
+                        <Button type="submit" variant="contained" sx={{ color: "#ffff", width: '57em', marginLeft:'2em', backgroundColor:'green' }}>
                             Submit
                         </Button>
                     </Grid>
