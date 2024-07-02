@@ -95,9 +95,9 @@ const AcceptedOrdersDashboard = () => {
     return (
         <>
             <InventoryNavbar />
-            <Box sx={{display: 'flex', height: '37.5em'}}>
+            <Box sx={{display: 'flex', height: '47em'}}>
                 <Container maxWidth={false}
-                           sx={{bgcolor: '#DBDFFD', height: 'auto', padding: '1.5em 0', position: 'relative'}}>
+                           sx={{bgcolor: '#DBDFFD', height: 'auto', padding: '1.5em 0', position: 'relative',paddingTop:'3em'}}>
                     <div className="searchContainer">
                         <Link to="/purchasedOrder">
                             <Button
@@ -113,11 +113,11 @@ const AcceptedOrdersDashboard = () => {
                                 Accepted Orders
                             </Button>
                         </Link>
-                    </div>
+                    </div> <br/>
                     {isLoading ? (
                         <PageLoader/>
                     ) : (
-
+                       
                         <DynamicTable
                             columns={columns}
                             data={dataWithActions}
