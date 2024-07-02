@@ -43,7 +43,7 @@ const AcceptedOrdersDashboard = () => {
 
     const handleMarkAsDeparted = async (id) => {
         try {
-            await axios.put(`http://localhost:9000/purchaseOrder/markAsDeparted/${id}`, {
+            await axios.put(`http://localhost:9000/purchaseOrder/markAsReceived/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -86,7 +86,7 @@ const AcceptedOrdersDashboard = () => {
                     marginRight: '0.75em'
                 }}
             >
-                Mark as Departed
+                Mark as Received
             </CustomizedButton>
         )
     }));
