@@ -57,14 +57,15 @@ export default function MultiActionAreaCard({ item, handleClick, handleBodyClick
     }));
 
     return (
-        <Card sx={{ maxWidth: 300, width: 300, minHeight: 400 }}>
+        <Card sx={{ maxWidth: 300, width: 300, minHeight: 400, boxShadow:'none', padding: 0 }}>
             <CardActionArea
                 onClick={() => handleBodyClick(item)}
-                sx={{ opacity: productQuantity === 0 ? 1 : 1 }}
+                sx={{ borderRadius: 2 }}
             >
                 <CardMedia
                     component="img"
-                    height="250"
+                    height="300"
+                    width = "300"
                     image={productImage[0]}
                     alt={productName}
                     onClick={(e) => {

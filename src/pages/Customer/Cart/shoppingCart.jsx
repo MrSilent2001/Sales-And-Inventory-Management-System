@@ -208,12 +208,12 @@ function Cart() {
                             <div className="totalText">
                                 {totalDiscountedPrice > 0 && (
                                     <>
-                                        <p><strong>Total:</strong> Rs {totalAmountWithoutDiscount.toFixed(2)} -
+                                        <p style={{color: 'gray'}}><strong>Total:</strong> Rs {totalAmountWithoutDiscount.toFixed(2)} -
                                             Rs {totalDiscountedPrice.toFixed(2)} (Discount)</p>
                                         {/*<p>Discounted Price: Rs {totalDiscountedPrice.toFixed(2)}</p>*/}
                                     </>
                                 )}
-                                <p style={{fontSize: '1.15em'}}>
+                                <p style={{fontSize: '1.08em'}}>
                                     <strong>Final Price:</strong> Rs {totalAmount.toFixed(2)}
                                 </p>
                             </div>
