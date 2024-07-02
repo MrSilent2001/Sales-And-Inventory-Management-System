@@ -154,7 +154,7 @@ function EligiblePurchaseOrdersForRefund() {
             <InventoryNavbar />
             <div className="eligiblePurchaseOrdersOuter">
                 <div className="eligiblePurchaseOrdersInner">
-                    <div className="searchContainer">
+                    <div className="searchContainer" style={{marginLeft:"90px",marginBottom:"50px" ,marginTop:"50px"}}>
                         <Link to="/InventoryRefundRequestsTable">
                             <Button
                                 startIcon={<BackArrow />}
@@ -163,7 +163,8 @@ function EligiblePurchaseOrdersForRefund() {
                                     color: "black",
                                     fontWeight: 'bold',
                                     textTransform: "none",
-                                    fontSize: '1.25em'
+                                    fontSize: '1.25em',
+                                    
                                 }}
                             >
                                 Eligible Purchase Orders for Refund

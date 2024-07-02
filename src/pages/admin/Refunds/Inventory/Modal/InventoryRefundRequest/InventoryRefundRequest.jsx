@@ -1,97 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import './InventoryRefundRequest.css';
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
-
 import axios from 'axios';
 import CustomizedAlert from '../../../../../../components/Alert/alert';
 import ComboBox from '../../../../../../components/Form Inputs/comboBox';
+import BasicTextField from '../../../../../../components/Form Inputs/textfield';
+import CenteredModal from '../../../../../../components/Modal/modal';
+import CustomizedButton from '../../../../../../components/Button/button';
+import { useNavigate } from 'react-router-dom';
 
-
-function BasicTextFields({ id, variant, size, type, value, onChange, error, helperText, disabled }) {
-    return (
-        <Box
-            component="form"
-            sx={{
-                '& > :not(style)': {
-                    m: 1,
-                    width: '17em',
-                    "& .MuiInputBase-root": {
-                        height: '2.5em',
-                        backgroundColor: '#e9eeff'
-                    },
-                    "& .MuiInputLabel-root": {
-                        fontSize: '0.5em',
-                        textAlign: 'center',
-                    },
-                },
-            }}
-            noValidate
-            autoComplete="off"
-        >
-            <TextField
-                id={id}
-                variant={variant}
-                size={size}
-                type={type}
-                value={value}
-                onChange={onChange}
-                error={error}
-                helperText={helperText}
-                margin='normal'
-                disabled={disabled}
-            />
-        </Box>
-    );
-}
-
-const CancelButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText('#D41400'),
-    backgroundColor: '#D41400',
-    '&:hover': {
-        backgroundColor: '#e03a26'
-    },
-    '&.MuiButton-root': {
-        width: '11.625em',
-        height: '2.75em'
-    },
-    fontSize: '0.625em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em'
-}));
-
-const CreateRequestButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText('#242F9B'),
-    backgroundColor: '#242F9B',
-    '&:hover': {
-        backgroundColor: '#2d3ed2'
-    },
-    '&.MuiButton-root': {
-        width: '11.625em',
-        height: '2.75em'
-    },
-    fontSize: '0.625em',
-    fontFamily: 'inter',
-    padding: '1.75em 0.625em'
-}));
-
-const CenteredModal = styled('div')({
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-});
 
 function InventoryRefundRequest({ order, onClose }) {
+    const navigate = useNavigate(); 
     const [supplier, setSupplier] = useState(order.supplierName);
     const [item, setItem] = useState(order.productName);
     const [quantity, setQuantity] = useState('');
     const [reason, setReason] = useState('');
     const [totalPrice, setTotalPrice] = useState(0);
     const [supplierId, setSupplierId] = useState(order.supplierId);
-    const [itemCode, setItemCode] = useState(order.items); // Item code from the order
+    const [itemCode, setItemCode] = useState(order.items); 
 
     const [quantityError, setQuantityError] = useState('');
     const [alertOpen, setAlertOpen] = useState(false);
@@ -135,6 +61,7 @@ function InventoryRefundRequest({ order, onClose }) {
             supplierName: supplier,
             supplierId: supplierId,
             item: itemCode, // Sending item code
+            productName: item, // Sending product name
             quantity,
             price: totalPrice, // Total price as per backend requirement
             reason
@@ -143,8 +70,12 @@ function InventoryRefundRequest({ order, onClose }) {
         try {
             await axios.post('http://localhost:9000/refund/inventoryRefund/create', refundRequestData);
             console.log('Refund request submitted successfully:', refundRequestData);
-            // Close the modal
-            onClose();
+            setAlertMessage('Refund request submitted successfully.');
+            setAlertSeverity('success');
+            setAlertOpen(true);
+            setTimeout(() => {
+                navigate('/InventoryGeneratedRequest', { state: { refundRequestData } }); 
+            }, 500);
         } catch (error) {
             console.error('Error submitting refund request:', error);
             setAlertMessage('Error submitting refund request');
@@ -164,7 +95,7 @@ function InventoryRefundRequest({ order, onClose }) {
                                 <h5>Supplier:</h5>
                             </div>
                             <div className="refundRequestidInput">
-                                <BasicTextFields
+                                <BasicTextField
                                     id="supplier"
                                     variant="outlined"
                                     size="small"
@@ -181,7 +112,7 @@ function InventoryRefundRequest({ order, onClose }) {
                                 <h5>Item:</h5>
                             </div>
                             <div className="refundRequestidInput">
-                                <BasicTextFields
+                                <BasicTextField
                                     id="item"
                                     variant="outlined"
                                     size="small"
@@ -198,7 +129,7 @@ function InventoryRefundRequest({ order, onClose }) {
                                 <h5>Quantity:</h5>
                             </div>
                             <div className="refundRequestidInput">
-                                <BasicTextFields
+                                <BasicTextField
                                     id="quantity"
                                     variant="outlined"
                                     size="small"
@@ -228,7 +159,7 @@ function InventoryRefundRequest({ order, onClose }) {
                                         { value: 'not-as-described', label: 'Not as Described' },
                                         { value: 'expired', label: 'Expired' }
                                     ]}
-                                    style={{ width: '17em', height: '2.5em', backgroundColor: '#e9eeff', marginRight: '8px' }}
+                                    style={{ width: '17.5em', height: '2.5em', backgroundColor: '#e9eeff', marginRight: '8px' }}
                                 />
                             </div>
                         </div>
@@ -238,7 +169,7 @@ function InventoryRefundRequest({ order, onClose }) {
                                 <h5>Total Price:</h5>
                             </div>
                             <div className="refundRequestidInput">
-                                <BasicTextFields
+                                <BasicTextField
                                     id="total-price"
                                     variant="outlined"
                                     size="small"
@@ -252,11 +183,27 @@ function InventoryRefundRequest({ order, onClose }) {
 
                         <div className="refundRequestformFieldButtons">
                             <div className="addSupplierButton">
-                                <CreateRequestButton onClick={handleSubmit}>Create Request</CreateRequestButton>
+                                <CustomizedButton 
+                                    variant="contained"
+                                    size="medium"
+                                    style={{ backgroundColor: '#242F9B', width: '11.625em', height: '2.75em', fontSize: '0.625em', padding: '1.75em 0.625em' }}
+                                    hoverBackgroundColor="#2d3ed2"
+                                    onClick={handleSubmit}
+                                >
+                                    Create Request
+                                </CustomizedButton>
                             </div>
 
                             <div className="refundRequestcancelButton">
-                                <CancelButton onClick={onClose}>Cancel</CancelButton>
+                                <CustomizedButton 
+                                    variant="contained"
+                                    size="medium"
+                                    style={{ backgroundColor: '#e03a26', width: '11.625em', height: '2.75em', fontSize: '0.625em', padding: '1.75em 0.625em' }}
+                                    hoverBackgroundColor="#e03a26"
+                                    onClick={onClose}
+                                >
+                                    Cancel
+                                </CustomizedButton>
                             </div>
                         </div>
                     </div>
