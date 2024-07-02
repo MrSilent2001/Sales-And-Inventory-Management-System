@@ -58,7 +58,7 @@ const theme = createTheme({
     },
 });
 
-function LandingPage() {
+function AdminLoginLandingPage() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -83,11 +83,8 @@ function LandingPage() {
                         Discover the best products at unbeatable prices. Shop now and experience seamless online shopping like never before.
                     </Typography>
                     <Box sx={{ mt: 2 }}>
-                        <Button variant="contained" color="primary" sx={{ mx: 1 }} component={Link} to="/adminLoginSignup">
+                        <Button variant="contained" color="primary" sx={{ mx: 1 }} component={Link} to="/adminLogin">
                             Login
-                        </Button>
-                        <Button variant="outlined" color="primary" sx={{ mx: 1 }} component={Link} to="/adminLoginSignup/signup">
-                            Sign Up
                         </Button>
                     </Box>
                     <Typography variant="body1" sx={{ mt: 4, color: theme.palette.text.secondary }}>
@@ -99,4 +96,4 @@ function LandingPage() {
     );
 }
 
-export default LandingPage;
+export default AdminLoginLandingPage;

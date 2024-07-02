@@ -55,6 +55,8 @@ import EligiblePurchaseOrderForRefund from "../pages/admin/Refunds/Inventory/eli
 import SupplierPayments from "../pages/Supplier/Supplier Payments/supplierPayments";
 import InventoryDetail from "../pages/admin/View Inventory/inventoryDetail";
 import AcceptedOrdersDashboard from "../pages/admin/Orders/Inventory/Order Dashboard/AcceptedOrdersDashboard";
+import {AdminLogin} from "../pages/login & SignUp/_newLogin/AdminLogin/AdminLogin";
+import AdminLoginLandingPage from "../pages/login & SignUp/_newLogin/LandingPage/adminLoginLandingPage";
 
 export function PageRouting() {
     return (
@@ -64,7 +66,9 @@ export function PageRouting() {
 {/*===================================================Public Routes=================================================================*/}
 
                 <Route path="/" element={<GetStartedPage/>}/>
-                <Route path="/admin" element={<AdminLandingPage/>}/>
+                <Route path="/adminSignUp" element={<AdminLandingPage/>}/>
+                <Route path="/admin" element={<AdminLoginLandingPage/>}/>
+                <Route path="/adminLogin" element={<AdminLogin/>}/>
                 <Route path="/create" element={<CreatAccountSelectionPage/>}/>
                 <Route path="/loginSelect" element={<LoginSelectionPage/>}/>
                 <Route path="/supplierLoginSignup/:mode" element={<SupplierLoginSignUp />} /> {/*here mode can be login or signup ex: supplierloginsignup/login*/}
