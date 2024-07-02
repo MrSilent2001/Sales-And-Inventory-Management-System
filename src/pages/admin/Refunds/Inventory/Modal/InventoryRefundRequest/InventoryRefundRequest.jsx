@@ -9,6 +9,7 @@ import axios from 'axios';
 import CustomizedAlert from '../../../../../../components/Alert/alert';
 import ComboBox from '../../../../../../components/Form Inputs/comboBox';
 
+
 function BasicTextFields({ id, variant, size, type, value, onChange, error, helperText, disabled }) {
     return (
         <Box
@@ -65,7 +66,7 @@ const CreateRequestButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#242F9B'),
     backgroundColor: '#242F9B',
     '&:hover': {
-        backgroundColor: '#2d3ed2' 
+        backgroundColor: '#2d3ed2'
     },
     '&.MuiButton-root': {
         width: '11.625em',
@@ -80,7 +81,7 @@ const CenteredModal = styled('div')({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100vh', 
+    height: '100vh',
 });
 
 function InventoryRefundRequest({ order, onClose }) {
@@ -88,12 +89,11 @@ function InventoryRefundRequest({ order, onClose }) {
     const [item, setItem] = useState(order.productName);
     const [quantity, setQuantity] = useState('');
     const [reason, setReason] = useState('');
-    const [price, setPrice] = useState(order.productSellingPrice);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [supplierId, setSupplierId] = useState(order.supplierId);
+    const [itemCode, setItemCode] = useState(order.items); // Item code from the order
 
     const [quantityError, setQuantityError] = useState('');
-    const [priceError, setPriceError] = useState('');
-
     const [alertOpen, setAlertOpen] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [alertSeverity, setAlertSeverity] = useState('error');
@@ -126,26 +126,30 @@ function InventoryRefundRequest({ order, onClose }) {
 
         validateField('quantity', quantity);
 
-        if (quantityError || priceError) {
+        if (quantityError) {
             return; // Do not submit if there are validation errors
         }
 
         const refundRequestData = {
             orderId: order.order_id,
-            productName: item,
-            productSellingPrice: price,
+            supplierName: supplier,
+            supplierId: supplierId,
+            item: itemCode, // Sending item code
             quantity,
-            reason,
-            totalPrice
+            price: totalPrice, // Total price as per backend requirement
+            reason
         };
 
         try {
-            // Simulate successful submission
+            await axios.post('http://localhost:9000/refund/inventoryRefund/create', refundRequestData);
             console.log('Refund request submitted successfully:', refundRequestData);
             // Close the modal
             onClose();
         } catch (error) {
             console.error('Error submitting refund request:', error);
+            setAlertMessage('Error submitting refund request');
+            setAlertSeverity('error');
+            setAlertOpen(true);
         }
     };
 
@@ -241,8 +245,6 @@ function InventoryRefundRequest({ order, onClose }) {
                                     type="number"
                                     value={totalPrice}
                                     onChange={(e) => setTotalPrice(e.target.value)}
-                                    error={!!priceError}
-                                    helperText={priceError}
                                     disabled
                                 />
                             </div>
