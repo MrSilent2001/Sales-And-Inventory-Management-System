@@ -9,14 +9,14 @@ import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navb
 import ComboBox from "../../../components/Form Inputs/comboBox";
 
 const columns = [
+    { accessorKey: 'items', header: 'Item Name', size: 75 },
+    { accessorKey: 'quantity', header: 'Qty', size: 25 },
+    { accessorKey: 'total_amount', header: 'Bill (Rs.)', size: 50 },
+    { accessorKey: 'createdDate', header: 'Date', size: 25 },
+    { accessorKey: 'status', header: 'Order Status', size: 50 },
     { accessorKey: 'mail', header: 'Email', size: 25 },
     { accessorKey: 'contact_number', header: 'Contact', size: 25 },
-    { accessorKey: 'Address', header: 'Address', size: 200 },
-    { accessorKey: 'createdDate', header: 'Ordered Date', size: 50 },
-    { accessorKey: 'items', header: 'Item Name', size: 75 },
-    { accessorKey: 'quantity', header: 'Qty', size: 75 },
-    { accessorKey: 'total_amount', header: 'Total Amount', size: 75 },
-    { accessorKey: 'status', header: 'Order Status', size: 100 }
+    { accessorKey: 'Address', header: 'Address', size: 150 }
 ];
 
 function SupplierOrders() {

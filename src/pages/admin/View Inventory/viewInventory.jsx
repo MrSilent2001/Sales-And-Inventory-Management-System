@@ -31,8 +31,14 @@ function ViewInventory() {
     };
 
     const categoryOptions = [
-        { value: 'Building Material', label: 'Building Material' },
-        { value: 'Plumbing Material', label: 'Plumbing Material' },
+        {value: 'Building Material', label: 'Building Material'},
+        {value: 'Hardware and Tools', label: 'Hardware and Tools'},
+        {value: 'Safety Equipments', label: 'Safety Equipments'},
+        {value: 'Electrical Supplies', label: 'Electrical Supplies'},
+        {value: 'Plumbing Supplies', label: 'Plumbing Supplies'},
+        {value: 'Interior Finishes', label: 'Interior Finishes'},
+        {value: 'Landscaping Products', label: 'Landscaping Products'},
+        {value: 'Construction Chemicals', label: 'Construction Chemicals'}
     ];
 
     const handleAvailability = (event) => {
@@ -88,7 +94,7 @@ function ViewInventory() {
     function createViewButton(id) {
         return (
             <CustomizedButton
-                onClick={() => navigate(`/viewInventoryDetail`)} // Modify this line to use navigate
+                onClick={() => navigate(`/viewInventoryDetail`)}
                 hoverBackgroundColor="#2d3ed2"
                 style={{
                     backgroundColor: '#242F9B',
@@ -97,8 +103,6 @@ function ViewInventory() {
                     height: '3em',
                     fontSize: '0.9em',
                     padding: '0.5em 0.625em',
-                    borderRadius: '0.35em',
-                    fontWeight: '500',
                     marginTop: '0.625em',
                     marginRight: '-2em'
                 }}
@@ -120,11 +124,8 @@ function ViewInventory() {
                     height: '3em',
                     fontSize: '0.9em',
                     padding: '0.5em 0.625em',
-                    borderRadius: '0.35em',
-                    fontWeight: '500',
                     marginTop: '0.625em',
                     marginLeft: '-3em',
-                    borderStyle: 'none'
                 }}
             >
                 Delete
@@ -172,37 +173,37 @@ function ViewInventory() {
                                 </Box>
 
                             </div>
-                            <div className="itemAvailabilityFilter">
-                                <div className="itemAvailabilityTopic">
-                                    <h5>Availability</h5>
-                                </div>
+                            {/*<div className="itemAvailabilityFilter">*/}
+                            {/*    <div className="itemAvailabilityTopic">*/}
+                            {/*        <h5>Availability</h5>*/}
+                            {/*    </div>*/}
 
-                                <Box sx={{ minWidth: 80 }}>
-                                    <FormControl fullWidth>
-                                        <InputLabel
-                                            id="availability Filter"
-                                            sx={{
-                                                fontSize: '10px',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                color: 'rgba(255,255,255,0.7)'
-                                            }}
-                                        >
-                                            Select
-                                        </InputLabel>
-                                        <ComboBox
-                                            value={stock}
-                                            onChange={(event) => handleAvailability(event)}
-                                            style={{width: '10em', marginRight: '0.5em',  border: '1px solid white'}}
-                                            options={availabilityOptions}
-                                            label="Stock"
-                                            size="small"
-                                        />
-                                    </FormControl>
-                                </Box>
+                            {/*    <Box sx={{ minWidth: 80 }}>*/}
+                            {/*        <FormControl fullWidth>*/}
+                            {/*            <InputLabel*/}
+                            {/*                id="availability Filter"*/}
+                            {/*                sx={{*/}
+                            {/*                    fontSize: '10px',*/}
+                            {/*                    display: 'flex',*/}
+                            {/*                    alignItems: 'center',*/}
+                            {/*                    justifyContent: 'center',*/}
+                            {/*                    color: 'rgba(255,255,255,0.7)'*/}
+                            {/*                }}*/}
+                            {/*            >*/}
+                            {/*                Select*/}
+                            {/*            </InputLabel>*/}
+                            {/*            <ComboBox*/}
+                            {/*                value={stock}*/}
+                            {/*                onChange={(event) => handleAvailability(event)}*/}
+                            {/*                style={{width: '10em', marginRight: '0.5em',  border: '1px solid white'}}*/}
+                            {/*                options={availabilityOptions}*/}
+                            {/*                label="Stock"*/}
+                            {/*                size="small"*/}
+                            {/*            />*/}
+                            {/*        </FormControl>*/}
+                            {/*    </Box>*/}
 
-                            </div>
+                            {/*</div>*/}
                             <div className="applyButton">
                                 <CustomizedButton
                                     hoverBackgroundColor="#f11717"
@@ -212,8 +213,6 @@ function ViewInventory() {
                                         height: '2.5em',
                                         fontSize: '0.95em',
                                         padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        fontWeight: '550',
                                         marginTop: '0.625em',
                                         marginRight:'1.5em',
                                         marginLeft: '1.5em',

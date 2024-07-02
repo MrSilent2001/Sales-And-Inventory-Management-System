@@ -13,10 +13,6 @@
     margin: 0 0 0 -0.3em;
 }
 
-.viewInventoryFilterInner{
-    margin-top: -22em;
-}
-
 .itemCategoryFilter{
     display: flex;
     flex-direction: column;
@@ -35,7 +31,6 @@
 
 .filterHeader h2{
     color: rgba(255, 255, 255, 0.8);
-    text-decoration: underline;
     font-family: inter;
 }
 

@@ -9,6 +9,7 @@ import SalesRefundDenialForm from '../Refund Denial Form/SalesRefundDenialForm';
 import CustomizedAlert from '../../../../../components/Alert/alert';
 
 
+const token = localStorage.getItem('accessToken');
 // API call function to update refund status
 const updateRefundStatus = async (id, status, denialReason = '') => {
     try {
@@ -16,7 +17,10 @@ const updateRefundStatus = async (id, status, denialReason = '') => {
             id,
             status,
             denialReason,
-        });
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }});
         return response.data;
     } catch (error) {
         console.error('Error updating refund status:', error);
@@ -34,7 +38,10 @@ function SalesViewRequest() {
         // Fetch the refund request details using the ID from the URL
         const fetchRefundRequest = async () => {
             try {
-                const response = await axios.get(`http://localhost:9000/refund/customerRefund/get/${id}`);
+                const response = await axios.get(`http://localhost:9000/refund/customerRefund/get/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }});
                 setRefundRequest(response.data);
             } catch (error) {
                 console.error('Error fetching refund request:', error);
@@ -92,14 +99,9 @@ function SalesViewRequest() {
                                 width: '6em',
                                 height: '2.5em',
                                 fontSize: '0.95em',
-                                fontFamily: 'inter',
                                 padding: '0.5em 0.625em',
-                                borderRadius: '0.35em',
-                                fontWeight: '550',
                                 marginTop: '1.5em',
                                 marginRight: '1.5em',
-                                textTransform: 'none',
-                                textAlign: 'center',
                             }}>
                             Accept
                         </CustomizedButton>
@@ -114,14 +116,9 @@ function SalesViewRequest() {
                                 width: '6em',
                                 height: '2.5em',
                                 fontSize: '0.95em',
-                                fontFamily: 'inter',
                                 padding: '0.5em 0.625em',
-                                borderRadius: '0.35em',
-                                fontWeight: '550',
                                 marginTop: '1.5em',
                                 marginRight: '1.5em',
-                                textTransform: 'none',
-                                textAlign: 'center',
                             }}>
                             Reject
                         </CustomizedButton>

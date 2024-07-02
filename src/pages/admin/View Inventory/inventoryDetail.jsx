@@ -71,7 +71,7 @@ function InventoryDetail() {
                         {inventoryItem.productImage.length > 0 && (
                             <Avatar
                                 src={inventoryItem.productImage[0]}
-                                sx={{ width: 440, height: 440, border: 1, borderRadius: 3, borderColor: 'black' }}
+                                sx={{ width: 400, height: 400, border: 1, borderRadius: 3, borderColor: 'black' }}
                             />
                         )}
                     </div>
@@ -88,7 +88,7 @@ function InventoryDetail() {
                                     <div className="productDetailTopic">
                                         <h3>Product ID : </h3>
                                     </div>
-                                    <div className="loadedProductDetail" style={{ marginRight: '6em' }}>
+                                    <div className="loadedProductDetail" style={{marginRight: '6em'}}>
                                         <h3>{inventoryItem.id}</h3>
                                     </div>
                                 </div>
@@ -102,11 +102,11 @@ function InventoryDetail() {
                                     </div>
                                 </div>
 
-                                <div className="productDetail" style={{ alignItems: 'flex-start' }}>
-                                    <div className="productDetailTopic" style={{ marginRight: '1em' }}>
+                                <div className="productDetail" style={{alignItems: 'flex-start'}}>
+                                    <div className="productDetailTopic" style={{marginRight: '1em'}}>
                                         <h3>Product Description : </h3>
                                     </div>
-                                    <div className="loadedProductDetail" style={{ width: '36em', textAlign: 'left' }}>
+                                    <div className="loadedProductDetail" style={{width: '36em', textAlign: 'left'}}>
                                         <h3>{inventoryItem.productDescription}</h3>
                                     </div>
                                 </div>
@@ -115,10 +115,12 @@ function InventoryDetail() {
                                     <div className="productDetailTopic">
                                         <h3>Manufacturer : </h3>
                                     </div>
-                                    <div className="loadedProductDetail" style={{ marginRight: '3em' }}>
+                                    <div className="loadedProductDetail" style={{marginRight: '3em'}}>
                                         <h3>{inventoryItem.productManufacturer}</h3>
                                     </div>
+                                </div>
 
+                                <div className="productDetail">
                                     <div className="productDetailTopic">
                                         <h3>Product Colour : </h3>
                                     </div>
@@ -131,7 +133,7 @@ function InventoryDetail() {
                                     <div className="productDetailTopic">
                                         <h3>Quantity : </h3>
                                     </div>
-                                    <div className="loadedProductDetail" style={{ marginRight: '3em' }}>
+                                    <div className="loadedProductDetail" style={{marginRight: '3em'}}>
                                         <h3>{inventoryItem.productQuantity}</h3>
                                     </div>
                                 </div>
@@ -148,11 +150,10 @@ function InventoryDetail() {
 
                             <div className="supplierDetailOuter">
                                 <div className="supplierDetail">
-
                                     <div className="supplierDetailTopic">
                                         <h3>Supplier ID : </h3>
                                     </div>
-                                    <div className="loadedSupplierDetail" style={{ marginRight: '6em' }}>
+                                    <div className="loadedSupplierDetail" style={{marginRight: '6em'}}>
                                         <h3>{supplier.id}</h3>
                                     </div>
 

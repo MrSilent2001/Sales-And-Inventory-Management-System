@@ -23,12 +23,12 @@
 }
 
 .productTopic{
-    text-align: left;
+    width: 35em;
+    text-align: center;
 }
 
 .productTopic h1{
     font-family: Arial;
-    margin-bottom: 1.25em;
 }
 
 .productDataOuter{
@@ -51,7 +51,7 @@
 
 .productDetailTopic h3{
     font-size: 1em;
-    font-weight: 550;
+    font-weight: 700;
     margin-top: 0.2em;
 }
 
@@ -72,7 +72,7 @@
 }
 
 .supplierDetailTopic h3{
-    font-weight: 550;
+    font-weight: 700;
     font-size: 1em;
 }
 
@@ -82,7 +82,10 @@
 }
 
 .productDetailButtons{
+    width: 35em;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
     margin-top: 2em;
 }

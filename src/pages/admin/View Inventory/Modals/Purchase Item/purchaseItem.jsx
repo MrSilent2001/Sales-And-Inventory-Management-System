@@ -179,6 +179,7 @@ function PurchaseItem(props) {
                                     onChange={(e) => {
                                         setName(e.target.value);
                                     }}
+                                    readOnly
                                 />
                             </div>
                         </div>
@@ -194,6 +195,7 @@ function PurchaseItem(props) {
                                     onChange={(e) => {
                                         setCategory(e.target.value);
                                     }}
+                                    readOnly
                                 />
                             </div>
                         </div>
@@ -209,6 +211,7 @@ function PurchaseItem(props) {
                                     onChange={(e) => {
                                         setQuantity(e.target.value);
                                     }}
+                                    readOnly
                                 />
                             </div>
                         </div>
@@ -224,6 +227,7 @@ function PurchaseItem(props) {
                                     onChange={(e) => {
                                         setUnitPrice(e.target.value);
                                     }}
+                                    readOnly
                                 />
                             </div>
                         </div>
@@ -235,7 +239,7 @@ function PurchaseItem(props) {
                             <div className="updateItemidInput">
                                 <BasicTextField
                                     name="purchaseQuantity"
-                                    value={purchaseQuantity}
+                                    type="number"
                                     onChange={handlePurchaseQuantityChange}
                                 />
                             </div>
@@ -264,12 +268,10 @@ function PurchaseItem(props) {
                                     hoverBackgroundColor="#f11717"
                                     style={{
                                         backgroundColor: '#960505',
-                                        width: '10em',
+                                        width: '9.5em',
                                         height: '2.75em',
                                         fontSize: '0.8em',
                                         padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        fontWeight: '700',
                                         color: 'white',
                                     }}
                                 >
@@ -279,16 +281,13 @@ function PurchaseItem(props) {
                             <div className="updateItempurchaseButton">
                                 <CustomizedButton
                                     onClick={handleSubmit}
-                                    hoverBackgroundColor="#007bff"
+                                    hoverBackgroundColor="#2d3ed2"
                                     style={{
-                                        backgroundColor: '#0056b3',
-                                        width: '10em',
+                                        backgroundColor: '#242F9B',
+                                        width: '9.5em',
                                         height: '2.75em',
                                         fontSize: '0.8em',
                                         padding: '0.5em 0.625em',
-                                        borderRadius: '0.35em',
-                                        fontWeight: '700',
-                                        color: 'white',
                                     }}
                                 >
                                     Purchase
