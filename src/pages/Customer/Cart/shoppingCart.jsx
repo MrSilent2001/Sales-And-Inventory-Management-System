@@ -9,6 +9,9 @@ import CustomizedButton from "../../../components/Button/button";
 import axios from "axios";
 import { useAuth } from "../../../context/AuthContext";
 import CustomizedAlert from "../../../components/Alert/alert";
+import {Link} from "react-router-dom";
+import emptyCartImage from "../../../assets/images/empty-cart-image.png";
+
 
 const getStripe = () => {
     let stripePromise = '';
@@ -24,6 +27,9 @@ function Cart() {
     const [cart, setCart] = useState([]);
     const [totalAmount, setTotalAmount] = useState(0);
     const [isLoading, setLoading] = useState(false);
+    const [totalAmountWithoutDiscount, setTotalAmountWithoutDiscount] = useState(0);
+    const [totalDiscountedPrice, setTotalDiscountedPrice] = useState(0);
+
 
     // Alert state for removing items from cart
     const [removeFromCartOpenSuccess, setRemoveFromCartOpenSuccess] = useState(false);
@@ -51,15 +57,25 @@ function Cart() {
     // Calculate total amount whenever cart changes
     useEffect(() => {
         let total = 0;
+        let totalWithoutDiscount = 0;
+        let totalDiscountedPrice = 0;
+
         cart.forEach(item => {
-            // Calculate the discounted price for each item if discountRate is present
             const finalPrice = item.discountRate
                 ? item.productSellingPrice * (1 - item.discountRate / 100)
                 : item.productSellingPrice;
             total += finalPrice * item.amount;
+            totalWithoutDiscount += item.productSellingPrice * item.amount;
+            totalDiscountedPrice += (item.discountRate ? item.productSellingPrice * (item.discountRate / 100) * item.amount : 0);
         });
+
         setTotalAmount(total);
+        setTotalAmountWithoutDiscount(totalWithoutDiscount);
+        setTotalDiscountedPrice(totalDiscountedPrice);
     }, [cart]);
+
+
+    console.log(cart);
 
     // Remove an item from the cart
     const removeFromCart = (itemId) => {
@@ -158,40 +174,75 @@ function Cart() {
         <>
             <CustomerNavbar />
             <div className="cartOuter">
-                <div className="cardspace">
-                    {cart.map(item => (
-                        <MediaControlCard key={item.id} item={item} removeFromCart={removeFromCart} />
-                    ))}
+                <div className="arrow">
+                    <Link to="/products">
+                        <ArrowBackIosIcon/>
+                    </Link>
                 </div>
+                {cart.length === 0 ? (
+                    <div className="emptyCartContainer">
+                        <img src={emptyCartImage} alt="Cart is empty" className="emptyCartImage"/>
+                    </div>
+                ) : (
+                    <>
+                        <div className="cardspace">
+                            {cart.map(item => (
+                                <MediaControlCard key={item.id} item={item} removeFromCart={removeFromCart}/>
+                            ))}
+                        </div>
 
-                <div className="cartInner">
-                    <div className="arrow">
-                        <ArrowBackIosIcon />
-                    </div>
-                    <div className="totalText">
-                        <p>Total Amount</p>
-                        <p className="amount">Rs {totalAmount.toFixed(2)}</p>
-                        <CustomizedButton
-                            onClick={redirectToCheckout}
-                            disabled={isLoading}
-                            hoverBackgroundColor="#0aaf0b"
-                            style={{
-                                color: '#ffffff',
-                                backgroundColor: '#057007',
-                                width: '7.5em',
-                                height: '2.25em',
-                                fontSize: '0.85em',
-                                padding: '0.5em 0.625em',
-                                borderRadius: '0.625em',
-                                border: 'none',
-                                marginTop: '0.25em',
-                                marginBottom: '2em',
-                            }}
-                        >
-                            {isLoading ? "Loading..." : "Buy Now"}
-                        </CustomizedButton>
-                    </div>
-                </div>
+                        <div className="cartInner">
+                            <div className="itemsList">
+                                {cart.map(item => {
+                                    const finalPrice = item.discountRate
+                                        ? item.productSellingPrice * (1 - item.discountRate / 100)
+                                        : item.productSellingPrice;
+                                    return (
+                                        <div key={item.id} className="itemDetails">
+                                            <p>{item.productName} x {item.amount} - Rs {finalPrice.toFixed(2)}</p>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                            <hr/>
+                            <div className="totalText">
+                                {totalDiscountedPrice > 0 && (
+                                    <>
+                                        <p><strong>Total:</strong> Rs {totalAmountWithoutDiscount.toFixed(2)} -
+                                            Rs {totalDiscountedPrice.toFixed(2)} (Discount)</p>
+                                        {/*<p>Discounted Price: Rs {totalDiscountedPrice.toFixed(2)}</p>*/}
+                                    </>
+                                )}
+                                <p style={{fontSize: '1.15em'}}>
+                                    <strong>Final Price:</strong> Rs {totalAmount.toFixed(2)}
+                                </p>
+                            </div>
+                            <div className="buttom">
+                                <CustomizedButton
+                                    onClick={redirectToCheckout}
+                                    disabled={isLoading}
+                                    hoverBackgroundColor="#0aaf0b"
+                                    style={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#057007',
+                                        width: '21.5em',
+                                        height: '4.25em',
+                                        fontSize: '0.85em',
+                                        padding: '0.5em 0.625em',
+                                        borderRadius: '0.625em',
+                                        border: 'none',
+                                        marginTop: '0.25em',
+                                        marginBottom: '2em',
+                                    }}
+                                >
+                                    {isLoading ? "Loading..." : "Buy Now"}
+                                </CustomizedButton>
+                            </div>
+                        </div>
+
+
+                    </>
+                )}
             </div>
 
             <CustomizedAlert
@@ -201,9 +252,10 @@ function Cart() {
                 message="Item removed from Cart!"
             />
 
-            <Footer />
+            <Footer/>
         </>
     );
+
 }
 
 export default Cart;

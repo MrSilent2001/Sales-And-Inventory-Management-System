@@ -1,43 +1,76 @@
 .cartOuter {
     width: 100%;
-    overflow-y: scroll; 
+    max-height: 76vh;
+    overflow-y: scroll;
+    height: 76vh;
+    display: flex;
+    background-color: #F5F5F5;
+    padding: 1em;
+    box-sizing: border-box;
 }
 
 .cartInner {
-    width: 20%;
-    height:50em;
-    float: left;
-    background-color: whitesmoke;
-    
-
+    width: 25%;
+    height: 100%;
+    background-color: #ffffff;
+    /*border-radius: 2px;*/
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+    padding: 1em;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+    /*float: left;*/
 }
 
 .cardspace {
-    width: 80%;
-    float: left;
+    width: 75%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-   
-
+    overflow-y: auto;
+    background-color: #F5F5F5;
+    padding: 1em;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-right: 1em;
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
 }
 
+.arrow {
+    padding: 1em 0;
+    text-align: center;
+    position: absolute;
+}
 
+.itemsList {
+    flex: 1;
+    margin-bottom: 1em;
+    margin-left: 1em;
+}
 
-.arrow{
+.itemDetails {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4em 0;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 14px;
+    color: #333;
+}
+
+.totalText {
+    text-align: left;
+    font-weight: 400;
+    font-size: 0.9em;
+    line-height: 1.5em;
+    margin-top: -2.5em;
+    margin-left: 1.5em;
     padding-top: 1em;
-    padding-right: 15em;
+    /*border-top: 1px solid #e0e0e0;*/
 }
 
-.totalText{
-    margin-top: 70%;
-    margin-bottom: 50%;
-    align-items: center;
-    font-weight: bold;
-    font-size: larger;
-    line-height: 1em;
-}
-
-.amount{
+.amount {
     color: rgb(109, 161, 213);
 }
 
@@ -57,4 +90,19 @@
     line-height: 130%;
     margin: 0;
     color: rgba(0, 0, 0, 1);
+}
+
+.emptyCartContainer {
+    height: 76vh;
+    width: 100vw;
+    background-color: white;
+    text-align: center;
+    margin: -1em;
+    overflow-y: clip;
+}
+
+.emptyCartImage {
+    margin-top: 3em;
+    max-width: 50em;
+    height: auto;
 }

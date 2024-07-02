@@ -17,43 +17,42 @@ export default function MediaControlCard({ item, removeFromCart }) {
     }
 
     return (
-        <Card sx={{ display: 'flex', flexDirection: 'column', height: 230, width: 1000, marginTop: 4, marginLeft: 10, backgroundColor: 'whitesmoke' }}>
+        <Card sx={{ display: 'flex', flexDirection: 'column', minHeight: 160, height: 160, width: 800, marginTop: 4, marginLeft: 20, backgroundColor: 'white', boxShadow: 'none' }}>
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                 <CardMedia
                     component="img"
-                    sx={{ width: 160, height: 160, marginLeft: 10, marginTop: 2 }}
+                    sx={{ width: 100, height: 100, marginLeft: 10, marginTop: 3 }}
                     image={productImage[0]}
                 />
                 <CardContent sx={{ flex: '1 0 auto', marginLeft: 10 }}>
-                    <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
-                        Item Id : {id}
+                    <Typography variant="subtitle2" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2, color: 'gray' }}>
+                        Reference : {id}
                     </Typography>
-                    <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
-                        Item Name : {productName}
+                    <Typography variant="h6" sx={{fontSize:17, textAlign: 'left', fontWeight: 'bold', lineHeight: 2, color: 'text.primary' }}>
+                        {productName} x {amount}
                     </Typography>
-                    <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
-                        Quantity: {amount}
-                    </Typography>
-                    <Typography variant="subtitle1" color="text.primary" component="div" sx={{ textAlign: 'left', fontWeight: 'bold', lineHeight: 2 }}>
-                        Price : Rs.{finalPrice.toFixed(2)}
+                    <Typography variant="subtitle1" sx={{fontSize:14, textAlign: 'left', fontWeight: 'normal', lineHeight: 2, color: 'text.primary' }}>
+                        Rs.{finalPrice.toFixed(2)}
                     </Typography>
                 </CardContent>
             </Box>
-            <Box sx={{ alignSelf: 'right', marginLeft: 100 }}>
+            <Box sx={{ alignSelf: 'flex-end', marginLeft: 'auto', marginBottom: 2, paddingRight: 2 }}>
                 <CustomizedButton
                     onClick={handleRemoveClick}
                     hoverBackgroundColor="#f11717"
                     style={{
                         color: '#ffffff',
                         backgroundColor: '#960505',
-                        width: '6em',
+                        width: '10em',
                         height: '2.5em',
-                        fontSize: '0.95em',
-                        fontFamily: 'inter',
+                        fontSize: '0.75em',
+                        fontFamily: 'Inter',
                         padding: '0.5em 0.625em',
                         borderRadius: '0.35em',
                         fontWeight: '550',
-                        marginTop: '0.625em',
+                        marginBottom: '0.625em',
+                        marginTop: '-1.225em',
+                        marginRight: '1.225em',
                         textTransform: 'none',
                         textAlign: 'center',
                     }}>
