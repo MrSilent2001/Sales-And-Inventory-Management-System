@@ -8,8 +8,8 @@
     padding: 0 30px 0 30px;
     box-shadow: 0 6px 7px -3px rgba(0, 0, 0, 0.35);
     /*background-color: #263043;*/
-    background-color: #041035;
-    color: #9e9ea4;
+    background-color: #242f9a;
+    color: #ffffff;
 }
 
 .menu-icon {
@@ -22,11 +22,11 @@
     grid-area: sidebar;
     height: 100%;
     /*background-color: #263043;*/
-    background-color: #0c1530;
+    background-color: #242f9a;
     overflow-y: auto;
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
-    color: #9e9ea4;
+    color: #ffffff;
 }
 
 .sidebar-title {
@@ -65,7 +65,7 @@
 
 .sidebar-list-item > a {
     text-decoration: none;
-    color: #9e9ea4;
+    color: #ffffff;
 }
 
 .sidebar-responsive {
@@ -89,11 +89,12 @@
     padding: 20px 20px;
     color: rgba(255, 255, 255, 0.95);
     /*background-color: #1d2634;*/
-    background-color: #30374e;
+    background-color: #f5f5f5;
 }
 
 .main-title {
     display: flex;
+    color: black;
     justify-content: space-between;
 }
 

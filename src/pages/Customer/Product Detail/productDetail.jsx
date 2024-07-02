@@ -221,7 +221,7 @@ function ProductDetail(){
         };
 
         fetchProductsWithOffers();
-    }, [productId, token]);
+    }, [productId, token, reviewSubmitOpenSuccess]);
 
     // useEffect(() => {
     //     const storedCart = JSON.parse(localStorage.getItem("cart"));
@@ -286,13 +286,15 @@ function ProductDetail(){
 
                         <h2>Product Reviews</h2>
 
-                        {productReview && productReview.length > 0 ? (
-                            productReview.map(reviews => (
-                                <ProductReviewCard key={reviews.id} reviews={reviews}/>
-                            ))
-                        ) : (
-                            <p>Currently no Reviews Available</p>
-                        )}
+                        <div className="productDetailReviewInner">
+                            {productReview && productReview.length > 0 ? (
+                                productReview.map(reviews => (
+                                    <ProductReviewCard key={reviews.id} reviews={reviews}/>
+                                ))
+                            ) : (
+                                <p>Currently no Reviews Available</p>
+                            )}
+                        </div>
                     </div>
 
 
