@@ -4,7 +4,7 @@ import minus from "./Icons/iconImages/icon-minus.svg";
 
 const QuantityButton = ({ onQuant, onRemove, onAdd, productQuantity, quantityError }) => {
     const handleAddClick = () => {
-        if (productQuantity === 0) {
+        if (productQuantity === 0 || onQuant === productQuantity) {
             quantityError(true);
         } else {
             onAdd();

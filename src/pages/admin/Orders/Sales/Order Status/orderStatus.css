@@ -8,18 +8,19 @@
 .body{
     display: flex;
     flex-direction: row;
+
 }
 
 .orderStatusFilter{
     width: 14.375em;
-    height: 36.03em;
+    height: 90vh;
     background-color: #646FD4;
 
 }
 
 .orderStatusInner{
     width : 76.5em;
-    height: 33em;
+    height: 88vh;
     margin: 3em 0 0 3em;
     background-color: #f3f3f3;
     overflow-y: auto;

@@ -400,6 +400,7 @@ ul {
 
 .ProductDetailGallery .backdrop .thumbnails {
     position: relative;
+
 }
 
 .ProductDetailGallery .backdrop .thumbnails .img-holder-backd {
@@ -410,6 +411,7 @@ ul {
 
 .ProductDetailGallery .backdrop .thumbnails img {
     height: 3.75rem;
+    width: 3.75rem;
 }
 
 .MuiBadge-badge,

@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import Rating from "@mui/material/Rating";
 import axios from 'axios';
 
-export default function ProductReviewSubmitForm({ productId, submitAlert ,submitErrorAlert }) {
+export default function ProductReviewSubmitForm({ productId, submitAlert, submitErrorAlert }) {
     const [value, setValue] = useState(2);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -27,9 +27,8 @@ export default function ProductReviewSubmitForm({ productId, submitAlert ,submit
             productReviewedDate: new Date().toISOString().split('T')[0] // Format the date as YYYY-MM-DD
         };
 
-
         try {
-            console.log("formdata",reviewData);
+            console.log("formdata", reviewData);
             const response = await axios.post('http://localhost:9000/product/review/create', reviewData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -38,15 +37,19 @@ export default function ProductReviewSubmitForm({ productId, submitAlert ,submit
             console.log('Review submitted successfully:', response.data);
             submitAlert();
 
+            // Clear the form fields after submission
+            setName('');
+            setDescription('');
+            setValue(2);
+
         } catch (error) {
             console.error('Error submitting review:', error);
             submitErrorAlert();
-
         }
     };
 
     return (
-        <Paper elevation={0} sx={{width: 900, marginLeft: 2, paddingRight: 4,marginTop: 4,marginBottom: 10, backgroundColor:'#F5F5F5' }}>
+        <Paper elevation={0} sx={{ width: 900, marginLeft: 2, paddingRight: 4, marginTop: 4, marginBottom: 10, backgroundColor: '#F5F5F5' }}>
             <Box sx={{ padding: 5 }} component="form" onSubmit={handleSubmit}>
                 <Typography variant="h6" gutterBottom sx={{ paddingBottom: 5 }}>
                     Submit a Review
@@ -124,7 +127,7 @@ export default function ProductReviewSubmitForm({ productId, submitAlert ,submit
                     <Grid item xs={12} sm={6} />
                     <Grid item xs={12} sm={5} />
                     <Grid item xs={12} sm={4}>
-                        <Button type="submit" variant="contained" sx={{ color: "#ffff", width: '57em', marginLeft:'2em', backgroundColor:'green' }}>
+                        <Button type="submit" variant="contained" sx={{ color: "#ffff", width: '57em', marginLeft: '2em', backgroundColor: 'green' }}>
                             Submit
                         </Button>
                     </Grid>
