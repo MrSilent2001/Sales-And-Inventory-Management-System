@@ -57,6 +57,7 @@ import InventoryDetail from "../pages/admin/View Inventory/inventoryDetail";
 import AcceptedOrdersDashboard from "../pages/admin/Orders/Inventory/Order Dashboard/AcceptedOrdersDashboard";
 import {AdminLogin} from "../pages/login & SignUp/_newLogin/AdminLogin/AdminLogin";
 import AdminLoginLandingPage from "../pages/login & SignUp/_newLogin/LandingPage/adminLoginLandingPage";
+import ViewShopReviews from "../pages/Customer/Home/Shop Reviews/View Shop Reviews";
 
 export function PageRouting() {
     return (
@@ -105,6 +106,7 @@ export function PageRouting() {
                     <Route path="/product/:productId" element={<ProductDetail />} />
                     <Route path="/products" element={<ProductCatalog/>}/>
                     <Route path="/cart" element={<Cart/>}/>
+                    <Route path="/customerReviews" element={<ViewShopReviews/>}/>
 
                     <Route path="/customerProfile" element={<CustomerProfile/>}/>
                     <Route path="/previousOrders" element={<CustomerOrderHistory/>}/>

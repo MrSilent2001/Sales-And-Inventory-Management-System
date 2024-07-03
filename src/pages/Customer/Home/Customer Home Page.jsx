@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import './Customer Home Page.css';
 import Footer from "../../../layout/footer/footer";
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
 import ShopReviewSubmitForm from "./Shop Reviews/Shop Reviews";
 import ReviewCard from "./Shop Reviews/Small Shop Review Card";
@@ -13,6 +13,7 @@ function CustomerHome() {
 
     const [reviews, setReviews] = useState([]);
     const token = localStorage.getItem('accessToken');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchReviews = async () => {
@@ -32,6 +33,10 @@ function CustomerHome() {
 
         fetchReviews();
     }, []);
+
+    const handleNavigate = () => {
+        navigate('/customerReviews');
+    };
 
     return (
         <>
@@ -104,7 +109,20 @@ function CustomerHome() {
                     </div>
 
                     <div className="viewCustomerReviews">
-                        
+                        <CustomizedButton
+                            onClick={handleNavigate}
+                            hoverBackgroundColor="#c6ccf3"
+                            style={{
+                                color: '#423333',
+                                backgroundColor: 'rgba(225,221,221,0.75)',
+                                border: '1px solid #242F9B',
+                                width: '11em',
+                                height: '2.95em',
+                                fontSize: '0.8em',
+                                padding: '0.5em 0.625em',
+                            }}>
+                            View More
+                        </CustomizedButton>
                     </div>
                 </div>
 
