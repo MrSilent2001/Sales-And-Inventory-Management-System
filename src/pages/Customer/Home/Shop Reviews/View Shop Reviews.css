@@ -1,0 +1,25 @@
+.allCustomerReviews{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.allCustomerReviewsTopic{
+    margin: 3.75em 0 0 0;
+}
+
+.allCustomerReviewsTopic h2{
+    font-size: 1.8em;
+    font-family: Inter;
+}
+
+.allCustomerReviewsPara{
+    width: 90em;
+    margin: 0.75em 0 1em 0;
+}
+
+.allCustomerReviewsPara p{
+    font-size: 0.95em;
+    font-family: Inter;
+    line-height: 1.7;
+}

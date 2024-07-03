@@ -12,6 +12,7 @@ import ReviewsGrid from "./Shop Reviews/Small Shop Review Card";
 function CustomerHome() {
 
     const [reviews, setReviews] = useState([]);
+    const [allReviews, setAllReviews] = useState([]);
     const token = localStorage.getItem('accessToken');
     const navigate = useNavigate();
 
@@ -24,6 +25,8 @@ function CustomerHome() {
                     },
                 });
                 const latestReviews = response.data.slice(-4).reverse();
+                const allData = response.data;
+                setAllReviews(allData);
                 setReviews(latestReviews);
                 console.log(latestReviews);
             } catch (error) {
@@ -35,7 +38,7 @@ function CustomerHome() {
     }, []);
 
     const handleNavigate = () => {
-        navigate('/customerReviews');
+        navigate('/customerReviews', { state: { reviews: allReviews } });
     };
 
     return (
@@ -53,21 +56,22 @@ function CustomerHome() {
                             <div className="carouselButton">
                                 <Link to="/products">
                                     <CustomizedButton
-                                        // hoverBackgroundColor="#d7d7d7"
+                                        hoverBackgroundColor="rgba(121,121,121,0.71)"
                                         style={{
-                                            color: '#000000',
-                                            backgroundColor: '#620707',
+                                            color: 'rgba(0,0,0,0.76)',
+                                            backgroundColor: '#2a2727',
                                             border: '1px solid #242F9B',
                                             width: '11em',
                                             height: '3.75em',
                                             fontSize: '0.7em',
                                             fontFamily: 'inter',
                                             padding: '0.5em 0.625em',
-                                            borderRadius: '0.35em',
+                                            borderRadius: '0.5em',
                                             fontWeight: '550',
                                             marginTop: '0.625em',
                                             textTransform: 'none',
                                             textAlign: 'center',
+
                                         }}>
                                         Shop Now
                                     </CustomizedButton>
