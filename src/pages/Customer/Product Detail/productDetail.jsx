@@ -66,7 +66,7 @@ function ProductDetail(){
                 updatedCart[existingItemIndex].amount += count;
                 setCart(updatedCart);
                 localStorage.setItem("cart", JSON.stringify(updatedCart));
-                resetQuant;
+                resetQuant();
                 setAvailableQuantity(product.productQuantity - updatedCart[existingItemIndex].amount);
                 addToCartHandleClickSuccess();
             } else {
@@ -78,7 +78,7 @@ function ProductDetail(){
                 setCart([...updatedCart, { ...product, amount: count }]);
                 localStorage.setItem("cart", JSON.stringify([...updatedCart, { ...product, amount: count }]));
                 setAvailableQuantity(product.productQuantity - count);
-                resetQuant;
+                resetQuant();
                 addToCartHandleClickSuccess();
             } else {
                 quantityErrorHandleClickSuccess();
