@@ -93,7 +93,7 @@ const SalesRefundDenialForm = ({ id, contact, setShowDenialForm, setAlert }) => 
                         value={reason}
                         onChange={(e) => { setReason(e.target.value); setError(''); }}
                         placeholder="Provide the reasons for the denial of the refund request"
-                        style={{ width: '60%', height: '150px', padding: '10px', fontSize: '16px', borderRadius: '4px', border: '1px solid #ccc' }}
+                        style={{ width: '80%', height: '150px', padding: '10px', fontSize: '16px', borderRadius: '4px', border: '1px solid #ccc' }}
                     />
                     {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
                     <div style={{ display: 'flex', justifyContent: 'space-between', width: '23%', marginLeft: '22em', marginTop: '1em' }}>
