@@ -4,6 +4,7 @@ import Footer from "../../../layout/footer/footer";
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
+import ShopReviewSubmitForm from "./Shop Reviews/Shop Reviews";
 
 function CustomerHome() {
     return (
@@ -122,6 +123,26 @@ function CustomerHome() {
                                 <p>No 16/B, Galle Road, Colombo 3</p>
                                 <p>011 5556667</p>
                                 <p>ContactUs@Tradeasy.com </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="shopReviewOuter">
+                        <h3>Make Your Reviews</h3>
+                        <div className="shopReviewContent">
+                            <div className="shopReviewDesc">
+                                <div className="shopReviewDescPara">
+                                    <p>Dear Customer,</p>
+                                    <p>
+                                        Thank you for choosing Tradeasy for your shopping needs! We strive to provide the best products and services, and to achieve this, we need your help. Your honest review is invaluable in enhancing our services, guiding future shoppers, fostering transparency, and driving innovation. By sharing your genuine experiences—whether positive or areas needing improvement—you help us understand what we are doing well and where we can improve. Your feedback also provides insights for other customers, helping them make informed decisions. Constructive criticism fuels our efforts to introduce new features and improve existing ones, ensuring a shopping experience that exceeds expectations. Please take a few moments to submit your review. Together, we can make Tradeasy the best shopping destination for everyone. Thank you for your support!
+                                    </p>
+                                    <p>
+                                        The Tradeasy Team
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="shopReviewForm">
+                                <ShopReviewSubmitForm></ShopReviewSubmitForm>
                             </div>
                         </div>
                     </div>
