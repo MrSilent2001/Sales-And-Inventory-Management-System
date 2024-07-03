@@ -55,11 +55,12 @@ function InventoryRefundRequest({ order, onClose }) {
         if (quantityError) {
             return; // Do not submit if there are validation errors
         }
-
+        console.log(order);
         const refundRequestData = {
             orderId: order.order_id,
             supplierName: supplier,
             supplierId: supplierId,
+            supplierMail:order.mail,
             item: itemCode, // Sending item code
             productName: item, // Sending product name
             quantity,

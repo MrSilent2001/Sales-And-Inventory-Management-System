@@ -131,6 +131,7 @@ function EligiblePurchaseOrdersForRefund() {
                         createdDate: order.createdDate,
                         quantity: order.quantity,
                         items: order.items,
+                        mail:order.mail,
                         eligibleForRefund: eligibleQuantity > 0
                     };
                 });

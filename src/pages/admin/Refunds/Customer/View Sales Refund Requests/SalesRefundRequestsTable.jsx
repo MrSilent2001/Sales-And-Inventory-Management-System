@@ -29,7 +29,9 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
+                console.log('response', response.data);
                 const currentDate = new Date();
+                // setting to check overdue
                 const dataWithWarning = response.data.map(request => {
                     const createdDate = new Date(request.createdDate);
                     const timeDifference = Math.floor((currentDate - createdDate) / (1000 * 60 * 60 * 24));
@@ -56,16 +58,19 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
     }, []);
 
     const columns = useMemo(() => [
-        { accessorKey: 'customerName', header: 'Name', size: 70, align: 'center' },
-        { accessorKey: 'id', header: 'Request Id', size: 100, align: 'center' },
         { accessorKey: 'orderId', header: 'Order Id', size: 100, align: 'center' },
-        { accessorKey: 'actions', header: 'Actions', size: 150, align: 'center' }
+        { accessorKey: 'customerName', header: 'Name', size: 70, align: 'center' },
+        {accessorKey:'contact',header:'Mail Address',size:70,align:'center'},
+        {accessorKey:'totalPrice' , header:'Total Price', size:100, align:'center'},
+        { accessorKey: 'actions', header: 'Actions', size: 100, align: 'center' }
     ], []);
 
     const dataWithActions = refundRequests.map(row => ({
         id: row.id,
         customerName: row.customerName,
         orderId: row.orderId,
+        contact: row.contact,
+        totalPrice: row.totalPrice,
         actions: (
             <Box key={row.id} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Link to={`/SalesViewRequest/${row.id}`} key={row.id}>
@@ -153,7 +158,7 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
     return (
         <>
             <SalesNavbar />
-            <Container maxWidth="90%" style={{ backgroundColor: '#DBDFFD', height: '37.5em' }}>
+            <Container maxWidth="90%" style={{ backgroundColor: '#DBDFFD', height: '47em' }}>
                 {hasOverdue && (
                     <CustomizedAlert
                         onClose={() => {}}
@@ -173,7 +178,7 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
                             marginBottom: 0.5
                         }}
                     >
-                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold' , marginTop:4,marginBottom:3 }}>
                             Refund Request
                         </Typography>
 
