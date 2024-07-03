@@ -145,3 +145,39 @@
     font-size: 0.9em;
 }
 
+.shopReviewOuter{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 5em;
+    margin-bottom: -14em;
+}
+
+.shopReviewContent{
+    display: flex;
+    justify-content: center;
+    padding-left: 3em;
+}
+
+.shopReviewDesc h2{
+    text-align: left;
+    font-weight: 650;
+    margin-bottom: 1.75em;
+}
+
+.shopReviewDescPara{
+    width: 36em;
+}
+
+.shopReviewDescPara p{
+    font-size: 0.85em;
+    text-align: left;
+    line-height: 2;
+    text-align: justify;
+}
+
+.shopReviewForm{
+    padding-top: 0.2em;
+}
+
+
