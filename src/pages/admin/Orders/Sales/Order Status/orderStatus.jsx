@@ -152,7 +152,7 @@ function OrderStatus() {
     };
 
     const options = [
-        { value: 'Pending', label: 'Pending', rgb: '100, 110, 211' },
+        // { value: 'Pending', label: 'Pending', rgb: '100, 110, 211' },
         { value: 'Accepted', label: 'Accepted', rgb: '76, 175, 80' },
         { value: 'In-Processing', label: 'In-Processing', rgb: '255, 193, 7' },
         { value: 'Departed', label: 'Departed', rgb: '233, 30, 99' },

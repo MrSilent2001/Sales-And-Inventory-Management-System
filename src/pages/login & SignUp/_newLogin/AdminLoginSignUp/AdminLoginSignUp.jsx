@@ -85,7 +85,7 @@ export function AdminLoginSignUp() {
                 });
                 resetForm();
                 handleClickSuccess();
-                navigate("/adminLogin");
+                navigate("/adminLoginSignup");
             } catch (error) {
                 console.error('Sign up error:', error);
                 // Display error message to user

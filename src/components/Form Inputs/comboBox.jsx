@@ -6,8 +6,10 @@ const getOptionStyles = (backgroundColor, borderColor, textColor) => ({
     color: textColor,
     borderRadius: '0.5em',
     padding: '0.5em 1em',
-    margin: '0.2em 0',
+    // margin: '0.2em 0',
+    // marginLeft:'-1em',
     height: '1.35em',
+    // width : '108%',
     textAlign: 'center',
     fontSize: '0.9em',
     fontFamily: 'inter',
@@ -22,9 +24,14 @@ const ComboBox = ({ value, onChange, options, style, defaultValue }) => {
     const renderValue = (selected) => {
         const selectedOption = options.find(option => option.value === selected);
         return selectedOption ? (
-            <Box sx={getOptionStyles(`rgba(${selectedOption.rgb}, 0.1)`, `rgba(${selectedOption.rgb}, 1)`, `rgba(${selectedOption.rgb}, 1)`)}>
+            <Box sx={{
+                ...getOptionStyles(`rgba(${selectedOption.rgb}, 0.1)`, `rgba(${selectedOption.rgb}, 0)`, `rgba(${selectedOption.rgb}, 1)`),
+                marginLeft:'-1em',
+                width : '108%'
+            }}>
                 {selectedOption.label}
             </Box>
+
         ) : null;
     };
 
@@ -41,7 +48,11 @@ const ComboBox = ({ value, onChange, options, style, defaultValue }) => {
                     key={option.value}
                     value={option.value}
                 >
-                    <Box sx={getOptionStyles(`rgba(${option.rgb}, 0.1)`, `rgba(${option.rgb}, 1)`, `rgba(${option.rgb}, 1)`)}>
+                    <Box sx={{
+                        ...getOptionStyles(`rgba(${option.rgb}, 0.1)`, `rgba(${option.rgb}, 0)`, `rgba(${option.rgb}, 1)`),
+                        margin: '0.2em 0',
+                        width : '100%'
+                    }}>
                         {option.label}
                     </Box>
                 </MenuItem>

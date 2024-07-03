@@ -4,7 +4,7 @@
     overflow-y: scroll;
     height: 76vh;
     display: flex;
-    background-color: #F5F5F5;
+    background-color: #F3F4FFFF;
     padding: 1em;
     box-sizing: border-box;
 }
@@ -30,7 +30,7 @@
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    background-color: #F5F5F5;
+    background-color: #f3f4ff;
     padding: 1em;
     box-sizing: border-box;
     border-radius: 10px;

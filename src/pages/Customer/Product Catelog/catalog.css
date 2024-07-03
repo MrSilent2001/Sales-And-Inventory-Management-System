@@ -8,7 +8,7 @@
     display: grid;
     grid-template-columns: 10em 1fr;
     height : 80%;
-    background-color: #F5F5F5;
+    background-color: #f3f4ff;
 }
 
 .customerItemGrid{
@@ -32,7 +32,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #F5F5F5 !important;
+    background-color: #f3f4ff !important;
     /*background-color: white !important;*/
 
 

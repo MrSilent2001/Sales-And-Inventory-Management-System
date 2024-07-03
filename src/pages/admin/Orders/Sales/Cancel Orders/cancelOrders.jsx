@@ -252,7 +252,7 @@ function CancelOrder() {
                                             borderRadius: '0.35em',
                                             fontWeight: '550',
                                             marginTop: '0.625em',
-                                            marginRight: '1.5em',
+                                            marginRight: '3.3em',
                                             textTransform: 'none',
                                             textAlign: 'center',
                                         }}>
@@ -273,7 +273,7 @@ function CancelOrder() {
                                             borderRadius: '0.35em',
                                             fontWeight: '550',
                                             marginTop: '0.625em',
-                                            marginRight: '1.5em',
+                                            marginRight: '3em',
                                             textTransform: 'none',
                                             textAlign: 'center',
                                         }}>
