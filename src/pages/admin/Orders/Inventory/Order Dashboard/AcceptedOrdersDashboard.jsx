@@ -46,7 +46,8 @@ const AcceptedOrdersDashboard = () => {
             
             // Find the order details to send email
             const order = departedOrders.find(order => order.id === id);
-            
+            console.log('supplier name',order.supplierName);
+            console.log('supplier email',order.mail);
             // Send email notification
             await axios.post('http://localhost:9000/email/send/purchaseOrderStatus', {
                 receiverName: order.supplierName,

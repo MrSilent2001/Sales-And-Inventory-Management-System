@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import CustomizedButton from "../../../../../components/Button/button";
 import axios from 'axios';
 
+
 const token = localStorage.getItem('accessToken');
-const SalesRefundDenialForm = ({ id, setShowDenialForm, setAlert }) => {
+const SalesRefundDenialForm = ({ id, contact, setShowDenialForm, setAlert }) => {
     const [reason, setReason] = useState('');
     const [error, setError] = useState('');
 
@@ -24,6 +25,19 @@ const SalesRefundDenialForm = ({ id, setShowDenialForm, setAlert }) => {
                     Authorization: `Bearer ${token}`
                 }
             });
+
+            // Send email notification
+            await axios.post('http://localhost:9000/email/send', {
+                receiverName: contact, // Assuming you have the contact name or email
+                emailSubject: "Refund Request Denied",
+                emailBody: `Your refund request with Order Id: ${id} has been denied for the following reason: ${reason}`,
+                receiverEmail: contact // Assuming this is the contact email
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
             setAlert({ open: true, message: `Order has been rejected: ${response.status}`, severity: 'success' });
             setTimeout(() => {
                 window.location.href = '/viewRefundRequests';

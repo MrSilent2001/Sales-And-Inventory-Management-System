@@ -1,5 +1,5 @@
 import React, { useState, useEffect,useMemo } from 'react';
-import { Button, Typography } from '@mui/material';
+
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import Footer from "../../../../../layout/footer/footer";
@@ -8,10 +8,14 @@ import PageLoader from "../../../../../components/Page Loader/pageLoader";
 import './SalesRejectedRefundsTable.css';
 import DynamicTable from '../../../../../components/Table/customizedTable2';
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
+import CustomizedButton from '../../../../../components/Button/button';
+
+import { Box, Container, Typography,Button } from '@mui/material';
+
 
 const SalesRejectedRefundsTable = () => {
+    const [isLoading, setIsLoading] = useState(true);
     const [rejectedRefunds, setRejectedRefunds] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
     const token = localStorage.getItem('accessToken');
@@ -32,71 +36,79 @@ const SalesRejectedRefundsTable = () => {
                 console.error('Error fetching rejected refunds:', error);
                 setError('Failed to fetch rejected refunds. Please try again later.');
             } finally {
-                setLoading(false);
+                setIsLoading(false);
             }
         };
         fetchRejectedRefunds();
     }, []);
 
     const columns = useMemo(() => [
-        { accessorKey: 'name', header: 'Name', size: 70, align: 'center' },
-        { accessorKey: 'requestId', header: 'Request Id', size: 150, align: 'center' },
-        { accessorKey: 'orderId', header: 'Order Id', size: 120, align: 'center' },
-        { accessorKey: 'amount', header: 'Amount', size: 100, align: 'center' },
-        { accessorKey: 'status', header: 'Status', size: 100, align: 'center' }
+        { accessorKey: 'orderId', header: 'Order Id', size: 100, align: 'center' },
+        { accessorKey: 'customerName', header: 'Name', size: 70, align: 'center' },
+        { accessorKey: 'contact', header: 'Mail Address', size: 70, align: 'center' },
+        { accessorKey: 'totalPrice', header: 'Total Price', size: 100, align: 'center' },
+        { accessorKey: 'reason', header: 'Reason to deny', size: 100, align: 'center' }
     ], []);
 
-    const mappedData = rejectedRefunds.map(row => ({
-        id: row.requestId, // Ensure each row has a unique id for React key
-        name: row.name,
-        requestId: row.requestId,
+    const dataWithActions = rejectedRefunds.map(row => ({
+        id: row.id,
+        customerName: row.customerName,
         orderId: row.orderId,
-        amount: row.amount,
-        status: row.status
+        contact: row.contact,
+        totalPrice: row.totalPrice,
+        reason: row.denialReason
     }));
 
     return (
         <>
-            <SalesNavbar/>
-            <div className="rejectedRefundsDashboardOuter">
-                <div className="rejectedRefundsDashboardInner">
-                    <div className="searchContainer">
-                    <Link to="/viewRefundRequests">
-                        <Button
-                            startIcon={<BackArrow/>}
-                            size="large"
-                            style={{
-                                color: "black",
-                                fontWeight: 'bold',
-                                textTransform: "none",
-                                fontSize: '1.25em'
-                            }}
-                        >
-                            Rejected Refunds
-                        </Button>
-                    </Link>
-                    </div>
-                    <div className="rejectedRefunds-dashboard">
-                        {loading ? (
-                            <PageLoader/>
-                        ) : error ? (
-                            <Typography variant="body1" color="error">
-                                {error}
-                            </Typography>
-                        ) : (
-                            <DynamicTable
-                                columns={columns}
-                                data={mappedData}
-                                includeProfile={false}
-                                tableWidth="100%"
-                                enableFilters={false}
-                                initialShowGlobalFilter={true}
-                            />
-                        )}
-                    </div>
-                </div>
-            </div>
-            <Footer/>
+            <SalesNavbar />
+            <Container maxWidth="90%" style={{ backgroundColor: '#DBDFFD', height: '47em' }}>
+                <Box>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            padding: '2em 0 1em 7em',
+                            marginBottom: 0.5
+                        }}
+                    >
+                        <Link to="/viewRefundRequests">
+                            <Button
+                                startIcon={<BackArrow />}
+                                size="large"
+                                style={{
+                                    color: "black",
+                                    fontWeight: 'bold',
+                                    textTransform: "none",
+                                    fontSize: '1.25em'
+                                }}
+                            >
+                                Rejected Refunds
+                            </Button>
+                        </Link>
+                        
+                    </Box>
+                    {isLoading ? (
+                        <PageLoader />
+                    ) : error ? (
+                        <Typography variant="body1" color="error">
+                            {error}
+                        </Typography>
+                    ) : (
+                        <DynamicTable
+                            columns={columns}
+                            data={dataWithActions}
+                            style={{ minWidth: 700, maxHeight: 400 }}
+                            includeProfile={false}
+                            tableWidth="100%"
+                            enableFilters={false}
+                            initialShowGlobalFilter={true}
+                        />
+                    )}
+                </Box>
+            </Container>
+            <Footer />
         </>
     );
 };

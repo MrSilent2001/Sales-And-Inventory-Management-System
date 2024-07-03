@@ -8,6 +8,7 @@ import CenteredModal from '../../../../../../components/Modal/modal';
 import CustomizedButton from '../../../../../../components/Button/button';
 import { useNavigate } from 'react-router-dom';
 
+const token = localStorage.getItem('accessToken');
 
 function InventoryRefundRequest({ order, onClose }) {
     const navigate = useNavigate(); 
@@ -60,7 +61,7 @@ function InventoryRefundRequest({ order, onClose }) {
             orderId: order.order_id,
             supplierName: supplier,
             supplierId: supplierId,
-            supplierMail:order.mail,
+            supplierMail: order.mail,
             item: itemCode, // Sending item code
             productName: item, // Sending product name
             quantity,
@@ -69,17 +70,31 @@ function InventoryRefundRequest({ order, onClose }) {
         };
 
         try {
+            // Create the refund request
             await axios.post('http://localhost:9000/refund/inventoryRefund/create', refundRequestData);
             console.log('Refund request submitted successfully:', refundRequestData);
             setAlertMessage('Refund request submitted successfully.');
             setAlertSeverity('success');
             setAlertOpen(true);
+            
+            // Send email notification
+            await axios.post('http://localhost:9000/email/send', {
+                receiverName: supplier, 
+                emailSubject: "Refund Request Submitted",
+                emailBody: `Your refund request for the item ${item} with quantity ${quantity} has been submitted. Total refund amount is ${totalPrice}. Reason: ${reason}.`,
+                receiverEmail: order.mail 
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
             setTimeout(() => {
                 navigate('/InventoryGeneratedRequest', { state: { refundRequestData } }); 
             }, 500);
         } catch (error) {
-            console.error('Error submitting refund request:', error);
-            setAlertMessage('Error submitting refund request');
+            console.error('Error submitting refund request or sending email:', error);
+            setAlertMessage('Error submitting refund request or sending email.');
             setAlertSeverity('error');
             setAlertOpen(true);
         }
