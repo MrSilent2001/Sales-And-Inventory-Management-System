@@ -110,7 +110,7 @@ const AcceptedOrdersDashboard = () => {
                                     fontSize: '1.25em'
                                 }}
                             >
-                                Accepted Orders
+                                Departed Orders
                             </Button>
                         </Link>
                     </div> <br/>
