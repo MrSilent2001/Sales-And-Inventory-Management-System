@@ -46,6 +46,17 @@ const Success = () => {
         if (sessionId) {
             fetchSession();
         }
+
+        // Load the Lottie player script
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs';
+        script.type = 'module';
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        };
+
     }, [sessionId]);
 
 
@@ -159,8 +170,17 @@ const Success = () => {
             justifyContent: 'center',
             alignItems: 'center'
         }}>
-            <h1>Success</h1>
-            <h2>Thank you for your purchase!</h2>
+
+            <dotlottie-player src="https://lottie.host/b8eff9bf-1329-4b02-ae4f-a54d071e9898/oqKMF2fQFM.json"
+                              background="transparent" speed="1"
+                              style={{width: '300px', height: '300px', marginTop: '-5em'}}
+                              loop autoplay>
+            </dotlottie-player>
+
+            <div style={{marginTop: '-5em'}}>
+                <h1>Success</h1>
+                <h2>Thank you for your purchase!</h2>
+            </div>
 
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                 <CustomizedButton
