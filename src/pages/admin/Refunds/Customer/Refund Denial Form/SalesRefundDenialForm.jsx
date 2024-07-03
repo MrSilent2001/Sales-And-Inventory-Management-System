@@ -2,8 +2,49 @@ import React, { useState } from 'react';
 import CustomizedButton from "../../../../../components/Button/button";
 import axios from 'axios';
 
+
+
 const token = localStorage.getItem('accessToken');
-const SalesRefundDenialForm = ({ id, setShowDenialForm, setAlert }) => {
+
+// Function to update refund status
+const updateRefundStatus = async (id, status, denialReason = '') => {
+    try {
+        const response = await axios.put(`http://localhost:9000/refund/customerRefund/updateStatus`, {
+            id,
+            status,
+            denialReason,
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error('Error updating refund status:', error);
+        throw error;
+    }
+};
+
+// Function to send email notification
+const sendEmailNotification = async (contact, id, reason) => {
+    try {
+        await axios.post('http://localhost:9000/email/send', {
+            receiverName: contact, // Assuming you have the contact name or email
+            emailSubject: "Refund Request Denied",
+            emailBody: `Your refund request with Order Id: ${id} has been denied for the following reason: ${reason}`,
+            receiverEmail: contact // Assuming this is the contact email
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+    } catch (error) {
+        console.error('Error sending email notification:', error);
+    }
+};
+
+const SalesRefundDenialForm = ({ id, contact, setShowDenialForm, setAlert }) => {
     const [reason, setReason] = useState('');
     const [error, setError] = useState('');
 
@@ -15,16 +56,14 @@ const SalesRefundDenialForm = ({ id, setShowDenialForm, setAlert }) => {
         }
 
         try {
-            const response = await axios.put(`http://localhost:9000/refund/customerRefund/updateStatus`, {
-                id,
-                status: 'rejected',
-                denialReason: reason,
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            // Update the refund status
+            const response = await updateRefundStatus(id, 'rejected', reason);
             setAlert({ open: true, message: `Order has been rejected: ${response.status}`, severity: 'success' });
+
+            // Send email notification asynchronously
+            sendEmailNotification(contact, id, reason);
+
+            // Redirect after a short delay
             setTimeout(() => {
                 window.location.href = '/viewRefundRequests';
             }, 2000); // 2 seconds delay
@@ -54,10 +93,10 @@ const SalesRefundDenialForm = ({ id, setShowDenialForm, setAlert }) => {
                         value={reason}
                         onChange={(e) => { setReason(e.target.value); setError(''); }}
                         placeholder="Provide the reasons for the denial of the refund request"
-                        style={{ width: '60%', height: '150px', padding: '10px', fontSize: '16px', borderRadius: '4px', border: '1px solid #ccc' }}
+                        style={{ width: '80%', height: '150px', padding: '10px', fontSize: '16px', borderRadius: '4px', border: '1px solid #ccc' }}
                     />
                     {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
-                    <div style={{ display: 'flex', justifyContent: 'space-between',  width:'23%',marginLeft:'22em',marginTop:'1em'}}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', width: '23%', marginLeft: '22em', marginTop: '1em' }}>
                         <CustomizedButton
                             type="submit"
                             hoverBackgroundColor="#2d3ed2"

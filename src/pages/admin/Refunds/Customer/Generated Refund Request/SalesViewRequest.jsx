@@ -8,7 +8,6 @@ import CustomizedButton from "../../../../../components/Button/button";
 import SalesRefundDenialForm from '../Refund Denial Form/SalesRefundDenialForm';
 import CustomizedAlert from '../../../../../components/Alert/alert';
 
-
 const token = localStorage.getItem('accessToken');
 
 // API call function to update refund status
@@ -23,10 +22,29 @@ const updateRefundStatus = async (id, status, denialReason = '') => {
                 Authorization: `Bearer ${token}`,
             }
         });
+
         return response.data;
     } catch (error) {
         console.error('Error updating refund status:', error);
         throw error;
+    }
+};
+
+// Function to send email notification
+const sendEmailNotification = async (refundRequest, id) => {
+    try {
+        await axios.post('http://localhost:9000/email/send', {
+            receiverName: refundRequest.supplierName,
+            emailSubject: "Order Status Update!",
+            emailBody: `Your refund request with Order Id: ${id} has been accepted. Thank you!`,
+            receiverEmail: refundRequest.contact
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    } catch (error) {
+        console.error('Error sending email notification:', error);
     }
 };
 
@@ -89,6 +107,9 @@ function SalesViewRequest() {
         try {
             const response = await updateRefundStatus(id, 'accepted');
             setAlert({ open: true, message: `Order has been accepted: ${response.status}`, severity: 'success', redirect: true });
+            
+            // Send email notification after updating the status
+            sendEmailNotification(refundRequest, id);
         } catch (error) {
             setAlert({ open: true, message: 'Error accepting the order', severity: 'error' });
         }
@@ -167,7 +188,7 @@ function SalesViewRequest() {
             </div>
             <Footer />
 
-            {showDenialForm && <SalesRefundDenialForm id={id} setShowDenialForm={setShowDenialForm} setAlert={setAlert} />}
+            {showDenialForm && <SalesRefundDenialForm id={id} contact={refundRequest.contact} setShowDenialForm={setShowDenialForm} setAlert={setAlert} />}
 
             <CustomizedAlert
                 onClose={() => {

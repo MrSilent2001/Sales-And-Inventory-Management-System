@@ -16,6 +16,8 @@ import CustomizedButton from "../../../../../components/Button/button";
 import DynamicTable from '../../../../../components/Table/customizedTable2';
 import PageLoader from "../../../../../components/Page Loader/pageLoader";
 
+
+
 const PurchaseOrderDashboard = () => {
     const [viewOrderVisible, setViewOrderVisible] = useState(false);
     const [currentMonth, setCurrentMonth] = useState('');
@@ -36,7 +38,6 @@ const PurchaseOrderDashboard = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                // Make sure to set all orders without filtering here
                 setOrders(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -154,25 +155,23 @@ const PurchaseOrderDashboard = () => {
                     }}>
                     View
                 </CustomizedButton>
-
-                {row.status === 'Pending' && (
-                    <CustomizedButton
-                        onClick={() => handleCancelOrder(row.id)}
-                        hoverBackgroundColor="#960505"
-                        style={{
-                            color: 'white',
-                            backgroundColor: '#960505',
-                            width: '6.5em',
-                            height: '2.75em',
-                            fontSize: '0.8em',
-                            padding: '0.5em 0.625em',
-                            borderRadius: '0.35em',
-                            marginTop: '0.625em',
-                            marginLeft: '0.75em',
-                        }}>
-                        Cancel
-                    </CustomizedButton>
-                )}
+                <CustomizedButton
+                    onClick={() => handleCancelOrder(row.id)}
+                    hoverBackgroundColor="#960505"
+                    disabled={row.status !== 'Pending'}
+                    style={{
+                        color: 'white',
+                        backgroundColor: row.status === 'Pending' ? '#960505' : '#B4B4B4',
+                        width: '6.5em',
+                        height: '2.75em',
+                        fontSize: '0.8em',
+                        padding: '0.5em 0.625em',
+                        borderRadius: '0.35em',
+                        marginTop: '0.625em',
+                        marginLeft: '0.75em',
+                    }}>
+                    Cancel
+                </CustomizedButton>
             </div>
         )
     }));
@@ -206,7 +205,6 @@ const PurchaseOrderDashboard = () => {
         <>
             <InventoryNavbar />
             <Box sx={{ display: 'flex', height: '47em' }}>
-                {/* Sidebar */}
                 <Box sx={{ width: '15%', height: 'auto', bgcolor: '#646FD4', color: 'white', p: 2 }}>
                     <Card sx={{ mt: 10, mb: 6, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
                         <CardContent>
@@ -231,7 +229,6 @@ const PurchaseOrderDashboard = () => {
                     </Card>
                 </Box>
 
-                {/* Main Content */}
                 <Container maxWidth={false} sx={{ bgcolor: '#DBDFFD', height: 'auto', padding: '1.5em 0', position: 'relative', paddingTop: '7em' }}>
                     {isLoading ? (
                         <PageLoader />

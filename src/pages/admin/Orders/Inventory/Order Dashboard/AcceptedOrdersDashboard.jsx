@@ -13,7 +13,6 @@ import BackArrow from "../../../../../components/Icons/backArrow";
 
 
 const AcceptedOrdersDashboard = () => {
-
     const [departedOrders, setDepartedOrders] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const token = localStorage.getItem('accessToken');
@@ -29,13 +28,8 @@ const AcceptedOrdersDashboard = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            const filteredOrders = response.data.filter(order => order.status === 'Received' || order.status === 'Departed', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            const filteredOrders = response.data.filter(order => order.status === 'Received' || order.status === 'Departed');
             setDepartedOrders(filteredOrders);
-            //setIsLoading(true);
         } catch (error) {
             console.error('Error fetching departed orders:', error);
         }
@@ -43,14 +37,30 @@ const AcceptedOrdersDashboard = () => {
 
     const handleMarkAsReceived = async (id) => {
         try {
-            await axios.put(`http://localhost:9000/purchaseOrder/markAsReceived/${id}`, {
+            await axios.put(`http://localhost:9000/purchaseOrder/markAsReceived/${id}`, {}, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
             fetchDepartedOrders();
+            
+            // Find the order details to send email
+            const order = departedOrders.find(order => order.id === id);
+            console.log('supplier name',order.supplierName);
+            console.log('supplier email',order.mail);
+            // Send email notification
+            await axios.post('http://localhost:9000/email/send/purchaseOrderStatus', {
+                receiverName: order.supplierName,
+                emailSubject: "Order Status Update!",
+                emailBody: `Your order under the Order Id: ${id} has been marked as Received. Thank You!`,
+                receiverEmail: order.mail
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
         } catch (error) {
-            console.error('Error updating order status:', error);
+            console.error('Error updating order status or sending email:', error);
         }
     };
 
@@ -91,17 +101,16 @@ const AcceptedOrdersDashboard = () => {
         )
     }));
 
-
     return (
         <>
             <InventoryNavbar />
-            <Box sx={{display: 'flex', height: '47em'}}>
+            <Box sx={{ display: 'flex', height: '47em' }}>
                 <Container maxWidth={false}
-                           sx={{bgcolor: '#DBDFFD', height: 'auto', padding: '1.5em 0', position: 'relative',paddingTop:'3em'}}>
+                    sx={{ bgcolor: '#DBDFFD', height: 'auto', padding: '1.5em 0', position: 'relative', paddingTop: '3em' }}>
                     <div className="searchContainer">
                         <Link to="/purchasedOrder">
                             <Button
-                                startIcon={<BackArrow/>}
+                                startIcon={<BackArrow />}
                                 size="large"
                                 style={{
                                     color: "black",
@@ -113,11 +122,10 @@ const AcceptedOrdersDashboard = () => {
                                 Departed Orders
                             </Button>
                         </Link>
-                    </div> <br/>
+                    </div> <br />
                     {isLoading ? (
-                        <PageLoader/>
+                        <PageLoader />
                     ) : (
-                       
                         <DynamicTable
                             columns={columns}
                             data={dataWithActions}
@@ -127,13 +135,11 @@ const AcceptedOrdersDashboard = () => {
                             initialShowGlobalFilter={true}
                         />
                     )}
-
                 </Container>
             </Box>
-            <Footer/>
+            <Footer />
         </>
     );
 };
 
 export default AcceptedOrdersDashboard;
-
