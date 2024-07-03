@@ -1,12 +1,38 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './Customer Home Page.css';
 import Footer from "../../../layout/footer/footer";
 import CustomerNavbar from "../../../layout/navbar/Customer navbar/Customer navbar";
 import {Link} from "react-router-dom";
 import CustomizedButton from "../../../components/Button/button";
 import ShopReviewSubmitForm from "./Shop Reviews/Shop Reviews";
+import ReviewCard from "./Shop Reviews/Small Shop Review Card";
+import axios from "axios";
+import ReviewsGrid from "./Shop Reviews/Small Shop Review Card";
 
 function CustomerHome() {
+
+    const [reviews, setReviews] = useState([]);
+    const token = localStorage.getItem('accessToken');
+
+    useEffect(() => {
+        const fetchReviews = async () => {
+            try {
+                const response = await axios.get('http://localhost:9000/admin/getAllShopReviews',{
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const latestReviews = response.data.slice(-4).reverse();
+                setReviews(latestReviews);
+                console.log(latestReviews);
+            } catch (error) {
+                console.error('Error fetching reviews:', error);
+            }
+        };
+
+        fetchReviews();
+    }, []);
+
     return (
         <>
             <CustomerNavbar/>
@@ -68,10 +94,27 @@ function CustomerHome() {
                     </p>
                 </div>
 
+                <div className="customerReviewOuter">
+                    <h3 className="customerReviewTopic">
+                        Customer Reviews
+                    </h3>
+
+                    <div className="customerReviews">
+                        <ReviewsGrid reviews={reviews}></ReviewsGrid>
+                    </div>
+
+                    <div className="viewCustomerReviews">
+                        
+                    </div>
+                </div>
+
+
                 <div className="products">
                     <h3 className="productsTopic">
                         Products
                     </h3>
+
+                    <p>At Tradeasy, you can discover a wide range of products to meet all your construction needs. Whether you’re searching for building materials, tools, equipment, or accessories, we have it all. Our extensive selection ensures that you can find any product you need for your construction projects, making Tradeasy your go-to destination for all things construction. At Tradeasy, we offer a vast selection of construction products designed to fulfill every requirement of your project. From high-quality materials and power tools to essential construction supplies and specialized equipment, you’ll find everything you need in one convenient place. Explore our range and experience the convenience of finding all your construction products at Tradeasy.</p>
 
                     <div className="productCategoryTypes">
                         <div className="productCategoryTypesRow">
