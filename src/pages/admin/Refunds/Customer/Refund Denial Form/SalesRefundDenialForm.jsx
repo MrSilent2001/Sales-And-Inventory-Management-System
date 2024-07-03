@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CustomizedButton from "../../../../../components/Button/button";
 import axios from 'axios';
 
-
+const token = localStorage.getItem('accessToken');
 const SalesRefundDenialForm = ({ id, setShowDenialForm, setAlert }) => {
     const [reason, setReason] = useState('');
     const [error, setError] = useState('');
@@ -19,19 +19,34 @@ const SalesRefundDenialForm = ({ id, setShowDenialForm, setAlert }) => {
                 id,
                 status: 'rejected',
                 denialReason: reason,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             });
             setAlert({ open: true, message: `Order has been rejected: ${response.status}`, severity: 'success' });
             setTimeout(() => {
                 window.location.href = '/viewRefundRequests';
-            },0); // 2 seconds delay
+            }, 2000); // 2 seconds delay
             setShowDenialForm(false);
         } catch (error) {
-            setError('Error rejecting the order');
+            if (error.response) {
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                setError(`Error: ${error.response.data.message || 'rejecting the order'}`);
+            } else if (error.request) {
+                console.log(error.request);
+                setError('No response received from the server');
+            } else {
+                console.log('Error', error.message);
+                setError('Error setting up the request');
+            }
         }
     };
 
     return (
-        <div style={{ backgroundColor: '#DBDFFD', padding: '20px', height: '80%', width: '60%', margin: '3%', position: 'fixed', top: '10%', left: '20%', zIndex: 1000 }}>
+        <div style={{ backgroundColor: '#DBDFFD', padding: '20px', height: '60%', width: '60%', margin: '3%', position: 'fixed', top: '10%', left: '20%', zIndex: 1000 }}>
             <div style={{ width: '80%', margin: '40px auto', padding: '20px' }}>
                 <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Reasons</h2>
                 <form onSubmit={handleSubmit}>
@@ -39,10 +54,10 @@ const SalesRefundDenialForm = ({ id, setShowDenialForm, setAlert }) => {
                         value={reason}
                         onChange={(e) => { setReason(e.target.value); setError(''); }}
                         placeholder="Provide the reasons for the denial of the refund request"
-                        style={{ width: '100%', height: '150px', padding: '10px', fontSize: '16px', borderRadius: '4px', border: '1px solid #ccc' }}
+                        style={{ width: '60%', height: '150px', padding: '10px', fontSize: '16px', borderRadius: '4px', border: '1px solid #ccc' }}
                     />
                     {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between',  width:'23%',marginLeft:'22em',marginTop:'1em'}}>
                         <CustomizedButton
                             type="submit"
                             hoverBackgroundColor="#2d3ed2"

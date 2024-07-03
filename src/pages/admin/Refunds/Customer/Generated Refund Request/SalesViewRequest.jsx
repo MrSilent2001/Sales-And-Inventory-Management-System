@@ -10,6 +10,7 @@ import CustomizedAlert from '../../../../../components/Alert/alert';
 
 
 const token = localStorage.getItem('accessToken');
+
 // API call function to update refund status
 const updateRefundStatus = async (id, status, denialReason = '') => {
     try {
@@ -20,7 +21,8 @@ const updateRefundStatus = async (id, status, denialReason = '') => {
         }, {
             headers: {
                 Authorization: `Bearer ${token}`,
-            }});
+            }
+        });
         return response.data;
     } catch (error) {
         console.error('Error updating refund status:', error);
@@ -31,8 +33,30 @@ const updateRefundStatus = async (id, status, denialReason = '') => {
 function SalesViewRequest() {
     const { id } = useParams();
     const [refundRequest, setRefundRequest] = useState(null);
+    const [itemMapping, setItemMapping] = useState({});
     const [showDenialForm, setShowDenialForm] = useState(false);
     const [alert, setAlert] = useState({ open: false, message: '', severity: '', redirect: false });
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get('http://localhost:9000/product/getAllProducts', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const products = response.data.reduce((acc, product) => {
+                    acc[product.id] = product.productName;
+                    return acc;
+                }, {});
+                setItemMapping(products);
+            } catch (err) {
+                console.error('Failed to fetch products:', err);
+            }
+        };
+
+        fetchProducts();
+    }, [token]);
 
     useEffect(() => {
         // Fetch the refund request details using the ID from the URL
@@ -41,16 +65,25 @@ function SalesViewRequest() {
                 const response = await axios.get(`http://localhost:9000/refund/customerRefund/get/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
-                    }});
-                setRefundRequest(response.data);
+                    }
+                });
+                const data = response.data;
+                const itemWithName = itemMapping[data.item] || data.item;
+
+                setRefundRequest({
+                    ...data,
+                    item: itemWithName
+                });
             } catch (error) {
                 console.error('Error fetching refund request:', error);
                 setAlert({ open: true, message: 'Error fetching refund request', severity: 'error' });
             }
         };
 
-        fetchRefundRequest();
-    }, [id]);
+        if (Object.keys(itemMapping).length) {
+            fetchRefundRequest();
+        }
+    }, [id, itemMapping]);
 
     const handleAccept = async () => {
         try {
@@ -76,13 +109,20 @@ function SalesViewRequest() {
                 <div className="generated-request">
                     <h2>Generated Request</h2>
                     <div className="refundRequestDetails">
-                        {['Customer', 'Contact', 'Item', 'Quantity', 'Reason', 'Total Price'].map((field, index) => (
+                        {[
+                            { label: 'Customer', value: refundRequest.customerName },
+                            { label: 'Contact', value: refundRequest.contact },
+                            { label: 'Item', value: refundRequest.item },
+                            { label: 'Quantity', value: refundRequest.quantity },
+                            { label: 'Reason', value: refundRequest.reason },
+                            { label: 'Total Price', value: refundRequest.totalPrice }
+                        ].map((field, index) => (
                             <div className="formField" key={index}>
                                 <div className="textField">
-                                    <h5>{field}</h5>
+                                    <h5>{field.label}</h5>
                                 </div>
                                 <div className="inputData">
-                                    <h6>{refundRequest[field.toLowerCase().replace(' ', '')]}</h6>
+                                    <h6>{field.value}</h6>
                                 </div>
                             </div>
                         ))}
