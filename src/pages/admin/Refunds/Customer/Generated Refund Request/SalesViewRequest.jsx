@@ -8,11 +8,10 @@ import CustomizedButton from "../../../../../components/Button/button";
 import SalesRefundDenialForm from '../Refund Denial Form/SalesRefundDenialForm';
 import CustomizedAlert from '../../../../../components/Alert/alert';
 
-
 const token = localStorage.getItem('accessToken');
 
-// API call function to update refund status and send email if accepted
-const updateRefundStatus = async (id, status, refundRequest, denialReason = '') => {
+// API call function to update refund status
+const updateRefundStatus = async (id, status, denialReason = '') => {
     try {
         const response = await axios.put(`http://localhost:9000/refund/customerRefund/updateStatus`, {
             id,
@@ -24,24 +23,28 @@ const updateRefundStatus = async (id, status, refundRequest, denialReason = '') 
             }
         });
 
-        if (status === 'accepted') {
-            // Send email notification
-            await axios.post('http://localhost:9000/email/send', {
-                receiverName: refundRequest.supplierName,
-                emailSubject: "Order Status Update!",
-                emailBody: `Your refund request with Order Id: ${id} has been accepted. Thank you!`,
-                receiverEmail: refundRequest.contact
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-        }
-
         return response.data;
     } catch (error) {
         console.error('Error updating refund status:', error);
         throw error;
+    }
+};
+
+// Function to send email notification
+const sendEmailNotification = async (refundRequest, id) => {
+    try {
+        await axios.post('http://localhost:9000/email/send', {
+            receiverName: refundRequest.supplierName,
+            emailSubject: "Order Status Update!",
+            emailBody: `Your refund request with Order Id: ${id} has been accepted. Thank you!`,
+            receiverEmail: refundRequest.contact
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    } catch (error) {
+        console.error('Error sending email notification:', error);
     }
 };
 
@@ -93,7 +96,6 @@ function SalesViewRequest() {
                 console.error('Error fetching refund request:', error);
                 setAlert({ open: true, message: 'Error fetching refund request', severity: 'error' });
             }
-            
         };
 
         if (Object.keys(itemMapping).length) {
@@ -103,8 +105,11 @@ function SalesViewRequest() {
 
     const handleAccept = async () => {
         try {
-            const response = await updateRefundStatus(id, 'accepted', refundRequest);
+            const response = await updateRefundStatus(id, 'accepted');
             setAlert({ open: true, message: `Order has been accepted: ${response.status}`, severity: 'success', redirect: true });
+            
+            // Send email notification after updating the status
+            sendEmailNotification(refundRequest, id);
         } catch (error) {
             setAlert({ open: true, message: 'Error accepting the order', severity: 'error' });
         }
