@@ -77,9 +77,34 @@
     margin: 0.75em 0 3em 0;
 }
 
+.customerReviewOuter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2em 0 5em 0;
+}
+
+.customerReviewOuter h3{
+    margin-bottom: 3em;
+    font-family: Inter;
+}
+
+.products{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .productsTopic{
     font-family: Inter;
-    margin: 1em 0 2em 0;
+    margin: 1em 0 0em 0;
+}
+
+.products p{
+    width: 98.938em;
+    font-size: 0.8em;
+    line-height: 1.9;
+    margin-bottom: 2em;
 }
 
 .productCategoryTypes{
@@ -153,27 +178,32 @@
     margin-bottom: -14em;
 }
 
+.shopReviewOuter h3{
+    font-family: Inter;
+}
+
 .shopReviewContent{
     display: flex;
     justify-content: center;
-    padding-left: 3em;
 }
 
 .shopReviewDesc h2{
     text-align: left;
     font-weight: 650;
     margin-bottom: 1.75em;
+    font-family: Inter;
 }
 
 .shopReviewDescPara{
-    width: 36em;
+    width: 43.5em;
 }
 
 .shopReviewDescPara p{
-    font-size: 0.85em;
+    font-size: 0.9em;
     text-align: left;
     line-height: 2;
     text-align: justify;
+    font-family: Inter;
 }
 
 .shopReviewForm{

@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -9,46 +8,55 @@ import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
 import Rating from "@mui/material/Rating";
 import axios from 'axios';
+import CustomizedAlert from "../../../../components/Alert/alert";
 
-function ShopReviewSubmitForm({ shopId, submitAlert, submitErrorAlert }) {
-    const [value, setValue] = useState(0); // Set default value of stars to 0
+function ShopReviewSubmitForm() {
+    const [value, setValue] = useState(0);
     const [name, setName] = useState('');
     const [comment, setComment] = useState('');
     const token = localStorage.getItem('accessToken');
+
+    const [reviewSubmitOpenSuccess, setReviewSubmitOpenSuccess] = useState(false);
+    const [reviewSubmitErrorOpenSuccess, setReviewSubmitErrorOpenSuccess] = useState(false);
+
+    const reviewSubmitHandleCloseSuccess = () => {
+        setReviewSubmitOpenSuccess(false);
+    };
+
+    const reviewSubmitErrorHandleCloseSuccess = () => {
+        setReviewSubmitErrorOpenSuccess(false);
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         const reviewData = {
-            shopId: String(shopId),
-            reviewerName: name,
-            reviewComment: comment,
-            starRating: String(value),
-            reviewDate: new Date().toISOString().split('T')[0] // Format the date as YYYY-MM-DD
+            customerName: name,
+            starReviewCount: String(value),
+            customerComment: comment,
         };
 
         try {
             console.log("formdata", reviewData);
-            const response = await axios.post('http://localhost:9000/shop/review/create', reviewData, {
+            const response = await axios.post('http://localhost:9000/admin/createReview', reviewData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
             console.log('Review submitted successfully:', response.data);
-            submitAlert();
-
+            setReviewSubmitOpenSuccess(true);
+            setName('');
+            setComment('');
+            setValue(0);
         } catch (error) {
             console.error('Error submitting review:', error);
-            submitErrorAlert();
+            setReviewSubmitErrorOpenSuccess(true);
         }
     };
 
     return (
         <Paper elevation={0} sx={{ width: 800, marginLeft: 2, paddingRight: 4, marginTop: 4, marginBottom: 10 }}>
             <Box sx={{ padding: 5 }} component="form" onSubmit={handleSubmit}>
-                {/*<Typography variant="h2" gutterBottom sx={{ paddingBottom: 5, fontSize: '1.5em', fontWeight: 550 }}>
-                    Submit a Shop Review
-                </Typography>*/}
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={2}>
                         <InputLabel
@@ -75,7 +83,7 @@ function ShopReviewSubmitForm({ shopId, submitAlert, submitErrorAlert }) {
                             variant="outlined"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            InputProps={{ style: { fontSize: '18px' } }}
+                            InputProps={{ style: { fontSize: '14px' } }}
                         />
                     </Grid>
 
@@ -125,7 +133,7 @@ function ShopReviewSubmitForm({ shopId, submitAlert, submitErrorAlert }) {
                             rows={4}
                             value={comment}
                             onChange={(e) => setComment(e.target.value)}
-                            InputProps={{ style: { fontSize: '18px' } }}
+                            InputProps={{ style: { fontSize: '14px' } }}
                         />
                     </Grid>
 
@@ -136,6 +144,18 @@ function ShopReviewSubmitForm({ shopId, submitAlert, submitErrorAlert }) {
                     </Grid>
                 </Grid>
             </Box>
+            <CustomizedAlert
+                open={reviewSubmitOpenSuccess}
+                onClose={reviewSubmitHandleCloseSuccess}
+                severity="success"
+                message="Review Submitted Successfully!"
+            />
+            <CustomizedAlert
+                open={reviewSubmitErrorOpenSuccess}
+                onClose={reviewSubmitErrorHandleCloseSuccess}
+                severity="error"
+                message="Error Occurred!"
+            />
         </Paper>
     );
 }
