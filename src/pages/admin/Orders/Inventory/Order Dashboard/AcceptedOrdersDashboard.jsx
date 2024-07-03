@@ -29,7 +29,7 @@ const AcceptedOrdersDashboard = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            const filteredOrders = response.data.filter(order => order.status === 'Accepted' || order.status === 'Departed', {
+            const filteredOrders = response.data.filter(order => order.status === 'Received' || order.status === 'Departed', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -41,9 +41,9 @@ const AcceptedOrdersDashboard = () => {
         }
     };
 
-    const handleMarkAsDeparted = async (id) => {
+    const handleMarkAsReceived = async (id) => {
         try {
-            await axios.put(`http://localhost:9000/purchaseOrder/markAsDeparted/${id}`, {
+            await axios.put(`http://localhost:9000/purchaseOrder/markAsReceived/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -69,11 +69,11 @@ const AcceptedOrdersDashboard = () => {
         mail: row.mail,
         contact_number: row.contact_number,
 
-        actions: row.status === 'Departed' ? (
+        actions: row.status === 'Received' ? (
             <CheckCircleIcon style={{ color: 'green', fontSize: '2em' }} />
         ) : (
             <CustomizedButton
-                onClick={() => handleMarkAsDeparted(row.id)}
+                onClick={() => handleMarkAsReceived(row.id)}
                 hoverBackgroundColor="#242F9B"
                 style={{
                     color: 'white',
@@ -86,7 +86,7 @@ const AcceptedOrdersDashboard = () => {
                     marginRight: '0.75em'
                 }}
             >
-                Mark as Departed
+                Mark as Received
             </CustomizedButton>
         )
     }));
@@ -95,9 +95,9 @@ const AcceptedOrdersDashboard = () => {
     return (
         <>
             <InventoryNavbar />
-            <Box sx={{display: 'flex', height: '37.5em'}}>
+            <Box sx={{display: 'flex', height: '47em'}}>
                 <Container maxWidth={false}
-                           sx={{bgcolor: '#DBDFFD', height: 'auto', padding: '1.5em 0', position: 'relative'}}>
+                           sx={{bgcolor: '#DBDFFD', height: 'auto', padding: '1.5em 0', position: 'relative',paddingTop:'3em'}}>
                     <div className="searchContainer">
                         <Link to="/purchasedOrder">
                             <Button
@@ -110,14 +110,14 @@ const AcceptedOrdersDashboard = () => {
                                     fontSize: '1.25em'
                                 }}
                             >
-                                Accepted Orders
+                                Departed Orders
                             </Button>
                         </Link>
-                    </div>
+                    </div> <br/>
                     {isLoading ? (
                         <PageLoader/>
                     ) : (
-
+                       
                         <DynamicTable
                             columns={columns}
                             data={dataWithActions}

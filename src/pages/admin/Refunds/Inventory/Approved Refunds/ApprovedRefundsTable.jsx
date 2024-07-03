@@ -1,6 +1,5 @@
 import React, { useState, useEffect,useMemo } from 'react';
 import {Container, Box, Paper, Modal, Typography, Button} from '@mui/material';
-import './ApprovedRefundsTable.css';
 import InventoryNavbar from '../../../../../layout/navbar/Inventory navbar/Inventory navbar';
 import Footer from "../../../../../layout/footer/footer";
 import { Link } from "react-router-dom";
@@ -90,7 +89,7 @@ const ApprovedRefundsTable = () => {
           sx={{
             backgroundColor: '#DBDFFD',
             width: '100%',
-            height: '37.5em'
+            height: '47em'
           }}
       >
         <Box>
@@ -100,7 +99,7 @@ const ApprovedRefundsTable = () => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 padding: '2em 0 1em 7em',
-                marginBottom: 0.5
+                marginBottom: 4
               }}
           >
             <Link to="/InventoryRefundRequestsTable">

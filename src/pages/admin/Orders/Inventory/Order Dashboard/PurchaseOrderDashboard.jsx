@@ -16,13 +16,10 @@ import CustomizedButton from "../../../../../components/Button/button";
 import DynamicTable from '../../../../../components/Table/customizedTable2';
 import PageLoader from "../../../../../components/Page Loader/pageLoader";
 
-
-
 const PurchaseOrderDashboard = () => {
-
     const [viewOrderVisible, setViewOrderVisible] = useState(false);
     const [currentMonth, setCurrentMonth] = useState('');
-    const [purchasedOrders, setPurchasedOrders] = useState([]);
+    const [orders, setOrders] = useState([]);
     const [totalOrders, setTotalOrders] = useState(0);
     const [inProgressOrders, setInProgressOrders] = useState(0);
     const [completedOrders, setCompletedOrders] = useState(0);
@@ -32,18 +29,18 @@ const PurchaseOrderDashboard = () => {
     const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
-        const fetchPurchasedOrders = async () => {
+        const fetchOrders = async () => {
             try {
                 const response = await axios.get('http://localhost:9000/purchaseOrder/getAll', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                const pendingOrders = response.data.filter(order => order.status === 'Pending');
-                setPurchasedOrders(pendingOrders);
-                console.log(pendingOrders);
+                // Make sure to set all orders without filtering here
+                setOrders(response.data);
+                console.log(response.data);
             } catch (error) {
-                console.error('Error fetching purchase orders:', error);
+                console.error('Error fetching orders:', error);
             }
         };
 
@@ -77,21 +74,26 @@ const PurchaseOrderDashboard = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                const completedResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/Departed', {
+                const departedResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/Departed', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const completedResponse = await axios.get('http://localhost:9000/purchaseOrder/getCountOfOrdersByStatus/Received', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
 
                 setTotalOrders(totalResponse.data);
-                setInProgressOrders(pendingResponse.data + acceptedResponse.data);
+                setInProgressOrders(pendingResponse.data + acceptedResponse.data + departedResponse.data);
                 setCompletedOrders(completedResponse.data);
             } catch (error) {
                 console.error('Error fetching order counts:', error);
             }
         };
 
-        fetchPurchasedOrders();
+        fetchOrders();
         fetchCurrentMonthName();
         fetchOrderCounts();
     }, []);
@@ -103,10 +105,15 @@ const PurchaseOrderDashboard = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            setPurchasedOrders(prevOrders => prevOrders.filter(order => order.id !== orderId));
+            setOrders(prevOrders => prevOrders.filter(order => order.id !== orderId));
         } catch (error) {
             console.error('Error deleting order:', error);
         }
+    };
+
+    const handleApproveOrder = async (orderId) => {
+        // Implement the logic to approve the order here
+        console.log('Approving order:', orderId);
     };
 
     const handleViewOrder = (order) => {
@@ -119,15 +126,17 @@ const PurchaseOrderDashboard = () => {
         { accessorKey: 'Address', header: 'Address', size: 175, align: 'center' },
         { accessorKey: 'mail', header: 'Email', size: 60, align: 'center' },
         { accessorKey: 'contact_number', header: 'Contact', size: 50, align: 'center' },
+        { accessorKey: 'status', header: 'Status', size: 50, align: 'center' },
         { accessorKey: 'actions', header: 'Actions', size: 120, align: 'center' }
     ], []);
 
-    const dataWithActions = purchasedOrders.map(row => ({
+    const dataWithActions = orders.filter(order => order.status === 'Pending' || order.status === 'Accepted').map(row => ({
         id: row.id,
         supplierName: row.supplierName,
         Address: row.Address,
         mail: row.mail,
         contact_number: row.contact_number,
+        status: row.status,
 
         actions: (
             <div style={{ display: 'flex' }}>
@@ -146,22 +155,24 @@ const PurchaseOrderDashboard = () => {
                     View
                 </CustomizedButton>
 
-                <CustomizedButton
-                    onClick={() => handleCancelOrder(row.id)}
-                    hoverBackgroundColor="#960505"
-                    style={{
-                        color: 'white',
-                        backgroundColor: '#960505',
-                        width: '6.5em',
-                        height: '2.75em',
-                        fontSize: '0.8em',
-                        padding: '0.5em 0.625em',
-                        borderRadius: '0.35em',
-                        marginTop: '0.625em',
-                        marginLeft: '0.75em',
-                    }}>
-                    Cancel
-                </CustomizedButton>
+                {row.status === 'Pending' && (
+                    <CustomizedButton
+                        onClick={() => handleCancelOrder(row.id)}
+                        hoverBackgroundColor="#960505"
+                        style={{
+                            color: 'white',
+                            backgroundColor: '#960505',
+                            width: '6.5em',
+                            height: '2.75em',
+                            fontSize: '0.8em',
+                            padding: '0.5em 0.625em',
+                            borderRadius: '0.35em',
+                            marginTop: '0.625em',
+                            marginLeft: '0.75em',
+                        }}>
+                        Cancel
+                    </CustomizedButton>
+                )}
             </div>
         )
     }));
@@ -175,6 +186,7 @@ const PurchaseOrderDashboard = () => {
             fontSize: '0.75em',
             padding: '0.5em 0.625em',
             borderRadius: '0.35em',
+            marginRight: '7.5em'
         };
 
         return (
@@ -184,7 +196,7 @@ const PurchaseOrderDashboard = () => {
                     hoverBackgroundColor="#2d3ed2"
                     style={buttonStyle}
                 >
-                    Accepted Orders
+                    Departed Orders
                 </CustomizedButton>
             </Link>
         );
@@ -193,24 +205,24 @@ const PurchaseOrderDashboard = () => {
     return (
         <>
             <InventoryNavbar />
-            <Box sx={{ display: 'flex', height: '37.5em' }}>
+            <Box sx={{ display: 'flex', height: '47em' }}>
                 {/* Sidebar */}
                 <Box sx={{ width: '15%', height: 'auto', bgcolor: '#646FD4', color: 'white', p: 2 }}>
-                    <Card sx={{ mb: 2, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
+                    <Card sx={{ mt: 10, mb: 6, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
                         <CardContent>
                             <Typography variant="subtitle1" sx={{ color: '#E74646', fontWeight: 'bold', mr: 6 }}>{currentMonth}</Typography>
                             <Typography variant="h6">Total Orders</Typography>
                             <Typography variant="h6" sx={{ textAlign: 'center' }}>{totalOrders}</Typography>
                         </CardContent>
                     </Card>
-                    <Card sx={{ mb: 2, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
+                    <Card sx={{ mb: 6, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
                         <CardContent>
                             <Typography variant="subtitle1" sx={{ color: '#E74646', fontWeight: 'bold', mr: 6 }}>{currentMonth}</Typography>
                             <Typography variant="h6">In-Progress</Typography>
                             <Typography variant="h6" sx={{ textAlign: 'center' }}>{inProgressOrders}</Typography>
                         </CardContent>
                     </Card>
-                    <Card sx={{ mb: 2, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
+                    <Card sx={{ mb: 6, bgcolor: '#B4D4FF', color: 'black', p: 1 }}>
                         <CardContent>
                             <Typography variant="subtitle1" sx={{ color: '#E74646', fontWeight: 'bold', mr: 6 }}>{currentMonth}</Typography>
                             <Typography variant="h6">Completed</Typography>
@@ -220,7 +232,7 @@ const PurchaseOrderDashboard = () => {
                 </Box>
 
                 {/* Main Content */}
-                <Container maxWidth={false} sx={{ bgcolor: '#DBDFFD', height: 'auto', padding: '1.5em 0', position: 'relative' }}>
+                <Container maxWidth={false} sx={{ bgcolor: '#DBDFFD', height: 'auto', padding: '1.5em 0', position: 'relative', paddingTop: '7em' }}>
                     {isLoading ? (
                         <PageLoader />
                     ) : (
@@ -228,9 +240,9 @@ const PurchaseOrderDashboard = () => {
                             columns={columns}
                             data={dataWithActions}
                             includeProfile={false}
-                            tableWidth="100%"  // Increase the width of the table
+                            tableWidth="100%"
                             enableFilters={false}
-                            initialShowGlobalFilter={true}  // Show the global search filter
+                            initialShowGlobalFilter={true}
                             renderToolbarItems={createToolbarButton}
                         />
                     )}

@@ -12,9 +12,10 @@ import DynamicTable from '../../../../../components/Table/customizedTable2';
 import { useNavigate } from "react-router-dom";
 import CustomizedAlert from "../../../../../components/Alert/alert";
 
- 
+
+
 const InventoryRefundRequestsTable = ({ onViewApproved }) => {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
     const [viewRequestVisible, setViewRequestVisible] = useState(false);
     const [refundRequests, setRefundRequests] = useState([]);
@@ -46,7 +47,7 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
     useEffect(() => {
         const fetchRefundRequests = async () => {
             try {
-                const response = await axios.get('http://localhost:9000/refund/inventoryRefund/getAll',{
+                const response = await axios.get('http://localhost:9000/refund/inventoryRefund/getAll', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -72,13 +73,13 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
     const handleDeleteRequest = async (requestId) => {
         console.log('Deleting request:', requestId);
         try {
-            await axios.delete(`http://localhost:9000/refund/inventoryRefund/delete/${requestId}`,{
+            await axios.delete(`http://localhost:9000/refund/inventoryRefund/delete/${requestId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
             setRefundRequests(prevRequests => prevRequests.filter(request => request.inventory_id !== requestId));
-            handleCloseSuccess();
+            handleClickSuccess();
         } catch (error) {
             console.error('Error deleting request:', error);
             handleClickError();
@@ -91,7 +92,7 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
         { accessorKey: 'inventory_id', header: 'Refund Id', size: 75, align: 'center' },
         { accessorKey: 'amount', header: 'Price', size: 100, align: 'center' },
         { accessorKey: 'status', header: 'Status', size: 100, align: 'center' },
-        { accessorKey: 'actions', header: 'Actions', size: 150, align: 'center' } // Increased minWidth for additional button
+        { accessorKey: 'actions', header: 'Actions', size: 150, align: 'center' }
     ], []);
 
     const dataWithActions = refundRequests.map(row => ({
@@ -159,38 +160,37 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
         };
 
         return (
-                <Box
-                    sx={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        padding: 2,
-                        marginBottom: 2
-                    }}
-                >
-                    <Link to="/eligiblePurchaseOrderForRefund">
-                        <CustomizedButton
-                            onClick={onViewApproved}
-                            hoverBackgroundColor="#2d3ed2"
-                            style={buttonStyle1}
-                        >
-                            Request Refund
-                        </CustomizedButton>
-                    </Link>
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: 2,
+                    marginBottom: 2
+                }}
+            >
+                <Link to="/eligiblePurchaseOrderForRefund">
+                    <CustomizedButton
+                        onClick={onViewApproved}
+                        hoverBackgroundColor="#2d3ed2"
+                        style={buttonStyle1}
+                    >
+                        Request Refund
+                    </CustomizedButton>
+                </Link>
 
-                    <Link to="/ApprovedRefundsTable">
-                        <CustomizedButton
-                            onClick={onViewApproved}
-                            hoverBackgroundColor="#2ec931"
-                            style={buttonStyle2}
-                        >
-                            Approved Refunds
-                        </CustomizedButton>
-                    </Link>
-                </Box>
+                <Link to="/ApprovedRefundsTable">
+                    <CustomizedButton
+                        onClick={onViewApproved}
+                        hoverBackgroundColor="#2ec931"
+                        style={buttonStyle2}
+                    >
+                        Approved Refunds
+                    </CustomizedButton>
+                </Link>
+            </Box>
         );
     };
-
 
     return (
         <>
@@ -200,7 +200,7 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
                 sx={{
                     backgroundColor: '#DBDFFD',
                     width: '100%',
-                    height: '37.5em'
+                    height: '47.5em'
                 }}
             >
                 <Box>
@@ -213,10 +213,9 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
                             marginBottom: 0.5
                         }}
                     >
-                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                            Refund Request
+                        <Typography variant="h6" sx={{ fontWeight: 'bold',marginLeft:5,marginBottom:5 ,marginTop:4 }}>
+                            Refund Requests
                         </Typography>
-
                     </Box>
                     {loading ? (
                         <PageLoader />
