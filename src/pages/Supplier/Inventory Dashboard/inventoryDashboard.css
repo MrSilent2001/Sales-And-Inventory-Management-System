@@ -5,7 +5,7 @@
 
 .supplierViewInventoryInner {
     width: 100%;
-    height: 35em;
+    height: 50em;
     background-color: rgba(219, 223, 253, 0.8);
     padding: 1em 0;
 }
@@ -43,10 +43,10 @@
     justify-content: center;
 }
 
-table {
-    width: 100%;
-    position: relative;
-}
+/*table {*/
+/*    width: 100%;*/
+/*    position: relative;*/
+/*}*/
 
 thead {
     position: sticky;

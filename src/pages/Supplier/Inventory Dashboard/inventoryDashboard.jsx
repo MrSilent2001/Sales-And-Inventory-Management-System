@@ -21,11 +21,11 @@ function InventoryDashboard(){
     const [selectedItem, setSelectedItem] = useState(null);
 
     const columns = useMemo(() => [
-        { accessorKey: 'productName', header: 'Item Name', size: 100 },
-        { accessorKey: 'productDescription', header: 'Item Description', size: 200 },
-        { accessorKey: 'productCategory', header: 'Item Category', size: 120 },
-        { accessorKey: 'productUnitPrice', header: 'Unit Price', size: 100 },
-        { accessorKey: 'productQuantity', header: 'Qty.', size: 100 }
+        { accessorKey: 'productName', header: 'Name', size: 50 },
+        { accessorKey: 'productDescription', header: 'Description', size: 400 },
+        { accessorKey: 'productCategory', header: 'Category', size: 50 },
+        { accessorKey: 'productUnitPrice', header: 'Unit Price', size: 25 },
+        { accessorKey: 'productQuantity', header: 'Qty.', size: 25 }
     ], []);
 
     const handleClickSuccess = () => {
