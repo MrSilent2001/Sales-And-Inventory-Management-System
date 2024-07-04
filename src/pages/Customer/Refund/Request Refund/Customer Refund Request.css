@@ -7,13 +7,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 37.5em;
-    background-color: #DBDFFD;
+    height: auto;
+    min-height: 41.5em;
+    background-color: #eaecff;
 }
 
 .customerRefundRequestTopic h2{
     font-family: Inter;
-    margin: 2em 0 0 0;
+    margin: 2.45em 0 1em 0;
 }
 
 .customerRefundRequestForm{
@@ -32,7 +33,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+        justify-content: center;
 }
 
 .customerRefundRequestButtons{
