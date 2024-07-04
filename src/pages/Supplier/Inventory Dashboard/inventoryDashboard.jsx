@@ -138,7 +138,7 @@ function InventoryDashboard(){
                         border: 'none',
                         margin: '0.625em 0 0 2em'
                     }}>
-                    Cancel
+                    Delete
                 </CustomizedButton>
             </div>
         );
@@ -183,7 +183,7 @@ function InventoryDashboard(){
 
             <div className="supplierViewInventoryOuter">
                 <div className="supplierViewInventoryInner">
-                    <h2 className="supplierInventory">Available Products</h2>
+                    <h2 className="supplierInventory">My Products</h2>
                     <div className="supplierItemTable">
                         {isLoading ? (
                             <PageLoader/>
