@@ -46,16 +46,17 @@ const CustomButton = styled(Button)(({ theme }) => ({
 let columns = [
     { accessorKey: 'order_id', header: 'ID', size: 10 },
     { accessorKey: 'name', header: 'NAME', size: 70 },
+
+    {
+        accessorKey: 'items',
+        header: 'ITEMS',
+        size: 70,
+    },
     {
         accessorKey: 'amount',
         header: 'AMOUNT(\u20A8.)',
         size: 70,
         cellRenderer: ({ renderedCellValue }) => renderedCellValue.toLocaleString('en-US'),
-    },
-    {
-        accessorKey: 'items',
-        header: 'ITEMS',
-        size: 70,
     },
 
     // {
