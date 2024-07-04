@@ -113,3 +113,10 @@ thead {
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(175, 175, 178, 0.74);
 }
+
+.InventoryCard{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff !important;
+}

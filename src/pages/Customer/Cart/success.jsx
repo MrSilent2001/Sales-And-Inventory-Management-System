@@ -205,7 +205,7 @@ const Success = () => {
 
                 <CustomizedButton
                     onClick={sendReceipt}
-                    hoverBackgroundColor="#0aaf0b"
+                    hoverBackgroundColor="#2d3ed2"
                     style={{
                         color: '#ffffff',
                         backgroundColor: '#007bff',
