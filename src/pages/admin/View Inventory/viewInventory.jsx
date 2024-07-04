@@ -211,7 +211,6 @@ function ViewInventory() {
                 <div className="viewInventoryItemInner">
                     <div className="InventorySearchAndButtons">
                         <div className="viewInventorySearch">
-                            <SearchBar/>
                         </div>
                     </div>
 
