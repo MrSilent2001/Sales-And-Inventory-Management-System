@@ -217,7 +217,7 @@ function ViewInventory() {
                     <div className="items">
                         <div className="inventoryItemGrid">
                             {allInventoryItems.map((item) => (
-                                <div className="card" key={item.id} >
+                                <div className="InventoryCard" key={item.id} >
                                     <MultiActionAreaCard
                                         item={item}
                                         handleClick={handleButtonClick}
