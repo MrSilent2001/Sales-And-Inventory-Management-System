@@ -9,7 +9,7 @@ function GeneratedCustomerRefundRequest() {
     const location = useLocation();
     const { formData } = location.state || {
         customerName: '',
-        contact: '',
+        email: '',
         item: '',
         quantity: '',
         reason: '',
@@ -37,10 +37,10 @@ function GeneratedCustomerRefundRequest() {
 
                         <div className="customerRefundFormField">
                             <div className="customerRefundTextField">
-                                <h5>Contact</h5>
+                                <h5>Email</h5>
                             </div>
                             <div className="customerRefundInputData">
-                                <h6>{formData.contact}</h6>
+                                <h6>{formData.email}</h6>
                             </div>
                         </div>
 
