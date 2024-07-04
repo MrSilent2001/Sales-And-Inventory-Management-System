@@ -74,6 +74,27 @@ function InventoryDetail() {
                                 sx={{ width: 400, height: 400, border: 1, borderRadius: 3, borderColor: 'black' }}
                             />
                         )}
+
+                        <div className="productDetailButtons">
+
+                            <CustomizedButton
+                                onClick={() => setVisible(true)}
+                                hoverBackgroundColor="#2d3ed2"
+                                style={{
+                                    backgroundColor: '#242F9B',
+                                    border: '1px solid #242F9B',
+                                    width: '10em',
+                                    height: '3em',
+                                    fontSize: '0.85em',
+                                    borderRadius: '0.35em',
+                                    fontWeight: '500',
+                                    marginRight: '2em'
+                                }}
+                            >
+                                Add Item
+                            </CustomizedButton>
+
+                        </div>
                     </div>
 
                     <div className="productDetails">
@@ -106,7 +127,7 @@ function InventoryDetail() {
                                     <div className="productDetailTopic" style={{marginRight: '1em'}}>
                                         <h3>Product Description : </h3>
                                     </div>
-                                    <div className="loadedProductDetail" style={{width: '36em', textAlign: 'left'}}>
+                                    <div className="loadedProductDetail" style={{width: '40em', textAlign: 'left'}}>
                                         <h3>{inventoryItem.productDescription}</h3>
                                     </div>
                                 </div>
@@ -167,26 +188,7 @@ function InventoryDetail() {
                                 </div>
                             </div>
 
-                            <div className="productDetailButtons">
 
-                                <CustomizedButton
-                                    onClick={() => setVisible(true)}
-                                    hoverBackgroundColor="#2d3ed2"
-                                    style={{
-                                        backgroundColor: '#242F9B',
-                                        border: '1px solid #242F9B',
-                                        width: '9em',
-                                        height: '2.85em',
-                                        fontSize: '0.75em',
-                                        borderRadius: '0.35em',
-                                        fontWeight: '500',
-                                        marginRight: '2em'
-                                    }}
-                                >
-                                    Add Item
-                                </CustomizedButton>
-
-                            </div>
 
                         </div>
                     </div>
