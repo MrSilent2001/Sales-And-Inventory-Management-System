@@ -74,7 +74,7 @@ function CustomerRefunds() {
             backgroundColor: '#242F9B',
             border: '1px solid #242F9B',
             width: '11em',
-            height: '2.5em',
+            height: '3em',
             fontSize: '0.75em',
             padding: '0.5em 0.625em',
             borderRadius: '0.35em',

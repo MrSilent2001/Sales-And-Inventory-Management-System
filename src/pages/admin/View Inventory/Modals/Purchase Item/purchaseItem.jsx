@@ -3,6 +3,7 @@ import './purchaseItem.css';
 import CenteredModal from "../../../../../components/Modal/modal";
 import BasicTextField from "../../../../../components/Form Inputs/textfield";
 import CustomizedButton from "../../../../../components/Button/button";
+import CustomizedAlert from "../../../../../components/Alert/alert";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -21,6 +22,9 @@ function PurchaseItem(props) {
     const [purchaseQuantity, setPurchaseQuantity] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
     const [errorMessage, setErrorMessage] = useState('');
+
+    const [purchaseSuccess, setPurchaseSuccess] = useState(false);
+    const [purchaseError, setPurchaseError] = useState(false);
 
     const token = localStorage.getItem('accessToken');
 
@@ -91,6 +95,7 @@ function PurchaseItem(props) {
                     })
                 ])
                     .then(axios.spread((productRes, orderRes) => {
+                        setPurchaseSuccess(true);
                         onClose();
                     }))
                     .catch(err => {
@@ -116,12 +121,14 @@ function PurchaseItem(props) {
                     })
                 ])
                     .then(axios.spread((productRes, orderRes) => {
+                        setPurchaseSuccess(true);
                         onClose();
                     }))
                     .catch(err => {
                         if (err.response && err.response.status === 401) {
                             console.log('Unauthorized: Token may be invalid or expired.');
                         }
+                        setPurchaseError(true);
                     });
             }
 
@@ -140,15 +147,18 @@ function PurchaseItem(props) {
                     })
                 ])
                     .then(axios.spread((productRes, orderRes) => {
+                        setPurchaseSuccess(true);
                         onClose();
                     }))
                     .catch(err => {
                         if (err.response && err.response.status === 401) {
                             console.log('Unauthorized: Token may be invalid or expired.');
                         }
+                        setPurchaseError(true);
                     });
             } else {
                 console.log('Error:', error);
+                setPurchaseError(true);
             }
         }
     };
@@ -297,6 +307,18 @@ function PurchaseItem(props) {
                     </div>
                 </div>
             </div>
+            <CustomizedAlert
+                open={purchaseSuccess}
+                onClose={() => setPurchaseSuccess(false)}
+                severity="success"
+                message="Purchase completed successfully!"
+            />
+            <CustomizedAlert
+                open={purchaseError}
+                onClose={() => setPurchaseError(false)}
+                severity="error"
+                message="Error occurred during purchase!"
+            />
         </CenteredModal>
     );
 }
