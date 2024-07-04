@@ -1,13 +1,15 @@
 .viewInventoryOuter{
     display: flex;
-    background-color: rgb(255, 255, 255);
+    margin-bottom: 5em;
 }
 
 .viewInventoryFilter{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-top: 13em;
     width: 15.75em;
+    min-height: 32em;
     height: auto;
     background-color: #646FD4;
     margin: 0 0 0 -0.3em;
@@ -110,4 +112,11 @@ thead {
 
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(175, 175, 178, 0.74);
+}
+
+.InventoryCard{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff !important;
 }

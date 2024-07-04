@@ -138,7 +138,7 @@ function InventoryDashboard(){
                         border: 'none',
                         margin: '0.625em 0 0 2em'
                     }}>
-                    Cancel
+                    Delete
                 </CustomizedButton>
             </div>
         );
@@ -149,7 +149,7 @@ function InventoryDashboard(){
             backgroundColor: '#242F9B',
             border: '1px solid #242F9B',
             width: '9.5em',
-            height: '2.5em',
+            height: '2.75em',
             fontSize: '0.75em',
             padding: '0.5em 0.625em',
             borderRadius: '0.35em',
@@ -183,7 +183,7 @@ function InventoryDashboard(){
 
             <div className="supplierViewInventoryOuter">
                 <div className="supplierViewInventoryInner">
-                    <h2 className="supplierInventory">Available Products</h2>
+                    <h2 className="supplierInventory">My Products</h2>
                     <div className="supplierItemTable">
                         {isLoading ? (
                             <PageLoader/>
