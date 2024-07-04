@@ -10,6 +10,7 @@ import WarningIcon from '@mui/icons-material/Warning';
 import CustomizedAlert from '../../../../../components/Alert/alert';
 import DynamicTable from '../../../../../components/Table/customizedTable2';
 
+
 const SalesRefundRequestsTable = ({ onViewApproved }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [refundRequests, setRefundRequests] = useState([]);
@@ -31,13 +32,14 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
                 });
                 console.log('response', response.data);
                 const currentDate = new Date();
-                // setting to check overdue
+                let overdueFound = false; // Local variable to track if there is an overdue request
+                
                 const dataWithWarning = response.data.map(request => {
                     const createdDate = new Date(request.createdDate);
                     const timeDifference = Math.floor((currentDate - createdDate) / (1000 * 60 * 60 * 24));
                     const warning = timeDifference > 5;
                     if (warning) {
-                        setHasOverdue(true);
+                        overdueFound = true;
                     }
                     return {
                         ...request,
@@ -45,7 +47,9 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
                         daysPending: timeDifference
                     };
                 });
+
                 setRefundRequests(dataWithWarning);
+                setHasOverdue(overdueFound); // Update the state once after the loop
                 console.log(dataWithWarning);
             } catch (error) {
                 console.error('Error fetching refund requests:', error);
@@ -55,13 +59,13 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
             }
         };
         fetchRefundRequests();
-    }, []);
+    }, [token]);
 
     const columns = useMemo(() => [
         { accessorKey: 'orderId', header: 'Order Id', size: 100, align: 'center' },
         { accessorKey: 'customerName', header: 'Name', size: 70, align: 'center' },
-        {accessorKey:'contact',header:'Mail Address',size:70,align:'center'},
-        {accessorKey:'totalPrice' , header:'Total Price', size:100, align:'center'},
+        { accessorKey: 'contact', header: 'Mail Address', size: 70, align: 'center' },
+        { accessorKey: 'totalPrice', header: 'Total Price', size: 100, align: 'center' },
         { accessorKey: 'actions', header: 'Actions', size: 100, align: 'center' }
     ], []);
 
@@ -132,28 +136,27 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
                 }}
             >
                 <Link to="/SalesApprovedRefundsTable">
-                <CustomizedButton
-                    onClick={onViewApproved}
-                    hoverBackgroundColor="#2d3ed2"
-                    style={buttonStyle1}
-                >
-                    Approved Refunds
-                </CustomizedButton>
+                    <CustomizedButton
+                        onClick={onViewApproved}
+                        hoverBackgroundColor="#2d3ed2"
+                        style={buttonStyle1}
+                    >
+                        Approved Refunds
+                    </CustomizedButton>
                 </Link>
 
                 <Link to="/SalesRejectedRefundsTable">
-                <CustomizedButton
-                    onClick={onViewApproved}
-                    hoverBackgroundColor="#f11717"
-                    style={buttonStyle2}
-                >
-                    Rejected Refunds
-                </CustomizedButton>
+                    <CustomizedButton
+                        onClick={onViewApproved}
+                        hoverBackgroundColor="#f11717"
+                        style={buttonStyle2}
+                    >
+                        Rejected Refunds
+                    </CustomizedButton>
                 </Link>
             </Box>
         );
     };
-
 
     return (
         <>
@@ -161,9 +164,9 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
             <Container maxWidth="90%" style={{ backgroundColor: '#DBDFFD', height: '47em' }}>
                 {hasOverdue && (
                     <CustomizedAlert
-                        onClose={() => {}}
+                        onClose={() => { setHasOverdue(false); }}
                         open={hasOverdue}
-                        message="There are overdue refund requests !"
+                        message="There are overdue refund requests!"
                         severity="warning"
                         style={{ marginBottom: 16 }}
                     />
@@ -178,10 +181,9 @@ const SalesRefundRequestsTable = ({ onViewApproved }) => {
                             marginBottom: 0.5
                         }}
                     >
-                        <Typography variant="h6" sx={{ fontWeight: 'bold' , marginTop:4,marginBottom:3 }}>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold', marginTop: 4, marginBottom: 3 }}>
                             Refund Request
                         </Typography>
-
                     </Box>
                     {isLoading ? (
                         <PageLoader />

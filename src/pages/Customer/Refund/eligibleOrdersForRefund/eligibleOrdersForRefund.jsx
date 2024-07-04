@@ -197,7 +197,7 @@ function EligibleOrdersForRefund() {
         <>
             <CustomerNavbar/>
             <div className="eligibleCustomerOrdersOuter">
-                <div className="eligibleCustomerOrdersInner">
+                <div className="eligibleCustomerOrdersInner"><br/>
                     <div className="searchContainer">
                         <Link to="/refundRequests">
                             <Button
@@ -213,7 +213,7 @@ function EligibleOrdersForRefund() {
                                 Eligible Orders for Refund
                             </Button>
                         </Link>
-                    </div>
+                    </div><br/>
                     <div className="eligibleCustomerOrders-dashboard">
                         {isLoading ? (
                             <PageLoader/>
