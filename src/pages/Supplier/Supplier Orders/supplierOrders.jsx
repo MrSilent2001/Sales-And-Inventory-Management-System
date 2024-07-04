@@ -14,9 +14,9 @@ const columns = [
     { accessorKey: 'total_amount', header: 'Bill (Rs.)', size: 50 },
     { accessorKey: 'createdDate', header: 'Date', size: 25 },
     { accessorKey: 'status', header: 'Order Status', size: 50 },
-    { accessorKey: 'mail', header: 'Email', size: 25 },
-    { accessorKey: 'contact_number', header: 'Contact', size: 25 },
-    { accessorKey: 'Address', header: 'Address', size: 150 }
+    // { accessorKey: 'mail', header: 'Email', size: 25 },
+    // { accessorKey: 'contact_number', header: 'Contact', size: 25 },
+    // { accessorKey: 'Address', header: 'Address', size: 150 }
 ];
 
 function SupplierOrders() {

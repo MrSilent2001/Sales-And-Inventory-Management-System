@@ -168,7 +168,8 @@ const Success = () => {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            backgroundColor:'#ddd7f8'
         }}>
 
             <dotlottie-player src="https://lottie.host/b8eff9bf-1329-4b02-ae4f-a54d071e9898/oqKMF2fQFM.json"
