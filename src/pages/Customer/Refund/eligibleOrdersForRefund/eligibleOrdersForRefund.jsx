@@ -44,7 +44,7 @@ function EligibleOrdersForRefund() {
                             backgroundColor: '#242F9B',
                             border: '1px solid #242F9B',
                             width: '10em',
-                            height: '2.5em',
+                            height: '2.85em',
                             fontSize: '0.8em',
                             padding: '0.5em 0.625em',
                             marginTop: '0.625em'
@@ -207,7 +207,8 @@ function EligibleOrdersForRefund() {
                                     color: "black",
                                     fontWeight: 'bold',
                                     textTransform: "none",
-                                    fontSize: '1.25em'
+                                    fontSize: '1.55em',
+                                    fontFamily: 'Inter'
                                 }}
                             >
                                 Eligible Orders for Refund

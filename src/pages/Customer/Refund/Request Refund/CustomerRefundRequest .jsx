@@ -93,7 +93,7 @@ function CustomerRefundRequest() {
     const [formData, setFormData] = useState({
         customerId: '',
         customerName: '',
-        contact: '',
+        email: '',
         accountDetails: '',
         item: '',
         quantity: 1,
@@ -106,7 +106,7 @@ function CustomerRefundRequest() {
     const [orderDate, setOrderDate] = useState();
     const [discounts, setDiscounts] = useState([]);
     const [errors, setErrors] = useState({
-        contact: false,
+        email: false,
         accountDetails: false,
         item: false,
         quantity: false,
@@ -125,7 +125,7 @@ function CustomerRefundRequest() {
                 ...prevData,
                 customerId: decodedToken.id,
                 customerName: decodedToken.username,
-                contact: decodedToken.contactNo,
+                email: decodedToken.email,
             }));
         }
 
@@ -246,7 +246,7 @@ function CustomerRefundRequest() {
         event.preventDefault();
 
         const newErrors = {
-            contact: !formData.contact,
+            email: !formData.email,
             accountDetails: !formData.accountDetails,
             item: !formData.item,
             quantity: !formData.quantity,
@@ -288,16 +288,16 @@ function CustomerRefundRequest() {
                     <form onSubmit={handleSubmit} className="customerRefundRequestForm">
                         <div className="customerFormField">
                             <div className="customerTextField">
-                                <h5>Contact:</h5>
+                                <h5>Email:</h5>
                             </div>
                             <div className="customerTextField">
                                 <BasicTextField
-                                    name="contact"
-                                    size="small"
-                                    type="number"
-                                    value={formData.contact}
+                                    name="email"
+                                    size="email"
+                                    type="email"
+                                    value={formData.email}
                                     onChange={handleChange}
-                                    error={errors.contact}
+                                    error={errors.email}
                                     disabled={true}
                                 />
                             </div>
