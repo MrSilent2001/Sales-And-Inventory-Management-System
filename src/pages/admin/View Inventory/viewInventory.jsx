@@ -31,6 +31,7 @@ function ViewInventory() {
     };
 
     const categoryOptions = [
+        {value: 'All', label: 'All'},
         {value: 'Building Material', label: 'Building Material'},
         {value: 'Hardware and Tools', label: 'Hardware and Tools'},
         {value: 'Safety Equipments', label: 'Safety Equipments'},
@@ -71,7 +72,7 @@ function ViewInventory() {
 
     const getAllInventoryItems = () => {
         const url =
-            category === 'Building Material' || category === 'Plumbing Material' ?
+            category === 'Building Material' || category === 'Safety Equipments' || category === 'Electrical Supplies' || category === 'Hardware and Tools' || category === 'Interior Finishes' || category === 'Landscaping Products' || category === 'Construction Chemicals' || category === 'Plumbing Supplies' ?
                 `http://localhost:9000/inventory/getByCategory?productCategory=${encodeURIComponent(category)}`
                 : 'http://localhost:9000/inventory/getAll';
 
@@ -204,23 +205,6 @@ function ViewInventory() {
                             {/*    </Box>*/}
 
                             {/*</div>*/}
-                            <div className="applyButton">
-                                <CustomizedButton
-                                    hoverBackgroundColor="#f11717"
-                                    style={{
-                                        backgroundColor: '#ff0000',
-                                        width: '11em',
-                                        height: '2.5em',
-                                        fontSize: '0.95em',
-                                        padding: '0.5em 0.625em',
-                                        marginTop: '0.625em',
-                                        marginRight:'1.5em',
-                                        marginLeft: '1.5em',
-                                    }}
-                                >
-                                    Apply
-                                </CustomizedButton>
-                            </div>
                         </div>
                     </div>
                 </div>

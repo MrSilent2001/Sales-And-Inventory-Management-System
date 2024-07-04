@@ -22,6 +22,7 @@ export default function MultiActionAreaCard({item,handleClick,buttonText}) {
                     alt={productName}
                     sx={{
                         objectFit: 'contain'
+
                     }}
                 />
                 <CardContent>
