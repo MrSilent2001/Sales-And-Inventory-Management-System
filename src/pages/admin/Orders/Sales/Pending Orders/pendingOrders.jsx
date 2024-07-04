@@ -164,7 +164,7 @@ function PendingOrders() {
         { accessorKey: 'customer_name', header: 'NAME', size: 70 },
         {
             accessorKey: 'items',
-            header: 'ORDERED ITEMS',
+            header: 'ITEMS',
             size: 100,
             cellRenderer: ({ row }) => {
                 const orderItems = row.original.orderItems.map(itemStr => {
