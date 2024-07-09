@@ -58,6 +58,7 @@ import AcceptedOrdersDashboard from "../pages/admin/Orders/Inventory/Order Dashb
 import {AdminLogin} from "../pages/login & SignUp/_newLogin/AdminLogin/AdminLogin";
 import AdminLoginLandingPage from "../pages/login & SignUp/_newLogin/LandingPage/adminLoginLandingPage";
 import ViewShopReviews from "../pages/Customer/Home/Shop Reviews/View Shop Reviews";
+import Feedbacks from "../pages/admin/Feedbacks/Feedbacks";
 
 export function PageRouting() {
     return (
@@ -141,6 +142,7 @@ export function PageRouting() {
 
                     <Route path="/viewInventory" element={<ViewInventory/>}/>
                     <Route path="/viewInventoryDetail/:itemId" element={<InventoryDetail/>}/>
+                    <Route path='/feedbacks' element={<Feedbacks/>}/>
                     <Route path="/viewSupplier" element={<ViewSupplier/>}/>
                     <Route path="/purchasedOrder" element={<PurchaseOrderDashboard/>}/>
                     <Route path="/acceptedOrders" element={<AcceptedOrdersDashboard/>}/>
