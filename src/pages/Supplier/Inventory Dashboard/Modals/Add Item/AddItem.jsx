@@ -19,7 +19,7 @@ function AddSupplierInventoryItem(props) {
         itemDesc: '',
         category: '',
         brand: '',
-        manufacturedDate: '',
+        productManufacturer: '',
         color: '',
         quantity: '',
         price: '',
@@ -83,8 +83,8 @@ function AddSupplierInventoryItem(props) {
         if (!formData.brand) {
             validationErrors.brand = " *This Field is required";
         }
-        if (!formData.manufacturedDate) {
-            validationErrors.manufacturedDate = " *This Field is required";
+        if (!formData.productManufacturer) {
+            validationErrors.productManufacturer = " *This Field is required";
         }
         if (!formData.color) {
             validationErrors.color = " *This Field is required";
@@ -115,7 +115,7 @@ function AddSupplierInventoryItem(props) {
                     productDescription: formData.itemDesc,
                     productCategory: formData.category,
                     productBrand: formData.brand,
-                    productManufacturer: formData.manufacturedDate,
+                    productManufacturer: formData.productManufacturer,
                     productColour: formData.color,
                     productQuantity: formData.quantity,
                     productUnitPrice: formData.price,
@@ -261,22 +261,23 @@ function AddSupplierInventoryItem(props) {
 
                             <div className="item-form-field">
                                 <div className="item-form-field-label">
-                                    <h5>Manufactured Date:</h5>
+                                    <h5>Manufacturer:</h5>
                                 </div>
                                 <div className="item-input-field">
-                                    <CustomDatePicker
-                                        name="manufacturedDate"
-                                        slotProps={{textField: {size: 'small'}}}
-                                        sx={{marginLeft: '0.5em'}}
-                                        onChange={(date) => handleChange("manufacturedDate", date)}
+                                    <BasicTextField
+                                        name="productManufacturer"
+                                        type="text"
+                                        size='small'
+                                        onChange={(e) => handleChange("productManufacturer", e.target.value)}
                                     />
                                 </div>
                             </div>
-                            {errors.manufacturedDate && <span style={{
-                                color: 'red',
-                                fontSize: '0.8em',
-                                padding: '0 0 0.5em 0.5em'
-                            }}>{errors.manufacturedDate}</span>}
+                            {errors.productManufacturer && <span
+                                style={{
+                                    color: 'red',
+                                    fontSize: '0.8em',
+                                    padding: '0 0 0.5em 0.5em'
+                                }}>{errors.productManufacturer}</span>}
 
                             <div className="item-form-field">
                                 <div className="item-form-field-label">

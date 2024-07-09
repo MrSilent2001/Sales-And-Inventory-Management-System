@@ -91,7 +91,7 @@ function InventoryDetail() {
                                     marginRight: '2em'
                                 }}
                             >
-                                Add Item
+                                Purchase Item
                             </CustomizedButton>
 
                         </div>

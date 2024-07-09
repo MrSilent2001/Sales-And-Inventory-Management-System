@@ -74,7 +74,6 @@ export function AdminLogin() {
                             {loginFormik.touched.password && loginFormik.errors.password ? (
                                 <div className="error-message">{loginFormik.errors.password}</div>
                             ) : null}
-                            <Components.Anchor href="#">Forgot your password?</Components.Anchor>
                             <Components.Button type="submit">
                                 Sign In
                             </Components.Button>

@@ -268,6 +268,16 @@ function CustomerRefundRequest() {
             },
         })
             .then((response) => {
+                axios.post('http://localhost:9000/email/send', {
+                    receiverName: formData.customerName,
+                    emailSubject: "Refund Request Submitted",
+                    emailBody: `Your refund request for the item ${formData.item} with quantity ${formData.quantity} has been submitted. Total refund amount is ${formData.totalPrice}. Reason: ${formData.reason}.`,
+                    receiverEmail: formData.email
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 console.log('Refund request created:', response.data);
                 navigate('/generatedrefund', { state: { formData } });
             })
