@@ -185,7 +185,7 @@ const PurchaseOrderDashboard = () => {
             fontSize: '0.75em',
             padding: '0.5em 0.625em',
             borderRadius: '0.35em',
-            marginRight: '7.5em'
+            marginRight: '5.5em'
         };
 
         return (
