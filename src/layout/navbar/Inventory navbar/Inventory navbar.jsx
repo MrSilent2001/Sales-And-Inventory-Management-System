@@ -66,6 +66,14 @@ function InventoryNavbar(){
                 </NavLink>
 
                 <NavLink
+                    to="/feedbacks"
+                    name="feedbacks"
+                    className={`navLink ${selectedNavLink === "feedbacks" ? "selected" : ""}`}
+                >
+                    Feedbacks
+                </NavLink>
+
+                <NavLink
                     to="/admin"
                     name="logout"
                     className={`navLink ${selectedNavLink === "logout" ? "selected" : ""}`}

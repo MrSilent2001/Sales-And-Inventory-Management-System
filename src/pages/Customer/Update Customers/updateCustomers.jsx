@@ -11,6 +11,8 @@ import FileUpload from "../../../components/Form Inputs/fileUpload";
 import {uploadFileToBlob} from "../../Supplier/Inventory Dashboard/productBlobStorage";
 import CustomizedAlert from "../../../components/Alert/alert";
 import BasicTextArea from "../../../components/Form Inputs/textArea";
+import { Margin } from '@mui/icons-material';
+import { blue } from '@mui/material/colors';
 
 function UpdateCustomers() {
     const [customer, setCustomer] = useState({});
@@ -132,11 +134,11 @@ function UpdateCustomers() {
                     <div className="UpdateCustomerProfile">
                         <div className="profileAvatar">
                             <Avatar src={formData.profilePicture}
-                                    sx={{width: 275, height: 275, border: 2, borderRadius: 50, marginTop: '-0.8em'}}/>
+                                    sx={{width: 275, height: 275, border: 2, borderRadius: 50, marginTop: '0.3em'}}/>
 
                             <FileUpload
                                 text={"upload image"}
-                                style={{marginTop: '1em'}}
+                                style={{marginTop: '2.5em',width:'12em',height:'2.7em'}}
                                 onChange={handleFileChange}
                             />
                         </div>
@@ -205,10 +207,12 @@ function UpdateCustomers() {
                                             color: '#ffffff',
                                             backgroundColor: '#242F9B',
                                             border: '1px solid #242F9B',
-                                            width: '8em',
-                                            height: '2.5em',
+                                            width: '9em',
+                                            height: '2.7em',
                                             fontSize: '0.8em',
-                                            padding: '0.5em 0.625em'
+                                            padding: '0.5em 0.625em',
+                                            marginLeft:'-3.5em',
+                                            
                                         }}>
                                         Update
                                     </CustomizedButton>

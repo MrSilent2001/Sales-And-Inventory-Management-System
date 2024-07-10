@@ -88,7 +88,7 @@ function SupplierProfile() {
                     <div className="SupplierProfile">
                         <div className="profileAvatar">
                             <Avatar src={supplier.profilePicture}
-                                    sx={{width: 275, height: 275, border: 2, borderRadius: 50, marginTop: '-0.8em'}}
+                                    sx={{width: 275, height: 275, border: 2, borderRadius: 50, marginTop: '0em'}}
                             />
                             <h2>{supplier.username}</h2>
                             <h3>Id:{localStorage.getItem('id')}</h3>
@@ -147,7 +147,7 @@ function SupplierProfile() {
                                     <span className="title">Payment Details:</span>
                                 </div>
                                 <div className="SupplierProfileInput">
-                                    <span>{supplier.paymentDetails || '-'}</span>
+                                    <span>{supplier.paymentDetails || ' '}</span>
                                 </div>
                             </div>
 
@@ -165,8 +165,8 @@ function SupplierProfile() {
                                             fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
-                                            marginTop: '0.625em',
-                                            marginRight:'2.5em',
+                                            marginTop: '2em',
+                                            marginRight: '0em',
                                         }}>
                                         Edit Profile
                                     </CustomizedButton>
@@ -183,6 +183,8 @@ function SupplierProfile() {
                                             padding: '0.5em 0.625em',
                                             borderRadius: '0.35em',
                                             marginLeft: '2.5em',
+                                            marginTop: '2.1em',
+                                            marginRight:'-5em',
                                         }}>
                                         Delete Profile
                                     </CustomizedButton>

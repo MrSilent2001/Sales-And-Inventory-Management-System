@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    background-color: #DBDFFD;
+    background-color: rgb(240, 240, 245);
 }
 
 .SupplierProfileInner{
@@ -18,7 +18,7 @@
 }
 
 .SupplierProfile{
-    background-color: #adbbda;
+    background-color: #b8d5f6;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,6 +26,9 @@
     width: 35%;
     height: 100%;
     border-radius: 0.5em 0 0 0.5em;
+    border-right-style: solid;
+    border-color: rgb(152, 187, 246);
+    border-width: 0.6em;
 }
 
 .SupplierProfileForm{
@@ -37,6 +40,7 @@
 .title{
     font-size: 1em;
     font-weight: bold;
+    
 }
 
 .SupplierProfileFormField{
@@ -47,6 +51,7 @@
 .SupplierProfileField{
     width: 20em;
     text-align: left;
+    margin-top: 0.2em;
 }
 
 .SupplierProfileInput{

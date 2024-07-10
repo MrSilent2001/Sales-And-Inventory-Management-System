@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    background-color: #DBDFFD;
+    background-color:rgb(240, 240, 245);
 }
 
 .UpdateSupplierInner{
@@ -18,7 +18,7 @@
 }
 
 .UpdateSupplierProfile{
-    background-color: #adbbda;
+    background-color: #b8d5f6;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,6 +26,9 @@
     width: 35%;
     height: 100%;
     border-radius: 0.5em 0 0 0.5em;
+    border-right-style: solid;
+    border-color: rgb(140, 186, 255);
+    border-width: 0.6em;
 }
 
 .UpdateSupplierForm{
@@ -48,6 +51,8 @@
 .UpdateSupplierTextField{
     padding: 0 0 0 1em;
     margin-left: 4em;
+    font-size:1.2em;
+    font-weight:1em ;
 }
 
 .UpdateSupplierTextField h4{
