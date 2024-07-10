@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    background-color: #DBDFFD;
+    background-color:rgb(240, 240, 245);
 }
 
 .UpdateCustomerInner{
@@ -18,7 +18,7 @@
 }
 
 .UpdateCustomerProfile{
-    background-color: #adbbda;
+    background-color: #b8d5f6;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,6 +26,9 @@
     width: 35%;
     height: 100%;
     border-radius: 0.5em 0 0 0.5em;
+    border-right-style: solid;
+    border-color: rgb(140, 186, 255);
+    border-width: 0.6em;
 }
 
 .UpdateCustomerForm{
@@ -33,6 +36,7 @@
     width: 65%;
     height: 100%;
     border-radius:  0 0.5em 0.5em 0;
+   
 }
 
 .UpdateCustomerFormField{
@@ -43,20 +47,26 @@
     align-items: center;
     justify-content: space-between;
     margin-left: 2em;
+    margin-top: 1.5em;
+    
 }
 
 .UpdateCustomerTextField{
     padding: 0 0 0 1em;
     margin-left: 4em;
+    font-size:1.2em;
+    font-weight:1em ;
 }
 
 .UpdateCustomerTextField h4{
     font-weight: 700;
     font-size: 0.8em;
+    
 }
 
 .UpdateCustomerTextInput{
     margin-left: 1em;
+    
 }
 
 .UpdateCustomerButtons{

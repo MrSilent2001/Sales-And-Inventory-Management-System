@@ -142,11 +142,12 @@ function CustomerProfile() {
                                         style={{
                                             color: '#ffffff',
                                             backgroundColor: '#0a810a',
-                                            width: '4.5em',
-                                            height: '2.25em',
+                                            width: '8.75em',
+                                            height: '2.5em',
                                             fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
-                                            marginRight: '1.5em'
+                                            marginRight: '6em',
+                                            marginLeft:'-5em'
                                         }}>
                                         View
                                     </CustomizedButton>
@@ -166,8 +167,9 @@ function CustomerProfile() {
                                             height: '2.5em',
                                             fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
-                                            marginTop: '0.625em',
-                                            marginRight: '2.5em',
+                                            marginTop: '2em',
+                                            marginRight: '0em',
+                                           
                                         }}>
                                         Edit Profile
                                     </CustomizedButton>
@@ -183,6 +185,8 @@ function CustomerProfile() {
                                             fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
                                             marginLeft: '2.5em',
+                                            marginTop: '2.1em',
+                                            marginRight:'-5em',
                                         }}>
                                         Delete Profile
                                     </CustomizedButton>
