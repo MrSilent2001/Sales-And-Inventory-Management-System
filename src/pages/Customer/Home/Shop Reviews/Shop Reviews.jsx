@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
@@ -9,11 +9,13 @@ import Button from "@mui/material/Button";
 import Rating from "@mui/material/Rating";
 import axios from 'axios';
 import CustomizedAlert from "../../../../components/Alert/alert";
+import {jwtDecode} from "jwt-decode";
 
 function ShopReviewSubmitForm() {
     const [value, setValue] = useState(0);
     const [name, setName] = useState('');
     const [comment, setComment] = useState('');
+    const [customerId, setCustomerId] = useState('');
     const token = localStorage.getItem('accessToken');
 
     const [reviewSubmitOpenSuccess, setReviewSubmitOpenSuccess] = useState(false);
@@ -27,13 +29,22 @@ function ShopReviewSubmitForm() {
         setReviewSubmitErrorOpenSuccess(false);
     };
 
+    useEffect(() => {
+        if(token){
+            const decodedToken = jwtDecode(token);
+            setCustomerId(decodedToken.id);
+        }
+    }, []);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         const reviewData = {
+            customerId: customerId,
             customerName: name,
             starReviewCount: String(value),
             customerComment: comment,
+            date: new Date().toISOString()
         };
 
         try {
