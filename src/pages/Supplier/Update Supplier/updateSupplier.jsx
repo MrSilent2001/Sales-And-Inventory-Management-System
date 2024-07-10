@@ -140,7 +140,7 @@ function UpdateSupplier(props) {
 
                             <FileUpload
                                 text={"upload image"}
-                                style={{marginTop: '1em'}}
+                                style={{marginTop: '2.5em',width:'12em',height:'2.7em'}}
                                 onChange={handleFileChange}
                             />
                         </div>
@@ -235,10 +235,12 @@ function UpdateSupplier(props) {
                                             color: '#ffffff',
                                             backgroundColor: '#242F9B',
                                             border: '1px solid #242F9B',
-                                            width: '8em',
+                                            width: '9em',
                                             height: '2.5em',
                                             fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
+                                            marginLeft:'-4.2em',
+                                            marginTop:'1.8em',
                                         }}>
                                         Update
                                     </CustomizedButton>
