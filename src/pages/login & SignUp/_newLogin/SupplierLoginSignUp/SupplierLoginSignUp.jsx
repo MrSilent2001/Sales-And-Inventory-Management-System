@@ -1,14 +1,16 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import * as Components from "../Component";
 import "../styles.css";
 import LoginAppBar from "../LoginAppbar/LoginAppBar";
-import {useNavigate, useParams} from "react-router-dom";
-import {useAuth} from "../../../../context/AuthContext";
+import { useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "../../../../context/AuthContext";
 import axios from "axios";
-import {useFormik} from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import PasswordInput from "../../../../components/Form Inputs/passwordField";
 import CustomizedAlert from "../../../../components/Alert/alert";
+import { Modal } from "@mui/material";
+import SupplierResetModal from "../Password Reset/supplierPasswordResetModal";
 
 const signInSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
@@ -32,14 +34,15 @@ const signUpSchema = Yup.object().shape({
 
 export function SupplierLoginSignUp() {
     const { supplierLogin } = useAuth();
-    const { mode } = useParams();  // This will capture the 'mode' parameter from the URL
+    const { mode } = useParams();
     const defaultSignIn = mode === 'signup' ? false : true; // Default to true if mode is not 'signup'
-    const [signIn, toggle] = React.useState(defaultSignIn);
+    const [signIn, toggle] = useState(defaultSignIn);
     const navigate = useNavigate();
 
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
     const [openError2, setOpenError2] = useState(false);
+    const [visible, setVisible] = useState(false);
 
     const handleClickSuccess = () => setOpenSuccess(true);
     const handleClickError = () => setOpenError(true);
@@ -48,8 +51,7 @@ export function SupplierLoginSignUp() {
     const handleCloseError = () => setOpenError(false);
     const handleCloseError2 = () => setOpenError2(false);
 
-
-    //Login
+    // Login
     const loginFormik = useFormik({
         initialValues: {
             username: '',
@@ -68,7 +70,7 @@ export function SupplierLoginSignUp() {
         }
     });
 
-    //SignUp
+    // SignUp
     const signUpFormik = useFormik({
         initialValues: {
             username: '',
@@ -104,11 +106,10 @@ export function SupplierLoginSignUp() {
         }
     });
 
-    React.useEffect(() => {
+    useEffect(() => {
         // This effect updates the signIn state if the URL parameter changes
         toggle(defaultSignIn);
     }, [mode, defaultSignIn]);
-
 
     return (
         <>
@@ -213,7 +214,12 @@ export function SupplierLoginSignUp() {
                             {loginFormik.touched.password && loginFormik.errors.password ? (
                                 <div className="error-message">{loginFormik.errors.password}</div>
                             ) : null}
-                            {/*<Components.Anchor href="#">Forgot your password?</Components.Anchor>*/}
+                            <Components.Anchor
+                                onClick={() => { setVisible(true); }}
+                                style={{ cursor: 'pointer' }}
+                            >
+                                Forgot your password?
+                            </Components.Anchor>
                             <Components.Button type="submit">
                                 Sign In
                             </Components.Button>
@@ -264,6 +270,10 @@ export function SupplierLoginSignUp() {
                 severity="error"
                 message="Sign-Up failed. Please try Again."
             />
+
+            <Modal open={visible} onClose={() => setVisible(false)}>
+                <SupplierResetModal onClose={() => setVisible(false)} />
+            </Modal>
         </>
     );
 }

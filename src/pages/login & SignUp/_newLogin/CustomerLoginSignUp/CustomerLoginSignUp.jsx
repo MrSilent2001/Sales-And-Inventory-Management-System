@@ -9,6 +9,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import PasswordInput from "../../../../components/Form Inputs/passwordField";
 import CustomizedAlert from "../../../../components/Alert/alert";
+import {Modal} from "@mui/material";
+import CustomerResetModal from "../Password Reset/customerPasswordResetModal";
 
 const signInSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
@@ -38,6 +40,7 @@ export function CustomerLoginSignUp() {
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openError, setOpenError] = useState(false);
     const [openError2, setOpenError2] = useState(false);
+    const [visible, setVisible] = useState(false);
 
     const handleClickSuccess = () => setOpenSuccess(true);
     const handleClickError = () => setOpenError(true);
@@ -187,7 +190,12 @@ export function CustomerLoginSignUp() {
                             {loginFormik.touched.password && loginFormik.errors.password ? (
                                 <div className="error-message">{loginFormik.errors.password}</div>
                             ) : null}
-                            {/*<Components.Anchor href="#">Forgot your password?</Components.Anchor>*/}
+                            <Components.Anchor
+                                onClick={() =>{setVisible(true)}}
+                                style={{cursor: 'pointer'}}
+                            >
+                                Forgot your password?
+                            </Components.Anchor>
                             <Components.Button type="submit">
                                 Sign In
                             </Components.Button>
@@ -238,6 +246,10 @@ export function CustomerLoginSignUp() {
                 severity="error"
                 message="Sign-Up failed. Please try Again."
             />
+
+            <Modal open={visible} onClose={() => setVisible(false)}>
+                <CustomerResetModal onClose={() => setVisible(false)} />
+            </Modal>
         </>
     );
 }
