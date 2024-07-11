@@ -50,7 +50,6 @@
     color: #373636;
     margin: 0;
 }
-
 .carouselButton{
     margin: 2.5em 0 0 0;
 }
@@ -83,38 +82,70 @@
     margin: 1em 0 2em 0;
 }
 
-.productCategoryTypes{
+h5{
+    font-weight: 550;
+    margin-top: 1em;
+    margin-bottom: 4em;
+}
+
+
+.supplierProductCategoryTypes{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: auto;
-    margin: 0 0 5em 0;
+    margin: 0 0 2em 0;
 }
 
-.productCategoryTypesRow{
+.supplierProductCategoryTypesRow{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 90%;
+    width: 70%;
     padding: 1.5em 0 1.5em 0;
 }
 
-.productCategoryCard{
+.supplierProductCategoryCard{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 19em;
-    height: 8em;
-    background-color: #DBDFFD;
+    height: 4em;
+    background-color: #ffffff;
     border-radius: 12px;
 }
 
-.productCategoryCardName{
+.supplierProductCategoryCard p{
     font-family: Inter;
-    font-size: 0.844em;
-    font-weight: 500;
+    font-size: 1.25em;
+    color: #1525da;
+    font-weight: 600;
+}
+
+.instructions{
+    font-family: Inter;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5em;
+}
+
+.instructionTopic{
+    margin-bottom: 2em;
+}
+
+.instructionContent{
+    width: 85%;
+}
+
+.instructionContent li{
+    text-align: center;
+    font-family: Inter;
+    font-size: 0.9em;
+    line-height: 1;
+    margin-top: 2em;
 }
 
 .contactUs{
@@ -122,7 +153,7 @@
 }
 
 .contactUsContent{
-    margin: 4em 0 0 0;
+    margin: 4em 0 0 5em;
 }
 
 .contactUsContent{
@@ -145,4 +176,49 @@
     font-family: Inter;
     font-size: 0.9em;
 }
+
+.supplierReviewOuter{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: -5em;
+    margin-bottom: -2em;
+}
+
+.supplierReviewOuter h3{
+    font-family: Inter;
+    margin-bottom: 2em;
+}
+
+.supplierReviewContent{
+    display: flex;
+    justify-content: center;
+}
+
+.supplierReviewDesc h2{
+    text-align: left;
+    font-weight: 650;
+    margin-bottom: 1.75em;
+    font-family: Inter;
+}
+
+.supplierReviewDescPara{
+    width: 40em;
+}
+
+.supplierReviewDescPara p{
+    font-size: 0.9em;
+    text-align: left;
+    line-height: 2;
+    text-align: justify;
+    font-family: Inter;
+}
+
+.supplierReviewForm{
+    padding-top: 0.2em;
+}
+
+
+
+
 
