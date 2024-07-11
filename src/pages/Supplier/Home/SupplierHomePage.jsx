@@ -2,6 +2,8 @@ import React from "react";
 import './SupplierHomePage.css';
 import Footer from "../../../layout/footer/footer";
 import SupplierNavbar from "../../../layout/navbar/Supplier Navbar/Supplier Navbar";
+import SupplierReviewSubmitForm from "./Supplier Feedbacks/Supplier Feedback";
+import ShopReviewSubmitForm from "../../Customer/Home/Shop Reviews/Shop Reviews";
 
 function SupplierHome() {
     return (
@@ -42,40 +44,74 @@ function SupplierHome() {
 
                 <div className="products">
                     <h3 className="productsTopic">
-                        Products
+                        We Sell These Types of Products
                     </h3>
 
-                    <div className="productCategoryTypes">
-                        <div className="productCategoryTypesRow">
-                            <div className="productCategoryCard">
-                                <p className="productCategoryCardName">Building Material</p>
+                    <h5>You can supply your products which are inder these categories. We are ready to provide you a platform to sell your products efficiently.</h5>
+
+                    <div className="supplierProductCategoryTypes">
+                        <div className="supplierProductCategoryTypesRow">
+                            <div className="supplierProductCategoryCard">
+                                <p className="supplierProductCategoryCardName">Building Material</p>
                             </div>
-                            <div className="productCategoryCard">
-                                <p className="productCategoryCardName">Hardware and Tools</p>
+                            <div className="supplierProductCategoryCard">
+                                <p className="supplierProductCategoryCardName">Hardware and Tools</p>
                             </div>
-                            <div className="productCategoryCard">
-                                <p className="productCategoryCardName">Safety Equipments</p>
+                            <div className="supplierProductCategoryCard">
+                                <p className="supplierProductCategoryCardName">Safety Equipments</p>
                             </div>
-                            <div className="productCategoryCard">
-                                <p className="productCategoryCardName">Electrical Supplies</p>
+                            <div className="supplierProductCategoryCard">
+                                <p className="supplierProductCategoryCardName">Electrical Supplies</p>
                             </div>
                         </div>
-                        <div className="productCategoryTypesRow">
-                            <div className="productCategoryCard">
-                                <p className="productCategoryCardName">Plumbing Supplies</p>
+                        <div className="supplierProductCategoryTypesRow">
+                            <div className="supplierProductCategoryCard">
+                                <p className="supplierProductCategoryCardName">Plumbing Supplies</p>
                             </div>
-                            <div className="productCategoryCard">
-                                <p className="productCategoryCardName">Interior Finishes</p>
+                            <div className="supplierProductCategoryCard">
+                                <p className="supplierProductCategoryCardName">Interior Finishes</p>
                             </div>
-                            <div className="productCategoryCard">
-                                <p className="productCategoryCardName">Landscaping Products</p>
+                            <div className="supplierProductCategoryCard">
+                                <p className="supplierProductCategoryCardName">Landscaping Products</p>
                             </div>
-                            <div className="productCategoryCard">
-                                <p className="productCategoryCardName">Construction Chemicals</p>
+                            <div className="supplierProductCategoryCard">
+                                <p className="supplierProductCategoryCardName">Construction Chemicals</p>
                             </div>
                         </div>
                     </div>
 
+                </div>
+
+                <div className="instructions">
+                    <h3 className="instructionTopic">
+                        Instructions to Sell
+                    </h3>
+
+                    <div className="instructionContent">
+                        <div>
+                            <ul>
+                                <li>
+                                    You should have the quality products which are going to sell to the Tradeasy Customers. Customer ar expecting higher quality
+                                    from the Tradeasy. Therefore, make sure that you have the best quality.
+                                </li>
+                                <li>
+                                    Please, make sure that you have the continuous supply for Tradeasy warehouses, because without a continuous supply for Tradeasy
+                                    warehouses, we are unable to provide the best service for our customers
+                                </li>
+                                <li>
+                                    When you add an item to make available for purchase by admin, please make sure to add accurate information about the items. Also, make
+                                    sure to add quality images of the items.
+                                </li>
+                                <li>
+                                    Ensure that your stock levels are updated regularly to reflect current inventory. This helps prevent overselling and backorders, which can frustrate customers.
+                                </li>
+                                <li>
+                                    Be transparent about shipping times and costs. Clear communication about delivery expectations helps build trust with customers. Write compelling and honest product descriptions.
+                                    Highlight the features and benefits that make your product stand out from the competition.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="contactUs">
@@ -99,6 +135,27 @@ function SupplierHome() {
                         </div>
                     </div>
                 </div>
+
+                <div className="supplierReviewOuter">
+                    <h3>Make Your Reviews</h3>
+                    <div className="supplierReviewContent">
+                        <div className="supplierReviewDesc">
+                            <div className="supplierReviewDescPara">
+                                <p>Dear Suppliers,</p>
+                                <p>
+                                    Thank you for choosing Tradeasy! We value your feedback as it helps us improve our services and provide the best products. Your honest review—whether positive or constructive—is essential for us to grow and serve you better. By sharing your experiences, you guide us in enhancing our offerings and help future customers make informed decisions. We appreciate your time and support in making Tradeasy the best place for all your construction needs!
+                                </p>
+                                <p>
+                                    The Tradeasy Team
+                                </p>
+                            </div>
+                        </div>
+                        <div className="supplierReviewForm">
+                            <SupplierReviewSubmitForm></SupplierReviewSubmitForm>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <Footer/>
         </>
