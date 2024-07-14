@@ -12,6 +12,7 @@ import CustomizedAlert from "../../../../components/Alert/alert";
 import {jwtDecode} from "jwt-decode";
 
 function SupplierReviewSubmitForm() {
+    const [value, setValue] = useState(0);
     const [name, setName] = useState('');
     const [comment, setComment] = useState('');
     const [supplierId, setSupplierId] = useState('');
@@ -41,6 +42,7 @@ function SupplierReviewSubmitForm() {
         const reviewData = {
             sellerId: supplierId,
             sellerName: name,
+            starReviewCount: String(value),
             sellerComment: comment,
             date: new Date().toISOString()
         };
@@ -93,6 +95,30 @@ function SupplierReviewSubmitForm() {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             InputProps={{ style: { fontSize: '14px' } }}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={2}>
+                        <InputLabel
+                            sx={{
+                                display: "flex",
+                                justifyContent: "left",
+                                alignContent: 'center',
+                                fontWeight: 600,
+                                fontSize: '0.92em'
+                            }}
+                        >
+                            Rate
+                        </InputLabel>
+                    </Grid>
+                    <Grid item xs={12} sm={10}>
+                        <Rating
+                            name="simple-controlled"
+                            value={value}
+                            onChange={(event, newValue) => {
+                                setValue(newValue);
+                            }}
+                            sx={{ display: 'flex', alignItems: 'center' }}
                         />
                     </Grid>
 

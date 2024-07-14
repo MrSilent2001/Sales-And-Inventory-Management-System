@@ -18,6 +18,7 @@ function Feedbacks() {
     const showComponentSupplier = () => {
         setActiveComponent('two');
     };
+    
 
     return (
         <div>
@@ -35,7 +36,7 @@ function Feedbacks() {
                                 onClick={showComponentCustomer}
                                 hoverBackgroundColor="#2d3ed2"
                                 style={{
-                                    backgroundColor: '#818bf3',
+                                    backgroundColor: activeComponent === 'one' ? '#4257f1' : '#818bf3',
                                     width: '13.5em',
                                     height: '2.95em',
                                     fontSize: '0.8em',
@@ -51,7 +52,7 @@ function Feedbacks() {
                                 onClick={showComponentSupplier}
                                 hoverBackgroundColor="#2d3ed2"
                                 style={{
-                                    backgroundColor: '#818bf3',
+                                    backgroundColor: activeComponent === 'two' ? '#4257f1' : '#818bf3',
                                     width: '13.5em',
                                     height: '2.95em',
                                     fontSize: '0.8em',
