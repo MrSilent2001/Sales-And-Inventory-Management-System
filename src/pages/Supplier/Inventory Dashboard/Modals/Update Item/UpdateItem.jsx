@@ -21,7 +21,7 @@ function UpdateItem(props) {
         itemDesc: '',
         category: '',
         brand: '',
-        manufacturedDate: '',
+        productManufacturer: '',
         color: '',
         quantity: '',
         price: '',
@@ -35,7 +35,7 @@ function UpdateItem(props) {
                 itemDesc: itemData.productDescription || '',
                 category: itemData.productCategory || '',
                 brand: itemData.productBrand || '',
-                manufacturedDate: itemData.productManufacturer || '',
+                productManufacturer: itemData.productManufacturer || '',
                 color: itemData.productColour || '',
                 quantity: itemData.productQuantity || '',
                 price: itemData.productUnitPrice || '',
@@ -101,8 +101,8 @@ function UpdateItem(props) {
         if (!formData.brand) {
             validationErrors.brand = " *This Field is required";
         }
-        if (!formData.manufacturedDate) {
-            validationErrors.manufacturedDate = " *This Field is required";
+        if (!formData.productManufacturer) {
+            validationErrors.productManufacturer = " *This Field is required";
         }
         if (!formData.color) {
             validationErrors.color = " *This Field is required";
@@ -130,7 +130,7 @@ function UpdateItem(props) {
                     productDescription: formData.itemDesc,
                     productCategory: formData.category,
                     productBrand: formData.brand,
-                    productManufacturer: formData.manufacturedDate,
+                    productManufacturer: formData.productManufacturer,
                     productColour: formData.color,
                     productQuantity: formData.quantity,
                     productUnitPrice: formData.price,
@@ -278,28 +278,23 @@ function UpdateItem(props) {
 
                             <div className="item-form-field">
                                 <div className="item-form-field-label">
-                                    <h5>Manufactured Date:</h5>
+                                    <h5>Manufacturer :</h5>
                                 </div>
                                 <div className="item-input-field">
-                                    <CustomDatePicker
-                                        name="manufacturedDate"
-                                        slotProps={{textField: {size: 'small', width: '10em'}}}
-                                        required
-                                        sx={{marginLeft: '0.5em'}}
-                                        value={dayjs(formData.manufacturedDate)}
-                                        onChange={(date) => {
-                                            const formattedDate = dayjs(date).format('YYYY-MM-DD');
-                                            console.log(formattedDate);
-                                            handleChange("manufacturedDate", formattedDate);
-                                        }}
+                                    <BasicTextField
+                                        name="color"
+                                        type="text"
+                                        size='small'
+                                        value={formData.productManufacturer}
+                                        onChange={(e) => handleChange("productManufacturer", e.target.value)}
                                     />
                                 </div>
                             </div>
-                            {errors.manufacturedDate && <span style={{
+                            {errors.productManufacturer && <span style={{
                                 color: 'red',
                                 fontSize: '0.8em',
                                 padding: '0 0 0.5em 0.5em'
-                            }}>{errors.manufacturedDate}</span>}
+                            }}>{errors.productManufacturer}</span>}
 
                             <div className="item-form-field">
                                 <div className="item-form-field-label">
@@ -357,31 +352,32 @@ function UpdateItem(props) {
                             </div>
 
                             <div className="updateItemButtons">
-                                <CustomizedButton
-                                    onClick={handleSubmit}
-                                    hoverBackgroundColor="#2d3ed2"
-                                    style={{
-                                        backgroundColor: '#242F9B',
-                                        border: '1px solid #242F9B',
-                                        width: '8em',
-                                        height: '2.5em',
-                                        fontSize: '0.8em'
-                                    }}>
-                                    Update
-                                </CustomizedButton>
+                                <div className="buttonInner">
+                                    <CustomizedButton
+                                        onClick={handleSubmit}
+                                        hoverBackgroundColor="#2d3ed2"
+                                        style={{
+                                            backgroundColor: '#242F9B',
+                                            border: '1px solid #242F9B',
+                                            width: '9em',
+                                            height: '2.5em',
+                                            fontSize: '0.8em'
+                                        }}>
+                                        Update
+                                    </CustomizedButton>
 
-                                <CustomizedButton
-                                    onClick={() => props.onClose(false)}
-                                    hoverBackgroundColor="#f11717"
-                                    style={{
-                                        backgroundColor: '#960505',
-                                        width: '8em',
-                                        height: '2.5em',
-                                        fontSize: '0.8em'
-                                    }}>
-                                    Cancel
-                                </CustomizedButton>
-
+                                    <CustomizedButton
+                                        onClick={() => props.onClose(false)}
+                                        hoverBackgroundColor="#f11717"
+                                        style={{
+                                            backgroundColor: '#960505',
+                                            width: '9em',
+                                            height: '2.5em',
+                                            fontSize: '0.8em'
+                                        }}>
+                                        Cancel
+                                    </CustomizedButton>
+                                </div>
                             </div>
                         </div>
                     </div>

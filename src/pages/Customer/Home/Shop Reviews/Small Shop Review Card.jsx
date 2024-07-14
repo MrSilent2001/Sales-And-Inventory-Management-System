@@ -44,7 +44,7 @@ ReviewCard.propTypes = {
 const ReviewsGrid = ({ reviews }) => {
     return (
         <Box>
-            <Grid container spacing={0} sx={{ gap: '60px' }}> {/* Adjust the gap between cards */}
+            <Grid container spacing={0} sx={{ gap: '40px' }}> {/* Adjust the gap between cards */}
                 {reviews.map((review, index) => (
                     <Grid item key={index}>
                         <ReviewCard

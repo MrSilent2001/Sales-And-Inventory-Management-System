@@ -18,7 +18,7 @@ function Feedbacks() {
     const showComponentSupplier = () => {
         setActiveComponent('two');
     };
-    
+
 
     return (
         <div>

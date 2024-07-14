@@ -200,11 +200,12 @@
 }
 
 .shopReviewDescPara{
-    width: 43.5em;
+    width: 37.5em;
+    margin-left: 3.65em;
 }
 
 .shopReviewDescPara p{
-    font-size: 0.9em;
+    font-size: 0.8em;
     text-align: left;
     line-height: 2;
     text-align: justify;

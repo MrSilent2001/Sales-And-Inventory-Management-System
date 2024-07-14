@@ -23,7 +23,7 @@ function SelectItem({ value, onChange, error, items }) {
                     id="item-select"
                     value={value}
                     onChange={onChange}
-                    style={{ width: '17.25em', height: '2em', marginRight: '0.5em' }}
+                    style={{ width: '17.575em', height: '2em', marginRight: '0.5em' }}
                 >
                     {items.map((item) => (
                         <MenuItem key={item.id} value={item.id}>
@@ -78,7 +78,7 @@ function SelectReason({ value, onChange, error }) {
                     id="reason-select"
                     value={value}
                     onChange={onChange}
-                    style={{ width: '17.25em', height: '2em', marginRight: '0.5em' }}
+                    style={{ width: '17.575em', height: '2em', marginRight: '0.5em' }}
                 >
                     <MenuItem value="Defective Item">Defective Item</MenuItem>
                     <MenuItem value="Not as Described">Not as Described</MenuItem>
@@ -155,6 +155,7 @@ function CustomerRefundRequest() {
                 ]);
 
                 setOrderDate(orderResponse.data.orderDate);
+                setMaxQuantity(orderResponse.data.quantity);
 
                 const products = productResponse.data.reduce((acc, product) => {
                     acc[product.id] = {
@@ -303,8 +304,8 @@ function CustomerRefundRequest() {
                             </div>
                         </div>
 
-                        <div className="customerFormField">
-                            <div className="customerTextField">
+                        <div className="customerFormField" style={{marginTop: '1em', marginBottom: '1.25em'}}>
+                            <div className="customerTextField" style={{ marginTop: '-1em'}}>
                                 <h5>Account Details: </h5>
                             </div>
                             <div className="customerTextField">
@@ -336,13 +337,14 @@ function CustomerRefundRequest() {
                                 <h5>Quantity:</h5>
                             </div>
                             <div className="customerTextField">
-                                <QuantityField
+                                <BasicTextField
                                     name="quantity"
                                     value={formData.quantity}
-                                    onChange={(e) => handleChange({ name: 'quantity', value: parseInt(e.target.value) })}
+                                    type="number"
+                                    size='small'
                                     error={errors.quantity}
-                                    max={maxQuantity}
-                                    disabled={formData.item === ''}
+                                    onChange={(e) => handleChange({ name: 'quantity', value: parseInt(e.target.value) })}
+                                    disabled={formData.quantity >= maxQuantity}
                                 />
                             </div>
                         </div>

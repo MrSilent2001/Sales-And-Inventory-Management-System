@@ -1,6 +1,6 @@
 .viewInventoryOuter{
     display: flex;
-    margin-bottom: 5em;
+    margin-bottom: 0em;
 }
 
 .viewInventoryFilter{
@@ -9,8 +9,7 @@
     justify-content: flex-start;
     padding-top: 13em;
     width: 15.75em;
-    min-height: 32em;
-    height: auto;
+    min-height: fit-content;
     background-color: #646FD4;
     margin: 0 0 0 -0.3em;
 }

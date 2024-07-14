@@ -7,6 +7,7 @@
 .inventoryDetailsInner{
     display: flex;
     height: 34em;
+    margin-top: -2em;
 }
 
 .productImage{
@@ -14,8 +15,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 36em;
-    margin-left: 10em;
+    width: 38em;
+    margin-left: 8em;
     padding-top: 4em;
 }
 

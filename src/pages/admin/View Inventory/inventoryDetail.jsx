@@ -124,10 +124,10 @@ function InventoryDetail() {
                                 </div>
 
                                 <div className="productDetail" style={{alignItems: 'flex-start'}}>
-                                    <div className="productDetailTopic" style={{marginRight: '1em'}}>
+                                    <div className="productDetailTopic" style={{width: '11em', marginLeft: '-0.4em'}}>
                                         <h3>Product Description : </h3>
                                     </div>
-                                    <div className="loadedProductDetail" style={{width: '40em', textAlign: 'left'}}>
+                                    <div className="loadedProductDetail" style={{width: '35em', textAlign: 'left'}}>
                                         <h3>{inventoryItem.productDescription}</h3>
                                     </div>
                                 </div>

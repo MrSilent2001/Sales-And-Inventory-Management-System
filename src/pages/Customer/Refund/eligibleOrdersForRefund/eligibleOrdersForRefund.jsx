@@ -23,7 +23,7 @@ function EligibleOrdersForRefund() {
     const navigate = useNavigate();
 
     const columns = useMemo(() => [
-        { accessorKey: 'orderId', header: 'Order Id', size: 5, align: 'center' },
+        { accessorKey: 'orderId', header: 'Order Id', size: 3, align: 'center' },
         { accessorKey: 'orderItems', header: 'Ordered Items', size: 50, align: 'center', Cell: ({ value }) => <span>{value}</span> },
         { accessorKey: 'eligibleItems', header: 'Refundable Items', size: 50, align: 'center', Cell: ({ value }) => <span>{value}</span> },
         { accessorKey: 'orderPrice', header: 'Amount', size: 50, align: 'center' },

@@ -19,7 +19,7 @@ function AddSupplierInventoryItem(props) {
         itemDesc: '',
         category: '',
         brand: '',
-        manufacturedDate: '',
+        productManufacturer: '',
         color: '',
         quantity: '',
         price: '',
@@ -83,8 +83,8 @@ function AddSupplierInventoryItem(props) {
         if (!formData.brand) {
             validationErrors.brand = " *This Field is required";
         }
-        if (!formData.manufacturedDate) {
-            validationErrors.manufacturedDate = " *This Field is required";
+        if (!formData.productManufacturer) {
+            validationErrors.productManufacturer = " *This Field is required";
         }
         if (!formData.color) {
             validationErrors.color = " *This Field is required";
@@ -115,7 +115,7 @@ function AddSupplierInventoryItem(props) {
                     productDescription: formData.itemDesc,
                     productCategory: formData.category,
                     productBrand: formData.brand,
-                    productManufacturer: formData.manufacturedDate,
+                    productManufacturer: formData.productManufacturer,
                     productColour: formData.color,
                     productQuantity: formData.quantity,
                     productUnitPrice: formData.price,
@@ -176,8 +176,8 @@ function AddSupplierInventoryItem(props) {
                             </div>
                         </div>
                         <div className="item-details">
-                            <div className="item-form-field" style={{marginTop: '1em'}}>
-                                <div className="item-form-field-label">
+                            <div className="item-form-container" style={{marginTop: '2.25em'}}>
+                                <div className="item-form-field-label-container">
                                     <h5>Item Name:</h5>
                                 </div>
                                 <div className="item-input-field">
@@ -195,8 +195,8 @@ function AddSupplierInventoryItem(props) {
                                 padding: '0 0 0.5em 0.5em'
                             }}>{errors.itemName}</span>}
 
-                            <div className="item-form-field">
-                                <div className="item-form-field-label">
+                            <div className="item-form-container">
+                                <div className="item-form-field-label-container">
                                     <h5>Item Description:</h5>
                                 </div>
                                 <div className="item-input-field">
@@ -214,8 +214,8 @@ function AddSupplierInventoryItem(props) {
                                 padding: '0 0 0.5em 0.5em'
                             }}>{errors.itemDesc}</span>}
 
-                            <div className="item-form-field">
-                                <div className="item-form-field-label">
+                            <div className="item-form-container">
+                                <div className="item-form-field-label-container">
                                     <h5>Category:</h5>
                                 </div>
                                 <div className="item-input-field">
@@ -239,8 +239,8 @@ function AddSupplierInventoryItem(props) {
                                 padding: '0 0 0.5em 0.5em'
                             }}>{errors.category}</span>}
 
-                            <div className="item-form-field">
-                                <div className="item-form-field-label">
+                            <div className="item-form-container">
+                                <div className="item-form-field-label-container">
                                     <h5>Brand:</h5>
                                 </div>
                                 <div className="item-input-field">
@@ -259,27 +259,27 @@ function AddSupplierInventoryItem(props) {
                                     padding: '0 0 0.5em 0.5em'
                                 }}>{errors.brand}</span>}
 
-                            <div className="item-form-field">
-                                <div className="item-form-field-label">
-                                    <h5>Manufactured Date:</h5>
+                            <div className="item-form-container">
+                                <div className="item-form-field-label-container">
+                                    <h5>Manufacturer:</h5>
                                 </div>
                                 <div className="item-input-field">
-                                    <CustomDatePicker
-                                        name="manufacturedDate"
-                                        slotProps={{textField: {size: 'small'}}}
-                                        sx={{marginLeft: '0.5em'}}
-                                        onChange={(date) => handleChange("manufacturedDate", date)}
+                                    <BasicTextField
+                                        name="color"
+                                        type="text"
+                                        size='small'
+                                        onChange={(e) => handleChange("productManufacturer", e.target.value)}
                                     />
                                 </div>
                             </div>
-                            {errors.manufacturedDate && <span style={{
+                            {errors.productManufacturer && <span style={{
                                 color: 'red',
                                 fontSize: '0.8em',
                                 padding: '0 0 0.5em 0.5em'
-                            }}>{errors.manufacturedDate}</span>}
+                            }}>{errors.productManufacturer}</span>}
 
-                            <div className="item-form-field">
-                                <div className="item-form-field-label">
+                            <div className="item-form-container">
+                                <div className="item-form-field-label-container">
                                     <h5>Color:</h5>
                                 </div>
                                 <div className="item-input-field">
@@ -298,8 +298,8 @@ function AddSupplierInventoryItem(props) {
                                     padding: '0 0 0.5em 0.5em'
                                 }}>{errors.color}</span>}
 
-                            <div className="item-form-field">
-                                <div className="item-form-field-label">
+                            <div className="item-form-container">
+                                <div className="item-form-field-label-container">
                                     <h5>Quantity:</h5>
                                 </div>
                                 <div className="item-input-field">
@@ -317,8 +317,8 @@ function AddSupplierInventoryItem(props) {
                                 padding: '0 0 0.5em 0.5em'
                             }}>{errors.quantity}</span>}
 
-                            <div className="item-form-field">
-                                <div className="item-form-field-label">
+                            <div className="item-form-container">
+                                <div className="item-form-field-label-container">
                                     <h5>Price:</h5>
                                 </div>
                                 <div className="item-input-field">
@@ -338,31 +338,32 @@ function AddSupplierInventoryItem(props) {
                                 }}>{errors.price}</span>}
 
                             <div className="addItemButtons">
-                                <CustomizedButton
-                                    type="submit"
-                                    hoverBackgroundColor="#2d3ed2"
-                                    style={{
-                                        backgroundColor: '#242F9B',
-                                        border: '1px solid #242F9B',
-                                        width: '8em',
-                                        height: '2.5em',
-                                        fontSize: '0.8em'
-                                    }}>
-                                    Add
-                                </CustomizedButton>
+                                <div className="buttonInner">
+                                    <CustomizedButton
+                                        type="submit"
+                                        hoverBackgroundColor="#2d3ed2"
+                                        style={{
+                                            backgroundColor: '#242F9B',
+                                            border: '1px solid #242F9B',
+                                            width: '9em',
+                                            height: '2.5em',
+                                            fontSize: '0.8em'
+                                        }}>
+                                        Add
+                                    </CustomizedButton>
 
-                                <CustomizedButton
-                                    onClick={() => props.onClose(false)}
-                                    hoverBackgroundColor="#f11717"
-                                    style={{
-                                        backgroundColor: '#960505',
-                                        width: '8em',
-                                        height: '2.5em',
-                                        fontSize: '0.8em'
-                                    }}>
-                                    Cancel
-                                </CustomizedButton>
-
+                                    <CustomizedButton
+                                        onClick={() => props.onClose(false)}
+                                        hoverBackgroundColor="#f11717"
+                                        style={{
+                                            backgroundColor: '#960505',
+                                            width: '9em',
+                                            height: '2.5em',
+                                            fontSize: '0.8em'
+                                        }}>
+                                        Cancel
+                                    </CustomizedButton>
+                                </div>
                             </div>
                         </div>
                     </div>
