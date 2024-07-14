@@ -19,9 +19,11 @@ const signInSchema = Yup.object().shape({
 
 const signUpSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
-    email: Yup.string().email("Invalid email").required("Email is required"),
+    email: Yup.string()
+        .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Invalid email")
+        .required("Email is required"),
     contactNo: Yup.string()
-        .matches(/^\d{10}$/, "Contact number must be exactly 10 digits")
+        .matches(/^(?:0|94|\+94)?\d{9}$/, "Invalid telephone number")
         .required("Contact number is required"),
     address: Yup.string().required("Address is required"),
     password: Yup.string().required("Password is required"),
@@ -80,6 +82,7 @@ export function CustomerLoginSignUp() {
         },
         validationSchema: signUpSchema,
         onSubmit: async (values, { resetForm }) => {
+            console.log('signup:',values);
             try {
                 await axios.post('http://localhost:9000/auth/signup', {
                     username: values.username,

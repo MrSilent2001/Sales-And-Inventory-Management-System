@@ -99,10 +99,8 @@ const CustomerResetModal = forwardRef((props, ref) => {
             <form onSubmit={handleSubmit}>
                 <div className="ResetPasswordModal">
                     <div className="ResetPasswordFormField">
-                        <div className="ResetPasswordLabelField">
-                            <h5>Enter your E-mail:</h5>
-                        </div>
                         <div className="ResetPasswordInput">
+                            <h5>Enter your E-mail:</h5>
                             <BasicTextField
                                 name="email"
                                 size="small"
