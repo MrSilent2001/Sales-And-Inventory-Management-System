@@ -30,7 +30,7 @@ const ShopFeedbackCard = ({ customerId, customerName, customerComment, date, sta
             <div className="cardContent">
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                     <Typography variant="h6" component="div" sx={{ fontWeight: '600', fontSize: '13px', marginBottom: 2, marginLeft: 3, marginTop: 1 }}>
-                        {customerName} (ID - {customerId})
+                        {customerName} (Customer ID : {customerId})
                     </Typography>
                     <Typography
                         variant="body2"

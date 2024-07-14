@@ -21,7 +21,7 @@ const ShopFeedbackCard = ({ customerId, customerName, customerComment, date, sta
 
         }}>
             <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', fontSize: '14px', marginTop: 2, marginBottom: 2 }}>
-                {customerName} (ID: {customerId})
+                {customerName} (Customer ID: {customerId})
             </Typography>
             <Typography variant="body2" component="div" sx={{ fontSize: '12px', marginTop: 1, overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
                 {customerComment}
