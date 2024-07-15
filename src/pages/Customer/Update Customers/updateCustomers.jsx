@@ -197,7 +197,20 @@ function UpdateCustomers() {
                                     />
                                 </div>
                             </div>
-                            
+                            <div className="UpdateCustomerFormField">
+                                <div className="UpdateCustomerTextField">
+                                    <h5>Password:</h5>
+                                </div>
+                                <div className="UpdateCustomerTextInput">
+                                    <BasicTextField
+                                        name="password"
+                                        style={{width: '20em'}}
+                                        // value={formData.password}
+                                        // onChange={(e) => handleChange("password", e.target.value)}
+                                    />
+                                </div>
+                            </div>
+
                             <div className="UpdateCustomerButtonField">
                                 <div className="UpdateCustomerButtons">
                                     <CustomizedButton
@@ -211,8 +224,8 @@ function UpdateCustomers() {
                                             height: '2.7em',
                                             fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
-                                            marginLeft:'-3.5em',
-                                            
+                                            marginLeft: '-3.5em',
+
                                         }}>
                                         Update
                                     </CustomizedButton>

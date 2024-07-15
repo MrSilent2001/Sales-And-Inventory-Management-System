@@ -226,11 +226,11 @@ function Home() {
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3"/>
-                        <XAxis dataKey="name" scale="point" padding={{left: 10, right: 10}}/>
-                        <YAxis/>
+                        <XAxis dataKey="name" scale="point" padding={{left: 50, right: 50}} interval={0} angle={-15} textAnchor="end" tick={{ fontSize: 12 }}/>
+                        <YAxis />
                         <Tooltip/>
                         <Legend/>
-                        <Bar dataKey="qty" fill="#8884d8"/>
+                        <Bar dataKey="qty" fill="#8884d8" barSize={30}/>
                     </BarChart>
                 </ResponsiveContainer>
 

@@ -55,18 +55,17 @@
     padding: 0 0 0 1em;
     margin-left: 4em;
     font-size:1.2em;
-    font-weight:1em ;
+    font-weight:700 ;
 }
 
 .UpdateCustomerTextField h4{
     font-weight: 700;
     font-size: 0.8em;
-    
+    margin-top: -1.5em;
 }
 
 .UpdateCustomerTextInput{
     margin-left: 1em;
-    
 }
 
 .UpdateCustomerButtons{
