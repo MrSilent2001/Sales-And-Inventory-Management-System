@@ -13,12 +13,35 @@ import CustomizedButton from '../../../../../components/Button/button';
 import { Box, Container, Typography,Button } from '@mui/material';
 
 
+
 const SalesRejectedRefundsTable = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [rejectedRefunds, setRejectedRefunds] = useState([]);
+    const [itemMapping, setItemMapping] = useState({});
     const [error, setError] = useState('');
 
     const token = localStorage.getItem('accessToken');
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get('http://localhost:9000/product/getAllProducts', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const products = response.data.reduce((acc, product) => {
+                    acc[product.id] = product.productName;
+                    return acc;
+                }, {});
+                setItemMapping(products);
+            } catch (err) {
+                console.error('Failed to fetch products:', err);
+            }
+        };
+
+        fetchProducts();
+    }, [token]);
 
     useEffect(() => {
         const fetchRejectedRefunds = async () => {
@@ -40,12 +63,14 @@ const SalesRejectedRefundsTable = () => {
             }
         };
         fetchRejectedRefunds();
-    }, []);
+    }, [token]);
 
     const columns = useMemo(() => [
         { accessorKey: 'orderId', header: 'Order Id', size: 100, align: 'center' },
         { accessorKey: 'customerName', header: 'Name', size: 70, align: 'center' },
         { accessorKey: 'contact', header: 'Mail Address', size: 70, align: 'center' },
+        { accessorKey: 'item', header: 'Item', size: 100, align: 'center' },
+        { accessorKey: 'quantity', header: 'Quantity', size: 70, align: 'center' },
         { accessorKey: 'totalPrice', header: 'Total Price', size: 100, align: 'center' },
         { accessorKey: 'reason', header: 'Reason to deny', size: 100, align: 'center' }
     ], []);
@@ -55,6 +80,8 @@ const SalesRejectedRefundsTable = () => {
         customerName: row.customerName,
         orderId: row.orderId,
         contact: row.contact,
+        item: itemMapping[row.item] || row.item,
+        quantity: row.quantity,
         totalPrice: row.totalPrice,
         reason: row.denialReason
     }));
@@ -87,7 +114,6 @@ const SalesRejectedRefundsTable = () => {
                                 Rejected Refunds
                             </Button>
                         </Link>
-                        
                     </Box>
                     {isLoading ? (
                         <PageLoader />

@@ -8,6 +8,7 @@ import CenteredModal from '../../../../../../components/Modal/modal';
 import CustomizedButton from '../../../../../../components/Button/button';
 import { useNavigate } from 'react-router-dom';
 
+
 const token = localStorage.getItem('accessToken');
 
 function InventoryRefundRequest({ order, onClose }) {
@@ -33,8 +34,8 @@ function InventoryRefundRequest({ order, onClose }) {
             }
         } else {
             if (field === 'quantity') {
-                if (parseInt(value) > parseInt(order.quantity)) {
-                    setQuantityError(`Quantity cannot be greater than ${order.quantity}`);
+                if (parseInt(value) > parseInt(order.eligibleQuantity)) {
+                    setQuantityError(`Quantity cannot be greater than ${order.eligibleQuantity}`);
                 } else {
                     setQuantityError('');
                     setTotalPrice(value * order.productSellingPrice); // Update total price
@@ -70,13 +71,14 @@ function InventoryRefundRequest({ order, onClose }) {
         };
 
         try {
+            // Show alert immediately upon submitting request
+            setAlertMessage('Submitting refund request...');
+            setAlertSeverity('info');
+            setAlertOpen(true);
+
             // Create the refund request
             await axios.post('http://localhost:9000/refund/inventoryRefund/create', refundRequestData);
-            console.log('Refund request submitted successfully:', refundRequestData);
-            setAlertMessage('Refund request submitted successfully.');
-            setAlertSeverity('success');
-            setAlertOpen(true);
-            
+
             // Send email notification
             await axios.post('http://localhost:9000/email/send', {
                 receiverName: supplier, 
@@ -89,9 +91,16 @@ function InventoryRefundRequest({ order, onClose }) {
                 },
             });
 
+            console.log('Refund request submitted successfully:', refundRequestData);
+            setAlertMessage('Refund request submitted successfully.');
+            setAlertSeverity('success');
+            setAlertOpen(true);
+
+            // Wait for a short duration before navigating to the generated request page
             setTimeout(() => {
-                navigate('/InventoryGeneratedRequest', { state: { refundRequestData } }); 
-            }, 500);
+                navigate('/InventoryGeneratedRequest', { state: { refundRequestData } });
+            }, 500); // Reduced timeout duration to 0.5 seconds
+
         } catch (error) {
             console.error('Error submitting refund request or sending email:', error);
             setAlertMessage('Error submitting refund request or sending email.');

@@ -9,12 +9,35 @@ import './SalesApprovedRefundsTable.css';
 import DynamicTable from '../../../../../components/Table/customizedTable2';
 import SalesNavbar from "../../../../../layout/navbar/Sales navbar/sales navbar";
 
+
 const SalesApprovedRefundsTable = () => {
   const [approvedRefunds, setApprovedRefunds] = useState([]);
+  const [itemMapping, setItemMapping] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   const token = localStorage.getItem('accessToken');
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:9000/product/getAllProducts', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const products = response.data.reduce((acc, product) => {
+          acc[product.id] = product.productName;
+          return acc;
+        }, {});
+        setItemMapping(products);
+      } catch (err) {
+        console.error('Failed to fetch products:', err);
+      }
+    };
+
+    fetchProducts();
+  }, [token]);
 
   useEffect(() => {
     const fetchApprovedRefunds = async () => {
@@ -36,14 +59,16 @@ const SalesApprovedRefundsTable = () => {
       }
     };
     fetchApprovedRefunds();
-  }, []);
+  }, [token]);
 
   const columns = useMemo(() => [
     { accessorKey: 'customerName', header: 'Name', size: 70, align: 'center' },
     { accessorKey: 'id', header: 'Request Id', size: 150, align: 'center' },
     { accessorKey: 'orderId', header: 'Order Id', size: 120, align: 'center' },
-    { accessorKey: 'totalPrice', header: 'Amount', size: 100, align: 'center' },
-    { accessorKey: 'status', header: 'Status', size: 100, align: 'center' }
+    { accessorKey: 'item', header: 'Item', size: 100, align: 'center' },
+    { accessorKey: 'quantity', header: 'Quantity', size: 70, align: 'center' },
+    { accessorKey: 'totalPrice', header: 'Total price', size: 100, align: 'center' },
+
   ], []);
 
   const mappedData = approvedRefunds.map(row => ({
@@ -51,6 +76,8 @@ const SalesApprovedRefundsTable = () => {
     customerName: row.customerName,
     requestId: row.requestId,
     orderId: row.orderId,
+    item: itemMapping[row.item] || row.item,
+    quantity: row.quantity,
     totalPrice: row.totalPrice,
     status: row.status
   }));
