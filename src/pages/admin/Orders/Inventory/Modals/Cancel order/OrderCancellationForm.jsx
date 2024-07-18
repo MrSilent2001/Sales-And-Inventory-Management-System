@@ -6,12 +6,12 @@ import axios from 'axios';
 const token = localStorage.getItem('accessToken');
 
 // Function to update order status
-const updateOrderStatus = async (id, status, orderCancelReason = '') => {
+const updateOrderStatus = async (id, status, order_cancel_reason= '') => {
     try {
         const response = await axios.put(`http://localhost:9000/purchaseOrder/update`, {
             id,
             status,
-            order_cancel_reason: orderCancelReason, // Ensure this field name matches the backend DTO and column name
+            order_cancel_reason: order_cancel_reason, 
         }, {
             headers: {
                 Authorization: `Bearer ${token}`
