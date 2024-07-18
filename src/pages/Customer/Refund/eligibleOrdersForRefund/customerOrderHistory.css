@@ -10,8 +10,12 @@
 .eligibleCustomerOrdersInner{
     padding-top: 1.5em;
     width: 100%;
+<<<<<<< HEAD
     height: auto;
     min-height: 39.625em;
+=======
+    height: 47em;
+>>>>>>> d406771 (changed)
     background-color: #DBDFFD;
 }
 
