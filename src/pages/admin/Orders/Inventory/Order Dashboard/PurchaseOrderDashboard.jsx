@@ -15,7 +15,8 @@ import ViewOrder from "../../../Orders/Inventory/Modals/View Order/viewOrder";
 import CustomizedButton from "../../../../../components/Button/button";
 import DynamicTable from '../../../../../components/Table/customizedTable2';
 import PageLoader from "../../../../../components/Page Loader/pageLoader";
-
+import OrderCancellationForm from '../Modals/Cancel order/OrderCancellationForm';
+import CustomizedAlert from '../../../../../components/Alert/alert';
 
 
 const PurchaseOrderDashboard = () => {
@@ -27,6 +28,9 @@ const PurchaseOrderDashboard = () => {
     const [completedOrders, setCompletedOrders] = useState(0);
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [cancelOrderVisible, setCancelOrderVisible] = useState(false);
+    const [selectedOrderForCancel, setSelectedOrderForCancel] = useState(null);
+    const [alert, setAlert] = useState({ open: false, message: '', severity: '' });
 
     const token = localStorage.getItem('accessToken');
 
@@ -99,30 +103,28 @@ const PurchaseOrderDashboard = () => {
         fetchOrderCounts();
     }, []);
 
-    const handleCancelOrder = async (orderId) => {
-        try {
-            await axios.delete(`http://localhost:9000/purchaseOrder/delete/${orderId}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            setOrders(prevOrders => prevOrders.filter(order => order.id !== orderId));
-        } catch (error) {
-            console.error('Error deleting order:', error);
-        }
-    };
-
-    const handleApproveOrder = async (orderId) => {
-        // Implement the logic to approve the order here
-        console.log('Approving order:', orderId);
-    };
-
     const handleViewOrder = (order) => {
         setSelectedOrder(order);
         setViewOrderVisible(true);
     };
 
+    const handleCancelOrder = (order) => {
+        setSelectedOrderForCancel(order);
+        setCancelOrderVisible(true);
+    };
+
+    const handleOrderCancelled = (updatedOrder) => {
+        setOrders((prevOrders) =>
+            prevOrders.map((order) =>
+                order.id === updatedOrder.id ? { ...order, status: updatedOrder.status, order_cancel_reason: updatedOrder.order_cancel_reason } : order
+            )
+        );
+        setCancelOrderVisible(false);
+        setAlert({ open: true, message: 'Order has been cancelled successfully.', severity: 'success' });
+    };
+
     const columns = useMemo(() => [
+        { accessorKey: 'order_id', header: 'Order ID', size: 50, align: 'center' },
         { accessorKey: 'supplierName', header: 'Supplier', size: 50, align: 'center' },
         { accessorKey: 'Address', header: 'Address', size: 175, align: 'center' },
         { accessorKey: 'mail', header: 'Email', size: 60, align: 'center' },
@@ -131,8 +133,8 @@ const PurchaseOrderDashboard = () => {
         { accessorKey: 'actions', header: 'Actions', size: 120, align: 'center' }
     ], []);
 
-    const dataWithActions = orders.filter(order => order.status === 'Pending' || order.status === 'Accepted').map(row => ({
-        id: row.id,
+    const dataWithActions = orders.map((row) => ({
+        order_id: row.id,
         supplierName: row.supplierName,
         Address: row.Address,
         mail: row.mail,
@@ -156,12 +158,12 @@ const PurchaseOrderDashboard = () => {
                     View
                 </CustomizedButton>
                 <CustomizedButton
-                    onClick={() => handleCancelOrder(row.id)}
+                    onClick={() => handleCancelOrder(row)}
                     hoverBackgroundColor="#960505"
-                    disabled={row.status !== 'Pending'}
+                    disabled={!(row.status === 'Pending' || row.status === 'Accepted')}
                     style={{
                         color: 'white',
-                        backgroundColor: row.status === 'Pending' ? '#960505' : '#B4B4B4',
+                        backgroundColor: (row.status === 'Pending' || row.status === 'Accepted') ? '#960505' : '#B4B4B4',
                         width: '6.5em',
                         height: '2.75em',
                         fontSize: '0.8em',
@@ -169,11 +171,12 @@ const PurchaseOrderDashboard = () => {
                         borderRadius: '0.35em',
                         marginTop: '0.625em',
                         marginLeft: '0.75em',
+                        textDecoration: row.status === 'Cancelled' ? 'line-through' : 'none',
                     }}>
                     Cancel
                 </CustomizedButton>
             </div>
-        )
+        ),
     }));
 
     const createToolbarButton = () => {
@@ -185,7 +188,7 @@ const PurchaseOrderDashboard = () => {
             fontSize: '0.75em',
             padding: '0.5em 0.625em',
             borderRadius: '0.35em',
-            marginRight: '5.5em'
+            marginRight: '2.5em'
         };
 
         return (
@@ -199,6 +202,10 @@ const PurchaseOrderDashboard = () => {
                 </CustomizedButton>
             </Link>
         );
+    };
+
+    const handleAlertClose = () => {
+        setAlert({ ...alert, open: false });
     };
 
     return (
@@ -247,9 +254,22 @@ const PurchaseOrderDashboard = () => {
                     <Modal open={viewOrderVisible}>
                         <ViewOrder order={selectedOrder} onClose={() => setViewOrderVisible(false)} />
                     </Modal>
+                    <Modal open={cancelOrderVisible}>
+                        <OrderCancellationForm
+                            order={selectedOrderForCancel}
+                            setShowCancellationForm={setCancelOrderVisible}
+                            onOrderCancelled={handleOrderCancelled}
+                        />
+                    </Modal>
                 </Container>
             </Box>
             <Footer />
+            <CustomizedAlert
+                onClose={handleAlertClose}
+                open={alert.open}
+                message={alert.message}
+                severity={alert.severity}
+            />
         </>
     );
 };
