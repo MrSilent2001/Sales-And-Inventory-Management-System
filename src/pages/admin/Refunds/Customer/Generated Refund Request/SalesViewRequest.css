@@ -1,60 +1,65 @@
-body{
-    font-family: Inter;
-  }
-  .generated-request {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 47em;
-    background-color: #DBDFFD;
-    width:100%;
-    text-align: center;
-  
-  }
-  .outer{
-    display: flex;
-    justify-content: center;
-  }
-  
-  .refundRequestDetails{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 38em;
-    padding: 0 0 1em 0;
-    background-color: white;
-    border-radius: 0.5em;
+body {
+  font-family: Inter;
 }
 
-.formField{
-    width: 20em;
-    height: 3.25em;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+.generated-request {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height:35em;
+  background-color: #DBDFFD;
+  width: 90%; /* Adjusted width */
+  text-align: center;
+  padding: 2em; /* Added padding for better spacing */
+  border-radius: 1em; /* Optional: rounded corners */
+
 }
 
-.textField{
-    padding: 0 0 0 1em;
+.outer {
+  display: flex;
+  justify-content: center;
+  padding: 1em; /* Added padding for better spacing */
 }
 
-.textField h5{
-    font-family: Inter;
-    font-weight: 700;
-    font-size: 0.8em;
+.refundRequestDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 45em; /* Adjusted width */
+  padding: 1em; /* Adjusted padding */
+  background-color: white;
+  border-radius: 0.5em;
 }
 
-.inputData{
-    width: 8em;
-    text-align: left;
+.formField {
+  width: 25em; /* Adjusted width */
+  height: 3.25em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.inputData h6{
-    font-family: Inter;
-    font-weight: 500;
-    font-size: 0.65em;
+.textField {
+  height: 2em;
+}
+
+.textField h5 {
+  font-family: Inter;
+  font-weight: 700;
+  font-size: 0.8em;
+}
+
+.inputData {
+  width: 10em; /* Adjusted width */
+  text-align: left;
+}
+
+.inputData h6 {
+  font-family: Inter;
+  font-weight: 500;
+  font-size: 0.65em;
 }
 
 .dark-overlay {

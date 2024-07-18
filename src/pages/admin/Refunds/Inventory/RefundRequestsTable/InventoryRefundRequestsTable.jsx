@@ -13,7 +13,6 @@ import { useNavigate } from "react-router-dom";
 import CustomizedAlert from "../../../../../components/Alert/alert";
 
 
-
 const InventoryRefundRequestsTable = ({ onViewApproved }) => {
     const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
@@ -22,6 +21,7 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
     const [selectedRequest, setSelectedRequest] = useState(null);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
+    const [itemMapping, setItemMapping] = useState({});
 
     const token = localStorage.getItem('accessToken');
 
@@ -45,6 +45,27 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
     };
 
     useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get('http://localhost:9000/product/getAllProducts', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const products = response.data.reduce((acc, product) => {
+                    acc[product.id] = product.productName;
+                    return acc;
+                }, {});
+                setItemMapping(products);
+            } catch (err) {
+                console.error('Failed to fetch products:', err);
+            }
+        };
+
+        fetchProducts();
+    }, [token]);
+
+    useEffect(() => {
         const fetchRefundRequests = async () => {
             try {
                 const response = await axios.get('http://localhost:9000/refund/inventoryRefund/getAll', {
@@ -62,7 +83,7 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
             }
         };
         fetchRefundRequests();
-    }, []);
+    }, [token]);
 
     const handleViewRequest = (request) => {
         console.log('Request:', request);
@@ -87,18 +108,21 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
     };
 
     const columns = useMemo(() => [
-        { accessorKey: 'supplierName', header: 'Name', size: 70, align: 'center' },
-        { accessorKey: 'contact_number', header: 'Contact number', size: 75, align: 'center' },
         { accessorKey: 'inventory_id', header: 'Refund Id', size: 75, align: 'center' },
+        { accessorKey: 'supplierName', header: 'Name', size: 70, align: 'center' },
+        { accessorKey: 'mail', header: 'Supplier Mail', size: 75, align: 'center' },
+        { accessorKey: 'item', header: 'Item', size: 100, align: 'center' },
+        { accessorKey: 'quantity', header: 'Quantity', size: 100, align: 'center' },
         { accessorKey: 'amount', header: 'Price', size: 100, align: 'center' },
-        { accessorKey: 'status', header: 'Status', size: 100, align: 'center' },
         { accessorKey: 'actions', header: 'Actions', size: 150, align: 'center' }
     ], []);
 
     const dataWithActions = refundRequests.map(row => ({
         inventory_id: row.inventory_id,
         supplierName: row.supplierName,
-        contact_number: row.phone,
+        mail: row.supplierMail,
+        item: itemMapping[row.item] || row.item,
+        quantity: row.quantity,
         amount: row.price,
         status: row.status,
         actions: (
@@ -213,7 +237,7 @@ const InventoryRefundRequestsTable = ({ onViewApproved }) => {
                             marginBottom: 0.5
                         }}
                     >
-                        <Typography variant="h6" sx={{ fontWeight: 'bold',marginLeft:5,marginBottom:5 ,marginTop:4 }}>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold', marginLeft: 5, marginBottom: 5, marginTop: 4 }}>
                             Refund Requests
                         </Typography>
                     </Box>
