@@ -168,6 +168,49 @@ function CustomerDashboard() {
 
     let rows = customer;
 
+    // const createActions = (id, lastLogin) => {
+    //     const enableWarning = isDateMoreThanMonthsAgo(lastLogin, 6);
+    //     const enableRemove = isDateMoreThanYearsAgo(lastLogin, 1);
+    //
+    //     const buttonStyle = (enabled, defaultColor, hoverColor) => ({
+    //         color: enabled ? '#ffffff' : '#a9a9a9',
+    //         backgroundColor: enabled ? defaultColor : '#d3d3d3',
+    //         border: enabled ? `1px solid ${defaultColor}` : '1px solid #d3d3d3',
+    //         width: '10em',
+    //         height: '2.5em',
+    //         fontSize: '0.75em',
+    //         padding: '0.5em 0.625em',
+    //         borderRadius: '0.35em',
+    //         marginTop: '0.625em',
+    //         marginRight: '1.5em',
+    //         cursor: enabled ? 'pointer' : 'not-allowed',
+    //     });
+    //
+    //     return (
+    //         <div style={{ display: "flex", justifyContent: "space-between" }}>
+    //             <CustomizedButton
+    //                 key={`sendWarning-${id}`}
+    //                 onClick={() => handleSendWarning(id)}
+    //                 hoverBackgroundColor="#2d3ed2"
+    //                 disabled={!enableWarning}
+    //                 style={buttonStyle(enableWarning, '#242F9B', '#2d3ed2')}
+    //             >
+    //                 Send Warning
+    //             </CustomizedButton>
+    //
+    //             <CustomizedButton
+    //                 key={`remove-${id}`}
+    //                 onClick={() => handleRemove(id)}
+    //                 hoverBackgroundColor="#f11717"
+    //                 disabled={!enableRemove}
+    //                 style={buttonStyle(enableRemove, '#960505', '#f11717')}
+    //             >
+    //                 Remove
+    //             </CustomizedButton>
+    //         </div>
+    //     );
+    // };
+
     const createActions = (id, lastLogin) => {
         const enableWarning = isDateMoreThanMonthsAgo(lastLogin, 6);
         const enableRemove = isDateMoreThanYearsAgo(lastLogin, 1);
@@ -184,13 +227,17 @@ function CustomerDashboard() {
             marginTop: '0.625em',
             marginRight: '1.5em',
             cursor: enabled ? 'pointer' : 'not-allowed',
+            pointerEvents: enabled ? 'auto' : 'none' // Ensure disabled buttons do not intercept clicks
         });
 
         return (
             <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <CustomizedButton
                     key={`sendWarning-${id}`}
-                    onClick={() => handleSendWarning(id)}
+                    onClick={(e) => {
+                        e.stopPropagation(); // Prevent row click event
+                        handleSendWarning(id);
+                    }}
                     hoverBackgroundColor="#2d3ed2"
                     disabled={!enableWarning}
                     style={buttonStyle(enableWarning, '#242F9B', '#2d3ed2')}
@@ -200,7 +247,10 @@ function CustomerDashboard() {
 
                 <CustomizedButton
                     key={`remove-${id}`}
-                    onClick={() => handleRemove(id)}
+                    onClick={(e) => {
+                        e.stopPropagation(); // Prevent row click event
+                        handleRemove(id);
+                    }}
                     hoverBackgroundColor="#f11717"
                     disabled={!enableRemove}
                     style={buttonStyle(enableRemove, '#960505', '#f11717')}
@@ -210,6 +260,7 @@ function CustomerDashboard() {
             </div>
         );
     };
+
 
     rows = rows.map(row => ({
         ...row,

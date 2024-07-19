@@ -247,7 +247,7 @@ function Home() {
                             bottom: 5,
                         }}
                     >
-                        <CartesianGrid strokeDasharray="3 3"/>
+                        <CartesianGrid strokeDasharray="5 3"/>
                         <XAxis dataKey="month"/>
                         <YAxis/>
                         <Tooltip/>
