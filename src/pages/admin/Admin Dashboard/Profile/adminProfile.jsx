@@ -156,7 +156,7 @@ function AdminProfile({show, onClose}) {
                                 </div>
                             </div>
 
-                            <div className="adminProfileFormField">
+                            <div className="adminProfileFormField" style={{marginTop:'0.5em'}}>
                                 <div className="adminProfileLabelField">
                                     <h5>Username:</h5>
                                 </div>

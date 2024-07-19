@@ -17,7 +17,8 @@ function SupplierPayments() {
     const id = localStorage.getItem('id');
 
     const columns = useMemo(() => [
-        { accessorKey: 'email', header: 'Email', size: 25 },
+        // { accessorKey: 'email', header: 'Email', size: 25 },
+        { accessorKey: 'id', header: 'ID', size: 25 },
         { accessorKey: 'date', header: 'Date of Payment', size: 25 },
         { accessorKey: 'itemsPurchased', header: 'Products Purchased', size: 25 },
         { accessorKey: 'billAmount', header: 'Bill Amount', size: 75 },

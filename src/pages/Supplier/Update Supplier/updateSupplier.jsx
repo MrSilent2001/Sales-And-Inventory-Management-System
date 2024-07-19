@@ -154,7 +154,7 @@ function UpdateSupplier(props) {
                                 <div className="UpdateSupplierTextInput">
                                     <BasicTextField
                                         name="name"
-                                        style={{ width: '20em' }}
+                                        style={{width: '20em'}}
                                         value={formData.username}
                                         onChange={(e) => handleChange("username", e.target.value)}
                                     />
@@ -167,7 +167,7 @@ function UpdateSupplier(props) {
                                 <div className="UpdateSupplierTextInput">
                                     <BasicTextField
                                         name="address"
-                                        style={{ width: '20em' }}
+                                        style={{width: '20em'}}
                                         value={formData.address}
                                         onChange={(e) => handleChange("address", e.target.value)}
                                     />
@@ -180,7 +180,7 @@ function UpdateSupplier(props) {
                                 <div className="UpdateSupplierTextInput">
                                     <BasicTextField
                                         name={"contact"}
-                                        style={{ width: '20em' }}
+                                        style={{width: '20em'}}
                                         value={formData.contactNo}
                                         onChange={(e) => handleChange("contactNo", e.target.value)}
                                     />
@@ -193,7 +193,7 @@ function UpdateSupplier(props) {
                                 <div className="UpdateSupplierTextInput">
                                     <BasicTextField
                                         name="email"
-                                        style={{ width: '20em' }}
+                                        style={{width: '20em'}}
                                         value={formData.email}
                                         onChange={(e) => handleChange("email", e.target.value)}
                                     />
@@ -220,9 +220,22 @@ function UpdateSupplier(props) {
                                     <BasicTextArea
                                         rows={3}
                                         name="paymentDetails"
-                                        style={{ width: '20em', marginTop:'3em' }}
+                                        style={{width: '20em', marginTop: '3em'}}
                                         value={formData.paymentDetails}
                                         onChange={(e) => handleChange("paymentDetails", e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                            <div className="UpdateSupplierFormField">
+                                <div className="UpdateCustomerTextField">
+                                    <h5 style={{marginTop:'6em'}}>Password</h5>
+                                </div>
+                                <div className="UpdateSupplierTextInput">
+                                    <BasicTextField
+                                        name="password"
+                                        style={{width: '20em', marginTop:'6em'}}
+                                        // value={formData.password}
+                                        // onChange={(e) => handleChange("password", e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -239,8 +252,8 @@ function UpdateSupplier(props) {
                                             height: '2.5em',
                                             fontSize: '0.8em',
                                             padding: '0.5em 0.625em',
-                                            marginLeft:'-4.2em',
-                                            marginTop:'1.8em',
+                                            marginLeft: '-4.2em',
+                                            marginTop: '1.8em',
                                         }}>
                                         Update
                                     </CustomizedButton>
@@ -250,7 +263,7 @@ function UpdateSupplier(props) {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <Footer/>
 
             <CustomizedAlert
                 open={openSuccess}

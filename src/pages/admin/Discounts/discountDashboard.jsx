@@ -153,7 +153,7 @@ function DiscountDashboard() {
             <SalesNavbar />
             <div className="discountDashboardOuter">
                 <div className="discountDashboardInner">
-                    <div className="searchContainer">
+                    <div className="discountSearchContainer">
                         <h3>Discounts</h3>
                     </div>
                     <div className="discount-dashboard">

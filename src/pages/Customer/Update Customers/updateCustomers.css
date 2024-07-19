@@ -32,39 +32,38 @@
 }
 
 .UpdateCustomerForm{
-    padding-top: 5em;
+    padding-top: 2.5em;
     width: 65%;
     height: 100%;
     border-radius:  0 0.5em 0.5em 0;
-   
+
 }
 
 .UpdateCustomerFormField{
-    width: 38em;
-    height: 3.25em;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    width: 38em;
+    height: 3.25em;
     margin-left: 2em;
-    margin-top: 1.5em;
-    
+    margin-top: 1.25em;
 }
 
 .UpdateCustomerTextField{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     padding: 0 0 0 1em;
     margin-left: 4em;
     font-size:1.2em;
     font-weight:700 ;
 }
 
-.UpdateCustomerTextField h4{
-    font-weight: 700;
-    font-size: 0.8em;
-    margin-top: -1.5em;
-}
 
 .UpdateCustomerTextInput{
+    margin-top: -2.5em;
     margin-left: 1em;
 }
 
@@ -72,5 +71,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 3.5em;
+    margin-top: 1.5em;
 }

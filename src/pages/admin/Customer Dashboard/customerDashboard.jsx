@@ -261,13 +261,6 @@ function CustomerDashboard() {
         );
     };
 
-
-    rows = rows.map(row => ({
-        ...row,
-        actions: createActions(row.id, row.lastLogin)
-    }));
-
-
     const handleRowClick = (customer) => {
         navigate(`/profile/${customer.id}`);
     };

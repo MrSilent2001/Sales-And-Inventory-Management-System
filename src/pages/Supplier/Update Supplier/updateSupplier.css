@@ -52,7 +52,7 @@
     padding: 0 0 0 1em;
     margin-left: 4em;
     font-size:1.2em;
-    font-weight:1em ;
+    font-weight:bold;
 }
 
 .UpdateSupplierTextField h4{
@@ -61,6 +61,7 @@
 }
 
 .UpdateSupplierTextInput{
+    margin-top: -2.5em;
     margin-left: 1em;
 }
 
@@ -68,5 +69,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 3.5em;
+    margin-top: 2em;
 }
