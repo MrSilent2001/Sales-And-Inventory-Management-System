@@ -1,4 +1,4 @@
-Tradeasy - A Sales and Inventory Management System
+**Tradeasy - A Sales and Inventory Management System**
 
 I’m thrilled to announce the successful completion of our second-year software project, Tradeasy! 🚀📊 This comprehensive Sales and Inventory Management System is meticulously designed to address the challenges faced by small and medium-sized enterprises in managing their sales and inventory operations.
 
