@@ -126,13 +126,14 @@ function EligiblePurchaseOrdersForRefund() {
                         productName: productName,
                         productSellingPrice: productSellingPrice,
                         supplierName: order.supplierName,
-                        supplierId: order.supplierId, // Add supplierId here
+                        supplierId: order.supplierId,
                         total_amount: order.total_amount,
                         createdDate: order.createdDate,
                         quantity: order.quantity,
                         items: order.items,
-                        mail:order.mail,
-                        eligibleForRefund: eligibleQuantity > 0
+                        mail: order.mail,
+                        eligibleForRefund: eligibleQuantity > 0,
+                        eligibleQuantity: eligibleQuantity,
                     };
                 });
 

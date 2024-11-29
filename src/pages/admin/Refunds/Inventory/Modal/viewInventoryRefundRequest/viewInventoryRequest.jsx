@@ -5,6 +5,7 @@ import CustomizedButton from "../../../../../../components/Button/button";
 import CenteredModal from "../../../../../../components/Modal/modal";
 
 
+
 function ViewInventoryRequest({ request, onClose }) {
     const [requestDetails, setRequestDetails] = useState({
         id: '',

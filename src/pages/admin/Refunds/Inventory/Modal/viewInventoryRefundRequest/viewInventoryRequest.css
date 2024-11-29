@@ -1,9 +1,16 @@
+.viewInventoryRefundRequestOuter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
 .viewInventoryRefundRequestModel {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 30.5em;
-    height: 37.5em;
+    height: 40em; /* Increased height */
     padding: 0.25em 0 0 0;
     background-color: #DBDFFD;
     border-radius: 0.5em;
@@ -11,13 +18,14 @@
 
 .viewInventoryRefundRequestModel h2 {
     font-family: Inter;
-    padding: 1em 0 0 0;
+    padding: 1em 0 1em 0;
 }
 
 .viewInventoryRefundRequestForm {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 2.5em; /* Increased line spacing */
 }
 
 .viewInventoryRefundformField {
@@ -29,20 +37,21 @@
     text-align: left;
 }
 
-.idInput{
-    margin-left: 2.5em;
-    width: 10em;
-    font-size: 0.75em;
-}
-
-.viewInventoryRefundformField h5 {
+.idField h5 {
+    margin: 0;
     font-family: Inter;
     font-weight: 600;
     font-size: 0.75em;
 }
 
+.idInput {
+    margin-left: 2.5em;
+    width: 10em;
+    font-size: 0.75em;
+}
+
 .viewInventoryRefundButtons {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    justify-content: center;
+    margin-top: 1em;
 }
